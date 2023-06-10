@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, PlaceholderIcon} from "../svg";
+import { DeviceUpdateForm } from "./DeviceUpdateForm";
 
 function generateLinks(model, type) {
     const formattedModel = model.toLowerCase().replace(/\s/ig, '_');
@@ -12,11 +14,21 @@ function generateLinks(model, type) {
     else if (type === 'user') {
         link = `${process.env.PUBLIC_URL}/manuals/user_manuals/${formattedModel}_user_manual.pdf`
     } 
-    console.log(link);
+    
     return link
 }
 
 export function TechnicalLinks({selectedData, onConfigClick}) {
+    
+    const [updateFormVisible, setUpdateFormVisible] = useState(false);
+
+    function showDeviceUpdate() {
+        setUpdateFormVisible(true);
+    }
+
+    function closeUpdate() {
+        setUpdateFormVisible(false)
+    }
     
     return (
         <>
@@ -27,6 +39,7 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
                     <div className="equipment-summary">
                         <h2>{selectedData.model}</h2>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
+                        <div className="device-edit-button" onClick={showDeviceUpdate}><img id="device-edit-image" src={`${process.env.PUBLIC_URL}/images/edit.svg`} alt="edit"></img>Update</div>
                     </div>
                 </div>
                 <div className="technical-area">
@@ -55,6 +68,7 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
                         Placeholder 2
                     </div>
                 </div>
+                {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} closeUpdate={closeUpdate} />}
         </> 
     );
 }
