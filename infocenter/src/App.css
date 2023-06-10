@@ -293,17 +293,19 @@ html {
 
 .device-text-input {
   text-align: center;
-  width: 300px;
-  height: 30px;
+  width: 150px;
+  height: 25px;
 }
 
 .device-file-upload {
   border: 1px solid black;
-  height: 30px;
+  height: 25px;
+  width: 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: white;
+  padding: 5px;
 }
 
 .technical-area {
@@ -498,7 +500,48 @@ html {
   background-color: rgb(217, 217, 224);
 }
 
-.select-container {
+.update-form-display {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  background-color: rgb(217, 217, 224);
+}
+
+.display-section-left {
+  grid-column: 1;
+  display: 'flex';
+  flex-direction: 'column';
+  justify-content: 'center';
+  align-items: 'center';
+}
+
+.display-section-right {
+  grid-column: 2;
+  display: 'flex';
+  flex-direction: 'column';
+  justify-content: 'flex-start';
+  align-items: 'center';
+}
+
+.add-new-config-select-container {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transform: translateY(-15px);
+}
+
+.add-new-config-select-label {
+  
+}
+
+.add-new-config-select {
+  padding: 5px;
+}
+
+.hospital-select-container, .department-select-container {
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -507,11 +550,11 @@ html {
   margin: 10px 0 20px 0;
 }
 
-.select-container:nth-child(2) {
+.hospital-select-container:nth-child(2), .department-select-container:nth-child(2) {
   transform: translateY(-30px);
 }
 
-.select-label {
+.hospitals-select-label, .department-select-label {
   font-weight: bold;
 }
 
