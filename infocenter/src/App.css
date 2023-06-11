@@ -13,6 +13,8 @@ html {
   --dark-theme: #1b223f;
   --med-theme: #37426f;
   --light-theme: #4558a2; 
+  --config-modal-width: 500px;
+  --config-modal-height: 500px;
 }
 
 .wrapper {
@@ -460,8 +462,8 @@ html {
   position: absolute;
   left: -300px;
   top: -5px;
-  width: 500px;
-  height: 500px;
+  width: var(--config-modal-width);
+  height: var(--config-modal-height);
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -503,21 +505,56 @@ html {
 .update-form-display {
   grid-row: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px;
   background-color: rgb(217, 217, 224);
 }
 
-.display-section-left {
-  grid-column: 1;
-  display: 'flex';
-  flex-direction: 'column';
-  justify-content: 'center';
-  align-items: 'center';
+.update-options {
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px 50px;  
+  margin-top: 20px; 
 }
 
-.display-section-right {
-  grid-column: 2;
+.update-options > label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(20px);
+}
+
+.update-options > label:nth-child(4), .update-options > label:nth-child(5) {
+  transform: translateX(calc(var(--config-modal-width)/2 - var(--config-modal-width)/3 + 20px));
+}
+
+.device-data-option {
+  font-size: 12px;
+  height: 20px;
+  width: 130px;
+  color: rgb(132, 132, 139);
+  border: 1px solid rgb(132, 132, 139);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.device-data-option-selected {
+  color: purple;
+  border: 1px solid purple;
+  background-color: rgb(249, 186, 249);
+  -webkit-box-shadow: 0px 0px 35px 5px rgba(249, 186, 249, 0.7);
+  -moz-box-shadow: 0px 0px 35px 5px rgba(249, 186, 249, 0.7);
+  box-shadow: 0px 0px 35px 5px rgb(250, 144, 250);
+}
+
+
+.update-options > label:hover {
+  cursor: pointer;
+}
+
+.display-section {
+  grid-row: 2;
   display: 'flex';
   flex-direction: 'column';
   justify-content: 'flex-start';
