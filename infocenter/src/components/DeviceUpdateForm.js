@@ -25,7 +25,10 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 </div>
                 <div className='display-section'>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} />
-                    <div className="upload-button" >Upload Updates</div>
+                    <div className="form-buttons">
+                        <div className="update-button save-button" >Save Changes</div>
+                        <div className="update-button" >Upload Updates</div>
+                    </div>                    
                 </div>                
             </div>
         </div>

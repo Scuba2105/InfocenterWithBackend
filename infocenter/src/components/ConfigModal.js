@@ -81,7 +81,7 @@ export function ConfigModal({selectedData, closeConfig}) {
                 <img className="cross" src={`${process.env.PUBLIC_URL}/images/cross.svg`} alt="cross" onClick={closeConfig}></img>   
             </div>
             <div className="modal-display">
-                <SelectInput label="Hospital" optionData={hospitals} onChange={onHospitalChange} />
+                <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
                 <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
                 <div className="config-display">
                     <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    

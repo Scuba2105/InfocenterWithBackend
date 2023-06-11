@@ -225,3 +225,23 @@ export function SkipIcon({color, size='20px', offset, angle, id}) {
         </>
     );
 }
+
+export function Cross({color, size='18px', margin}) {
+    return (
+        <>
+            <svg fill={color} width={size} height={size} viewBox="0 0 16 16" transform={`translate(${margin} 0)`}>
+                <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd"/>
+            </svg>
+        </>
+    );
+}
+
+export function Tick({color, size='18px', margin}) {
+    return (
+        <>
+            <svg width={size} height={size} viewBox="0 0 16 16" version="1.1" fill="none" transform={`translate(${margin} 0`} stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5">
+                <polyline points="2.75 8.75,6.25 12.25,13.25 4.75"/>
+            </svg>
+        </>
+    );
+}
