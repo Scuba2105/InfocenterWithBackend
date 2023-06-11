@@ -13,7 +13,8 @@ const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
 
-export function DisplayOption({selectedOption, selectedData}) {
+export function DisplayOption({selectedOption, selectedData, fileNumber, updateFileCount}) {
+
     if (selectedOption === 'Service Manual') {
         return (
             <div key={selectedOption} className="device-input-container"> 
@@ -40,18 +41,37 @@ export function DisplayOption({selectedOption, selectedData}) {
     }
     else if (selectedOption === 'Configurations') {
         return (
-            <div key={selectedOption} className="device-input-container">
-                <SelectInput label='Hospital' optionData={hospitalLocations} />
-                <label className="sub-unit-label">Department </label><input type="text" className="sub-unit-entry" placeholder="eg. ICU, ED, Ward H1 etc."></input>
-                <label className="sub-unit-label">{`Sub-Location (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. Transport, Paediatric etc."></input>
-                <input type="file" className="device-file-upload" id="file1" name="config-upload"></input>
+            <div key={selectedOption} id="device-config-container" className="device-input-container">
+                <h4>Add New Configuration</h4>
+                <div className="location-info">
+                    <SelectInput label='Hospital' optionData={hospitalLocations} />
+                    <label className="sub-unit-label">Department </label><input type="text" className="sub-unit-entry" placeholder="eg. ICU, ED, Ward H1 etc."></input>
+                    <label className="sub-unit-label">{`Sub-Location (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. Transport, Paediatric etc."></input>
+                </div>
+                <div className="config-info">
+                    <label className="sub-unit-label">{`Options (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. A06, H10, C06 etc"></input>
+                    <label className="sub-unit-label">{`Software Rev. (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. M.03.01, L.01.02"></input>
+                </div>
+                <div className="config-file-container">
+                    <label>Select Config File</label>
+                    <input type="file" className="device-file-upload" id="config-file" name="config-upload"></input>
+                </div>
             </div> 
         );
     }
     else {
         return (
-            <div key={selectedOption} className="device-input-container">
-                <label>User Manual: </label><input type="file" className="device-file-upload" id="file2" name="user-upload"></input>
+            <div key={selectedOption} className="other-input-container">
+                {fileNumber.map((number) => {
+                    return (
+                    <>
+                        <label key={`label${number}`}>{`File ${number}:`} </label><input key={`input${number}`} type="file" className="device-file-upload" id="file2" name="user-upload"></input>
+                    </>
+                    );
+                })
+                
+                }
+                {fileNumber[fileNumber.length - 1] < 4 && <button onClick={updateFileCount}>+ Add another file</button>}
             </div>
         );
     }

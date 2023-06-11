@@ -226,7 +226,7 @@ export function SkipIcon({color, size='20px', offset, angle, id}) {
     );
 }
 
-export function Cross({color, size='18px', margin}) {
+export function Cross({color, size='12px', margin}) {
     return (
         <>
             <svg fill={color} width={size} height={size} viewBox="0 0 16 16" transform={`translate(${margin} 0)`}>
@@ -236,7 +236,7 @@ export function Cross({color, size='18px', margin}) {
     );
 }
 
-export function Tick({color, size='18px', margin}) {
+export function Tick({color, size='22px', margin}) {
     return (
         <>
             <svg width={size} height={size} viewBox="0 0 16 16" version="1.1" fill="none" transform={`translate(${margin} 0`} stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5">
