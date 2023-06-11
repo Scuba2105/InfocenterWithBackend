@@ -1,17 +1,5 @@
 import { useState } from 'react';
-import { capitaliseFirstLetters } from "../utils/utils";
-import { SelectInput } from "./SelectInput";
-
-const hospitals = ['JOHN HUNTER HOSPITAL', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
-'CESSNOCK HOSPITAL', 'TAREE HOSPITAL', 'DUNGOG HOSPITAL', 'SINGLETON HOSPITAL', 'DENMAN MPS','GLOUCESTOR HOSPITAL', 'SCONE HOSPITAL', 'MUSWELBROOK HOSPITAL', 
-'MURRURUNDI HOSPITAL', 'MERRIWA MPS', 'TAMWORTH HOSPITAL', 'WALCHA MPS', 'QUIRINDI HOSPITAL', 'GUNNEDAH HOSPITAL', 'MANILLA MPS', 
-'ARMIDALE HOSPITAL', 'BARRABA MPS', 'GUYRA MPS', 'NARRABRI HOSPITAL',
-'WEEWAA HOSPITAL', 'GLEN INNES HOSPITAL', 'MOREE HOSPITAL', 'WARIALDA MPS', 'INVERELL HOSPITAL', 
-'TENTERFIELD HOSPITAL'];
-
-const hospitalLocations = hospitals.map((hospital) => {
-    return capitaliseFirstLetters(hospital)
-}).sort();
+import { DisplayOption } from './DeviceUpdateData';
 
 export function DeviceUpdateForm({selectedData, closeUpdate}) {
     
@@ -36,19 +24,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                     <label className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected" : "device-data-option"} onClick={updateSelectedOption}>Other Documents</label>
                 </div>
                 <div className='display-section'>
-                    <div className="device-input-container"> 
-                        <label>Service Manual: </label><input type="file" className="device-file-upload" id="file1" name="service-upload"></input>
-                    </div>    
-                    <div className="device-input-container">
-                        <label>User Manual: </label><input type="file" className="device-file-upload" id="file2" name="user-upload"></input>
-                    </div> 
-                    <div className="device-input-container">
-                        <label>Software File Location: </label><input type="text" disabled className="device-text-input" placeholder={selectedData.software}></input>
-                    </div>
-                    <div className="device-input-container">
-                        <SelectInput label='Hospital' optionData={hospitalLocations} />
-                        <input type="file" className="device-file-upload" id="file1" name="config-upload"></input>
-                    </div>
+                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} />
+                    <div className="upload-button" >Upload Updates</div>
                 </div>                
             </div>
         </div>
