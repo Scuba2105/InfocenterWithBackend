@@ -1,17 +1,29 @@
 import { useState } from 'react';
-import { DisplayOption } from './DeviceUpdateData';
+import { DisplayOption } from './DisplayOption';
 
 export function DeviceUpdateForm({selectedData, closeUpdate}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
+    const [updateData, setUpdateData] = useState({});
+
+    function saveUpdateData(e) {
+        if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
+            const selectedFile = e.target.parentNode.parentNode.querySelector('.device-file-upload');
+            if (selectedFile.files.length === 0) {
+                console.log('No files selected')
+            }
+            else {
+                console.log(selectedFile.files[0])
+            };
+        }
+            
+    }
 
     function updateSelectedOption(e) {
         setSelectedOption(e.target.textContent)
         setFileNumber([1]);
     }
-
-    
 
     function updateFileCount() {
         const lastNumber = fileNumber[fileNumber.length - 1];
@@ -42,7 +54,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 <div className='display-section'>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
                     <div className="form-buttons">
-                        <div className="update-button save-button" >Save Changes</div>
+                        <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
                         <div className="update-button" >Upload Updates</div>
                     </div>                    
                 </div>                

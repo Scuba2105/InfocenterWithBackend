@@ -18,7 +18,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     if (selectedOption === 'Service Manual') {
         return (
             <div key={selectedOption} className="device-input-container"> 
-                <label className="available-label">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" margin="25px" /> : <Cross color="#de0d37" margin="25px" />} </label>
+                <label className="available-label">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <label>Update Service Manual: </label><input type="file" className="device-file-upload" id="file1" name="service-upload"></input>
             </div>
         );
@@ -26,7 +26,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     else if (selectedOption === 'User Manual') {
         return (
             <div key={selectedOption} className="device-input-container">
-                <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" margin="25px" /> : <Cross color="#de0d37" margin="25px" />} </label>
+                <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <label>Update User Manual: </label><input type="file" className="device-file-upload" id="file2" name="user-upload"></input>
             </div>
         );
