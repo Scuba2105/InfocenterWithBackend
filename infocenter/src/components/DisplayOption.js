@@ -2,7 +2,7 @@ import { SelectInput } from "./SelectInput";
 import { capitaliseFirstLetters } from "../utils/utils";
 import { Cross, Tick } from "../svg";
 
-const hospitals = ['JOHN HUNTER HOSPITAL', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
+const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
 'CESSNOCK HOSPITAL', 'TAREE HOSPITAL', 'DUNGOG HOSPITAL', 'SINGLETON HOSPITAL', 'DENMAN MPS','GLOUCESTOR HOSPITAL', 'SCONE HOSPITAL', 'MUSWELBROOK HOSPITAL', 
 'MURRURUNDI HOSPITAL', 'MERRIWA MPS', 'TAMWORTH HOSPITAL', 'WALCHA MPS', 'QUIRINDI HOSPITAL', 'GUNNEDAH HOSPITAL', 'MANILLA MPS', 
 'ARMIDALE HOSPITAL', 'BARRABA MPS', 'GUYRA MPS', 'NARRABRI HOSPITAL',
@@ -51,7 +51,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 <div className="config-info">
                     <label className="sub-unit-label">{`Options (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. A06, H10, C06 etc"></input>
                     <label className="sub-unit-label">{`Software Rev. (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. M.03.01, L.01.02"></input>
-                    <label className="sub-unit-label">{`Date Created`}</label><input type="date" className="sub-unit-entry"></input>
+                    <label className="sub-unit-label">{`Date Created`}</label><input type="date" className="date-entry"></input>
                 </div>
                 <div className="config-file-container">
                     <label>Select Config File</label>

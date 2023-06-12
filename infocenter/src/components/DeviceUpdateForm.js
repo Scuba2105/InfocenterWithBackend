@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
 
 const acronyms = ['ICU', 'ED', 'AGSU'];
+const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 
 function capitaliseFirstLetters(input) {
     const words = input.split(' ');
@@ -15,6 +16,16 @@ function formatText(text) {
     return text.toLocaleLowerCase().replace(/\s/ig, '_');
 }
 
+function generateHospitalLabel(name) {
+    const hospitalAcronymList = Object.keys(hospitalAcronyms);
+    if (hospitalAcronymList.includes(name)) {
+        return hospitalAcronyms[name].toLocaleLowerCase();
+    }
+    else {
+        return name.split(' ')[0].toLocaleLowerCase();
+    }
+}
+
 export function DeviceUpdateForm({selectedData, closeUpdate}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
@@ -26,6 +37,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     const updateData = useRef(formData);
 
     function saveUpdateData(e) {
+        // Add the files from the service manual and user manual forms to the formData ref
         if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
             const selectedFile = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             if (selectedFile.files.length === 0) {
@@ -35,16 +47,31 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}`);
             }
         }
+        // Add the data from the software form to the formData ref
         else if (selectedOption === 'Software') {
             const selectedFile = e.target.parentNode.parentNode.querySelector('.device-text-input');
             updateData.current.set('software', selectedFile.value)
         }
+        // Add the data from the configurations form to the formData ref
         else if (selectedOption === 'Configurations') {
             const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
             const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.sub-unit-entry');
-            const configDataArray = [selectedHospital];
+            const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry');
+            const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
+            
+            // Check mandatory fields have been entered
+            if (configDataInputs[0].value === "") {
+                alert("Department is a mandatory field and has not been entered");
+            }
+            else if (dateInput.value === "") {
+                alert('Date Created is a mandatory field and has not been entered');
+            }
+
+            // Initialise config data array with hospital label            
+            const configDataArray = [generateHospitalLabel(selectedHospital.value)];
+            // Loop over the Department, Sub-Location, Options and Software config data inputs
             configDataInputs.forEach((input, index) => {
-                if (index === 0 || index == 1) {
+                if (index === 0 || index === 1) {
                     if (acronyms.includes(input.value.toUpperCase())) {
                         configDataArray.push((input.value.toUpperCase()))
                     }
@@ -52,27 +79,42 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                         configDataArray.push((capitaliseFirstLetters(input.value)))
                     }
                 }
-                // filter out Intellivue monitors so options string can be parsed
-                else if (index === 2) {
-                    if (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3') {
-                        const regex = input.value.match(/[A-Za-z]\d{2}/ig)
-                        configDataArray.push((regex.join('-').toUpperCase()))
+                // Parse options string. Filter out Intellivue monitors so options string can be parsed
+                else if (index === 2 ) {
+                    if (input.value !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
+                        const regex = input.value.match(/[A-Za-z]\d{2}/ig);
+                        configDataArray.push((regex.join('-').toUpperCase()));
                     }
-                                        
+                    else {
+                        input.value === "" ? configDataArray.push('none') : 
+                        configDataArray.push(input.value.toUpperCase()); 
+                    }                                        
                 }
                 // Parse software string and format
                 else if (index === 3) {
+                    input.value === "" ? configDataArray.push('none') : 
                     configDataArray.push(input.value.toUpperCase()); 
                 }
-                // 
-                else if (index === 4 || index){
-                    console.log(input.value);
-                    configDataArray.push(capitaliseFirstLetters(input.value)) 
-                }
             })
-            console.log(configDataArray)
-            console.log(`${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}`)
+            const dateString = dateInput.value.split('-').reverse().join('.');
+            
+            // Create the config filename from the input data
+            let configFilename;
+            configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg` :
+            configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg`
+        
+            if (configFileInput.files.length === 0) {
+                alert('No config files selected')
+            }
+            else {
+                updateData.current.set(`${formatText(selectedOption)}`, configFileInput.files[0], `${configFilename}`);
+            }
+            
         }
+        else if (selectedOption === "Other Documents") {
+
+        }
+        console.log(updateData.current.getAll('configurations'))
     }
 
     function updateSelectedOption(e) {
