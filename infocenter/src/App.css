@@ -720,19 +720,23 @@ html {
 }
 
 .config-info > label {
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .config-info > input:first-of-type, .config-info > label:first-of-type {
   transform: translateY(2px)
 }
 
-.config-info > input:nth-of-type(2), .config-info > label:nth-of-type(2) {
-  transform: translateY(20px)
+.config-info > label:nth-of-type(2) {
+  transform: translateY(23px)
+}
+
+.config-info > input:nth-of-type(2) {
+  transform: translateY(25px);
 }
 
 .config-info > input:nth-of-type(3), .config-info > label:nth-of-type(3) {
-  transform: translateY(40px)
+  transform: translateY(56px)
 }
 
 .config-file-container {

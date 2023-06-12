@@ -42,23 +42,36 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         else if (selectedOption === 'Configurations') {
             const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
             const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.sub-unit-entry');
-           console.log(selectedHospital.value)
-            const configDataArray = [];
+            const configDataArray = [selectedHospital];
             configDataInputs.forEach((input, index) => {
-                // filter out Intellivue monitors so options string can be parsed
-                if (index === 2 && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
-                    const regex = input.value.match(/[A-Za-z]\d{2}/ig)
-                    configDataArray.push((regex.join('-').toUpperCase()))
+                if (index === 0 || index == 1) {
+                    if (acronyms.includes(input.value.toUpperCase())) {
+                        configDataArray.push((input.value.toUpperCase()))
+                    }
+                    else {
+                        configDataArray.push((capitaliseFirstLetters(input.value)))
+                    }
                 }
-                else if (index === 3 || acronyms.includes(input.value.toUpperCase())) {
+                // filter out Intellivue monitors so options string can be parsed
+                else if (index === 2) {
+                    if (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3') {
+                        const regex = input.value.match(/[A-Za-z]\d{2}/ig)
+                        configDataArray.push((regex.join('-').toUpperCase()))
+                    }
+                                        
+                }
+                // Parse software string and format
+                else if (index === 3) {
                     configDataArray.push(input.value.toUpperCase()); 
                 }
-                else {
+                // 
+                else if (index === 4 || index){
                     console.log(input.value);
                     configDataArray.push(capitaliseFirstLetters(input.value)) 
                 }
             })
-            console.log(`${configDataArray.slice(0, 2).join('--')}_${configDataArray.slice(2).join('_')}`)
+            console.log(configDataArray)
+            console.log(`${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}`)
         }
     }
 
