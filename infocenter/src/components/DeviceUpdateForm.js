@@ -64,9 +64,11 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             // Check mandatory fields have been entered
             if (configDataInputs[0].value === "") {
                 alert("Department is a mandatory field and has not been entered");
+                return
             }
             else if (dateInput.value === "") {
                 alert('Date Created is a mandatory field and has not been entered');
+                return
             }
 
             // Initialise config data array with hospital label            
@@ -107,6 +109,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         
             if (configFileInput.files.length === 0) {
                 alert('No config files selected')
+                return 
             }
             else {
                 updateData.current.set(`${formatText(selectedOption)}`, configFileInput.files[0], `${configFilename}`);
@@ -116,9 +119,26 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         else if (selectedOption === "Other Documents") {
             const descriptions = e.target.parentNode.parentNode.querySelectorAll('.other-doc-text-input');
             const fileInputs = e.target.parentNode.parentNode.querySelectorAll('.other-doc-file-upload');
-            console.log(descriptions, fileInputs)            
+            
+            descriptions.forEach((description, index) => {
+                if (description.value === "") {
+                    alert(`The description for File ${index + 1} is missing`);
+                    return
+                }
+            })
+            
+            fileInputs.forEach((fileInput, index) => {
+                if (fileInput.files.length === 0) {
+                    alert(`File ${index + 1} is missing`);
+                    return 
+                }
+            })
+            
+            descriptions.forEach((description, index) => {
+                updateData.current.set(`description${index + 1}`, description.value);
+            })
         }
-        console.log(updateData.current.getAll('hospital'))
+        console.log(updateData.current.getAll('description1'))
     }
 
     function updateSelectedOption(e) {
@@ -127,7 +147,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     }
 
     function updateFileCount(e) {
-        if (e.target.textContent === '+ Add another file') {
+        if (e.target.textContent === 'Add another file') {
             const lastNumber = fileNumber[fileNumber.length - 1];
             
             if (lastNumber < 4) {

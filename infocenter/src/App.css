@@ -791,11 +791,10 @@ html {
 #remove-file {
   color: white;
   border-radius: 5px;
-  background-color: #e30c0c; 
+  background-color: #f94343; 
 }
 
 .other-file-button-container {
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;

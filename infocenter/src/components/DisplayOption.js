@@ -80,8 +80,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 
                 }
                 <div className="other-file-button-container">
-                    {fileNumber[fileNumber.length - 1] < 4 && <button id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}>+ Add another file</button>}
-                    {fileNumber.length !== 1 && <button id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}>- Remove file</button>}
+                    {fileNumber[fileNumber.length - 1] < 4 && <button id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}>Add another file</button>}
+                    {fileNumber.length !== 1 && <button id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}>Remove file</button>}
                 </div>
             </div>
         );
