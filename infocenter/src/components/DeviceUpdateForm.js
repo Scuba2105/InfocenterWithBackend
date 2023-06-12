@@ -1,23 +1,65 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
+
+const acronyms = ['ICU', 'ED', 'AGSU'];
+
+function capitaliseFirstLetters(input) {
+    const words = input.split(' ');
+    const formattedWords = words.map((word) => {
+        return word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase(); 
+    })
+    return formattedWords.join(' ')
+}
+
+function formatText(text) {
+    return text.toLocaleLowerCase().replace(/\s/ig, '_');
+}
 
 export function DeviceUpdateForm({selectedData, closeUpdate}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
-    const [updateData, setUpdateData] = useState({});
+    // Create a new form data object for storing saved files and data.
+    const formData = new FormData();
+    formData.append("model", selectedData.model);
+    formData.append("manufacturer", selectedData.manufacturer);
+    const updateData = useRef(formData);
 
     function saveUpdateData(e) {
         if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
             const selectedFile = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             if (selectedFile.files.length === 0) {
-                console.log('No files selected')
+                alert('No files selected')
             }
             else {
-                console.log(selectedFile.files[0])
-            };
+                updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}`);
+            }
         }
-            
+        else if (selectedOption === 'Software') {
+            const selectedFile = e.target.parentNode.parentNode.querySelector('.device-text-input');
+            updateData.current.set('software', selectedFile.value)
+        }
+        else if (selectedOption === 'Configurations') {
+            const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
+            const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.sub-unit-entry');
+           console.log(selectedHospital.value)
+            const configDataArray = [];
+            configDataInputs.forEach((input, index) => {
+                // filter out Intellivue monitors so options string can be parsed
+                if (index === 2 && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
+                    const regex = input.value.match(/[A-Za-z]\d{2}/ig)
+                    configDataArray.push((regex.join('-').toUpperCase()))
+                }
+                else if (index === 3 || acronyms.includes(input.value.toUpperCase())) {
+                    configDataArray.push(input.value.toUpperCase()); 
+                }
+                else {
+                    console.log(input.value);
+                    configDataArray.push(capitaliseFirstLetters(input.value)) 
+                }
+            })
+            console.log(`${configDataArray.slice(0, 2).join('--')}_${configDataArray.slice(2).join('_')}`)
+        }
     }
 
     function updateSelectedOption(e) {

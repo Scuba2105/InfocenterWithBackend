@@ -8,7 +8,6 @@ export function SearchFilter({pageData, selectedEntry, onRowClick}) {
     const [query, setQuery] = useState('null');
 
     function onQueryChange(e) {
-        console.log(e.target.value)
         setQuery(e.target.value);
     }
 
