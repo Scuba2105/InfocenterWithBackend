@@ -45,6 +45,9 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             }
             else {
                 updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}`);
+                for (const pair of updateData.current.entries()) {
+                    console.log(`${pair[0]}, ${pair[1]}`);
+                }
             }
         }
         // Add the data from the software form to the formData ref
@@ -136,6 +139,10 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             
             descriptions.forEach((description, index) => {
                 updateData.current.set(`description${index + 1}`, description.value);
+            })
+
+            fileInputs.forEach((fileInput, index) => {
+                console.log(fileInput.files[0]);
             })
         }
         console.log(updateData.current.getAll('description1'))
