@@ -59,6 +59,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry');
             const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             
+            updateData.current.set('hospital', selectedHospital.value);
+
             // Check mandatory fields have been entered
             if (configDataInputs[0].value === "") {
                 alert("Department is a mandatory field and has not been entered");
@@ -112,9 +114,11 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             
         }
         else if (selectedOption === "Other Documents") {
-
+            const descriptions = e.target.parentNode.parentNode.querySelectorAll('.other-doc-text-input');
+            const fileInputs = e.target.parentNode.parentNode.querySelectorAll('.other-doc-file-upload');
+            console.log(descriptions, fileInputs)            
         }
-        console.log(updateData.current.getAll('configurations'))
+        console.log(updateData.current.getAll('hospital'))
     }
 
     function updateSelectedOption(e) {
@@ -122,16 +126,23 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         setFileNumber([1]);
     }
 
-    function updateFileCount() {
-        const lastNumber = fileNumber[fileNumber.length - 1];
-        
-        if (lastNumber < 4) {
-            setFileNumber([...fileNumber, lastNumber + 1]);
+    function updateFileCount(e) {
+        if (e.target.textContent === '+ Add another file') {
+            const lastNumber = fileNumber[fileNumber.length - 1];
+            
+            if (lastNumber < 4) {
+                setFileNumber([...fileNumber, lastNumber + 1]);
+            }
+            else {
+                alert('Maximum number of files reached!')
+            }
         }
         else {
-            alert('Maximum number of files reached!')
+            if (fileNumber.length !== 1) {
+                const newArray = fileNumber.slice(0, -1);
+                setFileNumber(newArray);
+            }
         }
-        
     }
     
     return (

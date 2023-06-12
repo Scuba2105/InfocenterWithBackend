@@ -65,14 +65,24 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
             <div key={selectedOption} className="other-input-container">
                 {fileNumber.map((number) => {
                     return (
-                    <>
-                        <label key={`label${number}`}>{`File ${number}:`} </label><input key={`input${number}`} type="file" className="device-file-upload" id="file2" name="user-upload"></input>
-                    </>
+                    <div key={`container-${number}`} className="description-file-container">
+                        <div className="label-input-container1">
+                            <label key={`label-desc-${number}`}>{`File Description:`} </label>
+                            <input key={`text${number}`} type="text" className="other-doc-text-input" name={`description-${number}`}></input>
+                        </div>
+                        <div className="label-input-container2">
+                            <label key={`label-input-${number}`}>{`File ${number}:`} </label>
+                            <input key={`file${number}`} type="file" className="other-doc-file-upload" name="user-upload"></input>
+                        </div>
+                    </div>
                     );
                 })
                 
                 }
-                {fileNumber[fileNumber.length - 1] < 4 && <button onClick={updateFileCount}>+ Add another file</button>}
+                <div className="other-file-button-container">
+                    {fileNumber[fileNumber.length - 1] < 4 && <button id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}>+ Add another file</button>}
+                    {fileNumber.length !== 1 && <button id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}>- Remove file</button>}
+                </div>
             </div>
         );
     }

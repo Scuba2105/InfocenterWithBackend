@@ -301,8 +301,9 @@ html {
 }
 
 .device-file-upload {
+  font-size: 12px;
   border: 1px solid black;
-  height: 25px;
+  height: 20px;
   width: 200px;
   display: flex;
   justify-content: space-between;
@@ -781,12 +782,72 @@ html {
   transform: translateY(-5px);
 }
 
-.other-input-container > button {
+#add-another-file {
   color: white;
   border-radius: 5px;
   background-color: var(--light-theme); 
 }
 
+#remove-file {
+  color: white;
+  border-radius: 5px;
+  background-color: #e30c0c; 
+}
+
+.other-file-button-container {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(15px);
+}
+
+.description-file-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.label-input-container1 {
+  transform: translateX(-10px); 
+}
+
+.label-input-container2 {
+  transform: translateX(10px);
+}
+
+.other-doc-text-input {
+  border: 1px solid black;
+  font-size: 12px;
+  height: 20px;
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+  padding: 6px -5px 2px 0;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+.other-doc-file-upload {
+  font-size: 12px;
+  border: 1px solid black;
+  height: 20px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+  padding: 6px -5px 2px 0;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+/* Formatting for the configuration modal */
 .config-display {
   width: 100%;
   height: 100%;
