@@ -57,7 +57,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             updateData.current.set('software', selectedFile.value)
         }
         // Add the data from the configurations form to the formData ref
-        else if (selectedOption === 'Configurations') {
+        else if (selectedOption === 'Configs') {
             const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
             const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.sub-unit-entry');
             const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry');
@@ -140,7 +140,9 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 updateData.current.set(`file${index + 1}`, fileInput.files[0]);
             })
         }
-        console.log(updateData.current.getAll('description1'))
+        for (const pair of updateData.current.entries()) {
+            console.log(`${pair[0]}, ${pair[1]}`);
+        }
     }
 
     function updateSelectedOption(e) {
