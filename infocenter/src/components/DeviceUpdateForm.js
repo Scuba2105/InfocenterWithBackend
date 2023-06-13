@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
+import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 
 const acronyms = ['ICU', 'ED', 'AGSU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
@@ -128,6 +129,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                     alert(`The description for File ${index + 1} is missing`);
                     return
                 }
+                updateData.current.set(`description${index + 1}`, description.value);
             })
             
             fileInputs.forEach((fileInput, index) => {
@@ -135,21 +137,26 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                     alert(`File ${index + 1} is missing`);
                     return 
                 }
-            })
-            
-            descriptions.forEach((description, index) => {
-                updateData.current.set(`description${index + 1}`, description.value);
-            })
-
-            fileInputs.forEach((fileInput, index) => {
-                console.log(fileInput.files[0]);
+                updateData.current.set(`file${index + 1}`, fileInput.files[0]);
             })
         }
         console.log(updateData.current.getAll('description1'))
     }
 
     function updateSelectedOption(e) {
-        setSelectedOption(e.target.textContent)
+        let startElement = e.target;
+        let parentDiv;
+        if (startElement.classList.contains('device-data-option')) {
+            parentDiv = startElement;
+        }
+        else {
+            while (!startElement.classList.contains('device-data-option')) {
+                startElement = startElement.parentNode 
+            }
+            parentDiv = startElement;
+        }
+        
+        setSelectedOption(parentDiv.textContent)
         setFileNumber([1]);
     }
 
@@ -180,12 +187,27 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             </div>
             <div className="update-form-display">
                 <div className="update-options">
-                    <label className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option"} onClick={updateSelectedOption}>Service Manual</label>
-                    <label className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected" : "device-data-option"} onClick={updateSelectedOption}>User Manual</label>
-                    <label className={selectedOption === 'Configurations' ? "device-data-option device-data-option-selected" : "device-data-option"} onClick={updateSelectedOption}>Configurations</label>
-                    <label className={selectedOption === 'Software' ? "device-data-option device-data-option-selected" : "device-data-option"} onClick={updateSelectedOption}>Software</label>
-                    <label className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected" : "device-data-option"} onClick={updateSelectedOption}>Other Documents</label>
-                </div>
+                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>
+                        <ServiceIcon color={selectedOption === 'Service Manual' ? 'white' : 'rgb(132, 132, 139)'} size="25px"/>
+                        Service Manual
+                    </div>
+                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>
+                        <UserManualIcon color={selectedOption === 'User Manual' ? 'white' : 'rgb(132, 132, 139)'} size="25px"/>
+                        User Manual
+                    </div>
+                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>
+                        <ConfigIcon color={selectedOption === 'Configs' ? 'white' : 'rgb(132, 132, 139)'} size="25px"/>
+                        Configs
+                    </div>
+                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>
+                        <SoftwareIcon color={selectedOption === 'Software' ? 'white' : 'rgb(132, 132, 139)'} size="25px"/>
+                        Software
+                    </div>
+                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>
+                        <DocumentsIcon color={selectedOption === 'Other Documents' ? 'white' : 'rgb(132, 132, 139)'} size="25px"/>
+                        Other Documents
+                    </div>                    
+                 </div>
                 <div className='display-section'>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
                     <div className="form-buttons">

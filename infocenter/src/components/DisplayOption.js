@@ -39,10 +39,10 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
             </div>
         );
     }
-    else if (selectedOption === 'Configurations') {
+    else if (selectedOption === 'Configs') {
         return (
             <div key={selectedOption} id="device-config-container" className="device-input-container">
-                <h4>Add New Configuration</h4>
+                <h4 id="add-config-heading">Add New Configuration</h4>
                 <div className="location-info">
                     <SelectInput label='Hospital' optionData={hospitalLocations} />
                     <label className="sub-unit-label">Department </label><input type="text" className="sub-unit-entry" placeholder="eg. ICU, ED, Ward H1 etc."></input>

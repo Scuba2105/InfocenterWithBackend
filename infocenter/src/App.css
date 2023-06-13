@@ -13,7 +13,7 @@ html {
   --dark-theme: #1b223f;
   --med-theme: #37426f;
   --light-theme: #4558a2; 
-  --config-modal-width: 500px;
+  --config-modal-width: 580px;
   --config-modal-height: 500px;
 }
 
@@ -298,6 +298,7 @@ html {
   width: 275px;
   height: 25px;
   margin-top: 8px;
+  color: rgb(132, 132, 139);
 }
 
 .device-file-upload {
@@ -312,6 +313,7 @@ html {
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 10px;
+  color: rgb(132, 132, 139);
 }
 
 .available-label {
@@ -474,7 +476,7 @@ html {
 .config-modal {
   position: absolute;
   left: -300px;
-  top: -5px;
+  top: -20px;
   width: var(--config-modal-width);
   height: var(--config-modal-height);
   z-index: 50;
@@ -521,44 +523,46 @@ html {
   grid-template-columns: 1fr;
   grid-template-rows: 100px;
   background-color: rgb(217, 217, 224);
+  color: rgb(104, 104, 108);
 }
 
 .update-options {
   grid-row: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 50px 50px;  
-  margin-top: 20px; 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .update-options > label {
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateX(20px);
-}
-
-.update-options > label:nth-child(4), .update-options > label:nth-child(5) {
-  transform: translateX(calc(var(--config-modal-width)/2 - var(--config-modal-width)/3 + 20px));
 }
 
 .device-data-option {
   font-size: 12px;
-  height: 20px;
-  width: 130px;
+  height: 80px;
+  width: 80px;
   color: rgb(132, 132, 139);
   border: 1px solid rgb(132, 132, 139);
   border-radius: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.device-data-option:hover {
+ cursor: pointer;
 }
 
 .device-data-option-selected {
-  color: var(--dark-theme);
-  border: 1px solid var(--dark-theme);
-  background-color: rgb(193, 204, 248);
-  -webkit-box-shadow: 0px 0px 35px 5px rgba(102, 118, 181, 0.8);
-  -moz-box-shadow: 0px 0px 35px 5px rgba(102, 118, 181, 0.8);
-  box-shadow: 0px 0px 35px 5px rgba(102, 118, 181, 0.8);
+  color: white;
+  border: 1px solid #ff69b4;
+  background-color: #ff69b4;
+  font-weight:500;
 }
 
 
@@ -591,7 +595,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(#2d6039, #479159);
+  background: linear-gradient(var(--med-theme), var(--light-theme));
   color: white;
   border-radius: 5px;
 }
@@ -601,8 +605,9 @@ html {
 }
 
 .save-button {
-  background: linear-gradient(var(--dark-theme), var(--med-theme));
-  color: white;
+  background: linear-gradient(white, rgb(238, 238, 239));
+  border: 1.3px solid var(--med-theme);
+  color: var(--med-theme);
 }
 
 .add-new-config-select-container {
@@ -650,18 +655,21 @@ html {
 
 .hospital-select-label {
   font-size: 13px;
-  font-weight: bold;
+}
+
+.hospital-select {
+  color: rgb(132, 132, 139);
 }
 
 .sub-unit-label {
   font-size: 13px;
-  font-weight: bold;
 } 
 
 .sub-unit-entry {
   font-size: 12px;
   height: 20px;
   width: 180px;
+  color: rgb(132, 132, 139);
 }
 
 .hospital-select {
@@ -702,6 +710,8 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  color: rgb(132, 132, 139);
+  font-weight: normal;
 }
 
 .location-info > input {
@@ -769,6 +779,10 @@ html {
   margin-top: 10px;
 }
 
+.date-entry {
+  color: rgb(132, 132, 139);
+}
+
 .other-input-container {
   display: flex;
   flex-direction: column;
@@ -783,10 +797,10 @@ html {
 }
 
 #add-another-file {
-  color: black;
+  color: white;
   border-radius: 5px;
   border: 1px solid var(--dark-theme);
-  background-color: #F0E2E7;
+  background-color: #08AB7A;
   font-size: 13px; 
   height: 30px;
   width: 105px;

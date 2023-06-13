@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, PlaceholderIcon} from "../svg";
+import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PlaceholderIcon} from "../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
 
 function generateLinks(model, type) {
@@ -59,9 +59,9 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
                         <SoftwareIcon color="#8504a5" />
                         Software
                     </div>
-                    <div className="technical-link placeholder1" style={selectedData.placeholder1 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder1 === "" ? null : `${process.env.PUBLIC_URL}/${selectedData.placeholder1}`} target="_blank" rel="noopener noreferrer">
-                        <PlaceholderIcon color="#dc652f" />
-                        Placeholder 1
+                    <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder1 === "" ? null : `${process.env.PUBLIC_URL}/${selectedData.placeholder1}`} target="_blank" rel="noopener noreferrer">
+                        <DocumentsIcon color="#dc652f" />
+                        Other Documents
                     </div>
                     <div className="technical-link placeholder2" style={selectedData.placeholder2 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder2 === "" ? null : `${process.env.PUBLIC_URL}/${selectedData.placeholder2}`} target="_blank" rel="noopener noreferrer">
                         <PlaceholderIcon color="#33658A" />
