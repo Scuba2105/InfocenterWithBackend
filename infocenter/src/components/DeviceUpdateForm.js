@@ -154,7 +154,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     }
 
     function updateFileCount(e) {
-        if (e.target.textContent === 'Add another file') {
+        if (e.target.textContent === 'Add File') {
             const lastNumber = fileNumber[fileNumber.length - 1];
             
             if (lastNumber < 4) {

@@ -553,12 +553,12 @@ html {
 }
 
 .device-data-option-selected {
-  color: purple;
-  border: 1px solid purple;
-  background-color: rgb(249, 186, 249);
-  -webkit-box-shadow: 0px 0px 35px 5px rgba(249, 186, 249, 0.7);
-  -moz-box-shadow: 0px 0px 35px 5px rgba(249, 186, 249, 0.7);
-  box-shadow: 0px 0px 35px 5px rgb(250, 144, 250);
+  color: var(--dark-theme);
+  border: 1px solid var(--dark-theme);
+  background-color: rgb(193, 204, 248);
+  -webkit-box-shadow: 0px 0px 35px 5px rgba(102, 118, 181, 0.8);
+  -moz-box-shadow: 0px 0px 35px 5px rgba(102, 118, 181, 0.8);
+  box-shadow: 0px 0px 35px 5px rgba(102, 118, 181, 0.8);
 }
 
 
@@ -591,8 +591,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgb(248, 248, 25), rgb(174, 174, 4));
-  color: black;
+  background: linear-gradient(#2d6039, #479159);
+  color: white;
   border-radius: 5px;
 }
 
@@ -601,7 +601,7 @@ html {
 }
 
 .save-button {
-  background: linear-gradient(rgb(7, 171, 138), rgb(2, 110, 89));
+  background: linear-gradient(var(--dark-theme), var(--med-theme));
   color: white;
 }
 
@@ -783,15 +783,43 @@ html {
 }
 
 #add-another-file {
-  color: white;
+  color: black;
   border-radius: 5px;
-  background-color: var(--light-theme); 
+  border: 1px solid var(--dark-theme);
+  background-color: #F0E2E7;
+  font-size: 13px; 
+  height: 30px;
+  width: 105px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-another-file:hover {
+  cursor: pointer;
 }
 
 #remove-file {
-  color: white;
+  color: #a21212;
   border-radius: 5px;
-  background-color: #f94343; 
+  border: 1px solid #a21212;
+  background-color: white; 
+  font-size: 13px; 
+  height: 30px;
+  width: 105px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#remove-file {
+  cursor: pointer;
+}
+
+.file-add-remove-image {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
 .other-file-button-container {

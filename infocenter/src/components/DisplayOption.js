@@ -67,8 +67,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                     return (
                     <div key={`container-${number}`} className="description-file-container">
                         <div className="label-input-container1">
-                            <label key={`label-desc-${number}`}>{`File Description:`} </label>
-                            <input key={`text${number}`} type="text" className="other-doc-text-input" name={`description-${number}`}></input>
+                            <label key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
+                            <input key={`text${number}`} type="text" className="other-doc-text-input" placeholder="Enter a short title/description" name={`description-${number}`}></input>
                         </div>
                         <div className="label-input-container2">
                             <label key={`label-input-${number}`}>{`File ${number}:`} </label>
@@ -80,8 +80,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 
                 }
                 <div className="other-file-button-container">
-                    {fileNumber[fileNumber.length - 1] < 4 && <button id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}>Add another file</button>}
-                    {fileNumber.length !== 1 && <button id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}>Remove file</button>}
+                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`${process.env.PUBLIC_URL}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
+                    {fileNumber.length !== 1 && <div id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`${process.env.PUBLIC_URL}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
                 </div>
             </div>
         );
