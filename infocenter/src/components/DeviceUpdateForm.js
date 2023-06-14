@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 
@@ -31,11 +31,42 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
+    const [startUpload, setStartUpload] = useState(false);
+
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
+
+    useEffect(() => {
+        async function sendFormData() {
+            const res = await fetch("http://localhost:5000/putDeviceData", {
+                method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: updateData.current
+            });
+        }
+        if (startUpload) {
+            setStartUpload(false);
+            sendFormData();
+        }
+    }, [startUpload])
+
+    function beginUpload() {
+        let dataKeys = [];
+        for (const key of updateData.current.keys()) {
+            dataKeys.push(key);
+        }
+        console.log(dataKeys);
+        if (dataKeys.length === 2 && dataKeys[0] === 'model' && dataKeys[1] === 'manufacturer') {
+            alert('No form data has been saved for upload');
+            return;
+        }
+        setStartUpload(true);
+    }
 
     function saveUpdateData(e) {
         // Add the files from the service manual and user manual forms to the formData ref
@@ -46,15 +77,14 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             }
             else {
                 updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}`);
-                for (const pair of updateData.current.entries()) {
-                    console.log(`${pair[0]}, ${pair[1]}`);
-                }
             }
+            alert(`The ${selectedOption} for ${selectedData.model} has been saved ready for upload`)
         }
         // Add the data from the software form to the formData ref
         else if (selectedOption === 'Software') {
             const selectedFile = e.target.parentNode.parentNode.querySelector('.device-text-input');
             updateData.current.set('software', selectedFile.value)
+            alert(`The ${selectedOption} location for ${selectedData.model} has been saved`)
         }
         // Add the data from the configurations form to the formData ref
         else if (selectedOption === 'Configs') {
@@ -118,7 +148,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             else {
                 updateData.current.set(`${formatText(selectedOption)}`, configFileInput.files[0], `${configFilename}`);
             }
-            
+            alert(`The new configuration for ${selectedData.model} has been saved ready for upload`)
         }
         else if (selectedOption === "Other Documents") {
             const descriptions = e.target.parentNode.parentNode.querySelectorAll('.other-doc-text-input');
@@ -139,6 +169,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 }
                 updateData.current.set(`file${index + 1}`, fileInput.files[0]);
             })
+            alert(`The documents for ${selectedData.model} have been saved`)
         }
         for (const pair of updateData.current.entries()) {
             console.log(`${pair[0]}, ${pair[1]}`);
@@ -214,7 +245,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
                     <div className="form-buttons">
                         <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
-                        <div className="update-button" >Upload Updates</div>
+                        <div className="update-button" onClick={beginUpload}>Upload Updates</div>
                     </div>                    
                 </div>                
             </div>

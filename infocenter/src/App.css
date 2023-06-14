@@ -382,7 +382,7 @@ html {
   border: 1px solid #320E3B
 }
 
-.placeholder1 {
+.documents {
   background: linear-gradient(#facab4, #fda47b);
   color: #7f3f21;
   border: 1px solid #7f3f21;
@@ -501,7 +501,7 @@ html {
 .cross {
   position: relative;
   top: 0px;
-  left: 80px;
+  left: 11vw;
 }
 
 .cross:hover {
