@@ -6,11 +6,14 @@ const acronyms = ['ICU', 'ED', 'AGSU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 
 function capitaliseFirstLetters(input) {
-    const words = input.split(' ');
+    let words = input.split(' ');
+    if (words.length === 1) {
+        words = input.split('-');
+    }
     const formattedWords = words.map((word) => {
         return word.slice(0, 1).toUpperCase() + word.slice(1).toLowerCase(); 
     })
-    return formattedWords.join(' ')
+    return formattedWords.join('-')
 }
 
 function formatText(text) {
@@ -114,7 +117,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                         configDataArray.push((input.value.toUpperCase()))
                     }
                     else {
-                        configDataArray.push((capitaliseFirstLetters(input.value)))
+                        configDataArray.push(capitaliseFirstLetters(input.value));
                     }
                 }
                 // Parse options string. Filter out Intellivue monitors so options string can be parsed
@@ -140,7 +143,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             let configFilename;
             configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg` :
             configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg`
-        
+            console.log(configDataArray[1]);
             if (configFileInput.files.length === 0) {
                 alert('No config files selected')
                 return 
