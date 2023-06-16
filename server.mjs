@@ -73,9 +73,10 @@ app.get("/getData", (req, res) => {
 
 app.put("/putDeviceData", cpUpload, async (req, res) => {
     try {
-        console.log(req.files);
         const deviceJSON = fs.readFileSync(path.join(__dirname, 'data', 'data.json'));
         const deviceData = JSON.parse(deviceJSON).deviceData;
+        
+        // Define the variables from the uploaded data
         const model = req.body.model;
         const manufacturer = req.body.manufacturer;
         let hospital, configPath;
@@ -98,6 +99,13 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
         if (Object.keys(req.files).includes('configs')) {
             hospital = convertHospitalName(req.body.hospital);
             configPath = `/configurations/${hospital}/${model}/${req.files.configs[0].originalname.split('.').slice(0, -1).join('.')}`
+            if (Object.keys(updatedDevice.config).includes(hospital)) {
+                updatedDevice.config[hospital].push(configPath)
+            } 
+            else {
+                updatedDevice.config[hospital] = [configPath];
+            }
+            // Need to add to configs updatedDeviceData.config[hospital].push(configPath)
         }
 
         if (Object.keys(req.body).includes('software')) {
