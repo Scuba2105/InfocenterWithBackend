@@ -164,14 +164,15 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 }
                 updateData.current.set(`description${index + 1}`, description.value);
             })
-            
-            fileInputs.forEach((fileInput, index) => {
+            const fileInputArray = Array.from(fileInputs);
+            for (const fileInput of fileInputArray) {
+                const index = fileInputArray.indexOf(fileInput);
                 if (fileInput.files.length === 0) {
                     alert(`File ${index + 1} is missing`);
                     return 
                 }
                 updateData.current.set(`file${index + 1}`, fileInput.files[0]);
-            })
+            }
             alert(`The documents for ${selectedData.model} have been saved`)
         }
         for (const pair of updateData.current.entries()) {

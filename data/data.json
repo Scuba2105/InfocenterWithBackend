@@ -782,7 +782,7 @@
     "type": "Patient Monitor",
     "manufacturer": "Philips Healthcare",
     "model": "MX750",
-    "serviceManual": false,
+    "serviceManual": true,
     "userManual": false,
     "config": {
       "John Hunter Hospital": [
