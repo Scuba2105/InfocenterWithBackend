@@ -17,19 +17,19 @@ const storage = multer.diskStorage({
         const documentsFieldRegex = /file[1-4]/;
         
         if (file.fieldname === "service_manual" && file.mimetype === 'application/pdf') {
-            cb(null, path.join(__dirname, `infocenter/public/manuals/service_manuals`))
+            cb(null, path.join(__dirname, `public/manuals/service_manuals`))
         }
         else if (file.fieldname === "user_manual" && file.mimetype === 'application/pdf') {
-            cb(null, path.join(__dirname, `infocenter/public/manuals/user_manuals`))
+            cb(null, path.join(__dirname, `public/manuals/user_manuals`))
         } 
         else if (file.fieldname === "configs") {
             const hospital = convertHospitalName(req.body.hospital);
-            createDirectory(path.join(__dirname, `infocenter/public/configurations/${hospital}/${model}`))
-            cb(null, path.join(__dirname, `infocenter/public/configurations/${hospital}/${model}`))
+            createDirectory(path.join(__dirname, `public/configurations/${hospital}/${model}`))
+            cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
         }
         else if (documentsFieldRegex.test(file.fieldname)) {
-            createDirectory(path.join(__dirname, `infocenter/public/documents/${model}`))
-            cb(null, path.join(__dirname, `infocenter/public/documents/${model}`))            
+            createDirectory(path.join(__dirname, `public/documents/${model}`))
+            cb(null, path.join(__dirname, `public/documents/${model}`))            
         }  
         else {
             console.log(`The uploaded ${file.originalname} was not stored in a directory!`);
@@ -49,12 +49,16 @@ const cpUpload = upload.fields([{name: 'service_manual', maxCount: 1}, {name: 'u
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}])
 
-
+// Define the express app
 const app = express();
 
+// Set cors for any origin
 app.use(cors({
     origin: '*'
 }))
+
+// Serve static files 
+app.use(express.static('public'))
 
 app.get("/getData", async (req, res) => {
     try {
