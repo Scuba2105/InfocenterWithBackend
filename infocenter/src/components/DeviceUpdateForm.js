@@ -54,9 +54,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             const newDeviceData = await res.json();
             
             // Need to clear formData at this point
-            //updateData.current.delete()
-        }
-        if (startUpload) {
+            //updateDat       if (startUpload) {
             setStartUpload(false);
             sendFormData();
         }

@@ -34,12 +34,14 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
         <>
                 <div className="summary-area">
                     <div className="image-container">
-                    <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData.model, 'image')} alt="Medical Equipment"></img>
+                        <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData.model, 'image')} alt="Medical Equipment"></img>
                     </div>
                     <div className="equipment-summary">
-                        <h2>{selectedData.model}</h2>
+                        <div id="title-container">
+                            <h2>{selectedData.model}</h2>
+                            <div className="device-edit-button" onClick={showDeviceUpdate}><img id="device-edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>
+                        </div>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
-                        <div className="device-edit-button" onClick={showDeviceUpdate}><img id="device-edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>
                     </div>
                 </div>
                 <div className="technical-area">
