@@ -67,6 +67,7 @@ export function ConfigModal({selectedData, closeConfig}) {
     function onHospitalChange(e) {
         const newHospitalIndex = hospitals.indexOf(e.target.value);
         setHospitalsIndex(newHospitalIndex);
+        setDepartmentsIndex(0);
     }
 
     function onDepartmentChange(e) {

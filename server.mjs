@@ -130,7 +130,7 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
             }
         })
 
-        console.log(updatedDeviceData);
+        console.log(updatedDevice);
 
         // Write the data to file
         writeDataToFile(__dirname, JSON.stringify(updatedDeviceData, null, 2));

@@ -385,15 +385,13 @@
       ],
       "Belmont Hospital": [
         "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017.cfg"
+      ],
+      "Inverell Hospital": [
+        "/configurations/inverell/MX450/mx450_inverell_Medical-Ward_none_none_17.06.2023.cfg"
       ]
     },
-    "software": "C:/Updates",
-    "documents": [
-      {
-        "label": "description1",
-        "filePath": "/documents/MX450/robots.txt"
-      }
-    ],
+    "software": "",
+    "documents": "",
     "placeholder2": ""
   },
   {
