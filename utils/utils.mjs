@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { writeFile } from 'fs';
 import path from 'path';
 
 export function readAllData(__dirname) {
@@ -26,6 +26,13 @@ export function readDeviceData(__dirname) {
             }
         });
     })
+}
+
+export function writeDataToFile(__dirname, data) {
+    fs.writeFile(path.join(__dirname, 'data', 'test-data.json'), data, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+      });
 }
 
 export function createDirectory(dirPath) {

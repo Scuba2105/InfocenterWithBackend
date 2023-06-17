@@ -51,6 +51,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 referrerPolicy: "no-referrer",
                 body: updateData.current
             });
+            console.log(res);
         }
         if (startUpload) {
             setStartUpload(false);
@@ -131,7 +132,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                         configDataArray.push(input.value.toUpperCase()); 
                     }                                        
                 }
-                // Parse software string and format
+                // Parse config software string and format
                 else if (index === 3) {
                     input.value === "" ? configDataArray.push('none') : 
                     configDataArray.push(input.value.toUpperCase()); 
@@ -141,6 +142,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             
             // Create the config filename from the input data
             let configFilename;
+            // Need to make adaptable for different config file extensions
             configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg` :
             configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg`
             console.log(configDataArray[1]);

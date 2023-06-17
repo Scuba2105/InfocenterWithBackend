@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { createDirectory, convertHospitalName, readAllData, readDeviceData } from './utils/utils.mjs';
+import { createDirectory, convertHospitalName, readAllData, readDeviceData, writeDataToFile } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
 const __dirname = path.dirname('.');
@@ -77,10 +77,12 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
             return /description[1-4]/.test(key);
         });
         
+        // Retrieve the current data for the updated device
         const updatedDevice = deviceData.find((entry) => {
             return entry.model === model && entry.manufacturer === manufacturer;
         })
 
+        // Update the device details if corresponding key exists in form data
         if (Object.keys(req.files).includes('service_manual')) {
             updatedDevice.serviceManual = true;
         }
@@ -90,10 +92,9 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
         }
 
         if (Object.keys(req.files).includes('configs')) {
-            console.log(req.files.configs[0].originalname);
-
-            hospitalDirectory = convertHospitalName(req.body.hospital);
-            configPath = `/configurations/${hospitalDirectory}/${model}/${req.files.configs[0].originalname}`
+            const hospital = req.body.hospital;
+            const hospitalDirectory = convertHospitalName(hospital);
+            const configPath = `/configurations/${hospitalDirectory}/${model}/${req.files.configs[0].originalname}`
             if (Object.keys(updatedDevice.config).includes(hospital)) {
                 updatedDevice.config[hospital].push(configPath)
             } 
@@ -115,7 +116,23 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
             updatedDevice.documents = documentsInfo;
         }
 
-        console.log(updatedDevice);
+        // Replace the old device data in the DeviceData array with the new data that has been entered 
+        const updatedDeviceData = deviceData.map((entry) => {
+            if (entry.model === model && entry.manufacturer === manufacturer) {
+                return updatedDevice
+            }
+            else {
+                return entry;
+            }
+        })
+
+        console.log(updatedDeviceData);
+
+        // Write the data to file
+        writeDataToFile(__dirname, JSON.stringify(updatedDeviceData, null, 2));
+        
+        // Send the updated device's new data as a response
+        res.json(updatedDevice);
     } catch (err) {
         console.error(err);
     }
