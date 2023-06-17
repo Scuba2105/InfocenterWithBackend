@@ -696,7 +696,7 @@
     "userManual": true,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx400/mx400_jhh_Ward-G3_A03-H40_M.0_13.11.2020"
+        "/configurations/jhh/mx400/mx400_jhh_Ward-G3_A03-H40_M.0_13.11.2020.cfg"
       ]
     },
     "software": "",
@@ -712,31 +712,31 @@
     "userManual": true,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx450/mx450_jhh_AGSU_none_M.03.01_09.05.2018",
-        "/configurations/jhh/mx450/mx450_jhh_ED--CT_none_none_07.04.2020",
-        "/configurations/jhh/mx450/mx450_jhh_ED--Transport_none_none_02.06.2017",
-        "/configurations/jhh/mx450/mx450_jhh_ICU--Transport_none_L.01.12_24.03.2017",
-        "/configurations/jhh/mx450/mx450_jhh_NICU--Transport_H20-A05-C01-C02-C04-C05-C09-C15-C17-C18-C19-C20-C44-C45-C54_M.03.01_17.10.2017",
-        "/configurations/jhh/mx450/mx450_jhh_Simulation-Centre_none_M.03.01_31.07.2018",
-        "/configurations/jhh/mx450/mx450_jhh_Ward-G2_A04_L.0_06.09.2016",
-        "/configurations/jhh/mx450/mx450_jhh_Ward-H1_A04_N.00.04_24.03.2022",
-        "/configurations/jhh/mx450/mx450_jhh_Ward-H2--ESSU_H10-A04-C01-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C06_M.04.05_23.09.2021"
+        "/configurations/jhh/mx450/mx450_jhh_AGSU_none_M.03.01_09.05.2018.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_ED--CT_none_none_07.04.2020.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_ED--Transport_none_none_02.06.2017.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_ICU--Transport_none_L.01.12_24.03.2017.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_NICU--Transport_H20-A05-C01-C02-C04-C05-C09-C15-C17-C18-C19-C20-C44-C45-C54_M.03.01_17.10.2017.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Simulation-Centre_none_M.03.01_31.07.2018.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Ward-G2_A04_L.0_06.09.2016.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Ward-H1_A04_N.00.04_24.03.2022.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Ward-H2--ESSU_H10-A04-C01-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C06_M.04.05_23.09.2021.cfg"
       ],
       "Armidale Hospital": [
-        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-1_none_none_07.05.2018",
-        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-2_none_none_07.05.2018",
-        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-3_none_none_07.05.2018",
-        "/configurations/armidale/mx450/mx450_armidale_ED--Paediatric-Room_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018",
-        "/configurations/armidale/mx450/mx450_armidale_ED--Procedure-Bay_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018",
-        "/configurations/armidale/mx450/mx450_armidale_ED--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018",
-        "/configurations/armidale/mx450/mx450_armidale_ICU--Transport_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_14.11.2018",
-        "/configurations/armidale/mx450/mx450_armidale_Inpatient-Unit_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018",
-        "/configurations/armidale/mx450/mx450_armidale_OT--Induction-Bays_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018",
-        "/configurations/armidale/mx450/mx450_armidale_PACU--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018",
-        "/configurations/armidale/mx450/mx450_armidale_PACU_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_15.02.2018"
+        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-1_none_none_07.05.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-2_none_none_07.05.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-3_none_none_07.05.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Paediatric-Room_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Procedure-Bay_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ICU--Transport_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_14.11.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_Inpatient-Unit_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_OT--Induction-Bays_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_PACU--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_PACU_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_15.02.2018.cfg"
       ],
       "Belmont Hospital": [
-        "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017"
+        "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017.cfg"
       ]
     },
     "software": "",
@@ -752,8 +752,8 @@
     "userManual": true,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx550/mx550_jhh_ED--Paediatric_H10-A04_none_18.11.2020",
-        "/configurations/jhh/mx550/mx550_jhh_Ward-G3_A06-H40-M.0_13.11.2020"
+        "/configurations/jhh/mx550/mx550_jhh_ED--Paediatric_H10-A04_none_18.11.2020.cfg",
+        "/configurations/jhh/mx550/mx550_jhh_Ward-G3_A06-H40-M.0_13.11.2020.cfg"
       ]
     },
     "software": "",
@@ -769,8 +769,8 @@
     "userManual": true,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx700/mx700_jhh_CCU_none_none_08.07.2015",
-        "/configurations/jhh/mx700/mx700_jhh_ED_H10-A04-C01-C02-C15-C20_none_30.01.2019"
+        "/configurations/jhh/mx700/mx700_jhh_CCU_none_none_08.07.2015.cfg",
+        "/configurations/jhh/mx700/mx700_jhh_ED_H10-A04-C01-C02-C15-C20_none_30.01.2019.cfg"
       ]
     },
     "software": "",
@@ -786,7 +786,7 @@
     "userManual": false,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx750/mx750_jhh_ED--Resus_N.01.01_29.03.2022"
+        "/configurations/jhh/mx750/mx750_jhh_ED--Resus_N.01.01_29.03.2022.cfg"
       ]
     },
     "software": "",
@@ -802,16 +802,16 @@
     "userManual": true,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx800/mx800_jhh_ED_none_none_30.01.2019",
-        "/configurations/jhh/mx800/mx800_jhh_ICU_none_M.0_12.07.2021",
-        "/configurations/jhh/mx800/mx800_jhh_NICU--Bed-1-To-7_none_none_24.11.2022",
-        "/configurations/jhh/mx800/mx800_jhh_NICU_H20-A06-C07-C09_L.01.08_05.09.2018",
-        "/configurations/jhh/mx800/mx800_jhh_PICU_H10-A06-C01-C02-C05-C06-C09-C15-C20_none_12.11.2021"
+        "/configurations/jhh/mx800/mx800_jhh_ED_none_none_30.01.2019.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_ICU_none_M.0_12.07.2021.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_NICU--Bed-1-To-7_none_none_24.11.2022.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_NICU_H20-A06-C07-C09_L.01.08_05.09.2018.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_PICU_H10-A06-C01-C02-C05-C06-C09-C15-C20_none_12.11.2021.cfg"
       ],
       "Armidale Hospital": [
-        "/configurations/jhh/mx800/mx800_armidale_ED--Resus_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_25.01.2018",
-        "/configurations/jhh/mx800/mx800_armidale_ICU_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.04.00_13.11.2018",
-        "/configurations/jhh/mx800/mx800_armidale_Operating-Theatres--Networked-IntelliBridge_none_M.03.03_05.03.2018"
+        "/configurations/jhh/mx800/mx800_armidale_ED--Resus_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_25.01.2018.cfg",
+        "/configurations/jhh/mx800/mx800_armidale_ICU_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.04.00_13.11.2018.cfg",
+        "/configurations/jhh/mx800/mx800_armidale_Operating-Theatres--Networked-IntelliBridge_none_M.03.03_05.03.2018.cfg"
       ]
     },
     "software": "",
@@ -827,11 +827,11 @@
     "userManual": false,
     "config": {
       "John Hunter Hospital": [
-        "/configurations/jhh/mx40/mx40_jhh_Telemetry-Pool_none_none_20.05.2015",
-        "/configurations/jhh/mx40/mx40_jhh_Ward-G3_none_none_07.12.2017"
+        "/configurations/jhh/mx40/mx40_jhh_Telemetry-Pool_none_none_20.05.2015.cfg",
+        "/configurations/jhh/mx40/mx40_jhh_Ward-G3_none_none_07.12.2017.cfg"
       ],
       "Belmont Hospital": [
-        "/configurations/belmont/mx40/mx40_belmont_Whole-Hospital_none_none_02.01.2018"
+        "/configurations/belmont/mx40/mx40_belmont_Whole-Hospital_none_none_02.01.2018.cfg"
       ]
     },
     "software": "",

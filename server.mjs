@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { createDirectory, convertHospitalName } from './utils/utils.mjs';
+import { createDirectory, convertHospitalName, readAllData, readDeviceData } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
 const __dirname = path.dirname('.');
@@ -56,16 +56,10 @@ app.use(cors({
     origin: '*'
 }))
 
-app.get("/getData", (req, res) => {
+app.get("/getData", async (req, res) => {
     try {
-        fs.readFile(path.join(__dirname, 'data', 'data.json'), (err, data) => {
-            if (err) {
-                console.error(err);
-            }
-            else {
-                res.json(JSON.parse(data));
-            }
-        }); 
+        const data = await readAllData(__dirname);
+        res.json(data);
     } catch (err) {
         console.error(err);
     }
@@ -73,8 +67,7 @@ app.get("/getData", (req, res) => {
 
 app.put("/putDeviceData", cpUpload, async (req, res) => {
     try {
-        const deviceJSON = fs.readFileSync(path.join(__dirname, 'data', 'data.json'));
-        const deviceData = JSON.parse(deviceJSON).deviceData;
+        const deviceData = await readDeviceData(__dirname);
         
         // Define the variables from the uploaded data
         const model = req.body.model;
@@ -97,15 +90,16 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
         }
 
         if (Object.keys(req.files).includes('configs')) {
-            hospital = convertHospitalName(req.body.hospital);
-            configPath = `/configurations/${hospital}/${model}/${req.files.configs[0].originalname.split('.').slice(0, -1).join('.')}`
+            console.log(req.files.configs[0].originalname);
+
+            hospitalDirectory = convertHospitalName(req.body.hospital);
+            configPath = `/configurations/${hospitalDirectory}/${model}/${req.files.configs[0].originalname}`
             if (Object.keys(updatedDevice.config).includes(hospital)) {
                 updatedDevice.config[hospital].push(configPath)
             } 
             else {
                 updatedDevice.config[hospital] = [configPath];
             }
-            // Need to add to configs updatedDeviceData.config[hospital].push(configPath)
         }
 
         if (Object.keys(req.body).includes('software')) {

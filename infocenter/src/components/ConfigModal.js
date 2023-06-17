@@ -20,7 +20,7 @@ function parseConfigData(configData) {
     const department = capitaliseFirstLetter(configData[2]);
     const options = configData[3] === 'none' ? '-' : configData[3].replace(/-/g, ', ');
     const software = configData[4] === 'none' ? '-' : configData[4];
-    const dateCreated = configData[configData.length -1].replace(/\./g, '/');
+    const dateCreated = configData[configData.length -1].split('.').slice(0, -1).join('/');
 
     return [department, options, software, dateCreated];
 }

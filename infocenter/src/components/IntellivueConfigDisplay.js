@@ -13,7 +13,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
                 <label>Date Created:</label>
                 <label>{parsedConfigData[departmentsIndex][3]}</label>
             </div>
-            <a href={`${process.env.PUBLIC_URL}${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex]}.cfg`} download>Download</a>
+            <a href={`${process.env.PUBLIC_URL}${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex]}`} download>Download</a>
         </div>
     );
 } 
