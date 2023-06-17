@@ -41,7 +41,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
-
+    
     useEffect(() => {
         async function sendFormData() {
             const res = await fetch("http://localhost:5000/putDeviceData", {
@@ -51,7 +51,10 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 referrerPolicy: "no-referrer",
                 body: updateData.current
             });
-            console.log(res);
+            const newDeviceData = await res.json();
+            
+            // Need to clear formData at this point
+            //updateData.current.delete()
         }
         if (startUpload) {
             setStartUpload(false);
@@ -222,7 +225,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         <div className="config-modal">
             <div className="modal-title-bar">
                 <h2 className="model-title">{`Update ${selectedData.model} Data`}</h2> 
-                <img className="cross" src={`${process.env.PUBLIC_URL}/images/cross.svg`} alt="cross" onClick={closeUpdate}></img>   
+                <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeUpdate}></img>   
             </div>
             <div className="update-form-display">
                 <div className="update-options">

@@ -114,7 +114,7 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
         if (documentKeys.length !== 0) {
             const documentsInfo = [];
             documentKeys.forEach((key, index) => {
-                const keyObjectDetails = {label: key, filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
+                const keyObjectDetails = {label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
                 documentsInfo.push(keyObjectDetails);
             });
             updatedDevice.documents = documentsInfo;
@@ -129,8 +129,6 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
                 return entry;
             }
         })
-
-        console.log(updatedDevice);
 
         // Write the data to file
         writeDataToFile(__dirname, JSON.stringify(updatedDeviceData, null, 2));

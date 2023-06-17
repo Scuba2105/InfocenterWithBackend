@@ -390,8 +390,13 @@
         "/configurations/inverell/MX450/mx450_inverell_Medical-Ward_none_none_17.06.2023.cfg"
       ]
     },
-    "software": "",
-    "documents": "",
+    "software": "C:/Users/Software/Masimo",
+    "documents": [
+      {
+        "label": "extra-Test",
+        "filePath": "/documents/MX450/robots.txt"
+      }
+    ],
     "placeholder2": ""
   },
   {
