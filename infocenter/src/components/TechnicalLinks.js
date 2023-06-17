@@ -6,13 +6,13 @@ function generateLinks(model, type) {
     const formattedModel = model.toLowerCase().replace(/\s/ig, '_');
     let link;
     if (type === 'service') {
-        link = `${process.env.PUBLIC_URL}/manuals/service_manuals/${formattedModel}_service_manual.pdf`
+        link = `http://localhost:5000/manuals/service_manuals/${formattedModel}_service_manual.pdf`
     } 
     else if (type === 'image') {
-        link = `${process.env.PUBLIC_URL}/images/equipment/${formattedModel}.jpg`
+        link = `http://localhost:5000/images/equipment/${formattedModel}.jpg`
     } 
     else if (type === 'user') {
-        link = `${process.env.PUBLIC_URL}/manuals/user_manuals/${formattedModel}_user_manual.pdf`
+        link = `http://localhost:5000/manuals/user_manuals/${formattedModel}_user_manual.pdf`
     } 
     
     return link
@@ -39,7 +39,7 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
                     <div className="equipment-summary">
                         <h2>{selectedData.model}</h2>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
-                        <div className="device-edit-button" onClick={showDeviceUpdate}><img id="device-edit-image" src={`${process.env.PUBLIC_URL}/images/edit.svg`} alt="edit"></img>Update</div>
+                        <div className="device-edit-button" onClick={showDeviceUpdate}><img id="device-edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>
                     </div>
                 </div>
                 <div className="technical-area">
@@ -55,15 +55,15 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
                         <ConfigIcon color="#f4af1a"/>
                         Configuration
                     </div>
-                    <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.software === "" ? null : `${process.env.PUBLIC_URL}/${selectedData.software}`} target="_blank" rel="noopener noreferrer">
+                    <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.2} : {opacity: 1}}>
                         <SoftwareIcon color="#8504a5" />
                         Software
                     </div>
-                    <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder1 === "" ? null : `${process.env.PUBLIC_URL}/${selectedData.placeholder1}`} target="_blank" rel="noopener noreferrer">
+                    <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.2} : {opacity: 1}}>
                         <DocumentsIcon color="#dc652f" />
                         Other Documents
                     </div>
-                    <div className="technical-link placeholder2" style={selectedData.placeholder2 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder2 === "" ? null : `${process.env.PUBLIC_URL}/${selectedData.placeholder2}`} target="_blank" rel="noopener noreferrer">
+                    <div className="technical-link placeholder2" style={selectedData.placeholder2 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder2 === "" ? null : `http://localhost:5000/${selectedData.placeholder2}`} target="_blank" rel="noopener noreferrer">
                         <PlaceholderIcon color="#33658A" />
                         Placeholder 2
                     </div>

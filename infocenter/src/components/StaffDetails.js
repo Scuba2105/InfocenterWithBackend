@@ -27,7 +27,7 @@ export function StaffDetails({selectedData}) {
             return(initials);        
         }
         return (
-            <img className="phone-image" src={`${process.env.PUBLIC_URL}/images/phone.svg`} alt="phone"></img>
+            <img className="phone-image" src={`http://localhost:5000/images/phone.svg`} alt="phone"></img>
         );
     }
     

@@ -78,7 +78,7 @@ export function ConfigModal({selectedData, closeConfig}) {
         <div className="config-modal">
             <div className="modal-title-bar">
                 <h2 className="model-title">{`${selectedData.model} Configurations`}</h2> 
-                <img className="cross" src={`${process.env.PUBLIC_URL}/images/cross.svg`} alt="cross" onClick={closeConfig}></img>   
+                <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeConfig}></img>   
             </div>
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />

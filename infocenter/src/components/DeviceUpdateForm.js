@@ -64,7 +64,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         for (const key of updateData.current.keys()) {
             dataKeys.push(key);
         }
-        console.log(dataKeys);
+        
         if (dataKeys.length === 2 && dataKeys[0] === 'model' && dataKeys[1] === 'manufacturer') {
             alert('No form data has been saved for upload');
             return;

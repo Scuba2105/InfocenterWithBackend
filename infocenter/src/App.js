@@ -19,10 +19,11 @@ export default function App() {
                     referrerPolicy: "no-referrer"
                 })
                 const retrievedData = await res.json()
+                console.log('Data retrieved!')
                 setDataObject(retrievedData);
                 setSelectedPageData({page: 'staff', data: retrievedData.staffData})
             }
-            if (state === false) {
+            return () => {
                 state = true
             } 
         } 

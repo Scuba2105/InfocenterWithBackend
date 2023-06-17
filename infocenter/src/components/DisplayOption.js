@@ -80,8 +80,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 
                 }
                 <div className="other-file-button-container">
-                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`${process.env.PUBLIC_URL}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
-                    {fileNumber.length !== 1 && <div id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`${process.env.PUBLIC_URL}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
+                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`http://localhost:5000/images/add-square.svg`} alt="add-square"></img>Add File</div>}
+                    {fileNumber.length !== 1 && <div id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`http://localhost:5000/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
                 </div>
             </div>
         );
