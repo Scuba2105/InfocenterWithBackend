@@ -101,13 +101,16 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         else if (selectedOption === 'Configs') {
             const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
             const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.config-data-input');
+            configDataInputs.forEach((input) => {
+                console.log(input.parentNode.querySelector('.config-data-label'))
+            })
             const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry-input');
             const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             
             updateData.current.set('hospital', selectedHospital.value);
 
             // Check mandatory fields have been entered
-            if (configDataInputs[0].value === "") {
+            if (configDataInputs[1].value === "") {
                 alert("Department is a mandatory field and has not been entered");
                 return
             }
@@ -120,7 +123,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             const configDataArray = [generateHospitalLabel(selectedHospital.value)];
             // Loop over the Department, Sub-Location, Options and Software config data inputs
             configDataInputs.forEach((input, index) => {
-                if (index === 0 || index === 1) {
+                if (index === 1 || index === 3) {
                     if (acronyms.includes(input.value.toUpperCase())) {
                         configDataArray.push((input.value.toUpperCase()))
                     }
@@ -129,7 +132,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                     }
                 }
                 // Parse options string. Filter out Intellivue monitors so options string can be parsed
-                else if (index === 2 ) {
+                else if (index === 0 ) {
                     if (input.value !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
                         const regex = input.value.match(/[A-Za-z]\d{2}/ig);
                         configDataArray.push((regex.join('-').toUpperCase()));
@@ -255,7 +258,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 </div>
                 <div className='display-section'>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
-                    <div className="form-buttons" style={selectedOption !== 'Configs' ? {marginTop: 50 + 'px'} : {}}>
+                    <div className="form-buttons">
                         <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
                         <div className="update-button" onClick={beginUpload}>Upload Updates</div>
                     </div>                    

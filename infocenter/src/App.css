@@ -488,7 +488,7 @@ html {
   left: 700px;
   top: 80px;
   width: var(--config-modal-width);
-  min-height: 600px;
+  min-height: 700px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -600,6 +600,7 @@ html {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  transform: translateY(30px)
 }
 
 .update-button {
@@ -947,7 +948,8 @@ html {
     left: 350px;
     top: 20px;
     width: calc(var(--config-modal-width)* 5/8 + 50px);
-    min-height: calc(var(--config-modal-height)*4/8);
+    min-height: calc(var(--config-modal-height)*5/8);
+    max-height: 580px;
     grid-template-rows: 60px 1fr;
   }
   .modal-title-bar {
@@ -967,6 +969,7 @@ html {
     grid-template-rows: 50px 60% 1fr;
   }
   .form-buttons {
+    transform: translateY(-30px);
     margin-bottom: 20px;
   }
   .other-doc-text-input {
