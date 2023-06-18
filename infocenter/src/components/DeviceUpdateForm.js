@@ -100,8 +100,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
         // Add the data from the configurations form to the formData ref
         else if (selectedOption === 'Configs') {
             const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
-            const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.sub-unit-entry');
-            const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry');
+            const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.config-data-input');
+            const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry-input');
             const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             
             updateData.current.set('hospital', selectedHospital.value);

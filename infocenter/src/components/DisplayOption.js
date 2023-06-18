@@ -1,4 +1,5 @@
 import { SelectInput } from "./SelectInput";
+import { Input } from "./Input";
 import { capitaliseFirstLetters } from "../utils/utils";
 import { Cross, Tick } from "../svg";
 
@@ -43,15 +44,13 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
         return (
             <div key={selectedOption} id="device-config-container" className="device-input-container">
                 <h4 id="add-config-heading">Add New Configuration</h4>
-                <div className="location-info">
-                    <SelectInput label='Hospital' optionData={hospitalLocations} />
-                    <label className="sub-unit-label">Department </label><input type="text" className="sub-unit-entry" placeholder="eg. ICU, ED, Ward H1 etc."></input>
-                    <label className="sub-unit-label">{`Sub-Location (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. Transport, Paediatric etc."></input>
-                </div>
                 <div className="config-info">
-                    <label className="sub-unit-label">{`Options (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. A06, H10, C06 etc"></input>
-                    <label className="sub-unit-label">{`Software Rev. (optional)`}</label><input type="text" className="sub-unit-entry" placeholder="eg. M.03.01, L.01.02"></input>
-                    <label className="sub-unit-label">{`Date Created`}</label><input type="date" className="date-entry"></input>
+                    <SelectInput label='Hospital' optionData={hospitalLocations} />
+                    <Input inputType='text' identifier='config-data' labelText='Department' placeholdertext='eg. ICU, ED, Ward H1 etc.'/>
+                    <Input inputType='text' identifier='config-data' labelText='Sub-Location (optional)' placeholdertext='eg. Transport, Paediatric etc.'/>
+                    <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/>
+                    <Input inputType='text' identifier='config-data' labelText='Software Rev. (optional)' placeholdertext='eg. M.03.01, L.01.02'/>
+                    <Input inputType='date' identifier='date-entry' labelText='`Date Created'/>
                 </div>
                 <div className="config-file-container">
                     <label>Select Config File</label>
