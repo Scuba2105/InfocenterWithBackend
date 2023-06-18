@@ -4,10 +4,10 @@ import { ConfigModal } from "./ConfigModal";
 import { useState } from "react"
 
 const staffStyles = {display: 'grid', gridTemplateColumns: '1fr', gridTemplateRows: '15% 1fr',
-height: '88%', maxHeight: '550px'};
+height: '88%'};
 
 const equipmentStyles = {display: 'grid', gridTemplateColumns: '1fr', gridTemplateRows: '15% 180px 1fr',
-height: '88%',maxHeight: '650px'};
+height: '88%'};
 
 export function SummaryCard({pageData, selectedEntry}) {
     

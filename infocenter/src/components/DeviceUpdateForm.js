@@ -52,12 +52,18 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 body: updateData.current
             });
             const newDeviceData = await res.json();
-            
+            console.log(newDeviceData);
             // Need to clear formData at this point
-            //updateDat       if (startUpload) {
-            setStartUpload(false);
-            sendFormData();
+            for (const pair of updateData.current.entries()) {
+                console.log(`${pair[0]}, ${pair[1]}`);
+            }
+            
+            return () => {
+                setStartUpload(false);
+            } 
         }
+        
+        sendFormData();
     }, [startUpload])
 
     function beginUpload() {
@@ -146,7 +152,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             // Need to make adaptable for different config file extensions
             configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg` :
             configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg`
-            console.log(configDataArray[1]);
+            
             if (configFileInput.files.length === 0) {
                 alert('No config files selected')
                 return 
@@ -178,9 +184,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             }
             alert(`The documents for ${selectedData.model} have been saved`)
         }
-        for (const pair of updateData.current.entries()) {
-            console.log(`${pair[0]}, ${pair[1]}`);
-        }
+        
     }
 
     function updateSelectedOption(e) {
@@ -222,6 +226,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     return (
         <div className="config-modal">
             <div className="modal-title-bar">
+                <div id="title-aligner"></div>   
                 <h2 className="model-title">{`Update ${selectedData.model} Data`}</h2> 
                 <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeUpdate}></img>   
             </div>

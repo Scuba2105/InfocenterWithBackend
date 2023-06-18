@@ -1,5 +1,5 @@
 export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospitals, departmentsIndex, hospitalsIndex}) {
-    console.log(parsedConfigData, hospitals, departmentsIndex, hospitalsIndex)
+    
     return (
         <div className="config-link">
             <div className="options-info">

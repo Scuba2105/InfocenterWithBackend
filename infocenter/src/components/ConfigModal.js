@@ -78,6 +78,7 @@ export function ConfigModal({selectedData, closeConfig}) {
     return (
         <div className="config-modal">
             <div className="modal-title-bar">
+                <div id="title-aligner"></div>     
                 <h2 className="model-title">{`${selectedData.model} Configurations`}</h2> 
                 <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeConfig}></img>   
             </div>
