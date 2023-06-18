@@ -252,7 +252,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                         <DocumentsIcon color={selectedOption === 'Other Documents' ? 'white' : 'rgb(132, 132, 139)'} size="25px"/>
                         Other Documents
                     </div>                    
-                 </div>
+                </div>
                 <div className='display-section'>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
                     <div className="form-buttons">
