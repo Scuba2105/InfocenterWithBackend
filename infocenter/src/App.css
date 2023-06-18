@@ -488,7 +488,7 @@ html {
   left: 700px;
   top: 80px;
   width: var(--config-modal-width);
-  min-height: var(--config-modal-height);
+  min-height: 600px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -589,7 +589,7 @@ html {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -945,9 +945,9 @@ html {
   }
   .config-modal {
     left: 350px;
-    top: 50px;
+    top: 20px;
     width: calc(var(--config-modal-width)* 5/8 + 50px);
-    min-height: calc(var(--config-modal-height)*5/8);
+    min-height: calc(var(--config-modal-height)*4/8);
     grid-template-rows: 60px 1fr;
   }
   .modal-title-bar {
@@ -967,8 +967,37 @@ html {
     grid-template-rows: 50px 60% 1fr;
   }
   .form-buttons {
-    margin-top: -40px;
     margin-bottom: 20px;
   }
+  .other-doc-text-input {
+    border: 1px solid black;
+    font-size: 10px;
+    height: 13px;
+    width: 170px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    padding: 6px -5px 2px 0;
+    margin-top: 3px;
+    margin-bottom: 5px;
+  }
   
+  .other-doc-file-upload {
+    font-size: 10px;
+    border: 1px solid black;
+    height: 15px;
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 2px -5px 4px 0 !important;
+    margin-top: 3px;
+    margin-bottom: 5px;
+  }
+  .label-input-container1, .label-input-container2 {
+    font-size: 12px;
+  }
 }

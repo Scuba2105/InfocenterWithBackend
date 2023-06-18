@@ -255,7 +255,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
                 </div>
                 <div className='display-section'>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
-                    <div className="form-buttons">
+                    <div className="form-buttons" style={selectedOption !== 'Configs' ? {marginTop: 50 + 'px'} : {}}>
                         <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
                         <div className="update-button" onClick={beginUpload}>Upload Updates</div>
                     </div>                    
