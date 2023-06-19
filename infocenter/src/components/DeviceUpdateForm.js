@@ -227,7 +227,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     }
     
     return (
-        <div className="config-modal">
+        <div className="config-modal" style={selectedOption === 'Configs' ? {minHeight: 500 + 'px'} : {minHeight: 500 + 'px'}}>
             <div className="modal-title-bar">
                 <div id="title-aligner"></div>   
                 <h2 className="model-title">{`Update ${selectedData.model} Data`}</h2> 

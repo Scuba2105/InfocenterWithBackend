@@ -301,6 +301,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center; 
+  transform: translateY(100px);
 }
 
 .device-text-input {
@@ -488,7 +489,6 @@ html {
   left: 700px;
   top: 80px;
   width: var(--config-modal-width);
-  min-height: 700px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -586,7 +586,7 @@ html {
 .display-section {
   grid-row: 2;
   width: 100%;
-  height: 100%;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -600,7 +600,8 @@ html {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  transform: translateY(30px)
+  transform: translateY(20px);
+  margin-bottom: 50px;
 }
 
 .update-button {
@@ -776,6 +777,7 @@ html {
   justify-content: flex-start;
   align-items: center;
   padding-top: 20px;
+  transform: translateY(20px)
 }
 
 .other-input-container > input {
@@ -827,7 +829,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(15px);
+  transform: translateY(35px);
 }
 
 .description-file-container {
@@ -835,6 +837,7 @@ html {
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
+  transform: translateY(20px);
 }
 
 .label-input-container1 {
@@ -948,8 +951,7 @@ html {
     left: 350px;
     top: 20px;
     width: calc(var(--config-modal-width)* 5/8 + 50px);
-    min-height: calc(var(--config-modal-height)*5/8);
-    max-height: 580px;
+    min-height: 550px !important;
     grid-template-rows: 60px 1fr;
   }
   .modal-title-bar {
@@ -966,11 +968,23 @@ html {
     width: 200px;
   }
   #device-config-container {
-    grid-template-rows: 50px 60% 1fr;
+    grid-template-rows: 50px 55% 1fr;
+  }
+  .display-section {
+    height: 400px;
+  }
+  .device-input-container {
+    transform: translateY(75px)
   }
   .form-buttons {
     transform: translateY(-30px);
     margin-bottom: 20px;
+  }
+  .other-file-button-container {
+    transform: translateY(15px);
+  }
+  .description-file-container {
+    transform: translateY(0px);
   }
   .other-doc-text-input {
     border: 1px solid black;
