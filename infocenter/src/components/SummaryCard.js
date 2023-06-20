@@ -2,6 +2,7 @@ import { TechnicalLinks } from "./TechnicalLinks";
 import { StaffDetails } from "./StaffDetails";
 import { ConfigModal } from "./ConfigModal";
 import { useState } from "react"
+import useMediaQueries from "media-queries-in-react" 
 
 const staffStyles = {display: 'grid', gridTemplateColumns: '1fr', gridTemplateRows: '15% 1fr',
 height: '88%'};
@@ -10,7 +11,11 @@ const equipmentStyles = {display: 'grid', gridTemplateColumns: '1fr', gridTempla
 height: '88%'};
 
 export function SummaryCard({pageData, selectedEntry}) {
-    
+    const mediaQueries = useMediaQueries({
+        laptop: "(max-width: 1250px)",
+        desktop: "(min-width: 1800px)"
+    });
+
     const [modalVisible, setModalVisible] = useState(false);
     const page = pageData.page;
     const currentDataSet = pageData.data;
