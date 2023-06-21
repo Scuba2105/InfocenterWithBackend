@@ -4,17 +4,27 @@ import { ConfigModal } from "./ConfigModal";
 import { useState } from "react"
 import useMediaQueries from "media-queries-in-react" 
 
-const staffStyles = {display: 'grid', gridTemplateColumns: '1fr', gridTemplateRows: '15% 1fr',
-height: '88%'};
-
-const equipmentStyles = {display: 'grid', gridTemplateColumns: '1fr', gridTemplateRows: '15% 180px 1fr',
-height: '88%'};
-
 export function SummaryCard({pageData, selectedEntry}) {
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
+
+    function getClassName(page) {
+        if (page === 'staff' && mediaQueries.laptop === true) {
+            return 'display-area staff-display-laptop'
+        }
+        else if (page === 'staff' && mediaQueries.desktop === true) {
+            return 'display-area staff-display-desktop'
+        }
+        else if (page === 'technical-info' && mediaQueries.laptop === true) {
+            return 'display-area equipment-display-laptop'
+        }
+        else {
+            return 'display-area equipment-display-desktop'
+        }
+    }
+
 
     const [modalVisible, setModalVisible] = useState(false);
     const page = pageData.page;
@@ -35,7 +45,7 @@ export function SummaryCard({pageData, selectedEntry}) {
     }
     
     return (
-        <div className="display-area" style={page === 'staff' ? staffStyles : equipmentStyles }>
+        <div className={getClassName(page)}>
                 <h2>{page === 'staff' ? "Employee Summary" : "Equipment Summary"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onConfigClick={onConfigClick} />}

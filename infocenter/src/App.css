@@ -203,7 +203,7 @@ html {
   color: white;
 }
 
-.display-area {  
+.display-area {
   background-color: white;
   border: 1px solid black;
   width: 45%;
@@ -211,6 +211,34 @@ html {
   margin-top: 2%;
   margin-right: 5%;
   min-height: 500px;
+}
+
+.staff-display-laptop {  
+  display: grid;
+  grid-template-columns: 1fr; 
+  grid-template-rows: 80px 1fr;
+  height: 88%;
+}
+
+.staff-display-desktop { 
+  display: grid;
+  grid-template-columns: 1fr; 
+  grid-template-rows: 120px 1fr;
+  height: 88%;
+}
+
+.equipment-display-laptop {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 180px 1fr;
+  height: 88%;
+}
+
+.equipment-display-desktop {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 180px 1fr;
+  height: 88%;
 }
 
 .display-area > h2 {
@@ -225,6 +253,14 @@ html {
   color: white;
 }
 
+.staff-display-laptop > h2, .equipment-display-laptop > h2 {
+  font-size: 30px;
+}
+
+.staff-display-desktop > h2, .equipment-display-desktop > h2 {
+  font-size: 40px;
+}
+
 .summary-area {
   grid-row: 2;
   display: flex;
@@ -235,7 +271,15 @@ html {
   min-height: 200px;
 }
 
-.image-container {
+.image-container-laptop {
+  height: 165px;
+  width: 165px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container-desktop {
   height: 165px;
   width: 165px;
   display: flex;
@@ -406,20 +450,34 @@ html {
 }
 
 /* CSS for staff dislay area */
-.staff-info {
+.staff-info-laptop {
   font-size: 14px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 180px 1fr;
 }
 
-.staff-heading {
+.staff-info-desktop {
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 180px 1fr;
+}
+
+.staff-heading-laptop {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.staff-logo {
+.staff-heading-desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(70px);
+}
+
+.staff-logo-laptop {
   height: 175px;
   width: 175px;
   display: flex;
@@ -428,24 +486,16 @@ html {
   font-size: 30px;
 }
 
-.staff-name {
-  width: 65%;
-  height: 100%;
+.staff-logo-desktop {
+  height: 260px;
+  width: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 }
 
-.name-text {
-  width: 80%;
-  font-size: 30px;
-  border-bottom: 2px solid black;
-  padding-bottom: 20px;
-}
-
-.position {
-  font-weight: bold;
-  transform: translateY(-20px);
-}
-
-.logo {
+.logo-laptop {
   height: 120px;
   width: 120px;
   border: 1px solid rgb(137, 44, 44);
@@ -456,13 +506,59 @@ html {
   background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
 }
 
-.phone-image {
+.logo-desktop {
+  height: 240px;
+  width: 240px;
+  border: 1px solid rgb(137, 44, 44);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
+  transform: translateX(50px)
+}
+
+.staff-name {
+  width: 65%;
+  height: 100%;
+}
+
+.name-text-laptop {
+  width: 80%;
+  font-size: 30px;
+  border-bottom: 2px solid black;
+  padding-bottom: 20px;
+}
+
+.name-text-desktop {
+  width: 80%;
+  font-size: 45px;
+  border-bottom: 2px solid black;
+  padding-bottom: 20px;
+}
+
+.position-laptop {
+  font-weight: bold;
+  transform: translateY(-20px);
+}
+
+.position-desktop {
+  font-weight: bold;
+  transform: translateY(-20px);
+  font-size: 25px;
+}
+
+.phone-image-laptop {
   height: 80px;
   width: 80px;
 }
 
+.phone-image-desktop {
+  height: 110px;
+  width: 110px;
+}
 /* --------------------- */
-.info-container {
+.info-container-laptop {
   grid-column: 1;
   grid-row: 2;
   display: grid;
@@ -470,7 +566,16 @@ html {
   grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
-.info-container p {
+.info-container-desktop {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  transform: translateY(120px);
+}
+
+.info-container-laptop p {
   font-weight: bold;
   display: flex;
   justify-content: flex-start;
@@ -478,7 +583,20 @@ html {
   margin-left: 9%;
 }
 
-.info-container span {
+.info-container-desktop p {
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 9%;
+}
+
+.info-container-laptop span {
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+.info-container-desktop span {
   font-weight: normal;
   margin-left: 8px;
 }
