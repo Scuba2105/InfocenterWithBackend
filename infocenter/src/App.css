@@ -304,11 +304,15 @@ html {
   object-fit: contain;
 }
 
-.equipment-summary {
+.equipment-summary-laptop {
   width: 60%;
 }
 
-#title-container {
+.equipment-summary-desktop {
+  width: 60%;
+}
+
+#title-container-laptop {
   width: 100%;
   height: 50%;
   display: flex;
@@ -317,14 +321,32 @@ html {
   transform: translateY(25px);
 }
 
-.equipment-summary h4 {
+#title-container-desktop {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transform: translateY(50px);
+  font-size: 38px;
+}
+
+.equipment-summary-laptop h4 {
   border-top: 2px solid#536095;
   padding-top: 10px;
   color:rgb(172, 172, 173);
   height: 75px;
 }
 
-.device-edit-button {
+.equipment-summary-desktop h4 {
+  border-top: 2px solid#536095;
+  padding-top: 10px;
+  color:rgb(172, 172, 173);
+  height: 75px;
+  font-size: 20px;
+}
+
+.equipment-summary-laptop .device-edit-button {
   width: 80px;
   display: flex;
   justify-content: center;
@@ -336,7 +358,21 @@ html {
   margin-left: 20px;
   padding: 1px 0 3px 0 ;
   font-size: 12px;
+}
 
+.equipment-summary-desktop .device-edit-button {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgb(12, 178, 112);
+  border: 1px solid rgb(12, 178, 112);
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 1px 0 3px 0 ;
+  font-size: 18px;
+  transform: translateY(12px);
 }
 
 .device-edit-button:hover {
@@ -392,11 +428,7 @@ html {
 }
 
 /* Format the technical links equipment area */
-.equipment-display-desktop {
-
-}
-
-.technical-area {
+.technical-area-laptop, .technical-area-desktop {
   grid-row: 3;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -405,7 +437,16 @@ html {
   margin: 10px 3% 10px 3%;
 }
 
-.technical-link {
+.technical-area-desktop {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 5%;
+  margin: 100px 3% 10px 8%;
+}
+
+.technical-area-laptop .technical-link {
   font-size: 11px;
   width: 93px;
   height: 93px;
@@ -418,6 +459,23 @@ html {
   justify-content: space-around;
   align-items: center;
   font-weight: bold;
+}
+
+.technical-area-desktop .technical-link {
+  font-size: 11px;
+  width: 200px;
+  height: 200px;
+  border-radius: 6px;
+  transform: translateX(25px);
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
 }
 
 .technical-link:last-child {
