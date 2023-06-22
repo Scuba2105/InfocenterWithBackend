@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PlaceholderIcon} from "../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
+import useMediaQueries from "media-queries-in-react" 
 
 function generateLinks(model, type) {
     const formattedModel = model.toLowerCase().replace(/\s/ig, '_');
@@ -19,7 +20,12 @@ function generateLinks(model, type) {
 }
 
 export function TechnicalLinks({selectedData, onConfigClick}) {
-    
+
+    const mediaQueries = useMediaQueries({
+        laptop: "(max-width: 1250px)",
+        desktop: "(min-width: 1800px)"
+    });
+    console.log(mediaQueries)    
     const [updateFormVisible, setUpdateFormVisible] = useState(false);
 
     function showDeviceUpdate() {
@@ -32,8 +38,8 @@ export function TechnicalLinks({selectedData, onConfigClick}) {
     
     return (
         <>
-                <div className="summary-area">
-                    <div className="image-container">
+                <div className={mediaQueries.laptop ? "summary-area-laptop" : "summary-area-desktop"}>
+                    <div className={mediaQueries.laptop ? "image-container-laptop" : "image-container-desktop"}>
                         <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData.model, 'image')} alt="Medical Equipment"></img>
                     </div>
                     <div className="equipment-summary">

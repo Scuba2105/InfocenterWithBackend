@@ -261,7 +261,7 @@ html {
   font-size: 40px;
 }
 
-.summary-area {
+.summary-area-laptop {
   grid-row: 2;
   display: flex;
   justify-content: space-around;
@@ -269,6 +269,17 @@ html {
   width: 100%;
   height: 100%;
   min-height: 200px;
+}
+
+.summary-area-desktop {
+  grid-row: 2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  transform: translateY(30px)
 }
 
 .image-container-laptop {
@@ -280,16 +291,16 @@ html {
 }
 
 .image-container-desktop {
-  height: 165px;
-  width: 165px;
+  height: 300px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .equipment-image {
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 75%;
+  max-height: 75%;
   object-fit: contain;
 }
 
@@ -378,6 +389,11 @@ html {
   margin-bottom: 30px;
   width: 210px;
   font-size: 14px;
+}
+
+/* Format the technical links equipment area */
+.equipment-display-desktop {
+
 }
 
 .technical-area {
@@ -589,6 +605,7 @@ html {
   justify-content: flex-start;
   align-items: center;
   margin-left: 9%;
+  font-size: 26px;
 }
 
 .info-container-laptop span {
@@ -599,6 +616,7 @@ html {
 .info-container-desktop span {
   font-weight: normal;
   margin-left: 8px;
+  font-size: 26px;
 }
 
 /* Config modal formatting */

@@ -1,15 +1,6 @@
-import { useState, useMemo, useEffect } from "react";
+import useMediaQueries from "media-queries-in-react" 
 
-export function useMediaQuery({ query }) {
-    const mediaQuery = useMemo(() => window.matchMedia(query), [query]);
-    const [match, setMatch] = useState(mediaQuery.matches);
-  
-    useEffect(() => {
-      const onChange = () => setMatch(mediaQuery.matches);
-      mediaQuery.addEventListener("change", onChange);
-  
-      return () => mediaQuery.removeEventListener("change", onChange);
-    }, [mediaQuery]);
-  
-    return match;
-  }
+export const mediaQueries = useMediaQueries({
+  laptop: "(max-width: 1250px)",
+  desktop: "(min-width: 1800px)"
+});
