@@ -30,12 +30,13 @@ function generateHospitalLabel(name) {
     }
 }
 
-export function DeviceUpdateForm({selectedData, closeUpdate}) {
+export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
     const [startUpload, setStartUpload] = useState(false);
     const isMounted = useRef(false);
+    console.log(isMounted)
 
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
@@ -44,31 +45,40 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     const updateData = useRef(formData);
                    
     useEffect(() => {
-        async function sendFormData() {
-            const res = await fetch("http://localhost:5000/putDeviceData", {
-                method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                body: updateData.current
-            });
-            const newDeviceData = await res.json();
-            console.log(newDeviceData);
-
-            // Need to clear formData at this point
-            for (const pair of updateData.current.entries()) {
-                updateData.current.delete(pair[0]);
+        async function sendFormData(formMounted) {
+            if (formMounted) {
+                console.log('Testing')
+                const res = await fetch("http://localhost:5000/putDeviceData", {
+                    method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer",
+                    body: updateData.current
+                });
+                const newDeviceData = await res.json();
+                
+                // Need to clear formData at this point
+                for (const pair of updateData.current.entries()) {
+                    if (!['model', 'manufacturer'].includes(pair[0])) {
+                        updateData.current.delete(pair[0]);
+                    }
+                }
+2
+                // Need to update app data.
+                updatePageData(newDeviceData);
             }
             
             return () => {
                 setStartUpload(false);
             } 
-        }
-        if (isMounted) {
-            sendFormData();
-            isMounted.current = true;
+            
         }
         
+        sendFormData(isMounted.current);
+        
+        if (!isMounted.current) {
+            isMounted.current = true;
+        } 
     }, [startUpload])
 
     function beginUpload() {
@@ -232,7 +242,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     }
     
     return (
-        <div className="config-modal" style={selectedOption === 'Configs' ? {minHeight: 500 + 'px'} : {minHeight: 500 + 'px'}}>
+        <div key="" className="config-modal" style={selectedOption === 'Configs' ? {minHeight: 500 + 'px'} : {minHeight: 500 + 'px'}}>
             <div className="modal-title-bar">
                 <div id="title-aligner"></div>   
                 <h2 className="model-title">{`Update ${selectedData.model} Data`}</h2> 

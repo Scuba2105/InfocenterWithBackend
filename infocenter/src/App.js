@@ -30,11 +30,27 @@ export default function App() {
 
         fetchData(); 
     },[]);
-
     
     const [pageData, setSelectedPageData] = useState({page: 'staff', data: staffData});
     const [selectedEntry, setSelectedEntry] = useState('60146568');
-            
+          
+    // Update the selected page data when update form submitted
+    function updatePageData(newEntry) {
+        const updatedEntry = newEntry;
+        const currentDeviceData = pageData.data;
+        const updatedDeviceData = currentDeviceData.reduce((acc, entry) => {
+            if (entry.model === updatedEntry.model && entry.manufacturer === updatedEntry.manufacturer) {
+                acc.push(updatedEntry);
+                return acc
+            }
+            else {
+                acc.push(entry);
+                return acc
+            }
+        }, []);
+        setSelectedPageData({page: 'technical-info', data: updatedDeviceData})
+    } 
+
     // Update the selected entry on selecting a row
     function onRowClick(e) {
         const row = e.target.parentNode;
@@ -67,7 +83,7 @@ export default function App() {
             <div className="app-icon"></div>
             <div className="header-bar">HNECT Information Center</div>
             <Menu page={pageData.page} onPageSelect={onPageSelect} />
-            <MainArea pageData={pageData} selectedEntry={selectedEntry} onRowClick={onRowClick} />
+            <MainArea pageData={pageData} selectedEntry={selectedEntry} onRowClick={onRowClick} updatePageData={updatePageData}/>
         </div>
     );
 }

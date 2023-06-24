@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 5000;
 // Used with Multer for storing uploaded files on disk.
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        
         const model = req.body.model.toLowerCase();
         const documentsFieldRegex = /file[1-4]/;
         
@@ -71,6 +70,7 @@ app.get("/getData", async (req, res) => {
 
 app.put("/putDeviceData", cpUpload, async (req, res) => {
     try {
+        console.log(req.body);
         const deviceData = await readDeviceData(__dirname);
         
         // Define the variables from the uploaded data

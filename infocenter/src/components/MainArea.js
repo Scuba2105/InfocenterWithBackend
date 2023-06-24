@@ -1,12 +1,12 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
 
-export function MainArea({pageData, selectedEntry, onRowClick}) {
+export function MainArea({pageData, selectedEntry, onRowClick, updatePageData}) {
 
     const mainBody = pageData.page === "technical-info" ? 
             <>
                 <SearchFilter key={`${pageData.page}-device-filter`} pageData={pageData} selectedEntry={selectedEntry} onRowClick={onRowClick} />
-                <SummaryCard key={`${pageData.page}-device-card`} pageData={pageData} selectedEntry={selectedEntry} />
+                <SummaryCard key={`${pageData.page}-device-card`} pageData={pageData} selectedEntry={selectedEntry} updatePageData={updatePageData}/>
             </> :
             pageData.page === "staff" ?
             <>
