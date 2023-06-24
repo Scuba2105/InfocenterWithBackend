@@ -347,7 +347,7 @@ html {
 }
 
 .equipment-summary-laptop .device-edit-button {
-  width: 80px;
+  width: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -357,7 +357,7 @@ html {
   border-radius: 5px;
   margin-left: 20px;
   padding: 1px 0 3px 0 ;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .equipment-summary-desktop .device-edit-button {

@@ -35,13 +35,14 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
     const [startUpload, setStartUpload] = useState(false);
+    const isMounted = useRef(false);
 
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
-    
+                   
     useEffect(() => {
         async function sendFormData() {
             const res = await fetch("http://localhost:5000/putDeviceData", {
@@ -53,17 +54,21 @@ export function DeviceUpdateForm({selectedData, closeUpdate}) {
             });
             const newDeviceData = await res.json();
             console.log(newDeviceData);
+
             // Need to clear formData at this point
             for (const pair of updateData.current.entries()) {
-                console.log(`${pair[0]}, ${pair[1]}`);
+                updateData.current.delete(pair[0]);
             }
             
             return () => {
                 setStartUpload(false);
             } 
         }
+        if (isMounted) {
+            sendFormData();
+            isMounted.current = true;
+        }
         
-        sendFormData();
     }, [startUpload])
 
     function beginUpload() {
