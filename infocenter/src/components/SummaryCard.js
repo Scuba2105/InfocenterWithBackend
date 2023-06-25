@@ -9,7 +9,7 @@ export function SummaryCard({pageData, selectedEntry, updatePageData}) {
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
-
+    console.log(pageData)
     function getClassName(page) {
         if (page === 'staff' && mediaQueries.laptop === true) {
             return 'display-area staff-display-laptop'

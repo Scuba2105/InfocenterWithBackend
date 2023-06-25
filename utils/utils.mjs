@@ -29,7 +29,7 @@ export function readDeviceData(__dirname) {
 }
 
 export function writeDataToFile(__dirname, data) {
-    fs.writeFile(path.join(__dirname, 'data', 'test-data.json'), data, (err) => {
+    fs.writeFile(path.join(__dirname, 'data', 'data.json'), data, (err) => {
         if (err) throw err;
         console.log('The file has been saved!');
       });

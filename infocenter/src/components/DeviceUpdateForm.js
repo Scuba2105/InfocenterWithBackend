@@ -35,9 +35,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
     const [startUpload, setStartUpload] = useState(false);
-    const isMounted = useRef(false);
-    console.log(isMounted)
-
+    
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
     formData.append("model", selectedData.model);
@@ -45,9 +43,9 @@ export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
     const updateData = useRef(formData);
                    
     useEffect(() => {
-        async function sendFormData(formMounted) {
-            if (formMounted) {
-                console.log('Testing')
+        async function sendFormData(upload) {
+            if (upload) {
+                
                 const res = await fetch("http://localhost:5000/putDeviceData", {
                     method: "PUT", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin
@@ -63,7 +61,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
                         updateData.current.delete(pair[0]);
                     }
                 }
-2
+
                 // Need to update app data.
                 updatePageData(newDeviceData);
             }
@@ -74,11 +72,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
             
         }
         
-        sendFormData(isMounted.current);
+        sendFormData(startUpload);
         
-        if (!isMounted.current) {
-            isMounted.current = true;
-        } 
     }, [startUpload])
 
     function beginUpload() {

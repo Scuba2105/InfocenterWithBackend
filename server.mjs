@@ -132,8 +132,11 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
 
         // Write the data to file
         writeDataToFile(__dirname, JSON.stringify(updatedDeviceData, null, 2));
+
+        // Set the response header so client always fetches latest data not cached.
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
         
-        // Send the updated device's new data as a response
+        // Send the updated device's new data as a response.
         res.json(updatedDevice);
     } catch (err) {
         console.error(err);
