@@ -5,3 +5,14 @@ export function capitaliseFirstLetters(input) {
     }).join(' ');
     return formattedWords
 }
+
+export async function fetchData() {
+    const res = await fetch("http://localhost:5000/getData", {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer"
+    })
+    const data = await res.json();
+    return data;
+}

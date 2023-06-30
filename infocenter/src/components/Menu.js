@@ -6,9 +6,8 @@ export function Menu({page, onPageSelect}) {
    
   const [hoveredId, setHoveredId] = useState(null);
 
-  function enterMenuIcon(e) {
-    const element = e.target.classList[0] !== 'menu-option' ? e.target.parentNode.classList[0] !== 'menu-option' ? e.target.parentNode.parentNode: e.target.parentNode : e.target;
-    setHoveredId(element.id);
+  function enterMenuIcon(optionID) {
+    setHoveredId(optionID);
   }
 
   function leaveMenuIcon(e) {
@@ -19,7 +18,7 @@ export function Menu({page, onPageSelect}) {
     const titleArray = option.title.split(' ')
     const titleLength = titleArray.length;
     return (
-      <div key={option.id} id={option.id} className={option.id === page ? "menu-selected" : "menu-option"} onClick={onPageSelect} onMouseEnter={enterMenuIcon} onMouseLeave={leaveMenuIcon}>
+      <div key={option.id} id={option.id} className={option.id === page ? "menu-selected" : "menu-option"} onClick={onPageSelect} onMouseEnter={enterMenuIcon(option.id)} onMouseLeave={leaveMenuIcon}>
         {option.id === 'staff' ? <StaffIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> : 
         option.id === 'technical-info' ? <TechnicalIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
         option.id === 'contacts' ? <ContactsIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :

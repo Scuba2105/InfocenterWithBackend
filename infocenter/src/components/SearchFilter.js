@@ -3,7 +3,7 @@ import { SearchTable } from "./SearchTable";
 import { useState } from "react";
 
 
-export function SearchFilter({pageData, selectedEntry, onRowClick}) {
+export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
     
     const [query, setQuery] = useState('null');
 
@@ -11,9 +11,9 @@ export function SearchFilter({pageData, selectedEntry, onRowClick}) {
         setQuery(e.target.value);
     }
 
-    const pageSelected = pageData.page;
+    const pageSelected = page;
 
-    const currentDataSet = pageData.data;
+    const currentDataSet = pageData;
     
     const queryData = currentDataSet.filter((entry) => {
         const regex = new RegExp(query,'ig');
@@ -29,7 +29,7 @@ export function SearchFilter({pageData, selectedEntry, onRowClick}) {
     return (
         <div className="search-filter">
             <SearchInput key={`${pageSelected}-input`} onQueryChange={onQueryChange} />
-            <SearchTable key={`${pageSelected}-table`} pageSelected={pageData.page} queryData={displayData} onRowClick={onRowClick} />
+            <SearchTable key={`${pageSelected}-table`} pageSelected={page} queryData={displayData} onRowClick={onRowClick} />
         </div>
     );
 }

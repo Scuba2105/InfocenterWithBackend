@@ -1,4 +1,356 @@
-[
+{"staffData": [
+  {
+    "id": "-",
+    "name": "Armidale BME",
+    "officePhone": "677 69425",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Senior Technical Officer",
+    "id": "60146568",
+    "name": "Atif Siddiqui",
+    "officePhone": "492 13144",
+    "dectPhone": "",
+    "workMobile": "0447 470 772",
+    "personalMobile": "0411 177 064",
+    "team": "JHH"
+  },
+  {
+    "hospital": "New England",
+    "position": "Technical Officer",
+    "id": "56147979",
+    "name": "Azmi Refal",
+    "officePhone": "676 78024",
+    "dectPhone": "",
+    "workMobile": "0429 100 856",
+    "personalMobile": "",
+    "team": "Tamworth"
+  },
+  {
+    "id": "-",
+    "name": "B.E.E.R.",
+    "officePhone": "492 14035",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "id": "-",
+    "name": "Biomed Powerfail",
+    "officePhone": "495 61763",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "hospital": "New England",
+    "position": "Technical Officer",
+    "id": "60026649",
+    "name": "Brett Pryor",
+    "officePhone": "676 78026",
+    "dectPhone": "",
+    "workMobile": "0437 959 290",
+    "personalMobile": "0429 99 39 01",
+    "team": "Tamworth"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Senior Technical Officer",
+    "id": "60035155",
+    "name": "Durga Sompalle",
+    "officePhone": "492 13144",
+    "dectPhone": "492 55436",
+    "workMobile": "",
+    "personalMobile": "",
+    "team": "JHH"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Technical Officer",
+    "id": "56004946",
+    "name": "Ellen Heydon",
+    "officePhone": "492 13144",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "0431 605 729",
+    "team": "JHH"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Biomedical Engineer",
+    "id": "60240778",
+    "name": "Glady Gideon",
+    "officePhone": "492 13152",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "",
+    "team": "Management"
+  },
+  {
+    "id": "-",
+    "name": "ICU Workshop",
+    "officePhone": "492 14237",
+    "dectPhone": "492 13048",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Director",
+    "id": "60184450",
+    "name": "Ishaque Khan",
+    "officePhone": "492 13150",
+    "dectPhone": "",
+    "workMobile": "0437 989 655",
+    "personalMobile": "0450 975 515",
+    "team": "Management"
+  },
+  {
+    "hospital": "Tamworth Hospital",
+    "position": "Senior Technical Officer",
+    "id": "50030819",
+    "name": "John Larkworthy",
+    "officePhone": "676 78031",
+    "dectPhone": "",
+    "workMobile": "0408 421 838",
+    "personalMobile": "",
+    "team": "Tamworth"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Technical Officer",
+    "id": "50007633",
+    "name": "Keith Ball",
+    "officePhone": "492 12818",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "",
+    "team": "JHH"
+  },
+  {
+    "hospital": "Manning Base Hospital",
+    "position": "Technical Officer",
+    "id": "56150542",
+    "name": "Leigh Ryan",
+    "officePhone": "659 29162",
+    "dectPhone": "659 29162",
+    "workMobile": "",
+    "personalMobile": "0407 235 315",
+    "team": "Hunter"
+  },
+  {
+    "hospital": "Mater Hospital",
+    "position": "Technical Officer",
+    "id": "50007636",
+    "name": "Matthew Law",
+    "officePhone": "492 43307",
+    "dectPhone": " ",
+    "workMobile": "",
+    "personalMobile": "",
+    "team": "Hunter"
+  },
+  {
+    "hospital": "Green Team",
+    "position": "Technical Officer",
+    "id": "50012762",
+    "name": "Matthew Murrell",
+    "officePhone": "408 71358",
+    "dectPhone": "408 71385",
+    "workMobile": "0419 295 532",
+    "personalMobile": "",
+    "team": "Hunter"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Service Co-ordinator",
+    "id": "50007338",
+    "name": "Michelle Ison",
+    "officePhone": "492 36815",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "0422 079 517",
+    "team": "Management"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Technical Officer",
+    "id": "50011595",
+    "name": "Mick Dathan",
+    "officePhone": "492 13144",
+    "dectPhone": "492 36166",
+    "workMobile": "",
+    "personalMobile": "0408 656 494",
+    "team": "JHH"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Technical Officer",
+    "id": "60117751",
+    "name": "Mitchell Pacey",
+    "officePhone": "492 13144",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "0431 274 950",
+    "team": "JHH"
+  },
+  {
+    "hospital": "Mechanical/Anaesthetics",
+    "position": "Technical Officer",
+    "id": "50023598",
+    "name": "Mitchell Pyne",
+    "officePhone": "492 13152",
+    "dectPhone": "",
+    "workMobile": "0419 192 662",
+    "personalMobile": "",
+    "team": "Mechanical"
+  },
+  {
+    "id": "-",
+    "name": "New Maitland Storage",
+    "officePhone": "408 71374",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "id": "-",
+    "name": "New Maitland Workshop",
+    "officePhone": "408 71357",
+    "dectPhone": "408 71385",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "hospital": "Green Team",
+    "position": "Technical Officer",
+    "id": "60194207",
+    "name": "Patrick Small",
+    "officePhone": "492 13153",
+    "dectPhone": "",
+    "workMobile": "0419 119 841",
+    "personalMobile": "0412 926 058",
+    "team": "Hunter"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Deputy Director",
+    "id": "50010464",
+    "name": "Paul Cookson",
+    "officePhone": "492 13151",
+    "dectPhone": "",
+    "workMobile": "0409 431 528",
+    "personalMobile": "0401 221 332",
+    "team": "Management"
+  },
+  {
+    "hospital": "New England",
+    "position": "Biomedical Engineer",
+    "id": "60134701",
+    "name": "Pedram Bidar",
+    "officePhone": "676 78023",
+    "dectPhone": "",
+    "workMobile": "0428 371 700",
+    "personalMobile": "",
+    "team": "Tamworth"
+  },
+  {
+    "hospital": "Mechanical/Anaesthetics",
+    "position": "Senior Technical Officer",
+    "id": "56145551",
+    "name": "Ray Aunei Mose",
+    "officePhone": "492 13152",
+    "dectPhone": "",
+    "workMobile": "0477 761 620",
+    "personalMobile": "0422 707 441",
+    "team": "Mechanical"
+  },
+  {
+    "hospital": "Royal Newcastle Center",
+    "position": "Technical Officer",
+    "id": "50024127",
+    "name": "Rodney Birt",
+    "officePhone": "492 23675",
+    "dectPhone": "492 23693",
+    "workMobile": "",
+    "personalMobile": "",
+    "team": "JHH"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Technical Officer",
+    "id": "60146774",
+    "name": "Steven Bradbury",
+    "officePhone": "492 13144",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "0438 479 457",
+    "team": "JHH"
+  },
+  {
+    "id": "-",
+    "name": "Tea Room",
+    "officePhone": "492 13145",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "id": "-",
+    "name": "Triage",
+    "officePhone": "492 13149",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": ""
+  },
+  {
+    "hospital": "Green Team",
+    "position": "Senior Technical Officer",
+    "id": "50019318",
+    "name": "Troy Traeger",
+    "officePhone": "408 71385",
+    "dectPhone": "",
+    "workMobile": "0428 994 172",
+    "personalMobile": "",
+    "team": "Hunter"
+  },
+  {
+    "hospital": "Green Team",
+    "position": "Technical Officer",
+    "id": "50018924",
+    "name": "Wayne Fuller",
+    "officePhone": "408 71357",
+    "dectPhone": "",
+    "workMobile": "0477 424 324",
+    "personalMobile": "",
+    "team": "Hunter"
+  },
+  {
+    "hospital": "John Hunter Hospital",
+    "position": "Technical Officer",
+    "id": "60299787",
+    "name": "Kendo Wu",
+    "officePhone": "492 13144",
+    "dectPhone": "",
+    "workMobile": "",
+    "personalMobile": "0410 251 165",
+    "team": "JHH"
+  },
+  {
+    "hospital": "Green Team",
+    "position": "Technical Officer",
+    "id": "50018928",
+    "name": "Tome Tomev",
+    "officePhone": "408 71357",
+    "dectPhone": "408 71385",
+    "workMobile": "",
+    "personalMobile": "",
+    "team": "Hunter"
+  }
+],
+"deviceData": [
   {
     "img": "true",
     "type": "Anaesthetic Machine",
@@ -1127,4 +1479,4 @@
     "documents": "",
     "placeholder2": ""
   }
-]
+]}

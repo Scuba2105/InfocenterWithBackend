@@ -4,7 +4,7 @@ import { ConfigModal } from "./ConfigModal";
 import { useState } from "react"
 import useMediaQueries from "media-queries-in-react" 
 
-export function SummaryCard({pageData, selectedEntry, updatePageData}) {
+export function SummaryCard({page, pageData, selectedEntry, updatePageData}) {
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -27,8 +27,7 @@ export function SummaryCard({pageData, selectedEntry, updatePageData}) {
 
 
     const [modalVisible, setModalVisible] = useState(false);
-    const page = pageData.page;
-    const currentDataSet = pageData.data;
+    const currentDataSet = pageData;
 
     const selectedData = currentDataSet.find((entry) => {
         return entry.model === selectedEntry || entry.id === selectedEntry || entry.name === selectedEntry;
