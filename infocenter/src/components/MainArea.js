@@ -39,17 +39,15 @@ export function MainArea({page}) {
             <div key={page} className="main-area">
                 {page === "technical-info" ? 
             <>
-                {console.log(data)}
                 <SearchFilter key={`${page}-device-filter`} page={page} pageData={data.deviceData} onRowClick={onRowClick} />
                 <SummaryCard key={`${page}-device-card`} page={page} pageData={data.deviceData} selectedEntry={selectedEntry} />
             </> :
             page === "staff" ?
             <>
-                {console.log(data)} 
                 <SearchFilter key={`${page}-staff-filter`} page={page} pageData={data.staffData} onRowClick={onRowClick} />
                 <SummaryCard key={`${page}-staff-card`} page={page} pageData={data.staffData} selectedEntry={selectedEntry} />
             </> :
-            <h1>Page has not been implemented yet</h1>}
+                <h1>Page has not been implemented yet</h1>}
             </div>
         );
     }

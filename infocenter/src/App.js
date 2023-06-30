@@ -1,5 +1,5 @@
 import './App.css';
-/*import { Menu } from './components/Menu';*/
+import { Menu } from './components/Menu';
 import { MainArea } from './components/MainArea';
 import { useState } from 'react';
 import { staffData } from "./staff-data";
@@ -21,7 +21,7 @@ export default function App() {
         <div className="wrapper">
             <div className="app-icon"></div>
             <div className="header-bar">HNECT Information Center</div>
-            {/*<Menu page={page} onPageSelect={onPageSelect} />*/}
+            <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>
                 <MainArea page={page} />
             </QueryClientProvider>
