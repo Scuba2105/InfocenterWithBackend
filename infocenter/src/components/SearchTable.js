@@ -64,9 +64,9 @@ export function SearchTable({pageSelected, queryData, onRowClick}) {
                         return (
                             <>
                                 <tr style={{backgroundColor: rowColor}} key={`${data.model}-row`} onClick={onRowClick}>
-                                    <td key={`${data.model}-data`}>{pageSelected === 'staff' ? data.id : data.model}</td>
-                                    <td>{pageSelected === 'staff' ? data.name : data.manufacturer}</td>
-                                    <td key={data.type}>{pageSelected === 'staff' ? data.officePhone : data.type}</td>
+                                    <td key={pageSelected === 'staff' ? `${data.id}-row` : `${data.model}-row`}>{pageSelected === 'staff' ? data.id : data.model}</td>
+                                    <td key={pageSelected === 'staff' ? `${data.name}-row` : `${data.manufacturer}-row`}>{pageSelected === 'staff' ? data.name : data.manufacturer}</td>
+                                    <td key={pageSelected === 'staff' ? `${data.officePhone}-row` : `${data.type}-row`}>{pageSelected === 'staff' ? data.officePhone : data.type}</td>
                                 </tr>
                             </>
 

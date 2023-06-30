@@ -26,7 +26,6 @@ export function StaffDetails({selectedData}) {
     }
 
     function getInitials(name, laptop) {
-        console.log(name);
         if (!workshops.includes(name)) {
             const nameArray = name.split(' ');
             const initials = name === 'Mitchell Pacey' ? 'MJP' : name === 'Tome Tomev' ? 'TTT' : nameArray.map((word) => {

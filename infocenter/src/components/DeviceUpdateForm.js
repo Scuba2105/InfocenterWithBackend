@@ -30,7 +30,7 @@ function generateHospitalLabel(name) {
     }
 }
 
-export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
+export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
@@ -63,7 +63,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, updatePageData}) {
                 }
 
                 // Need to update app data.
-                updatePageData(newDeviceData);
+                queryClient.invalidateQueries('dataSource');
             }
             
             return () => {

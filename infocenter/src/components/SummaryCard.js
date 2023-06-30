@@ -4,12 +4,12 @@ import { ConfigModal } from "./ConfigModal";
 import { useState } from "react"
 import useMediaQueries from "media-queries-in-react" 
 
-export function SummaryCard({page, pageData, selectedEntry, updatePageData}) {
+export function SummaryCard({page, pageData, selectedEntry, queryClient}) {
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
-    console.log(pageData)
+    
     function getClassName(page) {
         if (page === 'staff' && mediaQueries.laptop === true) {
             return 'display-area staff-display-laptop'
@@ -47,7 +47,7 @@ export function SummaryCard({page, pageData, selectedEntry, updatePageData}) {
         <div className={getClassName(page)}>
                 <h2>{page === 'staff' ? "Employee Summary" : "Equipment Summary"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} />}                    
-                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onConfigClick={onConfigClick} updatePageData={updatePageData}/>}
+                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onConfigClick={onConfigClick} queryClient={queryClient}/>}
                 {modalVisible && page === 'technical-info' && <ConfigModal selectedData={selectedData} closeConfig={closeConfig} />}
         </div>    
     );

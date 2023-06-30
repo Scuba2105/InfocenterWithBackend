@@ -19,7 +19,7 @@ function generateLinks(model, type) {
     return link
 }
 
-export function TechnicalLinks({selectedData, onConfigClick, updatePageData}) {
+export function TechnicalLinks({selectedData, onConfigClick, queryClient}) {
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -76,7 +76,7 @@ export function TechnicalLinks({selectedData, onConfigClick, updatePageData}) {
                         Placeholder 2
                     </div>
                 </div>
-                {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} closeUpdate={closeUpdate} updatePageData={updatePageData}/>}
+                {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} closeUpdate={closeUpdate} queryClient={queryClient}/>}
         </> 
     );
 }
