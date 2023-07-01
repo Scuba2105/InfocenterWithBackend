@@ -81,9 +81,7 @@ export function LinkModal({selectedData, modalType}) {
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
                 <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
-                <div className="config-display">
-                    <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
-                </div>    
+                <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
             </div>
         );
     }

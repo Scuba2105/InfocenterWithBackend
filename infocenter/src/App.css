@@ -674,12 +674,26 @@ html {
 }
 
 /* link modal formatting */
-.config-modal, .modal-container {
+.modal-container-laptop {
   position: absolute;
   left: 375px;
   top: 20px;
   width: 500px;
   min-height: 500px;
+  z-index: 50;
+  background-color: white;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 65px 1fr;
+}
+
+.modal-container-desktop {
+  position: absolute;
+  left: 775px;
+  top: 100px;
+  width: 700px;
+  min-height: 700px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -1070,19 +1084,29 @@ html {
 }
 
 /* Formatting for the configuration modal */
-.config-display {
+.config-display-laptop {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  transform: translateY(15%)
+}
+
+.config-display-desktop {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transform: translateY(15%);
+  margin-bottom: 50px;
 }
 
 .config-link {
-  height: 350px;
-  width: 350px;
+  height: 100%;
+  width: 100%;
   border: 1px solid #003153;
   border-radius: 20px;
   background: url('http://localhost:5000/images/configuration-background.jpg');
@@ -1097,6 +1121,7 @@ html {
   font-size: 13px;
   transform: translateY(-20px);
 }
+
 
 .config-link a {
   padding: 3px 5px 3px 5px;
