@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
+import { ModalSkeleton } from './ModalSkeleton';
 
 const acronyms = ['ICU', 'ED', 'AGSU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
@@ -237,12 +238,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
     }
     
     return (
-        <div key="" className="config-modal" style={selectedOption === 'Configs' ? {minHeight: 500 + 'px'} : {minHeight: 500 + 'px'}}>
-            <div className="modal-title-bar">
-                <div id="title-aligner"></div>   
-                <h2 className="model-title">{`Update ${selectedData.model} Data`}</h2> 
-                <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeUpdate}></img>   
-            </div>
+        <ModalSkeleton selectedData={selectedData} closeModal={closeUpdate} type="update" >
             <div className="update-form-display">
                 <div className="update-options">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>
@@ -272,8 +268,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                         <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
                         <div className="update-button" onClick={beginUpload}>Upload Updates</div>
                     </div>                    
-                </div>                
-            </div>
-        </div>
+                </div>
+            </div>                
+        </ModalSkeleton>
     )
 } 

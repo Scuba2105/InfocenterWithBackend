@@ -673,18 +673,19 @@ html {
   font-size: 26px;
 }
 
-/* Config modal formatting */
-.config-modal {
+/* link modal formatting */
+.config-modal, .modal-container {
   position: absolute;
-  left: 700px;
-  top: 80px;
-  width: var(--config-modal-width);
+  left: 375px;
+  top: 20px;
+  width: 500px;
+  min-height: 500px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 90px 1fr;
+  grid-template-rows: 65px 1fr;
 }
 
 .modal-title-bar {

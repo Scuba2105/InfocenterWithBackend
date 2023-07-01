@@ -41,47 +41,43 @@ function capitaliseFirstLetter(word) {
     return formattedDepartment;
 }
 
-export function LinkModal({selectedData, modalType, closeModal}) {
+export function LinkModal({selectedData, modalType}) {
     
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     
-    const hospitals = Object.keys(selectedData.config) 
-    const configData = generateConfigData(hospitals, selectedData);
-    
-    // Generate the config information from the json link
-    const selectedHospitalConfigs = configData[hospitalsIndex];
-    
-    const parsedConfigData = selectedHospitalConfigs.map((configString) => {
-        return parseConfigData(configString);
-    });
-
-    function getDepartments() {
-        const newDepartmentIndex = parsedConfigData.map((entry) => {
-            return entry[0];
-        });
-        
-        return newDepartmentIndex;
-    }
-    
-    function onHospitalChange(e) {
-        const newHospitalIndex = hospitals.indexOf(e.target.value);
-        setHospitalsIndex(newHospitalIndex);
-        setDepartmentsIndex(0);
-    }
-
-    function onDepartmentChange(e) {
-        const newDepartmentIndex = getDepartments().indexOf(e.target.value);        
-        setDepartmentsIndex(newDepartmentIndex);
-    }
+    if (modalType === "config") {
             
-    return (
-        <div className="config-modal">
-            <div className="modal-title-bar">
-                <div id="title-aligner"></div>     
-                <h2 className="model-title">{`${selectedData.model} Configurations`}</h2> 
-                <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
-            </div>
+        const hospitals = Object.keys(selectedData.config) 
+        const configData = generateConfigData(hospitals, selectedData);
+        
+        // Generate the config information from the json link
+        const selectedHospitalConfigs = configData[hospitalsIndex];
+        
+        const parsedConfigData = selectedHospitalConfigs.map((configString) => {
+            return parseConfigData(configString);
+        });
+
+        function getDepartments() {
+            const newDepartmentIndex = parsedConfigData.map((entry) => {
+                return entry[0];
+            });
+            
+            return newDepartmentIndex;
+        }
+        
+        function onHospitalChange(e) {
+            const newHospitalIndex = hospitals.indexOf(e.target.value);
+            setHospitalsIndex(newHospitalIndex);
+            setDepartmentsIndex(0);
+        }
+
+        function onDepartmentChange(e) {
+            const newDepartmentIndex = getDepartments().indexOf(e.target.value);        
+            setDepartmentsIndex(newDepartmentIndex);
+        }
+                
+        return (
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
                 <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
@@ -89,6 +85,6 @@ export function LinkModal({selectedData, modalType, closeModal}) {
                     <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
                 </div>    
             </div>
-        </div> 
-    );
+        );
+    }
 }

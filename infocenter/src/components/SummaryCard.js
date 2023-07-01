@@ -1,6 +1,7 @@
 import { TechnicalLinks } from "./TechnicalLinks";
 import { StaffDetails } from "./StaffDetails";
 import { LinkModal } from "./LinkModal";
+import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
 import useMediaQueries from "media-queries-in-react" 
 
@@ -49,7 +50,10 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient}) {
                 <h2>{page === 'staff' ? "Employee Summary" : "Equipment Summary"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onLinkClick={onLinkClick} queryClient={queryClient}/>}
-                {modalVisible.visible && page === 'technical-info' && <LinkModal selectedData={selectedData} modalType={modalVisible.type} closeModal={closeModal} />}
+                {modalVisible.visible && page === 'technical-info' && 
+                    <ModalSkeleton selectedData={selectedData} closeModal={closeModal} type={modalVisible.type}>
+                        <LinkModal selectedData={selectedData} modalType={modalVisible.type} />
+                    </ModalSkeleton>}
         </div>    
     );
 }
