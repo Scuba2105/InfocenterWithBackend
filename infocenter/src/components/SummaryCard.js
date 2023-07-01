@@ -1,6 +1,6 @@
 import { TechnicalLinks } from "./TechnicalLinks";
 import { StaffDetails } from "./StaffDetails";
-import { ConfigModal } from "./ConfigModal";
+import { LinkModal } from "./LinkModal";
 import { useState } from "react"
 import useMediaQueries from "media-queries-in-react" 
 
@@ -33,22 +33,23 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient}) {
         return entry.model === selectedEntry || entry.id === selectedEntry || entry.name === selectedEntry;
     });
 
-    function onConfigClick(e) {
-        if (selectedData.config !== "") {
-            setModalVisible(true);
+    function onLinkClick(e) {
+        const option = e.currentTarget.classList[1];
+        if (selectedData[option] !== "" || selectedData[option] !== false) {
+            setModalVisible({visible: true, type: option});
         }
     }
 
-    function closeConfig() {
-        setModalVisible(false);
+    function closeModal() {
+        setModalVisible({visible: false, type: null});
     }
     
     return (
         <div className={getClassName(page)}>
                 <h2>{page === 'staff' ? "Employee Summary" : "Equipment Summary"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} />}                    
-                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onConfigClick={onConfigClick} queryClient={queryClient}/>}
-                {modalVisible && page === 'technical-info' && <ConfigModal selectedData={selectedData} closeConfig={closeConfig} />}
+                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onLinkClick={onLinkClick} queryClient={queryClient}/>}
+                {modalVisible.visible && page === 'technical-info' && <LinkModal selectedData={selectedData} modalType={modalVisible.type} closeModal={closeModal} />}
         </div>    
     );
 }

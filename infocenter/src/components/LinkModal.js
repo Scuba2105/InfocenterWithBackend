@@ -41,7 +41,7 @@ function capitaliseFirstLetter(word) {
     return formattedDepartment;
 }
 
-export function ConfigModal({selectedData, closeConfig}) {
+export function LinkModal({selectedData, modalType, closeModal}) {
     
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
@@ -80,7 +80,7 @@ export function ConfigModal({selectedData, closeConfig}) {
             <div className="modal-title-bar">
                 <div id="title-aligner"></div>     
                 <h2 className="model-title">{`${selectedData.model} Configurations`}</h2> 
-                <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeConfig}></img>   
+                <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
             </div>
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
