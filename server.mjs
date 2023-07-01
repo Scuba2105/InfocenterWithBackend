@@ -70,9 +70,9 @@ app.get("/getData", async (req, res) => {
 
 app.put("/putDeviceData", cpUpload, async (req, res) => {
     try {
-        console.log(req.body);
-        const deviceData = await readDeviceData(__dirname);
-        
+        const allData = await readAllData(__dirname);
+        const deviceData = allData.deviceData;
+
         // Define the variables from the uploaded data
         const model = req.body.model;
         const manufacturer = req.body.manufacturer;
@@ -130,12 +130,10 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
             }
         })
 
+        const updatedAllData = {staffData: allData.staffData, deviceData: updatedDeviceData} 
         // Write the data to file
-        writeDataToFile(__dirname, JSON.stringify(updatedDeviceData, null, 2));
+        writeDataToFile(__dirname, JSON.stringify(updatedAllData, null, 2));
 
-        // Set the response header so client always fetches latest data not cached.
-        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-        
         // Send the updated device's new data as a response.
         res.json(updatedDevice);
     } catch (err) {

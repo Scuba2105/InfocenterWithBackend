@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
-    
+    console.log(page, pageData)
     const [query, setQuery] = useState('null');
 
     function onQueryChange(e) {
