@@ -35,6 +35,31 @@ export function TechnicalLinks({selectedData, onConfigClick, queryClient}) {
     function closeUpdate() {
         setUpdateFormVisible(false)
     }
+
+    function cursorHover(e) {
+        const options = ['config', 'software', 'documents'];
+        let element = e.target;
+        let optionHovered = false;
+        
+        while (optionHovered === false) {
+            for (const option of options) {
+                if (element.classList.contains(option)) {
+                    optionHovered = true;
+                }
+            }
+            if (optionHovered === false) {
+                element = element.parentNode;
+            }
+        }
+        const hoveredOption = element.classList[1];
+        console.log(selectedData[hoveredOption]);
+        if (selectedData[hoveredOption] !== false || selectedData[hoveredOption] !== "") {
+            element.style.cursor = "pointer";
+        }
+        else {
+            element.style.cursor = "normal";
+        }
+    }
     
     return (
         <>
@@ -59,15 +84,15 @@ export function TechnicalLinks({selectedData, onConfigClick, queryClient}) {
                         <UserManualIcon color="#04b3ad" size={mediaQueries.desktop ? "75px" : "30px"}/>
                         User Manual                    
                     </a>
-                    <div className="technical-link config" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.2} : {opacity: 1}} onClick={onConfigClick} >
+                    <div className="technical-link config" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.2} : {opacity: 1}} onClick={onConfigClick} onMouseOver={cursorHover}>
                         <ConfigIcon color="#f4af1a" size={mediaQueries.desktop ? "75px" : "30px"}/>
                         Configuration
                     </div>
-                    <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.2} : {opacity: 1}}>
+                    <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.2} : {opacity: 1}} onMouseOver={cursorHover}>
                         <SoftwareIcon color="#8504a5" size={mediaQueries.desktop ? "75px" : "30px"}/>
                         Software
                     </div>
-                    <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.2} : {opacity: 1}}>
+                    <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.2} : {opacity: 1}} onMouseOver={cursorHover}>
                         <DocumentsIcon color="#dc652f" size={mediaQueries.desktop ? "75px" : "30px"}/>
                         Other Documents
                     </div>

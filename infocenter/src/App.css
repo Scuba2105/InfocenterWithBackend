@@ -501,10 +501,6 @@ html {
   border:1px solid #815a07;
 }
 
-.config:hover {
-  cursor: pointer;
-}
-
 .software {
   background: linear-gradient(#efbdfc, #e174fd);
   color: #320E3B;
