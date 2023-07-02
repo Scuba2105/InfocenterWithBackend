@@ -6,6 +6,9 @@ function formatTypeHeading(type) {
     if (type === "config") {
         name = "configurations" 
     }
+    else if (type === "software") {
+        name = "Software Locations"
+    }
     else {
         name = type;
     }
@@ -19,8 +22,6 @@ export function ModalSkeleton({children, selectedData, closeModal, type}) {
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
-
-
 
     return (
         <div className={mediaQueries.laptop ? "modal-container-laptop" : "modal-container-desktop"}>

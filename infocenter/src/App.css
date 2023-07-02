@@ -403,6 +403,22 @@ html {
   color: rgb(132, 132, 139);
 }
 
+.software-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+#device-software-label, #service-software-label {
+  font-size: 12px;
+}
+
+#device-software-label {
+  margin-right: 40px;
+}
+
 .device-file-upload {
   font-size: 12px;
   border: 1px solid black;

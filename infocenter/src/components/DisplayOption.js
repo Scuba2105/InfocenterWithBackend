@@ -35,7 +35,14 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     else if (selectedOption === 'Software') {
         return (
             <div key={selectedOption} className="device-input-container">
-                <label id="software-available" className="available-label">Current Location Provided: {selectedData.software !== "" ? <Tick color="rgb(7, 171, 138)" size="18px" margin="25px" /> : <Cross color="#de0d37" size="18px" margin="25px" />} </label>
+                {/*<label id="software-available" className="available-label">Current Location Provided: {selectedData.software !== "" ? <Tick color="rgb(7, 171, 138)" size="18px" margin="25px" /> : <Cross color="#de0d37" size="18px" margin="25px" />} </label>*/}
+                <label>Software Type</label>
+                <div className="software-type">
+                    <input type="radio" id="device-software" name="software-type" value="device-software"></input>
+                    <label id="device-software-label" htmlFor="device-software">Device Software</label><br></br>
+                    <input type="radio" id="service-software" name="software-type" value="service-software"></input>
+                    <label id="service-software-label" htmlFor="service-software">Service Software</label><br></br>
+                </div>
                 <label>Update Software File Location: </label><input type="text" className="device-text-input" placeholder={selectedData.software}></input>
             </div>
         );

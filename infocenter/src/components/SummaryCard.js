@@ -36,7 +36,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient}) {
 
     function onLinkClick(e) {
         const option = e.currentTarget.classList[1];
-        if (selectedData[option] !== "" || selectedData[option] !== false) {
+        if (selectedData[option] !== "") {
             setModalVisible({visible: true, type: option});
         }
     }
