@@ -6,6 +6,22 @@ export function capitaliseFirstLetters(input) {
     return formattedWords
 }
 
+export function generateDataPages(queryData, entriesPerPage) {
+    let pageCount = 0;
+    const paginatedData = queryData.reduce((acc, curr, index) => {
+        const remainder = index % entriesPerPage;
+        
+        if (remainder === 0 && index !== 0) {
+            pageCount++
+            acc.push([]);
+        }
+        
+        acc[pageCount].push(curr)
+        return acc;
+    }, [[]]);
+    return paginatedData;
+}
+
 export async function fetchData() {
     const res = await fetch("http://localhost:5000/getData", {
             method: "GET", // *GET, POST, PUT, DELETE, etc.

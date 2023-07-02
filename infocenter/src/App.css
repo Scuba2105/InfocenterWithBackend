@@ -803,6 +803,10 @@ html {
   font-size: 9px;
 }
 
+.hidden {
+  display: none;
+}
+
 .update-form-display {
   grid-row: 2;
   display: grid;
