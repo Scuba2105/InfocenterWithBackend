@@ -43,7 +43,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                     <input type="radio" id="service-software" name="software-type" value="service-software"></input>
                     <label id="service-software-label" htmlFor="service-software">Service Software</label><br></br>
                 </div>
-                <label>Update Software File Location: </label><input type="text" className="device-text-input" placeholder={selectedData.software}></input>
+                <label>Update Software File Location: </label><input type="text" className="device-text-input" ></input>
             </div>
         );
     }

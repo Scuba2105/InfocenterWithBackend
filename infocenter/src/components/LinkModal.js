@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SelectInput } from "./SelectInput";
 import { IntellivueConfigDisplay } from "./IntellivueConfigDisplay";
+import { ClipboardCopy } from "./CopyToClipboard";
 
 function generateConfigData(hospitals, selectedData) {
     let dataArray = [];
@@ -46,6 +47,26 @@ export function LinkModal({selectedData, modalType}) {
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     
+    if (modalType === "software") {
+        
+        const softwareData = selectedData.software;
+        
+        return (
+            <div className="modal-display">
+                <div className="software-summary">
+                    <label className="software-device-label">Device Software Location:</label>
+                    <label className="software-device-location">{softwareData["device-software"] || "N/A"}</label>
+                    <ClipboardCopy copyText={softwareData["device-software"] || "N/A"} identifier="1" />
+                </div>
+                <div className="software-summary">
+                    <label className="software-device-label">Service Software Location:</label>
+                    <label className="software-device-location">{softwareData["service-software"] || "N/A"}</label>
+                    <ClipboardCopy copyText={softwareData["service-software"] || "N/A"} identifier="2" />
+                </div>               
+            </div>
+        );
+    }
+
     if (modalType === "config") {
             
         const hospitals = Object.keys(selectedData.config) 

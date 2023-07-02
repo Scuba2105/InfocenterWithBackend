@@ -108,7 +108,17 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
         }
 
         if (Object.keys(req.body).includes('software')) {
-            updatedDevice.software = req.body.software;
+            const softwareData = req.body.software;
+            const softwareDataArray = softwareData.split('=');
+            const softwareType = softwareDataArray[0];
+            const softwareLocation = softwareDataArray[1];
+            
+            if (typeof updatedDevice.software !== "object") {
+                updatedDevice.software = {[softwareType]: softwareLocation};
+            }
+            else {
+                updatedDevice.software[softwareType] = softwareLocation;
+            }
         }
        
         if (documentKeys.length !== 0) {

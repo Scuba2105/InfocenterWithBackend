@@ -106,12 +106,22 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         else if (selectedOption === 'Software') {
             const textInput = e.target.parentNode.parentNode.querySelector('.device-text-input');
             const radioButtons = e.target.parentNode.parentNode.querySelectorAll('input[type=radio]');
-            console.log(radioButtons);
+            let softwareType = null;
+            radioButtons.forEach((radioButton) => {
+                if (radioButton.checked) {
+                    softwareType = radioButton.id;
+                }
+            })
+            if (softwareType === null) {
+                alert("The software type has not been selected");
+                return;
+            }
             if (textInput.value === "") {
                 alert('No location has been provided for the software!');
                 return
             }
-            updateData.current.set('software', textInput.value)
+            const data = `${softwareType}=${textInput.value}`;
+            updateData.current.set('software', data);
             alert(`The ${selectedOption} location for ${selectedData.model} has been saved`)
         }
         // Add the data from the configurations form to the formData ref

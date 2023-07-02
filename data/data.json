@@ -743,7 +743,10 @@
           "/configurations/inverell/MX450/mx450_inverell_Medical-Ward_none_none_17.06.2023.cfg"
         ]
       },
-      "software": "C://Software/Updates",
+      "software": {
+        "device-software": "C:\\Users\\officeworks\\Documents\\Biomedical_Engineering\\Appsmith",
+        "service-software": "I:/Staff/Apps/Philips/Service/MX450"
+      },
       "documents": "",
       "placeholder2": ""
     },
@@ -946,7 +949,9 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
-      "software": "C:/Updates/Software/950ANZ",
+      "software": {
+        "device-software": "C:/Updates/Software/950ANZ"
+      },
       "documents": "",
       "placeholder2": ""
     },
