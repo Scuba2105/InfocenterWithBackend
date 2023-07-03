@@ -122,12 +122,20 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
         }
        
         if (documentKeys.length !== 0) {
-            const documentsInfo = [];
-            documentKeys.forEach((key, index) => {
-                const keyObjectDetails = {label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
-                documentsInfo.push(keyObjectDetails);
-            });
-            updatedDevice.documents = documentsInfo;
+            if (typeof updatedDevice.documents === 'string') {
+                const documentsInfo = [];
+                documentKeys.forEach((key, index) => {
+                    const keyObjectDetails = {label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
+                    documentsInfo.push(keyObjectDetails);
+                });
+                updatedDevice.documents = documentsInfo;
+            }
+            else {
+                documentKeys.forEach((key, index) => {
+                    const keyObjectDetails = {label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
+                    updatedDevice.documents.push(keyObjectDetails);
+                });
+            }
         }
 
         // Replace the old device data in the DeviceData array with the new data that has been entered 

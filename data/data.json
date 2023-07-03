@@ -1410,7 +1410,12 @@
       "userManual": false,
       "config": "",
       "software": "",
-      "documents": "",
+      "documents": [
+        {
+          "label": "Disassembly Guide",
+          "filePath": "/documents/3015A/3015a_disassembly_guide.pdf"
+        }
+      ],
       "placeholder2": ""
     },
     {
@@ -1482,7 +1487,16 @@
       "userManual": true,
       "config": "",
       "software": "",
-      "documents": "",
+      "documents": [
+        {
+          "label": "Clinical Configuration Guide",
+          "filePath": "/documents/PIIC iX/piicix_clinical_configuration.pdf"
+        },
+        {
+          "label": "Installing Software Patch Guide",
+          "filePath": "/documents/PIIC iX/How to Install a Software Patch.docx"
+        }
+      ],
       "placeholder2": ""
     }
   ]
