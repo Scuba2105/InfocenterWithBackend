@@ -253,3 +253,7 @@ export function Tick({color, size='22px'}) {
         </>
     );
 }
+
+
+
+

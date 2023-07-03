@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SelectInput } from "./SelectInput";
 import { IntellivueConfigDisplay } from "./IntellivueConfigDisplay";
 import { ClipboardCopy } from "./CopyToClipboard";
+import { Documents } from "./Documents";
 import useMediaQueries from "media-queries-in-react"
 
 function generateConfigData(hospitals, selectedData) {
@@ -54,9 +55,21 @@ export function LinkModal({selectedData, modalType}) {
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     
     if (modalType === "documents") {
-        <div className="modal-display">
-            
-        </div>
+
+        const documentData = selectedData.documents;
+        
+        return (
+            <div className="modal-display">
+                {documentData.map((document) => {
+                    const description = document.label;
+                    const link = document.filePath;
+                    const extension = link.split('.').slice(-1)[0];
+                    return (
+                            <Documents key={`${description}.${extension}`} description={description} link={link} extension={extension} />
+                        )
+                })}
+            </div>
+        )
     }
 
     if (modalType === "software") {
