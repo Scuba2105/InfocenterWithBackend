@@ -693,7 +693,7 @@ html {
 .modal-container-laptop {
   position: absolute;
   left: 375px;
-  top: 20px;
+  top: 80px;
   width: 500px;
   z-index: 50;
   background-color: white;
@@ -763,17 +763,18 @@ html {
 }
 
 .software-device-location {
-  font-size: 12px;
+  font-size: 9px;
   border: 1px solid black;
   background-color: white;
   width: 450px;
-  padding: 5px 0 5px 20px;
+  height: 25px;
+  padding-left: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.copy-image1 {
+.copy-image1-laptop {
   position: absolute;
   left: 455px;
   top: 119px;
@@ -781,7 +782,15 @@ html {
   width: 20px;
 }
 
-.copy-image2 {
+.copy-image1-desktop {
+  position: absolute;
+  left: 555px;
+  top: 119px;
+  height: 20px;
+  width: 20px;
+}
+
+.copy-image2-laptop {
   position: absolute;
   left: 455px;
   top: 215px;
@@ -789,16 +798,38 @@ html {
   width: 20px;
 }
 
-.copied-text1 {
+.copy-image2-desktop {
+  position: absolute;
+  left: 555px;
+  top: 215px;
+  height: 20px;
+  width: 20px;
+}
+
+.copied-text1-laptop {
   position: absolute;
   left: 450px;
   top: 121px;
   font-size: 9px;
 }
 
-.copied-text2 {
+.copied-text1-desktop {
+  position: absolute;
+  left: 547px;
+  top: 121px;
+  font-size: 9px;
+}
+
+.copied-text2-laptop {
   position: absolute;
   left: 450px;
+  top: 217px;
+  font-size: 9px;
+}
+
+.copied-text2-desktop {
+  position: absolute;
+  left: 547px;
   top: 217px;
   font-size: 9px;
 }
