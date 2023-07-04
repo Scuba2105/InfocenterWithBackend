@@ -2,7 +2,6 @@ import './App.css';
 import { Menu } from './components/Menu';
 import { MainArea } from './components/MainArea';
 import { useState } from 'react';
-import { staffData } from "./staff-data";
 import { QueryClient, QueryClientProvider} from 'react-query';
 
 // Create a client

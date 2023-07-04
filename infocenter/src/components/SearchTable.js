@@ -1,5 +1,4 @@
 import { NextIcon, SkipIcon } from "../svg";
-import { useState } from 'react'; 
 
 export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, onRowClick, onTableArrowClick}) {
 

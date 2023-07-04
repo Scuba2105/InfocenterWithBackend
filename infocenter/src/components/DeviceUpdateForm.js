@@ -54,8 +54,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                     referrerPolicy: "no-referrer",
                     body: updateData.current
                 });
-                const newDeviceData = await res.json();
-                
+                                
                 // Need to clear formData at this point
                 for (const pair of updateData.current.entries()) {
                     if (!['model', 'manufacturer'].includes(pair[0])) {
