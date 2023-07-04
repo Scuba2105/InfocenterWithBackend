@@ -103,6 +103,7 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
                 updatedDevice.config[hospital].push(configPath)
             } 
             else {
+                updatedDevice.config = {};
                 updatedDevice.config[hospital] = [configPath];
             }
         }

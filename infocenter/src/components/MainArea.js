@@ -1,21 +1,11 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
-import { useState } from "react";
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
 
 export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
 
-    const {data, status} = useQuery(['dataSource'], async () => {
-        const res = await fetch("http://localhost:5000/getData", {
-                method: "GET", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer"
-        })
-        const data = await res.json();
-        return data;
-    });
+    const {data, status} = useQuery(['dataSource'], fetchData);
 
     if (status === 'loading') {
         <div>Loading...</div>

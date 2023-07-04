@@ -54,8 +54,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                     referrerPolicy: "no-referrer",
                     body: updateData.current
                 });
-                const newDeviceData = await res.json();
-                
+                                
                 // Need to clear formData at this point
                 for (const pair of updateData.current.entries()) {
                     if (!['model', 'manufacturer'].includes(pair[0])) {
@@ -128,9 +127,6 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         else if (selectedOption === 'Configs') {
             const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
             const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.config-data-input');
-            configDataInputs.forEach((input) => {
-                console.log(input.parentNode.querySelector('.config-data-label'))
-            })
             const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry-input');
             const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             
@@ -149,7 +145,9 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             // Initialise config data array with hospital label            
             const configDataArray = [generateHospitalLabel(selectedHospital.value)];
             // Loop over the Department, Sub-Location, Options and Software config data inputs
+            
             configDataInputs.forEach((input, index) => {
+                console.log(input);
                 if (index === 1 || index === 3) {
                     if (acronyms.includes(input.value.toUpperCase())) {
                         configDataArray.push((input.value.toUpperCase()))
@@ -157,7 +155,9 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                     else {
                         configDataArray.push(capitaliseFirstLetters(input.value));
                     }
+                    console.log(configDataArray)
                 }
+                
                 // Parse options string. Filter out Intellivue monitors so options string can be parsed
                 else if (index === 0 ) {
                     if (input.value !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {

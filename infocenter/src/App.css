@@ -838,6 +838,12 @@ html {
   display: none;
 }
 
+.documents-heading {
+  font-size: 20px;
+  color: rgb(132, 132, 139);
+  margin-bottom: 30px;
+}
+
 .document-container {
   display: flex;
   justify-content: flex-start;
@@ -847,6 +853,8 @@ html {
   margin-bottom: 20px;
   border: 1px solid black;
   background-color: white;
+  text-decoration: none;
+  color: black;
 }
 
 .document-icon {
@@ -856,9 +864,8 @@ html {
   margin-left: 20px;
 }
 
-.document-link {
-  text-decoration: none;
-  color: black;
+.document-label:hover {
+  cursor: pointer;
 }
 
 .update-form-display {
@@ -1280,6 +1287,7 @@ html {
   }
   .search-table tbody td {
     height: 24px;
+    height: 30px;
     font-size: 12px;
   }
   .display-area {
