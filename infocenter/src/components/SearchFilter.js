@@ -13,7 +13,7 @@ export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
         desktop: "(min-width: 1800px)"
     });
     
-    const entriesPerPage = mediaQueries.laptop ? 10 : 15;
+    const entriesPerPage = mediaQueries.laptop ? 10 : 13;
     
     function onTableArrowClick(e) {
         let id = e.target.id;
