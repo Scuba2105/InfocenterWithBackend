@@ -175,7 +175,7 @@ html {
 }
 
 .search-table tbody td {
-  height: 50px;
+  height: 35px;
   font-size: 14px;
   border-top: 1px solid var(--dark-theme);
   padding-left: 15px;
@@ -223,8 +223,8 @@ html {
 .staff-display-desktop { 
   display: grid;
   grid-template-columns: 1fr; 
-  grid-template-rows: 120px 1fr;
-  height: 88%;
+  grid-template-rows: 12% 1fr;
+  height: 92%;
 }
 
 .equipment-display-laptop {
@@ -258,7 +258,7 @@ html {
 }
 
 .staff-display-desktop > h2, .equipment-display-desktop > h2 {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .summary-area-laptop {
@@ -1279,7 +1279,7 @@ html {
     width: 200px;
   }
   .search-table tbody td {
-    height: 18px;
+    height: 24px;
     font-size: 12px;
   }
   .display-area {
