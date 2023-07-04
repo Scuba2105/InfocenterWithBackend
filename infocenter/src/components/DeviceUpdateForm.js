@@ -47,7 +47,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         async function sendFormData(upload) {
             if (upload) {
                 
-                const res = await fetch("http://localhost:5000/putDeviceData", {
+                await fetch("http://localhost:5000/putDeviceData", {
                     method: "PUT", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin
                     redirect: "follow", // manual, *follow, error
@@ -74,7 +74,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         
         sendFormData(startUpload);
         
-    }, [startUpload])
+    }, [startUpload, queryClient])
 
     function beginUpload() {
         let dataKeys = [];
@@ -143,45 +143,52 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             }
 
             // Initialise config data array with hospital label            
-            const configDataArray = [generateHospitalLabel(selectedHospital.value)];
+            let configDataArray = [generateHospitalLabel(selectedHospital.value)];
             // Loop over the Department, Sub-Location, Options and Software config data inputs
-            
+                      
+            const interimArray = [];
             configDataInputs.forEach((input, index) => {
-                console.log(input);
                 if (index === 1 || index === 3) {
                     if (acronyms.includes(input.value.toUpperCase())) {
-                        configDataArray.push((input.value.toUpperCase()))
+                        interimArray.push((input.value.toUpperCase()))
                     }
                     else {
-                        configDataArray.push(capitaliseFirstLetters(input.value));
+                        interimArray.push(capitaliseFirstLetters(input.value));
                     }
-                    console.log(configDataArray)
                 }
                 
                 // Parse options string. Filter out Intellivue monitors so options string can be parsed
                 else if (index === 0 ) {
                     if (input.value !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
                         const regex = input.value.match(/[A-Za-z]\d{2}/ig);
-                        configDataArray.push((regex.join('-').toUpperCase()));
+                        interimArray.push((regex.join('-').toUpperCase()));
                     }
                     else {
-                        input.value === "" ? configDataArray.push('none') : 
-                        configDataArray.push(input.value.toUpperCase()); 
+                        input.value === "" ? interimArray.push('none') : 
+                        interimArray.push(input.value.toUpperCase()); 
                     }                                        
                 }
                 // Parse config software string and format
-                else if (index === 3) {
-                    input.value === "" ? configDataArray.push('none') : 
-                    configDataArray.push(input.value.toUpperCase()); 
+                else if (index === 2) {
+                    input.value === "" ? interimArray.push('none') : 
+                    interimArray.push(input.value.toUpperCase()); 
                 }
             })
+
+            // Transform the input values into the correct order in the string which differs from the DOM order.
+            const transformedArray = [interimArray[1], interimArray[3], interimArray[0], interimArray[2]];
+            configDataArray = [configDataArray[0], ...transformedArray];
+            
+            // Get the value of the date input
             const dateString = dateInput.value.split('-').reverse().join('.');
             
             // Create the config filename from the input data
             let configFilename;
-            // Need to make adaptable for different config file extensions
-            configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg` :
-            configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.cfg`
+
+            // Generates the file name based on config input and config file extension
+            const fileExtension = configFileInput.files[0].name.split('.').slice(-1)[0];
+            configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
+            configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
             
             if (configFileInput.files.length === 0) {
                 alert('No config files selected')
