@@ -59,7 +59,8 @@ export function LinkModal({selectedData, modalType}) {
         const documentData = selectedData.documents;
         
         return (
-            <div className="modal-display">
+            <div className="modal-display" style={{justifyContent: 'flex-start'}}>
+                <h3 class="documents-heading">Available Documentation</h3>
                 {documentData.map((document) => {
                     const description = document.label;
                     const link = document.filePath;
