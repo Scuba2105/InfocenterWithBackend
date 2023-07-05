@@ -1,11 +1,12 @@
 export function SelectInput({label, optionData, onChange}) {
+    console.log(optionData);
     return (
         <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
             <p className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-label`}>{label}</p>
             <select name={label} className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select`} onChange={onChange}>
-                {optionData.map((hospital) => {
+                {optionData.map((hospital, index) => {
                     return (
-                    <option key={hospital} value={hospital}>{hospital}</option>
+                    <option key={index} value={hospital}>{hospital}</option>
                     );
                 })}
             </select>           

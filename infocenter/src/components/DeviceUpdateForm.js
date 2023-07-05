@@ -46,7 +46,10 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
     useEffect(() => {
         async function sendFormData(upload) {
             if (upload) {
-                console.log('sending data');
+                for (const pair of updateData.current.entries()) {
+                    console.log(pair[0], pair[1]);
+                }
+                
                 await fetch("http://localhost:5000/putDeviceData", {
                     method: "PUT", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin

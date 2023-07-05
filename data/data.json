@@ -1321,6 +1321,9 @@
         "John Hunter Hospital": [
           "/configurations/jhh/TC50/tc50_jhh_All-Departments_XML_A07_22.11.2022.XML",
           "/configurations/jhh/TC50/tc50_jhh_All-Departments_DAT_A07_22.11.2022.DAT"
+        ],
+        "Taree Hospital": [
+          "/configurations/taree/TC50/tc50_taree_All-Departments_XML_none_23.03.2018.XML"
         ]
       },
       "software": "",

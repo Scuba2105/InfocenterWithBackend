@@ -106,11 +106,17 @@ export function LinkModal({selectedData, modalType}) {
         });
 
         function getDepartments() {
-            const newDepartmentIndex = parsedConfigData.map((entry) => {
-                return entry[0];
-            });
+            const departments = parsedConfigData.reduce((acc, curr) => {
+                if (!acc.includes(curr[0])) {
+                    acc.push(curr[0])
+                    return acc;
+                }
+                else {
+                    return acc;
+                }
+            }, []);
             
-            return newDepartmentIndex;
+            return departments;
         }
         
         function onHospitalChange(e) {
@@ -128,7 +134,7 @@ export function LinkModal({selectedData, modalType}) {
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
                 <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
-                <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
+                <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
             </div>
         );
     }
