@@ -20,24 +20,30 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
         const parsedEntries =  filteredCurrentEntries.map((entry) => {
             return entry.split('/').slice(-1)[0];
         })
-        console.log(parsedEntries)
+        
         return (
-            <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
-                <div className="config-link">
-                    <div className="options-info">
-                        <label>Type: {parsedConfigData[departmentsIndex][1] === '-' && '-'}</label>
-                        {parsedConfigData[departmentsIndex][1] !== '-' && <label>{parsedConfigData[departmentsIndex][1]}</label>}
-                    </div>
-                    <div className="software-info">
-                        <label>Software: {parsedConfigData[departmentsIndex][2] === '-' && '-'}</label>
-                        {parsedConfigData[departmentsIndex][2] !== '-' && <label>{parsedConfigData[departmentsIndex][2]}</label>}
-                    </div>
-                    <div className="date-info">
-                        <label>Date Created:</label>
-                        <label>{parsedConfigData[departmentsIndex][3]}</label>
-                    </div>
-                    <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex]}`} download={fileName} >Download</a>
-                </div>
+            <div className={mediaQueries.laptop && parsedEntries.length === 2 ? "config-display-double-laptop" : mediaQueries.laptop && parsedEntries.length === 1 ? "config-display-laptop" :
+            mediaQueries.desktop && parsedEntries.length === 2 ? "config-display-double-desktop" : "config-display-desktop"}>
+                {parsedEntries.map((entry, index) => {
+                    const parsedConfigData = (entry.split('_'));
+                    return (
+                        <div key={`${hospitals[hospitalsIndex]}-${departmentName}-${index}}`} className="config-link">
+                            <div className="options-info">
+                                <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
+                                {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3]}</label>}
+                            </div>
+                            <div className="software-info">
+                                <label>Software: {parsedConfigData[4] === '-' && '-'}</label>
+                                {parsedConfigData[4] !== '-' && <label>{parsedConfigData[4]}</label>}
+                            </div>
+                            <div className="date-info">
+                                <label>Date Created:</label>
+                                <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
+                            </div>
+                            <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][index]}`} download={fileName} >Download</a>
+                        </div>
+                    );
+                })}
             </div>
             
         );

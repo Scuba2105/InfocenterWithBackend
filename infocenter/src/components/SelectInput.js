@@ -1,5 +1,5 @@
 export function SelectInput({label, optionData, onChange}) {
-    console.log(optionData);
+    
     return (
         <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
             <p className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-label`}>{label}</p>

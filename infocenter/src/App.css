@@ -1227,10 +1227,24 @@ html {
 }
 
 .config-display-desktop {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transform: translateY(15%);
+  margin-bottom: 50px;
+}
+
+.config-display-double-laptop {
+
+} 
+
+.config-display-double-desktop {
+  width: 70%;
+  height: 180px;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   transform: translateY(15%);
@@ -1253,6 +1267,8 @@ html {
   padding: 10px;
   font-size: 13px;
   transform: translateY(-20px);
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 
