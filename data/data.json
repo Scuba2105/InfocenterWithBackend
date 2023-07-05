@@ -1174,7 +1174,10 @@
       "userManual": true,
       "config": {
         "John Hunter Hospital": [
-          "/configurations/jhh/B850/b850_jhh_All--Aisys_none_none_05.07.2023.tgz"
+          "/configurations/jhh/B850/b850_jhh_All--Aisys_none_none_08.06.2018.tgz"
+        ],
+        "Royal Newcastle Centre": [
+          "/configurations/rnc/B850/b850_rnc_All--Aisys_none_none_08.06.2018.tgz"
         ]
       },
       "software": "",
@@ -1314,7 +1317,12 @@
       "model": "TC50",
       "serviceManual": true,
       "userManual": true,
-      "config": "",
+      "config": {
+        "John Hunter Hospital": [
+          "/configurations/jhh/TC50/tc50_jhh_All-Departments_XML_A07_22.11.2022.XML",
+          "/configurations/jhh/TC50/tc50_jhh_All-Departments_DAT_A07_22.11.2022.DAT"
+        ]
+      },
       "software": "",
       "documents": [
         {

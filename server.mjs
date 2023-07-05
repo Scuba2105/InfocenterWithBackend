@@ -102,8 +102,11 @@ app.put("/putDeviceData", cpUpload, async (req, res) => {
             if (Object.keys(updatedDevice.config).includes(hospital)) {
                 updatedDevice.config[hospital].push(configPath)
             } 
-            else {
+            else if (updatedDevice.config === "") {
                 updatedDevice.config = {};
+                updatedDevice.config[hospital] = [configPath];
+            }
+            else {
                 updatedDevice.config[hospital] = [configPath];
             }
         }
