@@ -39,8 +39,8 @@ const storage = multer.diskStorage({
     }
   })
 
-// Used for testing
-//const upload = multer({ dest: 'uploads/' })
+
+// Specify how to handle storage of file uploads. 
 const upload = multer({ storage: storage })
 
 // Define the field names to be used with Multer for the uploaded files.
@@ -70,6 +70,7 @@ app.get("/getData", async (req, res) => {
 
 app.put("/putDeviceData", cpUpload, async (req, res) => {
     try {
+        
         const allData = await readAllData(__dirname);
         const deviceData = allData.deviceData;
 

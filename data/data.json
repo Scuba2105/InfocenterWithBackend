@@ -408,7 +408,10 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
-      "software": "",
+      "software": {
+        "device-software": "Test",
+        "service-software": "Test 2"
+      },
       "documents": "",
       "placeholder2": ""
     },

@@ -785,7 +785,7 @@ html {
 .copy-image1-desktop {
   position: absolute;
   left: 555px;
-  top: 119px;
+  top: 219px;
   height: 20px;
   width: 20px;
 }
@@ -801,7 +801,7 @@ html {
 .copy-image2-desktop {
   position: absolute;
   left: 555px;
-  top: 215px;
+  top: 315px;
   height: 20px;
   width: 20px;
 }
@@ -815,8 +815,8 @@ html {
 
 .copied-text1-desktop {
   position: absolute;
-  left: 547px;
-  top: 121px;
+  left: 543px;
+  top: 221px;
   font-size: 11px;
 }
 
@@ -829,8 +829,8 @@ html {
 
 .copied-text2-desktop {
   position: absolute;
-  left: 547px;
-  top: 217px;
+  left: 543px;
+  top: 317px;
   font-size: 11px;
 }
 

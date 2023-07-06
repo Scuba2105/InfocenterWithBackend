@@ -67,6 +67,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
 
                 // Need to update app data.
                 queryClient.invalidateQueries('dataSource');
+
+                alert('Resources have been successfully updated!')
             }
             
             return () => {
@@ -100,6 +102,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                 alert('No files selected')
             }
             else {
+                // Get the extension from the uploaded file and append to the new filename in form data.
                 const extension = selectedFile.files[0].name.split('.').slice(-1)[0];
                 updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}.${extension}`);
             }
@@ -194,8 +197,6 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
             configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
             
-            console.log(configFilename)
-
             if (configFileInput.files.length === 0) {
                 alert('No config files selected')
                 return 
