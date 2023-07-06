@@ -100,7 +100,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                 alert('No files selected')
             }
             else {
-                updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}`);
+                const extension = selectedFile.files[0].name.split('.').slice(-1)[0];
+                updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}.${extension}`);
             }
             alert(`The ${selectedOption} for ${selectedData.model} has been saved ready for upload`)
         }
