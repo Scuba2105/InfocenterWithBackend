@@ -3,7 +3,7 @@ import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
 
-const acronyms = ['ICU', 'ED', 'AGSU'];
+const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 
 function capitaliseFirstLetters(input) {

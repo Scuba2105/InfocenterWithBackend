@@ -743,9 +743,6 @@
         ],
         "Belmont Hospital": [
           "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017.cfg"
-        ],
-        "Inverell Hospital": [
-          "/configurations/inverell/MX450/mx450_inverell_Medical-Ward_none_none_17.06.2023.cfg"
         ]
       },
       "software": {
@@ -793,6 +790,10 @@
         "John Hunter Hospital": [
           "/configurations/jhh/mx700/mx700_jhh_CCU_none_none_08.07.2015.cfg",
           "/configurations/jhh/mx700/mx700_jhh_ED_H10-A04-C01-C02-C15-C20_none_30.01.2019.cfg"
+        ],
+        "Maitland Hospital": [
+          "/configurations/maitland/MX700/mx700_maitland_HDU_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_31.10.2017.cfg",
+          "/configurations/maitland/MX700/mx700_maitland_ED_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_31.10.2017.cfg"
         ]
       },
       "software": "",
@@ -1215,6 +1216,10 @@
         ],
         "Belmont Hospital": [
           "/configurations/belmont/x2/x2_belmont_ED_A03_none_17.10.2017"
+        ],
+        "Maitland Hospital": [
+          "/configurations/maitland/X2/x2_maitland_All-Departments_C00-C01-C13-C15-C20_M.03.02_10.11.2017.cfg",
+          "/configurations/maitland/X2/x2_maitland_HDU_none_none_18.12.2019.cfg"
         ]
       },
       "software": "",
@@ -1328,6 +1333,10 @@
         "Mater Hospital": [
           "/configurations/mater/TC50/tc50_mater_All-Departments_XML_none_26.11.2021.XML",
           "/configurations/mater/TC50/tc50_mater_All-Departments_DAT_none_26.11.2021.DAT"
+        ],
+        "Hunter Region": [
+          "/configurations/hunter/TC50/tc50_hunter_All-Departments_XML_none_13.08.2021.XML",
+          "/configurations/hunter/TC50/tc50_hunter_All-Departments_DAT_none_13.08.2021.DAT"
         ]
       },
       "software": "",
