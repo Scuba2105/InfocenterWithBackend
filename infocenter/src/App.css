@@ -694,7 +694,7 @@ html {
   position: absolute;
   left: 375px;
   top: 80px;
-  width: 500px;
+  min-width: 500px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;

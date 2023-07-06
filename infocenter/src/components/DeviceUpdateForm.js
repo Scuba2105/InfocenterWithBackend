@@ -193,6 +193,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
             configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
             
+            console.log(configFilename)
+
             if (configFileInput.files.length === 0) {
                 alert('No config files selected')
                 return 
