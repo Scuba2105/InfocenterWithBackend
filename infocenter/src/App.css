@@ -1000,22 +1000,22 @@ html {
   text-align: center;
 }
 
-.hospital-select-container {
+.hospital-select-container, .configuration-type-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.hospital-select-label {
+.hospital-select-label, .configuration-type-select-container {
   font-size: 13px;
 }
 
-.hospital-select {
+.hospital-select, .configuration-type-select {
   color: rgb(132, 132, 139);
 }
 
-.hospital-select {
+.hospital-select, .configuration-type-select {
   font-size: 12px;
   display: block;
   height: 25px;

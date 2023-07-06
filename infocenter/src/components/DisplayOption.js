@@ -10,6 +10,8 @@ const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND H
 'WEEWAA HOSPITAL', 'GLEN INNES HOSPITAL', 'MOREE HOSPITAL', 'WARIALDA MPS', 'INVERELL HOSPITAL', 
 'TENTERFIELD HOSPITAL'];
 
+const configTypes = {TC50: ['XML', 'DAT'], "Perfusor Space": ['Modification Data', 'Disposable Articles', 'Drug Library']};
+
 const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
@@ -53,7 +55,10 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 <h4 id="add-config-heading">Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput label='Hospital' optionData={hospitalLocations} />
-                    {/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/> : <Input inputType='text' identifier='config-data' labelText='Type' placeholdertext='XML, DAT, Drug Data etc.'/>}
+                    {/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/> : 
+                    selectedData.model === 'TC50' ? <SelectInput label='Configuration Type' optionData={configTypes[selectedData.model]}/> : 
+                    selectedData.model === 'Perfusor Space' ? <SelectInput label='Configuration Type' optionData={configTypes[selectedData.model]}/> :
+                    <Input inputType='text' identifier='config-data' labelText='Configuration Type' placeholdertext='eg. XML, DAT or filetype etc.'/>}
                     <Input inputType='text' identifier='config-data' labelText='Department' placeholdertext='eg. ICU, ED, Ward H1 etc.'/>
                     <Input inputType='text' identifier='config-data' labelText='Software Rev. (optional)' placeholdertext='eg. M.03.01, L.01.02'/>
                     <Input inputType='text' identifier='config-data' labelText='Sub-Location (optional)' placeholdertext='eg. Transport, Paediatric etc.'/>
