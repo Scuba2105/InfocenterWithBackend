@@ -53,7 +53,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 <h4 id="add-config-heading">Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput label='Hospital' optionData={hospitalLocations} />
-                    <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/>
+                    {/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/> : <Input inputType='text' identifier='config-data' labelText='Type' placeholdertext='XML, DAT, Drug Data etc.'/>}
                     <Input inputType='text' identifier='config-data' labelText='Department' placeholdertext='eg. ICU, ED, Ward H1 etc.'/>
                     <Input inputType='text' identifier='config-data' labelText='Software Rev. (optional)' placeholdertext='eg. M.03.01, L.01.02'/>
                     <Input inputType='text' identifier='config-data' labelText='Sub-Location (optional)' placeholdertext='eg. Transport, Paediatric etc.'/>
