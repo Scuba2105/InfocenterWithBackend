@@ -3,8 +3,9 @@ import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
 
-const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU'];
+const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU', 'OT'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
+const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
 
 function capitaliseFirstLetters(input) {
     let words = input.split(' ');
@@ -164,15 +165,15 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                     }
                 }
                 
-                // Parse options string. Filter out Intellivue monitors so options string can be parsed
+                // Parse options string. Filter out Intellivue monitors so options string can be parsed otherwise format the data appropriately.
                 else if (index === 0 ) {
                     if (input.value !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
                         const regex = input.value.match(/[A-Za-z]\d{2}/ig);
                         interimArray.push((regex.join('-').toUpperCase()));
                     }
                     else {
-                        input.value === "" ? interimArray.push('none') : 
-                        interimArray.push(input.value.toUpperCase()); 
+                        input.value === "" ? interimArray.push('none') : configFileTypes.includes(input.value) ? interimArray.push(input.value.toUpperCase()) :
+                        interimArray.push(capitaliseFirstLetters(input.value)); 
                     }                                        
                 }
                 // Parse config software string and format

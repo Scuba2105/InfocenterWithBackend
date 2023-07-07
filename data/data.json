@@ -1164,7 +1164,15 @@
       "model": "B450",
       "serviceManual": true,
       "userManual": true,
-      "config": "",
+      "config": {
+        "John Hunter Hospital": [
+          "/configurations/jhh/b450/b450_jhh_Theatres--OT7_Cardiac-Config_none_20.12.2016.tgz",
+          "/configurations/jhh/B450/b450_jhh_Recovery_Recovery-Config_none_01.11.2018.tgz"
+        ],
+        "Royal Newcastle Centre": [
+          "/configurations/rnc/b450/b450_rnc_Recovery_Recovery-Config_none_29.12.2016.tgz"
+        ]
+      },
       "software": "",
       "documents": "",
       "placeholder2": ""
