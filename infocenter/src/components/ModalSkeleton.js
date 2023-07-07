@@ -2,6 +2,8 @@ import { capitaliseFirstLetters } from "../utils/utils";
 import useMediaQueries from "media-queries-in-react" 
 import { useRef, useState } from 'react'
 
+const scrollDocumentsDevices = ['PIIC iX']
+
 function updatedPosition(isLaptopScreen, incrementData) {
     const laptopX = 375
     const laptopY = 80;
@@ -47,6 +49,9 @@ export function ModalSkeleton({children, selectedData, closeModal, type}) {
         desktop: "(min-width: 1800px)"
     });
 
+    const scrollDocuments = type === 'documents' && scrollDocumentsDevices.includes(selectedData.model) ? 'scroll' : null;
+    console.log(scrollDocuments)
+
     function mouseDown(e) {
         buttonClicked.current = true;
         startPosition.current = {x: e.clientX, y: e.clientY}
@@ -66,7 +71,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type}) {
     }
 
     return (
-        <div className={mediaQueries.laptop ? "modal-container-laptop" : "modal-container-desktop"} style={type === "software" && mediaQueries.laptop ? 
+        <div className={mediaQueries.laptop ? `modal-container-laptop ${scrollDocuments}` : `modal-container-desktop ${scrollDocuments}`} style={type === "software" && mediaQueries.laptop ? 
         { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
         type === "software" && mediaQueries.desktop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : 
         { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={getCursorPosition}>

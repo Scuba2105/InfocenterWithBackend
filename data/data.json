@@ -1170,7 +1170,7 @@
           "/configurations/jhh/B450/b450_jhh_Recovery_Recovery-Config_none_01.11.2018.tgz"
         ],
         "Royal Newcastle Centre": [
-          "/configurations/rnc/b450/b450_rnc_Recovery_Recovery-Config_none_29.12.2016.tgz"
+          "/configurations/rnc/B450/b450_rnc_Recovery_Recovery-Config_none_06.06.2017.tgz"
         ]
       },
       "software": "",
@@ -1589,8 +1589,36 @@
           "filePath": "/documents/PIIC iX/piicix_clinical_configuration.pdf"
         },
         {
+          "label": "JHH Network Details",
+          "filePath": "/documents/PIIC iX/JHH Network Details.xlsx"
+        },
+        {
           "label": "Installing Software Patch Guide",
           "filePath": "/documents/PIIC iX/How to Install a Software Patch.docx"
+        },
+        {
+          "label": "Windows Updates Guide",
+          "filePath": "/documents/PIIC iX/Windows Updates Guide.docx"
+        },
+        {
+          "label": "WSUS Server Details",
+          "filePath": "/documents/PIIC iX/WSUS Server.txt"
+        },
+        {
+          "label": "APC Checks",
+          "filePath": "/documents/PIIC iX/Philips APC checks.txt"
+        },
+        {
+          "label": "Troubleshooting Guide",
+          "filePath": "/documents/PIIC iX/CMS2024_18_PIICiX Troubleshooting Test & Inspection.pdf"
+        },
+        {
+          "label": "PIICiX Service Tools",
+          "filePath": "/documents/PIIC iX/CMS2024_17_PIICiX Service Tools.pdf"
+        },
+        {
+          "label": "PIICiX Equipment Number",
+          "filePath": "/documents/PIIC iX/Philips PIIC iX Network Equipment Number.PNG"
         }
       ],
       "placeholder2": ""

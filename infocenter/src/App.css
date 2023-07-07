@@ -709,12 +709,17 @@ html {
   top: 100px;
   width: 700px;
   min-height: 700px;
+  max-height: 750px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 65px 1fr;
+}
+
+.scroll {  
+  overflow-y: scroll;
 }
 
 .modal-title-bar {
