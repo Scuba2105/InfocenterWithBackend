@@ -746,6 +746,9 @@
         ],
         "Belmont Hospital": [
           "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017.cfg"
+        ],
+        "Taree Hospital": [
+          "/configurations/taree/MX450/mx450_taree_Stroke-Unit_H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_24.07.2018.cfg"
         ]
       },
       "software": {
@@ -848,6 +851,9 @@
           "/configurations/jhh/mx800/mx800_armidale_ED--Resus_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_25.01.2018.cfg",
           "/configurations/jhh/mx800/mx800_armidale_ICU_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.04.00_13.11.2018.cfg",
           "/configurations/jhh/mx800/mx800_armidale_Operating-Theatres--Networked-IntelliBridge_none_M.03.03_05.03.2018.cfg"
+        ],
+        "Taree Hospital": [
+          "/configurations/taree/MX800/mx800_taree_ICU_H10-A08-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_19.07.2018.cfg"
         ]
       },
       "software": "",
@@ -873,10 +879,21 @@
         ],
         "Belmont Hospital": [
           "/configurations/belmont/mx40/mx40_belmont_Whole-Hospital_none_none_02.01.2018.cfg"
+        ],
+        "Maitland Hospital": [
+          "/configurations/maitland/MX40/mx40_maitland_All-Departments_none_none_27.07.2020.cfg"
+        ],
+        "Taree Hospital": [
+          "/configurations/taree/MX40/mx40_taree_Whole-Hospital_none_none_30.09.2020.cfg"
         ]
       },
       "software": "",
-      "documents": "",
+      "documents": [
+        {
+          "label": "Maitland Hospital MX40 User Names",
+          "filePath": "/documents/MX40/MX40 user names.xlsx"
+        }
+      ],
       "placeholder2": ""
     },
     {
@@ -1231,6 +1248,9 @@
         "Maitland Hospital": [
           "/configurations/maitland/X2/x2_maitland_All-Departments_C00-C01-C13-C15-C20_M.03.02_10.11.2017.cfg",
           "/configurations/maitland/X2/x2_maitland_HDU_none_none_18.12.2019.cfg"
+        ],
+        "Taree Hospital": [
+          "/configurations/taree/X2/x2_taree_Whole-Hospital_C00-C01-C13-C15-C20_M.03.02_01.08.2018.cfg"
         ]
       },
       "software": "",
@@ -1248,6 +1268,10 @@
         "John Hunter Hospital": [
           "/configurations/jhh/x3/x3_jhh_ED--Paediatric_A04_none_17.11.2020",
           "/configurations/jhh/x3/x3_jhh_Ward-H1_A04_N.00.04_24.03.2022"
+        ],
+        "Maitland Hospital": [
+          "/configurations/maitland/X3/x3_maitland_Whole-Hospital--4-Waves_A04-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg",
+          "/configurations/maitland/X3/x3_maitland_Whole-Hospital--5-Waves_A05-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg"
         ]
       },
       "software": "",
@@ -1258,7 +1282,7 @@
       "img": true,
       "type": "Ventilator",
       "manufacturer": "Philips Healthcare",
-      "model": "Trilogy202",
+      "model": "Trilogy 202",
       "serviceManual": true,
       "userManual": true,
       "config": "",

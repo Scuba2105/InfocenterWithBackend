@@ -695,6 +695,7 @@ html {
   left: 375px;
   top: 80px;
   min-width: 500px;
+  max-height: 450px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -853,7 +854,7 @@ html {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 350px;
+  width: 375px;
   height: 60px;
   margin-bottom: 20px;
   border: 1px solid black;
@@ -867,6 +868,10 @@ html {
   width: 50px;
   margin-right: 20px;
   margin-left: 20px;
+}
+
+.document-label {
+  margin-right: 10px;
 }
 
 .document-label:hover {
