@@ -749,6 +749,38 @@
         ],
         "Taree Hospital": [
           "/configurations/taree/MX450/mx450_taree_Stroke-Unit_H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_24.07.2018.cfg"
+        ],
+        "Murrurundi Hospital": [
+          "/configurations/murrurundi/MX450/mx450_murrurundi_ED_A04-H10_M.04_30.12.2020.cfg"
+        ],
+        "Muswelbrook Hospital": [
+          "/configurations/muswelbrook/MX450/mx450_muswelbrook_Close-Observation-Unit_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_24.11.2020.cfg"
+        ],
+        "New Maitland Hospital": [
+          "/configurations/new maitland/MX450/mx450_new_Birthing-Unit_H10-A04-C15-C50_N.00.04_16.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_Ward-4C_H10-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_N_26.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_Theatres--Anaesthetic-Bays_H30-A04-C06-C15-C17-C18-C19-C20-C21-C50_N_04.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_Cath-Lab_H40-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_N.00.04_16.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_ED_H10-A04_N.01.04_05.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_ED--Paediatric_H10-A04_N.01.04_17.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_ED--Transport-(wireless)_H10-A04_N.01.04_17.01.2022.cfg",
+          "/configurations/new maitland/MX450/mx450_new_ICU--Transport-(wireless)_H10-A04_none_17.01.2022.cfg",
+          "/configurations/new maitland/MX450/mx450_new_Outpatients_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_N.00.04_17.10.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_PACU-(6-Waves)_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_N_19.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_PACU-(4-Waves)_H10-A04-C15-C50_N_19.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_SCU_A20-A04-C04-C09-C15-C17-C18-C19-C20-C44-C45-C50_N.01.04_18.11.2021.cfg",
+          "/configurations/new maitland/MX450/mx450_new_Medical-Imaging_none_none_10.11.2021.cfg"
+        ],
+        "Scone Hospital": [
+          "/configurations/scone/MX450/mx450_scone_Close-Observation-Unit_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-H10_M_18.05.2021.cfg",
+          "/configurations/scone/MX450/mx450_scone_ED--(4-Waves)_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-H10_M_18.05.2021.cfg",
+          "/configurations/scone/MX450/mx450_scone_ED--(6-Waves)_A06-H10-C15-C50_N_21.02.2023.cfg"
+        ],
+        "Singleton Hospital": [
+          "/configurations/singleton/MX450/mx450_singleton_ED--Resus_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_28.10.2020.cfg"
+        ],
+        "Tamworth Hospital": [
+          "/configurations/tamworth/MX450/mx450_tamworth_Theatres--Induction-Bays_H31-A04-C01-C02-C06-C15-C20_K.21.42_27.05.2015.cfg"
         ]
       },
       "software": {
@@ -774,6 +806,10 @@
         "John Hunter Hospital": [
           "/configurations/jhh/mx550/mx550_jhh_ED--Paediatric_H10-A04_none_18.11.2020.cfg",
           "/configurations/jhh/mx550/mx550_jhh_Ward-G3_A06-H40-M.0_13.11.2020.cfg"
+        ],
+        "New Maitland Hospital": [
+          "/configurations/new maitland/MX550/mx550_new_Close-Observation-Unit_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-J15_N.01.04_05.11.2021.cfg",
+          "/configurations/new maitland/MX550/mx550_new_ED--Resus_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-J15_N.01.04_05.11.2021.cfg"
         ]
       },
       "software": "",
@@ -800,6 +836,9 @@
         "Maitland Hospital": [
           "/configurations/maitland/MX700/mx700_maitland_HDU_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_31.10.2017.cfg",
           "/configurations/maitland/MX700/mx700_maitland_ED_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_31.10.2017.cfg"
+        ],
+        "Tamworth Hospital": [
+          "/configurations/tamworth/MX700/mx700_tamworth_ICU--Procedure-Room_H10-A06-C01-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_L.01.17_16.11.2017.cfg"
         ]
       },
       "software": "",
@@ -821,6 +860,11 @@
       "config": {
         "John Hunter Hospital": [
           "/configurations/jhh/mx750/mx750_jhh_ED--Resus_N.01.01_29.03.2022.cfg"
+        ],
+        "New Maitland Hospital": [
+          "/configurations/new maitland/MX750/mx750_new_ICU_H10-A08-C01-C06-C09-C13-C15-C17-C18-C19-C21-C44-C45-C50-C51-M08-M20-X00-X30-X40_N.01.04_04.11.2021.cfg",
+          "/configurations/new maitland/MX750/mx750_new_SCU_A08-C04-C09-C15-C17-C18-C19-C21-C44-C45-C50-C60-H20-M08-M20-X00-X30-X40_N.01.04_18.11.2021.cfg",
+          "/configurations/new maitland/MX750/mx750_new_Theatres_A08-C06-C09-C15-C17-C18-C19-C21-C50-H30-M08-M20-X00-X30-X40_N.01.04_18.01.2022.cfg"
         ]
       },
       "software": "",
@@ -854,6 +898,13 @@
         ],
         "Taree Hospital": [
           "/configurations/taree/MX800/mx800_taree_ICU_H10-A08-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_19.07.2018.cfg"
+        ],
+        "Royal Newcastle Centre": [
+          "/configurations/rnc/MX800/mx800_rnc_Cath-Lab_none_J.10.50_19.06.2014.cfg"
+        ],
+        "Tamworth Hospital": [
+          "/configurations/tamworth/MX800/mx800_tamworth_ED_H10-A08-C01-C02-C05-C06-C15-C20_K.21.42_17.11.2015.cfg",
+          "/configurations/tamworth/MX800/mx800_tamworth_Theatres_H10-A08-C01-C02-C05-C06-C09-C15-C20_K.21.42_25.08.2015.cfg"
         ]
       },
       "software": "",
@@ -885,6 +936,9 @@
         ],
         "Taree Hospital": [
           "/configurations/taree/MX40/mx40_taree_Whole-Hospital_none_none_30.09.2020.cfg"
+        ],
+        "New Maitland Hospital": [
+          "/configurations/new maitland/MX40/mx40_new_Whole-Hospital_none_none_19.01.2022.cfg"
         ]
       },
       "software": "",
@@ -1272,6 +1326,16 @@
         "Maitland Hospital": [
           "/configurations/maitland/X3/x3_maitland_Whole-Hospital--4-Waves_A04-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg",
           "/configurations/maitland/X3/x3_maitland_Whole-Hospital--5-Waves_A05-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg"
+        ],
+        "Mater Hospital": [
+          "/configurations/mater/X3/x3_mater_Whole-Hospital_none_none_16.09.2020.cfg"
+        ],
+        "Murrurundi Hospital": [
+          "/configurations/murrurundi/X3/x3_murrurundi_ED_A04_M_30.12.2020.cfg"
+        ],
+        "New Maitland Hospital": [
+          "/configurations/new maitland/X3/x3_new_SCU_A03-C01-C12-C13-C15-C20-C23-C44-C45-C51-C54_N_03.11.2021.cfg",
+          "/configurations/new maitland/X3/x3_new_Whole-Hospital_A03-C01-C12-C13-C15-C20-C23-C44-C45-C51-C54_N_18.01.2022.cfg"
         ]
       },
       "software": "",
@@ -1310,6 +1374,22 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
+      "software": "",
+      "documents": "",
+      "placeholder2": ""
+    },
+    {
+      "img": true,
+      "type": "Ventilator",
+      "manufacturer": "Hamilton Medical",
+      "model": "MR1",
+      "serviceManual": false,
+      "userManual": true,
+      "config": {
+        "John Hunter Hospital": [
+          "/configurations/jhh/MR1/mr1_jhh_ICU_MRI-Transport_2.2.3_03.05.2016.waconfig"
+        ]
+      },
       "software": "",
       "documents": "",
       "placeholder2": ""
@@ -1451,6 +1531,25 @@
       "serviceManual": false,
       "userManual": true,
       "config": "",
+      "software": "",
+      "documents": "",
+      "placeholder2": ""
+    },
+    {
+      "img": true,
+      "type": "Electrocardiograph",
+      "manufacturer": "Mindray",
+      "model": "R12",
+      "serviceManual": false,
+      "userManual": true,
+      "config": {
+        "John Hunter Hospital": [
+          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_System_none_15.06.2018.cfg",
+          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Adult_none_15.06.2018.cfg",
+          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Paediatric_none_15.06.2018.cfg",
+          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Neonate_none_15.06.2018.cfg"
+        ]
+      },
       "software": "",
       "documents": "",
       "placeholder2": ""
@@ -1643,6 +1742,10 @@
         {
           "label": "PIICiX Equipment Number",
           "filePath": "/documents/PIIC iX/Philips PIIC iX Network Equipment Number.PNG"
+        },
+        {
+          "label": "RNC Cath Lab Printer Config",
+          "filePath": "/documents/PIIC iX/RNC Cath Lab Network Printer config.cfg"
         }
       ],
       "placeholder2": ""

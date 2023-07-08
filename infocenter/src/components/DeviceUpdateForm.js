@@ -3,7 +3,7 @@ import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
 
-const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU', 'OT'];
+const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU', 'OT', 'PACU', 'SCU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
 
@@ -28,7 +28,8 @@ function generateHospitalLabel(name) {
         return hospitalAcronyms[name].toLocaleLowerCase();
     }
     else {
-        return name.split(' ')[0].toLocaleLowerCase();
+        const nameLength = name.split(' ').length;
+        return nameLength === 2 ? name.split(' ')[0].toLocaleLowerCase() : name.split(' ').slice(0, -1).join('-').toLocaleLowerCase();
     }
 }
 
@@ -70,6 +71,8 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                 queryClient.invalidateQueries('dataSource');
 
                 alert('Resources have been successfully updated!')
+
+                closeUpdate();
             }
             
             return () => {
@@ -80,7 +83,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         
         sendFormData(startUpload);
         
-    }, [startUpload, queryClient])
+    }, [startUpload, queryClient, closeUpdate])
 
     function beginUpload() {
         let dataKeys = [];
