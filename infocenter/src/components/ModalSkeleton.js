@@ -6,8 +6,8 @@ const scrollDocumentsDevices = ['PIIC iX']
 
 function updatedPosition(isLaptopScreen, incrementData) {
     const laptopX = 375
-    const laptopY = 80;
-    const desktopX = 775; 
+    const laptopY = 30;
+    const desktopX = 625; 
     const desktopY = 100;
     
     let newX, newY
@@ -50,8 +50,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type}) {
     });
 
     const scrollDocuments = type === 'documents' && scrollDocumentsDevices.includes(selectedData.model) ? 'scroll' : null;
-    console.log(scrollDocuments)
-
+    
     function mouseDown(e) {
         buttonClicked.current = true;
         startPosition.current = {x: e.clientX, y: e.clientY}

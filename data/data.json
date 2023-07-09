@@ -396,7 +396,9 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
-      "software": "",
+      "software": {
+        "service-software": "test"
+      },
       "documents": "",
       "placeholder2": ""
     },
@@ -754,7 +756,7 @@
           "/configurations/murrurundi/MX450/mx450_murrurundi_ED_A04-H10_M.04_30.12.2020.cfg"
         ],
         "Muswelbrook Hospital": [
-          "/configurations/muswelbrook/MX450/mx450_muswelbrook_Close-Observation-Unit_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_24.11.2020.cfg"
+          "/configurations/muswelbrook/MX450/mx450_muswelbrook_COU_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_24.11.2020.cfg"
         ],
         "New Maitland Hospital": [
           "/configurations/new maitland/MX450/mx450_new_Birthing-Unit_H10-A04-C15-C50_N.00.04_16.11.2021.cfg",
@@ -783,10 +785,7 @@
           "/configurations/tamworth/MX450/mx450_tamworth_Theatres--Induction-Bays_H31-A04-C01-C02-C06-C15-C20_K.21.42_27.05.2015.cfg"
         ]
       },
-      "software": {
-        "device-software": "C:\\Users\\officeworks\\Documents\\Biomedical_Engineering\\Appsmith",
-        "service-software": "I:/Staff/Apps/Philips/Service/MX450"
-      },
+      "software": "",
       "documents": [
         {
           "label": "Intellivue Compatibility Matrix",

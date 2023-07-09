@@ -5,7 +5,7 @@ import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
 import useMediaQueries from "media-queries-in-react" 
 
-export function SummaryCard({page, pageData, selectedEntry, queryClient}) {
+export function SummaryCard({page, pageData, selectedEntry, queryClient, showMessage, closeDialog}) {
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -49,7 +49,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient}) {
         <div className={getClassName(page)}>
                 <h2>{page === 'staff' ? "Employee Summary" : "Equipment Summary"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} />}                    
-                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onLinkClick={onLinkClick} queryClient={queryClient}/>}
+                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} onLinkClick={onLinkClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {modalVisible.visible && page === 'technical-info' && 
                     <ModalSkeleton selectedData={selectedData} closeModal={closeModal} type={modalVisible.type}>
                         <LinkModal selectedData={selectedData} modalType={modalVisible.type} />

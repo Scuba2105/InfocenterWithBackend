@@ -33,12 +33,12 @@ function generateHospitalLabel(name) {
     }
 }
 
-export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
+export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
     const [startUpload, setStartUpload] = useState(false);
-    
+                
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
     formData.append("model", selectedData.model);
@@ -48,10 +48,17 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
     useEffect(() => {
         async function sendFormData(upload) {
             if (upload) {
+
                 for (const pair of updateData.current.entries()) {
-                    console.log(pair[0], pair[1]);
+                    if (!['model', 'manufacturer'].includes(pair[0])) {
+                        console.log(pair[0], pair[1]);
+                    }
                 }
+
+                // Show the uploading spinner dialog while uploading.
+                showMessage("uploading", `Uploading ${selectedData.model} Data`)
                 
+                // Post the form data to the server. 
                 await fetch("http://localhost:5000/putDeviceData", {
                     method: "PUT", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin
@@ -70,9 +77,11 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                 // Need to update app data.
                 queryClient.invalidateQueries('dataSource');
 
-                alert('Resources have been successfully updated!')
-
-                closeUpdate();
+                showMessage("info", 'Resources have been successfully updated!');
+                setTimeout(() => {
+                    closeDialog();
+                    closeUpdate();
+                }, 1600);
             }
             
             return () => {
@@ -83,7 +92,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         
         sendFormData(startUpload);
         
-    }, [startUpload, queryClient, closeUpdate])
+    }, [startUpload, queryClient, closeUpdate, showMessage, closeDialog])
 
     function beginUpload() {
         let dataKeys = [];
@@ -92,7 +101,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         }
         
         if (dataKeys.length === 2 && dataKeys[0] === 'model' && dataKeys[1] === 'manufacturer') {
-            alert('No form data has been saved for upload');
+            showMessage("error", 'No form data has been saved for upload');
             return;
         }
         setStartUpload(true);
@@ -103,15 +112,20 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
         if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
             const selectedFile = e.target.parentNode.parentNode.querySelector('.device-file-upload');
             if (selectedFile.files.length === 0) {
-                alert('No files selected')
+                showMessage("error", `No ${selectedOption} has been provided. Please choose a file and try again.`)
+                return
             }
             else {
                 // Get the extension from the uploaded file and append to the new filename in form data.
                 const extension = selectedFile.files[0].name.split('.').slice(-1)[0];
                 updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}.${extension}`);
+                showMessage("info", `The ${selectedOption} for ${selectedData.model} has been saved ready for upload.`)
+                setTimeout(() => {
+                    closeDialog();
+                }, 1600);
             }
-            alert(`The ${selectedOption} for ${selectedData.model} has been saved ready for upload`)
         }
+        
         // Add the data from the software form to the formData ref
         else if (selectedOption === 'Software') {
             const textInput = e.target.parentNode.parentNode.querySelector('.device-text-input');
@@ -123,16 +137,19 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                 }
             })
             if (softwareType === null) {
-                alert("The software type has not been selected");
+                showMessage("error", "The software type has not been selected. Please select an option and try again.");
                 return;
             }
             if (textInput.value === "") {
-                alert('No location has been provided for the software!');
+                showMessage("error", 'No location has been provided for the software. Please specify a location and try again.');
                 return
             }
             const data = `${softwareType}=${textInput.value}`;
             updateData.current.set('software', data);
-            alert(`The ${selectedOption} location for ${selectedData.model} has been saved`)
+            showMessage("info", `The ${selectedOption} location for ${selectedData.model} has been saved ready for upload.`)
+            setTimeout(() => {
+                closeDialog();
+            }, 1600);
         }
         // Add the data from the configurations form to the formData ref
         else if (selectedOption === 'Configs') {
@@ -145,11 +162,11 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
 
             // Check mandatory fields have been entered
             if (configDataInputs[1].value === "") {
-                alert("Department is a mandatory field and has not been entered");
+                showMessage("error", "Department is a mandatory field and has not been entered. Please enter a value.");
                 return
             }
             else if (dateInput.value === "") {
-                alert('Date Created is a mandatory field and has not been entered');
+                showMessage("error", 'Date Created is a mandatory field and has not been entered. Please enter a value.');
                 return
             }
 
@@ -202,13 +219,16 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
             
             if (configFileInput.files.length === 0) {
-                alert('No config files selected')
+                showMessage("error", 'No config files selected. Please choose a config file and try again.')
                 return 
             }
             else {
                 updateData.current.set(`${formatText(selectedOption)}`, configFileInput.files[0], `${configFilename}`);
             }
-            alert(`The new configuration for ${selectedData.model} has been saved ready for upload`)
+            showMessage("info", `The new configuration for ${selectedData.model} has been saved ready for upload.`)
+            setTimeout(() => {
+                closeDialog();
+            }, 1600);
         }
         else if (selectedOption === "Other Documents") {
             const descriptions = e.target.parentNode.parentNode.querySelectorAll('.other-doc-text-input');
@@ -216,7 +236,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             
             descriptions.forEach((description, index) => {
                 if (description.value === "") {
-                    alert(`The description for File ${index + 1} is missing`);
+                    showMessage("error", `The description for File ${index + 1} is missing. Please provide a description and try again.`);
                     return
                 }
                 updateData.current.set(`description${index + 1}`, description.value);
@@ -225,12 +245,15 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
             for (const fileInput of fileInputArray) {
                 const index = fileInputArray.indexOf(fileInput);
                 if (fileInput.files.length === 0) {
-                    alert(`File ${index + 1} is missing`);
+                    showMessage("error", `File ${index + 1} is missing. Please choose a file and try again.`);
                     return 
                 }
                 updateData.current.set(`file${index + 1}`, fileInput.files[0]);
             }
-            alert(`The documents for ${selectedData.model} have been saved`)
+            showMessage("info", `The documents for ${selectedData.model} have been saved ready for upload.`)
+            setTimeout(() => {
+                closeDialog();
+            }, 1600);
         }
         
     }
@@ -260,7 +283,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient}) {
                 setFileNumber([...fileNumber, lastNumber + 1]);
             }
             else {
-                alert('Maximum number of files reached!')
+                showMessage("warning", 'Maximum number of files reached. No more than 4 files can be added during one upload.')
             }
         }
         else {
