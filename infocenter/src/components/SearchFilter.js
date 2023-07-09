@@ -3,10 +3,13 @@ import { SearchTable } from "./SearchTable";
 import { useState } from "react";
 import useMediaQueries from "media-queries-in-react"
 import { generateDataPages } from "../utils/utils";
+import { ModalSkeleton } from "./ModalSkeleton";
+import { AddNewForm } from "./AddNewForm";
 
 export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
     const [query, setQuery] = useState('null');
     const [tableIndex, setTableIndex] = useState(0);
+    const [addNewModal, setAddNewModal] = useState(false);
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -42,6 +45,14 @@ export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
         setTableIndex(0);
     }
 
+    function openAddModal() {
+        setAddNewModal(true);
+    }
+
+    function closeAddModal() {
+        setAddNewModal(false);
+    }
+
     const pageSelected = page;
 
     const currentDataSet = pageData;
@@ -62,8 +73,12 @@ export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
 
     return (
         <div className="search-filter">
-            <SearchInput key={`${pageSelected}-input`} onQueryChange={onQueryChange} />
+            <SearchInput key={`${pageSelected}-input`} onQueryChange={onQueryChange} openAddModal={openAddModal}/>
             <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={onTableArrowClick} />
+            {addNewModal && 
+            <ModalSkeleton closeModal={closeAddModal} type="add-new" page={page}>
+                <AddNewForm page={page} pageData={pageData}></AddNewForm>
+            </ModalSkeleton>}
         </div>
     );
 }

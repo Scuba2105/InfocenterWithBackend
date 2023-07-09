@@ -396,10 +396,7 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
-      "software": {
-        "service-software": "Testing 2",
-        "device-software": "Testing Device Software"
-      },
+      "software": "",
       "documents": "",
       "placeholder2": ""
     },

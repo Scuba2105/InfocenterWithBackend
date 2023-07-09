@@ -1,6 +1,6 @@
 import { SearchIcon } from "../svg";
 
-export function SearchInput({onQueryChange}) {
+export function SearchInput({onQueryChange, openAddModal}) {
     return (
         <div className="search-box">
             <input style={{
@@ -13,7 +13,8 @@ export function SearchInput({onQueryChange}) {
                    placeholder="Search..."
                    onChange={onQueryChange}>
             </input>   
-            <SearchIcon color="#97a5dd" size="25px" />  
+            <SearchIcon color="#97a5dd" size="25px" /> 
+            <button className="add-new-btn" onClick={openAddModal}>+ Add New</button> 
         </div>
    );
 }

@@ -243,14 +243,23 @@ html {
 
 .search-input {
   height: 35px;
-  width: 100%;
+  width: calc(99%);
   margin-right: -4.5%;
   font-size: 20px;
 }
 
 .search-icon {
-    position: relative;
-    left: -96%;
+  transform: translateX(-780px);
+}
+
+.add-new-btn {
+  position: absolute;
+  width: 110px;
+  height: 30px;
+  margin-right: 10px;
+  z-index: 35;
+  transform: translateX(705px);
+  cursor: pointer;
 }
 
 .search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -521,7 +530,7 @@ html {
   transform: translateY(100px);
 }
 
-.device-text-input {
+.device-text-input, .add-new.input {
   text-align: center;
   width: 275px;
   height: 25px;
@@ -874,9 +883,56 @@ html {
   grid-row: 2;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background-color: rgb(217, 217, 224);
+}
+
+/* Format the add new staff/equipment modal */
+.add-new, .new-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  color: rgb(132, 132, 139);
+  margin-top: 15px;
+}
+
+.add-new-input, .new-image-input {
+  font-size: 12px;
+  color: rgb(132, 132, 139);
+  height: 20px;
+  width: 180px;
+  text-align: center;
+  padding-right: 20px;
+  padding-left: 10px;
+  margin-top: 3px;
+  transform: translateY(-4px);
+  background-color: white;
+}
+
+.add-new-input, .new-image-input {
+  border: 1px solid rgb(132, 132, 139);
+  padding: 3px;
+  width: 210px;
+}
+
+.add-new-label, .new-image-label {
+  font-weight: bold;
+  transform: translateY(-4px);  
+}
+
+.add-new-heading {
+  color: rgb(132, 132, 139);
+}
+
+.add-new-input-container {
+  transform: translateY(-30px);
+}
+
+.add-new-upload-button {
+  transform: translateY(-20px);
 }
 
 .software-summary {
@@ -1123,7 +1179,7 @@ html {
   transform: translateY(-30px);
 }
 
-.hospitals-select-label, .department-select-label {
+.hospitals-select-label, .department-select-label, .device-type-select-container, .manufacturer-select-container {
   font-weight: bold;
 }
 
@@ -1133,22 +1189,23 @@ html {
   text-align: center;
 }
 
-.hospital-select-container, .configuration-type-select-container {
+.hospital-select-container, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.hospital-select-label, .configuration-type-select-container {
+.hospital-select-label, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container {
   font-size: 13px;
-}
-
-.hospital-select, .configuration-type-select {
   color: rgb(132, 132, 139);
 }
 
-.hospital-select, .configuration-type-select {
+.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select {
+  color: rgb(132, 132, 139);
+}
+
+.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select {
   font-size: 12px;
   display: block;
   height: 25px;
@@ -1433,7 +1490,16 @@ html {
 
 @media (max-width: 1250px) {
   .search-icon {
-  left: -94%;
+  transform: translateX(-550px);
+  }
+  .add-new-btn {
+    position: absolute;
+    width: 110px;
+    height: 30px;
+    margin-right: 10px;
+    z-index: 35;
+    transform: translateX(470px);
+    cursor: pointer;
   }
   .search-table > thead td {
     font-size: 16px;
