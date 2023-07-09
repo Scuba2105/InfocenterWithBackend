@@ -48,3 +48,11 @@ export function convertHospitalName(hospitalName) {
     const hospitalDirectory = hospital == "john hunter" ? "jhh" : hospital === "royal newcastle" ? "rnc" : hospital;
     return hospitalDirectory;
 }
+
+export function capitaliseFirstLetters(input) {
+    const words = input.split(' ');
+    const formattedWords = words.map((word) => {
+        return word === 'MPS' ? word : word[0].toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+    return formattedWords
+}

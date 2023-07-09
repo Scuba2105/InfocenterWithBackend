@@ -49,48 +49,52 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMe
         async function sendFormData(upload) {
             if (upload) {
 
-                for (const pair of updateData.current.entries()) {
-                    if (!['model', 'manufacturer'].includes(pair[0])) {
-                        console.log(pair[0], pair[1]);
-                    }
-                }
-
                 // Show the uploading spinner dialog while uploading.
                 showMessage("uploading", `Uploading ${selectedData.model} Data`)
                 
                 // Post the form data to the server. 
-                await fetch("http://localhost:5000/putDeviceData", {
-                    method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                    mode: "cors", // no-cors, *cors, same-origin
-                    redirect: "follow", // manual, *follow, error
-                    referrerPolicy: "no-referrer",
-                    body: updateData.current
-                });
-                                
-                // Need to clear formData at this point
-                for (const pair of updateData.current.entries()) {
-                    if (!['model', 'manufacturer'].includes(pair[0])) {
-                        updateData.current.delete(pair[0]);
-                    }
-                }
-
-                // Need to update app data.
-                queryClient.invalidateQueries('dataSource');
-
-                showMessage("info", 'Resources have been successfully updated!');
-                setTimeout(() => {
+                const res = await fetch("http://localhost:5000/putDeviceData", {
+                        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                        mode: "cors", // no-cors, *cors, same-origin
+                        redirect: "follow", // manual, *follow, error
+                        referrerPolicy: "no-referrer",
+                        body: updateData.current
+                }).catch((error) => {
                     closeDialog();
-                    closeUpdate();
-                }, 1600);
-            }
-            
-            return () => {
-                setStartUpload(false);
+                    showMessage("error", error.message);
+                })
+
+                const data = await res.json();
+                if (data.type === "Error") {
+                    closeDialog();
+                    showMessage("error", `${data.message}. Please check the file type is pdf for service and user manuals and try again.`);
+                }
+                else {
+                    // Need to clear formData at this point
+                    for (const pair of updateData.current.entries()) {
+                        if (!['model', 'manufacturer'].includes(pair[0])) {
+                            updateData.current.delete(pair[0]);
+                        }
+                    }
+
+                    // Need to update app data.
+                    queryClient.invalidateQueries('dataSource');
+
+                    closeDialog();
+                    showMessage("info", 'Resources have been successfully updated!');
+                    setTimeout(() => {
+                        closeDialog();
+                        closeUpdate();
+                    }, 1600);
+                }
             } 
-            
         }
-        
+            
         sendFormData(startUpload);
+
+        return () => {
+            setStartUpload(false);
+        } 
         
     }, [startUpload, queryClient, closeUpdate, showMessage, closeDialog])
 

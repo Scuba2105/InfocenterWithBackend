@@ -124,9 +124,8 @@ html {
 #uploading-dialog {
   width: 320px;
   height: 140px;
-  transform: translate(20px, 200px); 
-  z-index: 75;  
   display: flex;
+  background-color: white;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;

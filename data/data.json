@@ -397,7 +397,8 @@
       "userManual": true,
       "config": "",
       "software": {
-        "service-software": "test"
+        "service-software": "Testing 2",
+        "device-software": "Testing Device Software"
       },
       "documents": "",
       "placeholder2": ""
@@ -1053,9 +1054,7 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
-      "software": {
-        "device-software": "C:/Updates/Software/950ANZ"
-      },
+      "software": "",
       "documents": "",
       "placeholder2": ""
     },
