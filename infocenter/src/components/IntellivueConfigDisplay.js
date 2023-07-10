@@ -1,7 +1,10 @@
 import useMediaQueries from "media-queries-in-react"
+import { useState } from "react";
 
 export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospitals,  departmentName, departmentsIndex, hospitalsIndex}) {
     
+    const [configIndex, setConfigIndex] = useState(0);
+
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -47,32 +50,39 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
         const parsedEntries =  filteredCurrentEntries.map((entry) => {
             return entry.split('/').slice(-1)[0];
         })
-        
+
+        // Get the current entry data based on config index
+        const parsedConfigData = parsedEntries[configIndex].split('_');
+
+        // Calculate the number of configs for chosen department
+        const configNumber = parsedEntries.length;
+
         return (
+            <>
+            {configNumber > 1 && <div className="indicator-container">
+                {parsedEntries.map((entry) => {
+                return <div className="indicator"></div>
+            })}
+            </div>}
             <div className={mediaQueries.laptop && parsedEntries.length === 2 ? "config-display-double-laptop" : mediaQueries.laptop && parsedEntries.length === 1 ? "config-display-laptop" :
             mediaQueries.desktop && parsedEntries.length === 2 ? "config-display-double-desktop" : "config-display-desktop"}>
-                {parsedEntries.map((entry, index) => {
-                    const parsedConfigData = (entry.split('_'));
-                    return (
-                        <div key={`${hospitals[hospitalsIndex]}-${departmentName}-${index}}`} className="config-link">
-                            <div className="options-info">
-                                <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
-                                {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}
-                            </div>
-                            <div className="software-info">
-                                <label>Software: {parsedConfigData[4] === '-' && '-'}</label>
-                                {parsedConfigData[4] !== '-' && <label>{parsedConfigData[4]}</label>}
-                            </div>
-                            <div className="date-info">
-                                <label>Date Created:</label>
-                                <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
-                            </div>
-                            <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][index]}`} download={fileName} >Download</a>
+                <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
+                        <div className="options-info">
+                            <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
+                            {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}
                         </div>
-                    );
-                })}
-            </div>
-            
+                        <div className="software-info">
+                            <label>Software: {parsedConfigData[4] === '-' && '-'}</label>
+                            {parsedConfigData[4] !== '-' && <label>{parsedConfigData[4]}</label>}
+                        </div>
+                        <div className="date-info">
+                            <label>Date Created:</label>
+                            <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
+                        </div>
+                        <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
+                    </div>
+                </div>
+            </>
         );
     }
 } 

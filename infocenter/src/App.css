@@ -929,7 +929,15 @@ html {
   align-items: center;
 }
 
-.edit-add-new-container > button {
+.tooltip-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+}
+
+.tooltip-button > button {
   border: none;
   border-radius: 4px;
   display: flex;
@@ -937,19 +945,24 @@ html {
   align-items: center;
   height: 30px;
   width: 30px;
-  margin-right: 30px;
-  transform: translateY(10px)
 }
 
-.edit-add-new-container > button > img {
+.tooltip-button > button > img {
   height: 20px;
   width: 20px;
 }
 
 .add-new-aligner {
   height: 30px;
-  width: 30px;
-  margin-left: 30px;
+  width: 100px;
+}
+
+.tooltip {
+  font-size: 10px;
+  background-color: #f5f1af;
+  color: black;
+  padding: 3px 6px 3px 6px;
+  border-radius: 3px;
 }
 
 .add-new-heading {
@@ -1474,6 +1487,21 @@ html {
   align-items: center;
   transform: translateY(15%);
   margin-bottom: 50px;
+}
+
+.indicator-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.indicator {
+  height: 10px;
+  width: 10px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+  margin: 0 25px 0 25px;
 }
 
 .config-link {

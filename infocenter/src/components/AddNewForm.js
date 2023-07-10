@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
+import { TooltipButton } from "./TooltipButton";
 
 export function AddNewForm({page, pageData}) {
     
@@ -46,17 +47,13 @@ export function AddNewForm({page, pageData}) {
             <div className="add-new-input-container">
                 <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter new ${placeholderValue}`} />
                 <div className="edit-add-new-container">
-                    <button onClick={toggleAddNewType} style={addNewType ? {backgroundColor: '#ff69b4'} : {backgroundColor: 'rgb(16, 172, 105)'}}>
-                        <img className="add-new-edit-button" src={addNewType ? `http://localhost:5000/images/undo.svg` : `http://localhost:5000/images/edit.svg`} alt="edit"></img>
-                    </button>
+                    <TooltipButton content={addNewType ? "Undo" :"Add New"} boolean={addNewType} toggleFunction={toggleAddNewType}/>
                     {addNewType ? <Input inputType="text" identifier="add-new" labelText="Device Type" placeholdertext={`Enter new device type`} /> : 
                     <SelectInput label="Device Type" optionData={currentTypes} />}
                     <div className="add-new-aligner"></div>
                 </div>
                 <div className="edit-add-new-container">
-                    <button onClick={toggleAddNewManufacturer} style={addNewManufacturer ? {backgroundColor: '#ff69b4'} : {backgroundColor: 'rgb(16, 172, 105)'}}>
-                        <img className="add-new-edit-button" src={addNewManufacturer ? `http://localhost:5000/images/undo.svg` : `http://localhost:5000/images/edit.svg`} alt="edit"></img>
-                    </button>
+                    <TooltipButton content={addNewManufacturer ? "Undo" :"Add New"} boolean={addNewManufacturer} toggleFunction={toggleAddNewManufacturer}/>
                     {addNewManufacturer ? <Input inputType="text" identifier="add-new" labelText="Device Type" placeholdertext={`Enter new device type`} /> : 
                     <SelectInput label="Manufacturer" optionData={currentManufacturers} />}
                     <div className="add-new-aligner"></div>
