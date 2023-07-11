@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
@@ -7,6 +7,9 @@ export function AddNewForm({page, pageData}) {
     
     const [addNewManufacturer, setAddNewManufacturer] = useState(false);
     const [addNewType, setaddNewType] = useState(false);
+
+    const formData = new FormData();
+    const newData = useRef(formData);
 
     const placeholderValue = page === "staff" ? "staff member full name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
@@ -17,6 +20,13 @@ export function AddNewForm({page, pageData}) {
     
     function toggleAddNewManufacturer() {
         setAddNewManufacturer(m => !m);
+    }
+
+    function saveFormData(e) {
+        const updateForm = e.currentTarget.parentNode.querySelector('.add-new-input-container');
+        const modelInput = updateForm.querySelector('.select-input' or '.text-input');
+        const deviceTypeInput = addNewType ? updateForm.querySelector('.select-input' or '.text-input');
+
     }
 
     function generateExistingSelectValues() {
