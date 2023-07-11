@@ -1,5 +1,6 @@
 import useMediaQueries from "media-queries-in-react"
 import { useState } from "react";
+import { ConfigArrow } from "../svg";
 
 export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospitals,  departmentName, departmentsIndex, hospitalsIndex}) {
     
@@ -60,27 +61,30 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
         return (
             <>
             {configNumber > 1 && <div className="indicator-container">
-                {parsedEntries.map((entry) => {
-                return <div className="indicator"></div>
+                {parsedEntries.map((entry, index) => {
+                return <div className={index === configIndex ? "indicator active-indicator" : "indicator"}></div>
             })}
             </div>}
-            <div className={mediaQueries.laptop && parsedEntries.length === 2 ? "config-display-double-laptop" : mediaQueries.laptop && parsedEntries.length === 1 ? "config-display-laptop" :
-            mediaQueries.desktop && parsedEntries.length === 2 ? "config-display-double-desktop" : "config-display-desktop"}>
-                <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
-                        <div className="options-info">
-                            <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
-                            {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}
+                <div className="config-display-container">
+                    <ConfigArrow color="#000000" />
+                    <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
+                        <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
+                                <div className="options-info">
+                                    <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
+                                    {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}
+                                </div>
+                                <div className="software-info">
+                                    <label>Software: {parsedConfigData[4] === '-' && '-'}</label>
+                                    {parsedConfigData[4] !== '-' && <label>{parsedConfigData[4]}</label>}
+                                </div>
+                                <div className="date-info">
+                                    <label>Date Created:</label>
+                                    <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
+                                </div>
+                                <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
                         </div>
-                        <div className="software-info">
-                            <label>Software: {parsedConfigData[4] === '-' && '-'}</label>
-                            {parsedConfigData[4] !== '-' && <label>{parsedConfigData[4]}</label>}
-                        </div>
-                        <div className="date-info">
-                            <label>Date Created:</label>
-                            <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
-                        </div>
-                        <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
                     </div>
+                    <img className="config-arrow config-right-arrow" src="http://localhost:5000/images/left-arrow.jpg" alt="left-arrow"></img>
                 </div>
             </>
         );
