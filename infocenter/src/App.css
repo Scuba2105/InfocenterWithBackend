@@ -1493,6 +1493,7 @@ html {
   justify-content: space-around;
   align-items: center;
   transform: translateY(-20px);
+  margin-bottom: 15px;
 }
 
 .config-arrow {
@@ -1501,7 +1502,7 @@ html {
 }
 
 .config-arrow:hover {
-  scale: 1.2;
+  scale: 1.1;
   cursor: pointer;
 }
 
@@ -1554,15 +1555,15 @@ html {
 
 @media (max-width: 1250px) {
   .search-icon {
-  transform: translateX(-550px);
+  transform: translateX(-450px);
   }
   .add-new-btn {
-    position: absolute;
+    position: relative;
     width: 110px;
     height: 30px;
     margin-right: 10px;
     z-index: 35;
-    transform: translateX(470px);
+    transform: translateX(5px);
     cursor: pointer;
   }
   .search-table > thead td {

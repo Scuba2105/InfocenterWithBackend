@@ -1,10 +1,19 @@
 import useMediaQueries from "media-queries-in-react"
 import { useState } from "react";
-import { ConfigArrow } from "../svg";
 
 export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospitals,  departmentName, departmentsIndex, hospitalsIndex}) {
     
     const [configIndex, setConfigIndex] = useState(0);
+    const [leftArrowHovered, setLeftArrowHovered] = useState(false);
+    const [rightArrowHovered, setRightArrowHovered] = useState(false);
+
+    function toggleLeftArrowHovered() {
+        setLeftArrowHovered(a => !a);
+    }
+
+    function toggleRightArrowHovered() {
+        setRightArrowHovered(a => !a);
+    }
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -40,6 +49,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
         );
     }
     else {
+
         const filteredCurrentEntries = currentConfigEntries.filter((entry) => {
             const departmentArray = entry.split('/').slice(-1)[0].split('_')[2].split('--');
             const departmentId  = departmentArray.map((word) => {
@@ -58,15 +68,28 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
         // Calculate the number of configs for chosen department
         const configNumber = parsedEntries.length;
 
+        function updateIndicator(e) {
+            const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
+            console.log(rightArrowPressed, configNumber);
+            if (rightArrowPressed && configIndex < (configNumber -1)) {
+                console.log("right arrow pressed");
+                setConfigIndex(c => c + 1);
+            }
+            else if (!rightArrowPressed && configIndex > 0) {
+                console.log("left arrow pressed");
+                setConfigIndex(c => c - 1);
+            }
+        }
+
         return (
             <>
             {configNumber > 1 && <div className="indicator-container">
                 {parsedEntries.map((entry, index) => {
-                return <div className={index === configIndex ? "indicator active-indicator" : "indicator"}></div>
+                return <div key={`indicator${index}`} className={index === configIndex ? "indicator active-indicator" : "indicator"}></div>
             })}
             </div>}
                 <div className="config-display-container">
-                    <ConfigArrow color="#000000" />
+                    <img className="config-arrow config-left-arrow" onClick={updateIndicator} onMouseOver={toggleLeftArrowHovered} onMouseOut={toggleLeftArrowHovered} src={leftArrowHovered ? "http://localhost:5000/images/left-arrow-highlight.jpg" : "http://localhost:5000/images/left-arrow.jpg"} alt="left-arrow"></img>
                     <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
                         <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
                                 <div className="options-info">
@@ -84,7 +107,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
                                 <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
                         </div>
                     </div>
-                    <img className="config-arrow config-right-arrow" src="http://localhost:5000/images/left-arrow.jpg" alt="left-arrow"></img>
+                    <img className="config-arrow config-right-arrow" onClick={updateIndicator} onMouseOver={toggleRightArrowHovered} onMouseOut={toggleRightArrowHovered} src={rightArrowHovered ? "http://localhost:5000/images/left-arrow-highlight.jpg" : "http://localhost:5000/images/left-arrow.jpg"} alt="right-arrow"></img>
                 </div>
             </>
         );
