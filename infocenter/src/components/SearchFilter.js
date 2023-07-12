@@ -6,7 +6,7 @@ import { generateDataPages } from "../utils/utils";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { AddNewForm } from "./AddNewForm";
 
-export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
+export function SearchFilter({page, pageData, selectedEntry, onRowClick, showMessage}) {
     const [query, setQuery] = useState('null');
     const [tableIndex, setTableIndex] = useState(0);
     const [addNewModal, setAddNewModal] = useState(false);
@@ -77,7 +77,7 @@ export function SearchFilter({page, pageData, selectedEntry, onRowClick}) {
             <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={onTableArrowClick} />
             {addNewModal && 
             <ModalSkeleton closeModal={closeAddModal} type="add-new" page={page}>
-                <AddNewForm page={page} pageData={pageData}></AddNewForm>
+                <AddNewForm page={page} pageData={pageData} showMessage={showMessage}></AddNewForm>
             </ModalSkeleton>}
         </div>
     );
