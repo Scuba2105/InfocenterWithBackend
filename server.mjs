@@ -71,7 +71,7 @@ app.get("/getData", async (req, res) => {
     }
 });
 
-app.put("/putDeviceData", async (req, res) => {
+app.put("/PutDeviceData", async (req, res) => {
     try {
         cpUpload(req, res, async function (err) {
             if (err) {
@@ -175,6 +175,13 @@ app.put("/putDeviceData", async (req, res) => {
         console.error(err);
     }
 });
+
+app.post('/AddNewEntry/:page', async (req, res) => {
+    if (req.params.page === "technical-info") {
+        console.log(req.body);
+    }
+    
+})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

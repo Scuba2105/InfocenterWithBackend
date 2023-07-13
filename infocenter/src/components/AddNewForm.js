@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef } from "react";
 import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
@@ -7,8 +7,7 @@ export function AddNewForm({page, pageData, showMessage}) {
     
     const [addNewManufacturer, setAddNewManufacturer] = useState(false);
     const [addNewType, setaddNewType] = useState(false);
-    const [uploadData, setUploadData] = useState(false);
-
+    
     // Define add new form DOM element and formdata refs
     const formData = new FormData();
     const newData = useRef(formData);
@@ -16,22 +15,7 @@ export function AddNewForm({page, pageData, showMessage}) {
 
     const placeholderValue = page === "staff" ? "staff member full name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
-
-    // Upload the data when the upload button is pressed
-    useEffect(() => {
-        if (uploadData) {
-            saveFormData();            
-        }
-
-        return () => {
-            setUploadData(false);
-        }
-    },[uploadData]);
-
-    function startUpload() {
-        setUploadData(true);
-    }
-
+  
     function toggleAddNewType() {
         setaddNewType(t => !t);
     }
@@ -64,24 +48,40 @@ export function AddNewForm({page, pageData, showMessage}) {
         return [modelInput, deviceTypeInput, manufacturerInput, fileInput];
     }
 
-    function saveFormData(formContainer) {
+    async function uploadFormData(formContainer) {
         const deviceDataOptions = ["Device Model", "Device Type", "Manufacturer", "Image File"]
         const formDataNames = deviceDataOptions.map((option) => {
             return option.toLocaleLowerCase().replace(' ', '-');
-        })
+        });
         const newForm = formContainer.current;
+        console.log(formContainer);
         const inputElements = getInputElements(newForm);
         inputElements.forEach((input,index) => {
             if (input.value === "") {
                 showMessage("error", `The input for the ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
                 return;
             }
-        })
+        });
         
         // Append the input data to the form data object
         inputElements.forEach((input, index) => {
             newData.current.set(formDataNames[index], input.value);
+        });
+
+        for (const pair of newData.current.entries()) {
+            console.log(`${pair[0]}, ${pair[1]}`);
+        }
+
+        // Post the data to the server  
+        const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: newData.current,
         })
+
+
     }
 
     function generateExistingSelectValues() {
@@ -125,7 +125,7 @@ export function AddNewForm({page, pageData, showMessage}) {
                 </div>
                 <Input inputType="file" identifier="new-image" labelText="New Device Image" />
             </div>            
-            <div className="update-button add-new-upload-button" onClick={startUpload}>Upload New Data</div>
+            <div className="update-button add-new-upload-button" onClick={() => uploadFormData(formContainer)}>Upload New Data</div>
         </div>
     );
 }

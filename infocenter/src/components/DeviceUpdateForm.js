@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
@@ -37,68 +37,15 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMe
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
-    const [startUpload, setStartUpload] = useState(false);
-                
+                    
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
                    
-    useEffect(() => {
-        async function sendFormData(upload) {
-            if (upload) {
-
-                // Show the uploading spinner dialog while uploading.
-                showMessage("uploading", `Uploading ${selectedData.model} Data`)
-                
-                // Post the form data to the server. 
-                const res = await fetch("http://localhost:5000/putDeviceData", {
-                        method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                        mode: "cors", // no-cors, *cors, same-origin
-                        redirect: "follow", // manual, *follow, error
-                        referrerPolicy: "no-referrer",
-                        body: updateData.current
-                }).catch((error) => {
-                    closeDialog();
-                    showMessage("error", error.message);
-                })
-
-                const data = await res.json();
-                if (data.type === "Error") {
-                    closeDialog();
-                    showMessage("error", `${data.message}. Please check the file type is pdf for service and user manuals and try again.`);
-                }
-                else {
-                    // Need to clear formData at this point
-                    for (const pair of updateData.current.entries()) {
-                        if (!['model', 'manufacturer'].includes(pair[0])) {
-                            updateData.current.delete(pair[0]);
-                        }
-                    }
-
-                    // Need to update app data.
-                    queryClient.invalidateQueries('dataSource');
-
-                    closeDialog();
-                    showMessage("info", 'Resources have been successfully updated!');
-                    setTimeout(() => {
-                        closeDialog();
-                        closeUpdate();
-                    }, 1600);
-                }
-            } 
-        }
+    async function sendFormData() {
             
-        sendFormData(startUpload);
-
-        return () => {
-            setStartUpload(false);
-        } 
-        
-    }, [startUpload, queryClient, closeUpdate, showMessage, closeDialog])
-
-    function beginUpload() {
         let dataKeys = [];
         for (const key of updateData.current.keys()) {
             dataKeys.push(key);
@@ -107,10 +54,49 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMe
         if (dataKeys.length === 2 && dataKeys[0] === 'model' && dataKeys[1] === 'manufacturer') {
             showMessage("error", 'No form data has been saved for upload');
             return;
-        }
-        setStartUpload(true);
-    }
+        }        
 
+        // Show the uploading spinner dialog while uploading.
+        showMessage("uploading", `Uploading ${selectedData.model} Data`)
+             
+        // Post the form data to the server. 
+        const res = await fetch("http://localhost:5000/PutDeviceData", {
+                method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: updateData.current
+        }).catch((error) => {
+            closeDialog();
+            showMessage("error", error.message);
+        })
+
+        const data = await res.json();
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. Please check the file type is pdf for service and user manuals and try again.`);
+        }
+        else {
+            // Need to clear formData at this point
+            for (const pair of updateData.current.entries()) {
+                if (!['model', 'manufacturer'].includes(pair[0])) {
+                    updateData.current.delete(pair[0]);
+                }
+            }
+
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeUpdate();
+            }, 1600);
+        }
+    } 
+ 
+    // Save the form data ready for upload
     function saveUpdateData(e) {
         // Add the files from the service manual and user manual forms to the formData ref
         if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
@@ -327,7 +313,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMe
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
                     <div className="form-buttons">
                         <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
-                        <div className="update-button" onClick={beginUpload}>Upload Updates</div>
+                        <div className="update-button" onClick={sendFormData}>Upload Updates</div>
                     </div>                    
                 </div>
             </div>                
