@@ -49,7 +49,7 @@ export function AddNewForm({page, pageData, showMessage}) {
     }
 
     async function uploadFormData(formContainer) {
-        const deviceDataOptions = ["Device Model", "Device Type", "Manufacturer", "Image File"]
+        const deviceDataOptions = ["Model", "Type", "Manufacturer", "Image File"]
         const formDataNames = deviceDataOptions.map((option) => {
             return option.toLocaleLowerCase().replace(' ', '-');
         });
@@ -58,14 +58,25 @@ export function AddNewForm({page, pageData, showMessage}) {
         const inputElements = getInputElements(newForm);
         inputElements.forEach((input,index) => {
             if (input.value === "") {
-                showMessage("error", `The input for the ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
+                showMessage("error", `The input for the new device ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
                 return;
             }
         });
         
+        let model;
         // Append the input data to the form data object
         inputElements.forEach((input, index) => {
-            newData.current.set(formDataNames[index], input.value);
+            if (index <= 2) {
+                if (index === 0) {
+                    model = input.value.toLocaleLowerCase().replace(/\s/ig, '_');
+                } 
+                newData.current.set(formDataNames[index], input.value);
+            }
+            else {
+                const fileExt = input.files[0].name.split('.').slice(-1)[0];
+                newData.current.set('extension', fileExt);
+                newData.current.set(formDataNames[index], input.files[0], `${model}.${fileExt}`);
+            }
         });
 
         for (const pair of newData.current.entries()) {
@@ -81,7 +92,8 @@ export function AddNewForm({page, pageData, showMessage}) {
                 body: newData.current,
         })
 
-
+        const data = await res.json();
+        console.log(data);
     }
 
     function generateExistingSelectValues() {

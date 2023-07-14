@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const model = req.body.model.toLowerCase();
         const documentsFieldRegex = /file[1-4]/;
-        
+        console.log(file.fieldname, file.originalname, model);
         if (file.fieldname === "service_manual" && file.mimetype === 'application/pdf') {
             cb(null, path.join(__dirname, `public/manuals/service_manuals`))
         }
@@ -32,8 +32,11 @@ const storage = multer.diskStorage({
             createDirectory(path.join(__dirname, `public/documents/${model}`))
             cb(null, path.join(__dirname, `public/documents/${model}`))            
         }  
+        else if (file.fieldname === "image-file") {
+            cb(null, path.join(__dirname, `public/images/equipment`))
+        }
         else {
-            const fileType = capitaliseFirstLetters(file.fieldname.split('_').join(' '));
+            const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
             cb(new Error(`An error occurred trying to save the uploaded ${fileType}`));
         }    
     },
@@ -49,7 +52,7 @@ const upload = multer({ storage: storage})
 // Define the field names to be used with Multer for the uploaded files.
 const cpUpload = upload.fields([{name: 'service_manual', maxCount: 1}, {name: 'user_manual', maxCount: 1}, 
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
-{name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}])
+{name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1}])
 
 // Define the express app
 const app = express();
@@ -177,10 +180,53 @@ app.put("/PutDeviceData", async (req, res) => {
 });
 
 app.post('/AddNewEntry/:page', async (req, res) => {
-    if (req.params.page === "technical-info") {
-        console.log(req.body);
+    try {
+        cpUpload(req, res, async function (err) {
+            if (err) {
+                console.log(err.message);
+                res.json({type: "Error", message: err.message});
+            }
+            else {
+                const page = req.params.page; 
+                if (page === "technical-info") {
+                    console.log(req.body);
+                    const allData = await readAllData(__dirname);
+                    const deviceData = allData.deviceData;
+                    const newModel = req.body.model;
+                    const newType = req.body.type;
+                    const manufacturer = req.body.manufacturer;
+                    const fileExt = req.body.extension;
+                    const newDevice = {
+                        img: fileExt,
+                        type: newType,
+                        manufacturer: manufacturer,
+                        model: newModel,
+                        serviceManual: "",
+                        userManual: "",
+                        config: "",
+                        software: "",
+                        documents: "",
+                        placeholder2: ""
+                      }
+                    
+                    // Push the new device data to the device data array 
+                    const updatedData = [newDevice].push(...deviceData);
+                    console.log(updatedData);
+                    
+                    // // Set the updated data to the all data object
+                    // allData.deviceData =  newDeviceData;
+
+                    // // Write the data to file
+                    // writeDataToFile(__dirname, JSON.stringify(allData, null, 2));
+
+                    res.json({hello: "Response from the server"});
+                }
+            }
+        })
     }
-    
+    catch(err) {
+        console.log(err);
+    }
 })
 
 app.listen(PORT, () => {
