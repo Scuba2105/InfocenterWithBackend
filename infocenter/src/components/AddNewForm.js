@@ -58,9 +58,7 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
         const textInputs = formContainer.current.querySelectorAll('.text-input');
         const selectInputs = formContainer.current.querySelectorAll('.select-input');
         const fileInput = formContainer.current.querySelectorAll('#new-employee-image');
-        
-        let error;
-
+                
         // Convert text value node lists to arrays and store 
         const textInputArray = Array.from(textInputs);
         const [name, id, officePhone, dectPhone, workMobile, personalMobile] = Array.from(textInputs);
@@ -87,15 +85,52 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
                 staffId = input.value;
             }
         });
-        console.log(fileInput.value);
-        if (fileInput.value !== "") {
-            const extension = fileInput.files[0].name.split('.').slice(-1)[0];
+        
+        // Add the uploaded file and file extension if it has been selected 
+        if (fileInput[0].value !== "") {
+            const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
             newData.current.set('extension', extension);
-            newData.current.set('employee-photo', fileInput.files[0], `${staffId}.${extension}`);
+            newData.current.set('employee-photo', fileInput[0].files[0], `${staffId}.${extension}`);
         }
 
-        for (const pair of newData.current.entries()) {
-            console.log(pair[0], pair[1]);
+        // Show the uploading spinner dialog while uploading.
+        showMessage("uploading", `Uploading Employee Data`)
+
+        // Post the data to the server  
+        const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: newData.current,
+        }).catch((error) => {
+            closeDialog();
+            showMessage("error", error.message);
+        })
+
+        const data = await res.json();
+
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
+        }
+        else {
+            // Need to clear formData at this point
+            for (const pair of newData.current.entries()) {
+                if (!['model', 'manufacturer'].includes(pair[0])) {
+                    newData.current.delete(pair[0]);
+                }
+            }
+
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeAddModal();
+            }, 1600);
         }
     }
 
@@ -109,78 +144,73 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
         // Get all the input elements in the add-new form
         const inputElements = getInputElements(newForm);
 
-        // Validate the input data
-        let error = false;
-        inputElements.forEach((input,index) => {
+        // Validate the input data for the new device. All fields mandatory
+        for (let [index, input] of inputElements.entries()) {
             if (input.value === "") {
                 showMessage("error", `The input for the new device ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
-                error = true;
+                return;
             }
             else if (unavailableModels.includes(input.value) && index === 0) {
                 showMessage("warning", `The Model entered for the new device already exists. Please verify this device data is not already present before continuing.`)
-                error = true;
+                return;
             }
-        });
+        };
         
-        if (error === false) {
-            let model;
-            // Append the input data to the form data object
-            inputElements.forEach((input, index) => {
-                if (index <= 2) {
-                    if (index === 0) {
-                        model = input.value.toLocaleLowerCase().replace(/\s/ig, '_');
-                    } 
-                    newData.current.set(formDataNames[index], input.value);
-                }
-                else {
-                    const fileExt = input.files[0].name.split('.').slice(-1)[0];
-                    newData.current.set('extension', fileExt);
-                    newData.current.set(formDataNames[index], input.files[0], `${model}.${fileExt}`);
-                }
-            });
+        // Store the model name for saving the uploaded image file. 
+        let model;
 
-            for (const pair of newData.current.entries()) {
-                console.log(`${pair[0]}, ${pair[1]}`);
-            }
-
-            // Show the uploading spinner dialog while uploading.
-            showMessage("uploading", `Uploading ${model} Data`)
-
-            // Post the data to the server  
-            const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
-                    method: "POST", // *GET, POST, PUT, DELETE, etc.
-                    mode: "cors", // no-cors, *cors, same-origin
-                    redirect: "follow", // manual, *follow, error
-                    referrerPolicy: "no-referrer",
-                    body: newData.current,
-            }).catch((error) => {
-                closeDialog();
-                showMessage("error", error.message);
-            })
-
-            const data = await res.json();
-            if (data.type === "Error") {
-                closeDialog();
-                showMessage("error", `${data.message}. Please check the file type is pdf for service and user manuals and try again.`);
+        // Append the input data to the form data object
+        inputElements.forEach((input, index) => {
+            if (index <= 2) {
+                if (index === 0) {
+                    model = input.value.toLocaleLowerCase().replace(/\s/ig, '_');
+                } 
+                newData.current.set(formDataNames[index], input.value);
             }
             else {
-                // Need to clear formData at this point
-                for (const pair of newData.current.entries()) {
-                    if (!['model', 'manufacturer'].includes(pair[0])) {
-                        newData.current.delete(pair[0]);
-                    }
-                }
-    
-                // Need to update app data.
-                queryClient.invalidateQueries('dataSource');
-    
-                closeDialog();
-                showMessage("info", 'Resources have been successfully updated!');
-                setTimeout(() => {
-                    closeDialog();
-                    closeAddModal();
-                }, 1600);
+                const fileExt = input.files[0].name.split('.').slice(-1)[0];
+                newData.current.set('extension', fileExt);
+                newData.current.set(formDataNames[index], input.files[0], `${model}.${fileExt}`);
             }
+        });
+
+        // Show the uploading spinner dialog while uploading.
+        showMessage("uploading", `Uploading ${model} Data`)
+
+        // Post the data to the server  
+        const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: newData.current,
+        }).catch((error) => {
+            closeDialog();
+            showMessage("error", error.message);
+        })
+
+        const data = await res.json();
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
+        }
+        else {
+            // Need to clear formData at this point
+            for (const pair of newData.current.entries()) {
+                if (!['model', 'manufacturer'].includes(pair[0])) {
+                    newData.current.delete(pair[0]);
+                }
+            }
+
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeAddModal();
+            }, 1600);
         }
     }
 
