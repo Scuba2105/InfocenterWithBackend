@@ -37,8 +37,9 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 </> :
                 page === "staff" ?
                 <>
-                    <SearchFilter key={`${page}-staff-filter`} page={page} pageData={data.staffData} onRowClick={onRowClick} />
+                    <SearchFilter key={`${page}-staff-filter`} page={page} pageData={data.staffData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <SummaryCard key={`${page}-staff-card`} page={page} pageData={data.staffData} selectedEntry={selectedEntry} queryClient={queryClient}/>
+                    <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                     <h1>Page has not been implemented yet</h1>}
                 </div>

@@ -51,7 +51,55 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
         return [modelInput, deviceTypeInput, manufacturerInput, fileInput];
     }
 
-    async function uploadFormData(formContainer) {
+    async function uploadStaffFormData(formContainer) {
+        const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
+        
+        // Get all the input elements
+        const textInputs = formContainer.current.querySelectorAll('.text-input');
+        const selectInputs = formContainer.current.querySelectorAll('.select-input');
+        const fileInput = formContainer.current.querySelectorAll('#new-employee-image');
+        
+        let error;
+
+        // Convert text value node lists to arrays and store 
+        const textInputArray = Array.from(textInputs);
+        const [name, id, officePhone, dectPhone, workMobile, personalMobile] = Array.from(textInputs);
+        const [workshop, position] = Array.from(selectInputs);
+        const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile];
+
+        // Validate the relevant new staff data inputs
+        for (let [index, input] of textInputArray.entries()) {
+            if (index <= 2 && input.value === "") {
+                showMessage("error", `The input for the new employee ${staffDataOptions[index]} is empty. Please enter the necessary data and try again.`)
+                return;
+            }
+        };
+
+        // Filter the empty data inputs out of the data and save to the Form Data
+        let staffId;
+        const inputIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"]
+        textValueInputsArray.forEach((input, index) => {
+            if (input.value !== "") {
+                newData.current.set(inputIdentifier[index], input.value);
+            }
+            if (index === 1) {
+                // Store the staff ID for naming the uploaded image file.
+                staffId = input.value;
+            }
+        });
+        console.log(fileInput.value);
+        if (fileInput.value !== "") {
+            const extension = fileInput.files[0].name.split('.').slice(-1)[0];
+            newData.current.set('extension', extension);
+            newData.current.set('employee-photo', fileInput.files[0], `${staffId}.${extension}`);
+        }
+
+        for (const pair of newData.current.entries()) {
+            console.log(pair[0], pair[1]);
+        }
+    }
+
+    async function uploadEquipmentFormData(formContainer) {
         const deviceDataOptions = ["Model", "Type", "Manufacturer", "Image File"]
         const formDataNames = deviceDataOptions.map((option) => {
             return option.toLocaleLowerCase().replace(' ', '-');
@@ -172,9 +220,9 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
                     <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext={`Enter Dect Phone Number`} /> 
                     <Input inputType="text" identifier="add-new" labelText="Work Mobile" placeholdertext={`Enter Work Mobile Number`} />  
                     <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />                   
+                    <Input inputType="file" identifier="new-image" labelText="New Employee Image" />
                 </div>  
-                <Input inputType="file" identifier="new-image" labelText="New Employee Image" />
-                <div className="update-button add-new-staff-upload-button" onClick={() => uploadFormData(formContainer)}>Upload New Data</div>
+                <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload New Data</div>
             </div>
         )
     }
@@ -198,7 +246,7 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
                     </div>
                     <Input inputType="file" identifier="new-image" labelText="New Device Image" />
                 </div>            
-                <div className="update-button add-new-upload-button" onClick={() => uploadFormData(formContainer)}>Upload New Data</div>
+                <div className="update-button add-new-upload-button" onClick={() => uploadEquipmentFormData(formContainer)}>Upload New Data</div>
             </div>
         );
     }
