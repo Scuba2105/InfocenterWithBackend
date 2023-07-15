@@ -408,10 +408,7 @@
       "serviceManual": true,
       "userManual": true,
       "config": "",
-      "software": {
-        "device-software": "Test",
-        "service-software": "Test 2"
-      },
+      "software": "",
       "documents": "",
       "placeholder2": ""
     },
@@ -491,7 +488,7 @@
       "img": "true",
       "type": "Patient Warmer",
       "manufacturer": "Cocoon",
-      "model": "cws5000",
+      "model": "CWS5000",
       "serviceManual": true,
       "userManual": true,
       "config": "",
@@ -1774,6 +1771,18 @@
       "type": "Coagulation Analyzer",
       "manufacturer": "Medtronic",
       "model": "ACT Plus",
+      "serviceManual": false,
+      "userManual": false,
+      "config": "",
+      "software": "",
+      "documents": "",
+      "placeholder2": ""
+    },
+    {
+      "img": "jpg",
+      "type": "Multiparameter Module",
+      "manufacturer": "GE Healthcare",
+      "model": "PDM",
       "serviceManual": false,
       "userManual": false,
       "config": "",

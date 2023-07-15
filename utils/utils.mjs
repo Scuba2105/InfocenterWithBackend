@@ -56,3 +56,19 @@ export function capitaliseFirstLetters(input) {
     }).join(' ');
     return formattedWords
 }
+
+export function generateNewDeviceData(fileExt, newType, manufacturer, newModel) {
+
+    return {
+        img: fileExt,
+        type: newType,
+        manufacturer: manufacturer,
+        model: newModel,
+        serviceManual: false,
+        userManual: false,
+        config: "",
+        software: "",
+        documents: "",
+        placeholder2: ""
+    }
+}

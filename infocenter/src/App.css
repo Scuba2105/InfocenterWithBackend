@@ -262,6 +262,10 @@ html {
   padding: 5px; 
 }
 
+.add-new-btn:hover {
+  cursor: pointer; 
+}
+
 .search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #97a5dd;
   opacity: 1; /* Firefox */
@@ -1004,7 +1008,7 @@ html {
 .copy-image1-laptop {
   position: absolute;
   left: 455px;
-  top: 119px;
+  top: 108px;
   height: 20px;
   width: 20px;
 }
@@ -1012,7 +1016,7 @@ html {
 .copy-image1-desktop {
   position: absolute;
   left: 555px;
-  top: 219px;
+  top: 158px;
   height: 20px;
   width: 20px;
 }
@@ -1020,7 +1024,7 @@ html {
 .copy-image2-laptop {
   position: absolute;
   left: 455px;
-  top: 215px;
+  top: 226px;
   height: 20px;
   width: 20px;
 }
@@ -1028,7 +1032,7 @@ html {
 .copy-image2-desktop {
   position: absolute;
   left: 555px;
-  top: 315px;
+  top: 375px;
   height: 20px;
   width: 20px;
 }
@@ -1036,28 +1040,28 @@ html {
 .copied-text1-laptop {
   position: absolute;
   left: 450px;
-  top: 121px;
+  top: 112px;
   font-size: 9px;
 }
 
 .copied-text1-desktop {
   position: absolute;
   left: 543px;
-  top: 221px;
+  top: 159px;
   font-size: 11px;
 }
 
 .copied-text2-laptop {
   position: absolute;
   left: 450px;
-  top: 217px;
+  top: 228px;
   font-size: 9px;
 }
 
 .copied-text2-desktop {
   position: absolute;
   left: 543px;
-  top: 317px;
+  top: 376px;
   font-size: 11px;
 }
 
