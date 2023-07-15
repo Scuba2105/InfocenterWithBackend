@@ -977,8 +977,19 @@ html {
   transform: translateY(-30px);
 }
 
+.add-new-staff-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 13px;
+}
+
 .add-new-upload-button {
   transform: translateY(-20px);
+}
+
+.add-new-staff-upload-button {
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .software-summary {
@@ -1225,7 +1236,7 @@ html {
   transform: translateY(-30px);
 }
 
-.hospitals-select-label, .department-select-label, .device-type-select-container, .manufacturer-select-container {
+.hospitals-select-label, .department-select-label, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
   font-weight: bold;
 }
 
@@ -1235,23 +1246,23 @@ html {
   text-align: center;
 }
 
-.hospital-select-container, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container {
+.hospital-select-container, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.hospital-select-label, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container {
+.hospital-select-label, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
   font-size: 13px;
   color: rgb(132, 132, 139);
 }
 
-.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select {
+.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
   color: rgb(132, 132, 139);
 }
 
-.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select {
+.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
   font-size: 12px;
   display: block;
   height: 25px;

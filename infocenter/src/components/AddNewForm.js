@@ -3,6 +3,9 @@ import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
 
+const locations = ["John Hunter Hospital", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
+const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
+
 export function AddNewForm({page, pageData, queryClient, showMessage, closeDialog, closeAddModal}) {
     
     const [addNewManufacturer, setAddNewManufacturer] = useState(false);
@@ -13,7 +16,7 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
     const newData = useRef(formData);
     const formContainer = useRef(null);
 
-    const placeholderValue = page === "staff" ? "staff member full name" : "equipment model" 
+    const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
   
     function toggleAddNewType() {
@@ -155,26 +158,48 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
     const currentTypes = existingSelectValues.types.sort();
     const currentManufacturers = existingSelectValues.manufacturers.sort(); 
 
-    return (
-        <div className="modal-display">
-            <h3 className="add-new-heading">New Equipment Details</h3>
-            <div className="add-new-input-container" ref={formContainer}>
-                <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter new ${placeholderValue}`} />
-                <div className="edit-add-new-container">
-                    <TooltipButton content={addNewType ? "Undo" :"Add New"} boolean={addNewType} toggleFunction={toggleAddNewType}/>
-                    {addNewType ? <Input inputType="text" identifier="add-new" labelText="Device Type" placeholdertext={`Enter new device type`} /> : 
-                    <SelectInput label="Device Type" optionData={currentTypes} />}
-                    <div className="add-new-aligner"></div>
-                </div>
-                <div className="edit-add-new-container">
-                    <TooltipButton content={addNewManufacturer ? "Undo" :"Add New"} boolean={addNewManufacturer} toggleFunction={toggleAddNewManufacturer}/>
-                    {addNewManufacturer ? <Input inputType="text" identifier="add-new" labelText="Device Manufacturer" placeholdertext={`Enter new device type`} /> : 
-                    <SelectInput label="Manufacturer" optionData={currentManufacturers} />}
-                    <div className="add-new-aligner"></div>
-                </div>
-                <Input inputType="file" identifier="new-image" labelText="New Device Image" />
-            </div>            
-            <div className="update-button add-new-upload-button" onClick={() => uploadFormData(formContainer)}>Upload New Data</div>
-        </div>
-    );
+    // Render the html based on the page prop
+    if (page === "staff") {
+        return (
+            <div className="modal-display">
+                <h3 className="add-new-heading">New Employee Details</h3>
+                <div className="add-new-staff-container" ref={formContainer}>
+                    <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter ${placeholderValue}`} />
+                    <Input inputType="text" identifier="add-new" labelText="Staff ID" placeholdertext={`Enter Employee Staff ID`} />
+                    <SelectInput label="Location" optionData={locations} />
+                    <SelectInput label="Position" optionData={positions} />
+                    <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext={`Enter Office Phone Number`} />
+                    <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext={`Enter Dect Phone Number`} /> 
+                    <Input inputType="text" identifier="add-new" labelText="Work Mobile" placeholdertext={`Enter Work Mobile Number`} />  
+                    <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />                   
+                </div>  
+                <Input inputType="file" identifier="new-image" labelText="New Employee Image" />
+                <div className="update-button add-new-staff-upload-button" onClick={() => uploadFormData(formContainer)}>Upload New Data</div>
+            </div>
+        )
+    }
+    else if (page === "technical-info") {
+        return (
+            <div className="modal-display">
+                <h3 className="add-new-heading">New Equipment Details</h3>
+                <div className="add-new-input-container" ref={formContainer}>
+                    <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter new ${placeholderValue}`} />
+                    <div className="edit-add-new-container">
+                        <TooltipButton content={addNewType ? "Undo" :"Add New"} boolean={addNewType} toggleFunction={toggleAddNewType}/>
+                        {addNewType ? <Input inputType="text" identifier="add-new" labelText="Device Type" placeholdertext={`Enter new device type`} /> : 
+                        <SelectInput label="Device Type" optionData={currentTypes} />}
+                        <div className="add-new-aligner"></div>
+                    </div>
+                    <div className="edit-add-new-container">
+                        <TooltipButton content={addNewManufacturer ? "Undo" :"Add New"} boolean={addNewManufacturer} toggleFunction={toggleAddNewManufacturer}/>
+                        {addNewManufacturer ? <Input inputType="text" identifier="add-new" labelText="Device Manufacturer" placeholdertext={`Enter new device type`} /> : 
+                        <SelectInput label="Manufacturer" optionData={currentManufacturers} />}
+                        <div className="add-new-aligner"></div>
+                    </div>
+                    <Input inputType="file" identifier="new-image" labelText="New Device Image" />
+                </div>            
+                <div className="update-button add-new-upload-button" onClick={() => uploadFormData(formContainer)}>Upload New Data</div>
+            </div>
+        );
+    }
 }

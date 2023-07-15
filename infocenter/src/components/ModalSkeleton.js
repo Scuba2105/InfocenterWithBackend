@@ -49,8 +49,12 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
         desktop: "(min-width: 1800px)"
     });
 
-    const scrollDocuments = type === 'documents' && scrollDocumentsDevices.includes(selectedData.model) ? 'scroll' : null;
+    let scrollDocuments = "no-scroll"; 
+    if (type === 'documents' && scrollDocumentsDevices.includes(selectedData.model)) {
+        scrollDocuments  = 'scroll';
+    } 
     
+
     function mouseDown(e) {
         buttonClicked.current = true;
         startPosition.current = {x: e.clientX, y: e.clientY}
