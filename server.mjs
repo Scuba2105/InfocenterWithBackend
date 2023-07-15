@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const model = req.body.model.toLowerCase();
         const documentsFieldRegex = /file[1-4]/;
-        console.log(file.fieldname, file.originalname, model);
+        
         if (file.fieldname === "service_manual" && file.mimetype === 'application/pdf') {
             cb(null, path.join(__dirname, `public/manuals/service_manuals`))
         }
@@ -201,8 +201,8 @@ app.post('/AddNewEntry/:page', async (req, res) => {
                         type: newType,
                         manufacturer: manufacturer,
                         model: newModel,
-                        serviceManual: "",
-                        userManual: "",
+                        serviceManual: false,
+                        userManual: false,
                         config: "",
                         software: "",
                         documents: "",
@@ -210,14 +210,13 @@ app.post('/AddNewEntry/:page', async (req, res) => {
                       }
                     
                     // Push the new device data to the device data array 
-                    const updatedData = [newDevice].push(...deviceData);
-                    console.log(updatedData);
+                    deviceData.push(newDevice);
+                                        
+                    // Set the updated data to the all data object
+                    const updatedAllData = {staffData: allData.staffData, deviceData: deviceData}
                     
-                    // // Set the updated data to the all data object
-                    // allData.deviceData =  newDeviceData;
-
-                    // // Write the data to file
-                    // writeDataToFile(__dirname, JSON.stringify(allData, null, 2));
+                    // Write the data to file
+                    writeDataToFile(__dirname, JSON.stringify(updatedAllData, null, 2));
 
                     res.json({hello: "Response from the server"});
                 }
