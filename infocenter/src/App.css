@@ -231,35 +231,35 @@ html {
   min-width: calc(1300px * 0.45);
 }
 
+.search-box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
 .search-box {
   display: flex;
   align-items: center;
-  margin-top: 20px;
   margin-left: 19px;
   border: 2px solid #97a5dd;
   border-radius: 5px;
-  width: 100%;
+  width: 80%;
 }
 
 .search-input {
   height: 35px;
-  width: calc(99%);
-  margin-right: -4.5%;
+  width: 100%;
   font-size: 20px;
 }
 
 .search-icon {
-  transform: translateX(-780px);
+  transform: translateX(-643px);
 }
 
 .add-new-btn {
-  position: absolute;
-  width: 110px;
-  height: 30px;
-  margin-right: 10px;
-  z-index: 35;
-  transform: translateX(705px);
-  cursor: pointer;
+  padding: 5px; 
 }
 
 .search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -1554,18 +1554,25 @@ html {
 }
 
 @media (max-width: 1250px) {
+  .search-box-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+  }
   .search-icon {
-  transform: translateX(-450px);
+  transform: translateX(-427px);
+  }
+
+  .search-box {
+    width: 75%;
   }
   .add-new-btn {
-    position: relative;
-    width: 110px;
-    height: 30px;
-    margin-right: 10px;
-    z-index: 35;
-    transform: translateX(5px);
-    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 8px 5px 8px;
   }
+  
   .search-table > thead td {
     font-size: 16px;
     height: 24px;
