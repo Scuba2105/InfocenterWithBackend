@@ -3,14 +3,15 @@ import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, P
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
 import useMediaQueries from "media-queries-in-react" 
 
-function generateLinks(model, type) {
-    const formattedModel = model.toLowerCase().replace(/\s/ig, '_');
+function generateLinks(deviceData, type) {
+    const formattedModel = deviceData.model.toLowerCase().replace(/\s/ig, '_');
     let link;
     if (type === 'service') {
         link = `http://localhost:5000/manuals/service_manuals/${formattedModel}_service_manual.pdf`
     } 
     else if (type === 'image') {
-        link = `http://localhost:5000/images/equipment/${formattedModel}.jpg`
+        const fileExtension = deviceData.img ? deviceData.img : 'jpg';
+         link = `http://localhost:5000/images/equipment/${formattedModel}.${fileExtension}`
     } 
     else if (type === 'user') {
         link = `http://localhost:5000/manuals/user_manuals/${formattedModel}_user_manual.pdf`
@@ -40,7 +41,7 @@ export function TechnicalLinks({selectedData, onLinkClick, queryClient, showMess
         <>
                 <div className={mediaQueries.laptop ? "summary-area-laptop" : "summary-area-desktop"}>
                     <div className={mediaQueries.laptop ? "image-container-laptop" : "image-container-desktop"}>
-                        <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData.model, 'image')} alt="Medical Equipment"></img>
+                        <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData, 'image')} alt="Medical Equipment"></img>
                     </div>
                     <div className={mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
@@ -51,11 +52,11 @@ export function TechnicalLinks({selectedData, onLinkClick, queryClient, showMess
                     </div>
                 </div>
                 <div className={mediaQueries.laptop ? "technical-area-laptop" : "technical-area-desktop"}>
-                    <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.2} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData.model, 'service')} target="_blank" rel="noopener noreferrer" >
+                    <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.2} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} target="_blank" rel="noopener noreferrer" >
                         <ServiceIcon color="#EA3E7A" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         Service Manual
                     </a>
-                    <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.2} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData.model, 'user')} target="_blank" rel="noopener noreferrer">
+                    <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.2} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} target="_blank" rel="noopener noreferrer">
                         <UserManualIcon color="#04b3ad" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         User Manual                    
                     </a>

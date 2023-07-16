@@ -288,7 +288,8 @@
       "dectPhone": "",
       "workMobile": "",
       "personalMobile": "0438 479 457",
-      "team": "JHH"
+      "team": "JHH",
+      "img": "jpg"
     },
     {
       "id": "-",
@@ -349,11 +350,23 @@
       "workMobile": "",
       "personalMobile": "",
       "team": "Hunter"
+    },
+    {
+      "hospital": "Mater Hospital",
+      "position": "Technical Officer",
+      "id": "60832957",
+      "name": "John Smith",
+      "officePhone": "49213144",
+      "dectPhone": "45678",
+      "workMobile": "0438479457",
+      "personalMobile": "0438479457",
+      "team": "Hunter",
+      "img": "jpg"
     }
   ],
   "deviceData": [
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Anaesthetic Machine",
       "manufacturer": "GE Healthcare",
       "model": "Aespire",
@@ -365,7 +378,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Anaesthetic Machine",
       "manufacturer": "GE Healthcare",
       "model": "Aestiva",
@@ -377,7 +390,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Anaesthetic Machine",
       "manufacturer": "GE Healthcare",
       "model": "Aisys CS2",
@@ -389,7 +402,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Alternating Mattress Pump",
       "manufacturer": "Huntleigh",
       "model": "Alpha Response",
@@ -401,7 +414,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Intra-Aortic Balloon Pump",
       "manufacturer": "Arrow",
       "model": "AutoCAT 2",
@@ -413,7 +426,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Sequential Compression Unit",
       "manufacturer": "Covidien",
       "model": "AV Impulse",
@@ -425,7 +438,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Bladder Scanner",
       "manufacturer": "CUBEscan",
       "model": "BioCon 500",
@@ -437,7 +450,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Bladder Scanner",
       "manufacturer": "CUBEscan",
       "model": "BioCon 700",
@@ -449,7 +462,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Syringe Driver",
       "manufacturer": "BD",
       "model": "Bodyguard T",
@@ -461,7 +474,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Urine Analyser",
       "manufacturer": "Siemens",
       "model": "Clinitek Status",
@@ -473,7 +486,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Intra-Cranial Pressure Monitor",
       "manufacturer": "Codman",
       "model": "Codman ICP",
@@ -485,7 +498,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Warmer",
       "manufacturer": "Cocoon",
       "model": "CWS5000",
@@ -497,7 +510,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Spirometer",
       "manufacturer": "NDD",
       "model": "EasyOne",
@@ -509,7 +522,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Enteral Feeding Pump",
       "manufacturer": "Covidien",
       "model": "ePump",
@@ -521,7 +534,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Automatic External Defibrillator ",
       "manufacturer": "Cardiac Science",
       "model": "Powerheart G3",
@@ -533,7 +546,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Welch Allyn",
       "model": "CSM",
@@ -545,7 +558,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Welch Allyn",
       "model": "CVSM",
@@ -557,7 +570,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Infusion Pump",
       "manufacturer": "B Braun",
       "model": "Infusomat Space",
@@ -569,7 +582,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Incubator",
       "manufacturer": "Drager",
       "model": "Isolette 8000 Plus",
@@ -581,7 +594,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Incubator",
       "manufacturer": "Drager",
       "model": "Isolette C2000",
@@ -593,7 +606,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Jaundice Meter",
       "manufacturer": "Drager",
       "model": "JM-105",
@@ -605,7 +618,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Jaundice Meter",
       "manufacturer": "M&B Electronic Instruments",
       "model": "MBJ20",
@@ -617,7 +630,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Syringe Driver",
       "manufacturer": "Caesarea Medical Electronics",
       "model": "Niki T34L",
@@ -629,7 +642,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Syringe Driver",
       "manufacturer": "Caesarea Medical Electronics",
       "model": "Niki T34",
@@ -641,7 +654,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Drager",
       "model": "Oxylog 3000",
@@ -653,7 +666,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Syringe Driver",
       "manufacturer": "B Braun",
       "model": "Perfusor Space",
@@ -665,7 +678,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "CRRT",
       "manufacturer": "Baxter Healthcare",
       "model": "Prismaflex",
@@ -677,7 +690,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "CRRT",
       "manufacturer": "Baxter Healthcare",
       "model": "Prismax",
@@ -689,7 +702,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX400",
@@ -710,7 +723,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX450",
@@ -790,7 +803,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX550",
@@ -816,7 +829,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX700",
@@ -845,7 +858,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX750",
@@ -871,7 +884,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX800",
@@ -911,7 +924,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Telemetry",
       "manufacturer": "Philips Healthcare",
       "model": "MX40",
@@ -945,7 +958,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Electrosurgical Unit",
       "manufacturer": "Valleylab",
       "model": "FT10",
@@ -957,7 +970,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Sequential Compression Unit",
       "manufacturer": "Covidien",
       "model": "SCD 700",
@@ -969,7 +982,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Docking Station",
       "manufacturer": "B Braun",
       "model": "Space Station",
@@ -981,7 +994,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Electrocardiograph",
       "manufacturer": "Welch Allyn",
       "model": "ELI 280",
@@ -993,7 +1006,7 @@
       "placeholder2": ""
     },
     {
-      "img": "true",
+      "img": "jpg",
       "type": "Blood Warmer",
       "manufacturer": "3M",
       "model": "Ranger",
@@ -1005,7 +1018,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Humidifier",
       "manufacturer": "Fisher and Paykel Healthcare",
       "model": "Airvo 2",
@@ -1017,7 +1030,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Humidifier",
       "manufacturer": "Fisher and Paykel Healthcare",
       "model": "Airvo 3",
@@ -1029,7 +1042,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Humidifier",
       "manufacturer": "Fisher and Paykel Healthcare",
       "model": "MR850",
@@ -1041,7 +1054,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Humidifier",
       "manufacturer": "Fisher and Paykel Healthcare",
       "model": "950ANZ",
@@ -1053,7 +1066,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Overhead Warmer",
       "manufacturer": "Fisher and Paykel Healthcare",
       "model": "Cosy Cot",
@@ -1065,7 +1078,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Resuscitator",
       "manufacturer": "Fisher and Paykel Healthcare",
       "model": "Neopuff",
@@ -1077,7 +1090,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Cardiac Output Module",
       "manufacturer": "GE Healthcare",
       "model": "E-PiCCO",
@@ -1089,7 +1102,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Cardiac Output Module",
       "manufacturer": "GE Healthcare",
       "model": "E-COP",
@@ -1101,7 +1114,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Pulse Oximetery Module",
       "manufacturer": "GE Healthcare",
       "model": "E-Masimo",
@@ -1113,7 +1126,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Dual Pressure Module",
       "manufacturer": "GE Healthcare",
       "model": "E-PP",
@@ -1125,7 +1138,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Pressure/Temperature Module",
       "manufacturer": "GE Healthcare",
       "model": "E-PT",
@@ -1137,7 +1150,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Respiratory Modules",
       "manufacturer": "GE Healthcare",
       "model": "E-sCAiOVX",
@@ -1149,7 +1162,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "CO2 Module",
       "manufacturer": "GE Healthcare",
       "model": "E-miniC",
@@ -1161,7 +1174,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Entropy Module",
       "manufacturer": "GE Healthcare",
       "model": "E-Entropy",
@@ -1173,7 +1186,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "EEG Module",
       "manufacturer": "GE Healthcare",
       "model": "E-EEG",
@@ -1185,7 +1198,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "BIS Module",
       "manufacturer": "GE Healthcare",
       "model": "E-BIS",
@@ -1197,7 +1210,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "NMT Module",
       "manufacturer": "GE Healthcare",
       "model": "E-NMT",
@@ -1209,7 +1222,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Module Rack",
       "manufacturer": "GE Healthcare",
       "model": "F5-F7 Frames",
@@ -1221,7 +1234,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "GE Healthcare",
       "model": "B450",
@@ -1241,7 +1254,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "GE Healthcare",
       "model": "B850",
@@ -1260,7 +1273,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Multiparameter Module",
       "manufacturer": "GE Healthcare",
       "model": "E-PSMP",
@@ -1272,7 +1285,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Multiparameter Module",
       "manufacturer": "Philips Healthcare",
       "model": "X2",
@@ -1304,7 +1317,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Multiparameter Module",
       "manufacturer": "Philips Healthcare",
       "model": "X3",
@@ -1335,7 +1348,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Philips Healthcare",
       "model": "Trilogy 202",
@@ -1347,7 +1360,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Hamilton Medical",
       "model": "T1",
@@ -1359,7 +1372,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Hamilton Medical",
       "model": "C1",
@@ -1371,7 +1384,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Hamilton Medical",
       "model": "MR1",
@@ -1387,7 +1400,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Maquet",
       "model": "Servo-i",
@@ -1399,7 +1412,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ventilator",
       "manufacturer": "Maquet",
       "model": "Servo-U",
@@ -1411,7 +1424,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Infant Ventilator",
       "manufacturer": "SLE",
       "model": "SLE6000",
@@ -1423,7 +1436,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Electrocardiograph",
       "manufacturer": "Philips Healthcare",
       "model": "TC50",
@@ -1468,7 +1481,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Defibrillator",
       "manufacturer": "Physio Control",
       "model": "Lifepak 20e",
@@ -1480,7 +1493,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Bladder Scanner",
       "manufacturer": "Verathon",
       "model": "BVI9400",
@@ -1492,7 +1505,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Bladder Scanner",
       "manufacturer": "Verathon",
       "model": "Prime Plus",
@@ -1504,7 +1517,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Bladder Scanner",
       "manufacturer": "Verathon",
       "model": "i10",
@@ -1516,7 +1529,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ultrasound",
       "manufacturer": "GE Healthcare",
       "model": "Venue Go",
@@ -1528,7 +1541,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Electrocardiograph",
       "manufacturer": "Mindray",
       "model": "R12",
@@ -1547,7 +1560,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ultrasound",
       "manufacturer": "Mindray",
       "model": "TE7",
@@ -1559,7 +1572,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Ultrasound",
       "manufacturer": "Mindray",
       "model": "TE5",
@@ -1571,7 +1584,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Cardiotocograph",
       "manufacturer": "Philips Healthcare",
       "model": "FM20",
@@ -1587,7 +1600,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Cardiotocograph",
       "manufacturer": "Philips Healthcare",
       "model": "FM30",
@@ -1603,7 +1616,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "CO2 Module",
       "manufacturer": "Philips Healthcare",
       "model": "3015A",
@@ -1620,7 +1633,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Incubator",
       "manufacturer": "GE Healthcare",
       "model": "Giraffe Omnibed",
@@ -1632,7 +1645,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Overhead Warmer",
       "manufacturer": "GE Healthcare",
       "model": "Panda",
@@ -1644,7 +1657,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Incubator",
       "manufacturer": "GE Healthcare",
       "model": "Carestation CS1",
@@ -1656,7 +1669,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Patient Monitor",
       "manufacturer": "Philips Healthcare",
       "model": "MX850",
@@ -1673,7 +1686,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Rapid Infuser",
       "manufacturer": "Belmont",
       "model": "RI-2",
@@ -1690,7 +1703,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Central Monitoring System",
       "manufacturer": "Philips Healthcare",
       "model": "PIIC iX",
@@ -1743,7 +1756,7 @@
       "placeholder2": ""
     },
     {
-      "img": true,
+      "img": "jpg",
       "type": "Tourniquet",
       "manufacturer": "Denyers",
       "model": "DTS-3000",

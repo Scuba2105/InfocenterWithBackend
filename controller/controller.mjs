@@ -157,8 +157,26 @@ export async function addNewStaffData(req, res, __dirname) {
     // Generate a new staff data object
     const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, team)   
 
-    console.log(newStaffData, staffData.length);
+    // Add any optional data provided to the data object
+    const optionalData = {"dect-phone": "dectPhone", "work-mobile": "workMobile", "personal-mobile": "personalMobile",
+    "extension": "img"};
 
-    res.json({testing: "Testing the API"});
-    
+    // Loop over optional data and add to data object
+    Object.keys(optionalData).forEach((key) => {
+        if (req.body[key]) {
+            newStaffData[optionalData[key]] = req.body[key];
+        }
+    });
+
+    // Append the new staff data 
+    staffData.push(newStaffData);
+
+    // Set the updated data to the staffData property 
+    const updatedAllData = {staffData: staffData, deviceData: allData.deviceData}
+
+    // Write the data to file
+    writeDataToFile(__dirname, JSON.stringify(updatedAllData, null, 2));
+
+    // Send the success response message.
+    res.json({type: "Success", message: 'Data Upload Successful'});
 }

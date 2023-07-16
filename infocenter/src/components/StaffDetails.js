@@ -42,7 +42,8 @@ export function StaffDetails({selectedData}) {
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
                 <div className={mediaQueries.laptop === true ? "staff-logo-laptop" : "staff-logo-desktop"}>
-                    <div className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}>{getInitials(selectedData.name, mediaQueries.laptop)}</div>
+                    {selectedData.img ? <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://localhost:5000/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
+                    <div className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}>{getInitials(selectedData.name, mediaQueries.laptop)}</div>}
                 </div>
                 <div className="staff-name">
                     <p className={mediaQueries.laptop === true ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
