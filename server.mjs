@@ -4,7 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
 import { cpUpload } from './file-handling.mjs';
-import { addNewDeviceData, getAllData, updateExistingDeviceData } from './controller/controller.mjs';
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData } from './controller/controller.mjs';
 
 
 // Define the root directory and the port for the server 
@@ -56,6 +56,9 @@ app.post('/AddNewEntry/:page', async (req, res) => {
                 const page = req.params.page; 
                 if (page === "technical-info") {
                     addNewDeviceData(req, res, rootDirectory);
+                }
+                else if (page === "staff") {
+                    addNewStaffData(req, res, rootDirectory);
                 }
             }
         })

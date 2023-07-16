@@ -72,3 +72,34 @@ export function generateNewDeviceData(fileExt, newType, manufacturer, newModel) 
         placeholder2: ""
     }
 }
+
+export function generateNewStaffData(name, id, workshop, position, officePhone, team) {
+
+    return {
+        hospital: workshop,
+        position: position,
+        id: id,
+        name: name,
+        officePhone: officePhone,
+        dectPhone: "",
+        workMobile: "",
+        personalMobile: "",
+        team: team
+      }
+}
+
+export function determineTeam(position, workshop) {
+    
+    // Define Management positions and Tamworth locations
+    const managementPositions = ["Director", "Deputy Director", "Biomedical Engineer", "Service Co-ordinator"]
+    const newEngland = ["Tamworth Hospital", "New England"];
+    
+    const team = managementPositions.includes(position) ? "Management" : 
+                workshop === "John Hunter Hospital" ? "JHH" :
+                workshop === "Royal Newcastle Centre" ? "JHH" :
+                workshop === "Mechanical/Anaesthetics" ? "Mechanical" :
+                newEngland.includes(workshop) ? "Tamworth" :
+                "Hunter";
+
+    return team;
+}

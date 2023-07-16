@@ -3,7 +3,7 @@ import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
 
-const locations = ["John Hunter Hospital", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
+const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
 
 export function AddNewForm({page, pageData, queryClient, showMessage, closeDialog, closeAddModal}) {

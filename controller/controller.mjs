@@ -1,4 +1,4 @@
-import {readAllData, readDeviceData, writeDataToFile, generateNewDeviceData } from '../utils/utils.mjs';
+import {readAllData, readDeviceData, writeDataToFile, generateNewDeviceData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 
 export async function getAllData(req, res, __dirname) {
     try {
@@ -138,4 +138,27 @@ export async function addNewDeviceData(req, res, __dirname) {
         // Send the error response message.
         res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
     }
+}
+
+export async function addNewStaffData(req, res, __dirname) {
+    
+    // Get the current device data 
+    const allData = await readAllData(__dirname);
+    const staffData = allData.staffData;
+
+    // Define the mandatory data in the request body
+    const name = req.body.name;
+    const id = req.body.id;
+    const workshop = req.body.workshop;
+    const position = req.body.position;
+    const officePhone = req.body["office-phone"];
+    const team = determineTeam(position, workshop);
+
+    // Generate a new staff data object
+    const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, team)   
+
+    console.log(newStaffData, staffData.length);
+
+    res.json({testing: "Testing the API"});
+    
 }
