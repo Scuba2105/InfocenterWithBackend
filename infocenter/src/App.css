@@ -497,6 +497,7 @@ html {
   margin-left: 20px;
   padding: 1px 0 3px 0 ;
   font-size: 10px;
+  font-weight: 500;
 }
 
 .equipment-summary-desktop .device-edit-button {
@@ -786,46 +787,72 @@ html {
 .info-container-laptop {
   grid-column: 1;
   grid-row: 2;
+  grid-gap: 15px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
+  overflow-x: hidden;
+  padding-bottom: 20px;
 }
 
 .info-container-desktop {
   grid-column: 1;
   grid-row: 2;
+  grid-gap: 15px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   transform: translateY(120px);
+  overflow-x: hidden;
 }
 
-.info-container-laptop p {
-  font-weight: bold;
+.info-entry-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 35px 1fr;
+  border: 1px solid black;
+  width: 90%;
+  height: 100%;
+  margin: auto auto;
+}
+
+.info-container-desktop .info-entry-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 1fr;
+  border: 1px solid black;
+  width: 90%;
+  height: 80%;
+  margin: auto auto;
+}
+
+.info-entry-container > h5 {
+  grid: 1 / 1;
+  width: 100%;
+  height: 75%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin-left: 9%;
+  color: white;
+  background: linear-gradient(var(--light-theme), var(--med-theme));
+  margin: 0;
 }
 
-.info-container-desktop p {
-  font-weight: bold;
+.info-container-desktop .info-entry-container > h5, .info-container-desktop .info-entry-container > span {
+  font-size: 18px;
+} 
+
+.info-entry-container > span {
+  grid: 1/ 2;
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin-left: 9%;
-  font-size: 20px;
-}
-
-.info-container-laptop span {
-  font-weight: normal;
-  margin-left: 8px;
-}
-
-.info-container-desktop span {
-  font-weight: normal;
-  margin-left: 8px;
-  font-size: 20px;
+  background-color: white;
+  margin: 0;
+  padding-top: 10px;
+  transform: translateY(-10px);
 }
 
 /* link modal formatting */
@@ -1588,6 +1615,9 @@ html {
     width: 75%;
   }
   .add-new-btn {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
     font-size: 14px;
     padding: 5px 8px 5px 8px;
   }

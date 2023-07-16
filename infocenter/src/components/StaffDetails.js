@@ -51,11 +51,11 @@ export function StaffDetails({selectedData}) {
                 </div>
             </div>            
             <div className={mediaQueries.laptop ? "info-container-laptop" : "info-container-desktop"}>
-                {selectedData.id !== "-" && <p>Staff ID: <span>{selectedData.id}</span></p>}
-                {<p>Office Phone: <span>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></p>}
-                {<p>Dect Phone: <span>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></p>}
-                {<p>Work Mobile: <span>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></p>}
-                {<p>Personal Mobile: <span>{selectedData.personalMobile === '' ? "-" : selectedData.personalMobile}</span></p>}
+                {selectedData.id !== "-" && <div className="info-entry-container"><h5>Staff ID</h5><span>{selectedData.id}</span></div>}
+                {<div className="info-entry-container"><h5>Office Phone</h5><span>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
+                {<div className="info-entry-container"><h5>Dect Phone</h5><span>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></div>}
+                {<div className="info-entry-container"><h5>Work Mobile</h5><span>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></div>}
+                {<div className="info-entry-container"><h5>Personal Mobile</h5><span>{selectedData.personalMobile === '' ? "-" : selectedData.personalMobile}</span></div>}
             </div>
         </div>
     );
