@@ -9,7 +9,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
 
     // Define add new form DOM element and formdata refs
     const formData = new FormData();
-    const newData = useRef(formData);
+    const updateData = useRef(formData);
     const formContainer = useRef(null);
 
     const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
@@ -21,15 +21,15 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         // Get all the input elements
         const textInputs = formContainer.current.querySelectorAll('.text-input');
         const selectInputs = formContainer.current.querySelectorAll('.select-input');
-        const fileInput = formContainer.current.querySelectorAll('#new-employee-image');
+        const fileInput = formContainer.current.querySelectorAll('.file-input')
                 
         // Convert text value node lists to arrays and store 
         const textInputArray = Array.from(textInputs);
         const [name, id, officePhone, dectPhone, workMobile, personalMobile] = Array.from(textInputs);
         const [workshop, position] = Array.from(selectInputs);
         const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile];
-    
-        // Validate the relevant new staff data inputs
+        
+        // Validate the relevant new staff data inputs over the text inputs only.
         for (let [index, input] of textInputArray.entries()) {
             if (index <= 2 && input.value === "") {
                 showMessage("error", `The input for the new employee ${staffDataOptions[index]} is empty. Please enter the necessary data and try again.`)
@@ -39,10 +39,11 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     
         // Filter the empty data inputs out of the data and save to the Form Data
         let staffId;
+        const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile"]
         const inputIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"]
         textValueInputsArray.forEach((input, index) => {
-            if (input.value !== "") {
-                newData.current.set(inputIdentifier[index], input.value);
+            if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
+                updateData.current.set(inputIdentifier[index], input.value);
             }
             if (index === 1) {
                 // Store the staff ID for naming the uploaded image file.
@@ -53,49 +54,62 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         // Add the uploaded file and file extension if it has been selected 
         if (fileInput[0].value !== "") {
             const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
-            newData.current.set('extension', extension);
-            newData.current.set('employee-photo', fileInput[0].files[0], `${staffId}.${extension}`);
+            updateData.current.set('extension', extension);
+            updateData.current.set('employee-photo', fileInput[0].files[0], `${staffId}.${extension}`);
         }
-    
-        // Show the uploading spinner dialog while uploading.
-        showMessage("uploading", `Uploading Employee Data`)
-    
-        // Post the data to the server  
-        const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                body: newData.current,
-        }).catch((error) => {
-            closeDialog();
-            showMessage("error", error.message);
-        })
-    
-        const data = await res.json();
-    
-        if (data.type === "Error") {
-            closeDialog();
-            showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
+        
+        // Calculate the number of updates applied.
+        let numberOfUpdates = 0;
+        for (const pair of updateData.current.entries()) {
+            numberOfUpdates++
+        };
+        
+        // If no updates applied show warning message and prevent updates.
+        if (numberOfUpdates === 0) {
+            showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
+            return;
         }
-        else {
-            // Need to clear formData at this point
-            for (const pair of newData.current.entries()) {
-                if (!['model', 'manufacturer'].includes(pair[0])) {
-                    newData.current.delete(pair[0]);
-                }
-            }
+        
     
-            // Need to update app data.
-            queryClient.invalidateQueries('dataSource');
+        // // Show the uploading spinner dialog while uploading.
+        // showMessage("uploading", `Uploading Employee Data`)
     
-            closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
-            setTimeout(() => {
-                closeDialog();
-                closeAddModal();
-            }, 1600);
-        }
+        // // Post the data to the server  
+        // const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
+        //         method: "POST", // *GET, POST, PUT, DELETE, etc.
+        //         mode: "cors", // no-cors, *cors, same-origin
+        //         redirect: "follow", // manual, *follow, error
+        //         referrerPolicy: "no-referrer",
+        //         body: updateData.current,
+        // }).catch((error) => {
+        //     closeDialog();
+        //     showMessage("error", error.message);
+        // })
+    
+        // const data = await res.json();
+    
+        // if (data.type === "Error") {
+        //     closeDialog();
+        //     showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
+        // }
+        // else {
+        //     // Need to clear formData at this point
+        //     for (const pair of updateData.current.entries()) {
+        //         if (!['model', 'manufacturer'].includes(pair[0])) {
+        //             updateData.current.delete(pair[0]);
+        //         }
+        //     }
+    
+        //     // Need to update app data.
+        //     queryClient.invalidateQueries('dataSource');
+    
+        //     closeDialog();
+        //     showMessage("info", 'Resources have been successfully updated!');
+        //     setTimeout(() => {
+        //         closeDialog();
+        //         closeAddModal();
+        //     }, 1600);
+    
     }
     
     return (
