@@ -33,7 +33,7 @@ function generateHospitalLabel(name) {
     }
 }
 
-export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMessage, closeDialog}) {
+export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
@@ -285,7 +285,7 @@ export function DeviceUpdateForm({selectedData, closeUpdate, queryClient, showMe
     }
     
     return (
-        <ModalSkeleton selectedData={selectedData} closeModal={closeUpdate} type="update" >
+        <ModalSkeleton selectedData={selectedData} closeModal={closeUpdate} type="update" page={page}>
             <div className="update-form-display">
                 <div className="update-options">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>

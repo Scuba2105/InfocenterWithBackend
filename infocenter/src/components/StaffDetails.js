@@ -11,7 +11,7 @@ border: '1px solid rgb(2, 57, 87)', color: 'rgb(2, 57, 87)'}, Mechanical: {backg
 border: '1px solid rgb(73, 16, 92)', color: 'rgb(73, 16, 92)'}, default: {background: 'radial-gradient(rgb(250, 193, 112), rgb(250, 169, 55))', 
 border: '1px solid rgb(163, 98, 3)', color: 'rgb(163, 98, 3)'}} 
 
-export function StaffDetails({selectedData}) {
+export function StaffDetails({selectedData, openAddUpdateForm}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -22,7 +22,6 @@ export function StaffDetails({selectedData}) {
         const colorString = teamColors[team].background.split(' rgb')[1];
         const rgb = colorString.substring(0, colorString.length - 1)
         return `rgb${rgb}`;
-
     }
 
     return (
@@ -33,8 +32,11 @@ export function StaffDetails({selectedData}) {
                     workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`http://localhost:5000/images/phone.svg`} alt="phone"></img></div> :
                     <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://localhost:5000/images/staff/blank-profile.png`} alt="staff" style={{border: "1px solid black"}}></img>}
                 </div>
-                <div className="staff-name">
-                    <p className={mediaQueries.laptop === true ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
+                <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
+                    <div className="name-update-container">
+                        <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
+                        {!workshops.includes(selectedData.name) && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>}
+                    </div>
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"} style={selectedData.id !== '-' ? {color: getTextColor(selectedData.team)} : {color: getTextColor("default")}}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
             </div>            

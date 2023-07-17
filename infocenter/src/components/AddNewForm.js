@@ -2,11 +2,10 @@ import { useState, useRef } from "react";
 import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
+import { AddEditStaff } from "./AddEditStaff";
 
-const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
-const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
 
-export function AddNewForm({page, pageData, queryClient, showMessage, closeDialog, closeAddModal}) {
+export function AddNewForm({page, selectedData, pageData, queryClient, showMessage, closeDialog, closeAddModal}) {
     
     const [addNewManufacturer, setAddNewManufacturer] = useState(false);
     const [addNewType, setaddNewType] = useState(false);
@@ -49,89 +48,6 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
         const fileInput = newForm.querySelector(".file-input")
         
         return [modelInput, deviceTypeInput, manufacturerInput, fileInput];
-    }
-
-    async function uploadStaffFormData(formContainer) {
-        const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
-        
-        // Get all the input elements
-        const textInputs = formContainer.current.querySelectorAll('.text-input');
-        const selectInputs = formContainer.current.querySelectorAll('.select-input');
-        const fileInput = formContainer.current.querySelectorAll('#new-employee-image');
-                
-        // Convert text value node lists to arrays and store 
-        const textInputArray = Array.from(textInputs);
-        const [name, id, officePhone, dectPhone, workMobile, personalMobile] = Array.from(textInputs);
-        const [workshop, position] = Array.from(selectInputs);
-        const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile];
-
-        // Validate the relevant new staff data inputs
-        for (let [index, input] of textInputArray.entries()) {
-            if (index <= 2 && input.value === "") {
-                showMessage("error", `The input for the new employee ${staffDataOptions[index]} is empty. Please enter the necessary data and try again.`)
-                return;
-            }
-        };
-
-        // Filter the empty data inputs out of the data and save to the Form Data
-        let staffId;
-        const inputIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"]
-        textValueInputsArray.forEach((input, index) => {
-            if (input.value !== "") {
-                newData.current.set(inputIdentifier[index], input.value);
-            }
-            if (index === 1) {
-                // Store the staff ID for naming the uploaded image file.
-                staffId = input.value;
-            }
-        });
-        
-        // Add the uploaded file and file extension if it has been selected 
-        if (fileInput[0].value !== "") {
-            const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
-            newData.current.set('extension', extension);
-            newData.current.set('employee-photo', fileInput[0].files[0], `${staffId}.${extension}`);
-        }
-
-        // Show the uploading spinner dialog while uploading.
-        showMessage("uploading", `Uploading Employee Data`)
-
-        // Post the data to the server  
-        const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                body: newData.current,
-        }).catch((error) => {
-            closeDialog();
-            showMessage("error", error.message);
-        })
-
-        const data = await res.json();
-
-        if (data.type === "Error") {
-            closeDialog();
-            showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
-        }
-        else {
-            // Need to clear formData at this point
-            for (const pair of newData.current.entries()) {
-                if (!['model', 'manufacturer'].includes(pair[0])) {
-                    newData.current.delete(pair[0]);
-                }
-            }
-
-            // Need to update app data.
-            queryClient.invalidateQueries('dataSource');
-
-            closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
-            setTimeout(() => {
-                closeDialog();
-                closeAddModal();
-            }, 1600);
-        }
     }
 
     async function uploadEquipmentFormData(formContainer) {
@@ -238,22 +154,11 @@ export function AddNewForm({page, pageData, queryClient, showMessage, closeDialo
 
     // Render the html based on the page prop
     if (page === "staff") {
+        
         return (
-            <div className="modal-display">
-                <h3 className="add-new-heading">New Employee Details</h3>
-                <div className="add-new-staff-container" ref={formContainer}>
-                    <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter ${placeholderValue}`} />
-                    <Input inputType="text" identifier="add-new" labelText="Staff ID" placeholdertext={`Enter Employee Staff ID`} />
-                    <SelectInput label="Location" optionData={locations} />
-                    <SelectInput label="Position" optionData={positions} />
-                    <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext={`Enter Office Phone Number`} />
-                    <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext={`Enter Dect Phone Number`} /> 
-                    <Input inputType="text" identifier="add-new" labelText="Work Mobile" placeholdertext={`Enter Work Mobile Number`} />  
-                    <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />                   
-                    <Input inputType="file" identifier="new-image" labelText="New Employee Image" />
-                </div>  
-                <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload New Data</div>
-            </div>
+            <>
+                <AddEditStaff type="add-new" page={page} selectedData={selectedData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={closeAddModal} />
+            </>
         )
     }
     else if (page === "technical-info") {

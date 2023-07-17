@@ -2,7 +2,19 @@ import { capitaliseFirstLetters } from "../utils/utils";
 import useMediaQueries from "media-queries-in-react" 
 import { useRef, useState } from 'react'
 
-const scrollDocumentsDevices = ['PIIC iX']
+const scrollDocumentsDevices = ['PIIC iX'];
+
+function getFormHeading(page, type, selectedData) {
+    
+    if (page === "staff") {
+        const heading = type === "add-new" ? "Add New Employee" : "Update Employee Details";
+        return heading;
+    }
+    else if (page === "technical-info") {
+        const heading = type === "add-new" ? "Add New Equipment" : `Update ${selectedData.model} Details`
+        return heading;
+    }
+}
 
 function updatedPosition(isLaptopScreen, incrementData) {
     const laptopX = 375
@@ -72,7 +84,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
             setIncrementChange({dx: dx, dy: dy});
         }
     }
-    if (type === 'add-new') {
+    if (type === 'add-new' || type === 'update') {
         return (
             <div className={mediaQueries.laptop ? `modal-container-laptop ${scrollDocuments}` : `modal-container-desktop ${scrollDocuments}`} style={type === "software" && mediaQueries.laptop ? 
             { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
@@ -80,7 +92,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
             { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={getCursorPosition}>
                 <div className="modal-title-bar" onMouseDown={mouseDown} onMouseUp={mouseUp}>
                     <div id="title-aligner"></div>     
-                    <h2 className="model-title">{page === "staff" ? "Add New Employee" : "Add New Equipment"}</h2> 
+                    <h2 className="model-title">{getFormHeading(page, type, selectedData)}</h2> 
                     <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
                 </div>
                 {children}

@@ -20,7 +20,7 @@ function generateLinks(deviceData, type) {
     return link
 }
 
-export function TechnicalLinks({selectedData, onLinkClick, queryClient, showMessage, closeDialog}) {
+export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, showMessage, closeDialog}) {
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -46,7 +46,7 @@ export function TechnicalLinks({selectedData, onLinkClick, queryClient, showMess
                     <div className={mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
                             <h2>{selectedData.model}</h2>
-                            <div className="device-edit-button" onClick={showDeviceUpdate}><img id="device-edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>
+                            <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>
                         </div>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                     </div>
@@ -77,7 +77,7 @@ export function TechnicalLinks({selectedData, onLinkClick, queryClient, showMess
                         Placeholder 2
                     </div>
                 </div>
-                {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} closeUpdate={closeUpdate} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
+                {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} page={page} closeUpdate={closeUpdate} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
         </> 
     );
 }
