@@ -25,25 +25,13 @@ export function StaffDetails({selectedData}) {
 
     }
 
-    function getInitials(name, laptop) {
-        if (!workshops.includes(name)) {
-            const nameArray = name.split(' ');
-            const initials = name === 'Mitchell Pacey' ? 'MJP' : name === 'Tome Tomev' ? 'TTT' : nameArray.map((word) => {
-                return word[0];
-            }).join('');
-            return(initials);        
-        }
-        return (
-            <img className={laptop === true ? "phone-image-laptop" : "phone-image-desktop"} src={`http://localhost:5000/images/phone.svg`} alt="phone"></img>
-        );
-    }
-    
     return (
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
                 <div className={mediaQueries.laptop === true ? "staff-logo-laptop" : "staff-logo-desktop"}>
                     {selectedData.img ? <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://localhost:5000/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
-                    <div className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}>{getInitials(selectedData.name, mediaQueries.laptop)}</div>}
+                    workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`http://localhost:5000/images/phone.svg`} alt="phone"></img></div> :
+                    <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://localhost:5000/images/staff/blank-profile.png`} alt="staff" style={{border: "1px solid black"}}></img>}
                 </div>
                 <div className="staff-name">
                     <p className={mediaQueries.laptop === true ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
@@ -51,11 +39,11 @@ export function StaffDetails({selectedData}) {
                 </div>
             </div>            
             <div className={mediaQueries.laptop ? "info-container-laptop" : "info-container-desktop"}>
-                {selectedData.id !== "-" && <div className="info-entry-container"><h5>Staff ID</h5><span>{selectedData.id}</span></div>}
-                {<div className="info-entry-container"><h5>Office Phone</h5><span>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
-                {<div className="info-entry-container"><h5>Dect Phone</h5><span>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></div>}
-                {<div className="info-entry-container"><h5>Work Mobile</h5><span>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></div>}
-                {<div className="info-entry-container"><h5>Personal Mobile</h5><span>{selectedData.personalMobile === '' ? "-" : selectedData.personalMobile}</span></div>}
+                {selectedData.id !== "-" && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Staff ID</h5><span>{selectedData.id}</span></div>}
+                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Office Phone</h5><span>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
+                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Dect Phone</h5><span>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></div>}
+                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Work Mobile</h5><span>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></div>}
+                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Personal Mobile</h5><span>{selectedData.personalMobile === '' ? "-" : selectedData.personalMobile}</span></div>}
             </div>
         </div>
     );

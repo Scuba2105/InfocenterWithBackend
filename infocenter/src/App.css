@@ -834,13 +834,17 @@ html {
   justify-content: center;
   align-items: center;
   color: white;
-  background: linear-gradient(var(--light-theme), var(--med-theme));
+  background-color: var(--light-theme);
   margin: 0;
 }
 
 .info-container-desktop .info-entry-container > h5, .info-container-desktop .info-entry-container > span {
   font-size: 18px;
 } 
+
+.info-entry-container #heading1 {
+  background-color: rgb(217, 95, 97);
+}
 
 .info-entry-container > span {
   grid: 1/ 2;
