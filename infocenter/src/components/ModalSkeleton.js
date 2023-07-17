@@ -7,7 +7,7 @@ const scrollDocumentsDevices = ['PIIC iX'];
 function getFormHeading(page, type, selectedData) {
     
     if (page === "staff") {
-        const heading = type === "add-new" ? "Add New Employee" : "Update Employee Details";
+        const heading = type === "add-new" ? "Add New Employee" : `Update Employee Details`;
         return heading;
     }
     else if (page === "technical-info") {

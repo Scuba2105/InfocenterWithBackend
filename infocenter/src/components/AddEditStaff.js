@@ -100,20 +100,25 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     
     return (
         <div className="modal-display">
-            <h3 className="add-new-heading">New Employee Details</h3>
+            <h3 className="add-new-heading">{type === "update" ? `${selectedData.name} Details` : "New Employee Details"}</h3>
             <div className="add-new-staff-container" ref={formContainer}>
                 {type === "update" ? <Input type="disabled" inputType="text" identifier="add-new" labelText={nameInputLabel} defaultValue={selectedData.name} /> :
                 <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter ${placeholderValue}`} />}
                 {type === "update" ? <Input type="disabled" inputType="text" identifier="add-new" labelText="Staff ID" defaultValue={selectedData.id} /> :
                 <Input inputType="text" identifier="add-new" labelText="Staff ID" placeholdertext={`Enter Employee Staff ID`} />}
-                <SelectInput label="Location" optionData={locations} />
-                <SelectInput label="Position" optionData={positions} />
+                {type === "update" ? <SelectInput type="update" defaultValue={selectedData.hospital} label="Location" optionData={locations} /> : 
+                <SelectInput label="Location" optionData={locations} />}
+                {type === "update" ? <SelectInput type="update" defaultValue={selectedData.position} label="Position" optionData={positions} /> : 
+                <SelectInput label="Position" optionData={positions} />}
                 { type === "update" ? <Input type="update" inputType="text" identifier="add-new" labelText="Office Phone" defaultValue={selectedData.officePhone} /> :
                 <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext={`Enter Office Phone Number`} />}
-                <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext={`Enter Dect Phone Number`} /> 
-                <Input inputType="text" identifier="add-new" labelText="Work Mobile" placeholdertext={`Enter Work Mobile Number`} />  
-                <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />                   
-                <Input inputType="file" identifier="new-image" labelText="New Employee Image" />
+                {type === "update" && selectedData.dectPhone !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.dectPhone} identifier="add-new" labelText="Dect Phone" /> : 
+                <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext={`Enter Dect Phone Number`} />}
+                {type === "update" && selectedData.workMobile !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.workMobile} identifier="add-new" labelText="Work Mobile" /> :
+                <Input inputType="text" identifier="add-new" labelText="Work Mobile" placeholdertext={`Enter Work Mobile Number`} />}
+                {type === "update" && selectedData.workMobile !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.personalMobile} identifier="add-new" labelText="Personal Mobile" /> :                  
+                <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />}
+                <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
             <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload New Data</div>
         </div>
