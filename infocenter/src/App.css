@@ -166,6 +166,31 @@ html {
   margin-right: 15px;
 }
 
+.confirmation-btn-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cancel-btn {
+  color: red;
+  background-color: rgb(252, 197, 197);
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.proceed-btn {
+  color: rgb(0, 128, 75);
+  background-color: rgb(170, 249, 216);
+  border: 1px solid rgb(0, 128, 75);
+  border-radius: 5px;
+}
+
+.cancel-btn:hover, .proceed-btn:hover {
+  cursor: pointer;
+}
+
 /* The animation code */
 @keyframes uploadSpinner {
   to {

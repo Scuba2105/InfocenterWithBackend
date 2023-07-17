@@ -22,25 +22,47 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                 </>
             );
         }
-        return (
-            <>
-                <dialog open id="dialog-background">
-                    <div id="dialog-box">
-                        <div className="dialog-title" style={dialogType === "error" ? {color: "#ed1b2e", backgroundColor: "#fbd4d7"} : 
-                        dialogType === "info" ? {color: "#4052c5", backgroundColor: "#ced4fa"} : 
-                        {color: "#fea500", backgroundColor: "#fdefd6"}}>
-                            <img className="info-icon" src={`http://localhost:5000/images/${dialogType}-icon.jpg`} alt="information"></img>
-                            <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType)} Message`}</h3>
+        else if (dialogType === "confirmation") {
+            return (
+                <>
+                    <dialog open id="dialog-background">
+                        <div id="dialog-box">
+                            <div className="dialog-title" style={{color: "#fea500", backgroundColor: "#fdefd6"}}>
+                                <img className="info-icon" src={`http://localhost:5000/images/warning-icon.jpg`} alt="warning"></img>
+                                <h3>Confirmation to Proceed</h3>
+                            </div>
+                            <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
+                                <p>{message}</p>
+                                <div className="confirmation-btn-container">
+                                    <button className="cancel-btn" value="default" onClick={closeDialog}>Cancel</button>
+                                    <button className="proceed-btn" value="default" onClick={closeDialog}>Proceed</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
-                            <p>{message}</p>
-                            {(dialogType === "error" || dialogType === "warning") && <button id="closeBtn" value="default" onClick={closeDialog}>Close</button>}
+                    </dialog>
+                </>
+            );
+        }
+        else {
+            return (
+                <>
+                    <dialog open id="dialog-background">
+                        <div id="dialog-box">
+                            <div className="dialog-title" style={dialogType === "error" ? {color: "#ed1b2e", backgroundColor: "#fbd4d7"} : 
+                            dialogType === "info" ? {color: "#4052c5", backgroundColor: "#ced4fa"} : 
+                            {color: "#fea500", backgroundColor: "#fdefd6"}}>
+                                <img className="info-icon" src={`http://localhost:5000/images/${dialogType}-icon.jpg`} alt="information"></img>
+                                <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType)} Message`}</h3>
+                            </div>
+                            <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
+                                <p>{message}</p>
+                                {(dialogType === "error" || dialogType === "warning") && <button id="closeBtn" value="default" onClick={closeDialog}>Close</button>}
+                            </div>
                         </div>
-                    </div>
-                </dialog>
-                
-            </>
-        );
+                    </dialog>
+                </>
+            );
+        }
     }
     else {
         return (

@@ -32,3 +32,7 @@ export async function fetchData() {
     const data = await res.json();
     return data;
 }
+
+export function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+};

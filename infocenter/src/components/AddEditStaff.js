@@ -1,6 +1,9 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { Input } from "./Input"
 import { SelectInput } from "./SelectInput"
+import { DialogBox } from "./DialogBox"
+import { capitaliseFirstLetters } from "../utils/utils"
+import { sleep } from "../utils/utils"
 
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
@@ -12,8 +15,39 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     const updateData = useRef(formData);
     const formContainer = useRef(null);
 
+    // Store the proceed confirmation in a ref
+    const [proceedDialogVisible, setproceedDialogVisible] = useState(false);
+    const proceedUpdate = useRef(null);
+    const message = useRef({type: "confirmation", message: "Message has not been set during confirmation." });
+
     const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
+
+    function openProceedDialog() {
+        return setproceedDialogVisible(true);
+    }
+
+    function closeProceedDialog() {
+        return setproceedDialogVisible(false);
+    }
+
+    function pauseForConfimation(currentStatus) {
+        return new Promise((resolve, reject) => {
+            while (currentStatus === null) {
+                sleep(500);
+                resolve(pauseForConfimation(proceedUpdate.current));
+            }
+            if (currentStatus) {
+                resolve("proceed");
+            }
+            else if (!currentStatus) {
+                resolve("cancel");
+            }
+            else {
+                reject("An error occurred waiting for confirmation to proceed");
+            }
+        })
+    }
 
     async function uploadStaffFormData(formContainer) {
         const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
@@ -58,23 +92,70 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             updateData.current.set('employee-photo', fileInput[0].files[0], `${staffId}.${extension}`);
         }
         
-        // Calculate the number of updates applied.
+        // Calculate the number of updates applied and if any mandatory fields changed.
         let numberOfUpdates = 0;
-        for (const pair of updateData.current.entries()) {
+        const mandatoryFields = ["workshop", "position", "office-phone"]
+        const changedMandatoryFields = [];
+        for (const [key, value] of updateData.current.entries()) {
             numberOfUpdates++
+            if (mandatoryFields.includes(key)) {
+                if (key === "workshop") {
+                    changedMandatoryFields.push('Location');
+                }
+                else {
+                    const fieldName = key.split('-').join(' ');
+                    changedMandatoryFields.push(capitaliseFirstLetters(fieldName));
+                }
+            }
         };
-        
+
+        // Sort the fields 
+        changedMandatoryFields.sort((a,b) => {
+            console.log(a, b)
+            if (a < b) {
+                return -1;
+            }
+            else if (a > b) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        })
+    
+
         // If no updates applied show warning message and prevent updates.
         if (numberOfUpdates === 0) {
             showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
             return;
         }
         
+        // Add the current ID to identify the staff data being updated.
+        updateData.current.set("existing-id", selectedData.id);
+
+        // Set the confirmation to proceed dialog box.
+        const changedFieldNumber = changedMandatoryFields.length;
+        message.current = `The mandatory ${changedFieldNumber === 1 ? "field" : "fields"} ${changedMandatoryFields.slice(0, -1).join(', ')}${changedFieldNumber === 1 ? "" : " and"} ${changedMandatoryFields.slice(-1)[0]} ${changedFieldNumber === 1 ? "has" : "have"} been changed. Please confirm you wish to proceed or cancel to prevent changes.`;
+        showMessage("confirmation", message.current);
+
+        // Need to send attach functions from main area to close dialog and respond appropriately.  
+
+
+        // // Start waiting for confirmation to proceed
+        // const permission = await pauseForConfimation(proceedUpdate.current);
+        
+        // if (permission === "cancel") {
+        //     console.log("permission denied");
+        // }
+        // else if (permission === "proceed") {
+        //     console.log("finish the upload script");
+        // } 
+        
+
+        // Show the uploading spinner dialog while uploading.
+        //showMessage("uploading", `Uploading Employee Data`)
     
-        // // Show the uploading spinner dialog while uploading.
-        // showMessage("uploading", `Uploading Employee Data`)
-    
-        // // Post the data to the server  
+        // Post the data to the server  
         // const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
         //         method: "POST", // *GET, POST, PUT, DELETE, etc.
         //         mode: "cors", // no-cors, *cors, same-origin
@@ -109,10 +190,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         //         closeDialog();
         //         closeAddModal();
         //     }, 1600);
-    
     }
-    
-    return (
+     return (
         <div className="modal-display">
             <h3 className="add-new-heading">{type === "update" ? `${selectedData.name} Details` : "New Employee Details"}</h3>
             <div className="add-new-staff-container" ref={formContainer}>
@@ -135,6 +214,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
             <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload New Data</div>
+            { proceedDialogVisible && <DialogBox dialogOpen={proceedDialogVisible} dialogMessage={message.current} closeDialog={closeProceedDialog} />}
         </div>
     )
 }
