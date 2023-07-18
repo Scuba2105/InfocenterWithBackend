@@ -10,6 +10,21 @@ const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior
 const mandatoryFields = ["workshop", "position", "office-phone"];
 const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"];
 
+function createFormData(updateData) {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(updateData)) {
+        if (key === "employee-photo") {
+            formData.set(key, value.file, value.fileName);
+        }
+        else {
+
+        }
+        formData.set(key, value);
+    }
+
+    return formData
+}
+
 export function AddEditStaff({type, page, selectedData, queryClient, showMessage, closeDialog, closeAddModal}) {
 
     // Define add new form DOM element and formdata refs
@@ -30,22 +45,27 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     // Run effect hook if confirmation result provided to complete update after re-render
     useEffect(() => {
         if (confirmationResult === "proceed") {
+
             async function proceedwithUpload() {
                 showMessage("uploading", `Uploading Employee Data`);
+
+                // Need to convert update data object into a FormData object.
+                const formData = createFormData(updateData.current);
+
                 // Post the data to the server  
                 const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
                         method: "PUT", // *GET, POST, PUT, DELETE, etc.
                         mode: "cors", // no-cors, *cors, same-origin
                         redirect: "follow", // manual, *follow, error
                         referrerPolicy: "no-referrer",
-                        body: updateData.current,
+                        body: formData,
                 }).catch((error) => {
                     closeDialog();
                     showMessage("error", error.message);
                 })
     
                 const data = await res.json();
-                console.log(data);
+                
             }
             proceedwithUpload();
         }
@@ -130,8 +150,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 }
             }
         };
-        console.log(numberOfUpdates, changedMandatoryFields, updateData.current);
-
+        
         // Sort the fields into the correct order if more than one changed
         if (changedMandatoryFields.length > 1) {
             sortMandatoryFields(changedMandatoryFields);
@@ -158,20 +177,23 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             // Show loading dialog while updating data on the server
             showMessage("uploading", `Uploading Employee Data`);
 
+            // Need to convert update data object into a FormData object.
+            const formData = createFormData(updateData.current);                       
+
             // Post the data to the server  
             const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
                     method: "PUT", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin
                     redirect: "follow", // manual, *follow, error
                     referrerPolicy: "no-referrer",
-                    body: updateData.current,
+                    body: formData,
             }).catch((error) => {
                 closeDialog();
                 showMessage("error", error.message);
             })
 
             const data = await res.json();
-            console.log(data);
+            
         }
         
 
