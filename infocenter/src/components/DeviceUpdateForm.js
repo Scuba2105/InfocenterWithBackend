@@ -60,7 +60,7 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
         showMessage("uploading", `Uploading ${selectedData.model} Data`)
              
         // Post the form data to the server. 
-        const res = await fetch("http://localhost:5000/PutDeviceData", {
+        const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
                 method: "PUT", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

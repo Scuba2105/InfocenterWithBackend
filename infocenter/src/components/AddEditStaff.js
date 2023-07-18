@@ -180,6 +180,10 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             // Need to convert update data object into a FormData object.
             const formData = createFormData(updateData.current);                       
 
+            for (const pair of formData.entries()) {
+                console.log(pair[0], pair[1]);
+            }
+
             // Post the data to the server  
             const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
                     method: "PUT", // *GET, POST, PUT, DELETE, etc.

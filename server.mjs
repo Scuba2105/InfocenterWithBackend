@@ -4,7 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
 import { cpUpload } from './file-handling.mjs';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData } from './controller/controller.mjs';
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData } from './controller/controller.mjs';
 
 
 // Define the root directory and the port for the server 
@@ -38,12 +38,11 @@ app.put("/UpdateEntry/:page", async (req, res) => {
             }
             else {
                 const page = req.params.page; 
-                console.log(page);
                 if (page === "technical-info") {
                     updateExistingDeviceData(req, res, rootDirectory);  
                 }
                 else if (page === "staff") {
-                    res.json({message: "successfully connected to server"});
+                    updateExistingStaffData(req, res, rootDirectory); 
                 }
                       
             }
