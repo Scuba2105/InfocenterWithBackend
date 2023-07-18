@@ -13,8 +13,8 @@ const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "de
 export function AddEditStaff({type, page, selectedData, queryClient, showMessage, closeDialog, closeAddModal}) {
 
     // Define add new form DOM element and formdata refs
-    const formData = new FormData();
-    const updateData = useRef(formData);
+    //const formData = new FormData();
+    const updateData = useRef({});
     const formContainer = useRef(null);
 
     // Store the confirmation message in ref. Changes based on changed mandatory fields. 
@@ -50,6 +50,12 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             proceedwithUpload();
         }
         else if (confirmationResult === "cancel") {
+            // Delete update data if reset
+            for (const [key, value] of Object.entries(updateData.current)) {
+                if (mandatoryFields.includes(key)) {
+                    delete updateData.current[key]
+                }
+            }
             
         }
         return () => {
@@ -87,7 +93,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile"]
         textValueInputsArray.forEach((input, index) => {
             if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
-                updateData.current.set(keyIdentifier[index], input.value);
+                updateData.current[keyIdentifier[index]] = input.value;
             }
             if (index === 1) {
                 // Store the staff ID for naming the uploaded image file.
@@ -98,16 +104,23 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         // Add the uploaded file and file extension if it has been selected 
         if (fileInput[0].value !== "") {
             const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
-            updateData.current.set('extension', extension);
-            updateData.current.set('employee-photo', fileInput[0].files[0], `${staffId}.${extension}`);
+            updateData.current['extension'] = extension;
+            updateData.current['employee-photo'] = {file: fileInput[0].files[0], fileName: `${staffId}.${extension}`};
         }
         
+        // Add the current ID to identify the staff data being updated. Store in session storage for 
+        // when component re-renders on confirmation or cancel
+        updateData.current["existing-id"] = selectedData.id;
+
         // Calculate the number of updates applied and if any mandatory fields changed.
         let numberOfUpdates = 0;
+        let numberOfMandatoryUpdates = 0;
         const changedMandatoryFields = [];
-        for (const [key, value] of updateData.current.entries()) {
+        for (const [key, value] of Object.entries(updateData.current)) {
             numberOfUpdates++
+            console.log(key);
             if (mandatoryFields.includes(key)) {
+                numberOfMandatoryUpdates++
                 if (key === "workshop") {
                     changedMandatoryFields.push('Location');
                 }
@@ -117,31 +130,55 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 }
             }
         };
+        console.log(numberOfUpdates, changedMandatoryFields, updateData.current);
 
         // Sort the fields into the correct order if more than one changed
         if (changedMandatoryFields.length > 1) {
             sortMandatoryFields(changedMandatoryFields);
         }
- 
+        
         // If no updates applied show warning message and prevent updates.
-        if (numberOfUpdates === 0) {
+        if (numberOfUpdates === 1) {
             showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
             return;
         }
         
-        // Add the current ID to identify the staff data being updated. Store in session storage for 
-        // when component re-renders on confirmation or cancel
-        updateData.current.set("existing-id", selectedData.id);
+        // Ask for confirmation if mandatory update is made and complete in effect hook after re-render
+        if (numberOfMandatoryUpdates !== 0) {
+            // Set the confirmation to proceed dialog box.
+            const changedFieldNumber = changedMandatoryFields.length;
+            message.current = `The mandatory ${changedFieldNumber === 1 ? "field" : "fields"} ${changedMandatoryFields.slice(0, -1).join(', ')}${changedFieldNumber === 1 ? "" : " and"} ${changedMandatoryFields.slice(-1)[0]} ${changedFieldNumber === 1 ? "has" : "have"} been changed. Please confirm you wish to proceed or cancel to prevent updates and make changes.`;
+            
+            // Have user confirm to proceed if changing mandatory data
+            showMessage("confirmation", message.current);
+        }
+
+        else {
+            
+            // Show loading dialog while updating data on the server
+            showMessage("uploading", `Uploading Employee Data`);
+
+            // Post the data to the server  
+            const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
+                    method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer",
+                    body: updateData.current,
+            }).catch((error) => {
+                closeDialog();
+                showMessage("error", error.message);
+            })
+
+            const data = await res.json();
+            console.log(data);
+        }
         
-        // Set the confirmation to proceed dialog box.
-        const changedFieldNumber = changedMandatoryFields.length;
-        message.current = `The mandatory ${changedFieldNumber === 1 ? "field" : "fields"} ${changedMandatoryFields.slice(0, -1).join(', ')}${changedFieldNumber === 1 ? "" : " and"} ${changedMandatoryFields.slice(-1)[0]} ${changedFieldNumber === 1 ? "has" : "have"} been changed. Please confirm you wish to proceed or cancel to prevent changes.`;
-        showMessage("confirmation", message.current);
 
         // Upload data is completed in useEffect on re-render after confirmation
         // // Start waiting for confirmation to proceed
                 
-        //Show the uploading spinner dialog while uploading.
+        //Show the uploading sp2inner dialog while uploading.
         //showMessage("uploading", `Uploading Employee Data`)
     
         // Post the data to the server  
