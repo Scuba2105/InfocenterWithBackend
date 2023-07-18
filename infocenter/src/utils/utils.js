@@ -33,6 +33,27 @@ export async function fetchData() {
     return data;
 }
 
+export function sortMandatoryFields(changedMandatoryFields) {
+    // Check if mandatory fields exist in array
+    const locationChanged = changedMandatoryFields.includes("Location");
+    const positionChanged = changedMandatoryFields.includes("Position");
+    const officeChanged = changedMandatoryFields.includes("Office Phone");
+
+    // Push them to the new array in the correct order
+    const sortedFields = [];
+    if (locationChanged) {
+        sortedFields.push("Location");
+    }
+    if (positionChanged) {
+        sortedFields.push("Position");
+    }
+    if (officeChanged) {
+        sortedFields.push("Office Phone");
+    }
+
+    return sortedFields;
+}
+
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 };

@@ -30,14 +30,22 @@ app.get("/getData", async (req, res) => {
     }
 });
 
-app.put("/PutDeviceData", async (req, res) => {
+app.put("/UpdateEntry/:page", async (req, res) => {
     try {
         cpUpload(req, res, async function (err) {
             if (err) {
                 res.json({type: "Error", message: err.message});
             }
             else {
-                updateExistingDeviceData(req, res, rootDirectory);        
+                const page = req.params.page; 
+                console.log(page);
+                if (page === "technical-info") {
+                    updateExistingDeviceData(req, res, rootDirectory);  
+                }
+                else if (page === "staff") {
+                    res.json({message: "successfully connected to server"});
+                }
+                      
             }
         });
     } 

@@ -1,12 +1,14 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef } from "react"
+import { useConfirmation } from "./StateStore"
 import { Input } from "./Input"
 import { SelectInput } from "./SelectInput"
-import { DialogBox } from "./DialogBox"
-import { capitaliseFirstLetters } from "../utils/utils"
-import { sleep } from "../utils/utils"
+import { capitaliseFirstLetters, sortMandatoryFields } from "../utils/utils"
+
 
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
+const mandatoryFields = ["workshop", "position", "office-phone"];
+const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"];
 
 export function AddEditStaff({type, page, selectedData, queryClient, showMessage, closeDialog, closeAddModal}) {
 
@@ -15,39 +17,48 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     const updateData = useRef(formData);
     const formContainer = useRef(null);
 
-    // Store the proceed confirmation in a ref
-    const [proceedDialogVisible, setproceedDialogVisible] = useState(false);
-    const proceedUpdate = useRef(null);
+    // Store the confirmation message in ref. Changes based on changed mandatory fields. 
     const message = useRef({type: "confirmation", message: "Message has not been set during confirmation." });
-
+    
+    // Get the confirmation result from Zustand state store.
+    const confirmationResult = useConfirmation((state) => state.updateConfirmation)
+    const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation)
+    
     const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
 
-    function openProceedDialog() {
-        return setproceedDialogVisible(true);
-    }
+    // Run effect hook if confirmation result provided to complete update after re-render
+    useEffect(() => {
+        if (confirmationResult === "proceed") {
+            async function proceedwithUpload() {
+                showMessage("uploading", `Uploading Employee Data`);
+                // Post the data to the server  
+                const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
+                        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                        mode: "cors", // no-cors, *cors, same-origin
+                        redirect: "follow", // manual, *follow, error
+                        referrerPolicy: "no-referrer",
+                        body: updateData.current,
+                }).catch((error) => {
+                    closeDialog();
+                    showMessage("error", error.message);
+                })
+    
+                const data = await res.json();
+                console.log(data);
+            }
+            proceedwithUpload();
+        }
+        else if (confirmationResult === "cancel") {
+            
+        }
+        return () => {
+            resetConfirmationStatus();
+        }    
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage]);
+    
 
-    function closeProceedDialog() {
-        return setproceedDialogVisible(false);
-    }
-
-    function pauseForConfimation(currentStatus) {
-        return new Promise((resolve, reject) => {
-            while (currentStatus === null) {
-                sleep(500);
-                resolve(pauseForConfimation(proceedUpdate.current));
-            }
-            if (currentStatus) {
-                resolve("proceed");
-            }
-            else if (!currentStatus) {
-                resolve("cancel");
-            }
-            else {
-                reject("An error occurred waiting for confirmation to proceed");
-            }
-        })
-    }
+        
 
     async function uploadStaffFormData(formContainer) {
         const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
@@ -74,10 +85,9 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         // Filter the empty data inputs out of the data and save to the Form Data
         let staffId;
         const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile"]
-        const inputIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"]
         textValueInputsArray.forEach((input, index) => {
             if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
-                updateData.current.set(inputIdentifier[index], input.value);
+                updateData.current.set(keyIdentifier[index], input.value);
             }
             if (index === 1) {
                 // Store the staff ID for naming the uploaded image file.
@@ -94,7 +104,6 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         
         // Calculate the number of updates applied and if any mandatory fields changed.
         let numberOfUpdates = 0;
-        const mandatoryFields = ["workshop", "position", "office-phone"]
         const changedMandatoryFields = [];
         for (const [key, value] of updateData.current.entries()) {
             numberOfUpdates++
@@ -109,50 +118,30 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             }
         };
 
-        // Sort the fields 
-        changedMandatoryFields.sort((a,b) => {
-            console.log(a, b)
-            if (a < b) {
-                return -1;
-            }
-            else if (a > b) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        })
-    
-
+        // Sort the fields into the correct order if more than one changed
+        if (changedMandatoryFields.length > 1) {
+            sortMandatoryFields(changedMandatoryFields);
+        }
+ 
         // If no updates applied show warning message and prevent updates.
         if (numberOfUpdates === 0) {
             showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
             return;
         }
         
-        // Add the current ID to identify the staff data being updated.
+        // Add the current ID to identify the staff data being updated. Store in session storage for 
+        // when component re-renders on confirmation or cancel
         updateData.current.set("existing-id", selectedData.id);
-
+        
         // Set the confirmation to proceed dialog box.
         const changedFieldNumber = changedMandatoryFields.length;
         message.current = `The mandatory ${changedFieldNumber === 1 ? "field" : "fields"} ${changedMandatoryFields.slice(0, -1).join(', ')}${changedFieldNumber === 1 ? "" : " and"} ${changedMandatoryFields.slice(-1)[0]} ${changedFieldNumber === 1 ? "has" : "have"} been changed. Please confirm you wish to proceed or cancel to prevent changes.`;
         showMessage("confirmation", message.current);
 
-        // Need to send attach functions from main area to close dialog and respond appropriately.  
-
-
+        // Upload data is completed in useEffect on re-render after confirmation
         // // Start waiting for confirmation to proceed
-        // const permission = await pauseForConfimation(proceedUpdate.current);
-        
-        // if (permission === "cancel") {
-        //     console.log("permission denied");
-        // }
-        // else if (permission === "proceed") {
-        //     console.log("finish the upload script");
-        // } 
-        
-
-        // Show the uploading spinner dialog while uploading.
+                
+        //Show the uploading spinner dialog while uploading.
         //showMessage("uploading", `Uploading Employee Data`)
     
         // Post the data to the server  
@@ -214,7 +203,6 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
             <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload New Data</div>
-            { proceedDialogVisible && <DialogBox dialogOpen={proceedDialogVisible} dialogMessage={message.current} closeDialog={closeProceedDialog} />}
         </div>
     )
 }

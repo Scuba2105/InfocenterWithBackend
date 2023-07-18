@@ -1,3 +1,4 @@
+import { useConfirmation } from "./StateStore";
 import { capitaliseFirstLetters } from "../utils/utils";
 
 export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
@@ -5,6 +6,20 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
     const dialogType = dialogMessage.type;
     const message = dialogMessage.message;
 
+    const proceedUpdate = useConfirmation((state) => state.proceedUpdate);
+    const cancelUpdate = useConfirmation((state) => state.cancelUpdate);
+    
+    function proceedWithUpdate() {
+        proceedUpdate();
+        closeDialog();
+    } 
+
+    function cancelAndQuitUpdate() {
+        cancelUpdate();
+        closeDialog();
+    }
+    
+    
     if (dialogOpen) {
         if (dialogType === "uploading") {
             return (
@@ -34,8 +49,8 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                             <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
                                 <p>{message}</p>
                                 <div className="confirmation-btn-container">
-                                    <button className="cancel-btn" value="default" onClick={closeDialog}>Cancel</button>
-                                    <button className="proceed-btn" value="default" onClick={closeDialog}>Proceed</button>
+                                    <button className="cancel-btn" value="default" onClick={cancelAndQuitUpdate}>Cancel</button>
+                                    <button className="proceed-btn" value="default" onClick={proceedWithUpdate}>Proceed</button>
                                 </div>
                             </div>
                         </div>
