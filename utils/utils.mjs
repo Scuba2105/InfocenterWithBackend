@@ -17,22 +17,44 @@ export function readAllData(__dirname) {
 
 export function readDeviceData(__dirname) {
     return new Promise((resolve, reject) => {
-        fs.readFile(path.join(__dirname, 'data', 'data.json'), (err, data) => {
+        fs.readFile(path.join(__dirname, 'data', 'device-data.json'), (err, data) => {
             if (err) {
+                console.error(err);
                 reject(`The data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data).deviceData);
+                resolve(JSON.parse(data));
             }
         });
     })
 }
 
-export function writeDataToFile(__dirname, data) {
-    fs.writeFile(path.join(__dirname, 'data', 'data.json'), data, (err) => {
+export function readStaffData(__dirname) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
+            if (err) {
+                console.error(err);
+                reject(`The data was unable to be read: ${err.message}`);
+            }
+            else {
+                resolve(JSON.parse(data));
+            }
+        });
+    })
+}
+
+export function writeStaffData(__dirname, data) {
+    fs.writeFile(path.join(__dirname, 'data', 'staff-data.json'), data, (err) => {
         if (err) throw err;
         console.log('The file has been saved!');
-      });
+    });
+}
+
+export function writeDeviceData(__dirname, data) {
+    fs.writeFile(path.join(__dirname, 'data', 'device-data.json'), data, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+    });
 }
 
 export function createDirectory(dirPath) {

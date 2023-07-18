@@ -11,6 +11,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
+    console.log(selectedEntry)
 
     function getClassName(page) {
         if (page === 'staff' && mediaQueries.laptop === true) {
@@ -35,7 +36,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
     const selectedData = currentDataSet.find((entry) => {
         return entry.model === selectedEntry || entry.id === selectedEntry || entry.name === selectedEntry;
     });
-
+    
     function onLinkClick(e) {
         const option = e.currentTarget.classList[1];
         if (selectedData[option] !== "") {

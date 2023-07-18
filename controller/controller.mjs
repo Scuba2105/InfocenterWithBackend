@@ -1,10 +1,12 @@
-import {readAllData, readDeviceData, writeDataToFile, generateNewDeviceData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
+import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 
 export async function getAllData(req, res, __dirname) {
     try {
-        const data = await readAllData(__dirname);
-        res.json(data);
+        const staffData = await readStaffData(__dirname);
+        const deviceData = await readDeviceData(__dirname);
+        const allData = {staffData: staffData, deviceData: deviceData};
+        res.json(allData);
     }
     catch(error) {
         console.log(error);
@@ -13,9 +15,8 @@ export async function getAllData(req, res, __dirname) {
 
 export async function updateExistingDeviceData(req, res, __dirname) {
     try {
-        const allData = await readAllData(__dirname);
-        const deviceData = allData.deviceData;
-
+        const deviceData = await readDeviceData(__dirname);
+        
         // Define the variables from the uploaded data
         const model = req.body.model;
         const manufacturer = req.body.manufacturer;
@@ -95,9 +96,8 @@ export async function updateExistingDeviceData(req, res, __dirname) {
             }
         })
 
-        const updatedAllData = {staffData: allData.staffData, deviceData: updatedDeviceData} 
         // Write the data to file
-        writeDataToFile(__dirname, JSON.stringify(updatedAllData, null, 2));
+        writeDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});
@@ -112,9 +112,8 @@ export async function addNewDeviceData(req, res, __dirname) {
     try {
 
         // Get the current device data 
-        const allData = await readAllData(__dirname);
-        const deviceData = allData.deviceData;
-
+        const deviceData = await readDeviceData(__dirname);
+        
         // Get the new device data from the request object
         const newModel = req.body.model;
         const newType = req.body.type;
@@ -127,27 +126,23 @@ export async function addNewDeviceData(req, res, __dirname) {
         // Push the new device data to the current device data array 
         deviceData.push(newDevice);
                                     
-        // Set the updated data to the all data object
-        const updatedAllData = {staffData: allData.staffData, deviceData: deviceData}
-        
         // Write the data to file
-        writeDataToFile(__dirname, JSON.stringify(updatedAllData, null, 2));
+        writeDeviceData(__dirname, JSON.stringify(deviceData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});
     }
     catch(err) {
         // Send the error response message.
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
     }
 }
 
 export async function addNewStaffData(req, res, __dirname) {
     try {
         // Get the current device data 
-        const allData = await readAllData(__dirname);
-        const staffData = allData.staffData;
-
+        const staffData = await readStaffData(__dirname);
+        
         // Define the mandatory data in the request body
         const name = req.body.name;
         const id = req.body.id;
@@ -173,11 +168,8 @@ export async function addNewStaffData(req, res, __dirname) {
         // Append the new staff data 
         staffData.push(newStaffData);
 
-        // Set the updated data to the staffData property 
-        const updatedAllData = {staffData: staffData, deviceData: allData.deviceData}
-
         // Write the data to file
-        writeDataToFile(__dirname, JSON.stringify(updatedAllData, null, 2));
+        writeStaffData(__dirname, JSON.stringify(staffData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});    
@@ -190,9 +182,8 @@ export async function addNewStaffData(req, res, __dirname) {
 export async function updateExistingStaffData(req, res, __dirname) {
     try {
         // Get the current device data 
-        const allData = await readAllData(__dirname);
-        const staffData = allData.staffData;
-
+        const staffData = await readStaffData(__dirname);
+    
         // Get the staff ID and find the existing employee data
         const existingId = req.body["existing-id"];
         const currentData = staffData.find((entry) => {
@@ -200,9 +191,22 @@ export async function updateExistingStaffData(req, res, __dirname) {
         })
                 
         // Update the data based on the key value pairs in the request body.
-        const updatedData = updateStaffEntry(req, currentData);
+        const updatedEntry = updateStaffEntry(req, currentData);
 
-        console.log(updatedData);
+        // Add the new entry to the staff array
+        const updatedStaffData = staffData.map((entry) => {
+            if (entry.id === existingId) {
+                return updatedEntry;
+            }
+            return entry;
+        })
+
+        // Write the data to file
+        writeStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2));
+
+        // Send the success response message.
+        res.json({type: "Success", message: 'Data Upload Successful'}); 
+
     } catch (err) {
         // Send the error response message.
         res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
