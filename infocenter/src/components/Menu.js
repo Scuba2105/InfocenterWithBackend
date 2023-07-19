@@ -1,5 +1,5 @@
 import { menuOptions } from '../data.js';
-import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon } from '../svg.js';
+import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon, UtilitiesIcon } from '../svg.js';
 import { useState } from 'react';
 
 export function Menu({page, onPageSelect}) {
@@ -22,7 +22,8 @@ export function Menu({page, onPageSelect}) {
         {option.id === 'staff' ? <StaffIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> : 
         option.id === 'technical-info' ? <TechnicalIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
         option.id === 'contacts' ? <ContactsIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
-        <AdminIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} />
+        option.id === 'admin' ? <AdminIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
+        <UtilitiesIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} />
         }
         {titleLength === 1 ? <span>{option.title}</span> : 
         <>

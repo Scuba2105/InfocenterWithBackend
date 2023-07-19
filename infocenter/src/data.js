@@ -14,6 +14,10 @@ export const menuOptions = [
     {
         id: 'admin',
         title: 'Administration',
+    },
+    {
+      id: 'utilities',
+      title: 'Utilities',
     }
 ];
   

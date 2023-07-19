@@ -1,5 +1,6 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
+import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
@@ -41,8 +42,12 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                     <SummaryCard key={`${page}-staff-card`} page={page} pageData={data.staffData} selectedEntry={selectedEntry} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
+                page === "utilities" ?
+                <>
+                    <Utilities />
+                </> :
                     <h1>Page has not been implemented yet</h1>}
-                </div>
+            </div>
         );
     }
     

@@ -1675,6 +1675,23 @@ html {
   align-items: center;
 }
 
+/* Formatting the utilities page */
+.utilities-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.utilities-select-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 @media (max-width: 1250px) {
   .search-box-container {
     width: 100%;
