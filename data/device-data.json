@@ -1,1440 +1,1464 @@
 [
-    {
-      "img": "jpg",
-      "type": "Anaesthetic Machine",
-      "manufacturer": "GE Healthcare",
-      "model": "Aespire",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+  {
+    "img": "jpg",
+    "type": "Anaesthetic Machine",
+    "manufacturer": "GE Healthcare",
+    "model": "Aespire",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Anaesthetic Machine",
+    "manufacturer": "GE Healthcare",
+    "model": "Aestiva",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Anaesthetic Machine",
+    "manufacturer": "GE Healthcare",
+    "model": "Aisys CS2",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Alternating Mattress Pump",
+    "manufacturer": "Huntleigh",
+    "model": "Alpha Response",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Intra-Aortic Balloon Pump",
+    "manufacturer": "Arrow",
+    "model": "AutoCAT 2",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Sequential Compression Unit",
+    "manufacturer": "Covidien",
+    "model": "AV Impulse",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Bladder Scanner",
+    "manufacturer": "CUBEscan",
+    "model": "BioCon 500",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Bladder Scanner",
+    "manufacturer": "CUBEscan",
+    "model": "BioCon 700",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Syringe Driver",
+    "manufacturer": "BD",
+    "model": "Bodyguard T",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Urine Analyser",
+    "manufacturer": "Siemens",
+    "model": "Clinitek Status",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Intra-Cranial Pressure Monitor",
+    "manufacturer": "Codman",
+    "model": "Codman ICP",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Warmer",
+    "manufacturer": "Cocoon",
+    "model": "CWS5000",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Spirometer",
+    "manufacturer": "NDD",
+    "model": "EasyOne",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Enteral Feeding Pump",
+    "manufacturer": "Covidien",
+    "model": "ePump",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Automatic External Defibrillator ",
+    "manufacturer": "Cardiac Science",
+    "model": "Powerheart G3",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Welch Allyn",
+    "model": "CSM",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Welch Allyn",
+    "model": "CVSM",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Infusion Pump",
+    "manufacturer": "B Braun",
+    "model": "Infusomat Space",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Incubator",
+    "manufacturer": "Drager",
+    "model": "Isolette 8000 Plus",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Incubator",
+    "manufacturer": "Drager",
+    "model": "Isolette C2000",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Jaundice Meter",
+    "manufacturer": "Drager",
+    "model": "JM-105",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Jaundice Meter",
+    "manufacturer": "M&B Electronic Instruments",
+    "model": "MBJ20",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Syringe Driver",
+    "manufacturer": "Caesarea Medical Electronics",
+    "model": "Niki T34L",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Syringe Driver",
+    "manufacturer": "Caesarea Medical Electronics",
+    "model": "Niki T34",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Drager",
+    "model": "Oxylog 3000",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Syringe Driver",
+    "manufacturer": "B Braun",
+    "model": "Perfusor Space",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "CRRT",
+    "manufacturer": "Baxter Healthcare",
+    "model": "Prismaflex",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "CRRT",
+    "manufacturer": "Baxter Healthcare",
+    "model": "Prismax",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX400",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx400/mx400_jhh_Ward-G3_A03-H40_M.0_13.11.2020.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Anaesthetic Machine",
-      "manufacturer": "GE Healthcare",
-      "model": "Aestiva",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Anaesthetic Machine",
-      "manufacturer": "GE Healthcare",
-      "model": "Aisys CS2",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Alternating Mattress Pump",
-      "manufacturer": "Huntleigh",
-      "model": "Alpha Response",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Intra-Aortic Balloon Pump",
-      "manufacturer": "Arrow",
-      "model": "AutoCAT 2",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Sequential Compression Unit",
-      "manufacturer": "Covidien",
-      "model": "AV Impulse",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Bladder Scanner",
-      "manufacturer": "CUBEscan",
-      "model": "BioCon 500",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Bladder Scanner",
-      "manufacturer": "CUBEscan",
-      "model": "BioCon 700",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Syringe Driver",
-      "manufacturer": "BD",
-      "model": "Bodyguard T",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Urine Analyser",
-      "manufacturer": "Siemens",
-      "model": "Clinitek Status",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Intra-Cranial Pressure Monitor",
-      "manufacturer": "Codman",
-      "model": "Codman ICP",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Warmer",
-      "manufacturer": "Cocoon",
-      "model": "CWS5000",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Spirometer",
-      "manufacturer": "NDD",
-      "model": "EasyOne",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Enteral Feeding Pump",
-      "manufacturer": "Covidien",
-      "model": "ePump",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Automatic External Defibrillator ",
-      "manufacturer": "Cardiac Science",
-      "model": "Powerheart G3",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Welch Allyn",
-      "model": "CSM",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Welch Allyn",
-      "model": "CVSM",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Infusion Pump",
-      "manufacturer": "B Braun",
-      "model": "Infusomat Space",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Incubator",
-      "manufacturer": "Drager",
-      "model": "Isolette 8000 Plus",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Incubator",
-      "manufacturer": "Drager",
-      "model": "Isolette C2000",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Jaundice Meter",
-      "manufacturer": "Drager",
-      "model": "JM-105",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Jaundice Meter",
-      "manufacturer": "M&B Electronic Instruments",
-      "model": "MBJ20",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Syringe Driver",
-      "manufacturer": "Caesarea Medical Electronics",
-      "model": "Niki T34L",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Syringe Driver",
-      "manufacturer": "Caesarea Medical Electronics",
-      "model": "Niki T34",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Drager",
-      "model": "Oxylog 3000",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Syringe Driver",
-      "manufacturer": "B Braun",
-      "model": "Perfusor Space",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "CRRT",
-      "manufacturer": "Baxter Healthcare",
-      "model": "Prismaflex",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "CRRT",
-      "manufacturer": "Baxter Healthcare",
-      "model": "Prismax",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX400",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx400/mx400_jhh_Ward-G3_A03-H40_M.0_13.11.2020.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX400/intellivue_compatibility_matrix.xlsx"
-        }
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX400/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX450",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx450/mx450_jhh_AGSU_none_M.03.01_09.05.2018.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_ED--CT_none_none_07.04.2020.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_ED--Transport_none_none_02.06.2017.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_ICU--Transport_none_L.01.12_24.03.2017.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_NICU--Transport_H20-A05-C01-C02-C04-C05-C09-C15-C17-C18-C19-C20-C44-C45-C54_M.03.01_17.10.2017.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Simulation-Centre_none_M.03.01_31.07.2018.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Ward-G2_A04_L.0_06.09.2016.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Ward-H1_A04_N.00.04_24.03.2022.cfg",
+        "/configurations/jhh/mx450/mx450_jhh_Ward-H2--ESSU_H10-A04-C01-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C06_M.04.05_23.09.2021.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX450",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx450/mx450_jhh_AGSU_none_M.03.01_09.05.2018.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_ED--CT_none_none_07.04.2020.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_ED--Transport_none_none_02.06.2017.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_ICU--Transport_none_L.01.12_24.03.2017.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_NICU--Transport_H20-A05-C01-C02-C04-C05-C09-C15-C17-C18-C19-C20-C44-C45-C54_M.03.01_17.10.2017.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_Simulation-Centre_none_M.03.01_31.07.2018.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_Ward-G2_A04_L.0_06.09.2016.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_Ward-H1_A04_N.00.04_24.03.2022.cfg",
-          "/configurations/jhh/mx450/mx450_jhh_Ward-H2--ESSU_H10-A04-C01-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C06_M.04.05_23.09.2021.cfg"
-        ],
-        "Armidale Hospital": [
-          "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-1_none_none_07.05.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-2_none_none_07.05.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-3_none_none_07.05.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_ED--Paediatric-Room_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_ED--Procedure-Bay_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_ED--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_ICU--Transport_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_14.11.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_Inpatient-Unit_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_OT--Induction-Bays_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_PACU--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018.cfg",
-          "/configurations/armidale/mx450/mx450_armidale_PACU_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_15.02.2018.cfg"
-        ],
-        "Belmont Hospital": [
-          "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017.cfg"
-        ],
-        "Taree Hospital": [
-          "/configurations/taree/MX450/mx450_taree_Stroke-Unit_H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_24.07.2018.cfg"
-        ],
-        "Murrurundi Hospital": [
-          "/configurations/murrurundi/MX450/mx450_murrurundi_ED_A04-H10_M.04_30.12.2020.cfg"
-        ],
-        "Muswelbrook Hospital": [
-          "/configurations/muswelbrook/MX450/mx450_muswelbrook_COU_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_24.11.2020.cfg"
-        ],
-        "New Maitland Hospital": [
-          "/configurations/new maitland/MX450/mx450_new_Birthing-Unit_H10-A04-C15-C50_N.00.04_16.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_Ward-4C_H10-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_N_26.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_Theatres--Anaesthetic-Bays_H30-A04-C06-C15-C17-C18-C19-C20-C21-C50_N_04.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_Cath-Lab_H40-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_N.00.04_16.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_ED_H10-A04_N.01.04_05.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_ED--Paediatric_H10-A04_N.01.04_17.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_ED--Transport-(wireless)_H10-A04_N.01.04_17.01.2022.cfg",
-          "/configurations/new maitland/MX450/mx450_new_ICU--Transport-(wireless)_H10-A04_none_17.01.2022.cfg",
-          "/configurations/new maitland/MX450/mx450_new_Outpatients_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_N.00.04_17.10.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_PACU-(6-Waves)_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_N_19.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_PACU-(4-Waves)_H10-A04-C15-C50_N_19.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_SCU_A20-A04-C04-C09-C15-C17-C18-C19-C20-C44-C45-C50_N.01.04_18.11.2021.cfg",
-          "/configurations/new maitland/MX450/mx450_new_Medical-Imaging_none_none_10.11.2021.cfg"
-        ],
-        "Scone Hospital": [
-          "/configurations/scone/MX450/mx450_scone_Close-Observation-Unit_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-H10_M_18.05.2021.cfg",
-          "/configurations/scone/MX450/mx450_scone_ED--(4-Waves)_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-H10_M_18.05.2021.cfg",
-          "/configurations/scone/MX450/mx450_scone_ED--(6-Waves)_A06-H10-C15-C50_N_21.02.2023.cfg"
-        ],
-        "Singleton Hospital": [
-          "/configurations/singleton/MX450/mx450_singleton_ED--Resus_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_28.10.2020.cfg"
-        ],
-        "Tamworth Hospital": [
-          "/configurations/tamworth/MX450/mx450_tamworth_Theatres--Induction-Bays_H31-A04-C01-C02-C06-C15-C20_K.21.42_27.05.2015.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX450/intellivue_compatibility_matrix.xlsx"
-        }
+      "Armidale Hospital": [
+        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-1_none_none_07.05.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-2_none_none_07.05.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Acute-Config-3_none_none_07.05.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Paediatric-Room_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Procedure-Bay_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ED--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_ICU--Transport_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_14.11.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_Inpatient-Unit_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_OT--Induction-Bays_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_25.01.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_PACU--Transport_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_01.02.2018.cfg",
+        "/configurations/armidale/mx450/mx450_armidale_PACU_H10-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_15.02.2018.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX550",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx550/mx550_jhh_ED--Paediatric_H10-A04_none_18.11.2020.cfg",
-          "/configurations/jhh/mx550/mx550_jhh_Ward-G3_A06-H40-M.0_13.11.2020.cfg"
-        ],
-        "New Maitland Hospital": [
-          "/configurations/new maitland/MX550/mx550_new_Close-Observation-Unit_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-J15_N.01.04_05.11.2021.cfg",
-          "/configurations/new maitland/MX550/mx550_new_ED--Resus_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-J15_N.01.04_05.11.2021.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX550/intellivue_compatibility_matrix.xlsx"
-        }
+      "Belmont Hospital": [
+        "/configurations/belmont/mx450/mx450_belmont_ED_ H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_23.10.2017.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX700",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx700/mx700_jhh_CCU_none_none_08.07.2015.cfg",
-          "/configurations/jhh/mx700/mx700_jhh_ED_H10-A04-C01-C02-C15-C20_none_30.01.2019.cfg"
-        ],
-        "Maitland Hospital": [
-          "/configurations/maitland/MX700/mx700_maitland_HDU_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_31.10.2017.cfg",
-          "/configurations/maitland/MX700/mx700_maitland_ED_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_31.10.2017.cfg"
-        ],
-        "Tamworth Hospital": [
-          "/configurations/tamworth/MX700/mx700_tamworth_ICU--Procedure-Room_H10-A06-C01-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_L.01.17_16.11.2017.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX700/intellivue_compatibility_matrix.xlsx"
-        }
+      "Taree Hospital": [
+        "/configurations/taree/MX450/mx450_taree_Stroke-Unit_H40-A04-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_24.07.2018.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX750",
-      "serviceManual": true,
-      "userManual": false,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx750/mx750_jhh_ED--Resus_N.01.01_29.03.2022.cfg"
-        ],
-        "New Maitland Hospital": [
-          "/configurations/new maitland/MX750/mx750_new_ICU_H10-A08-C01-C06-C09-C13-C15-C17-C18-C19-C21-C44-C45-C50-C51-M08-M20-X00-X30-X40_N.01.04_04.11.2021.cfg",
-          "/configurations/new maitland/MX750/mx750_new_SCU_A08-C04-C09-C15-C17-C18-C19-C21-C44-C45-C50-C60-H20-M08-M20-X00-X30-X40_N.01.04_18.11.2021.cfg",
-          "/configurations/new maitland/MX750/mx750_new_Theatres_A08-C06-C09-C15-C17-C18-C19-C21-C50-H30-M08-M20-X00-X30-X40_N.01.04_18.01.2022.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX750/intellivue_compatibility_matrix.xlsx"
-        }
+      "Murrurundi Hospital": [
+        "/configurations/murrurundi/MX450/mx450_murrurundi_ED_A04-H10_M.04_30.12.2020.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX800",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx800/mx800_jhh_ED_none_none_30.01.2019.cfg",
-          "/configurations/jhh/mx800/mx800_jhh_ICU_none_M.0_12.07.2021.cfg",
-          "/configurations/jhh/mx800/mx800_jhh_NICU--Bed-1-To-7_none_none_24.11.2022.cfg",
-          "/configurations/jhh/mx800/mx800_jhh_NICU_H20-A06-C07-C09_L.01.08_05.09.2018.cfg",
-          "/configurations/jhh/mx800/mx800_jhh_PICU_H10-A06-C01-C02-C05-C06-C09-C15-C20_none_12.11.2021.cfg"
-        ],
-        "Armidale Hospital": [
-          "/configurations/jhh/mx800/mx800_armidale_ED--Resus_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_25.01.2018.cfg",
-          "/configurations/jhh/mx800/mx800_armidale_ICU_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.04.00_13.11.2018.cfg",
-          "/configurations/jhh/mx800/mx800_armidale_Operating-Theatres--Networked-IntelliBridge_none_M.03.03_05.03.2018.cfg"
-        ],
-        "Taree Hospital": [
-          "/configurations/taree/MX800/mx800_taree_ICU_H10-A08-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_19.07.2018.cfg"
-        ],
-        "Royal Newcastle Centre": [
-          "/configurations/rnc/MX800/mx800_rnc_Cath-Lab_none_J.10.50_19.06.2014.cfg"
-        ],
-        "Tamworth Hospital": [
-          "/configurations/tamworth/MX800/mx800_tamworth_ED_H10-A08-C01-C02-C05-C06-C15-C20_K.21.42_17.11.2015.cfg",
-          "/configurations/tamworth/MX800/mx800_tamworth_Theatres_H10-A08-C01-C02-C05-C06-C09-C15-C20_K.21.42_25.08.2015.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX800/intellivue_compatibility_matrix.xlsx"
-        }
+      "Muswelbrook Hospital": [
+        "/configurations/muswelbrook/MX450/mx450_muswelbrook_COU_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_24.11.2020.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Telemetry",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX40",
-      "serviceManual": true,
-      "userManual": false,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/mx40/mx40_jhh_Telemetry-Pool_none_none_20.05.2015.cfg",
-          "/configurations/jhh/mx40/mx40_jhh_Ward-G3_none_none_07.12.2017.cfg"
-        ],
-        "Belmont Hospital": [
-          "/configurations/belmont/mx40/mx40_belmont_Whole-Hospital_none_none_02.01.2018.cfg"
-        ],
-        "Maitland Hospital": [
-          "/configurations/maitland/MX40/mx40_maitland_All-Departments_none_none_27.07.2020.cfg"
-        ],
-        "Taree Hospital": [
-          "/configurations/taree/MX40/mx40_taree_Whole-Hospital_none_none_30.09.2020.cfg"
-        ],
-        "New Maitland Hospital": [
-          "/configurations/new maitland/MX40/mx40_new_Whole-Hospital_none_none_19.01.2022.cfg"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Maitland Hospital MX40 User Names",
-          "filePath": "/documents/MX40/MX40 user names.xlsx"
-        }
+      "New Maitland Hospital": [
+        "/configurations/new maitland/MX450/mx450_new_Birthing-Unit_H10-A04-C15-C50_N.00.04_16.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_Ward-4C_H10-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_N_26.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_Theatres--Anaesthetic-Bays_H30-A04-C06-C15-C17-C18-C19-C20-C21-C50_N_04.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_Cath-Lab_H40-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_N.00.04_16.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_ED_H10-A04_N.01.04_05.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_ED--Paediatric_H10-A04_N.01.04_17.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_ED--Transport-(wireless)_H10-A04_N.01.04_17.01.2022.cfg",
+        "/configurations/new maitland/MX450/mx450_new_ICU--Transport-(wireless)_H10-A04_none_17.01.2022.cfg",
+        "/configurations/new maitland/MX450/mx450_new_Outpatients_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_N.00.04_17.10.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_PACU-(6-Waves)_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_N_19.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_PACU-(4-Waves)_H10-A04-C15-C50_N_19.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_SCU_A20-A04-C04-C09-C15-C17-C18-C19-C20-C44-C45-C50_N.01.04_18.11.2021.cfg",
+        "/configurations/new maitland/MX450/mx450_new_Medical-Imaging_none_none_10.11.2021.cfg"
       ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Electrosurgical Unit",
-      "manufacturer": "Valleylab",
-      "model": "FT10",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Sequential Compression Unit",
-      "manufacturer": "Covidien",
-      "model": "SCD 700",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Docking Station",
-      "manufacturer": "B Braun",
-      "model": "Space Station",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Electrocardiograph",
-      "manufacturer": "Welch Allyn",
-      "model": "ELI 280",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Blood Warmer",
-      "manufacturer": "3M",
-      "model": "Ranger",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Humidifier",
-      "manufacturer": "Fisher and Paykel Healthcare",
-      "model": "Airvo 2",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Humidifier",
-      "manufacturer": "Fisher and Paykel Healthcare",
-      "model": "Airvo 3",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Humidifier",
-      "manufacturer": "Fisher and Paykel Healthcare",
-      "model": "MR850",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Humidifier",
-      "manufacturer": "Fisher and Paykel Healthcare",
-      "model": "950ANZ",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Overhead Warmer",
-      "manufacturer": "Fisher and Paykel Healthcare",
-      "model": "Cosy Cot",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Resuscitator",
-      "manufacturer": "Fisher and Paykel Healthcare",
-      "model": "Neopuff",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Cardiac Output Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-PiCCO",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Cardiac Output Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-COP",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Pulse Oximetery Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-Masimo",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Dual Pressure Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-PP",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Pressure/Temperature Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-PT",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Respiratory Modules",
-      "manufacturer": "GE Healthcare",
-      "model": "E-sCAiOVX",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "CO2 Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-miniC",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Entropy Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-Entropy",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "EEG Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-EEG",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "BIS Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-BIS",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "NMT Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-NMT",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Module Rack",
-      "manufacturer": "GE Healthcare",
-      "model": "F5-F7 Frames",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "GE Healthcare",
-      "model": "B450",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/b450/b450_jhh_Theatres--OT7_Cardiac-Config_none_20.12.2016.tgz",
-          "/configurations/jhh/B450/b450_jhh_Recovery_Recovery-Config_none_01.11.2018.tgz"
-        ],
-        "Royal Newcastle Centre": [
-          "/configurations/rnc/B450/b450_rnc_Recovery_Recovery-Config_none_06.06.2017.tgz"
-        ]
-      },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "GE Healthcare",
-      "model": "B850",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/B850/b850_jhh_All--Aisys_none_none_08.06.2018.tgz"
-        ],
-        "Royal Newcastle Centre": [
-          "/configurations/rnc/B850/b850_rnc_All--Aisys_none_none_08.06.2018.tgz"
-        ]
-      },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Multiparameter Module",
-      "manufacturer": "GE Healthcare",
-      "model": "E-PSMP",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Multiparameter Module",
-      "manufacturer": "Philips Healthcare",
-      "model": "X2",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/x2/x2_jhh_Whole-Hospital_C00-C01-C13-C15-C20_M.03.02_02.05.2018",
-          "/configurations/jhh/x2/x2_jhh_ICU_none_M.0_12.07.2022",
-          "/configurations/jhh/x2/x2_jhh_NICU_none_none_01.08.2016",
-          "/configurations/jhh/x2/x2_jhh_Ward-G2_none_L.0_06.09.2016"
-        ],
-        "Armidale Hospital": [
-          "/configurations/armidale/x2/x2_armidale_Armidale--Whole-Hospital_C01-C12-C13-C15-C20_M.03.02_25.01.2018"
-        ],
-        "Belmont Hospital": [
-          "/configurations/belmont/x2/x2_belmont_ED_A03_none_17.10.2017"
-        ],
-        "Maitland Hospital": [
-          "/configurations/maitland/X2/x2_maitland_All-Departments_C00-C01-C13-C15-C20_M.03.02_10.11.2017.cfg",
-          "/configurations/maitland/X2/x2_maitland_HDU_none_none_18.12.2019.cfg"
-        ],
-        "Taree Hospital": [
-          "/configurations/taree/X2/x2_taree_Whole-Hospital_C00-C01-C13-C15-C20_M.03.02_01.08.2018.cfg"
-        ]
-      },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Multiparameter Module",
-      "manufacturer": "Philips Healthcare",
-      "model": "X3",
-      "serviceManual": false,
-      "userManual": false,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/x3/x3_jhh_ED--Paediatric_A04_none_17.11.2020",
-          "/configurations/jhh/x3/x3_jhh_Ward-H1_A04_N.00.04_24.03.2022"
-        ],
-        "Maitland Hospital": [
-          "/configurations/maitland/X3/x3_maitland_Whole-Hospital--4-Waves_A04-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg",
-          "/configurations/maitland/X3/x3_maitland_Whole-Hospital--5-Waves_A05-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg"
-        ],
-        "Mater Hospital": [
-          "/configurations/mater/X3/x3_mater_Whole-Hospital_none_none_16.09.2020.cfg"
-        ],
-        "Murrurundi Hospital": [
-          "/configurations/murrurundi/X3/x3_murrurundi_ED_A04_M_30.12.2020.cfg"
-        ],
-        "New Maitland Hospital": [
-          "/configurations/new maitland/X3/x3_new_SCU_A03-C01-C12-C13-C15-C20-C23-C44-C45-C51-C54_N_03.11.2021.cfg",
-          "/configurations/new maitland/X3/x3_new_Whole-Hospital_A03-C01-C12-C13-C15-C20-C23-C44-C45-C51-C54_N_18.01.2022.cfg"
-        ]
-      },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Philips Healthcare",
-      "model": "Trilogy 202",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Hamilton Medical",
-      "model": "T1",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Hamilton Medical",
-      "model": "C1",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Hamilton Medical",
-      "model": "MR1",
-      "serviceManual": false,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/MR1/mr1_jhh_ICU_MRI-Transport_2.2.3_03.05.2016.waconfig"
-        ]
-      },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Maquet",
-      "model": "Servo-i",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ventilator",
-      "manufacturer": "Maquet",
-      "model": "Servo-U",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Infant Ventilator",
-      "manufacturer": "SLE",
-      "model": "SLE6000",
-      "serviceManual": false,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Electrocardiograph",
-      "manufacturer": "Philips Healthcare",
-      "model": "TC50",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/TC50/tc50_jhh_All-Departments_XML_A07_22.11.2022.XML",
-          "/configurations/jhh/TC50/tc50_jhh_All-Departments_DAT_A07_22.11.2022.DAT"
-        ],
-        "Taree Hospital": [
-          "/configurations/taree/TC50/tc50_taree_All-Departments_XML_none_23.03.2018.XML"
-        ],
-        "Mater Hospital": [
-          "/configurations/mater/TC50/tc50_mater_All-Departments_XML_none_26.11.2021.XML",
-          "/configurations/mater/TC50/tc50_mater_All-Departments_DAT_none_26.11.2021.DAT"
-        ],
-        "Hunter Region": [
-          "/configurations/hunter/TC50/tc50_hunter_All-Departments_XML_none_13.08.2021.XML",
-          "/configurations/hunter/TC50/tc50_hunter_All-Departments_DAT_none_13.08.2021.DAT"
-        ]
-      },
-      "software": "",
-      "documents": [
-        {
-          "label": "Master Spreadsheet",
-          "filePath": "/documents/TC50/Master Philips TC-50.xlsx"
-        },
-        {
-          "label": "Setup Guide",
-          "filePath": "/documents/TC50/TC-50 Setup guide OLD.docx"
-        },
-        {
-          "label": "Change SSID Instructions",
-          "filePath": "/documents/TC50/TC-50 SSID Change Instructions.docx"
-        },
-        {
-          "label": "Time Server Setup",
-          "filePath": "/documents/TC50/Time Server setup.jpg"
-        }
+      "Scone Hospital": [
+        "/configurations/scone/MX450/mx450_scone_Close-Observation-Unit_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-H10_M_18.05.2021.cfg",
+        "/configurations/scone/MX450/mx450_scone_ED--(4-Waves)_A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-H10_M_18.05.2021.cfg",
+        "/configurations/scone/MX450/mx450_scone_ED--(6-Waves)_A06-H10-C15-C50_N_21.02.2023.cfg"
       ],
-      "placeholder2": ""
+      "Singleton Hospital": [
+        "/configurations/singleton/MX450/mx450_singleton_ED--Resus_H10-A04-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51_M.04.05_28.10.2020.cfg"
+      ],
+      "Tamworth Hospital": [
+        "/configurations/tamworth/MX450/mx450_tamworth_Theatres--Induction-Bays_H31-A04-C01-C02-C06-C15-C20_K.21.42_27.05.2015.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Defibrillator",
-      "manufacturer": "Physio Control",
-      "model": "Lifepak 20e",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX450/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX550",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx550/mx550_jhh_ED--Paediatric_H10-A04_none_18.11.2020.cfg",
+        "/configurations/jhh/mx550/mx550_jhh_Ward-G3_A06-H40-M.0_13.11.2020.cfg"
+      ],
+      "New Maitland Hospital": [
+        "/configurations/new maitland/MX550/mx550_new_Close-Observation-Unit_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-J15_N.01.04_05.11.2021.cfg",
+        "/configurations/new maitland/MX550/mx550_new_ED--Resus_H10-A06-C01-C06-C09-C13-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-J15_N.01.04_05.11.2021.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Bladder Scanner",
-      "manufacturer": "Verathon",
-      "model": "BVI9400",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX550/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX700",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx700/mx700_jhh_CCU_none_none_08.07.2015.cfg",
+        "/configurations/jhh/mx700/mx700_jhh_ED_H10-A04-C01-C02-C15-C20_none_30.01.2019.cfg"
+      ],
+      "Maitland Hospital": [
+        "/configurations/maitland/MX700/mx700_maitland_HDU_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_31.10.2017.cfg",
+        "/configurations/maitland/MX700/mx700_maitland_ED_H40-A06-C01-C06-C15-C17-C18-C19-C20-C21-C44-C45-C50-C51-C54_M.03.01_31.10.2017.cfg"
+      ],
+      "Tamworth Hospital": [
+        "/configurations/tamworth/MX700/mx700_tamworth_ICU--Procedure-Room_H10-A06-C01-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_L.01.17_16.11.2017.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Bladder Scanner",
-      "manufacturer": "Verathon",
-      "model": "Prime Plus",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX700/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX750",
+    "serviceManual": true,
+    "userManual": false,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx750/mx750_jhh_ED--Resus_N.01.01_29.03.2022.cfg"
+      ],
+      "New Maitland Hospital": [
+        "/configurations/new maitland/MX750/mx750_new_ICU_H10-A08-C01-C06-C09-C13-C15-C17-C18-C19-C21-C44-C45-C50-C51-M08-M20-X00-X30-X40_N.01.04_04.11.2021.cfg",
+        "/configurations/new maitland/MX750/mx750_new_SCU_A08-C04-C09-C15-C17-C18-C19-C21-C44-C45-C50-C60-H20-M08-M20-X00-X30-X40_N.01.04_18.11.2021.cfg",
+        "/configurations/new maitland/MX750/mx750_new_Theatres_A08-C06-C09-C15-C17-C18-C19-C21-C50-H30-M08-M20-X00-X30-X40_N.01.04_18.01.2022.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Bladder Scanner",
-      "manufacturer": "Verathon",
-      "model": "i10",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX750/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX800",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx800/mx800_jhh_ED_none_none_30.01.2019.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_ICU_none_M.0_12.07.2021.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_NICU--Bed-1-To-7_none_none_24.11.2022.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_NICU_H20-A06-C07-C09_L.01.08_05.09.2018.cfg",
+        "/configurations/jhh/mx800/mx800_jhh_PICU_H10-A06-C01-C02-C05-C06-C09-C15-C20_none_12.11.2021.cfg"
+      ],
+      "Armidale Hospital": [
+        "/configurations/jhh/mx800/mx800_armidale_ED--Resus_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_25.01.2018.cfg",
+        "/configurations/jhh/mx800/mx800_armidale_ICU_H10-A06-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.04.00_13.11.2018.cfg",
+        "/configurations/jhh/mx800/mx800_armidale_Operating-Theatres--Networked-IntelliBridge_none_M.03.03_05.03.2018.cfg"
+      ],
+      "Taree Hospital": [
+        "/configurations/taree/MX800/mx800_taree_ICU_H10-A08-C01-C03-C06-C09-C13-C15-C19-C20-C21-C44-C45-C50-C51-C54_M.03.03_19.07.2018.cfg"
+      ],
+      "Royal Newcastle Centre": [
+        "/configurations/rnc/MX800/mx800_rnc_Cath-Lab_none_J.10.50_19.06.2014.cfg"
+      ],
+      "Tamworth Hospital": [
+        "/configurations/tamworth/MX800/mx800_tamworth_ED_H10-A08-C01-C02-C05-C06-C15-C20_K.21.42_17.11.2015.cfg",
+        "/configurations/tamworth/MX800/mx800_tamworth_Theatres_H10-A08-C01-C02-C05-C06-C09-C15-C20_K.21.42_25.08.2015.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Ultrasound",
-      "manufacturer": "GE Healthcare",
-      "model": "Venue Go",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX800/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Telemetry",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX40",
+    "serviceManual": true,
+    "userManual": false,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/mx40/mx40_jhh_Telemetry-Pool_none_none_20.05.2015.cfg",
+        "/configurations/jhh/mx40/mx40_jhh_Ward-G3_none_none_07.12.2017.cfg"
+      ],
+      "Belmont Hospital": [
+        "/configurations/belmont/mx40/mx40_belmont_Whole-Hospital_none_none_02.01.2018.cfg"
+      ],
+      "Maitland Hospital": [
+        "/configurations/maitland/MX40/mx40_maitland_All-Departments_none_none_27.07.2020.cfg"
+      ],
+      "Taree Hospital": [
+        "/configurations/taree/MX40/mx40_taree_Whole-Hospital_none_none_30.09.2020.cfg"
+      ],
+      "New Maitland Hospital": [
+        "/configurations/new maitland/MX40/mx40_new_Whole-Hospital_none_none_19.01.2022.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Electrocardiograph",
-      "manufacturer": "Mindray",
-      "model": "R12",
-      "serviceManual": false,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_System_none_15.06.2018.cfg",
-          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Adult_none_15.06.2018.cfg",
-          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Paediatric_none_15.06.2018.cfg",
-          "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Neonate_none_15.06.2018.cfg"
-        ]
+    "software": "",
+    "documents": [
+      {
+        "label": "Maitland Hospital MX40 User Names",
+        "filePath": "/documents/MX40/MX40 user names.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Electrosurgical Unit",
+    "manufacturer": "Valleylab",
+    "model": "FT10",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Sequential Compression Unit",
+    "manufacturer": "Covidien",
+    "model": "SCD 700",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Docking Station",
+    "manufacturer": "B Braun",
+    "model": "Space Station",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Electrocardiograph",
+    "manufacturer": "Welch Allyn",
+    "model": "ELI 280",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Blood Warmer",
+    "manufacturer": "3M",
+    "model": "Ranger",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Humidifier",
+    "manufacturer": "Fisher and Paykel Healthcare",
+    "model": "Airvo 2",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Humidifier",
+    "manufacturer": "Fisher and Paykel Healthcare",
+    "model": "Airvo 3",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Humidifier",
+    "manufacturer": "Fisher and Paykel Healthcare",
+    "model": "MR850",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Humidifier",
+    "manufacturer": "Fisher and Paykel Healthcare",
+    "model": "950ANZ",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Overhead Warmer",
+    "manufacturer": "Fisher and Paykel Healthcare",
+    "model": "Cosy Cot",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Resuscitator",
+    "manufacturer": "Fisher and Paykel Healthcare",
+    "model": "Neopuff",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Cardiac Output Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-PiCCO",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Cardiac Output Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-COP",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Pulse Oximetery Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-Masimo",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Dual Pressure Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-PP",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Pressure/Temperature Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-PT",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Respiratory Modules",
+    "manufacturer": "GE Healthcare",
+    "model": "E-sCAiOVX",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "CO2 Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-miniC",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Entropy Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-Entropy",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "EEG Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-EEG",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "BIS Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-BIS",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "NMT Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-NMT",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Module Rack",
+    "manufacturer": "GE Healthcare",
+    "model": "F5-F7 Frames",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "GE Healthcare",
+    "model": "B450",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/b450/b450_jhh_Theatres--OT7_Cardiac-Config_none_20.12.2016.tgz",
+        "/configurations/jhh/B450/b450_jhh_Recovery_Recovery-Config_none_01.11.2018.tgz"
+      ],
+      "Royal Newcastle Centre": [
+        "/configurations/rnc/B450/b450_rnc_Recovery_Recovery-Config_none_06.06.2017.tgz"
+      ]
+    },
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "GE Healthcare",
+    "model": "B850",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/B850/b850_jhh_All--Aisys_none_none_08.06.2018.tgz"
+      ],
+      "Royal Newcastle Centre": [
+        "/configurations/rnc/B850/b850_rnc_All--Aisys_none_none_08.06.2018.tgz"
+      ]
+    },
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Multiparameter Module",
+    "manufacturer": "GE Healthcare",
+    "model": "E-PSMP",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Multiparameter Module",
+    "manufacturer": "Philips Healthcare",
+    "model": "X2",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/x2/x2_jhh_Whole-Hospital_C00-C01-C13-C15-C20_M.03.02_02.05.2018",
+        "/configurations/jhh/x2/x2_jhh_ICU_none_M.0_12.07.2022",
+        "/configurations/jhh/x2/x2_jhh_NICU_none_none_01.08.2016",
+        "/configurations/jhh/x2/x2_jhh_Ward-G2_none_L.0_06.09.2016"
+      ],
+      "Armidale Hospital": [
+        "/configurations/armidale/x2/x2_armidale_Armidale--Whole-Hospital_C01-C12-C13-C15-C20_M.03.02_25.01.2018"
+      ],
+      "Belmont Hospital": [
+        "/configurations/belmont/x2/x2_belmont_ED_A03_none_17.10.2017"
+      ],
+      "Maitland Hospital": [
+        "/configurations/maitland/X2/x2_maitland_All-Departments_C00-C01-C13-C15-C20_M.03.02_10.11.2017.cfg",
+        "/configurations/maitland/X2/x2_maitland_HDU_none_none_18.12.2019.cfg"
+      ],
+      "Taree Hospital": [
+        "/configurations/taree/X2/x2_taree_Whole-Hospital_C00-C01-C13-C15-C20_M.03.02_01.08.2018.cfg"
+      ]
+    },
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Multiparameter Module",
+    "manufacturer": "Philips Healthcare",
+    "model": "X3",
+    "serviceManual": false,
+    "userManual": false,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/x3/x3_jhh_ED--Paediatric_A04_none_17.11.2020",
+        "/configurations/jhh/x3/x3_jhh_Ward-H1_A04_N.00.04_24.03.2022"
+      ],
+      "Maitland Hospital": [
+        "/configurations/maitland/X3/x3_maitland_Whole-Hospital--4-Waves_A04-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg",
+        "/configurations/maitland/X3/x3_maitland_Whole-Hospital--5-Waves_A05-C01-C13-C15-C20-C23-C44-C45-C51-C54_M.04.05_29.10.2020.cfg"
+      ],
+      "Mater Hospital": [
+        "/configurations/mater/X3/x3_mater_Whole-Hospital_none_none_16.09.2020.cfg"
+      ],
+      "Murrurundi Hospital": [
+        "/configurations/murrurundi/X3/x3_murrurundi_ED_A04_M_30.12.2020.cfg"
+      ],
+      "New Maitland Hospital": [
+        "/configurations/new maitland/X3/x3_new_SCU_A03-C01-C12-C13-C15-C20-C23-C44-C45-C51-C54_N_03.11.2021.cfg",
+        "/configurations/new maitland/X3/x3_new_Whole-Hospital_A03-C01-C12-C13-C15-C20-C23-C44-C45-C51-C54_N_18.01.2022.cfg"
+      ]
+    },
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Philips Healthcare",
+    "model": "Trilogy 202",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Hamilton Medical",
+    "model": "T1",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Hamilton Medical",
+    "model": "C1",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Hamilton Medical",
+    "model": "MR1",
+    "serviceManual": false,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/MR1/mr1_jhh_ICU_MRI-Transport_2.2.3_03.05.2016.waconfig"
+      ]
+    },
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Maquet",
+    "model": "Servo-i",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ventilator",
+    "manufacturer": "Maquet",
+    "model": "Servo-U",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Infant Ventilator",
+    "manufacturer": "SLE",
+    "model": "SLE6000",
+    "serviceManual": false,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Electrocardiograph",
+    "manufacturer": "Philips Healthcare",
+    "model": "TC50",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/TC50/tc50_jhh_All-Departments_XML_A07_22.11.2022.XML",
+        "/configurations/jhh/TC50/tc50_jhh_All-Departments_DAT_A07_22.11.2022.DAT"
+      ],
+      "Taree Hospital": [
+        "/configurations/taree/TC50/tc50_taree_All-Departments_XML_none_23.03.2018.XML"
+      ],
+      "Mater Hospital": [
+        "/configurations/mater/TC50/tc50_mater_All-Departments_XML_none_26.11.2021.XML",
+        "/configurations/mater/TC50/tc50_mater_All-Departments_DAT_none_26.11.2021.DAT"
+      ],
+      "Hunter Region": [
+        "/configurations/hunter/TC50/tc50_hunter_All-Departments_XML_none_13.08.2021.XML",
+        "/configurations/hunter/TC50/tc50_hunter_All-Departments_DAT_none_13.08.2021.DAT"
+      ]
+    },
+    "software": "",
+    "documents": [
+      {
+        "label": "Master Spreadsheet",
+        "filePath": "/documents/TC50/Master Philips TC-50.xlsx"
       },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ultrasound",
-      "manufacturer": "Mindray",
-      "model": "TE7",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Ultrasound",
-      "manufacturer": "Mindray",
-      "model": "TE5",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Cardiotocograph",
-      "manufacturer": "Philips Healthcare",
-      "model": "FM20",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "Belmont Hospital": [
-          "/configurations/belmont/fm20/fm20_belmont_Maternity_none_none_21.11.2019"
-        ]
+      {
+        "label": "Setup Guide",
+        "filePath": "/documents/TC50/TC-50 Setup guide OLD.docx"
       },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Cardiotocograph",
-      "manufacturer": "Philips Healthcare",
-      "model": "FM30",
-      "serviceManual": true,
-      "userManual": true,
-      "config": {
-        "John Hunter Hospital": [
-          "/configurations/jhh/fm30/fm30_jhh_Maternity-Wards_none_none_12.04.18"
-        ]
+      {
+        "label": "Change SSID Instructions",
+        "filePath": "/documents/TC50/TC-50 SSID Change Instructions.docx"
       },
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+      {
+        "label": "Time Server Setup",
+        "filePath": "/documents/TC50/Time Server setup.jpg"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Defibrillator",
+    "manufacturer": "Physio Control",
+    "model": "Lifepak 20e",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Bladder Scanner",
+    "manufacturer": "Verathon",
+    "model": "BVI9400",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Bladder Scanner",
+    "manufacturer": "Verathon",
+    "model": "Prime Plus",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Bladder Scanner",
+    "manufacturer": "Verathon",
+    "model": "i10",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ultrasound",
+    "manufacturer": "GE Healthcare",
+    "model": "Venue Go",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Electrocardiograph",
+    "manufacturer": "Mindray",
+    "model": "R12",
+    "serviceManual": false,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/R12/r12_jhh_Whole-Hospital_System_none_15.06.2018.cfg",
+        "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Adult_none_15.06.2018.cfg",
+        "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Paediatric_none_15.06.2018.cfg",
+        "/configurations/jhh/R12/r12_jhh_Whole-Hospital_Neonate_none_15.06.2018.cfg"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "CO2 Module",
-      "manufacturer": "Philips Healthcare",
-      "model": "3015A",
-      "serviceManual": false,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": [
-        {
-          "label": "Disassembly Guide",
-          "filePath": "/documents/3015A/3015a_disassembly_guide.pdf"
-        }
-      ],
-      "placeholder2": ""
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ultrasound",
+    "manufacturer": "Mindray",
+    "model": "TE7",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ultrasound",
+    "manufacturer": "Mindray",
+    "model": "TE5",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Cardiotocograph",
+    "manufacturer": "Philips Healthcare",
+    "model": "FM20",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "Belmont Hospital": [
+        "/configurations/belmont/fm20/fm20_belmont_Maternity_none_none_21.11.2019"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Incubator",
-      "manufacturer": "GE Healthcare",
-      "model": "Giraffe Omnibed",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Cardiotocograph",
+    "manufacturer": "Philips Healthcare",
+    "model": "FM30",
+    "serviceManual": true,
+    "userManual": true,
+    "config": {
+      "John Hunter Hospital": [
+        "/configurations/jhh/fm30/fm30_jhh_Maternity-Wards_none_none_12.04.18"
+      ]
     },
-    {
-      "img": "jpg",
-      "type": "Overhead Warmer",
-      "manufacturer": "GE Healthcare",
-      "model": "Panda",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Incubator",
-      "manufacturer": "GE Healthcare",
-      "model": "Carestation CS1",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Patient Monitor",
-      "manufacturer": "Philips Healthcare",
-      "model": "MX850",
-      "serviceManual": true,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": [
-        {
-          "label": "Intellivue Compatibility Matrix",
-          "filePath": "/documents/MX850/intellivue_compatibility_matrix.xlsx"
-        }
-      ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Rapid Infuser",
-      "manufacturer": "Belmont",
-      "model": "RI-2",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": [
-        {
-          "label": "PM Guide",
-          "filePath": "/documents/RI-2/ri-2_pm_guide.pdf"
-        }
-      ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Central Monitoring System",
-      "manufacturer": "Philips Healthcare",
-      "model": "PIIC iX",
-      "serviceManual": true,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": [
-        {
-          "label": "Clinical Configuration Guide",
-          "filePath": "/documents/PIIC iX/piicix_clinical_configuration.pdf"
-        },
-        {
-          "label": "JHH Network Details",
-          "filePath": "/documents/PIIC iX/JHH Network Details.xlsx"
-        },
-        {
-          "label": "Installing Software Patch Guide",
-          "filePath": "/documents/PIIC iX/How to Install a Software Patch.docx"
-        },
-        {
-          "label": "Windows Updates Guide",
-          "filePath": "/documents/PIIC iX/Windows Updates Guide.docx"
-        },
-        {
-          "label": "WSUS Server Details",
-          "filePath": "/documents/PIIC iX/WSUS Server.txt"
-        },
-        {
-          "label": "APC Checks",
-          "filePath": "/documents/PIIC iX/Philips APC checks.txt"
-        },
-        {
-          "label": "Troubleshooting Guide",
-          "filePath": "/documents/PIIC iX/CMS2024_18_PIICiX Troubleshooting Test & Inspection.pdf"
-        },
-        {
-          "label": "PIICiX Service Tools",
-          "filePath": "/documents/PIIC iX/CMS2024_17_PIICiX Service Tools.pdf"
-        },
-        {
-          "label": "PIICiX Equipment Number",
-          "filePath": "/documents/PIIC iX/Philips PIIC iX Network Equipment Number.PNG"
-        },
-        {
-          "label": "RNC Cath Lab Printer Config",
-          "filePath": "/documents/PIIC iX/RNC Cath Lab Network Printer config.cfg"
-        }
-      ],
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Tourniquet",
-      "manufacturer": "Denyers",
-      "model": "DTS-3000",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Electrosurgical Unit",
-      "manufacturer": "Erbe",
-      "model": "VIO 300D",
-      "serviceManual": false,
-      "userManual": true,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Coagulation Analyzer",
-      "manufacturer": "Medtronic",
-      "model": "ACT Plus",
-      "serviceManual": false,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    },
-    {
-      "img": "jpg",
-      "type": "Multiparameter Module",
-      "manufacturer": "GE Healthcare",
-      "model": "PDM",
-      "serviceManual": false,
-      "userManual": false,
-      "config": "",
-      "software": "",
-      "documents": "",
-      "placeholder2": ""
-    }
-  ]
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "CO2 Module",
+    "manufacturer": "Philips Healthcare",
+    "model": "3015A",
+    "serviceManual": false,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": [
+      {
+        "label": "Disassembly Guide",
+        "filePath": "/documents/3015A/3015a_disassembly_guide.pdf"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Incubator",
+    "manufacturer": "GE Healthcare",
+    "model": "Giraffe Omnibed",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Overhead Warmer",
+    "manufacturer": "GE Healthcare",
+    "model": "Panda",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Incubator",
+    "manufacturer": "GE Healthcare",
+    "model": "Carestation CS1",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Patient Monitor",
+    "manufacturer": "Philips Healthcare",
+    "model": "MX850",
+    "serviceManual": true,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": [
+      {
+        "label": "Intellivue Compatibility Matrix",
+        "filePath": "/documents/MX850/intellivue_compatibility_matrix.xlsx"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Rapid Infuser",
+    "manufacturer": "Belmont",
+    "model": "RI-2",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": [
+      {
+        "label": "PM Guide",
+        "filePath": "/documents/RI-2/ri-2_pm_guide.pdf"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Central Monitoring System",
+    "manufacturer": "Philips Healthcare",
+    "model": "PIIC iX",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": [
+      {
+        "label": "Clinical Configuration Guide",
+        "filePath": "/documents/PIIC iX/piicix_clinical_configuration.pdf"
+      },
+      {
+        "label": "JHH Network Details",
+        "filePath": "/documents/PIIC iX/JHH Network Details.xlsx"
+      },
+      {
+        "label": "Installing Software Patch Guide",
+        "filePath": "/documents/PIIC iX/How to Install a Software Patch.docx"
+      },
+      {
+        "label": "Windows Updates Guide",
+        "filePath": "/documents/PIIC iX/Windows Updates Guide.docx"
+      },
+      {
+        "label": "WSUS Server Details",
+        "filePath": "/documents/PIIC iX/WSUS Server.txt"
+      },
+      {
+        "label": "APC Checks",
+        "filePath": "/documents/PIIC iX/Philips APC checks.txt"
+      },
+      {
+        "label": "Troubleshooting Guide",
+        "filePath": "/documents/PIIC iX/CMS2024_18_PIICiX Troubleshooting Test & Inspection.pdf"
+      },
+      {
+        "label": "PIICiX Service Tools",
+        "filePath": "/documents/PIIC iX/CMS2024_17_PIICiX Service Tools.pdf"
+      },
+      {
+        "label": "PIICiX Equipment Number",
+        "filePath": "/documents/PIIC iX/Philips PIIC iX Network Equipment Number.PNG"
+      },
+      {
+        "label": "RNC Cath Lab Printer Config",
+        "filePath": "/documents/PIIC iX/RNC Cath Lab Network Printer config.cfg"
+      }
+    ],
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Tourniquet",
+    "manufacturer": "Denyers",
+    "model": "DTS-3000",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Electrosurgical Unit",
+    "manufacturer": "Erbe",
+    "model": "VIO 300D",
+    "serviceManual": false,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Coagulation Analyzer",
+    "manufacturer": "Medtronic",
+    "model": "ACT Plus",
+    "serviceManual": false,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Multiparameter Module",
+    "manufacturer": "GE Healthcare",
+    "model": "PDM",
+    "serviceManual": false,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Information Management System",
+    "manufacturer": "Philips Healthcare",
+    "model": "Intellispace (ISP)",
+    "serviceManual": false,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Ultrasound",
+    "manufacturer": "Philips Healthcare",
+    "model": "Sparq",
+    "serviceManual": false,
+    "userManual": false,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
+  }
+]
