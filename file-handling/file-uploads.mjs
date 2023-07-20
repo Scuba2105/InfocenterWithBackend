@@ -1,6 +1,6 @@
 import multer from 'multer';
 import path from 'path';
-import { createDirectory, convertHospitalName, capitaliseFirstLetters } from './utils/utils.mjs';
+import { createDirectory, convertHospitalName, capitaliseFirstLetters } from '../utils/utils.mjs';
 
 // Specify the root path
 const __dirname = path.dirname('.');

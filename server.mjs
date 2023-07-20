@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { cpUpload } from './file-handling.mjs';
+import { cpUpload } from './file-handling/file-uploads.mjs';
 import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData } from './controller/controller.mjs';
 
 
