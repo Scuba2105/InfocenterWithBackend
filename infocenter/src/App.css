@@ -888,6 +888,20 @@ html {
   margin: auto auto;
 }
 
+.info-container-laptop .email-link {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-container-desktop .email-link {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .info-container-desktop .info-entry-container {
   display: grid;
   grid-template-columns: 1fr;

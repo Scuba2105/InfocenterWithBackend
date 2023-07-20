@@ -18,6 +18,8 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
         desktop: "(min-width: 1800px)"
     });
 
+    const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '-')}@health.nsw.gov.au`;
+
     function getTextColor(team) {
         const colorString = teamColors[team].background.split(' rgb')[1];
         const rgb = colorString.substring(0, colorString.length - 1)
@@ -42,6 +44,7 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
             </div>            
             <div className={mediaQueries.laptop ? "info-container-laptop" : "info-container-desktop"}>
                 {selectedData.id !== "-" && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Staff ID</h5><span>{selectedData.id}</span></div>}
+                {!workshops.includes(selectedData.name) && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Email Address</h5><a href={emailAddress} className="email-link">{emailAddress.replace("mailto:",'')}</a></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Office Phone</h5><span>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Dect Phone</h5><span>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Work Mobile</h5><span>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></div>}
