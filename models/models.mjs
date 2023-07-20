@@ -28,3 +28,10 @@ export function updateStaffEntry(req, currentData) {
         
     return currentData;
 }
+
+// Get a staff member entry based on 
+export function getEmployee(staffArray, name) {
+    return staffArray.find((entry) => {
+        return entry.name = name;
+    })
+}

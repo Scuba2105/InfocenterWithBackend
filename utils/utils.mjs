@@ -125,3 +125,8 @@ export function determineTeam(position, workshop) {
 
     return team;
 }
+
+export function generateEmailAddress(name) {
+    const emailAddress = name === "Azmi Refal" ? `Mohamed${name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `${name.replace(' ', '.').replace(' ', '-')}@health.nsw.gov.au`;
+    return emailAddress;
+}
