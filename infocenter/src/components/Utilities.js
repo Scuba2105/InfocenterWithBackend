@@ -1,11 +1,13 @@
 import { SelectInput } from "./SelectInput";
+import { utilityFunctions } from "../data";
 
-const utilityFunctions = ["Service Manual Administration", "Genius 3 Thermometer Management"] 
-
-export function Utilities() {
+export function Utilities({children, onChange}) {
     return (
-        <div className="utilities-container">
-            <SelectInput label="Utilities" optionData={utilityFunctions} />
-        </div>
+        <>
+            <div className="utilities-container">
+                <SelectInput label="Utilities" optionData={utilityFunctions} onChange={onChange} />
+                {children}
+            </div>
+        </>
     );
 }

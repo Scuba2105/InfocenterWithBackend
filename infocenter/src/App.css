@@ -15,6 +15,8 @@ html {
   --light-theme: #4558a2; 
   --config-modal-width: 800px;
   --config-modal-height: 800px;
+  --form-font-color: rgb(132, 132, 139);
+  ---form-background-color: rgb(217, 217, 224);
 }
 
 .wrapper {
@@ -1694,8 +1696,9 @@ html {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .utilities-select-container {
@@ -1705,6 +1708,54 @@ html {
   align-items: center;
 }
 
+.utilities-select-label {
+  font-size: 30px;
+}
+
+.utilities-select {
+  height: 50px;
+  width: 700px;
+  font-size: 40px;
+}
+
+.thermometers-utility {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.thermometer-form-laptop, .thermometer-form-desktop {
+  height: 75%;
+  width: 28%;
+  background-color: var(---form-background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.thermometer-form-desktop {
+  height: 65%;
+}
+
+.thermometer-form-laptop h4, .thermometer-form-desktop h4 {
+  width: 100%;
+  height: 20%;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  color: white;
+  margin-top: 0;
+}
+
+.thermometer-form-desktop h4 {
+  height: 12%;
+}
 
 @media (max-width: 1250px) {
   .search-box-container {
