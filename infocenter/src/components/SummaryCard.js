@@ -11,7 +11,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
-    console.log(selectedEntry)
+    
 
     function getClassName(page) {
         if (page === 'staff' && mediaQueries.laptop === true) {

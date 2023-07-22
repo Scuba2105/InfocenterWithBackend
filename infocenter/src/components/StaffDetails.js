@@ -1,7 +1,5 @@
 import useMediaQueries from "media-queries-in-react" ;
-
-const workshops = ['Armidale BME', 'B.E.E.R.', 'Biomed Powerfail', 'ICU Workshop', 
-    'New Maitland Storage', 'New Maitland Workshop', 'Tea Room', 'Triage'];
+import { workshops } from "../data";
 
 const teamColors = {Management: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
 border: '1px solid rgb(137, 44, 44)', color: 'rgb(137, 44, 44)'}, JHH: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 

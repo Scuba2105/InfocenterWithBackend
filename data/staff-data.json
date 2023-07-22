@@ -179,7 +179,7 @@
     "hospital": "John Hunter Hospital",
     "position": "Technical Officer",
     "id": "50011595",
-    "name": "Mick Dathan",
+    "name": "Michael Dathan",
     "officePhone": "492 13144",
     "dectPhone": "492 36166",
     "workMobile": "",
@@ -350,17 +350,5 @@
     "workMobile": "",
     "personalMobile": "",
     "team": "Hunter"
-  },
-  {
-    "hospital": "Mater Hospital",
-    "position": "Technical Officer",
-    "id": "60832957",
-    "name": "John Smith",
-    "officePhone": "49213144",
-    "dectPhone": "45678",
-    "workMobile": "0438479457",
-    "personalMobile": "0438479457",
-    "team": "Hunter",
-    "img": "jpg"
   }
 ]

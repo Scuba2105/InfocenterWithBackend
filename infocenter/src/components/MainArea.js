@@ -7,7 +7,7 @@ import { fetchData } from "../utils/utils";
 import { useState } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ThermometerManagement } from "./ThermometerManagement";
-import { utilityFunctions } from "../data";
+import { workshops } from "../data";
 
 export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
 
@@ -25,9 +25,8 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         setDialogOpen(true);
     }
 
-    function selectUtility(e) {
-        const newIndex = utilityFunctions.indexOf(e.currentTarget.value);
-        setUtilityPage(newIndex);
+    function selectUtility(index) {
+        setUtilityPage(index);
     }
 
     if (status === 'loading') {
@@ -37,6 +36,15 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         <div>{`An error occurred: ${status.error}`}</div>
     }
     else if (status === 'success') {
+
+        const staffNames = data.staffData.reduce((acc, currStaff) => {
+            if (!workshops.includes(currStaff.name)) {
+                acc.push(currStaff.name);
+                return acc;
+            }
+            return acc;
+        }, [])
+
         return (
             <div key={page} className="main-area">
                 {page === "technical-info" ? 
@@ -53,9 +61,9 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 </> :
                 page === "utilities" ?
                 <>
-                    <Utilities onChange={selectUtility}>
+                    <Utilities utilityPage={utilityPage} onClick={selectUtility}>
                         {utilityPage === 0 && <ServiceReportUploads></ServiceReportUploads>}
-                        {utilityPage === 1 && <ThermometerManagement></ThermometerManagement>}
+                        {utilityPage === 1 && <ThermometerManagement staffNames={staffNames}></ThermometerManagement>}
                     </Utilities>
                 </> :
                     <h1>Page has not been implemented yet</h1>}

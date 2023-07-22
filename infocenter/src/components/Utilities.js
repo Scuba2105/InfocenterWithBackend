@@ -1,11 +1,16 @@
-import { SelectInput } from "./SelectInput";
 import { utilityFunctions } from "../data";
 
-export function Utilities({children, onChange}) {
+export function Utilities({children, utilityPage, onClick}) {
     return (
         <>
             <div className="utilities-container">
-                <SelectInput label="Utilities" optionData={utilityFunctions} onChange={onChange} />
+                <div className="utility-options">
+                    {utilityFunctions.map((entry, index) => {
+                        return (
+                            <h2 key={`utility-option${index}`} className={index === utilityPage ? "utility-selected" : undefined} onClick={() => onClick(index)}>{entry}</h2>
+                        )
+                    })}
+                </div>
                 {children}
             </div>
         </>

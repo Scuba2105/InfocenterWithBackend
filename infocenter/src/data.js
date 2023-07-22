@@ -22,6 +22,9 @@ export const menuOptions = [
 ];
   
 export const utilityFunctions = ["Service Report Uploads", "Genius 3 Thermometer Management"];
+
+export const workshops = ['Armidale BME', 'B.E.E.R.', 'Biomed Powerfail', 'ICU Workshop', 
+'New Maitland Storage', 'New Maitland Workshop', 'Tea Room', 'Triage'];
    
 
 
