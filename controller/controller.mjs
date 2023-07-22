@@ -225,3 +225,20 @@ export async function updateExistingStaffData(req, res, __dirname) {
     }
     
 }
+
+export async function generateRepairRequest(req, res, __dirname) {
+    try {
+        const jsonData = JSON.stringify(req.body);
+        const reqData = JSON.parse(jsonData);
+        const name = reqData.name;
+        const bmeNumbers = reqData["bme-numbers"];
+        
+        // Check the serial numbers in the database
+
+        // Write the serial numbers and name data into the Genius 3 Form Template
+    } catch (err) {
+        // Send the error response message.
+        console.log(err);
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
+    }
+}

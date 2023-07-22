@@ -1806,7 +1806,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 13px;
+  font-size: 12px;
   color: rgb(132, 132, 139);
   margin-top: 5px;
 }
@@ -1817,12 +1817,13 @@ html {
 
 .bme-input {
   text-align: center;
+  font-size: 11px;
   width: 75px;
   height: 12px;
   margin-top: 3px;
   color: rgb(132, 132, 139);
   border: 1px solid rgb(132, 132, 139);
-  padding: 2px 5px 2px 5px;  
+  padding: 5px 5px 5px 5px;  
 }
 
 .thermometer-form-button-container {

@@ -63,7 +63,8 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 <>
                     <Utilities utilityPage={utilityPage} onClick={selectUtility}>
                         {utilityPage === 0 && <ServiceReportUploads></ServiceReportUploads>}
-                        {utilityPage === 1 && <ThermometerManagement staffNames={staffNames}></ThermometerManagement>}
+                        {utilityPage === 1 && <ThermometerManagement staffNames={staffNames} dialogOpen={dialogOpen} closeDialog={closeDialog} showMessage={showMessage}></ThermometerManagement>}
+                        <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>
                 </> :
                     <h1>Page has not been implemented yet</h1>}

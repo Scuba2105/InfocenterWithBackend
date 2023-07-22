@@ -4,7 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
 import { cpUpload } from './file-handling/file-uploads.mjs';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData } from './controller/controller.mjs';
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateRepairRequest } from './controller/controller.mjs';
 
 
 // Define the root directory and the port for the server 
@@ -15,12 +15,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Set cors for any origin during development. Set to same origin for production.  
-app.use(cors({
-    origin: '*'
-}))
+app.use(cors({origin: '*'}));
 
-// Serve static files 
-app.use(express.static('public'))
+// Serve static files. 
+app.use(express.static('public'));
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
 
 app.get("/getData", async (req, res) => {
     try {
@@ -74,6 +75,18 @@ app.post('/AddNewEntry/:page', async (req, res) => {
         console.log(err);
     }
 })
+
+app.put('/Thermometers/:requestType', async (req, res) => {
+    const requestType = req.params.requestType;
+    if (requestType === "RepairRequestGeneration") {
+        try {
+            await generateRepairRequest(req, res, rootDirectory)
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
