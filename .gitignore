@@ -1,1 +1,5 @@
 /node_modules
+/public/configurations
+/public/documents
+/public/templates
+
