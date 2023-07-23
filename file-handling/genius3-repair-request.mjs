@@ -3,12 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import { generateEmailAddress } from '../utils/utils.mjs';
 
-export async function populateGenius3RequestTemplate(name, serialNumbers) {
+export async function populateGenius3RequestTemplate(name, serialNumbers, rootDirectory) {
     try {
-        const rootDirectory = path.dirname('.');
-
+        
         // Read the binary data of the Genius 3 template. 
-        const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, '..', 'public','templates', 'Genius 3 Service Request Template.pdf'));
+        const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'Genius 3 Service Request Template.pdf'));
 
         // Load a PDFDocument from the existing PDF bytes
         const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -71,8 +70,7 @@ export async function populateGenius3RequestTemplate(name, serialNumbers) {
         });
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
-        const pdfBytes = await pdfDoc.save()
-        console.log(pdfBytes);
+        const pdfBytes = await pdfDoc.save();
         return pdfBytes;
         //fs.writeFileSync(path.join(rootDirectory, 'Genius 3 Test.pdf'), pdfBytes);        
     } catch (err) {

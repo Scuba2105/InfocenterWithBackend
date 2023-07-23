@@ -66,25 +66,35 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error
             referrerPolicy: "no-referrer",
+            responseType: "arraybuffer",
             headers: {
                 'Content-Type': 'application/json'
                 },
             body: requestData
         });
-
+        console.log(res.status);
+        // If error message is sent form server set response based on error status.
         if (res.status === 400) {
             const error = await res.json();
             throw new Error(error.message)
         }
+        
+        // Create a blob from response arraybuffer.
+        const data = await res.blob();
 
-        //Create a Blob from the PDF Stream
-        const file = new Blob([res.data], { type: "application/pdf" });
-        //Build a URL from the file
-        const fileURL = URL.createObjectURL(file);
-        //Open the URL on new Window
-        const pdfWindow = window.open();
-        pdfWindow.location.href = fileURL;
+        // Build a URL from the file.
+        const fileURL = URL.createObjectURL(data);
+
+        // Open the URL on new Window.
+        window.open(fileURL);
+
+        // Close the upload dialog box. 
         closeDialog();
+
+        // Reset the form inputs to empty.
+        bmeInputs.forEach((bmeInput) => {
+            bmeInput.value = "";
+        }) 
     } catch (error) {
         showMessage("error-request", `"${error.message}"`);
     }

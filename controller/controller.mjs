@@ -239,12 +239,12 @@ export async function generateRepairRequest(req, res, __dirname) {
         const serialNumbers = ["N16934567", "N1693847", "N1704848", "N1704848", "N1705743"]
 
         // Write the serial numbers and name data into the Genius 3 Form Template
-        const pdfBytes = await populateGenius3RequestTemplate(name, serialNumbers);
+        const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
         
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
         res.contentType("application/pdf");
-        res.end(pdfBytes);
+        res.end(pdfStr);
     } catch (err) {
         // Send the error response message.
         res.status(400).json({message: err.message});
