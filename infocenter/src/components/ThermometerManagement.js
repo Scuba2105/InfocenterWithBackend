@@ -2,6 +2,7 @@ import useMediaQueries from "media-queries-in-react";
 import { SelectInput } from "./SelectInput";
 import { Input } from "./Input";
 import { serverConfig } from "../server";
+import { getOrdinalNumber } from "../utils/utils.js" 
 
 const formTypes = ["Repair Request Generation", "Check Thermometer Returns", "Thermometer Clean-Up"]
 const bmeInputs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -39,11 +40,19 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
     const bmeNumbers = [];
     for (const value in inputValues) {
         const bme = inputValues[value].trim();
-        if (isValidBME(bme)) {
+        if (bmeNumbers.includes(bme)) {
+            const inputNumber = Number(value) + 1;
+            const inputNumberString = String(inputNumber);
+            showMessage("error", `The ${getOrdinalNumber(inputNumberString)} input BME #: ${bme} is duplicated. Please check the entered values.`)
+            return;
+        }
+        else if (isValidBME(bme)) {
             bmeNumbers.push(bme);
         }
         else {
-            showMessage("error", `The input BME #: ${bme} is not recognised as a valid BME. Please confirm the entered number and contact an administator if required.`)
+            const inputNumber = Number(value) + 1;
+            const inputNumberString = String(inputNumber);
+            showMessage("error", `The ${getOrdinalNumber(inputNumberString)} input BME #: ${bme} is not recognised as a valid BME. Please confirm the entered number and contact an administator if required.`)
             return;
         }        
     }

@@ -54,6 +54,22 @@ export function sortMandatoryFields(changedMandatoryFields) {
     return sortedFields;
 }
 
+export function getOrdinalNumber(number) {
+    const lastNumber = number.split("").slice(-1)[0];
+    if (lastNumber === '1') {
+        return `${number}st`
+    } 
+    else if (lastNumber === '2') {
+        return `${number}nd`
+    } 
+    else if (lastNumber === '3') {
+        return `${number}rd`
+    } 
+    else {
+        return `${number}th`
+    }
+}
+
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
