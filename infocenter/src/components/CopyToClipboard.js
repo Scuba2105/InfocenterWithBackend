@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { serverConfig } from '../server';
 
 export function ClipboardCopy({ copyText, identifier }) {
     const [isCopied, setIsCopied] = useState(false);
@@ -32,7 +33,7 @@ export function ClipboardCopy({ copyText, identifier }) {
   
     return (
         <>
-            {isCopied ? <span className={`copied-text${identifier}`} >Copied!</span> : <img src={`http://localhost:5000/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : `copy-image${identifier}`} onClick={handleCopyClick}></img>}
+            {isCopied ? <span className={`copied-text${identifier}`} >Copied!</span> : <img src={`http://${serverConfig.host}:${serverConfig.port}/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : `copy-image${identifier}`} onClick={handleCopyClick}></img>}
         </>
     );
 }

@@ -3,7 +3,7 @@ import { useConfirmation } from "./StateStore"
 import { Input } from "./Input"
 import { SelectInput } from "./SelectInput"
 import { capitaliseFirstLetters, sortMandatoryFields } from "../utils/utils"
-
+import { serverConfig } from "../server"
 
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
@@ -56,7 +56,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 const formData = createFormData(updateData.current);
 
                 // Post the data to the server  
-                const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
+                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
                         method: "PUT", // *GET, POST, PUT, DELETE, etc.
                         mode: "cors", // no-cors, *cors, same-origin
                         redirect: "follow", // manual, *follow, error
@@ -68,6 +68,22 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 })
     
                 const data = await res.json();
+
+                if (data.type === "Error") {
+                    closeDialog();
+                    showMessage("error", `${data.message}`);
+                }
+                else {                            
+                    // Need to update app data.
+                    queryClient.invalidateQueries('dataSource');
+        
+                    closeDialog();
+                    showMessage("info", 'Resources have been successfully updated!');
+                    setTimeout(() => {
+                        closeDialog();
+                        closeAddModal();
+                    }, 1600);
+                }
                 
             }
             proceedwithUpload();
@@ -139,7 +155,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             const formData = createFormData(updateData.current);
 
             //Post the data to the server  
-            const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
+            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
                     method: "POST", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin
                     redirect: "follow", // manual, *follow, error
@@ -239,7 +255,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 const formData = createFormData(updateData.current);                       
 
                 // Post the data to the server  
-                const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
+                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
                         method: "PUT", // *GET, POST, PUT, DELETE, etc.
                         mode: "cors", // no-cors, *cors, same-origin
                         redirect: "follow", // manual, *follow, error
@@ -251,7 +267,22 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 })
 
                 const data = await res.json();
-                
+
+                if (data.type === "Error") {
+                    closeDialog();
+                    showMessage("error", `${data.message}`);
+                }
+                else {                            
+                    // Need to update app data.
+                    queryClient.invalidateQueries('dataSource');
+        
+                    closeDialog();
+                    showMessage("info", 'Resources have been successfully updated!');
+                    setTimeout(() => {
+                        closeDialog();
+                        closeAddModal();
+                    }, 1600);
+                }
             }
         }
     }

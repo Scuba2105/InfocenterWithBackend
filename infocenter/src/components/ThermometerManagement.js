@@ -1,6 +1,7 @@
 import useMediaQueries from "media-queries-in-react";
 import { SelectInput } from "./SelectInput";
 import { Input } from "./Input";
+import { serverConfig } from "../server";
 
 const formTypes = ["Repair Request Generation", "Check Thermometer Returns", "Thermometer Clean-Up"]
 const bmeInputs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -61,7 +62,7 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
 
     try {
         // Send the data to the backend
-        const res = await fetch(`http://localhost:5000/Thermometers/${formTypes[index].replace(/\s/ig, "")}`, {
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/${formTypes[index].replace(/\s/ig, "")}`, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error

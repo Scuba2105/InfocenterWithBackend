@@ -1,6 +1,7 @@
 import { capitaliseFirstLetters } from "../utils/utils"; 
-import useMediaQueries from "media-queries-in-react" 
-import { useRef, useState } from 'react'
+import useMediaQueries from "media-queries-in-react"; 
+import { useRef, useState } from 'react';
+import { serverConfig } from "../server";
 
 const scrollDocumentsDevices = ['PIIC iX'];
 
@@ -93,7 +94,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
                 <div className="modal-title-bar" onMouseDown={mouseDown} onMouseUp={mouseUp}>
                     <div id="title-aligner"></div>     
                     <h2 className="model-title">{getFormHeading(page, type, selectedData)}</h2> 
-                    <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
+                    <img className="cross" src={`http://${serverConfig.host}:${serverConfig.port}/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
                 </div>
                 {children}
             </div> 
@@ -108,7 +109,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
                 <div className="modal-title-bar" onMouseDown={mouseDown} onMouseUp={mouseUp}>
                     <div id="title-aligner"></div>     
                     <h2 className="model-title">{type !== "update" ? `${selectedData.model} ${formatTypeHeading(type)}` : `Update ${selectedData.model} Resources`}</h2> 
-                    <img className="cross" src={`http://localhost:5000/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
+                    <img className="cross" src={`http://${serverConfig.host}:${serverConfig.port}/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
                 </div>
                 {children}
             </div> 

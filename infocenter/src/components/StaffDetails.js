@@ -1,5 +1,6 @@
 import useMediaQueries from "media-queries-in-react" ;
 import { workshops } from "../data";
+import { serverConfig } from "../server";
 
 const teamColors = {Management: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
 border: '1px solid rgb(137, 44, 44)', color: 'rgb(137, 44, 44)'}, JHH: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
@@ -28,14 +29,14 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
                 <div className={mediaQueries.laptop === true ? "staff-logo-laptop" : "staff-logo-desktop"}>
-                    {selectedData.img ? <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://localhost:5000/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
-                    workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`http://localhost:5000/images/phone.svg`} alt="phone"></img></div> :
-                    <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://localhost:5000/images/staff/blank-profile.png`} alt="staff" style={{border: "1px solid black"}}></img>}
+                    {selectedData.img ? <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
+                    workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
+                    <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/blank-profile.png`} alt="staff" style={{border: "1px solid black"}}></img>}
                 </div>
                 <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
                     <div className="name-update-container">
                         <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>}
+                        {!workshops.includes(selectedData.name) && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>}
                     </div>
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"} style={selectedData.id !== '-' ? {color: getTextColor(selectedData.team)} : {color: getTextColor("default")}}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

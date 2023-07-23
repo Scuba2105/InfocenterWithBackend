@@ -222,7 +222,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
         })
     } catch (err) {
         // Send the error response message.
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
     }
     
 }

@@ -3,7 +3,7 @@ import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
 import { AddEditStaff } from "./AddEditStaff";
-
+import { serverConfig } from "../server";
 
 export function AddNewForm({page, selectedData, pageData, queryClient, showMessage, closeDialog, closeAddModal}) {
     
@@ -94,7 +94,7 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
         showMessage("uploading", `Uploading ${model} Data`)
 
         // Post the data to the server  
-        const res = await fetch(`http://localhost:5000/AddNewEntry/${page}`, {
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

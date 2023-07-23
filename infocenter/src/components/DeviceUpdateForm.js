@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
+import { serverConfig } from '../server';
 
 const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU', 'OT', 'PACU', 'SCU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
@@ -60,7 +61,7 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
         showMessage("uploading", `Uploading ${selectedData.model} Data`)
              
         // Post the form data to the server. 
-        const res = await fetch(`http://localhost:5000/UpdateEntry/${page}`, {
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
                 method: "PUT", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

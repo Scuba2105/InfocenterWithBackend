@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PlaceholderIcon} from "../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
-import useMediaQueries from "media-queries-in-react" 
+import useMediaQueries from "media-queries-in-react";
+import { serverConfig } from "../server";
 
 function generateLinks(deviceData, type) {
     const formattedModel = deviceData.model.toLowerCase().replace(/\s/ig, '_');
     let link;
     if (type === 'service') {
-        link = `http://localhost:5000/manuals/service_manuals/${formattedModel}_service_manual.pdf`
+        link = `http://${serverConfig.host}:${serverConfig.port}/manuals/service_manuals/${formattedModel}_service_manual.pdf`
     } 
     else if (type === 'image') {
         const fileExtension = deviceData.img ? deviceData.img : 'jpg';
-         link = `http://localhost:5000/images/equipment/${formattedModel}.${fileExtension}`
+         link = `http://${serverConfig.host}:${serverConfig.port}/images/equipment/${formattedModel}.${fileExtension}`
     } 
     else if (type === 'user') {
-        link = `http://localhost:5000/manuals/user_manuals/${formattedModel}_user_manual.pdf`
+        link = `http://${serverConfig.host}:${serverConfig.port}/manuals/user_manuals/${formattedModel}_user_manual.pdf`
     } 
     
     return link
@@ -46,7 +47,7 @@ export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, sh
                     <div className={mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
                             <h2>{selectedData.model}</h2>
-                            <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://localhost:5000/images/edit.svg`} alt="edit"></img>Update</div>
+                            <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>
                         </div>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                     </div>
@@ -72,7 +73,7 @@ export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, sh
                         <DocumentsIcon color="#dc652f" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         Other Documents
                     </div>
-                    <div className="technical-link placeholder2" style={selectedData.placeholder2 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder2 === "" ? null : `http://localhost:5000/${selectedData.placeholder2}`} target="_blank" rel="noopener noreferrer">
+                    <div className="technical-link placeholder2" style={selectedData.placeholder2 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder2 === "" ? null : `http://${serverConfig.host}:${serverConfig.port}/${selectedData.placeholder2}`} target="_blank" rel="noopener noreferrer">
                         <PlaceholderIcon color="#33658A" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         Placeholder 2
                     </div>

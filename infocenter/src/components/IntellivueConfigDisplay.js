@@ -1,5 +1,6 @@
 import useMediaQueries from "media-queries-in-react"
 import { useState } from "react";
+import { serverConfig } from "../server";
 
 export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospitals,  departmentName, departmentsIndex, hospitalsIndex}) {
     
@@ -42,7 +43,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
                         <label>Date Created:</label>
                         <label>{parsedConfigData[departmentsIndex][3]}</label>
                     </div>
-                    <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex]}`} download={fileName} >Download</a>
+                    <a href={`http://${serverConfig.host}:${serverConfig.port}${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex]}`} download={fileName} >Download</a>
                 </div>
             </div>
             
@@ -89,7 +90,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
             })}
             </div>}
                 <div className="config-display-container">
-                    <img className="config-arrow config-left-arrow" onClick={updateIndicator} onMouseOver={toggleLeftArrowHovered} onMouseOut={toggleLeftArrowHovered} src={leftArrowHovered ? "http://localhost:5000/images/left-arrow-highlight.jpg" : "http://localhost:5000/images/left-arrow.jpg"} alt="left-arrow"></img>
+                    <img className="config-arrow config-left-arrow" onClick={updateIndicator} onMouseOver={toggleLeftArrowHovered} onMouseOut={toggleLeftArrowHovered} src={leftArrowHovered ? `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow-highlight.jpg` : `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
                         <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
                                 <div className="options-info">
@@ -104,10 +105,10 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
                                     <label>Date Created:</label>
                                     <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                                 </div>
-                                <a href={`http://localhost:5000${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
+                                <a href={`http://${serverConfig.host}:${serverConfig.port}${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
                         </div>
                     </div>
-                    <img className="config-arrow config-right-arrow" onClick={updateIndicator} onMouseOver={toggleRightArrowHovered} onMouseOut={toggleRightArrowHovered} src={rightArrowHovered ? "http://localhost:5000/images/left-arrow-highlight.jpg" : "http://localhost:5000/images/left-arrow.jpg"} alt="right-arrow"></img>
+                    <img className="config-arrow config-right-arrow" onClick={updateIndicator} onMouseOver={toggleRightArrowHovered} onMouseOut={toggleRightArrowHovered} src={rightArrowHovered ? `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow-highlight.jpg` : `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>
                 </div>
             </>
         );
