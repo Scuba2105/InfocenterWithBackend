@@ -59,18 +59,35 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
     // Show the uploading dialog while communicating with server
     showMessage("uploading", `Generating Repair Request Form...`);
 
-    // Send the data to the backend
-    const res = await fetch(`http://localhost:5000/Thermometers/${formTypes[index].replace(/\s/ig, "")}`, {
-        method: "PUT", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer",
-        headers: {
-            'Content-Type': 'application/json'
-            },
-        body: requestData
-    })
+    try {
+        // Send the data to the backend
+        const res = await fetch(`http://localhost:5000/Thermometers/${formTypes[index].replace(/\s/ig, "")}`, {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: requestData
+        });
 
+        if (res.status === 400) {
+            const error = await res.json();
+            throw new Error(error.message)
+        }
+
+        //Create a Blob from the PDF Stream
+        const file = new Blob([res.data], { type: "application/pdf" });
+        //Build a URL from the file
+        const fileURL = URL.createObjectURL(file);
+        //Open the URL on new Window
+        const pdfWindow = window.open();
+        pdfWindow.location.href = fileURL;
+        closeDialog();
+    } catch (error) {
+        showMessage("error-request", `"${error.message}"`);
+    }
 }
 
 function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {

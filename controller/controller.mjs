@@ -1,6 +1,7 @@
 import { Mutex } from 'async-mutex';
 import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
+import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
 
 // Define the mutex objects for both staff and device files.
 // Assists with preventing race conditions. 
@@ -233,12 +234,19 @@ export async function generateRepairRequest(req, res, __dirname) {
         const name = reqData.name;
         const bmeNumbers = reqData["bme-numbers"];
         
-        // Check the serial numbers in the database
+        // Get the serial numbers in the database at this point
+        // For now just hardcode the serial numbers
+        const serialNumbers = ["N16934567", "N1693847", "N1704848", "N1704848", "N1705743"]
 
         // Write the serial numbers and name data into the Genius 3 Form Template
+        const pdfBytes = await populateGenius3RequestTemplate(name, serialNumbers);
+        
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        res.contentType("application/pdf");
+        res.end(pdfBytes);
     } catch (err) {
         // Send the error response message.
-        console.log(err);
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
+        res.status(400).json({message: err.message});
     }
 }

@@ -62,16 +62,22 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
             return (
                 <>
                     <dialog open id="dialog-background">
-                        <div id="dialog-box">
-                            <div className="dialog-title" style={dialogType === "error" ? {color: "#ed1b2e", backgroundColor: "#fbd4d7"} : 
+                        <div id={dialogType === "error-request" ? "dialog-box-error-request" : "dialog-box"}>
+                            <div className="dialog-title" style={dialogType === "error" || dialogType === "error-request" ? {color: "#ed1b2e", backgroundColor: "#fbd4d7"} : 
                             dialogType === "info" ? {color: "#4052c5", backgroundColor: "#ced4fa"} : 
                             {color: "#fea500", backgroundColor: "#fdefd6"}}>
-                                <img className="info-icon" src={`http://localhost:5000/images/${dialogType}-icon.jpg`} alt="information"></img>
-                                <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType)} Message`}</h3>
+                                <img className="info-icon" src={`http://localhost:5000/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
+                                <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType).split("-")[0]} Message`}</h3>
                             </div>
-                            <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
-                                <p>{message}</p>
-                                {(dialogType === "error" || dialogType === "warning") && <button id="closeBtn" value="default" onClick={closeDialog}>Close</button>}
+                            <div className={dialogType === "info" ? "dialog-body-info" : dialogType === "error-request" ? "dialog-body-error-request" : "dialog-body"}>
+                                {dialogType === "error-request" ?
+                                    <>
+                                        <p>An error occurred generating the request form;</p>
+                                        <p>{message}</p>
+                                        <p>Try again and if the issue persists contact an Administrator</p>
+                                    </> :
+                                    <p>{message}</p>}
+                                {(dialogType === "error" || dialogType === "warning" || dialogType === "error-request") && <button id="closeBtn" value="default" onClick={closeDialog}>Close</button>}
                             </div>
                         </div>
                     </dialog>
