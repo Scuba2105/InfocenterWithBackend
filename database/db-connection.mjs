@@ -1,23 +1,29 @@
 import { Connection, Request } from "tedious";
 import { localDBConfig } from "../config.mjs";
 
-const connection = new Connection(localDBConfig);
+export function queryDB(query) {
+  const connection = new Connection(localDBConfig);
 
-connection.connect((err) => {
-  if (err) {
-    console.log('Connection Failed');
-    throw err;
-  }
+  connection.connect((err) => {
+    if (err) {
+      console.log('Connection Failed');
+      throw err;
+    }
 
-  executeStatement();
-});
+    executeStatement(query);
+  });
+}
 
-function executeStatement() {
-  const request = new Request('SELECT TOP (10) * FROM Equipment', (err, rowCount) => {
+function executeStatement(query) {
+  
+  const serialNumberLookup = [];
+
+  const request = new Request(query, (err, rowCount) => {
     if (err) {
       throw err;
     }
 
+    console.log(serialNumberLookup);
     console.log('DONE!');
     connection.close();
   });
@@ -28,7 +34,7 @@ function executeStatement() {
       if (column.value === null) {
         console.log('NULL');
       } else {
-        console.log(column.value);
+        serialNumberLookup.push(column.value);
       }
     });
   });
