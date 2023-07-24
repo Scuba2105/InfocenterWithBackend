@@ -432,6 +432,10 @@
       {
         "label": "Intellivue Compatibility Matrix",
         "filePath": "/documents/MX450/intellivue_compatibility_matrix.xlsx"
+      },
+      {
+        "label": "Support Tool IFU",
+        "filePath": "/documents/MX450/SupportTool_IFU.pdf"
       }
     ],
     "placeholder2": ""

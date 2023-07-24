@@ -15,4 +15,3 @@ async function queryDB() {
 const serialBMELookup = await queryDB();
 console.log(serialBMELookup.recordset);
 
-//queryDB("SELECT BMENO, SERIAL_NO FROM tblEquipment WHERE LocationCurrent = 294 AND MANUFACT LIKE '%SLE%'");
