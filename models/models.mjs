@@ -1,3 +1,6 @@
+import sql from "mssql";
+import { localDBConfig } from "../config.mjs";
+import { localEMSConfig } from "../config.mjs";
 import { determineTeam } from "../utils/utils.mjs";
 
 const staffObjectPropLookup = {"name": "name", "id": "id", "hospital": "hospital", "position": "position", 
@@ -35,3 +38,32 @@ export function getEmployee(staffArray, name) {
         return entry.name = name;
     })
 }
+
+// Get the Genius3 Serial Numbers from the BME list input
+export async function getGenius3Serial(parameter) {
+  try {
+
+      // Need to validate the parameter input
+      // Connect to the database
+      await sql.connect(localDBConfig);  
+      
+      // Create a new request object
+      const request = new sql.Request()
+            
+      // make sure that any items are correctly URL encoded in the connection string
+      const result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
+      
+      // Need to close connection
+      return result.recordset;
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+// const array = ["37646", "57565", "45742", "55406", "53729", "37746", "54024", "51784", "47767"];
+// const lastIndex = array.length - 1;
+// const queryParameter = array.map((bme, index) => {
+//   return index === 0 ? `(${bme}` : index === lastIndex ? `${bme})` : `${bme}`
+// }).join(",");
+
+

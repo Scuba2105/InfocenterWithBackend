@@ -2,6 +2,7 @@ import { Mutex } from 'async-mutex';
 import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
+import { getGenius3Serial } from '../models/models.mjs';
 
 // Define the mutex objects for both staff and device files.
 // Assists with preventing race conditions. 
@@ -227,16 +228,32 @@ export async function updateExistingStaffData(req, res, __dirname) {
     
 }
 
-export async function generateRepairRequest(req, res, __dirname) {
+export async function generateThermometerRepairRequest(req, res, __dirname) {
     try {
         const jsonData = JSON.stringify(req.body);
         const reqData = JSON.parse(jsonData);
         const name = reqData.name;
         const bmeNumbers = reqData["bme-numbers"];
         
-        // Get the serial numbers in the database at this point
-        // For now just hardcode the serial numbers
-        const serialNumbers = ["N16934567", "N1693847", "N1704848", "N1704848", "N1705743"]
+        // Need to validate the bmeNumbers input *****************
+        
+        // Generate the bme list to input as a parameter
+        const lastIndex = bmeNumbers.length - 1;
+        const queryParameter = bmeNumbers.map((bme, index) => {
+            return index === 0 ? `(${bme}` : index === lastIndex ? `${bme})` : `${bme}`
+        }).join(",");
+
+        // Get the genius 3 serial numbers
+        const bmeSerialLookup = await getGenius3Serial(queryParameter);
+
+        //****** Need to check that number of returned elements corresponds to input size. Otherwise could be incorrect BME input.
+        
+        // The get the serial number from the returned data.
+        const serialNumbers = bmeSerialLookup.map((element) => {
+            return element["Serial_No"];
+        });
+
+        console.log(serialNumbers);
 
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);

@@ -4,7 +4,7 @@ import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
 import { cpUpload } from './file-handling/file-uploads.mjs';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateRepairRequest } from './controller/controller.mjs';
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateThermometerRepairRequest } from './controller/controller.mjs';
 
 
 // Define the root directory and the port for the server 
@@ -80,7 +80,7 @@ app.put('/Thermometers/:requestType', async (req, res) => {
     const requestType = req.params.requestType;
     if (requestType === "RepairRequestGeneration") {
         try {
-            await generateRepairRequest(req, res, rootDirectory)
+            await generateThermometerRepairRequest(req, res, rootDirectory)
         }
         catch(err) {
             console.log(err);
