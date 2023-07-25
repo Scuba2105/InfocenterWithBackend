@@ -23,6 +23,14 @@ app.use(express.static('public'));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
+// // Express error handler
+// app.use(function (err, req, res, next) {
+//     if (res.headersSent) {
+//         return next(err)
+//     }
+//     res.status(400).json({type: "Error", message: err.message});
+// });
+
 app.get("/getData", async (req, res) => {
     try {
         await getAllData(req, res, rootDirectory);
@@ -31,50 +39,33 @@ app.get("/getData", async (req, res) => {
     }
 });
 
-app.put("/UpdateEntry/:page", async (req, res) => {
+app.put("/UpdateEntry/:page", cpUpload, async (req, res) => {
     try {
-        cpUpload(req, res, async function (err) {
-            if (err) {
-                res.send('Error occurred');
-                res.json({type: "Error", message: err.message});
-            }
-            else {
-                const page = req.params.page; 
-                if (page === "technical-info") {
-                    updateExistingDeviceData(req, res, rootDirectory);  
-                }
-                else if (page === "staff") {
-                    updateExistingStaffData(req, res, rootDirectory); 
-                }
-                      
-            }
-        });
+        const page = req.params.page; 
+        if (page === "technical-info") {
+            updateExistingDeviceData(req, res, rootDirectory);  
+        }
+        else if (page === "staff") {
+            updateExistingStaffData(req, res, rootDirectory); 
+        }
     } 
     catch (err) {
-        console.error(err);
+        res.status(400).json({type: "Error", message: err.message});
     }
 });
 
-app.post('/AddNewEntry/:page', async (req, res) => {
+app.post('/AddNewEntry/:page', cpUpload, async (req, res) => {
     try {
-        cpUpload(req, res, function (err) {
-            if (err) {
-                console.log('Error');
-                res.json({type: "Error", message: err.message});
-            }
-            else {
-                const page = req.params.page; 
-                if (page === "technical-info") {
-                    addNewDeviceData(req, res, rootDirectory);
-                }
-                else if (page === "staff") {
-                    addNewStaffData(req, res, rootDirectory);
-                }
-            }
-        })
+        const page = req.params.page; 
+        if (page === "technical-info") {
+            addNewDeviceData(req, res, rootDirectory);
+        }
+        else if (page === "staff") {
+            addNewStaffData(req, res, rootDirectory);
+        }
     }
     catch(err) {
-        console.log(err);
+        res.status(400).json({type: "Error", message: err.message});
     }
 })
 
@@ -85,10 +76,14 @@ app.put('/Thermometers/:requestType', async (req, res) => {
             await generateThermometerRepairRequest(req, res, rootDirectory)
         }
         catch(err) {
-            console.log(err);
+            res.status(400).json({type: "Error", message: err.message});
         }
     }
 });
+
+(err , req , res, next) => {
+    res.status(400).json({type: "Error", message: err.message});
+}
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
