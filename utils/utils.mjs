@@ -130,3 +130,17 @@ export function generateEmailAddress(name) {
     const emailAddress = name === "Azmi Refal" ? `Mohamed${name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `${name.replace(' ', '.').replace(' ', '-')}@health.nsw.gov.au`;
     return emailAddress;
 }
+
+export function isValidBME(bme) {
+    const firstNumber = bme[0];
+    const otherNumbers = bme.split("").slice(1).join("");
+    if (bme.length === 5 && !isNaN(bme)) {
+        return true;
+    }
+    else if ((firstNumber === "E" || firstNumber === "e") && !isNaN(otherNumbers)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
