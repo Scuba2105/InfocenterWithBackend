@@ -3,6 +3,7 @@ import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generate
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
 import { getGenius3Serial } from '../models/models.mjs';
+import { isValidBME } from '../utils/utils.mjs';
 
 // Define the mutex objects for both staff and device files.
 // Assists with preventing race conditions. 
@@ -235,8 +236,13 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         const name = reqData.name;
         const bmeNumbers = reqData["bme-numbers"];
         
-        // Need to validate the bmeNumbers input *****************
-        
+        // Need to validate the bmeNumbers input 
+        bmeNumbers.forEach((bme) => {
+                if (!isValidBME(bme)) {
+                    throw new Error(`The BME #: ${bme} is not recognised as a valid BME. Please check the input.`)
+                }
+        })
+                
         // Generate the bme list to input as a parameter
         const lastIndex = bmeNumbers.length - 1;
         const queryParameter = bmeNumbers.map((bme, index) => {
@@ -246,19 +252,34 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         // Get the genius 3 serial numbers
         const bmeSerialLookup = await getGenius3Serial(queryParameter);
 
-        // Need to check that number of returned elements corresponds to input size. Otherwise could be incorrect BME input or another device.
-        // Loop over returned data. Check all entries are title 'Thermometer, Infrared, Ear'
+        // Declare the serial number and BME arrays
+        let returnedBME = [];
+        const serialNumbers = [];
+
+        // Check if any returned data is not Genius 3 and send an error
+        const errorBME = bmeSerialLookup.reduce((acc, entry) => {
+            returnedBME.push(entry["BMENO"]);
+            serialNumbers.push(entry["SERIAL_NO"]);
+            if (entry.BRAND_NAME !== 'Genius 3') {
+                acc.push(entry.BMENO);
+                return acc;
+            }
+        }, []);
+
+        if (errorBME.length > 0) {
+            const errBmeString = errorBME.map((bme) => {
+                return `BME #: ${bme}`
+            }).join(',');
+            throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, do not correspond to Genius 3 Thermometers. Please review the entered data.`)
+        }
+
         // Check the size of the returned data to make sure all bme input returns a serial number. 
+        for (const bme in bmeNumbers) {
+            if (!returnedBME.includes(bme)) {
+                throw new Error(`The BME #: ${bme} doesn't exist in the database. Please check the entered data.`);
+            }
+        }
         
-        console.log(bmeSerialLookup);
-
-        // The get the serial number from the returned data.
-        const serialNumbers = bmeSerialLookup.map((element) => {
-            return element["Serial_No"];
-        });
-
-        console.log(serialNumbers);
-
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
         
