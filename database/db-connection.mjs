@@ -14,7 +14,8 @@ async function getGenius3Serial(parameter) {
       // make sure that any items are correctly URL encoded in the connection string
       const result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
       return result.recordset;
-  } catch (error) {
+  } 
+  catch (error) {
       console.log(error);
   }
 }

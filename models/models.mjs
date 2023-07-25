@@ -45,13 +45,13 @@ export async function getGenius3Serial(parameter) {
 
       // Need to validate the parameter input
       // Connect to the database
-      await sql.connect(localDBConfig);  
+      await sql.connect(localEMSConfig);  
       
       // Create a new request object
       const request = new sql.Request()
             
       // make sure that any items are correctly URL encoded in the connection string
-      const result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
+      const result = await request.query(`SELECT BMENO, Serial_No, TITLE FROM tblEquipment WHERE BMENO IN ${parameter}`);
       
       // Need to close connection
       return result.recordset;

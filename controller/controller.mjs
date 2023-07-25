@@ -240,14 +240,18 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         // Generate the bme list to input as a parameter
         const lastIndex = bmeNumbers.length - 1;
         const queryParameter = bmeNumbers.map((bme, index) => {
-            return index === 0 ? `(${bme}` : index === lastIndex ? `${bme})` : `${bme}`
+            return index === 0 ? `('${bme}'` : index === lastIndex ? `'${bme}')` : `'${bme}'`
         }).join(",");
-
+        
         // Get the genius 3 serial numbers
         const bmeSerialLookup = await getGenius3Serial(queryParameter);
 
-        //****** Need to check that number of returned elements corresponds to input size. Otherwise could be incorrect BME input.
+        // Need to check that number of returned elements corresponds to input size. Otherwise could be incorrect BME input or another device.
+        // Loop over returned data. Check all entries are title 'Thermometer, Infrared, Ear'
+        // Check the size of the returned data to make sure all bme input returns a serial number. 
         
+        console.log(bmeSerialLookup);
+
         // The get the serial number from the returned data.
         const serialNumbers = bmeSerialLookup.map((element) => {
             return element["Serial_No"];
