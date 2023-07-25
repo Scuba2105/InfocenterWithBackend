@@ -26,10 +26,10 @@ const storage = multer.diskStorage({
             createDirectory(path.join(__dirname, `public/documents/${model}`))
             cb(null, path.join(__dirname, `public/documents/${model}`))            
         }  
-        else if (file.fieldname === "image-file") {
+        else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
             cb(null, path.join(__dirname, `public/images/equipment`))
         }
-        else if (file.fieldname === "employee-photo") {
+        else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
             cb(null, path.join(__dirname, `public/images/staff`))
         }
         else {

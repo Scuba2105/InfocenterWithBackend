@@ -35,6 +35,7 @@ app.put("/UpdateEntry/:page", async (req, res) => {
     try {
         cpUpload(req, res, async function (err) {
             if (err) {
+                res.send('Error occurred');
                 res.json({type: "Error", message: err.message});
             }
             else {
@@ -56,8 +57,9 @@ app.put("/UpdateEntry/:page", async (req, res) => {
 
 app.post('/AddNewEntry/:page', async (req, res) => {
     try {
-        cpUpload(req, res, async function (err) {
+        cpUpload(req, res, function (err) {
             if (err) {
+                console.log('Error');
                 res.json({type: "Error", message: err.message});
             }
             else {

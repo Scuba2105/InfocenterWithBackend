@@ -100,15 +100,14 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
                 redirect: "follow", // manual, *follow, error
                 referrerPolicy: "no-referrer",
                 body: newData.current,
-        }).catch((error) => {
-            closeDialog();
-            showMessage("error", error.message);
-        })
+        });
 
         const data = await res.json();
+        console.log(data);
+
         if (data.type === "Error") {
             closeDialog();
-            showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
+            showMessage("error", `${data.message}. Please check the image file is either jpg or png and try again. If the issue persists contact the administrator.`);
         }
         else {
             // Need to clear formData at this point
