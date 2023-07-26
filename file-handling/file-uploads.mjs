@@ -51,3 +51,4 @@ export const cpUpload = upload.fields([{name: 'service_manual', maxCount: 1}, {n
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
 {name: 'employee-photo', maxCount: 1}])
+

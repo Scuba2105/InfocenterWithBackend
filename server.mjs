@@ -3,12 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { cpUpload } from './file-handling/file-uploads.mjs';
 import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateThermometerRepairRequest } from './controller/controller.mjs';
-
+import { capitaliseFirstLetters } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
-const rootDirectory = path.dirname('.');
+const __dirname = path.dirname('.');
 const PORT = process.env.PORT || 5000;
 
 // Define the express app
@@ -23,67 +22,130 @@ app.use(express.static('public'));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-// // Express error handler
-// app.use(function (err, req, res, next) {
-//     if (res.headersSent) {
-//         return next(err)
-//     }
-//     res.status(400).json({type: "Error", message: err.message});
-// });
+// Used with Multer for storing uploaded files on disk.
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const model = req.body.model ? req.body.model.toLowerCase() : null;
+        const documentsFieldRegex = /file[1-4]/;
+        
+        if (file.fieldname === "service_manual" && file.mimetype === 'application/pdf') {
+            cb(null, path.join(__dirname, `public/manuals/service_manuals`))
+        }
+        else if (file.fieldname === "user_manual" && file.mimetype === 'application/pdf') {
+            cb(null, path.join(__dirname, `public/manuals/user_manuals`))
+        } 
+        else if (file.fieldname === "configs") {
+            const hospital = convertHospitalName(req.body.hospital);
+            createDirectory(path.join(__dirname, `public/configurations/${hospital}/${model}`))
+            cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
+        }
+        else if (documentsFieldRegex.test(file.fieldname)) {
+            createDirectory(path.join(__dirname, `public/documents/${model}`))
+            cb(null, path.join(__dirname, `public/documents/${model}`))            
+        }  
+        else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
+            cb(null, path.join(__dirname, `public/images/equipment`))
+        }
+        else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
+            cb(null, path.join(__dirname, `public/images/staff`))
+        }
+        else {
+            const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
+            cb(new Error(`An error occurred trying to save the uploaded ${fileType}`));
+        }    
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+  })
 
+// Specify how to handle storage of file uploads. 
+const upload = multer({ storage: storage})
+
+// Define the field names to be used with Multer for the uploaded files.
+const cpUpload = upload.fields([{name: 'service_manual', maxCount: 1}, {name: 'user_manual', maxCount: 1}, 
+{name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
+{name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
+{name: 'employee-photo', maxCount: 1}])
+
+// Define route to get all data.
 app.get("/getData", async (req, res) => {
     try {
-        await getAllData(req, res, rootDirectory);
+        await getAllData(req, res, __dirname);
     } catch (err) {
-        console.error(err);
+        next(err);
     }
 });
 
+// Define route to update staff or equipment details. 
 app.put("/UpdateEntry/:page", cpUpload, async (req, res) => {
     try {
-        const page = req.params.page; 
-        if (page === "technical-info") {
-            updateExistingDeviceData(req, res, rootDirectory);  
-        }
-        else if (page === "staff") {
-            updateExistingStaffData(req, res, rootDirectory); 
-        }
+        cpUpload(req, res, async (err) => {
+            if (err) {
+                next(err);
+            }
+            else {
+                const page = req.params.page; 
+                if (page === "technical-info") {
+                    await updateExistingDeviceData(req, res, __dirname);  
+                }
+                else if (page === "staff") {
+                    await updateExistingStaffData(req, res, __dirname); 
+                }
+            }
+        })
     } 
     catch (err) {
-        res.status(400).json({type: "Error", message: err.message});
-    }
-});
-
-app.post('/AddNewEntry/:page', cpUpload, async (req, res) => {
-    try {
-        const page = req.params.page; 
-        if (page === "technical-info") {
-            addNewDeviceData(req, res, rootDirectory);
-        }
-        else if (page === "staff") {
-            addNewStaffData(req, res, rootDirectory);
-        }
-    }
-    catch(err) {
-        res.status(400).json({type: "Error", message: err.message});
-    }
+        next(err);
+    }     
 })
 
+
+
+// Define route to add new staff or equipment. 
+app.post('/AddNewEntry/:page', cpUpload, async (req, res) => {
+    try {
+        cpUpload(req, res, async (err) => {
+            if (err) {
+                next(err);
+            }
+            else {
+                const page = req.params.page; 
+                if (page === "technical-info") {
+                    await addNewDeviceData(req, res, __dirname);
+                }
+                else if (page === "staff") {
+                    await addNewStaffData(req, res, __dirname);
+                }
+            }
+        })
+    } 
+    catch (err) {
+        next(err);
+    }   
+})
+
+// define route for processing Genius 3 thermometers
 app.put('/Thermometers/:requestType', async (req, res) => {
     const requestType = req.params.requestType;
     if (requestType === "RepairRequestGeneration") {
         try {
-            await generateThermometerRepairRequest(req, res, rootDirectory)
+            await generateThermometerRepairRequest(req, res, __dirname)
         }
         catch(err) {
-            res.status(400).json({type: "Error", message: err.message});
+            next(err);
         }
     }
 });
 
-(err , req , res, next) => {
-    res.status(400).json({type: "Error", message: err.message});
-}
+// Error handler 
+app.use(async (err, req, res, next) => {
+    if (res.headersSent) {
+      return next(err);
+    }
+    console.log(res);
+    return await res.status(400).json({type: "Error", message: err.message});
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

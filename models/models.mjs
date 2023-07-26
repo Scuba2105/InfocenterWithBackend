@@ -40,7 +40,7 @@ export function getEmployee(staffArray, name) {
 }
 
 // Get the Genius3 Serial Numbers from the BME list input
-export async function getGenius3Serial(parameter) {
+export async function getGenius3Serial(parameter, length) {
   try {
 
       // Need to validate the parameter input
@@ -49,11 +49,20 @@ export async function getGenius3Serial(parameter) {
       
       // Create a new request object
       const request = new sql.Request()
-            
-      // make sure that any items are correctly URL encoded in the connection string
-      const result = await request.query(`SELECT BMENO, Serial_No, TITLE FROM tblEquipment WHERE BMENO IN ${parameter}`);
       
+      // declare result variable
+      let result;
+
+      // make sure that any items are correctly URL encoded in the connection string
+      if (length === 1) {
+        result = await request.query(`SELECT BMENO, Serial_No, BRAND_NAME FROM tblEquipment WHERE BMENO = ${parameter}`);
+      } 
+      else {
+        result = await request.query(`SELECT BMENO, Serial_No, BRAND_NAME FROM tblEquipment WHERE BMENO IN ${parameter}`);
+      }
+
       // Need to close connection
+      console.log(result);
       return result.recordset;
   } catch (error) {
       console.log(error);

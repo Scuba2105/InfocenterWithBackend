@@ -244,29 +244,34 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         })
                 
         // Generate the bme list to input as a parameter
-        const lastIndex = bmeNumbers.length - 1;
-        const queryParameter = bmeNumbers.map((bme, index) => {
+        const arrayLength = bmeNumbers.length;
+        const lastIndex = arrayLength - 1;
+        const queryParameter = lastIndex === 0 ? `'${bmeNumbers[0]}'` : bmeNumbers.map((bme, index) => {
             return index === 0 ? `('${bme}'` : index === lastIndex ? `'${bme}')` : `'${bme}'`
         }).join(",");
         
         // Get the genius 3 serial numbers
-        const bmeSerialLookup = await getGenius3Serial(queryParameter);
+        const bmeSerialLookup = await getGenius3Serial(queryParameter, arrayLength);
 
         // Declare the serial number and BME arrays
         let returnedBME = [];
         const serialNumbers = [];
+        
+        // Initialise error indicating a device is not Genius 3.
+        let notGenius3Error = false;
 
-        // Check if any returned data is not Genius 3 and send an error
+        // Check if any returned data is not Genius 3 and set error to true then send an error
         const errorBME = bmeSerialLookup.reduce((acc, entry) => {
             returnedBME.push(entry["BMENO"]);
-            serialNumbers.push(entry["SERIAL_NO"]);
-            if (entry.BRAND_NAME !== 'Genius 3') {
+            serialNumbers.push(entry["Serial_No"]);
+            if (entry.BRAND_NAME !== 'Genius 3' || entry.BRAND_NAME !== 'GENIUS 3') {
+                error === true;
                 acc.push(entry.BMENO);
                 return acc;
             }
         }, []);
 
-        if (errorBME.length > 0) {
+        if (notGenius3Error) {
             const errBmeString = errorBME.map((bme) => {
                 return `BME #: ${bme}`
             }).join(',');
@@ -275,11 +280,11 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
 
         // Check the size of the returned data to make sure all bme input returns a serial number. 
         for (const bme in bmeNumbers) {
-            if (!returnedBME.includes(bme)) {
+            if (!returnedBME.includes(bmeNumbers[bme])) {
                 throw new Error(`The BME #: ${bme} doesn't exist in the database. Please check the entered data.`);
             }
         }
-        
+          
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
         
