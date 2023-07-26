@@ -1727,25 +1727,28 @@ html {
 .utility-options {
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
   font-size: 7px;
   color: rgb(156, 155, 155);
   background-color: #202950;
+  padding: 0;
 }
 
 .utility-options > h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px 20px 5px 20px;
-  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .utility-selected {
-  background-color: rgb(250, 132, 209);/*radial-gradient(circle at center,#f45bbf, #202950 100%);*/
+  background-color: var(--light-theme);
   color: white;
+  margin: 0;
 }
 
 .utility-options > h2:hover {
@@ -1836,8 +1839,8 @@ html {
 }
 
 .bme-label {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .bme-input {
@@ -1860,7 +1863,7 @@ html {
 .thermometer-form-button {
   width: 60%;
   height: 40px;
-  background-color: #08AB7A;
+  background: linear-gradient(#036346, #059066);
   color: white;
   border: none;
   display: flex;

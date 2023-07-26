@@ -119,11 +119,9 @@ app.post('/AddNewEntry/:page', (req, res, next) => {
             else {
                 const page = req.params.page; 
                 if (page === "technical-info") {
-                    console.log(req.body, req.files)
                     addNewDeviceData(req, res, __dirname);
                 }
                 else if (page === "staff") {
-                    console.log(req.body, req.files)
                     addNewStaffData(req, res, __dirname);
                 }
             }
