@@ -115,7 +115,7 @@ export async function updateExistingDeviceData(req, res, __dirname) {
     }
     catch (err) {
         // Send the error response message.
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
     }
 }
 
@@ -170,7 +170,7 @@ export async function addNewStaffData(req, res, __dirname) {
             // Add any optional data provided to the data object
             const optionalData = {"dect-phone": "dectPhone", "work-mobile": "workMobile", "personal-mobile": "personalMobile",
             "extension": "img"};
-
+            console.log(req.body);
             // Loop over optional data and add to data object
             Object.keys(optionalData).forEach((key) => {
                 if (req.body[key]) {
@@ -189,7 +189,7 @@ export async function addNewStaffData(req, res, __dirname) {
         })   
     } catch (err) {
         // Send the error response message.
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administartor`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
     }
 }
 
@@ -238,9 +238,9 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         
         // Need to validate the bmeNumbers input 
         bmeNumbers.forEach((bme) => {
-                if (!isValidBME(bme)) {
-                    throw new Error(`The BME #: ${bme} is not recognised as a valid BME. Please check the input.`)
-                }
+            if (!isValidBME(bme)) {
+                throw new Error(`The BME #: ${bme} is not recognised as a valid BME. Please check the input.`)
+            }
         })
                 
         // Generate the bme list to input as a parameter

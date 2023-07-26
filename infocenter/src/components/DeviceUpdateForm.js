@@ -19,8 +19,14 @@ function capitaliseFirstLetters(input) {
     return formattedWords.join('-')
 }
 
-function formatText(text) {
-    return text.toLocaleLowerCase().replace(/\s/ig, '_');
+function formatText(text, fieldName) {
+    if (fieldName === "field-name") {
+        return text.toLocaleLowerCase().replace(/\s/ig, '-');
+    }
+    else {
+        return text.toLocaleLowerCase().replace(/\s/ig, '_');
+    }
+    
 }
 
 function generateHospitalLabel(name) {
@@ -59,41 +65,44 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
 
         // Show the uploading spinner dialog while uploading.
         showMessage("uploading", `Uploading ${selectedData.model} Data`)
-             
-        // Post the form data to the server. 
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
-                method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                body: updateData.current
-        }).catch((error) => {
-            closeDialog();
-            showMessage("error", error.message);
-        })
+          
+        try {
+        
+            // Post the form data to the server. 
+            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                    method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer",
+                    body: updateData.current
+            })
 
-        const data = await res.json();
-        if (data.type === "Error") {
-            closeDialog();
-            showMessage("error", `${data.message}. Please check the file type is pdf for service and user manuals and try again.`);
-        }
-        else {
-            // Need to clear formData at this point
-            for (const pair of updateData.current.entries()) {
-                if (!['model', 'manufacturer'].includes(pair[0])) {
-                    updateData.current.delete(pair[0]);
-                }
-            }
-
-            // Need to update app data.
-            queryClient.invalidateQueries('dataSource');
-
-            closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
-            setTimeout(() => {
+            const data = await res.json();
+            if (data.type === "Error") {
                 closeDialog();
-                closeUpdate();
-            }, 1600);
+                showMessage("error", `${data.message}.`);
+            }
+            else {
+                // Need to clear formData at this point
+                for (const pair of updateData.current.entries()) {
+                    if (!['model', 'manufacturer'].includes(pair[0])) {
+                        updateData.current.delete(pair[0]);
+                    }
+                }
+
+                // Need to update app data.
+                queryClient.invalidateQueries('dataSource');
+
+                closeDialog();
+                showMessage("info", 'Resources have been successfully updated!');
+                setTimeout(() => {
+                    closeDialog();
+                    closeUpdate();
+                }, 1600);
+            }
+        }
+        catch (error) {
+            showMessage("error", error.message);
         }
     } 
  
@@ -109,7 +118,7 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
             else {
                 // Get the extension from the uploaded file and append to the new filename in form data.
                 const extension = selectedFile.files[0].name.split('.').slice(-1)[0];
-                updateData.current.set(`${formatText(selectedOption)}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}.${extension}`);
+                updateData.current.set(`${formatText(selectedOption, "field-name")}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}.${extension}`);
                 showMessage("info", `The ${selectedOption} for ${selectedData.model} has been saved ready for upload.`)
                 setTimeout(() => {
                     closeDialog();

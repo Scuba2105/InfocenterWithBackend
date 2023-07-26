@@ -93,39 +93,45 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
         // Show the uploading spinner dialog while uploading.
         showMessage("uploading", `Uploading ${model} Data`)
 
-        // Post the data to the server  
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                body: newData.current,
-        });
+        try {
+        
+            // Post the data to the server  
+            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
+                    method: "POST", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer",
+                    body: newData.current,
+            });
 
-        const data = await res.json();
-        console.log(data);
+            const data = await res.json();
+            console.log(data);
 
-        if (data.type === "Error") {
-            closeDialog();
-            showMessage("error", `${data.message}. Please check the image file is either jpg or png and try again. If the issue persists contact the administrator.`);
-        }
-        else {
-            // Need to clear formData at this point
-            for (const pair of newData.current.entries()) {
-                if (!['model', 'manufacturer'].includes(pair[0])) {
-                    newData.current.delete(pair[0]);
-                }
-            }
-
-            // Need to update app data.
-            queryClient.invalidateQueries('dataSource');
-
-            closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
-            setTimeout(() => {
+            if (data.type === "Error") {
                 closeDialog();
-                closeAddModal();
-            }, 1600);
+                showMessage("error", `${data.message} If the issue persists contact the administrator.`);
+            }
+            else {
+                // Need to clear formData at this point
+                for (const pair of newData.current.entries()) {
+                    if (!['model', 'manufacturer'].includes(pair[0])) {
+                        newData.current.delete(pair[0]);
+                    }
+                }
+
+                // Need to update app data.
+                queryClient.invalidateQueries('dataSource');
+
+                closeDialog();
+                showMessage("info", 'Resources have been successfully updated!');
+                setTimeout(() => {
+                    closeDialog();
+                    closeAddModal();
+                }, 1600);
+            }
+        }
+        catch (error) {
+            showMessage("error", error.message);
         }
     }
 

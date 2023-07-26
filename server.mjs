@@ -28,10 +28,10 @@ const storage = multer.diskStorage({
         const model = req.body.model ? req.body.model.toLowerCase() : null;
         const documentsFieldRegex = /file[1-4]/;
         
-        if (file.fieldname === "service_manual" && file.mimetype === 'application/pdf') {
+        if (file.fieldname === "service-manual" && file.mimetype === 'application/pdf') {
             cb(null, path.join(__dirname, `public/manuals/service_manuals`))
         }
-        else if (file.fieldname === "user_manual" && file.mimetype === 'application/pdf') {
+        else if (file.fieldname === "user-manual" && file.mimetype === 'application/pdf') {
             cb(null, path.join(__dirname, `public/manuals/user_manuals`))
         } 
         else if (file.fieldname === "configs") {
@@ -46,13 +46,20 @@ const storage = multer.diskStorage({
         else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
             cb(null, path.join(__dirname, `public/images/equipment`))
         }
-        else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
+        else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
             cb(null, path.join(__dirname, `public/images/staff`))
         }
-        else {
+        else if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
             const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
-            cb(new Error(`An error occurred trying to save the uploaded ${fileType}`));
-        }    
+            return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the manual is a pdf and try again`));
+        }
+        else if ((file.fieldname === "employee-photo" || file.fieldname === "image-file") && (file.mimetype !== 'image/jpeg' || file.mimetype !== 'image/jpg' || file.mimetype !== 'image/png')) {
+            const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
+            return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the image file is either jpg or png and try again`));
+        }   
+        else {
+            return cb(new Error('An unknown error occurred. Please try again and contact the administrator if the issue persists'))
+        } 
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -63,7 +70,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage})
 
 // Define the field names to be used with Multer for the uploaded files.
-const cpUpload = upload.fields([{name: 'service_manual', maxCount: 1}, {name: 'user_manual', maxCount: 1}, 
+const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'user-manual', maxCount: 1}, 
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
 {name: 'employee-photo', maxCount: 1}])
@@ -78,19 +85,19 @@ app.get("/getData", async (req, res) => {
 });
 
 // Define route to update staff or equipment details. 
-app.put("/UpdateEntry/:page", cpUpload, async (req, res) => {
+app.put("/UpdateEntry/:page", (req, res, next) => {
     try {
-        cpUpload(req, res, async (err) => {
+        cpUpload(req, res, (err) => {
             if (err) {
                 next(err);
             }
             else {
                 const page = req.params.page; 
                 if (page === "technical-info") {
-                    await updateExistingDeviceData(req, res, __dirname);  
+                    updateExistingDeviceData(req, res, __dirname);  
                 }
                 else if (page === "staff") {
-                    await updateExistingStaffData(req, res, __dirname); 
+                    updateExistingStaffData(req, res, __dirname); 
                 }
             }
         })
@@ -103,19 +110,21 @@ app.put("/UpdateEntry/:page", cpUpload, async (req, res) => {
 
 
 // Define route to add new staff or equipment. 
-app.post('/AddNewEntry/:page', cpUpload, async (req, res) => {
+app.post('/AddNewEntry/:page', (req, res, next) => {
     try {
-        cpUpload(req, res, async (err) => {
+        cpUpload(req, res, (err) => {
             if (err) {
                 next(err);
             }
             else {
                 const page = req.params.page; 
                 if (page === "technical-info") {
-                    await addNewDeviceData(req, res, __dirname);
+                    console.log(req.body, req.files)
+                    addNewDeviceData(req, res, __dirname);
                 }
                 else if (page === "staff") {
-                    await addNewStaffData(req, res, __dirname);
+                    console.log(req.body, req.files)
+                    addNewStaffData(req, res, __dirname);
                 }
             }
         })
@@ -139,12 +148,12 @@ app.put('/Thermometers/:requestType', async (req, res) => {
 });
 
 // Error handler 
-app.use(async (err, req, res, next) => {
+app.use((err, req, res, next) => {
     if (res.headersSent) {
       return next(err);
     }
-    console.log(res);
-    return await res.status(400).json({type: "Error", message: err.message});
+    console.log(err);
+    return res.status(400).json({type: "Error", message: err.message});
 });
 
 app.listen(PORT, () => {

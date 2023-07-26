@@ -10,19 +10,15 @@ const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior
 const mandatoryFields = ["workshop", "position", "office-phone"];
 const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"];
 
-function createFormData(updateData) {
-    const formData = new FormData();
+function createFormData(updateData, formData) {
     for (const [key, value] of Object.entries(updateData)) {
         if (key === "employee-photo") {
             formData.set(key, value.file, value.fileName);
         }
         else {
-
+            formData.set(key, value);
         }
-        formData.set(key, value);
     }
-
-    return formData
 }
 
 export function AddEditStaff({type, page, selectedData, queryClient, showMessage, closeDialog, closeAddModal}) {
@@ -30,8 +26,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     // Define add new form DOM element and formdata refs
     const updateData = useRef({});
     if (type === "update") {
-        updateData.name = selectedData.name;
-        updateData.id = selectedData.id;
+        updateData.current.name = selectedData.name;
+        updateData.current.id = selectedData.id;
     }
     const formContainer = useRef(null);
 
@@ -53,38 +49,41 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 showMessage("uploading", `Uploading Employee Data`);
 
                 // Need to convert update data object into a FormData object.
-                const formData = createFormData(updateData.current);
+                const formData = new FormData(); 
+                createFormData(updateData.current, formData);
 
-                // Post the data to the server  
-                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
-                        method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                        mode: "cors", // no-cors, *cors, same-origin
-                        redirect: "follow", // manual, *follow, error
-                        referrerPolicy: "no-referrer",
-                        body: formData,
-                }).catch((error) => {
-                    closeDialog();
-                    showMessage("error", error.message);
-                })
-    
-                const data = await res.json();
+                try {
 
-                if (data.type === "Error") {
-                    closeDialog();
-                    showMessage("error", `${data.message}`);
-                }
-                else {                            
-                    // Need to update app data.
-                    queryClient.invalidateQueries('dataSource');
+                    // Post the data to the server  
+                    const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                            mode: "cors", // no-cors, *cors, same-origin
+                            redirect: "follow", // manual, *follow, error
+                            referrerPolicy: "no-referrer",
+                            body: formData,
+                    })
         
-                    closeDialog();
-                    showMessage("info", 'Resources have been successfully updated!');
-                    setTimeout(() => {
+                    const data = await res.json();
+
+                    if (data.type === "Error") {
                         closeDialog();
-                        closeAddModal();
-                    }, 1600);
+                        showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+                    }
+                    else {                            
+                        // Need to update app data.
+                        queryClient.invalidateQueries('dataSource');
+            
+                        closeDialog();
+                        showMessage("info", 'Resources have been successfully updated!');
+                        setTimeout(() => {
+                            closeDialog();
+                            closeAddModal();
+                        }, 1600);
+                    }
+                } 
+                catch (error) {
+                    showMessage("error", `${error.message}.`)
                 }
-                
             }
             proceedwithUpload();
         }
@@ -152,38 +151,46 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             showMessage("uploading", `Uploading Employee Data`);
             
             // Need to convert update data object into a FormData object.
-            const formData = createFormData(updateData.current);
-
-            //Post the data to the server  
-            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
-                    method: "POST", // *GET, POST, PUT, DELETE, etc.
-                    mode: "cors", // no-cors, *cors, same-origin
-                    redirect: "follow", // manual, *follow, error
-                    referrerPolicy: "no-referrer",
-                    body: formData,
-            }).catch((error) => {
-                closeDialog();
-                showMessage("error", error.message);
-            })
-    
-            // Parse the received response
-            const data = await res.json();
-    
-            if (data.type === "Error") {
-                closeDialog();
-                showMessage("error", `${data.message}. Please check the image file which was uploaded and try again. If the issue persists contact the administrator.`);
+            const formData = new FormData(); 
+            createFormData(updateData.current, formData);
+            
+            for (const pair of formData.entries()) {
+                console.log(pair[0], pair[1]);
             }
-            else {
-                
-                // Need to update app data.
-                queryClient.invalidateQueries('dataSource');
+
+            try {
+
+                //Post the data to the server  
+                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
+                        method: "POST", // *GET, POST, PUT, DELETE, etc.
+                        mode: "cors", // no-cors, *cors, same-origin
+                        redirect: "follow", // manual, *follow, error
+                        referrerPolicy: "no-referrer",
+                        body: formData,
+                })
         
-                closeDialog();
-                showMessage("info", 'Resources have been successfully updated!');
-                setTimeout(() => {
+                // Parse the received response
+                const data = await res.json();
+        
+                if (data.type === "Error") {
                     closeDialog();
-                    closeAddModal();
-                }, 1600);
+                    showMessage("error", `${data.message}. If the issue persists contact an administrator.`);
+                }
+                else {
+                
+                    // Need to update app data.
+                    queryClient.invalidateQueries('dataSource');
+            
+                    closeDialog();
+                    showMessage("info", 'Resources have been successfully updated!');
+                    setTimeout(() => {
+                        closeDialog();
+                        closeAddModal();
+                    }, 1600);
+                }
+            }
+            catch (error) {
+                showMessage("error", `${error.message}.`)
             }
         }
         else if (type === "update") {
@@ -252,36 +259,38 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 showMessage("uploading", `Uploading Employee Data`);
 
                 // Need to convert update data object into a FormData object.
-                const formData = createFormData(updateData.current);                       
+                const formData = new FormData(); 
+                createFormData(updateData.current, formData);
+                
+                try {
+                    // Post the data to the server  
+                    const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                            mode: "cors", // no-cors, *cors, same-origin
+                            redirect: "follow", // manual, *follow, error
+                            referrerPolicy: "no-referrer",
+                            body: formData,
+                    })
 
-                // Post the data to the server  
-                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
-                        method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                        mode: "cors", // no-cors, *cors, same-origin
-                        redirect: "follow", // manual, *follow, error
-                        referrerPolicy: "no-referrer",
-                        body: formData,
-                }).catch((error) => {
-                    closeDialog();
-                    showMessage("error", error.message);
-                })
+                    const data = await res.json();
 
-                const data = await res.json();
-
-                if (data.type === "Error") {
-                    closeDialog();
-                    showMessage("error", `${data.message}`);
-                }
-                else {                            
-                    // Need to update app data.
-                    queryClient.invalidateQueries('dataSource');
-        
-                    closeDialog();
-                    showMessage("info", 'Resources have been successfully updated!');
-                    setTimeout(() => {
+                    if (data.type === "Error") {
                         closeDialog();
-                        closeAddModal();
-                    }, 1600);
+                        showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+                    }
+                    else {                            
+                        // Need to update app data.
+                        queryClient.invalidateQueries('dataSource');
+            
+                        closeDialog();
+                        showMessage("info", 'Resources have been successfully updated!');
+                        setTimeout(() => {
+                            closeDialog();
+                            closeAddModal();
+                        }, 1600);
+                    }
+                } catch (error) {
+                    showMessage("error", `${error.message}.`)
                 }
             }
         }
