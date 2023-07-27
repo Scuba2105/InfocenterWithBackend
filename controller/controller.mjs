@@ -271,6 +271,7 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
             }
         }, []);
 
+        // If any returned devices are not Genius 3, then throw an error indicating the at fault BME numbers.
         if (notGenius3Error) {
             const errBmeString = errorBME.map((bme) => {
                 return `BME #: ${bme}`
@@ -284,6 +285,13 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
                 throw new Error(`The BME #: ${bme} doesn't exist in the database. Please check the entered data.`);
             }
         }
+
+        // Write the data to the thermometers data json file. 
+        const date = new Date().now();
+        bmeSerialLookup.map((entry) => {
+            return {bme: entry.BMENO, serial: entry["Serial_No"], date: date};
+        })
+        
           
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
