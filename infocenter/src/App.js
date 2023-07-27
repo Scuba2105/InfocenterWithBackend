@@ -3,6 +3,7 @@ import { Menu } from './components/Menu';
 import { MainArea } from './components/MainArea';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
+import { serverConfig } from './server';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -28,7 +29,7 @@ export default function App() {
     
     return (
         <div className="wrapper">
-            <div className="app-icon"></div>
+            <div className="app-icon-container"></div>
             <div className="header-bar">HNECT Information Center</div>
             <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>
