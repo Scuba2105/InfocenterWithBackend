@@ -1759,7 +1759,7 @@ html {
 
 .utility-selected {
   background-color: var(--icon-theme);
-  box-shadow: 0px 0px 8px 2px rgb(255,105,180) inset;
+  box-shadow: 0px 0px 8px 2px #c9e661 inset;
   color: white;
   margin: 0;
 }
@@ -1880,7 +1880,7 @@ html {
   justify-content: center;
 }
 
-.thermometer-form-button {
+.thermometer-form-button, .thermometer-disposal-button {
   width: 60%;
   height: 40px;
   background: linear-gradient(#036346, #059066);
@@ -1889,6 +1889,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.thermometer-disposal-button {
+  background: linear-gradient(#c81123, #b10819);
 }
 
 @media (max-width: 1250px) {

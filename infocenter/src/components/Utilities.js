@@ -1,6 +1,7 @@
 import { utilityFunctions } from "../data";
 
 export function Utilities({children, utilityPage, onClick}) {
+    
     return (
         <>
             <div className="utilities-container">

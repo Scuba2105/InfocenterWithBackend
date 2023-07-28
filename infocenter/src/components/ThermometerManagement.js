@@ -1,8 +1,10 @@
 import useMediaQueries from "media-queries-in-react";
+import { useState } from "react";
 import { SelectInput } from "./SelectInput";
 import { Input } from "./Input";
 import { serverConfig } from "../server";
 import { getOrdinalNumber } from "../utils/utils.js";
+import { ModalSkeleton } from "./ModalSkeleton";
 
 const formTypes = ["Repair Request Generation", "Check Thermometer Returns", "Thermometer Clean-Up"]
 const bmeInputs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -117,6 +119,22 @@ function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
     );
 }
 
+function ThermometerCheckButton({buttonText, openForm, closeDialog, showMessage, index}) {
+    return (
+        <div className="thermometer-form-button-container">
+            <div className="thermometer-form-button" onClick={openForm}>{buttonText}</div>
+        </div>
+    );
+}
+
+function ThermometerDisposalButton({buttonText, openForm, closeDialog, showMessage, index}) {
+    return (
+        <div className="thermometer-form-button-container">
+            <div className="thermometer-disposal-button" onClick={openForm}>{buttonText}</div>
+        </div>
+    );
+}
+
 function ThermometerForm1({staffNames, mediaQueries, closeDialog, showMessage, index}) {
     return (
         <>
@@ -130,16 +148,35 @@ function ThermometerForm1({staffNames, mediaQueries, closeDialog, showMessage, i
             </div>
             <ThermometerFormButton buttonText="Generate Request Form" closeDialog={closeDialog} showMessage={showMessage} index={index}/>
         </>
-        
+    );
+}
+
+function ThermometerForm2({mediaQueries, openForm, closeDialog, showMessage, index}) {
+    return (
+        <>
+            <Input inputType="text" identifier="bme" labelText={`Returned BME`}></Input>
+            <ThermometerCheckButton buttonText="Check Returns" openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+            <ThermometerDisposalButton buttonText="Manage Disposals" openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+        </>
     );
 }
 
 export function ThermometerManagement({staffNames, closeDialog, showMessage}) {
 
+    const [formVisible, setFormVisible] = useState(false);
+
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     }); 
+
+    function openForm() {
+        setFormVisible(true);
+    }
+    
+    function closeForm() {
+        setFormVisible(false);
+    }
 
     return (
         <>
@@ -149,10 +186,12 @@ export function ThermometerManagement({staffNames, closeDialog, showMessage}) {
                     <form key={`thermometer-form${index}`} className={mediaQueries.laptop ? "thermometer-form-laptop" : "thermometer-form-desktop"}>
                         <h4>{type}</h4>
                         {index === 0 && <ThermometerForm1 staffNames={staffNames} mediaQueries={mediaQueries} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm1>}
+                        {index === 1 && <ThermometerForm2 mediaQueries={mediaQueries} openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm2>}
                     </form>
                 )
             })}
             </div>
+            {formVisible && <ModalSkeleton closeModal={closeForm}></ModalSkeleton>}
         </>
         
     );
