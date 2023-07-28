@@ -264,7 +264,10 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         const errorBME = bmeSerialLookup.reduce((acc, entry) => {
             returnedBME.push(entry["BMENO"]);
             serialNumbers.push(entry["Serial_No"]);
-            if (entry.BRAND_NAME !== 'Genius 3' || entry.BRAND_NAME !== 'GENIUS 3') {
+            
+            // Define available Brand Names for Genius 3 and push to error array if Brand Name is not in options.   
+            const brandOptions = ['Genius 3', 'GENIUS 3', '303013'];
+            if (!brandOptions.includes(entry["BRAND_NAME"])) {
                 notGenius3Error = true;
                 acc.push(entry.BMENO);
                 return acc;
@@ -286,12 +289,21 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
             }
         }
 
-        // // Write the data to the thermometers data json file. 
-        // const date = new Date().now();
-        // bmeSerialLookup.map((entry) => {
+        // Write the data to the thermometers data json file. 
+        // const date = new Date();
+        // const timestamp = date.now();
+        // const thermometerData = bmeSerialLookup.map((entry) => {
         //     return {bme: entry.BMENO, serial: entry["Serial_No"], date: date};
         // })
-        
+
+        // Read data from file into object
+        //write
+
+        // append new data
+
+
+        // write to file 
+        //JSON.stringify(thermometerData);        
           
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
