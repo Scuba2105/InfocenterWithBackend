@@ -1759,7 +1759,7 @@ html {
 
 .utility-selected {
   background-color: var(--icon-theme);
-  box-shadow: 0px 0px 8px 2px rgba(255,105,180,1) inset;
+  box-shadow: 0px 0px 8px 2px rgb(255,105,180) inset;
   color: white;
   margin: 0;
 }

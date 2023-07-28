@@ -70,7 +70,6 @@ export async function getGenius3Serial(parameter, length) {
       }
 
       // Need to close connection
-      console.log(result);
       return result.recordset;
   } 
   catch (error) {

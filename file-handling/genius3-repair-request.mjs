@@ -71,6 +71,7 @@ export async function populateGenius3RequestTemplate(name, serialNumbers, rootDi
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save();
+        
         return pdfBytes;
         //fs.writeFileSync(path.join(rootDirectory, 'Genius 3 Test.pdf'), pdfBytes);        
     } catch (err) {

@@ -301,7 +301,7 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         let updatedThermometerData;
         // append new data
         if (thermometerData.length === 0) {
-            updatedThermometerData= newThermometerData.reduce((entry) => {
+            updatedThermometerData= newThermometerData.reduce((acc, entry) => {
                 acc.push(entry);
                 return acc
             }, [])
@@ -311,12 +311,11 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
             updatedThermometerData = thermometerData
         }
         
-        
-        // write to file 
-        writeThermometerData(__dirname, JSON.stringify(updatedThermometerData, null, 2));        
-          
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
+
+        // write to file 
+        writeThermometerData(__dirname, JSON.stringify(updatedThermometerData, null, 2));        
         
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "X-Requested-With");
