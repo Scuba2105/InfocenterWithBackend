@@ -2,7 +2,7 @@ import useMediaQueries from "media-queries-in-react";
 import { SelectInput } from "./SelectInput";
 import { Input } from "./Input";
 import { serverConfig } from "../server";
-import { getOrdinalNumber } from "../utils/utils.js" 
+import { getOrdinalNumber } from "../utils/utils.js";
 
 const formTypes = ["Repair Request Generation", "Check Thermometer Returns", "Thermometer Clean-Up"]
 const bmeInputs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -28,8 +28,7 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
 
     const requestor = requestorInput.value;
     const inputValues = [];
-    const regex = new RegExp(/^[0-9]{5}$|(?<=E)[0-9]+/, 'g');
-    
+        
     // Verify the input values correspond to valid BME numbers
     bmeInputs.forEach((bmeInput) => {
         if (bmeInput.value !== "") {
@@ -118,11 +117,11 @@ function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
     );
 }
 
-function ThermometerForm1({staffNames, closeDialog, showMessage, index}) {
+function ThermometerForm1({staffNames, mediaQueries, closeDialog, showMessage, index}) {
     return (
         <>
             <SelectInput label="Employee Requestor" optionData={staffNames}></SelectInput>
-            <div className="bme-container">    
+            <div className={mediaQueries.laptop ? "bme-container" : "bme-container-desktop"}>    
                 {bmeInputs.map((input) => {
                     return (
                         <Input key={`BME ${input}`} inputType="text" identifier="bme" labelText={`BME ${input}`}></Input>
@@ -149,7 +148,7 @@ export function ThermometerManagement({staffNames, closeDialog, showMessage}) {
                 return (
                     <form key={`thermometer-form${index}`} className={mediaQueries.laptop ? "thermometer-form-laptop" : "thermometer-form-desktop"}>
                         <h4>{type}</h4>
-                        {index === 0 && <ThermometerForm1 staffNames={staffNames} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm1>}
+                        {index === 0 && <ThermometerForm1 staffNames={staffNames} mediaQueries={mediaQueries} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm1>}
                     </form>
                 )
             })}

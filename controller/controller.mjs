@@ -265,32 +265,32 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
             returnedBME.push(entry["BMENO"]);
             serialNumbers.push(entry["Serial_No"]);
             if (entry.BRAND_NAME !== 'Genius 3' || entry.BRAND_NAME !== 'GENIUS 3') {
-                error === true;
+                notGenius3Error = true;
                 acc.push(entry.BMENO);
                 return acc;
             }
         }, []);
-
+        
         // If any returned devices are not Genius 3, then throw an error indicating the at fault BME numbers.
         if (notGenius3Error) {
             const errBmeString = errorBME.map((bme) => {
                 return `BME #: ${bme}`
             }).join(',');
-            throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, do not correspond to Genius 3 Thermometers. Please review the entered data.`)
+            throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, ${errorBME.length === 1 ? 'does' : 'do'} not correspond to ${errorBME.length === 1 ? 'a Genius 3 Thermometer' : 'Genius 3 Thermometers'}. Please review the entered data.`)
         }
 
         // Check the size of the returned data to make sure all bme input returns a serial number. 
         for (const bme in bmeNumbers) {
             if (!returnedBME.includes(bmeNumbers[bme])) {
-                throw new Error(`The BME #: ${bme} doesn't exist in the database. Please check the entered data.`);
+                throw new Error(`The BME #: ${bmeNumbers[bme]} doesn't exist in the database. Please check the entered data.`);
             }
         }
 
-        // Write the data to the thermometers data json file. 
-        const date = new Date().now();
-        bmeSerialLookup.map((entry) => {
-            return {bme: entry.BMENO, serial: entry["Serial_No"], date: date};
-        })
+        // // Write the data to the thermometers data json file. 
+        // const date = new Date().now();
+        // bmeSerialLookup.map((entry) => {
+        //     return {bme: entry.BMENO, serial: entry["Serial_No"], date: date};
+        // })
         
           
         // Write the serial numbers and name data into the Genius 3 Form Template
@@ -302,6 +302,7 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         res.end(pdfStr);
     } catch (err) {
         // Send the error response message.
+        console.log(err);
         res.status(400).json({message: err.message});
     }
 }
