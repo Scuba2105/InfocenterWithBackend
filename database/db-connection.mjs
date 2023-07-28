@@ -1,19 +1,30 @@
 import sql from "mssql";
-import { localDBConfig } from "../config.mjs";
-import { localEMSConfig } from "../config.mjs";
+import { localDBConfig, localEMSConfig, testDBConfig } from "../config"
+
+const pool = new sql.ConnectionPool(testDBConfig);
 
 async function getGenius3Serial(parameter) {
   try {
-      // Need to validate the parameter input
-      // Connect to the database
-      await sql.connect(localDBConfig);  
-      
-      // Create a new request object
-      const request = new sql.Request()
-            
-      // make sure that any items are correctly URL encoded in the connection string
-      const result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
-      return result.recordset;
+
+    let connPromise;
+    if (!pool.connected) {
+        if (!pool.connecting) {
+            connPromise = await pool.connect();
+        } else {
+            await connPromise;
+        }
+    }
+   
+    // Create a new request object
+    var req = await pool.Request();
+    
+    // Make sure that any items are correctly URL encoded in the connection string
+    const result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
+    
+    // Close connection to pool
+    await pool.close();
+    
+    return result.recordset;
   } 
   catch (error) {
       console.log(error);

@@ -65,7 +65,7 @@ export function readThermometerData(__dirname) {
                 reject(`The data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data));
+                resolve(JSON.parse(data).thermometerData);
             }
         });
     })

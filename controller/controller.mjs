@@ -256,32 +256,31 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         // Declare the serial number and BME arrays
         let returnedBME = [];
         const serialNumbers = [];
-        
+        const errorBME = [];  
+
         // Initialise error indicating a device is not Genius 3.
         let notGenius3Error = false;
 
         // Check if any returned data is not Genius 3 and set error to true then send an error
-        const errorBME = bmeSerialLookup.reduce((acc, entry) => {
+        bmeSerialLookup.forEach((entry) => {
             returnedBME.push(entry["BMENO"]);
             serialNumbers.push(entry["Serial_No"]);
-            console.log(acc)
+            
             // Define available Brand Names for Genius 3 and push to error array if Brand Name is not in options.   
             const brandOptions = ['Genius 3', 'GENIUS 3', '303013'];
             if (!brandOptions.includes(entry["BRAND_NAME"])) {
                 notGenius3Error = true;
-                acc.push(entry.BMENO);
-                console.log(acc);
-                return acc;
+                errorBME.push(entry["BMENO"])
             }
         }, []);
-        console.log(errorBME);
+        
         // If any returned devices are not Genius 3, then throw an error indicating the at fault BME numbers.
-        if (notGenius3Error) {
-            const errBmeString = errorBME.map((bme) => {
-                return `BME #: ${bme}`
-            }).join(',');
-            throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, ${errorBME.length === 1 ? 'does' : 'do'} not correspond to ${errorBME.length === 1 ? 'a Genius 3 Thermometer' : 'Genius 3 Thermometers'}. Please review the entered data.`)
-        }
+        // if (notGenius3Error) {
+        //     const errBmeString = errorBME.map((bme) => {
+        //         return `BME #: ${bme}`
+        //     }).join(',');
+        //     throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, ${errorBME.length === 1 ? 'does' : 'do'} not correspond to ${errorBME.length === 1 ? 'a Genius 3 Thermometer' : 'Genius 3 Thermometers'}. Please review the entered data.`)
+        // }
 
         // Check the size of the returned data to make sure all bme input returns a serial number. 
         for (const bme in bmeNumbers) {
@@ -291,17 +290,28 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         }
 
         // Create data to write to file
-        const timestamp = new Date().now();
+        const timestamp = Date.now();
         const newThermometerData = bmeSerialLookup.map((entry) => {
             return {bme: entry.BMENO, serial: entry["Serial_No"], date: timestamp};
         })
 
         // Read data from file into object
         const thermometerData =  await readThermometerData(__dirname);
-
+        
+        let updatedThermometerData;
         // append new data
-        const updatedThermometerData = thermometerData.push(...newThermometerData);
-
+        if (thermometerData.length === 0) {
+            updatedThermometerData= newThermometerData.reduce((entry) => {
+                acc.push(entry);
+                return acc
+            }, [])
+        }
+        else {
+            thermometerData.push(...newThermometerData);
+            updatedThermometerData = thermometerData
+        }
+        
+        
         // write to file 
         writeThermometerData(__dirname, JSON.stringify(updatedThermometerData, null, 2));        
           
