@@ -1,5 +1,5 @@
 import { Mutex } from 'async-mutex';
-import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
+import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
 import { getGenius3Serial } from '../models/models.mjs';
@@ -264,16 +264,17 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         const errorBME = bmeSerialLookup.reduce((acc, entry) => {
             returnedBME.push(entry["BMENO"]);
             serialNumbers.push(entry["Serial_No"]);
-            
+            console.log(acc)
             // Define available Brand Names for Genius 3 and push to error array if Brand Name is not in options.   
             const brandOptions = ['Genius 3', 'GENIUS 3', '303013'];
             if (!brandOptions.includes(entry["BRAND_NAME"])) {
                 notGenius3Error = true;
                 acc.push(entry.BMENO);
+                console.log(acc);
                 return acc;
             }
         }, []);
-        
+        console.log(errorBME);
         // If any returned devices are not Genius 3, then throw an error indicating the at fault BME numbers.
         if (notGenius3Error) {
             const errBmeString = errorBME.map((bme) => {
@@ -289,21 +290,20 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
             }
         }
 
-        // Write the data to the thermometers data json file. 
-        // const date = new Date();
-        // const timestamp = date.now();
-        // const thermometerData = bmeSerialLookup.map((entry) => {
-        //     return {bme: entry.BMENO, serial: entry["Serial_No"], date: date};
-        // })
+        // Create data to write to file
+        const timestamp = new Date().now();
+        const newThermometerData = bmeSerialLookup.map((entry) => {
+            return {bme: entry.BMENO, serial: entry["Serial_No"], date: timestamp};
+        })
 
         // Read data from file into object
-        //write
+        const thermometerData =  await readThermometerData(__dirname);
 
         // append new data
-
+        const updatedThermometerData = thermometerData.push(...newThermometerData);
 
         // write to file 
-        //JSON.stringify(thermometerData);        
+        writeThermometerData(__dirname, JSON.stringify(updatedThermometerData, null, 2));        
           
         // Write the serial numbers and name data into the Genius 3 Form Template
         const pdfStr = await populateGenius3RequestTemplate(name, serialNumbers, __dirname);
