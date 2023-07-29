@@ -5,6 +5,7 @@ import { Input } from "./Input";
 import { serverConfig } from "../server";
 import { getOrdinalNumber } from "../utils/utils.js";
 import { ModalSkeleton } from "./ModalSkeleton";
+import { ThermometerModal } from "./ThermometerModal";
 
 const formTypes = ["Repair Request Generation", "Manage Thermometer Returns"];
 const bmeInputs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -152,11 +153,13 @@ async function getReturnBatch(closeDialog, showMessage, setBatchData, openForm, 
         // Get the data from the JSON response.
         const data = await res.json();
         
+        const batchData = JSON.parse(data);
+
         // Close loading dialog.
         closeDialog();
 
         // Set the data for the component and open form.
-        setBatchData(data);
+        setBatchData(batchData);
         openForm("check")
 
     } catch (error) {
@@ -255,7 +258,9 @@ export function ThermometerManagement({staffNames, page, closeDialog, showMessag
                 )
             })}
             </div>
-            {formVisible && <ModalSkeleton data={batchData} page={page} type={formType} closeModal={closeForm}></ModalSkeleton>}
+            {formVisible && <ModalSkeleton page={page} type={formType} closeModal={closeForm}>
+                                <ThermometerModal batchData={batchData} type={formType}></ThermometerModal>
+                            </ModalSkeleton>}
         </>
         
     );
