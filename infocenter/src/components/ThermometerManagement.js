@@ -111,6 +111,57 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
     }
 }
 
+async function getReturnBatch(closeDialog, showMessage, index, e) {
+    const checkContainer = e.currentTarget.parentNode.parentNode;
+    const bmeInput = checkContainer.querySelector('.bme-input');
+    
+    // Get the value of the bme input
+    const bme = bmeInput.value;
+
+    if (!isValidBME(bme)) {
+        showMessage("error", "The entered BME value is not recognised as a valid BME. Please check the entered value and try again.")        
+        return;
+    }
+
+    // Strignify the BME data to be uploaded
+    const bmeData = JSON.stringify({bme: bme});
+
+    // Show the uploading dialog while communicating with server
+    showMessage("uploading", `Retrieving Batch Data...`);
+
+    try {
+        // Send the input BME to the backend to fetch the thermometer batch
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/CheckReturns`, {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer",
+            responseType: "arraybuffer",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: bmeData,
+        });
+
+        // If error message is sent form server set response based on error status.
+        if (res.status === 400) {
+            const error = await res.json();
+            throw new Error(error.message)
+        }
+
+        const data = await res.json();
+        console.log(data);
+
+    } catch (error) {
+        
+    }
+   
+}
+
+function getThermometersForDisposal(e) {
+    console.log(e.currentTarget);
+}
+
 function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
     return (
         <div className="thermometer-form-button-container">
@@ -119,18 +170,18 @@ function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
     );
 }
 
-function ThermometerCheckButton({buttonText, openForm, closeDialog, showMessage, index}) {
+function ThermometerCheckButton({buttonText, getReturnBatch, closeDialog, showMessage, index}) {
     return (
         <div className="thermometer-form-button-container">
-            <div className="thermometer-form-button" onClick={openForm}>{buttonText}</div>
+            <div className="thermometer-form-button" onClick={(e) => getReturnBatch(closeDialog, showMessage, index, e)}>{buttonText}</div>
         </div>
     );
 }
 
-function ThermometerDisposalButton({buttonText, openForm, closeDialog, showMessage, index}) {
+function ThermometerDisposalButton({buttonText, getThermometersForDisposal, closeDialog, showMessage, index}) {
     return (
         <div className="thermometer-form-button-container">
-            <div className="thermometer-disposal-button" onClick={openForm}>{buttonText}</div>
+            <div className="thermometer-disposal-button" onClick={getThermometersForDisposal}>{buttonText}</div>
         </div>
     );
 }
@@ -156,10 +207,10 @@ function ThermometerForm2({mediaQueries, openForm, closeDialog, showMessage, ind
         <>
             <div className="check-container">
                 <Input inputType="text" identifier="bme" labelText={`Returned BME`}></Input>
-                <p className="check-message">*Please enter any BME from returned delivery of Genius 3 to check what thermometers have not been received in the batch.</p>
-                <ThermometerCheckButton buttonText="Check Returns" openForm={() => openForm("check")} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+                <p className="check-message">*Please enter any BME from returned delivery of Genius 3 to check what thermometers have been received in the batch.</p>
+                <ThermometerCheckButton buttonText="Check Returns" getReturnBatch={getReturnBatch} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
             </div>
-            <ThermometerDisposalButton buttonText="Manage Disposals" openForm={() => openForm("disposal")} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+            <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
         </>
     );
 }

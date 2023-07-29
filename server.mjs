@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateThermometerRepairRequest } from './controller/controller.mjs';
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch } from './controller/controller.mjs';
 import { capitaliseFirstLetters } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
@@ -133,11 +133,20 @@ app.post('/AddNewEntry/:page', (req, res, next) => {
 })
 
 // define route for processing Genius 3 thermometers
-app.put('/Thermometers/:requestType', async (req, res) => {
+app.put('/Thermometers/:requestType', async (req, res, next) => {
     const requestType = req.params.requestType;
+    
     if (requestType === "RepairRequestGeneration") {
         try {
             await generateThermometerRepairRequest(req, res, __dirname)
+        }
+        catch(err) {
+            next(err);
+        }
+    }
+    else if (requestType === "CheckReturns") {
+        try {
+            await getThermometerBatch(req, res, __dirname)
         }
         catch(err) {
             next(err);

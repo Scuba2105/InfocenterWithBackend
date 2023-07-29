@@ -327,3 +327,43 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         res.status(400).json({message: err.message});
     }
 }
+
+export async function getThermometerBatch(req, res, __dirname) {
+    
+    try {
+        const jsonData = JSON.stringify(req.body);
+        const reqData = JSON.parse(jsonData);
+
+        // Get the BME from the JSON body 
+        const bme = reqData.bme;
+
+        // Get the thermometer data
+        const allThermometerData = await readThermometerData(__dirname);
+
+        // Get the timestamp from the provided thermometer BME
+        const bmeEntry  = allThermometerData.find((entry) => {
+            return entry.bme === bme;
+        })
+        const selectedTimestamp = bmeEntry.date;
+
+        // Get the batch BME numbers with the same timestamp
+        const batchBMENumbers = allThermometerData.filter((entry) => {
+            return entry.date === selectedTimestamp;
+        });
+
+        // Send the stringified batch array as JSON reponse
+        res.json(JSON.stringify(batchBMENumbers));
+    } catch (err) {
+        // Send the error response message.
+        console.log(err);
+        res.status(400).json({message: err.message});
+    }
+}
+
+export async function getThermometerDisposal(req, res, __dirname) {
+    // Specify the number of milliseconds in 2 months. Determine the cut-off by subtracting from current time
+    const currentTimestamp = Date.now();
+    const msIn2Months = 5259600000
+    // Any thermometer 
+    const cutOff = currentTimestamp - msIn2Months;
+}
