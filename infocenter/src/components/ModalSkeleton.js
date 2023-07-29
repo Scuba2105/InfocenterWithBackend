@@ -15,6 +15,10 @@ function getFormHeading(page, type, selectedData) {
         const heading = type === "add-new" ? "Add New Equipment" : `Update ${selectedData.model} Details`
         return heading;
     }
+    else if (page === "utilities") {
+        const heading = type === "check" ? "Check Genius 3 Returns" : `Manage Genius 3 Disposals`
+        return heading;
+    }
 }
 
 function updatedPosition(isLaptopScreen, incrementData) {
@@ -85,7 +89,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
             setIncrementChange({dx: dx, dy: dy});
         }
     }
-    if (type === 'add-new' || type === 'update') {
+    if (type === 'add-new' || type === 'update' || type === 'check' || type === 'disposal') {
         return (
             <div className={mediaQueries.laptop ? `modal-container-laptop ${scrollDocuments}` : `modal-container-desktop ${scrollDocuments}`} style={type === "software" && mediaQueries.laptop ? 
             { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :

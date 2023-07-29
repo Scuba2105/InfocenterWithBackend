@@ -6,7 +6,7 @@ import { serverConfig } from "../server";
 import { getOrdinalNumber } from "../utils/utils.js";
 import { ModalSkeleton } from "./ModalSkeleton";
 
-const formTypes = ["Repair Request Generation", "Check Thermometer Returns", "Thermometer Clean-Up"]
+const formTypes = ["Repair Request Generation", "Manage Thermometer Returns"];
 const bmeInputs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function isValidBME(bme) {
@@ -83,7 +83,7 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
                 },
             body: requestData
         });
-        console.log(res.status);
+        
         // If error message is sent form server set response based on error status.
         if (res.status === 400) {
             const error = await res.json();
@@ -154,24 +154,29 @@ function ThermometerForm1({staffNames, mediaQueries, closeDialog, showMessage, i
 function ThermometerForm2({mediaQueries, openForm, closeDialog, showMessage, index}) {
     return (
         <>
-            <Input inputType="text" identifier="bme" labelText={`Returned BME`}></Input>
-            <ThermometerCheckButton buttonText="Check Returns" openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
-            <ThermometerDisposalButton buttonText="Manage Disposals" openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+            <div className="check-container">
+                <Input inputType="text" identifier="bme" labelText={`Returned BME`}></Input>
+                <p className="check-message">*Please enter any BME from returned delivery of Genius 3 to check what thermometers have not been received in the batch.</p>
+                <ThermometerCheckButton buttonText="Check Returns" openForm={() => openForm("check")} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+            </div>
+            <ThermometerDisposalButton buttonText="Manage Disposals" openForm={() => openForm("disposal")} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
         </>
     );
 }
 
-export function ThermometerManagement({staffNames, closeDialog, showMessage}) {
+export function ThermometerManagement({staffNames, page, closeDialog, showMessage}) {
 
     const [formVisible, setFormVisible] = useState(false);
+    const [formType, setFormType] = useState(null);    
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     }); 
 
-    function openForm() {
+    function openForm(type) {
         setFormVisible(true);
+        setFormType(type);
     }
     
     function closeForm() {
@@ -191,7 +196,7 @@ export function ThermometerManagement({staffNames, closeDialog, showMessage}) {
                 )
             })}
             </div>
-            {formVisible && <ModalSkeleton closeModal={closeForm}></ModalSkeleton>}
+            {formVisible && <ModalSkeleton page={page} type={formType} closeModal={closeForm}></ModalSkeleton>}
         </>
         
     );
