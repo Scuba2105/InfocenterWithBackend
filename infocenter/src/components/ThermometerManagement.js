@@ -111,7 +111,7 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
     }
 }
 
-async function getReturnBatch(closeDialog, showMessage, index, e) {
+async function getReturnBatch(closeDialog, showMessage, setBatchData, openForm, e) {
     const checkContainer = e.currentTarget.parentNode.parentNode;
     const bmeInput = checkContainer.querySelector('.bme-input');
     
@@ -149,11 +149,18 @@ async function getReturnBatch(closeDialog, showMessage, index, e) {
             throw new Error(error.message)
         }
 
+        // Get the data from the JSON response.
         const data = await res.json();
-        console.log(data);
+        
+        // Close loading dialog.
+        closeDialog();
+
+        // Set the data for the component and open form.
+        setBatchData(data);
+        openForm("check")
 
     } catch (error) {
-        
+        showMessage("error", error.message);
     }
    
 }
@@ -170,10 +177,10 @@ function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
     );
 }
 
-function ThermometerCheckButton({buttonText, getReturnBatch, closeDialog, showMessage, index}) {
+function ThermometerCheckButton({buttonText, setBatchData, openForm, getReturnBatch, closeDialog, showMessage}) {
     return (
         <div className="thermometer-form-button-container">
-            <div className="thermometer-form-button" onClick={(e) => getReturnBatch(closeDialog, showMessage, index, e)}>{buttonText}</div>
+            <div className="thermometer-form-button" onClick={(e) => getReturnBatch(closeDialog, showMessage, setBatchData, openForm, e)}>{buttonText}</div>
         </div>
     );
 }
@@ -202,13 +209,13 @@ function ThermometerForm1({staffNames, mediaQueries, closeDialog, showMessage, i
     );
 }
 
-function ThermometerForm2({mediaQueries, openForm, closeDialog, showMessage, index}) {
+function ThermometerForm2({mediaQueries, setBatchData, openForm, closeDialog, showMessage, index}) {
     return (
         <>
             <div className="check-container">
                 <Input inputType="text" identifier="bme" labelText={`Returned BME`}></Input>
                 <p className="check-message">*Please enter any BME from returned delivery of Genius 3 to check what thermometers have been received in the batch.</p>
-                <ThermometerCheckButton buttonText="Check Returns" getReturnBatch={getReturnBatch} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+                <ThermometerCheckButton buttonText="Check Returns" setBatchData={setBatchData} openForm={openForm} getReturnBatch={getReturnBatch} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
             </div>
             <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
         </>
@@ -218,7 +225,8 @@ function ThermometerForm2({mediaQueries, openForm, closeDialog, showMessage, ind
 export function ThermometerManagement({staffNames, page, closeDialog, showMessage}) {
 
     const [formVisible, setFormVisible] = useState(false);
-    const [formType, setFormType] = useState(null);    
+    const [formType, setFormType] = useState(null);  
+    const [batchData, setBatchData] = useState(null); 
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -242,12 +250,12 @@ export function ThermometerManagement({staffNames, page, closeDialog, showMessag
                     <form key={`thermometer-form${index}`} className={mediaQueries.laptop ? "thermometer-form-laptop" : "thermometer-form-desktop"}>
                         <h4>{type}</h4>
                         {index === 0 && <ThermometerForm1 staffNames={staffNames} mediaQueries={mediaQueries} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm1>}
-                        {index === 1 && <ThermometerForm2 mediaQueries={mediaQueries} openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm2>}
+                        {index === 1 && <ThermometerForm2 mediaQueries={mediaQueries} setBatchData={setBatchData} openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm2>}
                     </form>
                 )
             })}
             </div>
-            {formVisible && <ModalSkeleton page={page} type={formType} closeModal={closeForm}></ModalSkeleton>}
+            {formVisible && <ModalSkeleton data={batchData} page={page} type={formType} closeModal={closeForm}></ModalSkeleton>}
         </>
         
     );
