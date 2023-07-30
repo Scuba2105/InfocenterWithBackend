@@ -1930,10 +1930,18 @@ html {
   margin: 0 20px 20px 20px;
 }
 
+.thermometer-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(var(--icon-theme), var(--med-theme));
+  border: 1px solid black;
+} 
+
 .thermometer-list-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid black;
 }
 
 .check-data-container {
@@ -1942,9 +1950,10 @@ html {
   grid-template-rows: 1fr 1fr;
   margin: 8px;
   border: 1px solid black;
+  border-radius: 5px;
   font-size: 12px;
-  background-color: white;
   color: black;
+  background-color: var(---form-background-color);
   padding: 5px;
 }
 
