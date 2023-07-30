@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { SkipIcon, NextIcon } from "../svg";
+import { serverConfig } from "../server";
 
 function onTableArrowClick(tableIndex, setTableIndex, maxIndex, e) {
     let id = e.target.id;
@@ -23,17 +24,17 @@ function onTableArrowClick(tableIndex, setTableIndex, maxIndex, e) {
     }
 }
 
-function updateReturnList(returnList, bmeNumber, e) {
+function updateselectedList(selectedList, bmeNumber, e) {
     if (e.currentTarget.checked) {
         // Push the checked BME to the return list
-        returnList.current.push(bmeNumber);
+        selectedList.current.push(bmeNumber);
     }
     else {
         // Remove the BME from the return list if check removed
-        const newReturnList = returnList.current.filter((bme) => {
+        const newselectedList = selectedList.current.filter((bme) => {
             return bme !== bmeNumber;
         })
-        returnList.current = newReturnList;
+        selectedList.current = newselectedList;
     }
 }
 
@@ -46,20 +47,52 @@ function getDescription(type) {
     }
 }
 
-function returnSelected() {
-    console.log("returning selected");
+async function returnSelected(selectedList, closeDialog, showMessage) {
+    
+    // Stringify the input BME array for upload
+    const requestData = JSON.stringify(selectedList.current)
+
+    // Show the uploading dialog while communicating with server
+    showMessage("uploading", `Updating Genius 3 repair list...`);
+
+    try {
+        // Send the data to the backend
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/UpdateReturns`, {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer",
+            responseType: "arraybuffer",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: requestData
+        });
+
+        // If error message is sent form server set response based on error status.
+        if (res.status === 400) {
+            const error = await res.json();
+            throw new Error(error.message)
+        }
+
+        const data = await res.json();
+
+        console.log(data);
+    } catch (error) {
+        showMessage("error", error.message);
+    }
 }
 
-function disposeSelected() {
+function disposeSelected(selectedList, closeDialog, showMessage) {
     console.log("dispose selected");
 }
 
-export function ThermometerModal({batchData, type}) {
+export function ThermometerModal({batchData, type, closeDialog, showMessage}) {
     
     const date = new Date(batchData[0].date);
     const dateString = date.toLocaleDateString();
     const [tableIndex, setTableIndex] = useState(0);
-    const returnList = useRef([]);
+    const selectedList = useRef([]);
     
     const entriesPerPage = 6;
     const maxIndex = Math.ceil(batchData.length/entriesPerPage);
@@ -68,7 +101,6 @@ export function ThermometerModal({batchData, type}) {
         return index >= tableIndex*entriesPerPage && index <= (tableIndex*entriesPerPage + 5) 
     })
 
-    if (type === "check") {
         return (
             <div className="thermometer-modal-container">
                 <h4 id="thermometer-batch-heading">{type === "check" ?`Thermometer Batch ${dateString}` : "Inactive Thermometers"}</h4>
@@ -82,9 +114,9 @@ export function ThermometerModal({batchData, type}) {
                                     <label id="thermometer-bme">{`BME #: ${entry.bme}`}</label>
                                     <label id="thermometer-serial">{`Serial #: ${entry.serial}`}</label>
                                     <div id="thermometer-checkbox">
-                                        {returnList.current.includes(bmeNumber) ? 
-                                        <input type="checkbox" checked onClick={(e) => updateReturnList(returnList, bmeNumber, e)}></input> :
-                                        <input type="checkbox" onClick={(e) => updateReturnList(returnList, bmeNumber, e)}></input>}
+                                        {selectedList.current.includes(bmeNumber) ? 
+                                        <input type="checkbox" checked onClick={(e) => updateselectedList(selectedList, bmeNumber, e)}></input> :
+                                        <input type="checkbox" onClick={(e) => updateselectedList(selectedList, bmeNumber, e)}></input>}
                                     </div>
                                 </div> 
                             );
@@ -98,12 +130,8 @@ export function ThermometerModal({batchData, type}) {
                         <SkipIcon className="forward-skip-icon" color="white" size="21px" offset="0" angle="180" id="forward-skip" />
                     </div>
                 </div>
-                {type === "check" ? <button className="thermometer-form-button thermometer-modal-button" onClick={returnSelected}>Return Selected</button> : 
-                                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={disposeSelected}>Dispose Selected</button>}
+                {type === "check" ? <button className="thermometer-form-button thermometer-modal-button" onClick={() => returnSelected(selectedList, closeDialog, showMessage)}>Return Selected</button> : 
+                                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={() => disposeSelected(selectedList, closeDialog, showMessage)}>Dispose Selected</button>}
             </div>
         )
-    }
-    else if (type === "disposal") {
-
-    }
 }

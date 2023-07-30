@@ -360,6 +360,38 @@ export async function getThermometerBatch(req, res, __dirname) {
     }
 }
 
+export async function updateThermometerList(req, res, __dirname) {
+    try {
+
+        // Parse the request data to get the BME Array
+        const jsonData = JSON.stringify(req.body);
+        const reqData = JSON.parse(jsonData);
+
+        // Validate the BME array
+        reqData.forEach((bme) => {
+            if (!isValidBME(bme)) {
+                throw new Error(`The entry BME #: ${bme} is not a recognised BME. Please review the data and contact an administrator if the issue persists.`)
+            }
+        });
+
+        // Read the current thermometer data from file
+        const currentGenius3Data = await readThermometerData(__dirname);
+        
+        // Filter the selected BME's in the request data from the current data
+        const updatedGenius3Data = currentGenius3Data.filter((entry) => {
+            return reqData.includes(entry.bme) === false;
+        });
+
+        console.log(currentGenius3Data, updatedGenius3Data);
+
+
+    } catch (err) {
+        // Send the error response message.
+        console.log(err);
+        res.status(400).json({message: err.message});
+    }
+}
+
 export async function getThermometerDisposal(req, res, __dirname) {
     // Specify the number of milliseconds in 2 months. Determine the cut-off by subtracting from current time
     const currentTimestamp = Date.now();
