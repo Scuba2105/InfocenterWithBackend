@@ -37,35 +37,54 @@ function updateReturnList(returnList, bmeNumber, e) {
     }
 }
 
+function getDescription(type) {
+    if (type === "check") {
+        return "*The following list of thermometer have not yet been received back from repair/calibration."
+    }
+    else if (type === "disposal") {
+        return "*The following thermometers have been inactive for at least 2 months. Please select for disposal as required."
+    }
+}
+
+function returnSelected() {
+    console.log("returning selected");
+}
+
+function disposeSelected() {
+    console.log("dispose selected");
+}
+
 export function ThermometerModal({batchData, type}) {
     
     const date = new Date(batchData[0].date);
     const dateString = date.toLocaleDateString();
     const [tableIndex, setTableIndex] = useState(0);
     const returnList = useRef([]);
-
-    const entriesPerPage = 8;
+    
+    const entriesPerPage = 6;
     const maxIndex = Math.ceil(batchData.length/entriesPerPage);
     
     const currentData = batchData.filter((entry, index) => {
-        return index >= tableIndex*entriesPerPage && index <= (tableIndex*entriesPerPage + 7) 
+        return index >= tableIndex*entriesPerPage && index <= (tableIndex*entriesPerPage + 5) 
     })
 
     if (type === "check") {
         return (
             <div className="thermometer-modal-container">
-                <h4 id="thermometer-batch-heading">{`Thermometer Batch ${dateString}`}</h4>
-                <p id="thermometer-batch-info">*The following list of thermometer have not yet been received back from repair/calibration.</p>
+                <h4 id="thermometer-batch-heading">{type === "check" ?`Thermometer Batch ${dateString}` : "Inactive Thermometers"}</h4>
+                <p id="thermometer-batch-info">{getDescription(type)}</p>
                 <div className="thermometer-list">
                     <div className="thermometer-list-container">
                         {currentData.map((entry, index) => {
                             const bmeNumber = entry.bme; 
                             return (
-                                <div key={`check-data-container${index}`} className="check-data-container">
+                                <div key={`check-data-container-${bmeNumber}`} className="check-data-container">
                                     <label id="thermometer-bme">{`BME #: ${entry.bme}`}</label>
                                     <label id="thermometer-serial">{`Serial #: ${entry.serial}`}</label>
                                     <div id="thermometer-checkbox">
-                                        <input type="checkbox" onClick={(e) => updateReturnList(returnList, bmeNumber, e)}></input>
+                                        {returnList.current.includes(bmeNumber) ? 
+                                        <input type="checkbox" checked onClick={(e) => updateReturnList(returnList, bmeNumber, e)}></input> :
+                                        <input type="checkbox" onClick={(e) => updateReturnList(returnList, bmeNumber, e)}></input>}
                                     </div>
                                 </div> 
                             );
@@ -74,11 +93,13 @@ export function ThermometerModal({batchData, type}) {
                     <div className="table-controls thermometer-table-controls" onClick={(e) => onTableArrowClick(tableIndex, setTableIndex, maxIndex, e)}>
                         <SkipIcon className="back-skip-icon" color="white" size="21px" offset="0" angle="0" id="back-skip" />
                         <NextIcon className="back-next-icon" color="white" size="11px" offset="1" angle="180" id="back-next" />
-                        <label className="table-page-info">{`Showing ${tableIndex*entriesPerPage + 1} to ${batchData.length < 8 ? batchData.length : tableIndex*entriesPerPage + 8} of ${batchData.length}`}</label>
+                        <label className="table-page-info">{`Showing ${tableIndex*entriesPerPage + 1} to ${batchData.length < (tableIndex + 1)*entriesPerPage ? batchData.length : tableIndex*entriesPerPage + entriesPerPage} of ${batchData.length}`}</label>
                         <NextIcon className="forward-next-icon" color="white" size="11px" offset="0" angle="0" id="forward-next" />
                         <SkipIcon className="forward-skip-icon" color="white" size="21px" offset="0" angle="180" id="forward-skip" />
                     </div>
                 </div>
+                {type === "check" ? <button className="thermometer-form-button thermometer-modal-button" onClick={returnSelected}>Return Selected</button> : 
+                                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={disposeSelected}>Dispose Selected</button>}
             </div>
         )
     }

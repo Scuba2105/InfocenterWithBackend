@@ -1977,6 +1977,11 @@ html {
   justify-content: center;
 }
 
+.thermometer-modal-button {
+  margin-top: 40px;
+  font-size: 16px;
+}
+
 @media (max-width: 1250px) {
   .search-box-container {
     width: 100%;

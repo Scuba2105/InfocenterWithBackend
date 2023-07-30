@@ -180,7 +180,7 @@ function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
     );
 }
 
-function ThermometerCheckButton({buttonText, setBatchData, openForm, getReturnBatch, closeDialog, showMessage}) {
+export function ThermometerCheckButton({buttonText, setBatchData, openForm, getReturnBatch, closeDialog, showMessage}) {
     return (
         <div className="thermometer-form-button-container">
             <div className="thermometer-form-button" onClick={(e) => getReturnBatch(closeDialog, showMessage, setBatchData, openForm, e)}>{buttonText}</div>
@@ -188,7 +188,7 @@ function ThermometerCheckButton({buttonText, setBatchData, openForm, getReturnBa
     );
 }
 
-function ThermometerDisposalButton({buttonText, getThermometersForDisposal, closeDialog, showMessage, index}) {
+export function ThermometerDisposalButton({buttonText, getThermometersForDisposal, closeDialog, showMessage, index}) {
     return (
         <div className="thermometer-form-button-container">
             <div className="thermometer-disposal-button" onClick={getThermometersForDisposal}>{buttonText}</div>
