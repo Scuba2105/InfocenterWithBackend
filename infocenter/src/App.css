@@ -1777,8 +1777,8 @@ html {
 }
 
 .thermometer-form-laptop {
-  height: 450px;
-  width: 400px;
+  height: 400px;
+  width: 350px;
   background-color: var(---form-background-color);
   display: grid;
   grid-template-columns: 100%;
@@ -1880,10 +1880,19 @@ html {
   padding: 5px 5px 5px 5px;  
 }
 
-.check-container {
+.check-container, .disposal-container {
   width: 90%;
   height: 60%;
   margin: auto auto;
+}
+
+.disposal-container {
+  margin-top: 0;
+  transform: translateY(-30px);
+}
+
+.thermometer-form-desktop .disposal-container {
+  transform: translateY(-20px);
 }
 
 .thermometer-form-button-container {
@@ -1896,7 +1905,14 @@ html {
 .check-message {
   font-size: 12px;
   color: rgb(132, 132, 139);
-  margin: 20px;
+  margin: 10px;
+}
+
+.disposal-message {
+  font-size: 12px;
+  color: rgb(132, 132, 139);
+  margin: 10px;
+  margin-bottom: 20px;
 }
 
 .thermometer-form-button, .thermometer-disposal-button {
@@ -1912,7 +1928,10 @@ html {
 
 .thermometer-disposal-button {
   background: linear-gradient(#c81123, #b10819);
-  
+}
+
+.thermometer-form-desktop .thermometer-check-button {
+  transform: translateY(30px);
 }
 
 .line-spacer-laptop {
@@ -1920,7 +1939,7 @@ html {
   width: 90%;
   background-color: var(--form-font-color);
   margin: auto auto;
-  transform: translateY(40px);
+  transform: translateY(50px);
 }
 
 .line-spacer-desktop {

@@ -183,7 +183,7 @@ function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
 export function ThermometerCheckButton({buttonText, setBatchData, openForm, getReturnBatch, closeDialog, showMessage}) {
     return (
         <div className="thermometer-form-button-container">
-            <div className="thermometer-form-button" onClick={(e) => getReturnBatch(closeDialog, showMessage, setBatchData, openForm, e)}>{buttonText}</div>
+            <div className="thermometer-form-button thermometer-check-button" onClick={(e) => getReturnBatch(closeDialog, showMessage, setBatchData, openForm, e)}>{buttonText}</div>
         </div>
     );
 }
@@ -221,7 +221,10 @@ function ThermometerForm2({mediaQueries, setBatchData, openForm, closeDialog, sh
                 <ThermometerCheckButton buttonText="Check Returns" setBatchData={setBatchData} openForm={openForm} getReturnBatch={getReturnBatch} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
             </div>
             <div className={mediaQueries.laptop ? "line-spacer-laptop" : "line-spacer-desktop"}></div>
-            <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+            <div className="disposal-container">
+                <p className="disposal-message">*View a list of thermometer which have been inactive for 2 months and consider for disposal.</p>
+                <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+            </div>
         </>
     );
 }
