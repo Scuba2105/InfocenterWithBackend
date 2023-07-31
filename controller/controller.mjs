@@ -39,13 +39,13 @@ export async function updateExistingDeviceData(req, res, __dirname) {
             const updatedDevice = deviceData.find((entry) => {
                 return entry.model === model && entry.manufacturer === manufacturer;
             })
-
+            
             // Update the device details if corresponding key exists in form data
-            if (Object.keys(req.files).includes('service_manual')) {
+            if (Object.keys(req.files).includes('service-manual')) {
                 updatedDevice.serviceManual = true;
             }
 
-            if (Object.keys(req.files).includes('user_manual')) {
+            if (Object.keys(req.files).includes('user-manual')) {
                 updatedDevice.userManual = true;
             }
             
@@ -107,7 +107,7 @@ export async function updateExistingDeviceData(req, res, __dirname) {
             })
 
             // Write the data to file
-            writeDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2));
+            await writeDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2));
 
             // Send the success response message.
             res.json({type: "Success", message: 'Data Upload Successful'});
@@ -275,12 +275,12 @@ export async function generateThermometerRepairRequest(req, res, __dirname) {
         }, []);
         
         // If any returned devices are not Genius 3, then throw an error indicating the at fault BME numbers.
-        // if (notGenius3Error) {
-        //     const errBmeString = errorBME.map((bme) => {
-        //         return `BME #: ${bme}`
-        //     }).join(',');
-        //     throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, ${errorBME.length === 1 ? 'does' : 'do'} not correspond to ${errorBME.length === 1 ? 'a Genius 3 Thermometer' : 'Genius 3 Thermometers'}. Please review the entered data.`)
-        // }
+        if (notGenius3Error) {
+            const errBmeString = errorBME.map((bme) => {
+                return `BME #: ${bme}`
+            }).join(',');
+            throw new Error(`The following ${errorBME.length === 1 ? 'device,' : 'devices,'} ${errBmeString}, ${errorBME.length === 1 ? 'does' : 'do'} not correspond to ${errorBME.length === 1 ? 'a Genius 3 Thermometer' : 'Genius 3 Thermometers'}. Please review the entered data.`)
+        }
 
         // Check the size of the returned data to make sure all bme input returns a serial number. 
         for (const bme in bmeNumbers) {
@@ -363,7 +363,7 @@ export async function getThermometerBatch(req, res, __dirname) {
 export async function updateThermometerList(req, res, __dirname) {
     try {
 
-        // Parse the request data to get the BME Array
+        // Parse the request data to get the BME Array.
         const jsonData = JSON.stringify(req.body);
         const reqData = JSON.parse(jsonData);
 
@@ -374,15 +374,19 @@ export async function updateThermometerList(req, res, __dirname) {
             }
         });
 
-        // Read the current thermometer data from file
+        // Read the current thermometer data from file.
         const currentGenius3Data = await readThermometerData(__dirname);
         
-        // Filter the selected BME's in the request data from the current data
+        // Filter the selected BME's in the request data from the current data and stringify the updated data for writing to file.
         const updatedGenius3Data = currentGenius3Data.filter((entry) => {
             return reqData.includes(entry.bme) === false;
         });
 
-        console.log(currentGenius3Data, updatedGenius3Data);
+        // Write the data to file.
+        writeThermometerData(__dirname, JSON.stringify(updatedGenius3Data));
+
+       // Send the success response message.
+       res.json({type: "Success", message: 'Thermometer Data Update Successful'}); 
 
 
     } catch (err) {

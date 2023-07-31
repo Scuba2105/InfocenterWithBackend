@@ -3,8 +3,6 @@ import { localDBConfig } from "../config.mjs";
 import { localEMSConfig } from "../config.mjs";
 import { determineTeam } from "../utils/utils.mjs";
 
-const database = "local";
-
 const staffObjectPropLookup = {"name": "name", "id": "id", "hospital": "hospital", "position": "position", 
 "office-phone": "officePhone", "dect-phone": "dectPhone", "work-mobile": "workMobile", 
 "personal-mobile": "personalMobile", "extension": "img"};
@@ -47,7 +45,8 @@ export async function getGenius3Serial(parameter, length) {
 
       // Need to validate the parameter input
       // Connect to the database
-      await sql.connect(localDBConfig);  
+      await sql.connect(localEMSConfig);  
+      //await sql.connect(localDBConfig);
       
       // Create a new request object
       const request = new sql.Request()
@@ -57,16 +56,12 @@ export async function getGenius3Serial(parameter, length) {
 
       // make sure that any items are correctly URL encoded in the connection string
       if (length === 1) {
-        if (database === "EMS")  
             result = await request.query(`SELECT BMENO, Serial_No, BRAND_NAME FROM tblEquipment WHERE BMENO = ${parameter}`);
-        else (database === "local")
-            result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO = ${parameter}`);
+            //result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO = ${parameter}`);
       } 
       else {
-        if (database === "EMS")  
             result = await request.query(`SELECT BMENO, Serial_No, BRAND_NAME FROM tblEquipment WHERE BMENO IN ${parameter}`);
-        else (database === "local")
-            result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
+            //result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
       }
 
       // Need to close connection

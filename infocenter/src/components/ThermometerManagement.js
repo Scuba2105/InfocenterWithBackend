@@ -220,6 +220,7 @@ function ThermometerForm2({mediaQueries, setBatchData, openForm, closeDialog, sh
                 <p className="check-message">*Please enter any BME from returned delivery of Genius 3 to check what thermometers have been received in the batch.</p>
                 <ThermometerCheckButton buttonText="Check Returns" setBatchData={setBatchData} openForm={openForm} getReturnBatch={getReturnBatch} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
             </div>
+            <div className="line-spacer"></div>
             <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
         </>
     );

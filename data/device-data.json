@@ -1488,5 +1488,17 @@
     "software": "",
     "documents": "",
     "placeholder2": ""
+  },
+  {
+    "img": "jpg",
+    "type": "Suction Unit",
+    "manufacturer": "Laerdal",
+    "model": "LSU",
+    "serviceManual": true,
+    "userManual": true,
+    "config": "",
+    "software": "",
+    "documents": "",
+    "placeholder2": ""
   }
 ]

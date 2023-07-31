@@ -1780,21 +1780,15 @@ html {
   height: 75%;
   width: 28%;
   background-color: var(---form-background-color);
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 16% 10% 50% 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.thermometer-form-desktop {
-  height: 65%;
-}
-
 .thermometer-form-laptop h4, .thermometer-form-desktop h4 {
-  grid: 1 / 1;
   width: 100%;
-  height: 100%;
-  grid-row: 1;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1802,10 +1796,6 @@ html {
   background: linear-gradient(var(--dark-theme), var(--med-theme));
   color: white;
   margin-top: 0;
-}
-
-.thermometer-form-desktop h4 {
-  height: 90%;
 }
 
 .employee-requestor-select-container {
@@ -1876,8 +1866,7 @@ html {
 
 .check-container {
   width: 90%;
-  height: 60%;
-  margin: auto auto;
+  height: 30%;
 }
 
 .thermometer-form-button-container {
@@ -1907,6 +1896,12 @@ html {
 .thermometer-disposal-button {
   background: linear-gradient(#c81123, #b10819);
   transform: translateY(120px);
+}
+
+.line-spacer {
+  height: 2px;
+  width: 90%;
+  background-color: var(--form-font-color);
 }
 
 .thermometer-modal-container {

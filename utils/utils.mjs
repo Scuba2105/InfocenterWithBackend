@@ -52,7 +52,9 @@ export function writeStaffData(__dirname, data) {
 
 export function writeDeviceData(__dirname, data) {
     fs.writeFile(path.join(__dirname, 'data', 'device-data.json'), data, (err) => {
-        if (err) throw err;
+        if (err) {
+            throw err;
+        }
         console.log('The file has been saved!');
     });
 }
