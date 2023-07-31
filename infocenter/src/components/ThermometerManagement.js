@@ -147,7 +147,7 @@ async function getReturnBatch(closeDialog, showMessage, setBatchData, openForm, 
         // If error message is sent form server set response based on error status.
         if (res.status === 400) {
             const error = await res.json();
-            throw new Error(error.message)
+            throw new Error(`${error.message} If the issue persists please contact an admininistrator.`)
         }
 
         // Get the data from the JSON response.
@@ -168,8 +168,38 @@ async function getReturnBatch(closeDialog, showMessage, setBatchData, openForm, 
    
 }
 
-function getThermometersForDisposal(e) {
-    console.log(e.currentTarget);
+async function getThermometersForDisposal(closeDialog, showMessage, setBatchData, openForm, e) {
+    
+    // Show the uploading dialog while communicating with server
+    showMessage("uploading", `Retrieving Inactive Genius 3 Data...`);
+
+    try {
+        // Send the input BME to the backend to fetch the thermometer batch
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/GetInactive`, {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer",
+            responseType: "arraybuffer",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+        });
+
+        // If error message is sent form server set response based on error status.
+        if (res.status === 400) {
+            const error = await res.json();
+            throw new Error(`${error.message} If the issue persists please contact an admininistrator.`)
+        }
+
+        // Get the json data from the repsonse
+        const data = await res.json();
+        console.log(data);
+        
+    }
+    catch (err) {
+        showMessage("error", `${err.message} If the issue persists please contact an administrator.`);
+    }
 }
 
 function ThermometerFormButton({buttonText, closeDialog, showMessage, index}) {
@@ -188,10 +218,10 @@ export function ThermometerCheckButton({buttonText, setBatchData, openForm, getR
     );
 }
 
-export function ThermometerDisposalButton({buttonText, getThermometersForDisposal, closeDialog, showMessage, index}) {
+export function ThermometerDisposalButton({buttonText, setBatchData, openForm, getReturnBatch, closeDialog, showMessage}) {
     return (
         <div className="thermometer-form-button-container">
-            <div className="thermometer-disposal-button" onClick={getThermometersForDisposal}>{buttonText}</div>
+            <div className="thermometer-disposal-button" onClick={(e) => getThermometersForDisposal(closeDialog, showMessage, setBatchData, openForm, e)}>{buttonText}</div>
         </div>
     );
 }
@@ -223,7 +253,7 @@ function ThermometerForm2({mediaQueries, setBatchData, openForm, closeDialog, sh
             <div className={mediaQueries.laptop ? "line-spacer-laptop" : "line-spacer-desktop"}></div>
             <div className="disposal-container">
                 <p className="disposal-message">*View a list of thermometer which have been inactive for 2 months and consider for disposal.</p>
-                <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
+                <ThermometerDisposalButton buttonText="Manage Disposals" setBatchData={setBatchData} openForm={openForm} getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
             </div>
         </>
     );

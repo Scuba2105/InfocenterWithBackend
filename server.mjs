@@ -3,7 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, updateThermometerList } from './controller/controller.mjs';
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, 
+         updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, 
+         updateThermometerList, getInactiveThermometers } from './controller/controller.mjs';
 import { capitaliseFirstLetters } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
@@ -154,7 +156,15 @@ app.put('/Thermometers/:requestType', async (req, res, next) => {
     }
     else if (requestType === "UpdateReturns") {
         try {
-            await updateThermometerList(req, res, __dirname)
+            await updateThermometerList(req, res, __dirname);
+        }
+        catch(err) {
+            next(err);
+        }
+    }
+    else if (requestType === "GetInactive") {
+        try {
+            await getInactiveThermometers(req, res, __dirname);
         }
         catch(err) {
             next(err);

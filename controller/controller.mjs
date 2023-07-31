@@ -343,7 +343,12 @@ export async function getThermometerBatch(req, res, __dirname) {
         // Get the timestamp from the provided thermometer BME
         const bmeEntry  = allThermometerData.find((entry) => {
             return entry.bme === bme;
-        })
+        });
+
+        if (bmeEntry === undefined) {
+            throw new Error(`The entered BME #: ${bme} is not in the list of inactive thermometers. Please try another BME in the returned batch.`)
+        }
+
         const selectedTimestamp = bmeEntry.date;
 
         // Get the batch BME numbers with the same timestamp
@@ -396,10 +401,21 @@ export async function updateThermometerList(req, res, __dirname) {
     }
 }
 
-export async function getThermometerDisposal(req, res, __dirname) {
+export async function getInactiveThermometers(req, res, __dirname) {
     // Specify the number of milliseconds in 2 months. Determine the cut-off by subtracting from current time
     const currentTimestamp = Date.now();
-    const msIn2Months = 5259600000
-    // Any thermometer 
+    const msIn2Months = 5259600000;
+
+    // Any thermometer with timestamp below cut-off will be returned 
     const cutOff = currentTimestamp - msIn2Months;
+
+    // Get current data
+    const currentGenius3Data = await readThermometerData(__dirname);
+    
+    const inactiveEntries = currentGenius3Data.filter((entry) => {
+        return entry.date <= cutOff;
+    });  
+
+    console.log(inactiveEntries);
+    
 }
