@@ -1776,19 +1776,31 @@ html {
   height: 100%;
 }
 
-.thermometer-form-laptop, .thermometer-form-desktop {
-  height: 75%;
-  width: 28%;
+.thermometer-form-laptop {
+  height: 450px;
+  width: 400px;
   background-color: var(---form-background-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 16% 10% 50% 1fr;
+  align-items: center;
+}
+
+.thermometer-form-desktop {
+  height: 550px;
+  width: 500px;
+  background-color: var(---form-background-color);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 16% 10% 50% 1fr;
   align-items: center;
 }
 
 .thermometer-form-laptop h4, .thermometer-form-desktop h4 {
+  grid: 1 / 1;
   width: 100%;
-  height: 80px;
+  height: 100%;
+  grid-row: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1796,6 +1808,10 @@ html {
   background: linear-gradient(var(--dark-theme), var(--med-theme));
   color: white;
   margin-top: 0;
+}
+
+.thermometer-form-desktop h4 {
+  height: 90%;
 }
 
 .employee-requestor-select-container {
@@ -1866,7 +1882,8 @@ html {
 
 .check-container {
   width: 90%;
-  height: 30%;
+  height: 60%;
+  margin: auto auto;
 }
 
 .thermometer-form-button-container {
@@ -1895,13 +1912,23 @@ html {
 
 .thermometer-disposal-button {
   background: linear-gradient(#c81123, #b10819);
-  transform: translateY(120px);
+  
 }
 
-.line-spacer {
-  height: 2px;
+.line-spacer-laptop {
+  height: 1px;
   width: 90%;
   background-color: var(--form-font-color);
+  margin: auto auto;
+  transform: translateY(40px);
+}
+
+.line-spacer-desktop {
+  height: 1px;
+  width: 90%;
+  background-color: var(--form-font-color);
+  margin: auto auto;
+  transform: translateY(20px);
 }
 
 .thermometer-modal-container {

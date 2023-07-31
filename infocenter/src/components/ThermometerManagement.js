@@ -220,7 +220,7 @@ function ThermometerForm2({mediaQueries, setBatchData, openForm, closeDialog, sh
                 <p className="check-message">*Please enter any BME from returned delivery of Genius 3 to check what thermometers have been received in the batch.</p>
                 <ThermometerCheckButton buttonText="Check Returns" setBatchData={setBatchData} openForm={openForm} getReturnBatch={getReturnBatch} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
             </div>
-            <div className="line-spacer"></div>
+            <div className={mediaQueries.laptop ? "line-spacer-laptop" : "line-spacer-desktop"}></div>
             <ThermometerDisposalButton buttonText="Manage Disposals" getThermometersForDisposal={getThermometersForDisposal} closeDialog={closeDialog} showMessage={showMessage} index={index}/>
         </>
     );
@@ -251,11 +251,14 @@ export function ThermometerManagement({staffNames, page, closeDialog, showMessag
             <div className="thermometers-utility">
             {formTypes.map((type, index) => {
                 return (
-                    <form key={`thermometer-form${index}`} className={mediaQueries.laptop ? "thermometer-form-laptop" : "thermometer-form-desktop"}>
-                        <h4>{type}</h4>
-                        {index === 0 && <ThermometerForm1 staffNames={staffNames} mediaQueries={mediaQueries} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm1>}
-                        {index === 1 && <ThermometerForm2 mediaQueries={mediaQueries} setBatchData={setBatchData} openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm2>}
-                    </form>
+                    <>
+                        <form key={`thermometer-form${index}`} className={mediaQueries.laptop ? `thermometer-form-laptop` : `thermometer-form-desktop`}>
+                            <h4>{type}</h4>
+                            {index === 0 && <ThermometerForm1 staffNames={staffNames} mediaQueries={mediaQueries} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm1>}
+                            {index === 1 && <ThermometerForm2 mediaQueries={mediaQueries} setBatchData={setBatchData} openForm={openForm} closeDialog={closeDialog} showMessage={showMessage} index={index}></ThermometerForm2>}
+                        </form>
+                    </>
+                    
                 )
             })}
             </div>
