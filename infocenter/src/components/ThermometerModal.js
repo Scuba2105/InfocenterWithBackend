@@ -25,13 +25,14 @@ function onTableArrowClick(tableIndex, setTableIndex, maxIndex, e) {
 }
 
 function updateSelectedList(setSelectedList, selectedList, bmeNumber, e) {
+    console.log(selectedList);
     if (e.currentTarget.checked) {
         // Push the checked BME to the return list
        setSelectedList([...selectedList, bmeNumber]);
     }
     else {
         // Remove the BME from the return list if check removed
-        const newSelectedList = selectedList.current.filter((bme) => {
+        const newSelectedList = selectedList.filter((bme) => {
             return bme !== bmeNumber;
         })
         setSelectedList(newSelectedList);
@@ -69,7 +70,7 @@ async function returnSelected(selectedList, closeDialog, showMessage) {
             body: requestData
         });
 
-        // If error message is sent form server set response based on error status.
+        // If error message is sent from server set response based on error status.
         if (res.status === 400) {
             const error = await res.json();
             throw new Error(error.message)
@@ -83,15 +84,45 @@ async function returnSelected(selectedList, closeDialog, showMessage) {
     }
 }
 
-function disposeSelected(selectedList, closeDialog, showMessage) {
-    console.log("dispose selected");
+async function disposeSelected(selectedList, closeDialog, showMessage) {
+    // Stringify the input BME array for upload
+    const requestData = JSON.stringify(selectedList)
+
+    // Show the uploading dialog while communicating with server
+    showMessage("uploading", `Disposing selected Genius 3...`);
+
+    try {
+       // Send the data to the backend
+       const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/Disposals`, {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer",
+            responseType: "arraybuffer",
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: requestData
+        });
+
+        // If error message is sent form server set response based on error status.
+        if (res.status === 400) {
+            const error = await res.json();
+            throw new Error(error.message)
+        }
+
+        const data = await res.json(); 
+        showMessage("success", data.message);
+    } catch (error) {
+        showMessage("error", error.message);
+    }
 }
 
 function checkAllBoxes(selectedList, setSelectedList, batchData) {
     const bmeList = batchData.map((entry) => {
         return entry.bme;
     });
-    setSelectedList([...selectedList, ...bmeList]);
+    setSelectedList([...bmeList]);
 }
 
 export function ThermometerModal({batchData, type, closeDialog, showMessage}) {

@@ -2033,7 +2033,7 @@ html {
 .select-all-button {
   width: 200px;
   height: 40px;
-  background: linear-gradient(white, rgb(224, 224, 224));
+  background: linear-gradient(rgb(236, 235, 235), rgb(224, 224, 224));
   color: var(--dark-theme);
   border: 1px solid var(--dark-theme);
   display: flex;

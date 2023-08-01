@@ -426,3 +426,17 @@ export async function getInactiveThermometers(req, res, __dirname) {
         res.status(400).json({message: err.message});
     }  
 }
+
+export async function disposeSelectedThermometers(req, res, __dirname) {
+    try {
+       // Parse the request data to get the BME Array.
+       const jsonData = JSON.stringify(req.body);
+       const reqData = JSON.parse(jsonData);
+       
+       console.log(reqData)
+    } catch (error) {
+       // Send the error response message.
+       console.log(err);
+       res.status(400).json({message: err.message});
+    }
+}
