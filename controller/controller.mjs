@@ -402,6 +402,7 @@ export async function updateThermometerList(req, res, __dirname) {
 }
 
 export async function getInactiveThermometers(req, res, __dirname) {
+    try {
     // Specify the number of milliseconds in 2 months. Determine the cut-off by subtracting from current time
     const currentTimestamp = Date.now();
     const msIn2Months = 5259600000;
@@ -409,13 +410,19 @@ export async function getInactiveThermometers(req, res, __dirname) {
     // Any thermometer with timestamp below cut-off will be returned 
     const cutOff = currentTimestamp - msIn2Months;
 
-    // Get current data
+    // Get current data and filter out inactive entries.
     const currentGenius3Data = await readThermometerData(__dirname);
     
     const inactiveEntries = currentGenius3Data.filter((entry) => {
         return entry.date <= cutOff;
     });  
 
-    console.log(inactiveEntries);
-    
+    // Send json response.
+    res.json(JSON.stringify(inactiveEntries));
+    } 
+    catch (err) {
+        // Send the error response message.
+        console.log(err);
+        res.status(400).json({message: err.message});
+    }  
 }

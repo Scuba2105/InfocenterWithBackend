@@ -2023,6 +2023,24 @@ html {
   font-size: 16px;
 }
 
+.therm-disposal-button-container {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.select-all-button {
+  width: 200px;
+  height: 40px;
+  background: linear-gradient(white, rgb(224, 224, 224));
+  color: var(--dark-theme);
+  border: 1px solid var(--dark-theme);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 1250px) {
   .search-box-container {
     width: 100%;

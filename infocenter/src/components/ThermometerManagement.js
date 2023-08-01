@@ -192,10 +192,23 @@ async function getThermometersForDisposal(closeDialog, showMessage, setBatchData
             throw new Error(`${error.message} If the issue persists please contact an admininistrator.`)
         }
 
-        // Get the json data from the repsonse
+        // If error message is sent form server set response based on error status.
+        if (res.status === 400) {
+            const error = await res.json();
+            throw new Error(`${error.message} If the issue persists please contact an admininistrator.`)
+        }
+
+        // Get the data from the JSON response.
         const data = await res.json();
-        console.log(data);
         
+        const batchData = JSON.parse(data);
+
+        // Close loading dialog.
+        closeDialog();
+
+        // Set the data for the component and open form.
+        setBatchData(batchData);
+        openForm("disposal")
     }
     catch (err) {
         showMessage("error", `${err.message} If the issue persists please contact an administrator.`);

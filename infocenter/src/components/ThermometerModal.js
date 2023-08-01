@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { SkipIcon, NextIcon } from "../svg";
 import { serverConfig } from "../server";
 
@@ -24,17 +24,17 @@ function onTableArrowClick(tableIndex, setTableIndex, maxIndex, e) {
     }
 }
 
-function updateselectedList(selectedList, bmeNumber, e) {
+function updateSelectedList(setSelectedList, selectedList, bmeNumber, e) {
     if (e.currentTarget.checked) {
         // Push the checked BME to the return list
-        selectedList.current.push(bmeNumber);
+       setSelectedList([...selectedList, bmeNumber]);
     }
     else {
         // Remove the BME from the return list if check removed
-        const newselectedList = selectedList.current.filter((bme) => {
+        const newSelectedList = selectedList.current.filter((bme) => {
             return bme !== bmeNumber;
         })
-        selectedList.current = newselectedList;
+        setSelectedList(newSelectedList);
     }
 }
 
@@ -77,7 +77,7 @@ async function returnSelected(selectedList, closeDialog, showMessage) {
 
         const data = await res.json();
 
-        console.log(data);
+        showMessage("success", data.message);
     } catch (error) {
         showMessage("error", error.message);
     }
@@ -87,12 +87,20 @@ function disposeSelected(selectedList, closeDialog, showMessage) {
     console.log("dispose selected");
 }
 
+function checkAllBoxes(selectedList, setSelectedList, batchData) {
+    const bmeList = batchData.map((entry) => {
+        return entry.bme;
+    });
+    setSelectedList([...selectedList, ...bmeList]);
+}
+
 export function ThermometerModal({batchData, type, closeDialog, showMessage}) {
     
     const date = new Date(batchData[0].date);
     const dateString = date.toLocaleDateString();
     const [tableIndex, setTableIndex] = useState(0);
-    const selectedList = useRef([]);
+    const [selectedList,setSelectedList] = useState([]);
+    
     
     const entriesPerPage = 6;
     const maxIndex = Math.ceil(batchData.length/entriesPerPage);
@@ -114,9 +122,9 @@ export function ThermometerModal({batchData, type, closeDialog, showMessage}) {
                                     <label id="thermometer-bme">{`BME #: ${entry.bme}`}</label>
                                     <label id="thermometer-serial">{`Serial #: ${entry.serial}`}</label>
                                     <div id="thermometer-checkbox">
-                                        {selectedList.current.includes(bmeNumber) ? 
-                                        <input type="checkbox" checked onClick={(e) => updateselectedList(selectedList, bmeNumber, e)}></input> :
-                                        <input type="checkbox" onClick={(e) => updateselectedList(selectedList, bmeNumber, e)}></input>}
+                                        {selectedList.includes(bmeNumber) ? 
+                                        <input type="checkbox" checked onClick={(e) => updateSelectedList(setSelectedList, selectedList, bmeNumber, e)}></input> :
+                                        <input type="checkbox" onClick={(e) => updateSelectedList(setSelectedList, selectedList, bmeNumber, e)}></input>}
                                     </div>
                                 </div> 
                             );
@@ -130,8 +138,13 @@ export function ThermometerModal({batchData, type, closeDialog, showMessage}) {
                         <SkipIcon className="forward-skip-icon" color="white" size="21px" offset="0" angle="180" id="forward-skip" />
                     </div>
                 </div>
-                {type === "check" ? <button className="thermometer-form-button thermometer-modal-button" onClick={() => returnSelected(selectedList, closeDialog, showMessage)}>Return Selected</button> : 
-                                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={() => disposeSelected(selectedList, closeDialog, showMessage)}>Dispose Selected</button>}
+                {type === "check" ? 
+                <button className="thermometer-form-button thermometer-modal-button" onClick={() => returnSelected(selectedList, closeDialog, showMessage)}>Return Selected</button> 
+                :
+                <div className="therm-disposal-button-container">
+                    <button className="select-all-button thermometer-modal-button" onClick={() => checkAllBoxes(selectedList, setSelectedList, batchData)}>Select All</button>
+                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={() => disposeSelected(selectedList, closeDialog, showMessage)}>Dispose Selected</button>
+                </div>}
             </div>
         )
 }
