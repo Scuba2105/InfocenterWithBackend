@@ -138,4 +138,17 @@ export function LinkModal({selectedData, modalType}) {
             </div>
         );
     }
+    if (modalType === "passwords") {
+        const passwordData = selectedData.passwords;
+        return (
+            <>
+                {passwordData.map((entry) => {
+                    return (
+                        
+                        <label>{`${entry.type} Password: ${entry.value}`}</label>
+                    ) 
+            })}
+            </>
+        )
+    }
 }

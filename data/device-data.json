@@ -9,7 +9,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -21,7 +21,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -33,7 +33,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -45,7 +45,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -57,7 +57,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -69,7 +69,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -81,7 +81,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -93,7 +93,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -105,7 +105,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -117,7 +117,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -129,7 +129,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -141,7 +141,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -153,7 +153,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -165,7 +165,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -177,7 +177,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -189,7 +189,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -201,7 +201,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -213,7 +213,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -225,7 +225,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -237,7 +237,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -249,7 +249,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -261,7 +261,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -273,7 +273,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -285,7 +285,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -297,7 +297,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -309,7 +309,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -321,7 +321,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -333,7 +333,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -354,7 +354,7 @@
         "filePath": "/documents/MX400/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -438,7 +438,7 @@
         "filePath": "/documents/MX450/SupportTool_IFU.pdf"
       }
     ],
-    "placeholder2": ""
+    "passwords": [{"type": "Service", "value":"1345"}, {"type": "Configuration", "value": "71034"}, {"type": "Demo", "value": "64432"}]
   },
   {
     "img": "jpg",
@@ -464,7 +464,7 @@
         "filePath": "/documents/MX550/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": {"service": "1345", "configuration": "71034", "demo": "64432"}
   },
   {
     "img": "jpg",
@@ -493,7 +493,7 @@
         "filePath": "/documents/MX700/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -519,7 +519,7 @@
         "filePath": "/documents/MX750/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -559,7 +559,7 @@
         "filePath": "/documents/MX800/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -593,7 +593,7 @@
         "filePath": "/documents/MX40/MX40 user names.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -605,7 +605,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -617,7 +617,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -629,7 +629,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -641,7 +641,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -653,7 +653,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -665,7 +665,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -677,7 +677,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -689,7 +689,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -701,7 +701,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -713,7 +713,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -725,7 +725,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -737,7 +737,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -749,7 +749,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -761,7 +761,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -773,7 +773,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -785,7 +785,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -797,7 +797,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -809,7 +809,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -821,7 +821,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -833,7 +833,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -845,7 +845,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -857,7 +857,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -869,7 +869,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -889,7 +889,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -908,7 +908,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -920,7 +920,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -952,7 +952,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -983,7 +983,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -995,7 +995,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1007,7 +1007,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1019,7 +1019,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1035,7 +1035,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1047,7 +1047,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1059,7 +1059,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1071,7 +1071,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1116,7 +1116,7 @@
         "filePath": "/documents/TC50/Time Server setup.jpg"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1128,7 +1128,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1140,7 +1140,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1152,7 +1152,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1164,7 +1164,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1176,7 +1176,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1195,7 +1195,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1207,7 +1207,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1219,7 +1219,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1235,7 +1235,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1251,7 +1251,7 @@
     },
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1268,7 +1268,7 @@
         "filePath": "/documents/3015A/3015a_disassembly_guide.pdf"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1280,7 +1280,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1292,7 +1292,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1304,7 +1304,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1321,7 +1321,7 @@
         "filePath": "/documents/MX850/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1338,7 +1338,7 @@
         "filePath": "/documents/RI-2/ri-2_pm_guide.pdf"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1391,7 +1391,7 @@
         "filePath": "/documents/PIIC iX/RNC Cath Lab Network Printer config.cfg"
       }
     ],
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1403,7 +1403,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1415,7 +1415,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1427,7 +1427,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1439,7 +1439,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1451,7 +1451,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1463,7 +1463,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1475,7 +1475,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1487,7 +1487,7 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -1499,6 +1499,6 @@
     "config": "",
     "software": "",
     "documents": "",
-    "placeholder2": ""
+    "passwords": ""
   }
 ]
