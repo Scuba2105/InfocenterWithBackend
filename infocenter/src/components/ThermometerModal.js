@@ -48,10 +48,10 @@ function getDescription(type) {
     }
 }
 
-async function returnSelected(selectedList, closeDialog, showMessage) {
+async function returnSelected(selectedList, closeDialog, showMessage, closeModal) {
     
     // Stringify the input BME array for upload
-    const requestData = JSON.stringify(selectedList.current)
+    const requestData = JSON.stringify(selectedList);
 
     // Show the uploading dialog while communicating with server
     showMessage("uploading", `Updating Genius 3 repair list...`);
@@ -76,15 +76,22 @@ async function returnSelected(selectedList, closeDialog, showMessage) {
             throw new Error(error.message)
         }
 
+        // Get the json data from the response.
         const data = await res.json();
 
-        showMessage("success", data.message);
+        // Close the uploading dialog and show the auccess message for 1.6s.
+        closeDialog();
+        showMessage("info", data.message);
+        setTimeout(() => {
+            closeDialog();
+            closeModal();
+        }, 1600);
     } catch (error) {
         showMessage("error", error.message);
     }
 }
 
-async function disposeSelected(selectedList, closeDialog, showMessage) {
+async function disposeSelected(selectedList, closeDialog, showMessage, closeModal) {
     // Stringify the input BME array for upload
     const requestData = JSON.stringify(selectedList)
 
@@ -108,11 +115,19 @@ async function disposeSelected(selectedList, closeDialog, showMessage) {
         // If error message is sent form server set response based on error status.
         if (res.status === 400) {
             const error = await res.json();
-            throw new Error(error.message)
+            throw new Error(`${error.message} If the issue persists please contact an administrator.`)
         }
 
+        // Get the json data from the response.
         const data = await res.json(); 
-        showMessage("success", data.message);
+        
+        // Close the uploading dialog and show the auccess message for 1.6s.
+        closeDialog();
+        showMessage("info", data.message);
+        setTimeout(() => {
+            closeDialog();
+            closeModal();
+        }, 1600);
     } catch (error) {
         showMessage("error", error.message);
     }
@@ -125,7 +140,7 @@ function checkAllBoxes(selectedList, setSelectedList, batchData) {
     setSelectedList([...bmeList]);
 }
 
-export function ThermometerModal({batchData, type, closeDialog, showMessage}) {
+export function ThermometerModal({batchData, type, closeDialog, showMessage, closeModal}) {
     
     const date = new Date(batchData[0].date);
     const dateString = date.toLocaleDateString();
@@ -170,11 +185,11 @@ export function ThermometerModal({batchData, type, closeDialog, showMessage}) {
                     </div>
                 </div>
                 {type === "check" ? 
-                <button className="thermometer-form-button thermometer-modal-button" onClick={() => returnSelected(selectedList, closeDialog, showMessage)}>Return Selected</button> 
+                <button className="thermometer-form-button thermometer-modal-button" onClick={() => returnSelected(selectedList, closeDialog, showMessage, closeModal)}>Return Selected</button> 
                 :
                 <div className="therm-disposal-button-container">
                     <button className="select-all-button thermometer-modal-button" onClick={() => checkAllBoxes(selectedList, setSelectedList, batchData)}>Select All</button>
-                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={() => disposeSelected(selectedList, closeDialog, showMessage)}>Dispose Selected</button>
+                    <button className="thermometer-disposal-button thermometer-modal-button" onClick={() => disposeSelected(selectedList, closeDialog, showMessage, closeModal)}>Dispose Selected</button>
                 </div>}
             </div>
         )
