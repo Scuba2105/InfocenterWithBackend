@@ -73,6 +73,31 @@ export async function getGenius3Serial(parameter, length) {
   }
 }
 
+export async function disposeGenius3(parameter) {
+    try {
+  
+        // Need to validate the parameter input
+        // Connect to the database
+        await sql.connect(localEMSConfig);  
+        //await sql.connect(localDBConfig);
+        
+        // Create a new request object
+        const request = new sql.Request()
+        
+        // declare result variable
+        const result = await request
+            .input('bmeString', parameter)
+            .execute(`sp_SCB_ThermometerBulkDisposal`);        
+  
+        // Need to close connection
+        return result.recordset;
+    } 
+    catch (error) {
+      console.log(error);
+      throw new Error(`An error occurred querying the database :- ${error.message}`);
+    }
+  }
+
 // const array = ["37646", "57565", "45742", "55406", "53729", "37746", "54024", "51784", "47767"];
 // const lastIndex = array.length - 1;
 // const queryParameter = array.map((bme, index) => {

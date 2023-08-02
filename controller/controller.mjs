@@ -2,7 +2,7 @@ import { Mutex } from 'async-mutex';
 import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
-import { getGenius3Serial } from '../models/models.mjs';
+import { getGenius3Serial, disposeGenius3 } from '../models/models.mjs';
 import { isValidBME } from '../utils/utils.mjs';
 
 // Define the mutex objects for both staff and device files.
@@ -433,8 +433,13 @@ export async function disposeSelectedThermometers(req, res, __dirname) {
        const jsonData = JSON.stringify(req.body);
        const reqData = JSON.parse(jsonData);
        
-       console.log(reqData)
-    } catch (error) {
+       const inputData = '52015,74323,86393,86394';
+
+       const testData = await disposeGenius3(inputData);
+       
+       console.log(testData)
+       res.json(JSON.stringify(testData));
+    } catch (err) {
        // Send the error response message.
        console.log(err);
        res.status(400).json({message: err.message});
