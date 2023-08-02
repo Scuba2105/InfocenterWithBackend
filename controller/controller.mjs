@@ -433,9 +433,9 @@ export async function disposeSelectedThermometers(req, res, __dirname) {
        const jsonData = JSON.stringify(req.body);
        const reqData = JSON.parse(jsonData);
        
-       const inputData = '52015,74323,86393,86394';
+       const inputParameter = reqData.join(',');
 
-       const testData = await disposeGenius3(inputData);
+       const testData = await disposeGenius3(inputParameter);
        
        console.log(testData)
        res.json(JSON.stringify(testData));
