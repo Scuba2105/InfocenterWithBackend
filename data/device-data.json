@@ -438,7 +438,7 @@
         "filePath": "/documents/MX450/SupportTool_IFU.pdf"
       }
     ],
-    "passwords": [{"type": "Service", "value":"1345"}, {"type": "Configuration", "value": "71034"}, {"type": "Demo", "value": "64432"}]
+    "passwords": ""    
   },
   {
     "img": "jpg",
@@ -1391,7 +1391,7 @@
         "filePath": "/documents/PIIC iX/RNC Cath Lab Network Printer config.cfg"
       }
     ],
-    "passwords": ""
+    "passwords": "" 
   },
   {
     "img": "jpg",

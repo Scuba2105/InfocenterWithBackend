@@ -1047,6 +1047,34 @@ html {
   background-color: rgb(217, 217, 224);
 }
 
+.password-display {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(---form-background-color)
+}
+
+.password-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--form-font-color)
+}
+
+.password-type {
+  font-weight: 600; 
+}
+
+.password-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Format the add new staff/equipment modal */
 .add-new, .new-image {
   display: flex;

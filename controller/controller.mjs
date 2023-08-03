@@ -388,7 +388,7 @@ export async function updateThermometerList(req, res, __dirname) {
         });
 
         // Write the data to file.
-        writeThermometerData(__dirname, JSON.stringify(updatedGenius3Data, null, 2));
+        writeThermometerData(__dirname, JSON.stringify(updatedGenius3Data));
 
        // Send the success response message.
        res.json({type: "Success", message: 'Thermometer Data Update Successful'}); 
@@ -433,14 +433,14 @@ export async function disposeSelectedThermometers(req, res, __dirname) {
        const jsonData = JSON.stringify(req.body);
        const reqData = JSON.parse(jsonData);
        
-       // Create the input parameter for the stored procedure.
        const inputParameter = reqData.join(',');
 
-       //const testData = await disposeGenius3(inputParameter);
+       const testData = await disposeGenius3(inputParameter);
        
-       //console.log(testData)
+       console.log(testData)
+
        // Send the success response message.
-       res.json({type: "Success", message: 'Selected Thermometers Successfully Disposed'}); 
+       res.json({type: "Success", message: 'Selected Thermometers Disposed Successfully'}); 
     } catch (err) {
        // Send the error response message.
        console.log(err);
