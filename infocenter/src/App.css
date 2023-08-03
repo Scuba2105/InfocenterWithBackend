@@ -738,6 +738,8 @@ html {
   border: 1px solid #043254;
 }
 
+
+
 /* CSS for staff dislay area */
 .staff-info-laptop {
   font-size: 14px;
@@ -1053,7 +1055,8 @@ html {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background-color: var(---form-background-color)
+  background-color: var(---form-background-color);
+  overflow-y: scroll;
 }
 
 .password-container {
@@ -1061,7 +1064,12 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--form-font-color)
+  color: white;
+  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  height: 100px;
+  width: 300px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .password-type {
@@ -1073,6 +1081,11 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 13px;
+}
+
+.bolder {
+  font-weight: 500;
 }
 
 /* Format the add new staff/equipment modal */

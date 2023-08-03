@@ -438,7 +438,7 @@
         "filePath": "/documents/MX450/SupportTool_IFU.pdf"
       }
     ],
-    "passwords": ""    
+    "passwords": [{"type": "Service Password", "values": ["Software Revision M or Lower: 1345", "Software Revision N or Higher: 61021345"]}, {"type": "Configuration", "values": ["Software Revision M or Lower: 71034", "Software Revision N or Higher: 610271034"]}, {"type": "Demo", "values": ["Software Revision M or Lower: 14432", "Software Revision N or Higher: 610214432"]}, {"type": "Demo", "values": ["Software Revision M or Lower: 14432", "Software Revision N or Higher: 610214432"]}]
   },
   {
     "img": "jpg",
@@ -1391,7 +1391,7 @@
         "filePath": "/documents/PIIC iX/RNC Cath Lab Network Printer config.cfg"
       }
     ],
-    "passwords": "" 
+    "passwords": ""
   },
   {
     "img": "jpg",

@@ -149,7 +149,9 @@ export function LinkModal({selectedData, modalType}) {
                             <label className="password-type">{`${entry.type}`}</label>
                             <div className="password-info">
                                 {entry.values.map((pword) => {
-                                        return <label>{pword}</label>;
+                                        const desc = pword.split(':')[0];
+                                        const value = pword.split(':')[1];
+                                        return <label ><span className="bolder">{desc}</span>{`:${value}`}</label>;
                                 })}
                             </div>
                         </div>
