@@ -3,7 +3,24 @@ import { SelectInput } from "./SelectInput";
 import { IntellivueConfigDisplay } from "./IntellivueConfigDisplay";
 import { ClipboardCopy } from "./CopyToClipboard";
 import { Documents } from "./Documents";
-import useMediaQueries from "media-queries-in-react"
+import useMediaQueries from "media-queries-in-react";
+
+const departmentAcronyms = ['ct', 'agsu'];
+
+function passwordEntryBackgrounds(num) {
+    if (num === 0) {
+        return "linear-gradient(#E2CD45, #E1CA38)"
+    }
+    else if (num === 1) {
+        return "linear-gradient(#6F8F72, #5C7B60)"
+    }
+    else if (num === 2) {
+        return "linear-gradient(#7D80DA, #6F72D3)"
+    }
+    else if (num === 3) {
+        return "linear-gradient(#DB3186, #CC1F76)"
+    }
+}
 
 function generateConfigData(hospitals, selectedData) {
     let dataArray = [];
@@ -33,7 +50,7 @@ function capitaliseFirstLetter(word) {
     const formattedDepartment = wordArray.map((word) => {
         const array = word.split('-');
         const capitalisedWords = array.map((item) => {
-            if (item === 'ct' || item === 'agsu') {
+            if (departmentAcronyms.includes(item)) {
                 return item.toUpperCase();
             }
             return item[0].toUpperCase() + item.slice(1);
@@ -145,13 +162,16 @@ export function LinkModal({selectedData, modalType}) {
             <div className="password-display">
                 {passwordData.map((entry, index) => {
                     return (
-                        <div className="password-container" key={`${selectedData.model}${index}`}>
+                        <div className="password-container" key={`${selectedData.model}${index}`} style={{background: passwordEntryBackgrounds(index % 4)}}>
                             <label className="password-type">{`${entry.type}`}</label>
                             <div className="password-info">
                                 {entry.values.map((pword) => {
                                         const desc = pword.split(':')[0];
                                         const value = pword.split(':')[1];
-                                        return <label ><span className="bolder">{desc}</span>{`:${value}`}</label>;
+                                        const returnHTML = value !== undefined ? 
+                                        <label ><span className="bolder">{desc}</span>{`:${value}`}</label> :
+                                        <label >{`${desc}`}</label>
+                                        return returnHTML
                                 })}
                             </div>
                         </div>

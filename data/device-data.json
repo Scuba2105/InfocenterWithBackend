@@ -438,7 +438,7 @@
         "filePath": "/documents/MX450/SupportTool_IFU.pdf"
       }
     ],
-    "passwords": [{"type": "Service Password", "values": ["Software Revision M or Lower: 1345", "Software Revision N or Higher: 61021345"]}, {"type": "Configuration", "values": ["Software Revision M or Lower: 71034", "Software Revision N or Higher: 610271034"]}, {"type": "Demo", "values": ["Software Revision M or Lower: 14432", "Software Revision N or Higher: 610214432"]}, {"type": "Demo", "values": ["Software Revision M or Lower: 14432", "Software Revision N or Higher: 610214432"]}]
+    "passwords": ""
   },
   {
     "img": "jpg",
@@ -464,7 +464,7 @@
         "filePath": "/documents/MX550/intellivue_compatibility_matrix.xlsx"
       }
     ],
-    "passwords": {"service": "1345", "configuration": "71034", "demo": "64432"}
+    "passwords": ""
   },
   {
     "img": "jpg",
