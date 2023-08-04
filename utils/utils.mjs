@@ -114,7 +114,7 @@ export function generateNewDeviceData(fileExt, newType, manufacturer, newModel) 
         config: "",
         software: "",
         documents: "",
-        placeholder2: ""
+        passwords: ""
     }
 }
 
