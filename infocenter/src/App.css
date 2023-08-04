@@ -989,7 +989,7 @@ html {
 .modal-container-laptop {
   position: absolute;
   min-width: 500px;
-  max-height: 550px;
+  max-height: 600px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
