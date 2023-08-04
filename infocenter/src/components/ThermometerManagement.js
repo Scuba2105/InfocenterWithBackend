@@ -309,7 +309,7 @@ export function ThermometerManagement({staffNames, page, closeDialog, showMessag
             })}
             </div>
             {formVisible && <ModalSkeleton page={page} type={formType} closeModal={closeForm}>
-                                <ThermometerModal batchData={batchData} type={formType} closeDialog={closeDialog} showMessage={showMessage}></ThermometerModal>
+                                <ThermometerModal batchData={batchData} type={formType} closeDialog={closeDialog} showMessage={showMessage} closeModal={closeForm}></ThermometerModal>
                             </ModalSkeleton>}
         </>
         

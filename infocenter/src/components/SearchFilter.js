@@ -41,8 +41,17 @@ export function SearchFilter({page, pageData, onRowClick, queryClient, showMessa
     }
 
     function onQueryChange(e) {
-        setQuery(e.target.value);
-        setTableIndex(0);
+        const lastCharacter = e.target.value.split("").slice(-1)[0];
+        const prevCharacters = e.target.value.split("").slice(0, -1).join("");
+        if (lastCharacter !== "\\") {
+            setQuery(e.target.value);
+            setTableIndex(0);
+        }
+        else {
+            e.target.value = prevCharacters;
+            setQuery(prevCharacters);
+            setTableIndex(0);
+        }
     }
 
     function openAddModal() {

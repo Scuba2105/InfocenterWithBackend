@@ -732,11 +732,13 @@ html {
   border: 1px solid #7f3f21;
 }
 
-.placeholder2 {
+.passwords {
   color: #043254;
   background: linear-gradient(#a8d6f9, #6dbefc);
   border: 1px solid #043254;
 }
+
+
 
 /* CSS for staff dislay area */
 .staff-info-laptop {
@@ -987,13 +989,14 @@ html {
 .modal-container-laptop {
   position: absolute;
   min-width: 500px;
-  max-height: 600px;
+  max-height: 550px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 65px 1fr;
+  overflow-y: auto;
 }
 
 .modal-container-desktop {
@@ -1007,11 +1010,7 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 65px 1fr;
-  overflow-y: scroll;
-}
-
-.scroll {  
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .modal-title-bar {
@@ -1045,6 +1044,49 @@ html {
   justify-content: space-around;
   align-items: center;
   background-color: rgb(217, 217, 224);
+}
+
+.password-display {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(---form-background-color);
+  overflow-y: auto;
+}
+
+.password-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  min-height: 100px;
+  width: 300px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.password-container:first-of-type {
+  margin-top: 20px;
+}
+
+.password-type {
+  font-weight: 600; 
+}
+
+.password-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.bolder {
+  font-weight: 500;
 }
 
 /* Format the add new staff/equipment modal */

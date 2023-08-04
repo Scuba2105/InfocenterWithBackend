@@ -438,7 +438,9 @@ export async function disposeSelectedThermometers(req, res, __dirname) {
        const testData = await disposeGenius3(inputParameter);
        
        console.log(testData)
-       res.json(JSON.stringify(testData));
+
+       // Send the success response message.
+       res.json({type: "Success", message: 'Selected Thermometers Disposed Successfully'}); 
     } catch (err) {
        // Send the error response message.
        console.log(err);

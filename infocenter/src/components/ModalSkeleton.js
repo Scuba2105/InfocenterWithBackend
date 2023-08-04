@@ -3,8 +3,6 @@ import useMediaQueries from "media-queries-in-react";
 import { useRef, useState } from 'react';
 import { serverConfig } from "../server";
 
-const scrollDocumentsDevices = ['PIIC iX'];
-
 function getFormHeading(page, type, selectedData) {
     
     if (page === "staff") {
@@ -66,12 +64,6 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
         desktop: "(min-width: 1800px)"
     });
 
-    let scrollDocuments = "no-scroll"; 
-    if (type === 'documents' && scrollDocumentsDevices.includes(selectedData.model)) {
-        scrollDocuments  = 'scroll';
-    } 
-    
-
     function mouseDown(e) {
         buttonClicked.current = true;
         startPosition.current = {x: e.clientX, y: e.clientY}
@@ -91,7 +83,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
     }
     if (type === 'add-new' || type === 'update' || type === 'check' || type === 'disposal') {
         return (
-            <div className={mediaQueries.laptop ? `modal-container-laptop ${scrollDocuments}` : `modal-container-desktop ${scrollDocuments}`} style={type === "software" && mediaQueries.laptop ? 
+            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={type === "software" && mediaQueries.laptop ? 
             { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
             type === "software" && mediaQueries.desktop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : 
             { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={getCursorPosition}>
@@ -106,7 +98,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
     }
     else {
         return (
-            <div className={mediaQueries.laptop ? `modal-container-laptop ${scrollDocuments}` : `modal-container-desktop ${scrollDocuments}`} style={type === "software" && mediaQueries.laptop ? 
+            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={type === "software" && mediaQueries.laptop ? 
             { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
             type === "software" && mediaQueries.desktop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : 
             { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={getCursorPosition}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PlaceholderIcon} from "../svg";
+import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PasswordsIcon} from "../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
 import useMediaQueries from "media-queries-in-react";
 import { serverConfig } from "../server";
@@ -73,9 +73,9 @@ export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, sh
                         <DocumentsIcon color="#dc652f" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         Other Documents
                     </div>
-                    <div className="technical-link placeholder2" style={selectedData.placeholder2 === "" ? {opacity: 0.2} : {opacity: 1}} href={selectedData.placeholder2 === "" ? null : `http://${serverConfig.host}:${serverConfig.port}/${selectedData.placeholder2}`} target="_blank" rel="noopener noreferrer">
-                        <PlaceholderIcon color="#33658A" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                        Placeholder 2
+                    <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.2} : {opacity: 1}} onClick={onLinkClick}>
+                        <PasswordsIcon color="#33658A" size={mediaQueries.desktop ? "50px" : "30px"}/>
+                        Passwords
                     </div>
                 </div>
                 {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} page={page} closeUpdate={closeUpdate} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
