@@ -73,7 +73,7 @@ export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, sh
                         <DocumentsIcon color="#dc652f" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         Other Documents
                     </div>
-                    <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.2} : {opacity: 1}} onClick={onLinkClick}>
+                    <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.2} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <PasswordsIcon color="#33658A" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         Passwords
                     </div>

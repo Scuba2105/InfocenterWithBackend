@@ -7,18 +7,24 @@ import useMediaQueries from "media-queries-in-react";
 
 const departmentAcronyms = ['ct', 'agsu'];
 
-function passwordEntryBackgrounds(num) {
+function passwordEntryClassName(num) {
     if (num === 0) {
-        return "linear-gradient(#E2CD45, #E1CA38)"
+        return "service"
     }
     else if (num === 1) {
-        return "linear-gradient(#6F8F72, #5C7B60)"
+        return "user-manual"
     }
     else if (num === 2) {
-        return "linear-gradient(#7D80DA, #6F72D3)"
+        return "config"
     }
     else if (num === 3) {
-        return "linear-gradient(#DB3186, #CC1F76)"
+        return "software"
+    }
+    else if (num === 4) {
+        return "documents"
+    }
+    else if (num === 5) {
+        return "passwords"
     }
 }
 
@@ -162,7 +168,7 @@ export function LinkModal({selectedData, modalType}) {
             <div className="password-display">
                 {passwordData.map((entry, index) => {
                     return (
-                        <div className="password-container" key={`${selectedData.model}${index}`} style={{background: passwordEntryBackgrounds(index % 4)}}>
+                        <div className={`password-container ${passwordEntryClassName(index % 6)}`} key={`${selectedData.model}${index}`}>
                             <label className="password-type">{`${entry.type}`}</label>
                             <div className="password-info">
                                 {entry.values.map((pword) => {
