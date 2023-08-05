@@ -2081,7 +2081,7 @@ html {
   align-items: center;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1500px) {
   .search-box-container {
     width: 100%;
     display: flex;

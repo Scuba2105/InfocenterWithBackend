@@ -20,7 +20,7 @@ function getFormHeading(page, type, selectedData) {
 }
 
 function updatedPosition(isLaptopScreen, incrementData) {
-    const laptopX = 375
+    const laptopX = 375;
     const laptopY = 30;
     const desktopX = 625; 
     const desktopY = 100;
