@@ -27,7 +27,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
 
     if (selectedOption === 'Service Manual') {
         return (
-            <div key={selectedOption} className="device-input-container"> 
+            <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}> 
                 <label className="available-label">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <label>Update Service Manual: </label><input type="file" className="device-file-upload" id="file1" name="service-upload"></input>
             </div>
@@ -35,7 +35,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     }
     else if (selectedOption === 'User Manual') {
         return (
-            <div key={selectedOption} className="device-input-container">
+            <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
                 <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <label>Update User Manual: </label><input type="file" className="device-file-upload" id="file2" name="user-upload"></input>
             </div>
@@ -43,7 +43,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     }
     else if (selectedOption === 'Software') {
         return (
-            <div key={selectedOption} className="device-input-container">
+            <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
                 {/*<label id="software-available" className="available-label">Current Location Provided: {selectedData.software !== "" ? <Tick color="rgb(7, 171, 138)" size="18px" margin="25px" /> : <Cross color="#de0d37" size="18px" margin="25px" />} </label>*/}
                 <label>Software Type</label>
                 <div className="software-type">
@@ -58,7 +58,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     }
     else if (selectedOption === 'Configs') {
         return (
-            <div key={selectedOption} id={mediaQueries.laptop ? "device-config-container-laptop" : "device-config-container-desktop"} className="device-input-container">
+            <div key={selectedOption} id={mediaQueries.laptop ? "device-config-container-laptop" : "device-config-container-desktop"} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
                 <h4 id="add-config-heading">Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput label='Hospital' optionData={hospitalLocations} />
@@ -83,21 +83,21 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
             <div key={selectedOption} className="other-input-container">
                 {fileNumber.map((number) => {
                     return (
-                    <div key={`container-${number}`} className="description-file-container">
-                        <div className="label-input-container1">
+                    <div key={`container-${number}`} className={mediaQueries.laptop ? "description-file-container-laptop" : "description-file-container-desktop"}>
+                        <div className={mediaQueries.laptop ? "label-input-container1-laptop" : "label-input-container1-desktop"}>
                             <label key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
-                            <input key={`text${number}`} type="text" className="other-doc-text-input" placeholder="Enter a short title/description" name={`description-${number}`}></input>
+                            <input key={`text${number}`} type="text" className={mediaQueries.laptop ? "other-doc-text-input-laptop" : "other-doc-text-input-desktop"}  placeholder="Enter a short title/description" name={`description-${number}`}></input>
                         </div>
-                        <div className="label-input-container2">
+                        <div className={mediaQueries.laptop ? "label-input-container2-laptop" : "label-input-container2-desktop"}>
                             <label key={`label-input-${number}`}>{`File ${number}:`} </label>
-                            <input key={`file${number}`} type="file" className="other-doc-file-upload" name="user-upload"></input>
+                            <input key={`file${number}`} type="file" className={mediaQueries.laptop ? "other-doc-file-upload-laptop" : "other-doc-file-upload-desktop"} name="user-upload"></input>
                         </div>
                     </div>
                     );
                 })
                 
                 }
-                <div className="other-file-button-container">
+                <div className={mediaQueries.laptop ? "other-file-button-container-laptop" : "other-file-button-container-desktop"}>
                     {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
                     {fileNumber.length !== 1 && <div id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
                 </div>

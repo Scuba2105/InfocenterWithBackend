@@ -649,13 +649,22 @@ html {
 }
 
 /* Upload form styles */
-.device-input-container {
+.device-input-container-desktop {
   margin: 25px 0 25px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; 
   transform: translateY(100px);
+}
+
+.device-input-container-laptop {
+  margin: 25px 0 25px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(75px)
 }
 
 .device-text-input, .add-new.input {
@@ -1697,14 +1706,28 @@ html {
   margin-right: 5px;
 }
 
-.other-file-button-container {
+.other-file-button-container-laptop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(15px);
+}
+
+.other-file-button-container-desktop {
   display: flex;
   justify-content: center;
   align-items: center;
   transform: translateY(35px);
 }
 
-.description-file-container {
+.description-file-container-laptop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.description-file-container-desktop {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1712,15 +1735,34 @@ html {
   transform: translateY(20px);
 }
 
-.label-input-container1 {
+.label-input-container1-laptop, .label-input-container2-laptop {
+  font-size: 12px;
+}
+
+.label-input-container1-laptop, .label-input-container1-desktop {
   transform: translateX(-10px); 
 }
 
-.label-input-container2 {
+.label-input-container2-laptop, .label-input-container2-desktop {
   transform: translateX(10px);
 }
 
-.other-doc-text-input {
+.other-doc-text-input-laptop {
+  border: 1px solid black;
+  font-size: 10px;
+  height: 13px;
+  width: 170px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 5px;
+  padding: 6px -5px 2px 0;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+.other-doc-text-input-desktop {
   border: 1px solid black;
   font-size: 12px;
   height: 20px;
@@ -1735,7 +1777,21 @@ html {
   margin-bottom: 5px;
 }
 
-.other-doc-file-upload {
+.other-doc-file-upload-laptop {
+  font-size: 10px;
+  border: 1px solid black;
+  height: 15px;
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 4px 5px 5px 5px;
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+.other-doc-file-upload-desktop {
   font-size: 12px;
   border: 1px solid black;
   height: 20px;
@@ -2172,48 +2228,4 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@media (max-width: 1500px) {
-  
-  .device-input-container {
-    transform: translateY(75px)
-  }
-  .other-file-button-container {
-    transform: translateY(15px);
-  }
-  .description-file-container {
-    transform: translateY(0px);
-  }
-  .other-doc-text-input {
-    border: 1px solid black;
-    font-size: 10px;
-    height: 13px;
-    width: 170px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 5px;
-    padding: 6px -5px 2px 0;
-    margin-top: 3px;
-    margin-bottom: 5px;
-  }
-  
-  .other-doc-file-upload {
-    font-size: 10px;
-    border: 1px solid black;
-    height: 15px;
-    width: 180px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 2px -5px 4px 0 !important;
-    margin-top: 3px;
-    margin-bottom: 5px;
-  }
-  .label-input-container1, .label-input-container2 {
-    font-size: 12px;
-  }
 }
