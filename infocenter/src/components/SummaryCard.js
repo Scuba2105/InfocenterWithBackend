@@ -15,16 +15,16 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
 
     function getClassName(page) {
         if (page === 'staff' && mediaQueries.laptop === true) {
-            return 'display-area staff-display-laptop'
+            return 'display-area-laptop staff-display-laptop'
         }
         else if (page === 'staff' && mediaQueries.desktop === true) {
-            return 'display-area staff-display-desktop'
+            return 'display-area-desktop staff-display-desktop'
         }
         else if (page === 'technical-info' && mediaQueries.laptop === true) {
-            return 'display-area equipment-display-laptop'
+            return 'display-area-laptop equipment-display-laptop'
         }
         else {
-            return 'display-area equipment-display-desktop'
+            return 'display-area-desktop equipment-display-desktop'
         }
     }
 

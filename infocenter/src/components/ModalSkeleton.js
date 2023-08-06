@@ -64,6 +64,8 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
         desktop: "(min-width: 1800px)"
     });
 
+    console.log(mediaQueries.laptop);
+
     function mouseDown(e) {
         buttonClicked.current = true;
         startPosition.current = {x: e.clientX, y: e.clientY}

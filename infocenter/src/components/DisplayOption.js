@@ -3,6 +3,7 @@ import { Input } from "./Input";
 import { capitaliseFirstLetters } from "../utils/utils";
 import { Cross, Tick } from "../svg";
 import { serverConfig } from "../server";
+import useMediaQueries from "media-queries-in-react";
 
 const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'MATER HOSPITAL','BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
 'CESSNOCK HOSPITAL', 'TAREE HOSPITAL', 'DUNGOG HOSPITAL', 'SINGLETON HOSPITAL', 'DENMAN MPS','GLOUCESTOR HOSPITAL', 'SCONE HOSPITAL', 'MUSWELBROOK HOSPITAL', 
@@ -18,6 +19,11 @@ const hospitalLocations = hospitals.map((hospital) => {
 }).sort();
 
 export function DisplayOption({selectedOption, selectedData, fileNumber, updateFileCount}) {
+
+    const mediaQueries = useMediaQueries({
+        laptop: "(max-width: 1250px)",
+        desktop: "(min-width: 1800px)"
+    });
 
     if (selectedOption === 'Service Manual') {
         return (
@@ -52,7 +58,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
     }
     else if (selectedOption === 'Configs') {
         return (
-            <div key={selectedOption} id="device-config-container" className="device-input-container">
+            <div key={selectedOption} id={mediaQueries.laptop ? "device-config-container-laptop" : "device-config-container-desktop"} className="device-input-container">
                 <h4 id="add-config-heading">Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput label='Hospital' optionData={hospitalLocations} />
