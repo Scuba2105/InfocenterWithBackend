@@ -3,7 +3,7 @@ import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generate
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
 import { getGenius3Serial, disposeGenius3 } from '../models/models.mjs';
-import { isValidBME } from '../utils/utils.mjs';
+import { isValidBME, brandOptions } from '../utils/utils.mjs';
 
 // Define the mutex objects for both staff and device files.
 // Assists with preventing race conditions. 
@@ -429,16 +429,39 @@ export async function getInactiveThermometers(req, res, __dirname) {
 
 export async function disposeSelectedThermometers(req, res, __dirname) {
     try {
-       // Parse the request data to get the BME Array.
-       const jsonData = JSON.stringify(req.body);
-       const reqData = JSON.parse(jsonData);
+        // Parse the request data to get the BME Array.
+        const jsonData = JSON.stringify(req.body);
+        const BMENumbers = JSON.parse(jsonData);
        
-       const inputParameter = reqData.join(',');
+        // Check the request data are valid BME numbers.
+        for (const bme in BMENumbers) {
+            if (!isValidBME(BMENumbers[bme])) {
+                throw new Error('The selected BME is not a recognised BME Number. Please Contact an administrator to resolve the issue.')
+            }
+        }
 
-       const testData = await disposeGenius3(inputParameter);
-       
-       // Send the success response message.
-       res.json({type: "Success", message: 'Selected Thermometers Disposed Successfully'}); 
+        // Get the genius 3 serial numbers and brand names
+        const bmeSerialLookup = await getGenius3Serial(queryParameter, arrayLength);
+
+        // If not genius 3 then push to array so error can be thrown.
+        let errorBME = [];
+        bmeSerialLookup.forEach((entry) => {
+            if (!brandOptions.includes(entry["BRAND_NAME"])) {
+                errorBME.push(entry["BMENO"])
+            }
+        });
+
+        if (errorBME.length > 0) {
+            throw new Error(`The following BME Number/s are not recognised as Genius 3 devices; ${errorBME.join(",")}. Please contact an administrator to resolve the issue.`)
+        }
+
+        const inputParameter = BMENumbers.join(',');
+        console.log(inputParameter);
+
+        //const testData = await disposeGenius3(inputParameter);
+        
+        // Send the success response message.
+        res.json({type: "Success", message: 'Selected Thermometers Disposed Successfully'}); 
     } catch (err) {
        // Send the error response message.
        console.log(err);
