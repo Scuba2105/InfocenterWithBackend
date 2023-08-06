@@ -43,11 +43,6 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         }
     }, [isLoading, error, data])
     
-    // If error occurs fetching data then load error dialog.
-    useEffect(() => {
-        
-    }, [error])
-     
     // If data retrieved then render the main area based on returned data.
     if (data) {
         const staffNames = data.staffData.reduce((acc, currStaff) => {

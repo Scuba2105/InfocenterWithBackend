@@ -421,11 +421,11 @@ html {
   padding-left: 15px;
 }
 
-.search-table tbody tr:last-child {
+.search-table-laptop tbody tr:last-child, .search-table-desktop tbody tr:last-child {
   border-bottom: 1px solid rgb(156, 155, 155);
 }
 
-.search-table tbody tr:hover td {
+.search-table-laptop tbody tr:hover td, .search-table-desktop tbody tr:hover td {
   background-color: var(--row-hover);
   color: white;
   cursor: pointer;
