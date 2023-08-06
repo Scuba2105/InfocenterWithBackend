@@ -4,7 +4,7 @@ import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceReportGenerator } from "./ServiceReportGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
@@ -17,9 +17,9 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     const [utilityPage, setUtilityPage] = useState(0)
 
-    const closeDialog = useCallback(() => {
+    function closeDialog() {
         setDialogOpen(false);
-    }, []);
+    };
     
     function showMessage(dialogType, message) {
         setDialogMessage({type: dialogType, message: message});
@@ -30,22 +30,22 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         setUtilityPage(index);
     }
 
-    // If is loading then show the loading dialog.
+    // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     useEffect(() => {
         if (isLoading) {
-            showMessage("uploading", "Loading App Data...")
-
-            return () => {
-                closeDialog();
-            }
+            showMessage("uploading", "Loading App Data...");
         }
-    }, [isLoading, closeDialog])
+        if (error) {
+            showMessage("error", "An error occurred loading the app data from the server!");
+        }
+        if (data) {
+            closeDialog();
+        }
+    }, [isLoading, error, data])
     
     // If error occurs fetching data then load error dialog.
     useEffect(() => {
-        if (error) {
-            showMessage("error", "An error occurred loading the app data from the server!")
-        }
+        
     }, [error])
      
     // If data retrieved then render the main area based on returned data.
