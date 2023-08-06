@@ -3,6 +3,7 @@ import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
 import { serverConfig } from '../server';
+import useMediaQueries from 'media-queries-in-react';
 
 const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU', 'OT', 'PACU', 'SCU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
@@ -42,6 +43,11 @@ function generateHospitalLabel(name) {
 
 export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, showMessage, closeDialog}) {
     
+    const mediaQueries = useMediaQueries({
+        laptop: "(max-width: 1250px)",
+        desktop: "(min-width: 1800px)"
+    });
+
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
                     
@@ -50,7 +56,7 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
-                   
+                       
     async function sendFormData() {
             
         let dataKeys = [];
@@ -319,9 +325,9 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
                         Other Documents
                     </div>                    
                 </div>
-                <div className='display-section'>
+                <div className={mediaQueries.laptop ? 'display-section display-section-laptop' : "display-section"}>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} updateFileCount={updateFileCount} />
-                    <div className="form-buttons">
+                    <div className={mediaQueries.laptop ? "form-buttons-laptop" : "form-buttons-desktop"}>
                         <div className="update-button save-button" onClick={saveUpdateData}>Save Changes</div>
                         <div className="update-button" onClick={sendFormData}>Upload Updates</div>
                     </div>                    

@@ -167,3 +167,5 @@ export function isValidBME(bme) {
         return false;
     }
 }
+
+export const brandOptions = ['Genius 3', 'GENIUS 3', '303013'];

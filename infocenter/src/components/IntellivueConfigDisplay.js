@@ -92,7 +92,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
                 <div className="config-display-container">
                     <img className="config-arrow config-left-arrow" onClick={updateIndicator} onMouseOver={toggleLeftArrowHovered} onMouseOut={toggleLeftArrowHovered} src={leftArrowHovered ? `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow-highlight.jpg` : `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
-                        <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
+                        <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className={mediaQueries.laptop ? "config-link config-link-laptop" : "config-link"}>
                                 <div className="options-info">
                                     <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
                                     {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}

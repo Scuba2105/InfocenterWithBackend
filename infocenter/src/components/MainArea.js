@@ -4,7 +4,7 @@ import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceReportGenerator } from "./ServiceReportGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
@@ -12,15 +12,15 @@ import { workshops } from "../data";
 
 export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     
-    const {data, status} = useQuery(['dataSource'], fetchData);
+    const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     const [utilityPage, setUtilityPage] = useState(0)
 
-    function closeDialog() {
+    const closeDialog = useCallback(() => {
         setDialogOpen(false);
-    }
-
+    }, []);
+    
     function showMessage(dialogType, message) {
         setDialogMessage({type: dialogType, message: message});
         setDialogOpen(true);
@@ -30,14 +30,26 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         setUtilityPage(index);
     }
 
-    if (status === 'loading') {
-        <div>Loading...</div>
-    }
-    else if (status === 'error') {
-        <div>{`An error occurred: ${status.error}`}</div>
-    }
-    else if (status === 'success') {
+    // If is loading then show the loading dialog.
+    useEffect(() => {
+        if (isLoading) {
+            showMessage("uploading", "Loading App Data...")
 
+            return () => {
+                closeDialog();
+            }
+        }
+    }, [isLoading, closeDialog])
+    
+    // If error occurs fetching data then load error dialog.
+    useEffect(() => {
+        if (error) {
+            showMessage("error", "An error occurred loading the app data from the server!")
+        }
+    }, [error])
+     
+    // If data retrieved then render the main area based on returned data.
+    if (data) {
         const staffNames = data.staffData.reduce((acc, currStaff) => {
             if (!workshops.includes(currStaff.name)) {
                 acc.push(currStaff.name);
@@ -73,5 +85,5 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
             </div>
         );
     }
-    
 }
+    
