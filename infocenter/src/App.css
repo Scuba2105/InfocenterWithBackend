@@ -108,6 +108,20 @@ html {
   overflow: hidden;
 }
 
+.computer-container {
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-description {
+  width: 375px;
+  height: 100%;
+  margin-left: 50px;
+  background: linear-gradient(white, rgb(234, 233, 234))
+}
+
 /* Styling for the dialog component */
 #dialog-background {
   height: calc(100% + 120px);

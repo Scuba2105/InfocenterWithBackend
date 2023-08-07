@@ -200,6 +200,73 @@ export function PasswordsIcon({color, size='30px'}) {
     );
 }
 
+export function ComputerScreen({size="150px", color}) {
+    return (
+        <>
+            <svg width={size} height={size} viewBox="0 0 32 32">
+                <defs>
+                    <clipPath id="clip-computer">
+                    <rect width="32" height="32"/>
+                    </clipPath>
+                </defs>
+                <g id="computer" clip-path="url(#clip-computer)">
+                    <g id="Group_3463" data-name="Group 3463">
+                    <g id="Group_3456" data-name="Group 3456">
+                        <g id="Group_3449" data-name="Group 3449">
+                        <g id="Group_3448" data-name="Group 3448">
+                            <g id="Group_3447" data-name="Group 3447">
+                            <path id="Path_4068" data-name="Path 4068" d="M22.083,28.164H9.917a1,1,0,1,1,0-2H22.083a1,1,0,0,1,0,2Z" fill="#C6CAED"/>
+                            </g>
+                        </g>
+                        </g>
+                        <g id="Group_3452" data-name="Group 3452">
+                        <g id="Group_3451" data-name="Group 3451">
+                            <g id="Group_3450" data-name="Group 3450">
+                            <path id="Path_4069" data-name="Path 4069" d="M30.417,24.17H1.583a1,1,0,0,1-1-1V4.836a1,1,0,0,1,1-1H30.417a1,1,0,0,1,1,1V23.17A1,1,0,0,1,30.417,24.17Zm-27.834-2H29.417V5.836H2.583Z" fill="#C6CAED"/>
+                            </g>
+                        </g>
+                        </g>
+                        <g id="Group_3455" data-name="Group 3455">
+                        <g id="Group_3454" data-name="Group 3454">
+                            <g id="Group_3453" data-name="Group 3453">
+                            <path id="Path_4070" data-name="Path 4070" d="M19.917,27.664H12.083a.5.5,0,0,1-.5-.5V23.17a.5.5,0,0,1,.5-.5h7.834a.5.5,0,0,1,.5.5v3.994A.5.5,0,0,1,19.917,27.664Zm-7.334-1h6.834V23.67H12.583Z" fill="#C6CAED"/>
+                            </g>
+                        </g>
+                        </g>
+                    </g>
+                    <g id="Group_3459" data-name="Group 3459">
+                        <g id="Group_3458" data-name="Group 3458">
+                        <g id="Group_3457" data-name="Group 3457">
+                            <path id="Path_4071" data-name="Path 4071" d="M30.146,18.813H1.854a.5.5,0,1,1,0-1H30.146a.5.5,0,0,1,0,1Z" fill="#C6CAED"/>
+                        </g>
+                        </g>
+                    </g>
+                    <g id="Group_3462" data-name="Group 3462">
+                        <g id="Group_3461" data-name="Group 3461">
+                        <g id="Group_3460" data-name="Group 3460">
+                            <circle id="Ellipse_35" data-name="Ellipse 35" cx="0.875" cy="0.875" r="0.875" transform="translate(15.125 19.625)" fill="#C6CAED"/>
+                        </g>
+                        </g>
+                    </g>
+                    </g>
+                </g>
+            </svg>
+        </>
+    )
+}
+
+export function WarningIcon({size, color}) {
+    return (
+        <>
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="red">
+                <circle cx="12" cy="17" r="1" fill="#000000"/>
+                <path d="M12 10L12 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3.44722 18.1056L10.2111 4.57771C10.9482 3.10361 13.0518 3.10362 13.7889 4.57771L20.5528 18.1056C21.2177 19.4354 20.2507 21 18.7639 21H5.23607C3.7493 21 2.78231 19.4354 3.44722 18.1056Z" stroke="red" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+        </>
+    )
+}
+
 export function NextIcon({color, size='12px', offset, angle, id}) {
     return (
         <>
