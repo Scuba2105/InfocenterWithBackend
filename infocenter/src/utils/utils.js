@@ -23,14 +23,20 @@ export function generateDataPages(queryData, entriesPerPage) {
 }
 
 export async function fetchData() {
-    const res = await fetch("http://localhost:5000/getData", {
-            method: "GET", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, *cors, same-origin
-            redirect: "follow", // manual, *follow, error
-            referrerPolicy: "no-referrer"
-    })
-    const data = await res.json();
-    return data;
+    try {
+        const res = await fetch("http://localhost:5000/getData", {
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer"
+        })
+        console.log(res);
+        const data = await res.json();
+        return data;
+    }
+    catch (err) {
+        throw new Error(err.message);
+    }
 }
 
 export function sortMandatoryFields(changedMandatoryFields) {

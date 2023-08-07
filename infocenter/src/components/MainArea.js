@@ -31,18 +31,21 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     }
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
-    useEffect(() => {
-        if (isLoading) {
-            showMessage("uploading", "Loading App Data...");
-        }
-        if (error) {
-            showMessage("error", "An error occurred loading the app data from the server!");
-        }
-        if (data) {
-            closeDialog();
-        }
-    }, [isLoading, error, data])
+    if (isLoading) {
+        console.log('Loading');
+        return (
+            <h1>Loading App data. Please Wait...</h1> 
+        )
+    }
     
+    if (error !== null) {
+        console.log('Error has been detected. Unable to fetch App data.');
+        return (
+            <h1>Error has been detected. Unable to fetch App data.</h1>
+        )
+        //showMessage("error", "An error occurred loading the app data from the server!");
+    }
+
     // If data retrieved then render the main area based on returned data.
     if (data) {
         const staffNames = data.staffData.reduce((acc, currStaff) => {
