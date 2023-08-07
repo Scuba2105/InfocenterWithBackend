@@ -2,6 +2,7 @@ import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
 import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
+import { ErrorPage } from "./ErrorPage";
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
 import { useState, useEffect } from "react";
@@ -41,7 +42,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     if (error !== null) {
         console.log('Error has been detected. Unable to fetch App data.');
         return (
-            <h1>Error has been detected. Unable to fetch App data.</h1>
+            <ErrorPage></ErrorPage>
         )
         //showMessage("error", "An error occurred loading the app data from the server!");
     }
