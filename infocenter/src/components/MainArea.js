@@ -44,7 +44,6 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         return (
             <ErrorPage></ErrorPage>
         )
-        //showMessage("error", "An error occurred loading the app data from the server!");
     }
 
     // If data retrieved then render the main area based on returned data.
