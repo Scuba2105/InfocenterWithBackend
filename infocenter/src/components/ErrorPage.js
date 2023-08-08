@@ -1,16 +1,18 @@
 import { ComputerScreen, WarningIcon } from "../svg"
+import { GearIcon } from "../svg"
 
 export function ErrorPage() {
     return (
         <div className="computer-container">
-            <ComputerScreen size="400px" color="#C6CAED"></ComputerScreen>
             <div className="error-description">
-                <div className="warning-header">
-                    <WarningIcon size="80px" color="#ffffff"></WarningIcon>
-                </div>
-                <h1>Error 503</h1>
-                <p>Please be patient while the issue is rectified and try again later</p>
+                <h1 className="error-503">Error 503</h1>
+                <p className="message1-503">Service currently unavailable.</p>
+                <p className="message2-503">Please try again later.</p>
             </div>
+            <ComputerScreen sizeX="400px" sizeY="500px" color="#C6CAED"></ComputerScreen>
+            <GearIcon gearId="gear1" color="#F7A278" size="60px"></GearIcon>
+            <GearIcon gearId="gear2" color="#F7A278" size="80px"></GearIcon>
+            <GearIcon gearId="gear3" color="#F7A278" size="50px"></GearIcon>
         </div>
     )
 }

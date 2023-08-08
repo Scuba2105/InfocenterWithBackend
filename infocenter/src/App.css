@@ -114,26 +114,50 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url(../public/error-background.png);
+  background-size: cover;
 }
 
 .error-description {
   width: 375px;
   height: 375px;
-  margin-left: 50px;
-  background: linear-gradient(white, rgb(234, 233, 234));
+  margin-right: 250px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
-.warning-header {
-  height: 100px;
-  width: 100%;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.error-503 {
+  font-weight: bold;
+  font-size: 40px;
+  color: #4558a2;
+}
+
+.message1-503, .message2-503 {
+  font-size: 22px;
+  color: #4558a2;
+}
+
+#gear1 {
+  position: absolute;
+  top: 250px;
+  left: 875px;
+  animation: gearSpinnerBackward 3000ms linear infinite;
+}
+
+#gear2 {
+  position: absolute;
+  top: 250px;
+  left: 930px;
+  animation: gearSpinnerForward 4500ms linear infinite;
+}
+
+#gear3 {
+  position: absolute;
+  top: 252px;
+  left: 1006px;
+  animation: gearSpinnerBackward 2800ms linear infinite;
 }
 
 /* Styling for the dialog component */
@@ -245,6 +269,22 @@ html {
 @keyframes uploadSpinner {
   to {
 		transform: rotate(360deg);
+	}
+}
+
+/* The animation code */
+@keyframes gearSpinnerForward {
+  to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes gearSpinnerBackward {
+  from{
+    transform: rotate(360deg);
+  }
+  to {
+		transform: rotate(0deg);
 	}
 }
 
