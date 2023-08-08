@@ -5,7 +5,7 @@ import { DialogBox } from "./DialogBox";
 import { ErrorPage } from "./ErrorPage";
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceReportGenerator } from "./ServiceReportGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";

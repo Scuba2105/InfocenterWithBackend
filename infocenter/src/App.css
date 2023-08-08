@@ -16,6 +16,8 @@ html {
   --icon-theme: #202950;
   --form-font-color: rgb(132, 132, 139);
   ---form-background-color: rgb(217, 217, 224);
+  --gear-desktop-offsetY: 160px;
+  --gear-desktop-offsetX: 415px;
 }
 
 .wrapper {
@@ -118,10 +120,20 @@ html {
   background-size: cover;
 }
 
-.error-description {
+.error-description-laptop {
   width: 375px;
   height: 375px;
   margin-right: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-description-desktop {
+  width: 375px;
+  height: 375px;
+  margin-right: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,24 +151,45 @@ html {
   color: #4558a2;
 }
 
-#gear1 {
+#gear1-laptop {
   position: absolute;
   top: 250px;
   left: 875px;
   animation: gearSpinnerBackward 3000ms linear infinite;
 }
 
-#gear2 {
+#gear1-desktop {
+  position: absolute;
+  top: calc(250px + var(--gear-desktop-offsetY));
+  left: calc(875px + var(--gear-desktop-offsetX));
+  animation: gearSpinnerBackward 3000ms linear infinite;
+}
+
+#gear2-laptop {
   position: absolute;
   top: 250px;
   left: 930px;
   animation: gearSpinnerForward 4500ms linear infinite;
 }
 
-#gear3 {
+#gear2-desktop {
+  position: absolute;
+  top: calc(250px + var(--gear-desktop-offsetY));
+  left: calc(930px + var(--gear-desktop-offsetX));
+  animation: gearSpinnerForward 4500ms linear infinite;
+}
+
+#gear3-laptop {
   position: absolute;
   top: 252px;
   left: 1006px;
+  animation: gearSpinnerBackward 2800ms linear infinite;
+}
+
+#gear3-desktop {
+  position: absolute;
+  top: calc(252px + var(--gear-desktop-offsetY));
+  left: calc(1006px + var(--gear-desktop-offsetX));
   animation: gearSpinnerBackward 2800ms linear infinite;
 }
 
