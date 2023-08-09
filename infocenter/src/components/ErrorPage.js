@@ -1,4 +1,4 @@
-import { ComputerScreen, WarningIcon } from "../svg";
+import { ComputerScreen } from "../svg";
 import { GearIcon } from "../svg";
 import useMediaQueries from "media-queries-in-react";
 

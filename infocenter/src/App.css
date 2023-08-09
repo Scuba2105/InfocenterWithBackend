@@ -593,7 +593,7 @@ html {
 }
 
 .display-area-laptop > h2 { 
-  font-size: 20px;
+  font-size: 24px;
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
@@ -614,14 +614,6 @@ html {
   font-size: 30px;
   background: linear-gradient(var(--dark-theme), var(--med-theme));
   color: white;
-}
-
-.staff-display-laptop > h2, .equipment-display-laptop > h2 {
-  font-size: 30px;
-}
-
-.staff-display-desktop > h2, .equipment-display-desktop > h2 {
-  font-size: 35px;
 }
 
 .summary-area-laptop {

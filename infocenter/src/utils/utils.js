@@ -30,7 +30,7 @@ export async function fetchData() {
                 redirect: "follow", // manual, *follow, error
                 referrerPolicy: "no-referrer"
         })
-        console.log(res);
+        
         const data = await res.json();
         return data;
     }

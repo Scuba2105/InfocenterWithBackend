@@ -237,8 +237,9 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
             }, 1600);
         }
         else if (selectedOption === "Other Documents") {
-            const descriptions = e.target.parentNode.parentNode.querySelectorAll('.other-doc-text-input');
-            const fileInputs = e.target.parentNode.parentNode.querySelectorAll('.other-doc-file-upload');
+
+            const descriptions = e.target.parentNode.parentNode.querySelectorAll(`.other-doc-text-input-${mediaQueries.laptop ? 'laptop' : 'desktop'}`);
+            const fileInputs = e.target.parentNode.parentNode.querySelectorAll(`.other-doc-file-upload-${mediaQueries.laptop ? 'laptop' : 'desktop'}`);
             
             descriptions.forEach((description, index) => {
                 if (description.value === "") {
@@ -247,7 +248,9 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
                 }
                 updateData.current.set(`description${index + 1}`, description.value);
             })
+
             const fileInputArray = Array.from(fileInputs);
+            
             for (const fileInput of fileInputArray) {
                 const index = fileInputArray.indexOf(fileInput);
                 if (fileInput.files.length === 0) {
