@@ -193,6 +193,33 @@ html {
   animation: gearSpinnerBackward 2800ms linear infinite;
 }
 
+.loading-page-container {
+  height: 100%;
+  width: 100%;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 12px solid rgb(215, 215, 215); /* Light grey */
+  border-top: 12px solid #F7A278; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1.0s linear infinite;
+}
+
+.loading-page-container h1 {
+  color: rgb(215, 215, 215);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Styling for the dialog component */
 #dialog-background {
   height: calc(100% + 120px);

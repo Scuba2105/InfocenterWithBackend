@@ -2,6 +2,7 @@ import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
 import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
+import { LoadingPage } from "./LoadingPage";
 import { ErrorPage } from "./ErrorPage";
 import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
@@ -35,7 +36,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     if (isLoading) {
         console.log('Loading');
         return (
-            <h1>Loading App data. Please Wait...</h1> 
+            <LoadingPage></LoadingPage> 
         )
     }
     
