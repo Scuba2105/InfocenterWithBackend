@@ -211,7 +211,7 @@ html {
   animation: spin 1.0s linear infinite;
 }
 
-.loading-page-container h1 {
+.loading-page-container h2 {
   color: rgb(215, 215, 215);
 }
 
