@@ -1,7 +1,7 @@
 import { Mutex } from 'async-mutex';
 import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
-import { populateGenius3RequestTemplate } from '../file-handling/genius3-repair-request.mjs';
+import { populateGenius3RequestTemplate } from '../file-handling/repair-requests.mjs';
 import { getGenius3Serial, disposeGenius3 } from '../models/models.mjs';
 import { isValidBME, brandOptions } from '../utils/utils.mjs';
 
