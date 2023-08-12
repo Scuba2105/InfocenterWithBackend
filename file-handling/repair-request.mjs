@@ -239,55 +239,22 @@ export async function FreseniusKabiRepairRequest(name, hospital, model, serialNu
         const pngImageBytes = readTickImage("C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/images/tick.png")
         const tickImage = await pdfDoc.embedPng(pngImageBytes)
 
-        // Draw name 
-        firstPage.drawText(name, {
-            x: 226,
-            y: 787,
-            size: 10,
+        // Specify the array of text elements to draw to the form.
+        const textArray = [{text: name, format: {x: 226, y: 787, size: 10}},
+            {text: hospital, format: {x: 226, y: 740, size: 10}},
+            {text: returnAddress.split(",").slice(0, 3).join(","), format: {x: 226, y: 627, size: 10,}},
+            {text: returnAddress.split(",").slice(3).join(","), format: {x: 225, y: 613, size: 10}},
+            {text: `(02) ${contactNumber}`, format: {x: 225, y: 568, size: 10}},
+            {text: emailAddress, format: {x: 225, y: 524, size: 10}},
+            {text: serialNumber, format: {x: 305, y: 412, size: 10}},
+            {text: faultDescription, format: {x: 305, y: 319, size: 10}}];
+            
+        // Loop over the array of elements and draw each text to the page.
+        textArray.forEach((entry) => {
+            firstPage.drawText(entry.text, entry.format);
         })
 
-        // Draw hospital 
-        firstPage.drawText(hospital, {
-            x: 226,
-            y: 740,
-            size: 10,
-        })
-
-        // Draw return address
-        firstPage.drawText(returnAddress.split(",").slice(0, 3).join(","), {
-            x: 226,
-            y: 627,
-            size: 10,
-        })
-
-         // Draw return address
-         firstPage.drawText(returnAddress.split(",").slice(3).join(","), {
-            x: 225,
-            y: 613,
-            size: 10,
-        })
-
-        // Draw phone number
-        firstPage.drawText(`(02) ${contactNumber}`, {
-            x: 225,
-            y: 568,
-            size: 10,
-        });
-
-        // Draw email address
-        firstPage.drawText(emailAddress, {
-            x: 225,
-            y: 524,
-            size: 10,
-        });
-
-        // Draw Serial Number
-        firstPage.drawText(serialNumber, {
-            x: 305,
-            y: 412,
-            size: 10,
-        });
-
+        // Draw the error code to the PDF if it is present.
         if (errorCode !== "No Code") {
             // Draw Error Code
             firstPage.drawText(errorCode, {
@@ -296,20 +263,15 @@ export async function FreseniusKabiRepairRequest(name, hospital, model, serialNu
                 size: 10,
             });
         }
-        
-        // Draw fault description
-        firstPage.drawText(faultDescription, {
-            x: 305,
-            y: 319,
-            size: 10,
-        });
 
+        // Draw the tick for the appropriate shipping        
         const shippingTickPosition = pickup === "TNT" ? 
         {x: 251, y: 692, width: 12, height: 12} : 
         {x: 328.3, y: 692, width: 12, height: 12};
 
         firstPage.drawImage(tickImage, shippingTickPosition)
 
+        // Specify the colleciton date if not sending via TNT.
         if (pickup !== "TNT") {
             firstPage.drawText(date, {
                 x: 386,
@@ -317,7 +279,8 @@ export async function FreseniusKabiRepairRequest(name, hospital, model, serialNu
                 size: 10,
             })
         }
-        
+
+        // Determine the appropriate option to tick based on selected model.        
         const modelTickPosition = model === "Volumat" ? 
         {x: 96, y: 467, width: 12, height: 12} : 
         model === "Injectomat" ? {x: 242, y: 467, width: 12, height: 12} :
