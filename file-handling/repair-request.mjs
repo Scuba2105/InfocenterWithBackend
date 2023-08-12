@@ -1,7 +1,7 @@
 import {PDFDocument, StandardFonts } from 'pdf-lib';
 import fs from 'fs';
 import path from 'path';
-import { generateEmailAddress } from '../utils/utils.mjs';
+import { generateEmailAddress, getReducedName } from '../utils/utils.mjs';
 
 export async function populateGenius3RequestTemplate(name, serialNumbers, rootDirectory) {
     try {
@@ -217,3 +217,22 @@ export async function fm30TransducersDeliveryNote(name, ultrasoundNumber, tocoNu
         throw new Error(err.message);
     }
 }
+
+export async function FreseniusKabiRepairRequest(name, hospital, rootDirectory) {
+    try {
+        
+        const emailAddress = generateEmailAddress(name);
+        const reducedName = getReducedName(name);
+
+        const returnAddress = `ATTN: ${reducedName}, HNE Clinical Technology, Level 1 John Hunter Hospital, Lookout Road, New Lambton Heights, NSW, 2305`
+        
+        console.log(returnAddress, emailAddress);
+    
+    } catch (err) {
+        console.log(err);
+        throw new Error(err.message);
+    }
+}
+
+
+FreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hospital", "directory")

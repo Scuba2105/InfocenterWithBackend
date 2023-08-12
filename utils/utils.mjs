@@ -169,3 +169,16 @@ export function isValidBME(bme) {
 }
 
 export const brandOptions = ['Genius 3', 'GENIUS 3', '303013'];
+
+export function getReducedName(name) {
+    const reducedName = name.split(" ").map((entry, index) => {
+        if (index == 0) {
+            return entry.split("")[0];
+        }
+        else {
+            return entry;
+        }
+    }).join(" ")
+
+    return reducedName;
+}
