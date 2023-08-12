@@ -1,4 +1,4 @@
-import fs, { writeFile } from 'fs';
+import fs, { readFile, writeFile } from 'fs';
 import path from 'path';
 
 export function readAllData(__dirname) {
@@ -181,4 +181,9 @@ export function getReducedName(name) {
     }).join(" ")
 
     return reducedName;
+}
+
+export function readTickImage(path) {
+    const imageData = fs.readFileSync(path);
+    return imageData;
 }

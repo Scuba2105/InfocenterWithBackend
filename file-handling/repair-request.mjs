@@ -1,7 +1,7 @@
 import {PDFDocument, StandardFonts } from 'pdf-lib';
 import fs from 'fs';
 import path from 'path';
-import { generateEmailAddress, getReducedName } from '../utils/utils.mjs';
+import { generateEmailAddress, getReducedName, readTickImage } from '../utils/utils.mjs';
 
 export async function populateGenius3RequestTemplate(name, serialNumbers, rootDirectory) {
     try {
@@ -100,7 +100,7 @@ export async function cardinalHealthRepairRequest(name, model, serialNumbers, fa
         }
         
         // Load a PDFDocument from the existing PDF bytes
-        const pdfDoc = await PDFDocument.load(existingPdfBytesTest)
+        const pdfDoc = await PDFDocument.load(existingPdfBytes)
         
         // Get the first page of the document
         const pages = pdfDoc.getPages()
@@ -182,7 +182,7 @@ export async function fm30TransducersDeliveryNote(name, ultrasoundNumber, tocoNu
         //const existingPdfBytesTest = fs.readFileSync('C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/templates/FM30 US and Toco Transducers.pdf');
                 
         // Load a PDFDocument from the existing PDF bytes
-        const pdfDoc = await PDFDocument.load(existingPdfBytesTest)
+        const pdfDoc = await PDFDocument.load(existingPdfBytes)
         
         // Get the first page of the document
         const pages = pdfDoc.getPages()
@@ -218,16 +218,131 @@ export async function fm30TransducersDeliveryNote(name, ultrasoundNumber, tocoNu
     }
 }
 
-export async function FreseniusKabiRepairRequest(name, hospital, rootDirectory) {
+export async function FreseniusKabiRepairRequest(name, hospital, model, serialNumber, faultDescription, errorCode, contactNumber, pickup, rootDirectory) {
     try {
         
+        const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'FM30 US and Toco Transducers.pdf'));
+        //const existingPdfBytesTest = fs.readFileSync('C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/templates/FKA_Request_Template.pdf');
+                
+        // Load a PDFDocument from the existing PDF bytes
+        const pdfDoc = await PDFDocument.load(existingPdfBytes)
+        
+        // Get the first page of the document
+        const pages = pdfDoc.getPages()
+        const firstPage = pages[0];
+
         const emailAddress = generateEmailAddress(name);
         const reducedName = getReducedName(name);
-
         const returnAddress = `ATTN: ${reducedName}, HNE Clinical Technology, Level 1 John Hunter Hospital, Lookout Road, New Lambton Heights, NSW, 2305`
+        const date = new Date().toLocaleDateString();
+
+        const pngImageBytes = readTickImage("C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/images/tick.png")
+        const tickImage = await pdfDoc.embedPng(pngImageBytes)
+
+        // Draw name 
+        firstPage.drawText(name, {
+            x: 226,
+            y: 787,
+            size: 10,
+        })
+
+        // Draw hospital 
+        firstPage.drawText(hospital, {
+            x: 226,
+            y: 740,
+            size: 10,
+        })
+
+        // Draw return address
+        firstPage.drawText(returnAddress.split(",").slice(0, 3).join(","), {
+            x: 226,
+            y: 627,
+            size: 10,
+        })
+
+         // Draw return address
+         firstPage.drawText(returnAddress.split(",").slice(3).join(","), {
+            x: 225,
+            y: 613,
+            size: 10,
+        })
+
+        // Draw phone number
+        firstPage.drawText(`(02) ${contactNumber}`, {
+            x: 225,
+            y: 568,
+            size: 10,
+        });
+
+        // Draw email address
+        firstPage.drawText(emailAddress, {
+            x: 225,
+            y: 524,
+            size: 10,
+        });
+
+        // Draw Serial Number
+        firstPage.drawText(serialNumber, {
+            x: 305,
+            y: 412,
+            size: 10,
+        });
+
+        if (errorCode !== "No Code") {
+            // Draw Error Code
+            firstPage.drawText(errorCode, {
+                x: 305,
+                y: 390,
+                size: 10,
+            });
+        }
         
-        console.log(returnAddress, emailAddress);
-    
+        // Draw fault description
+        firstPage.drawText(faultDescription, {
+            x: 305,
+            y: 319,
+            size: 10,
+        });
+
+        const shippingTickPosition = pickup === "TNT" ? 
+        {x: 251, y: 692, width: 12, height: 12} : 
+        {x: 328.3, y: 692, width: 12, height: 12};
+
+        firstPage.drawImage(tickImage, shippingTickPosition)
+
+        if (pickup !== "TNT") {
+            firstPage.drawText(date, {
+                x: 386,
+                y: 694,
+                size: 10,
+            })
+        }
+        
+        const modelTickPosition = model === "Volumat" ? 
+        {x: 96, y: 467, width: 12, height: 12} : 
+        model === "Injectomat" ? {x: 242, y: 467, width: 12, height: 12} :
+        model === "Agilia VP" ? {x: 365, y: 467, width: 12, height: 12} :
+        model === "Agilia SP" ? {x: 495, y: 467, width: 12, height: 12} :
+        "Other model selected"
+
+        // Indicate the model of the device on the form.
+        if (["Volumat", "Injectomat", "Agilia VP", "Agilia SP"].includes(model)) {
+            firstPage.drawImage(tickImage, modelTickPosition)
+        }
+        else {
+            firstPage.drawText(model, {
+                x: 80,
+                y: 446,
+                size: 10
+            })
+        }
+        
+        // Serialize the PDFDocument to bytes (a Uint8Array)
+        const pdfBytes = await pdfDoc.save();
+        
+        return pdfBytes;
+        //fs.writeFileSync('C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/templates/Request_Test.pdf', pdfBytes); 
+        
     } catch (err) {
         console.log(err);
         throw new Error(err.message);
@@ -235,4 +350,3 @@ export async function FreseniusKabiRepairRequest(name, hospital, rootDirectory) 
 }
 
 
-FreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hospital", "directory")
