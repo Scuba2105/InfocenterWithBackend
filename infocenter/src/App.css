@@ -2087,17 +2087,14 @@ html {
 
 .request-form-laptop {
   height: 400px;
-  width: 350px;
   background-color: var(---form-background-color);
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 16% 1fr;
-  align-items: center;
+  grid-template-rows: 80px 1fr;
 }
 
 .request-form-desktop {
   height: 550px;
-  width: 500px;
   background-color: var(---form-background-color);
   display: grid;
   grid-template-columns: 100%;
@@ -2141,25 +2138,26 @@ html {
   align-items: center;
 }
 
-.request-form-laptop .input-container {
-  transform: translateY(-10px)
+.request-form-laptop > .input-container {
+  grid: 2 / 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.request-form-laptop {
-  height: 400px;
-  width: 350px;
-}
-
-.request-form-desktop {
-  height: 550px;
-  width: 500px;
+.two-column-container {
+  grid: 2 / 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
 }
 
 .thermometer-form-laptop h4, .thermometer-form-desktop h4, .request-form-laptop h4, .request-form-desktop h4 {
   grid: 1 / 1;
   width: 100%;
   height: 100%;
-  grid-row: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2171,7 +2169,7 @@ html {
 
 .request-form-laptop h4, .request-form-desktop h4 {
   width: 100%;
-  height: 80px;
+  height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2193,6 +2191,25 @@ html {
   margin-top: 12px;
 }
 
+.employee-requestor-select-container, .service-agent-select-container {
+  transform: translateY(-4px);
+} 
+
+.service-agent-select-container {
+  transform: translateY(-20px);
+} 
+
+.shipping-option-select-container {
+  transform: translateY(-50px);
+}
+
+.text-area-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .model-select-container {
   margin-top: 0;
   margin-left: 20px;
@@ -2200,6 +2217,10 @@ html {
 
 .us-qty-select-container, .ctg-qty-select-container {
   transform: translateY(-20px);
+}
+
+.us-qty-select-container {
+  margin-right: 40px;
 }
 
 .request-form-laptop .employee-requestor-select-container, .request-form-desktop .employee-requestor-select-container {
@@ -2210,7 +2231,7 @@ html {
   margin-top: -10px;
 }
 
-.employee-requestor-select-label, .service-agent-select-label, .model-select-label, .us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label {
+.employee-requestor-select-label, .service-agent-select-label, .model-select-label, .us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, .text-area-container label {
   font-size: 15px;
   font-weight: 600;
   color: rgb(132, 132, 139);
@@ -2242,7 +2263,16 @@ html {
   transform: translateY(-10px);
 }
 
-.model-select, .us-qty-select, .ctg-qty-select {
+.text-area-container textarea {
+  color: rgb(132, 132, 139);
+  font-size: 12px;
+  height: 50px;
+  width: 235px;
+  margin-top: 10px;
+  resize: none;
+}
+
+.model-select, .us-qty-select, .ctg-qty-select, .shipping-option-select {
   height: 25px;
   width: 115px;
 }

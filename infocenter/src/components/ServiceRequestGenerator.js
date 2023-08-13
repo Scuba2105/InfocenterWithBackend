@@ -1,6 +1,7 @@
 import useMediaQueries from "media-queries-in-react";
 import { SelectInput } from "./SelectInput";
 import { Input } from "./Input";
+import { TextArea } from "./TextArea";
 import { useState } from "react";
 
 const saModels = {"Cardinal Health": ["SCD700", "ePump"], "Fresenius Kabi": ["Volumat", "Injectomat", "Agilia SP", "Agilia VP"],
@@ -25,17 +26,17 @@ export function ServiceRequestGenerator({staffNames}) {
 
     return (
         <div className="request-page-container">
-            <form className={mediaQueries.laptop ? `request-form-laptop` : `request-form-desktop`}>
+            <form className={mediaQueries.laptop ? `request-form-laptop` : `request-form-desktop`} style={serviceAgent === "Ecomed (CTG Transducers)" ? {width: 400 + "px"} : {width: 600 + "px"}}>
                 <h4>Request Form Generation</h4>
-                <div className="input-container">
+                <div className={serviceAgent === "Ecomed (CTG Transducers)" ? "input-container" : "two-column-container"}>
                     <SelectInput label="Employee Requestor" optionData={staffNames}></SelectInput>
-                    <SelectInput label="Service Agent" optionData={serviceAgents} onChange={changeServiceAgent}></SelectInput>
                     {serviceAgent !== "Ecomed (CTG Transducers)" && 
                         <div className="bme-model-container">
                             <Input inputType="text" identifier="bme" labelText={`BME`}></Input>
                             {saModels[serviceAgent] !== "" && <SelectInput label="Model" optionData={saModels[serviceAgent]} onChange={changeServiceAgent}></SelectInput>}
                         </div>}
-                    {serviceAgent !== "Ecomed (CTG Transducers)" && <SelectInput label="Fault Description" optionData={staffNames}></SelectInput>}
+                    <SelectInput label="Service Agent" optionData={serviceAgents} onChange={changeServiceAgent}></SelectInput>
+                    {serviceAgent !== "Ecomed (CTG Transducers)" && <TextArea label="Fault Description"></TextArea>}
                     {serviceAgent === "Fresenius Kabi" && <SelectInput label="Shipping Option" optionData={fkaShippingOptions}></SelectInput>} 
                     {serviceAgent === "Ecomed (CTG Transducers)" && 
                         <div className="transducer-qty-container">
