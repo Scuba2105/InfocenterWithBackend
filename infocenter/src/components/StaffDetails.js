@@ -10,6 +10,21 @@ border: '1px solid rgb(2, 57, 87)', color: 'rgb(2, 57, 87)'}, Mechanical: {backg
 border: '1px solid rgb(73, 16, 92)', color: 'rgb(73, 16, 92)'}, default: {background: 'radial-gradient(rgb(250, 193, 112), rgb(250, 169, 55))', 
 border: '1px solid rgb(163, 98, 3)', color: 'rgb(163, 98, 3)'}} 
 
+function emailFontSize(name, laptop) {
+    if (name === "Azmi Refal" && laptop) {
+        return {fontSize: "9px"}
+    }
+    if (name !== "Azmi Refal" && laptop) {
+        return {fontSize: "12px"}
+    }
+    if (name === "Azmi Refal" && !laptop) {
+        return {fontSize: "12px"}
+    }
+    if (name !== "Azmi Refal" && !laptop) {
+        return {fontSize: "16px"}
+    }
+} 
+
 export function StaffDetails({selectedData, openAddUpdateForm}) {
     
     const mediaQueries = useMediaQueries({
@@ -43,7 +58,7 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
             </div>            
             <div className={mediaQueries.laptop ? "info-container-laptop" : "info-container-desktop"}>
                 {selectedData.id !== "-" && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Staff ID</h5><span>{selectedData.id}</span></div>}
-                {!workshops.includes(selectedData.name) && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Email Address</h5><a href={emailAddress} className="email-link" style={selectedData.name === "Azmi Refal" ? {fontSize: "9px"}: {fontSize: "12px"}}>{emailAddress.replace("mailto:",'')}</a></div>}
+                {!workshops.includes(selectedData.name) && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Email Address</h5><a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}>{emailAddress.replace("mailto:",'')}</a></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}}>Office Phone</h5><span>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Dect Phone</h5><span>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team)} : {backgroundColor: getTextColor("default")}} >Work Mobile</h5><span>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></div>}
