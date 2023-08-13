@@ -2105,16 +2105,6 @@ html {
   align-items: center;
 }
 
-.request-form-laptop .input-container, .request-form-desktop .input-container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: -20px;
-}
-
 .thermometers-utility {
   display: flex;
   justify-content: space-around;
@@ -2123,7 +2113,7 @@ html {
   height: 100%;
 }
 
-.thermometer-form-laptop, .request-form-laptop {
+.thermometer-form-laptop {
   height: 400px;
   width: 350px;
   background-color: var(---form-background-color);
@@ -2133,7 +2123,7 @@ html {
   align-items: center;
 }
 
-.thermometer-form-desktop, .request-form-desktop {
+.thermometer-form-desktop {
   height: 550px;
   width: 500px;
   background-color: var(---form-background-color);
@@ -2141,6 +2131,28 @@ html {
   grid-template-columns: 100%;
   grid-template-rows: 16% 10% 50% 1fr;
   align-items: center;
+}
+
+.request-form-laptop, .request-form-desktop {
+  background-color: var(---form-background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.request-form-laptop .input-container {
+  transform: translateY(-10px)
+}
+
+.request-form-laptop {
+  height: 400px;
+  width: 350px;
+}
+
+.request-form-desktop {
+  height: 550px;
+  width: 500px;
 }
 
 .thermometer-form-laptop h4, .thermometer-form-desktop h4, .request-form-laptop h4, .request-form-desktop h4 {
@@ -2157,11 +2169,23 @@ html {
   margin-top: 0;
 }
 
+.request-form-laptop h4, .request-form-desktop h4 {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  color: white;
+  margin-top: 0;
+}
+
 .thermometer-form-desktop h4 {
   height: 90%;
 }
 
-.employee-requestor-select-container, .service-agent-select-container {
+.employee-requestor-select-container, .service-agent-select-container, .model-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2169,13 +2193,21 @@ html {
   margin-top: 12px;
 }
 
-.employee-requestor-select-label, .service-agent-select-label {
+.request-form-laptop .employee-requestor-select-container, .request-form-desktop .employee-requestor-select-container {
+  margin-top: -10px;
+}
+
+.service-agent-select-container {
+  margin-top: -10px;
+}
+
+.employee-requestor-select-label, .service-agent-select-label, .model-select-label {
   font-size: 15px;
   font-weight: 600;
   color: rgb(132, 132, 139);
 }
 
-.employee-requestor-select, .service-agent-select {
+.employee-requestor-select, .service-agent-select, .model-select {
   color: rgb(132, 132, 139);
   font-size: 12px;
   display: block;
@@ -2185,6 +2217,11 @@ html {
   padding-right: 20px;
   padding-left: 10px;
   transform: translateY(-10px);
+}
+
+.model-select {
+  height: 25px;
+  width: 115px;
 }
 
 .bme-container {

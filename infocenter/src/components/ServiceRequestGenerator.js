@@ -3,7 +3,9 @@ import { SelectInput } from "./SelectInput";
 import { Input } from "./Input";
 import { useState } from "react";
 
-const serviceAgents = ["Cardinal Health", "Ecomed (CTG Transducers)", "Fresenius Kabi"]
+const saModels = {"Cardinal Health": ["SCD700", "ePump"], "Fresenius Kabi": ["Volumat", "Injectomat", "Agilia SP", "Agilia VP"],
+"Ecomed (CTG Transducers)": ""}
+const fkaShippingOptions = ["TNT", "FKA Arranged"];
 
 export function ServiceRequestGenerator({staffNames}) {
 
@@ -18,6 +20,8 @@ export function ServiceRequestGenerator({staffNames}) {
         desktop: "(min-width: 1800px)"
     }); 
 
+    const serviceAgents = Object.keys(saModels);
+
     return (
         <div className="request-page-container">
             <form className={mediaQueries.laptop ? `request-form-laptop` : `request-form-desktop`}>
@@ -25,9 +29,10 @@ export function ServiceRequestGenerator({staffNames}) {
                 <div className="input-container">
                     <SelectInput label="Employee Requestor" optionData={staffNames}></SelectInput>
                     <SelectInput label="Service Agent" optionData={serviceAgents} onChange={changeServiceAgent}></SelectInput>
-                    <Input inputType="text" identifier="bme" labelText={`BME`}></Input>
+                    {serviceAgent !== "Ecomed (CTG Transducers)" && <Input inputType="text" identifier="bme" labelText={`BME`}></Input>}
+                    {saModels[serviceAgent] !== "" && <SelectInput label="Model" optionData={saModels[serviceAgent]} onChange={changeServiceAgent}></SelectInput>}
                     {/*<GenerateFormButton buttonText="Generate Request Form"/>*/} 
-                </div>                
+                </div>
             </form>
         </div>
     );
