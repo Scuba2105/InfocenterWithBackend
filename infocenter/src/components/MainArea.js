@@ -8,7 +8,7 @@ import { useQuery } from 'react-query'
 import { fetchData } from "../utils/utils";
 import { useState } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
-import { ServiceReportGenerator } from "./ServiceReportGenerator";
+import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { workshops } from "../data";
 
@@ -75,7 +75,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 <>
                     <Utilities utilityPage={utilityPage} onClick={selectUtility}>
                         {utilityPage === 0 && <ServiceReportUploads></ServiceReportUploads>}
-                        {utilityPage === 1 && <ServiceReportGenerator></ServiceReportGenerator>}
+                        {utilityPage === 1 && <ServiceRequestGenerator staffNames={staffNames}></ServiceRequestGenerator>}
                         {utilityPage === 2 && <ThermometerManagement staffNames={staffNames} page={page} dialogOpen={dialogOpen} closeDialog={closeDialog} showMessage={showMessage}></ThermometerManagement>}
                         <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>

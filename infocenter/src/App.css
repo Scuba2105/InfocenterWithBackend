@@ -2077,6 +2077,44 @@ html {
   cursor: pointer;
 }
 
+.request-page-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.request-form-laptop {
+  height: 400px;
+  width: 350px;
+  background-color: var(---form-background-color);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 16% 1fr;
+  align-items: center;
+}
+
+.request-form-desktop {
+  height: 550px;
+  width: 500px;
+  background-color: var(---form-background-color);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 16% 1fr;
+  align-items: center;
+}
+
+.request-form-laptop .input-container, .request-form-desktop .input-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: -20px;
+}
+
 .thermometers-utility {
   display: flex;
   justify-content: space-around;
@@ -2085,7 +2123,7 @@ html {
   height: 100%;
 }
 
-.thermometer-form-laptop {
+.thermometer-form-laptop, .request-form-laptop {
   height: 400px;
   width: 350px;
   background-color: var(---form-background-color);
@@ -2095,7 +2133,7 @@ html {
   align-items: center;
 }
 
-.thermometer-form-desktop {
+.thermometer-form-desktop, .request-form-desktop {
   height: 550px;
   width: 500px;
   background-color: var(---form-background-color);
@@ -2105,7 +2143,7 @@ html {
   align-items: center;
 }
 
-.thermometer-form-laptop h4, .thermometer-form-desktop h4 {
+.thermometer-form-laptop h4, .thermometer-form-desktop h4, .request-form-laptop h4, .request-form-desktop h4 {
   grid: 1 / 1;
   width: 100%;
   height: 100%;
@@ -2123,7 +2161,7 @@ html {
   height: 90%;
 }
 
-.employee-requestor-select-container {
+.employee-requestor-select-container, .service-agent-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2131,13 +2169,13 @@ html {
   margin-top: 12px;
 }
 
-.employee-requestor-select-label {
+.employee-requestor-select-label, .service-agent-select-label {
   font-size: 15px;
   font-weight: 600;
   color: rgb(132, 132, 139);
 }
 
-.employee-requestor-select {
+.employee-requestor-select, .service-agent-select {
   color: rgb(132, 132, 139);
   font-size: 12px;
   display: block;

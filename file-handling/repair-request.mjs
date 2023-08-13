@@ -80,7 +80,7 @@ export async function populateGenius3RequestTemplate(name, serialNumbers, rootDi
     }
 }
 
-export async function cardinalHealthRepairRequest(name, model, serialNumbers, faultDescription, rootDirectory) {
+export async function populateCardinalHealthRepairRequest(name, model, serialNumbers, faultDescription, rootDirectory) {
     try {
 
         let existingPdfBytes, existingPdfBytesTest;
@@ -175,7 +175,7 @@ export async function cardinalHealthRepairRequest(name, model, serialNumbers, fa
     }
 }
 
-export async function fm30TransducersDeliveryNote(name, ultrasoundNumber, tocoNumber, rootDirectory) {
+export async function populateFM30TransducersDeliveryNote(name, ultrasoundNumber, tocoNumber, rootDirectory) {
     try {
         
         const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'FM30 US and Toco Transducers.pdf'));
@@ -218,10 +218,10 @@ export async function fm30TransducersDeliveryNote(name, ultrasoundNumber, tocoNu
     }
 }
 
-export async function FreseniusKabiRepairRequest(name, hospital, model, serialNumber, faultDescription, errorCode, contactNumber, pickup, rootDirectory) {
+export async function populateFreseniusKabiRepairRequest(name, hospital, model, serialNumber, faultDescription, errorCode, contactNumber, pickup, rootDirectory) {
     try {
         
-        const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'FM30 US and Toco Transducers.pdf'));
+        const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'FKA_Request_Template.pdf'));
         //const existingPdfBytesTest = fs.readFileSync('C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/templates/FKA_Request_Template.pdf');
                 
         // Load a PDFDocument from the existing PDF bytes
@@ -312,4 +312,4 @@ export async function FreseniusKabiRepairRequest(name, hospital, model, serialNu
     }
 }
 
-
+// populateFreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hopsital", "Volumat", "2N135423", "Air bubble detector fault.", "No Code", "49213144", "TNT", "directory")
