@@ -98,10 +98,39 @@ export async function disposeGenius3(parameter) {
     }
   }
 
-// const array = ["37646", "57565", "45742", "55406", "53729", "37746", "54024", "51784", "47767"];
-// const lastIndex = array.length - 1;
-// const queryParameter = array.map((bme, index) => {
-//   return index === 0 ? `(${bme}` : index === lastIndex ? `${bme})` : `${bme}`
-// }).join(",");
+  export async function getSerialNumbers(parameter, length) {
+    try {
+  
+        // Need to validate the parameter input
+        // Connect to the database
+        await sql.connect(localEMSConfig);  
+        //await sql.connect(localDBConfig);
+        
+        // Create a new request object
+        const request = new sql.Request()
+        
+        // declare result variable
+        let result;
+
+        // make sure that any items are correctly URL encoded in the connection string
+        if (length === 1) {
+            result = await request.query(`SELECT BMENO, Serial_No, BRAND_NAME FROM tblEquipment WHERE BMENO = ${parameter}`);
+            //result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO = ${parameter}`);
+        } 
+        else {
+            result = await request.query(`SELECT BMENO, Serial_No, BRAND_NAME FROM tblEquipment WHERE BMENO IN ${parameter}`);
+            //result = await request.query(`SELECT BMENO, Serial_No FROM Equipment WHERE BMENO IN ${parameter}`);
+        }
+
+        // Need to close connection
+        return result.recordset;
+    }
+    catch (err) {
+        console.log(err);
+        throw new Error (err.message);
+    }
+}
+
+
 
 

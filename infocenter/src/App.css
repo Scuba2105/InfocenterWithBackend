@@ -193,6 +193,33 @@ html {
   animation: gearSpinnerBackward 2800ms linear infinite;
 }
 
+.loading-page-container {
+  height: 100%;
+  width: 100%;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 12px solid rgb(215, 215, 215); /* Light grey */
+  border-top: 12px solid #F7A278; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1.0s linear infinite;
+}
+
+.loading-page-container h2 {
+  color: rgb(215, 215, 215);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Styling for the dialog component */
 #dialog-background {
   height: calc(100% + 120px);
@@ -2050,6 +2077,31 @@ html {
   cursor: pointer;
 }
 
+.request-page-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.request-form-laptop {
+  height: 400px;
+  background-color: var(---form-background-color);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 80px 1fr;
+}
+
+.request-form-desktop {
+  height: 550px;
+  background-color: var(---form-background-color);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 16% 1fr;
+  align-items: center;
+}
+
 .thermometers-utility {
   display: flex;
   justify-content: space-around;
@@ -2078,11 +2130,46 @@ html {
   align-items: center;
 }
 
-.thermometer-form-laptop h4, .thermometer-form-desktop h4 {
+.request-form-laptop, .request-form-desktop {
+  background-color: var(---form-background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.request-form-laptop > .input-container {
+  grid: 2 / 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.two-column-container {
+  grid: 2 / 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
+}
+
+.thermometer-form-laptop h4, .thermometer-form-desktop h4, .request-form-laptop h4, .request-form-desktop h4 {
   grid: 1 / 1;
   width: 100%;
   height: 100%;
-  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  color: white;
+  margin-top: 0;
+}
+
+.request-form-laptop h4, .request-form-desktop h4 {
+  width: 100%;
+  height: 72px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2096,7 +2183,7 @@ html {
   height: 90%;
 }
 
-.employee-requestor-select-container {
+.employee-requestor-select-container, .service-agent-select-container, .model-select-container, .us-qty-select-container, .ctg-qty-select-container, .shipping-option-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2104,13 +2191,67 @@ html {
   margin-top: 12px;
 }
 
-.employee-requestor-select-label {
+.employee-requestor-select-container, .service-agent-select-container {
+  transform: translateY(-4px);
+} 
+
+.service-agent-select-container {
+  transform: translateY(-20px);
+} 
+
+.shipping-option-select-container {
+  transform: translateY(-50px);
+}
+
+.text-area-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.model-select-container {
+  margin-top: 0;
+  margin-left: 20px;
+}
+
+.us-qty-select-container, .ctg-qty-select-container {
+  transform: translateY(-20px);
+}
+
+.us-qty-select-container {
+  margin-right: 40px;
+}
+
+.request-form-laptop .employee-requestor-select-container, .request-form-desktop .employee-requestor-select-container {
+  margin-top: -10px;
+}
+
+.service-agent-select-container {
+  margin-top: -10px;
+}
+
+.employee-requestor-select-label, .service-agent-select-label, .model-select-label, .us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, .text-area-container label {
   font-size: 15px;
   font-weight: 600;
   color: rgb(132, 132, 139);
 }
 
-.employee-requestor-select {
+.us-qty-select-label, .ctg-qty-select-label {
+  font-size: 13px;
+}
+
+.transducer-qty-container, .bme-model-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bme-model-container {
+  transform: translateY(-10px);
+}
+
+.employee-requestor-select, .service-agent-select, .model-select, .us-qty-select, .ctg-qty-select, .shipping-option-select {
   color: rgb(132, 132, 139);
   font-size: 12px;
   display: block;
@@ -2120,6 +2261,29 @@ html {
   padding-right: 20px;
   padding-left: 10px;
   transform: translateY(-10px);
+}
+
+.text-area-container textarea {
+  color: rgb(132, 132, 139);
+  font-size: 12px;
+  height: 50px;
+  width: 235px;
+  margin-top: 10px;
+  resize: none;
+}
+
+.model-select, .us-qty-select, .ctg-qty-select, .shipping-option-select {
+  height: 25px;
+  width: 115px;
+}
+
+.shipping-option-select {
+  width: 135px;
+}
+
+.us-qty-select, .ctg-qty-select {
+  height: 25px;
+  width: 55px;
 }
 
 .bme-container {
