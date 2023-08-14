@@ -31,6 +31,90 @@ html {
   -webkit-overflow-scrolling: touch; /* optional, for smoother scrolling on iOS devices */
 }
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login Form css */
+.login-form {
+  height: 350px;
+  width: 300px;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+}
+
+.login-header {
+  grid-row: 1;
+  height: 100%;
+  width: 100%;
+  background-color: #059066;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.login-body {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+}
+
+.login-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-input-icon {
+  background-color: #059066;
+  width: 33px;
+  height: 33.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-button {
+  height: 35px;
+  width: 200px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #059066;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.inputs-container {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(20px);
+}
+
+.login-input {
+  width: 200px;
+  height: 30px;
+  border: 1px solid grey;
+  border-left: none;
+  padding-left: 10px;
+}
+
+.login-body label {
+  color: #059066;
+  transform: translateX(-60px);
+}
+
 .app-icon-container {
   background-color: #202950;
   height: 100%;

@@ -3,7 +3,7 @@ import { Menu } from './components/Menu';
 import { MainArea } from './components/MainArea';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
-import { serverConfig } from './server';
+import { Login } from './components/Login';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -12,6 +12,7 @@ export default function App() {
 
     const [page, setPage] = useState('staff');
     const [selectedEntry, setSelectedEntry] = useState('60146568');
+    const [loggedIn, setLoggedIn] = useState(false);
               
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
@@ -27,6 +28,12 @@ export default function App() {
         setSelectedEntry(entryIdentifier);
     }
     
+    if (!loggedIn) {
+        return (
+           <Login></Login> 
+        )
+    }
+
     return (
         <div className="wrapper">
             <div className="app-icon-container"></div>
@@ -35,7 +42,6 @@ export default function App() {
             <QueryClientProvider client={queryClient}>
                 <MainArea page={page} selectedEntry={selectedEntry} onRowClick={onRowClick} queryClient={queryClient} />
             </QueryClientProvider>
-            
         </div>
     );
 }
