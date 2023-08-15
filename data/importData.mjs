@@ -1,8 +1,17 @@
 import fs from 'fs';
 import path from 'path'
+import { generateEmailAddress } from "../utils/utils.mjs"
 
-import { staffData } from '../infocenter/src/staff-data';
 
-fs.writeFileSync('./staffData.json', JSON.stringify(staffData, null, 2));
+async function getStaffInfo() {
+    const staffData = fs.readFileSync('C:/Users/60146774/Web Development/Information Centre With Backend/InfocenterWithBackend/data/staff-data.json');
+    const staffInfo = JSON.parse(staffData)
+    
+    const names = staffInfo.map((entry) => {
+        return {name: entry.name, email: generateEmailAddress(entry.name)}
+    })
+    fs.writeFileSync('./testData.json', JSON.stringify(names, null, 2));
+}  
 
+getStaffInfo()
 

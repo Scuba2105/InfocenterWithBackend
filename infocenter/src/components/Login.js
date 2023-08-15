@@ -1,6 +1,13 @@
 import { LoginInput } from "./LoginInput"
 
+function submitData(e) {
+    e.preventDefault();
+    const [emailInput, passwordInput] = e.currentTarget.parentNode.querySelectorAll('input');
+    console.log(emailInput.value, passwordInput.value);
+}
+
 export function Login() {
+
     return (
         <div className="wrapper login-container">
             <form className="login-form">
@@ -13,7 +20,7 @@ export function Login() {
                         <LoginInput input="password"></LoginInput>
                     </div>                    
                     <label>Forgot Password?</label>
-                    <button className="login-button">Login</button>
+                    <button className="login-button" onClick={submitData}>Login</button>
                 </div>
             </form>
         </div>

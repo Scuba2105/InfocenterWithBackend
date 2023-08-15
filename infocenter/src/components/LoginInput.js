@@ -6,7 +6,7 @@ export function LoginInput({input}) {
             <div className="login-input-icon">
                 {input === "name" ? <StaffIcon size="20px" color="#ffffff"></StaffIcon> : <PadlockIcon color="#ffffff" size="20px"></PadlockIcon>}
             </div>
-            <input className="login-input" type="text" placeholder={input === "name" ? "Full Name/Username" : "Password"}></input>
+            <input className="login-input" type="text" placeholder={input === "name" ? "Email Address" : "Password"}></input>
         </div>
     )
 }
