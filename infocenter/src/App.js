@@ -28,11 +28,11 @@ export default function App() {
         setSelectedEntry(entryIdentifier);
     }
     
-    if (!loggedIn) {
-        return (
-           <Login></Login> 
-        )
-    }
+    // if (!loggedIn) {
+    //     return (
+    //        <Login></Login> 
+    //     )
+    // }
 
     return (
         <div className="wrapper">
