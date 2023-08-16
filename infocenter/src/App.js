@@ -12,7 +12,10 @@ export default function App() {
 
     const [page, setPage] = useState('staff');
     const [selectedEntry, setSelectedEntry] = useState('60146568');
+    
+    // Need to add to Zustand state store to share with components without prop drilling
     const [loggedIn, setLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
               
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {

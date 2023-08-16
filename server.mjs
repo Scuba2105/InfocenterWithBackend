@@ -6,7 +6,7 @@ import multer from 'multer';
 import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, 
          updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, 
          updateThermometerList, getInactiveThermometers, disposeSelectedThermometers } from './controller/controller.mjs';
-import { capitaliseFirstLetters, createDirectory } from './utils/utils.mjs';
+import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
 const __dirname = path.dirname('.');

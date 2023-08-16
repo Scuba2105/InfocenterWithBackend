@@ -1727,6 +1727,7 @@ html {
   justify-content: center;
   align-items: center;
   margin: 10px 0 20px 0;
+  color: var(--form-font-color)
 }
 
 .department-select-container {
@@ -1741,6 +1742,7 @@ html {
   height: 30px;
   width: 200px;
   text-align: center;
+  color: var(--form-font-color);
 }
 
 .hospital-select-container, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {

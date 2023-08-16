@@ -3,7 +3,7 @@ import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generate
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/repair-request.mjs';
 import { getGenius3Serial, disposeGenius3 } from '../models/models.mjs';
-import { isValidBME, brandOptions } from '../utils/utils.mjs';
+import { isValidBME, brandOptions, convertHospitalName } from '../utils/utils.mjs';
 
 // Define the mutex objects for both staff and device files.
 // Assists with preventing race conditions. 
