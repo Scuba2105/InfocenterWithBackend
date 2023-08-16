@@ -39,7 +39,14 @@ html {
 }
 
 /* Login Form css */
-.login-form {
+.login-form-laptop {
+  height: 400px;
+  width: 350px;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+}
+
+.login-form-desktop {
   height: 40%;
   width: 20%;
   display: grid;

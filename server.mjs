@@ -77,6 +77,14 @@ const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'u
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
 {name: 'employee-photo', maxCount: 1}])
 
+app.post("/VerifyLogin", async (req, res) => {
+    try {
+        console.log("Hello")
+    } catch (err) {
+        next(err);
+    }
+});
+
 // Define route to get all data.
 app.get("/getData", async (req, res) => {
     try {
