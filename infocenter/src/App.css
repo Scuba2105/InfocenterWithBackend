@@ -8,7 +8,7 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: var(--light-theme); /*var(--light-theme)*/
+  background-color: var(--light-theme); 
   --row-hover: #62709b;
   --dark-theme: #1b223f;
   --med-theme: #37426f;
@@ -35,7 +35,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #7c8eda;
+  background: url("../public/login-background.jpg");
+  background-size: cover;
 }
 
 /* Login Form css */
