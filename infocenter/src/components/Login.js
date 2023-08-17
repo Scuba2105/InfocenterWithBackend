@@ -5,15 +5,18 @@ import { serverConfig } from "../server";
 function submitData(e) {
     e.preventDefault();
     const [emailInput, passwordInput] = e.currentTarget.parentNode.querySelectorAll('input');
-    const emailRegex = /^[a-zA-Z0-9]+@health.nsw.gov.au$/;
-    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
+    const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$/;
+    const invalidPasswordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/
     console.log(emailInput.value, passwordInput.value)
-    if (emailRegex.test(emailInput.value)) {
+
+    // Check if email address valid
+    if (!emailRegex.test(emailInput.value)) {
         console.log("Email does not match the required email pattern");
     }
 
-    if (passwordRegex.test(passwordInput.value)) {
-        console.log("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number");
+    // Check if password valid
+    if (invalidPasswordRegex.test(passwordInput.value)) {
+        console.log("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
     }
 }
 
