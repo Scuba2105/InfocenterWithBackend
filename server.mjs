@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, 
+import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, validateLoginCredentials, 
          updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, 
          updateThermometerList, getInactiveThermometers, disposeSelectedThermometers } from './controller/controller.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
@@ -77,9 +77,9 @@ const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'u
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
 {name: 'employee-photo', maxCount: 1}])
 
-app.post("/VerifyLogin", async (req, res) => {
+app.post("/VerifyLogin", async (req, res, next) => {
     try {
-        console.log("Hello")
+        await validateLoginCredentials(req, res)
     } catch (err) {
         next(err);
     }

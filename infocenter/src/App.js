@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
 import { Login } from './components/Login';
 import { useLoggedIn, useUser } from './components/StateStore';
+import { serverConfig } from './server';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -40,7 +41,9 @@ export default function App() {
 
     return (
         <div className="wrapper">
-            <div className="app-icon-container"></div>
+            <div className="app-icon-container">
+                <img className="app-logo-solo" src={`http://${serverConfig.host}:${serverConfig.port}/images/app-logo-solo.png`} alt="app-logo-solo"></img>
+            </div>
             <div className="header-bar">HNECT Information Center</div>
             <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>

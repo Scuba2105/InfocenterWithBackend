@@ -45,26 +45,40 @@ html {
   width: 350px;
   display: grid;
   grid-template-rows: 60px 1fr;
+  background-color: white;
 }
 
 .login-form-desktop {
   height: 40%;
   width: 20%;
   display: grid;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 90px 1fr;
+  background-color: white;
 }
 
 .login-header {
   grid-row: 1;
   height: 100%;
-  width: 100%;
-  background: linear-gradient(var(--med-theme), var(--light-theme));
-  color: white;
+  width: 100%;  
+  margin: auto auto;
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  align-items: flex-end;
+}
+
+.login-form-laptop .app-logo {
+  height: 60px;
+  width: 300px;
+  transform: translateY(30px);
+  padding-bottom: 10px;
+  border-bottom: 2px solid grey;
+}
+
+.login-form-desktop .app-logo {
+  height: 60px;
+  width: 300px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid grey;
 }
 
 .login-body {
@@ -82,6 +96,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.login-form-laptop .login-input-container {
+  transform: translateY(15px);
 }
 
 .login-input-icon {
@@ -141,6 +159,16 @@ html {
   height: 100%;
   width: 85%;
   margin: auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-logo-solo {
+  height: 60px;
+  width: 300px;
+  height: 50px;
+  width: 50px;
 }
 
 .header-bar {

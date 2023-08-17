@@ -1,4 +1,5 @@
 import { Mutex } from 'async-mutex';
+import bcrypt from "bcrypt"
 import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/repair-request.mjs';
@@ -9,6 +10,45 @@ import { isValidBME, brandOptions, convertHospitalName } from '../utils/utils.mj
 // Assists with preventing race conditions. 
 const staffDataMutex = new Mutex();
 const deviceDataMutex = new Mutex();
+
+export async function validateLoginCredentials(req, res) {
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+
+        // Validate the user credentials 
+        const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$/;
+        const invalidPasswordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/
+        
+        // Check if email address valid
+        if (!emailRegex.test(emailInput.value)) {
+            throw new Error("Email does not match the required email pattern");
+        }
+
+        // Check if password valid
+        if (invalidPasswordRegex.test(passwordInput.value)) {
+            throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
+        }
+
+        const emailSuffix = email.split(".").slice(2).join(".");
+
+        const capitalisedNames = email.split(".").slice(0,2).map((name) => {
+            return name[0].toUpperCase() + name.slice(1).toLowerCase();
+        }).join(".");
+
+        // Making sure name is capitalised for comparison so entry can be found in database
+        const capitalisedEmail = (`${capitalisedNames}.${emailSuffix}`);
+
+        // Define hashing parameters and generate password hash
+        const saltRounds = 10;
+        bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+            // Store hash in your password DB.
+
+        });
+    } catch (error) {
+        res.status(400).json(`An error occured validating the login credentials: ${error.message}`)
+    }
+}
 
 export async function getAllData(req, res, __dirname) {
     try {
