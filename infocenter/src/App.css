@@ -8,7 +8,7 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: #7c8eda; /*var(--light-theme)*/
+  background-color: var(--light-theme); /*var(--light-theme)*/
   --row-hover: #62709b;
   --dark-theme: #1b223f;
   --med-theme: #37426f;
