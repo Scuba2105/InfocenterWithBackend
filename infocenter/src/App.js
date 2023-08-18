@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
 import { Login } from './components/Login';
 import { useLoggedIn, useUser } from './components/StateStore';
-import { serverConfig } from './server';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -17,8 +16,7 @@ export default function App() {
     
     // Use Zustand state store to share with components without prop drilling
     const loggedIn = useLoggedIn((state) => state.loggedIn);
-    const currentUser = useUser((state) => state.user);
-    console.log(currentUser);
+        
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
         const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? 'MX450' : null

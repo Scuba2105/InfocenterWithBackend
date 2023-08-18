@@ -34,14 +34,12 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     if (isLoading) {
-        console.log('Loading');
         return (
             <LoadingPage></LoadingPage> 
         )
     }
     
     if (error !== null) {
-        console.log('Error has been detected. Unable to fetch App data.');
         return (
             <ErrorPage></ErrorPage>
         )

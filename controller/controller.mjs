@@ -11,10 +11,9 @@ import { isValidBME, brandOptions, convertHospitalName } from '../utils/utils.mj
 const staffDataMutex = new Mutex();
 const deviceDataMutex = new Mutex();
 
-export async function validateLoginCredentials(req, res) {
+export async function validateLoginCredentials(req, res, __dirname) {
     try {
-        const reqBody = JSON.stringify(req.body);
-        const reqData = JSON.parse(reqBody);
+        // Define the entered credentials in the request
         const email = req.body.email;
         const submittedPassword = req.body.password;
 
@@ -32,22 +31,21 @@ export async function validateLoginCredentials(req, res) {
             throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
         }
 
-        const emailSuffix = email.split(".").slice(2).join(".");
-
-        const capitalisedNames = email.split(".").slice(0,2).map((name) => {
-            return name[0].toUpperCase() + name.slice(1).toLowerCase();
-        }).join(".");
-
-        // Making sure name is capitalised for comparison so entry can be found in database
-        const capitalisedEmail = (`${capitalisedNames}.${emailSuffix}`);
+        const staffData = await readStaffData(__dirname);
         
+        const staffIds = staffData
+            .filter((entry) => {
+                return entry.id !== "-";
+            }) 
+            .map((entry) => {
+                return {name: entry.name, id: entry.id};
+            }) 
+
         // Define hashing parameters and generate password hash
         // const saltRounds = 10;
-        // bcrypt.hash(password, saltRounds, function(err, hash) {
-        //     // Store hash in your password DB.
-        //     console.log(hash);
-        // });
-
+        // const hashedPassword = await bcrypt.hash(submittedPassword, saltRounds);
+        // console.log(hashedPassword);  
+        
         // Retrieve the use credentials from the database
         const data = await retrieveUserCredentials(email);
         

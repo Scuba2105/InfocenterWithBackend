@@ -79,7 +79,7 @@ const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'u
 
 app.post("/VerifyLogin", async (req, res, next) => {
     try {
-        await validateLoginCredentials(req, res)
+        await validateLoginCredentials(req, res, __dirname)
     } catch (err) {
         next(err);
     }
