@@ -13,6 +13,8 @@ const deviceDataMutex = new Mutex();
 
 export async function validateLoginCredentials(req, res) {
     try {
+        const reqBody = JSON.stringify(req.body);
+        const reqData = JSON.parse(reqBody);
         const email = req.body.email;
         const password = req.body.password;
 
@@ -21,12 +23,12 @@ export async function validateLoginCredentials(req, res) {
         const invalidPasswordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/
         
         // Check if email address valid
-        if (!emailRegex.test(emailInput.value)) {
+        if (!emailRegex.test(email)) {
             throw new Error("Email does not match the required email pattern");
         }
 
         // Check if password valid
-        if (invalidPasswordRegex.test(passwordInput.value)) {
+        if (invalidPasswordRegex.test(password)) {
             throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
         }
 
@@ -38,14 +40,15 @@ export async function validateLoginCredentials(req, res) {
 
         // Making sure name is capitalised for comparison so entry can be found in database
         const capitalisedEmail = (`${capitalisedNames}.${emailSuffix}`);
-
+        
         // Define hashing parameters and generate password hash
-        const saltRounds = 10;
-        bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-            // Store hash in your password DB.
-
-        });
+        // const saltRounds = 10;
+        // bcrypt.hash(password, saltRounds, function(err, hash) {
+        //     // Store hash in your password DB.
+        //     console.log(hash);
+        // });
     } catch (error) {
+        console.log(error);
         res.status(400).json(`An error occured validating the login credentials: ${error.message}`)
     }
 }
