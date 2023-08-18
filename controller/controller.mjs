@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/repair-request.mjs';
-import { getGenius3Serial, disposeGenius3 } from '../models/models.mjs';
+import { getGenius3Serial, disposeGenius3, retrieveUserCredentials } from '../models/models.mjs';
 import { isValidBME, brandOptions, convertHospitalName } from '../utils/utils.mjs';
 
 // Define the mutex objects for both staff and device files.
@@ -16,7 +16,7 @@ export async function validateLoginCredentials(req, res) {
         const reqBody = JSON.stringify(req.body);
         const reqData = JSON.parse(reqBody);
         const email = req.body.email;
-        const password = req.body.password;
+        const submittedPassword = req.body.password;
 
         // Validate the user credentials 
         const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$/;
@@ -28,7 +28,7 @@ export async function validateLoginCredentials(req, res) {
         }
 
         // Check if password valid
-        if (invalidPasswordRegex.test(password)) {
+        if (invalidPasswordRegex.test(submittedPassword)) {
             throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
         }
 
@@ -47,9 +47,31 @@ export async function validateLoginCredentials(req, res) {
         //     // Store hash in your password DB.
         //     console.log(hash);
         // });
+
+        // Retrieve the use credentials from the database
+        const data = await retrieveUserCredentials(email);
+        
+        if (data === undefined) {
+            throw new Error("The entered email address is not in the database");
+        }
+
+        // Extract the values from the object
+        const {Email, FullName, Password, AccessPermissions} = data[0];
+        
+        // Compare the submitted password and hashed password and determine if they match
+        const passwordResult = await bcrypt.compare(submittedPassword, Password);
+        
+        if (passwordResult === true) {
+            const appPermissions = {name: FullName, accessPermissions: AccessPermissions};
+            res.json({type: "Success", credentials: appPermissions});
+        }
+        else {
+            res.status(400).json({type: "Error", message: `The entered password is incorrect.`})
+        }
+
     } catch (error) {
         console.log(error);
-        res.status(400).json(`An error occured validating the login credentials: ${error.message}`)
+        res.status(400).json({type: "Error", message: `Login Failed. An unexpected error occured`});
     }
 }
 

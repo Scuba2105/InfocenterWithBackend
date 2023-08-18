@@ -16,7 +16,7 @@ export const useLoggedIn = create((set) => ({
 
 export const useUser = create((set) => ({
     user: null,
-    setUser: (name) => set({user: name}),
-    clearUser: () => set({user: null}),
+    setUser: (name, permissions) => set({user: name, permissions: permissions}),
+    clearUser: () => set({user: null, permissions: null}),
 }))  
 

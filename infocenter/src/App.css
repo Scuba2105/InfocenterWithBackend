@@ -92,6 +92,12 @@ html {
   border-bottom-right-radius: 10px;
 }
 
+.login-body p {
+  margin: 20px 20px 0 20px;
+  font-size: 10px;
+  color: red;
+}
+
 .login-input-container {
   display: flex;
   justify-content: center;
@@ -99,7 +105,7 @@ html {
 }
 
 .login-form-laptop .login-input-container {
-  transform: translateY(15px);
+  transform: translateY(10px);
 }
 
 .login-input-icon {
@@ -129,7 +135,7 @@ html {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  transform: translateY(20px);
+  transform: translateY(40px);
 }
 
 .login-input {
@@ -142,7 +148,7 @@ html {
 
 .login-body label {
   color: var(--dark-theme);
-  transform: translateX(-60px);
+  transform: translate(-60px, -10px);
   cursor: pointer;
 }
 

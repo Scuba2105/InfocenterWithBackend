@@ -1,8 +1,10 @@
 import { LoginInput } from "./LoginInput";
 import useMediaQueries from "media-queries-in-react";
+import { useState } from "react";
 import { serverConfig } from "../server";
+import { useLoggedIn, useUser } from "./StateStore";
 
-async function submitData(e) {
+async function submitData(setLoginError, setLoginErrorMessage, login, setUser, e) {
     e.preventDefault();
     const [emailInput, passwordInput] = e.currentTarget.parentNode.querySelectorAll('input');
     const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$/;
@@ -10,13 +12,15 @@ async function submitData(e) {
     
     // Check if email address valid
     if (!emailRegex.test(emailInput.value)) {
-        console.log("Email does not match the required email pattern");
+        setLoginErrorMessage("Email does not match the required email pattern");
+        setLoginError(true);
         return
     }
 
     // Check if password valid
     if (invalidPasswordRegex.test(passwordInput.value)) {
-        console.log("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
+        setLoginErrorMessage("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
+        setLoginError(true);
         return
     }
 
@@ -35,10 +39,25 @@ async function submitData(e) {
         body: JSON.stringify(loginCredentials)
     })
 
-//const data = await res.json();
+    const data = await res.json();
+
+    if (data.type === "Error") {
+        setLoginError(true);
+        setLoginErrorMessage(data.message);
+    }
+    else {
+        setUser(data.credentials.name, data.credentials.accessPermissions);
+        login();
+    }
 }
 
 export function Login() {
+
+    const [loginError, setLoginError] = useState(false);
+    const [loginErrorMessage, setLoginErrorMessage] = useState(null);
+
+    const login = useLoggedIn((state) => state.login)
+    const setUser = useUser((state) => state.setUser)
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -55,9 +74,10 @@ export function Login() {
                     <div className="inputs-container">
                         <LoginInput input="name"></LoginInput>
                         <LoginInput input="password"></LoginInput>
-                    </div>                    
+                    </div> 
+                    <p style={loginError ? {opacity: 1} : {opacity: 0}}>{loginErrorMessage}</p>
                     <label>Forgot Password?</label>
-                    <button className="login-button" onClick={submitData}>Login</button>
+                    <button className="login-button" onClick={(e) => submitData(setLoginError, setLoginErrorMessage, login, setUser, e)}>Login</button>
                 </div>
             </form>
         </div>

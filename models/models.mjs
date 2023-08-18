@@ -1,5 +1,5 @@
 import sql from "mssql";
-import { localDBConfig } from "../config.mjs";
+import { localDBConfig, testDBConfig } from "../config.mjs";
 import { localEMSConfig } from "../config.mjs";
 import { determineTeam } from "../utils/utils.mjs";
 
@@ -128,6 +128,27 @@ export async function disposeGenius3(parameter) {
     catch (err) {
         console.log(err);
         throw new Error (err.message);
+    }
+}
+
+export async function retrieveUserCredentials(email) {
+    try {
+        // Connect to the database
+        await sql.connect(testDBConfig);  
+        //await sql.connect(localDBConfig);
+        
+        // Create a new request object
+        const request = new sql.Request();
+
+        // Query the database for user credentials
+        const result = await request
+            .input('input_parameter', sql.VarChar, email)
+            .query(`SELECT * FROM Users WHERE Email = @input_parameter`);
+
+        // Return the recordset
+        return result.recordset
+    } catch (error) {
+        
     }
 }
 

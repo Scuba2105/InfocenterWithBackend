@@ -18,7 +18,7 @@ export default function App() {
     // Use Zustand state store to share with components without prop drilling
     const loggedIn = useLoggedIn((state) => state.loggedIn);
     const currentUser = useUser((state) => state.user);
-    
+    console.log(currentUser);
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
         const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? 'MX450' : null
@@ -41,9 +41,7 @@ export default function App() {
 
     return (
         <div className="wrapper">
-            <div className="app-icon-container">
-                <img className="app-logo-solo" src={`http://${serverConfig.host}:${serverConfig.port}/images/app-logo-solo.png`} alt="app-logo-solo"></img>
-            </div>
+            <div className="app-icon-container"></div>
             <div className="header-bar">HNECT Information Center</div>
             <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>
