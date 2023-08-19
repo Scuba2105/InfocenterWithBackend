@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
 import { Login } from './components/Login';
 import { useLoggedIn } from './components/StateStore';
+import { Avatar } from './components/Avatar';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -40,7 +41,11 @@ export default function App() {
     return (
         <div className="wrapper">
             <div className="app-icon-container"></div>
-            <div className="header-bar">HNECT Information Center</div>
+            <div className="header-bar">
+                <div id='header-aligner'></div>
+                HNECT Information Center
+                <Avatar></Avatar>
+            </div>
             <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>
                 <MainArea page={page} selectedEntry={selectedEntry} onRowClick={onRowClick} queryClient={queryClient} />
