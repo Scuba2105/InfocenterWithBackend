@@ -15,7 +15,11 @@ export function Avatar() {
         <div className="avatar-container" onClick={toggleMenu}>
             <img id="avatar-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/blank-profile.png`} alt="staff"></img>
             <label>{currentUser.user}</label>
-            {menuVisible && <div className="avatar-menu"></div>}
+            <div className="avatar-menu" style={menuVisible ? {opacity: 1} : {opacity: 0}}>
+                <label>{currentUser.permissions}</label>
+                <label>Change Password</label>
+                <label>Logout</label>
+            </div>
         </div>
     )
 }
