@@ -1,4 +1,5 @@
 import { SearchIcon } from "../svg";
+import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react";
 
 export function SearchInput({onQueryChange, openAddModal}) {
@@ -8,6 +9,9 @@ export function SearchInput({onQueryChange, openAddModal}) {
         desktop: "(min-width: 1800px)"
     });
 
+    // Get user state from Zustand state
+    const currentUser = useUser((state) => state.userCredentials);
+    
     return (
         <div className="search-box-container">
             <div className={mediaQueries.laptop ? "search-box-laptop" : "search-box-desktop"}>
@@ -23,7 +27,7 @@ export function SearchInput({onQueryChange, openAddModal}) {
                 </input>   
             </div>
             <SearchIcon color="#97a5dd" size="25px" mediaQueries={mediaQueries}/> 
-            <button className={mediaQueries.laptop ? "add-new-btn-laptop" : "add-new-btn-desktop"} onClick={openAddModal}>+ Add New</button> 
+            {currentUser.permissions === "user" && <button className={mediaQueries.laptop ? "add-new-btn-laptop" : "add-new-btn-desktop"} onClick={openAddModal}>+ Add New</button>} 
         </div>
     );
 }

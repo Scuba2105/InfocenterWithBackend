@@ -1,3 +1,4 @@
+import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react" ;
 import { workshops } from "../data";
 import { serverConfig } from "../server";
@@ -27,6 +28,9 @@ function emailFontSize(name, laptop) {
 
 export function StaffDetails({selectedData, openAddUpdateForm}) {
     
+    // Get user state from Zustand state
+    const currentUser = useUser((state) => state.userCredentials);
+
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -51,7 +55,7 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
                 <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
                     <div className="name-update-container">
                         <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>}
+                        {!workshops.includes(selectedData.name) && currentUser.permissions === "admin" && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>}
                     </div>
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"} style={selectedData.id !== '-' ? {color: getTextColor(selectedData.team)} : {color: getTextColor("default")}}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

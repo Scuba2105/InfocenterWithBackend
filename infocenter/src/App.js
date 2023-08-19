@@ -4,7 +4,7 @@ import { MainArea } from './components/MainArea';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
 import { Login } from './components/Login';
-import { useLoggedIn, useUser } from './components/StateStore';
+import { useLoggedIn } from './components/StateStore';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -13,8 +13,8 @@ export default function App() {
 
     const [page, setPage] = useState('staff');
     const [selectedEntry, setSelectedEntry] = useState('60146568');
-    
-    // Use Zustand state store to share with components without prop drilling
+        
+    // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
         
     //Update the page selected when a new page in the menu is selected
