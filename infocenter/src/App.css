@@ -583,20 +583,30 @@ html {
   font-size: 20px;
 }
 
-.search-icon-laptop {
-  transform: translateX(-427px);
+.search-icon-laptop-user {
+  transform: translateX(-515px);
 }
 
-.search-icon-desktop {
-  transform: translateX(-618px);
+.search-icon-laptop-admin {
+  transform: translateX(-430px);
+}
+
+.search-icon-desktop-user {
+  transform: translateX(-747px);
+}
+
+.search-icon-desktop-admin {
+  transform: translateX(-640px);
 }
 
 .add-new-btn-laptop {
   background-color: white;
   border: 1px solid black;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
   padding: 5px; 
+  width: 90px;
+  height: 40px;
 }
 
 .add-new-btn-desktop {
@@ -604,7 +614,8 @@ html {
   border: 1px solid black;
   border-radius: 4px;
   font-size: 14px;
-  padding: 5px 8px 5px 8px;
+  width: 100px;
+  height: 40px;
 }
 
 .add-new-btn-laptop:hover, .add-new-btn-desktop:hover {
