@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PasswordsIcon} from "../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
+import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react";
 import { serverConfig } from "../server";
 
@@ -22,6 +23,8 @@ function generateLinks(deviceData, type) {
 }
 
 export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, showMessage, closeDialog}) {
+
+    const currentUser = useUser((state) => state.userCredentials);
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -47,7 +50,7 @@ export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, sh
                     <div className={mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
                             <h2>{selectedData.model}</h2>
-                            <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>
+                            {currentUser.permissions === "admin" && <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>}
                         </div>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                     </div>
