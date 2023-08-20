@@ -2,8 +2,7 @@ import { serverConfig } from "../server";
 import { useUser, useLoggedIn } from "./StateStore";
 import { useState } from "react";
 import useMediaQueries from "media-queries-in-react";
-import { ModalSkeleton } from "./ModalSkeleton";
-import { Input } from "./Input";
+import { ChangePassword } from "./ChangePassword";
 import { PadlockIcon, LogoutIcon } from "../svg";
 
 function logoutFromApp(logout) {
@@ -33,7 +32,7 @@ export function Avatar() {
         setChangePasswordVisible(true);
     }
 
-    function closeModal() {
+    function closePasswordModal() {
         setChangePasswordVisible(false);
     }
 
@@ -54,24 +53,7 @@ export function Avatar() {
                     </div>
                 </div>}
             </div>
-            {changePasswordVisible &&
-                <>
-                    <ModalSkeleton type="change-password" closeModal={closeModal}>
-                        <div className="change-password-form">
-                            <Input type="password" inputType="password" identifier="change-password" labelText="Current Password" placeholdertext="Enter Current Password"></Input>  
-                            <div className="passwords-input-container">
-                                <Input type="password" inputType="password" identifier="change-password" labelText="New Password" placeholdertext="Enter New Password"></Input>  
-                                <Input type="password" inputType="password" identifier="change-password" labelText="Confirm New Password" placeholdertext="Re-Enter New Password"></Input>  
-                                <div className="password-strength-container">
-                                    <label>Password Strength: Fair</label>
-                                    <div className="strength-indicator"></div>
-                                </div>
-                            </div>
-                                                        
-                            <button id="submit-password-change" className="update-button">Submit</button>
-                        </div>
-                    </ModalSkeleton>
-                </>}
+            {changePasswordVisible && <ChangePassword closeModal={closePasswordModal}></ChangePassword>}
         </>
         
     )

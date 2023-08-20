@@ -1,6 +1,6 @@
 
 
-export function Input({ type, inputType, identifier, labelText, defaultValue, placeholdertext }) {
+export function Input({ type, inputType, identifier, labelText, defaultValue, placeholdertext, onChange }) {
     if (type === "disabled") {
         return (
             <div className={identifier}>
@@ -21,7 +21,7 @@ export function Input({ type, inputType, identifier, labelText, defaultValue, pl
         return (
             <div className={identifier}>
                 <label className={`${identifier}-label`}>{labelText}</label>
-                <input type={inputType} id={labelText.toLowerCase().replace(/\s/ig, '-')} className={`${inputType}-input ${identifier}-input`} placeholder={placeholdertext}></input>
+                <input type={inputType} id={labelText.toLowerCase().replace(/\s/ig, '-')} className={`${inputType}-input ${identifier}-input`} placeholder={placeholdertext} onChange={onChange}></input>
             </div>
         );
     }
