@@ -38,10 +38,10 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
 
     const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '-')}@health.nsw.gov.au`;
 
-    function getTextColor(team) {
+    function getTextColor(team, opacity) {
         const colorString = teamColors[team].background.split(' rgb')[1];
-        const rgb = colorString.substring(0, colorString.length - 1)
-        return `rgb${rgb}`;
+        const rgb = opacity === undefined ? colorString.substring(0, colorString.length - 1) : colorString.substring(0, colorString.length - 2)
+        return opacity = undefined ? `rgb${rgb}` : `rgba${rgb},${opacity})`;
     }
 
     const editPermissions = (currentUser.permissions === "admin" || currentUser.user === selectedData.name)
