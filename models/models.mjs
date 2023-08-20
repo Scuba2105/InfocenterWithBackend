@@ -1,5 +1,5 @@
 import sql from "mssql";
-import { localDBConfig, testDBConfig } from "../config.mjs";
+import { infoCenterDBConfig } from "../config.mjs";
 import { localEMSConfig } from "../config.mjs";
 import { determineTeam } from "../utils/utils.mjs";
 
@@ -132,11 +132,10 @@ export async function disposeGenius3(parameter) {
 }
 
 export async function retrieveUserCredentials(email) {
-    try {
+    
         // Connect to the database
-        await sql.connect(testDBConfig);  
-        //await sql.connect(localDBConfig);
-        
+        await sql.connect(infoCenterDBConfig);  
+    
         // Create a new request object
         const request = new sql.Request();
 
@@ -147,9 +146,6 @@ export async function retrieveUserCredentials(email) {
 
         // Return the recordset
         return result.recordset
-    } catch (error) {
-        
-    }
 }
 
 

@@ -709,11 +709,11 @@ html {
 }
 
 .search-icon-desktop-user {
-  transform: translateX(-747px);
+  transform: translateX(-715px);
 }
 
 .search-icon-desktop-admin {
-  transform: translateX(-640px);
+  transform: translateX(-620px);
 }
 
 .add-new-btn-laptop {
