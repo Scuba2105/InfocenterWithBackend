@@ -58,10 +58,16 @@ export function Avatar() {
                 <>
                     <ModalSkeleton type="change-password" closeModal={closeModal}>
                         <div className="change-password-form">
+                            <Input type="password" inputType="password" identifier="change-password" labelText="Current Password" placeholdertext="Enter Current Password"></Input>  
                             <div className="passwords-input-container">
-                                <Input type="password" inputType="password" identifier="change-password" labelText="Password" placeholdertext="Enter New Password"></Input>  
-                                <Input type="password" inputType="password" identifier="change-password" labelText="Confirm Password" placeholdertext="Re-Enter New Password"></Input>  
+                                <Input type="password" inputType="password" identifier="change-password" labelText="New Password" placeholdertext="Enter New Password"></Input>  
+                                <Input type="password" inputType="password" identifier="change-password" labelText="Confirm New Password" placeholdertext="Re-Enter New Password"></Input>  
+                                <div className="password-strength-container">
+                                    <label>Password Strength: Fair</label>
+                                    <div className="strength-indicator"></div>
+                                </div>
                             </div>
+                                                        
                             <button id="submit-password-change" className="update-button">Submit</button>
                         </div>
                     </ModalSkeleton>

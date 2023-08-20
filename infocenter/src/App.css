@@ -15,7 +15,7 @@ html {
   --light-theme: #4558a2; 
   --icon-theme: #202950;
   --avatar-menu-color: #414f8a;
-  --form-font-color: rgb(132, 132, 139);
+  --form-font-color: rgb(105, 105, 108);
   ---form-background-color: rgb(217, 217, 224);
   --gear-desktop-offsetY: 160px;
   --gear-desktop-offsetX: 415px;
@@ -258,23 +258,44 @@ html {
   background-color: var(---form-background-color);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }  
 
 /* Change the formatting of the update password inputs */
-#password, #confirm-password {
+#new-password, #confirm-new-password, #current-password {
   width: 300px;
   height: 25px;
 }
 
-#password {
-  margin-bottom: 20px;
+#new-password, #current-password {
+  margin-bottom: 25px;
+}
+
+.passwords-input-container {
+  transform: translateY(-32px)
+}
+
+.password-strength-container {
+  width: 335px;
+  font-size: 14px;
+  margin-top: 20px;
+  color: var(--form-font-color);
+}
+
+.strength-indicator {
+  width: 100%;
+  height: 10px;
+  background-color: red;
+  margin-top: 10px;
 }
 
 #submit-password-change {
+  border: none;
   background: linear-gradient(rgb(16, 135, 99), rgb(23, 156, 116));
   width: 120px;
+  height: 35px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -505,7 +526,7 @@ html {
 
 .upload-body > p {
   font-size: 12px;
-  color:rgb(132, 132, 139);
+  color:var(--form-font-color);
   margin-left: 15px;
 }
 
@@ -1023,7 +1044,7 @@ html {
   width: 275px;
   height: 25px;
   margin-top: 8px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .software-type {
@@ -1054,7 +1075,7 @@ html {
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 10px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .available-label {
@@ -1519,13 +1540,13 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   margin-top: 15px;
 }
 
 .add-new-input, .new-image-input {
   font-size: 12px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   height: 20px;
   width: 180px;
   text-align: center;
@@ -1537,7 +1558,7 @@ html {
 }
 
 .add-new-input, .new-image-input {
-  border: 1px solid rgb(132, 132, 139);
+  border: 1px solid var(--form-font-color);
   padding: 3px;
   width: 210px;
 }
@@ -1590,7 +1611,7 @@ html {
 }
 
 .add-new-heading {
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .add-new-input-container {
@@ -1706,7 +1727,7 @@ html {
 
 .documents-heading {
   font-size: 20px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   margin-bottom: 30px;
 }
 
@@ -1765,8 +1786,8 @@ html {
   font-size: 12px;
   height: 80px;
   width: 80px;
-  color: rgb(132, 132, 139);
-  border: 1px solid rgb(132, 132, 139);
+  color: var(--form-font-color);
+  border: 1px solid var(--form-font-color);
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -1896,11 +1917,11 @@ html {
 
 .hospital-select-label, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
   font-size: 13px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
@@ -1957,12 +1978,12 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .config-data-input, .date-entry-input, .change-password-input {
   font-size: 12px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   height: 20px;
   width: 180px;
   text-align: center;
@@ -2002,7 +2023,7 @@ html {
 }
 
 .date-entry {
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .other-input-container {
@@ -2285,7 +2306,7 @@ html {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
   font-size: 7px;
-  color: rgb(156, 155, 155);
+  color: var(--form-font-color);
   background-color: #202950;
   padding: 0;
 }
@@ -2467,7 +2488,7 @@ html {
 .employee-requestor-select-label, .service-agent-select-label, .model-select-label, .us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, .text-area-container label {
   font-size: 15px;
   font-weight: 600;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
 }
 
 .us-qty-select-label, .ctg-qty-select-label {
@@ -2485,7 +2506,7 @@ html {
 }
 
 .employee-requestor-select, .service-agent-select, .model-select, .us-qty-select, .ctg-qty-select, .shipping-option-select {
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   font-size: 12px;
   display: block;
   height: 25px;
@@ -2497,7 +2518,7 @@ html {
 }
 
 .text-area-container textarea {
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   font-size: 12px;
   height: 50px;
   width: 235px;
@@ -2539,7 +2560,7 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   margin-top: 5px;
 }
 
@@ -2554,8 +2575,8 @@ html {
   width: 75px;
   height: 12px;
   margin-top: 3px;
-  color: rgb(132, 132, 139);
-  border: 1px solid rgb(132, 132, 139);
+  color: var(--form-font-color);
+  border: 1px solid var(--form-font-color);
   padding: 5px 5px 5px 5px;  
 }
 
@@ -2583,13 +2604,13 @@ html {
 
 .check-message {
   font-size: 12px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   margin: 10px;
 }
 
 .disposal-message {
   font-size: 12px;
-  color: rgb(132, 132, 139);
+  color: var(--form-font-color);
   margin: 10px;
   margin-bottom: 20px;
 }

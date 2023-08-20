@@ -86,7 +86,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
     }
     if (type === 'add-new' || type === 'update' || type === 'check' || type === 'disposal' || type === 'change-password') {
         return (
-            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={(type === "software" || type === "change-password") && mediaQueries.laptop ? 
+            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={(type === "software") && mediaQueries.laptop ? 
             { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
             type === "software" && mediaQueries.desktop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : 
             { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={getCursorPosition}>
