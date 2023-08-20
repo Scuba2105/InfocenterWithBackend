@@ -174,7 +174,7 @@ html {
 }
 
 #header-aligner {
-  width: 330px;
+  width: 100px;
   height: 20px;
 }
 
@@ -190,28 +190,38 @@ html {
   height: 25px;
   width: 25x;
   border-radius: 50%;
-  position: relative;
-  left: 200px;
 }
 
 .avatar-container label {
   font-size: 12px;
   margin-left: 10px;
   cursor: pointer;
-  position: relative;
-  left: 200px;
 }
 
-.avatar-menu {
-  position: relative;
-  top: 120px;
-  left: 0px;
+.avatar-menu-laptop, .avatar-menu {
+  position: absolute;
+  right: 20px;
+  top: 50px;
   height: 200px;
   width: 200px;
   background-color: white;
   border: 1px solid var(--light-theme);
   z-index: 100;
   clip-path: polygon(0% 5%, 75% 5%, 80% 0%, 85% 5%, 100% 5%, 100% 100%, 0% 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.avatar-menu-desktop {
+  position: absolute;
+  right: 20px;
+  top: 50px;
+}
+
+.avatar-menu-laptop label, .avatar-menu-desktop label {
+  color: var(--form-font-color)
 }
 
 .sidenav {
@@ -263,7 +273,6 @@ html {
   justify-content: space-between;
   align-items: flex-start;
   min-width: 1150px;
-  max-width: 1250px;
   overflow: hidden;
 }
 
