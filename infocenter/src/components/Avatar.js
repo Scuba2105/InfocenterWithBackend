@@ -3,6 +3,7 @@ import { useUser, useLoggedIn } from "./StateStore";
 import { useState } from "react";
 import useMediaQueries from "media-queries-in-react";
 import { ModalSkeleton } from "./ModalSkeleton";
+import { Input } from "./Input";
 import { PadlockIcon, LogoutIcon } from "../svg";
 
 function logoutFromApp(logout) {
@@ -41,7 +42,7 @@ export function Avatar() {
             <div className="avatar-container" onClick={toggleMenu}>
                 <img id="avatar-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/blank-profile.png`} alt="staff"></img>
                 <label>{currentUser.user}</label>
-                <div className={mediaQueries.laptop ? "avatar-menu-laptop" : "avatar-menu avatar-menu-desktop"} style={menuVisible ? {opacity: 1} : {opacity: 0}}>
+                {menuVisible && <div className={mediaQueries.laptop ? "avatar-menu-laptop" : "avatar-menu avatar-menu-desktop"}>
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>
                     <div className="avatar-option" onClick={showModal}>
                         <PadlockIcon color="white" size="25px"></PadlockIcon>
@@ -51,9 +52,20 @@ export function Avatar() {
                         <LogoutIcon color="white" size="25px"></LogoutIcon>
                         <label id="logout-label">Logout</label>
                     </div>
-                </div>
+                </div>}
             </div>
-            {changePasswordVisible &&<ModalSkeleton type="change-password" closeModal={closeModal}></ModalSkeleton>}
+            {changePasswordVisible &&
+                <>
+                    <ModalSkeleton type="change-password" closeModal={closeModal}>
+                        <div className="change-password-form">
+                            <div className="passwords-input-container">
+                                <Input type="password" inputType="password" identifier="change-password" labelText="Password" placeholdertext="Enter New Password"></Input>  
+                                <Input type="password" inputType="password" identifier="change-password" labelText="Confirm Password" placeholdertext="Re-Enter New Password"></Input>  
+                            </div>
+                            <button id="submit-password-change" className="update-button">Submit</button>
+                        </div>
+                    </ModalSkeleton>
+                </>}
         </>
         
     )

@@ -252,6 +252,32 @@ html {
   margin-left: 10px;
 }
 
+.change-password-form {
+  height: 100%;
+  width: 100%;
+  background-color: var(---form-background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}  
+
+/* Change the formatting of the update password inputs */
+#password, #confirm-password {
+  width: 300px;
+  height: 25px;
+}
+
+#password {
+  margin-bottom: 20px;
+}
+
+#submit-password-change {
+  background: linear-gradient(rgb(16, 135, 99), rgb(23, 156, 116));
+  width: 120px;
+  font-weight: 500;
+}
+
 .sidenav {
   grid-row: 2 / -1;
   grid-column: 1;
@@ -992,7 +1018,7 @@ html {
   transform: translateY(75px)
 }
 
-.device-text-input, .add-new.input {
+.device-text-input, .add-new.input, .change-password-input {
   text-align: center;
   width: 275px;
   height: 25px;
@@ -1925,7 +1951,7 @@ html {
   padding-top: 10px;
 }
 
-.config-data, .date-entry {
+.config-data, .date-entry, .change-password {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1934,7 +1960,7 @@ html {
   color: rgb(132, 132, 139);
 }
 
-.config-data-input, .date-entry-input {
+.config-data-input, .date-entry-input, .change-password-input {
   font-size: 12px;
   color: rgb(132, 132, 139);
   height: 20px;
