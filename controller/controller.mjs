@@ -41,7 +41,7 @@ export async function validateLoginCredentials(req, res, __dirname) {
                 return {name: entry.name, id: entry.id};
             }) 
 
-        // Define hashing parameters and generate password hash
+        //Define hashing parameters and generate password hash
         // const saltRounds = 10;
         // const hashedPassword = await bcrypt.hash(submittedPassword, saltRounds);
         // console.log(hashedPassword);  
