@@ -36,7 +36,7 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
         desktop: "(min-width: 1800px)"
     });
 
-    const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '-')}@health.nsw.gov.au`;
+    const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
 
     function getTextColor(team) {
         const colorString = teamColors[team].background.split(' rgb')[1];

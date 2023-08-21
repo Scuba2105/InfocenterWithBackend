@@ -38,7 +38,7 @@ export function Login() {
     useEffect(() => {
         async function submitData(setLoginError, setLoginErrorMessage, login, setUser) {
             const [emailInput, passwordInput] = loginForm.current.querySelectorAll('input');
-            const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$/;
+            const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$|[0-9]+/;
             const invalidPasswordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/
             
             // Check if email address valid

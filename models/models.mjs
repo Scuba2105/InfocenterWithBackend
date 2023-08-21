@@ -142,7 +142,7 @@ export async function retrieveUserCredentials(email) {
         // Query the database for user credentials
         const result = await request
             .input('input_parameter', sql.VarChar, email)
-            .query(`SELECT * FROM Users WHERE Email = @input_parameter`);
+            .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
 
         // Return the recordset
         return result.recordset

@@ -18,7 +18,7 @@ export async function validateLoginCredentials(req, res, __dirname) {
         const submittedPassword = req.body.password;
 
         // Validate the user credentials 
-        const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$/;
+        const emailRegex = /^[A-Za-z0-9]+\.[A-Za-z0-9]+(@health.nsw.gov.au)$|[0-9]+/;
         const invalidPasswordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/
         
         // Check if email address valid
