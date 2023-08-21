@@ -4,4 +4,5 @@
 /public/templates
 config.mjs
 /data/device-data.json
+/data/contacts.json
 
