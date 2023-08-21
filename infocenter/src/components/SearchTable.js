@@ -13,7 +13,7 @@ export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, 
             <table className={mediaQueries.laptop ? "search-table-laptop" : "search-table-desktop"} cellSpacing="0px">
                 <thead>
                     <tr key="header-row">
-                        <td className="header" >{pageSelected === "staff" ? "Staff ID" : pageSelected === "technical-info" ? "Model" : "Name"}</td>
+                        {pageSelected !== "contacts" && <td className="header" >{pageSelected === "staff" ? "Staff ID" : "Model"}</td>}
                         <td className="header">{pageSelected === "staff" ? "Name" : pageSelected === "technical-info" ? "Manufacturer" : "Hospital"}</td>
                         <td className="header">{pageSelected === "staff" ? "Office Phone No." : pageSelected === "technical-info" ? "Type" : "Department"}</td>
                     </tr>
@@ -25,7 +25,7 @@ export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, 
                         return (
                             <>
                                 <tr style={{backgroundColor: rowColor}} key={`${data.model}-row`} onClick={onRowClick}>
-                                    <td key={pageSelected === 'staff' ? `${data.id}-row` : pageSelected === 'technical-info' ? `${data.model}-row` : `${data.contact}-row`}>{pageSelected === 'staff' ? data.id : pageSelected === 'technical-info' ? data.model : data.contact}</td>
+                                    {pageSelected !== "contacts" && <td key={pageSelected === 'staff' ? `${data.id}-row` : pageSelected === 'technical-info' ? `${data.model}-row` : `${data.contact}-row`}>{pageSelected === 'staff' ? data.id : data.model}</td>}
                                     <td key={pageSelected === 'staff' ? `${data.name}-row` : pageSelected === 'technical-info' ? `${data.manufacturer}-row` : `${data.hospital}-row`}>{pageSelected === 'staff' ? data.name : pageSelected === 'technical-info' ? data.manufacturer : data.hospital}</td>
                                     <td key={pageSelected === 'staff' ? `${data.officePhone}-row` : pageSelected === 'technical-info' ? `${data.type}-row` : `${data.department}-row`}>{pageSelected === 'staff' ? data.officePhone : pageSelected === 'technical-info' ? data.type : data.department}</td>
                                 </tr>

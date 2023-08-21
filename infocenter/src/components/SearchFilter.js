@@ -64,12 +64,33 @@ export function SearchFilter({page, pageData, onRowClick, queryClient, showMessa
 
     const pageSelected = page;
 
-    const currentDataSet = pageData;
+    // Declare current data set. If contacts page then sort page data by hospitals
+    let currentDataSet;
     
+    if (pageSelected === "contacts") {
+        const hospitalData = pageData.reduce((acc, entry) => {
+            if (!acc.includes(`${entry.hospital},${entry.department}`)) {
+                acc.push(`${entry.hospital},${entry.department}`);
+            }
+            return acc
+        }, []).map((string) => {
+            const array = string.split(',')
+            return {hospital: array[0], department: array[1]};
+        });
+        
+        const sortedHospitals = hospitalData.sort((a,b) => {
+            return a.hospital < b.hospital ? -1 : a.hospital > b.hospital ? 1 : 0;
+        })
+        currentDataSet = sortedHospitals;
+    }
+    else {
+        currentDataSet = pageData;
+    }
+
     // Filter the data based on search box query
     const queryData = currentDataSet.filter((entry) => {
         const regex = new RegExp(query,'ig');
-        return regex.test(entry.model) || regex.test(entry.manufacturer) || regex.test(entry.type) || regex.test(entry.name) || regex.test(entry.contact) || regex.test(entry.hospital) || regex.test(entry.department);
+        return regex.test(entry.model) || regex.test(entry.manufacturer) || regex.test(entry.type) || regex.test(entry.name) || regex.test(entry.hospital) || regex.test(entry.department);
     }).sort((a, b) => {
         return a.model < b.model ? -1 : a.model > b.model ? 1 : 0;
     });
