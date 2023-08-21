@@ -66,20 +66,23 @@ export function SearchFilter({page, pageData, onRowClick, queryClient, showMessa
 
     const currentDataSet = pageData;
     
+    // Filter the data based on search box query
     const queryData = currentDataSet.filter((entry) => {
         const regex = new RegExp(query,'ig');
-        return regex.test(entry.model) || regex.test(entry.manufacturer) || regex.test(entry.type) || regex.test(entry.name);
+        return regex.test(entry.model) || regex.test(entry.manufacturer) || regex.test(entry.type) || regex.test(entry.name) || regex.test(entry.contact) || regex.test(entry.hospital) || regex.test(entry.department);
     }).sort((a, b) => {
         return a.model < b.model ? -1 : a.model > b.model ? 1 : 0;
     });
     
+    // Display all data if no query present
     const displayData = queryData.length === 0 ? currentDataSet.sort((a, b) => {
         return a.model < b.model ? -1 : a.model > b.model ? 1 : 0;
     }) : queryData;
     
+    // Create the paginated data from the search box query filtered data
     const paginatedData = generateDataPages(displayData, entriesPerPage);
     const maxIndex = paginatedData.length - 1;
-
+    
     return (
         <div className="search-filter">
             <SearchInput key={`${pageSelected}-input`} onQueryChange={onQueryChange} openAddModal={openAddModal}/>

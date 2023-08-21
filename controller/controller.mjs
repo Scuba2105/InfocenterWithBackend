@@ -1,6 +1,6 @@
 import { Mutex } from 'async-mutex';
 import bcrypt from "bcrypt"
-import {readDeviceData, readStaffData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
+import {readDeviceData, readStaffData, readContactsData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/repair-request.mjs';
 import { getGenius3Serial, disposeGenius3, retrieveUserCredentials } from '../models/models.mjs';
@@ -77,7 +77,8 @@ export async function getAllData(req, res, __dirname) {
     try {
         const staffData = await readStaffData(__dirname);
         const deviceData = await readDeviceData(__dirname);
-        const allData = {staffData: staffData, deviceData: deviceData};
+        const contactsData = await readContactsData(__dirname);
+        const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData};
         res.json(allData);
     }
     catch(error) {
