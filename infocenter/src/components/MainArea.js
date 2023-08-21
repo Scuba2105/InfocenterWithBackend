@@ -72,7 +72,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 page === "contacts" ?
                 <>
                     <SearchFilter key={`${page}-contacts-filter`} page={page} pageData={data.contactsData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
-                    {/*<SummaryCard key={`${page}-contacts-card`} page={page} pageData={data.contactsData} selectedEntry={selectedEntry} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>*/}
+                    <SummaryCard key={`${page}-contacts-card`} page={page} pageData={data.contactsData} selectedEntry={selectedEntry} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "utilities" ?
