@@ -1,5 +1,6 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
+import { ContactsFilter } from "./ContactsFilter";
 import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
 import { LoadingPage } from "./LoadingPage";
@@ -18,7 +19,8 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     const [utilityPage, setUtilityPage] = useState(0)
-
+    const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics/Recovery"})
+    
     function closeDialog() {
         setDialogOpen(false);
     };
@@ -30,6 +32,22 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
 
     function selectUtility(index) {
         setUtilityPage(index);
+    }
+
+    // Update the selected entry when changing the hospital select input
+    function onHospitalChange(pageData, e) {
+        const newHospital = e.currentTarget.value;
+        const matchingEntry = pageData.find((entry) => {
+            return entry.hospital === newHospital
+        })        
+        const initialDepartment = matchingEntry.department;
+        setSelectedDepartment({hospital: newHospital, department: initialDepartment})
+    }    
+
+    // Update the selected entry when changing the hospital select input
+    function onDepartmentChange(e) {
+        const newDepartment = e.currentTarget.value;
+        setSelectedDepartment({...selectedDepartment, department: newDepartment});
     }
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
@@ -71,8 +89,8 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 </> :
                 page === "contacts" ?
                 <>
-                    <SearchFilter key={`${page}-contacts-filter`} page={page} pageData={data.contactsData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
-                    <SummaryCard key={`${page}-contacts-card`} page={page} pageData={data.contactsData} selectedEntry={selectedEntry} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
+                    <ContactsFilter selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} ></ContactsFilter>
+                    <SummaryCard page={page} pageData={data.contactsData} selectedDepartment={selectedDepartment} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "utilities" ?

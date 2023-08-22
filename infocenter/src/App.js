@@ -14,13 +14,13 @@ export default function App() {
 
     const [page, setPage] = useState('staff');
     const [selectedEntry, setSelectedEntry] = useState('60146568');
-    
+    console.log(selectedEntry)
     // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
         
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
-        const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? 'MX450' : page === 'contacts' ? 'Katie Francis' : null
+        const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? 'MX450' : null;
         setSelectedEntry(initialEntry);
         setPage(page);
     }
@@ -31,7 +31,7 @@ export default function App() {
         const entryIdentifier = row.children[0].textContent === '-' ? row.children[1].textContent : row.children[0].textContent
         setSelectedEntry(entryIdentifier);
     }
-    
+
     if (!loggedIn) {
         return (
            <Login></Login> 

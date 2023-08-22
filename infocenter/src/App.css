@@ -2297,6 +2297,13 @@ html {
   align-items: center;
 }
 
+/* Formatting the Contacts page */
+.contacts-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Formatting the utilities page */
 .utilities-container {
   height: 100%;
