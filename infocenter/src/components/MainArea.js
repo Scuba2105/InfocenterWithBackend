@@ -88,11 +88,17 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "contacts" ?
-                <>
-                    <ContactsFilter selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} ></ContactsFilter>
-                    <SummaryCard page={page} pageData={data.contactsData} selectedDepartment={selectedDepartment} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
+                <div className="contacts-page-container">
+                    <div className="hospital-contacts-container">
+                        <div className="contacts-heading">
+                            <h2>Department Contacts</h2>
+                        </div>   
+                        <div className="contacts-display">
+                            <ContactsFilter selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} ></ContactsFilter>
+                        </div>                  
+                    </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
-                </> :
+                </div> :
                 page === "utilities" ?
                 <>
                     <Utilities utilityPage={utilityPage} onClick={selectUtility}>

@@ -14,7 +14,7 @@ export default function App() {
 
     const [page, setPage] = useState('staff');
     const [selectedEntry, setSelectedEntry] = useState('60146568');
-    console.log(selectedEntry)
+    
     // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
         

@@ -27,6 +27,20 @@ export function SelectInput({type, defaultValue, label, optionData, onChange}) {
             </div>
         );
     }
+    else if (type === "contacts") {
+        return (
+            <div className={`contacts-select-container`}>
+                <p className={`contacts-select-label`}>{label}</p>
+                <select name={label} className="select-input contacts-select" onChange={onChange}>
+                    {optionData.map((hospital, index) => {
+                        return (
+                        <option key={index} value={hospital}>{hospital}</option>
+                        );
+                    })}
+                </select>           
+            </div>
+        );
+    }
     else {
         return (
             <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
