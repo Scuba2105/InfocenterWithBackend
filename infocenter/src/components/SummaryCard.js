@@ -23,8 +23,14 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
         else if (page === 'technical-info' && mediaQueries.laptop === true) {
             return 'display-area-laptop equipment-display-laptop'
         }
-        else {
+        else if (page === 'technical-info' && mediaQueries.desktop === true) {
             return 'display-area-desktop equipment-display-desktop'
+        }
+        else if (page === 'contacts' && mediaQueries.laptop === true) {
+            return 'display-area-laptop staff-display-laptop'
+        }
+        else {
+            return 'display-area-desktop staff-display-desktop'
         }
     }
 
@@ -58,7 +64,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
     
     return (
         <div className={getClassName(page)}>
-                <h2>{page === 'staff' ? "Employee Summary" : "Equipment Summary"}</h2>
+                <h2>{page === 'staff' ? "Employee Summary" : page === 'staff' ? "Equipment Summary" : "Department Contacts"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} openAddUpdateForm={openAddUpdateForm} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} onLinkClick={onLinkClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {addUpdateFormVisible && page === 'staff' && 

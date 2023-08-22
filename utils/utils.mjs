@@ -29,6 +29,20 @@ export function readDeviceData(__dirname) {
     })
 }
 
+export function readContactsData(__dirname) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(path.join(__dirname, 'data', 'contacts.json'), (err, data) => {
+            if (err) {
+                console.error(err);
+                reject(`The data was unable to be read: ${err.message}`);
+            }
+            else {
+                resolve(JSON.parse(data));
+            }
+        });
+    })
+}
+
 export function readStaffData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
