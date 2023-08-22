@@ -2297,6 +2297,70 @@ html {
   align-items: center;
 }
 
+/* Formatting the Contacts page */
+.contacts-page-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.hospital-contacts-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  margin-top: 20px;
+}
+
+.contacts-heading {
+  height: 100%;
+  width: 90%;
+  color: white;
+  background-color: var(--dark-theme);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto;
+}
+
+.contacts-display {
+  background-color: white;
+  height: 100%;
+  width: 90%;
+  margin: auto auto;
+}
+
+.contacts-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacts-select-container {
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacts-select-label {
+  color: var(--dark-theme);
+  font-weight: 600;
+}
+
+.contacts-select {
+  width: 220px;
+  height: 25px;
+  text-align: center;
+  background-color: var(--dark-theme);
+  border: 1px solid #97a5dd;
+  color: #97a5dd;
+  padding-right: 10px;
+  transform: translateY(-10px)
+}
+
 /* Formatting the utilities page */
 .utilities-container {
   height: 100%;
