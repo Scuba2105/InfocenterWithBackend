@@ -27,7 +27,7 @@ export function SelectInput({type, defaultValue, label, optionData, onChange}) {
             </div>
         );
     }
-    else if (type === "contacts") {
+    else if (type === "contacts-hospitals" || type === "contacts-departments") {
         return (
             <div className={`contacts-select-container`}>
                 <p className={`contacts-select-label`}>{label}</p>
@@ -37,7 +37,7 @@ export function SelectInput({type, defaultValue, label, optionData, onChange}) {
                         <option key={index} value={hospital}>{hospital}</option>
                         );
                     })}
-                </select>           
+                </select>  
             </div>
         );
     }

@@ -18,8 +18,8 @@ export function ContactsFilter({selectedDepartment, pageData, onHospitalChange, 
         
     return (
         <div className="contacts-filter-container">
-            <SelectInput type="contacts" defaultValue={selectedDepartment.hospital} label="Hospital" optionData={hospitalData} onChange={(e) => onHospitalChange(pageData, e)}></SelectInput>
-            <SelectInput type="contacts" defaultValue={selectedDepartment.department} label="Department" optionData={departmentData} onChange={onDepartmentChange}></SelectInput>
+            <SelectInput type="contacts-hospitals" defaultValue={selectedDepartment.hospital} label="Hospital" optionData={hospitalData} onChange={(e) => onHospitalChange(pageData, e)}></SelectInput>
+            <SelectInput type="contacts-departments" defaultValue={selectedDepartment.department} label="Department" optionData={departmentData} onChange={onDepartmentChange}></SelectInput>
         </div>
     );
 }
