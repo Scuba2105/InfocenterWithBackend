@@ -1,5 +1,6 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
+import { ContactsSummary } from "./ContactsSummary";
 import { ContactsFilter } from "./ContactsFilter";
 import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
@@ -19,7 +20,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     const [utilityPage, setUtilityPage] = useState(0)
-    const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics/Recovery"})
+    const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
     
     function closeDialog() {
         setDialogOpen(false);
@@ -65,6 +66,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
 
     // If data retrieved then render the main area based on returned data.
     if (data) {
+
         const staffNames = data.staffData.reduce((acc, currStaff) => {
             if (!workshops.includes(currStaff.name)) {
                 acc.push(currStaff.name);
@@ -89,13 +91,9 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 </> :
                 page === "contacts" ?
                 <div className="contacts-page-container">
-                    <div className="hospital-contacts-container">
-                        <div className="contacts-heading">
-                            <h2>Department Contacts</h2>
-                        </div>   
-                        <div className="contacts-display">
-                            <ContactsFilter selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} ></ContactsFilter>
-                        </div>                  
+                    <div className="contacts-summary-container">
+                        <ContactsFilter selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} ></ContactsFilter>
+                        <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </div> :

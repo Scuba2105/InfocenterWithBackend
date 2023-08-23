@@ -1,0 +1,312 @@
+[
+ {
+  "contact": "Katie Francis",
+  "hospital": "John Hunter Hospital",
+  "department": "Anaesthetics & Recovery",
+  "position": "Equipment Officer",
+  "officePhone": 55412
+ },
+ {
+  "contact": "Patricia Franks",
+  "hospital": "John Hunter Hospital",
+  "department": "Anaesthetics & Recovery",
+  "position": "Equipment Officer",
+  "officePhone": 55412
+ },
+ {
+  "contact": "Kaylea Short",
+  "hospital": "Royal Newcastle Centre",
+  "department": "Cardiac Catheter Lab",
+  "position": "NUM",
+  "officePhone": 36791
+ },
+ {
+  "contact": "Kylie Winchester",
+  "hospital": "John Hunter Hospital",
+  "department": "Coronary Care Unit ",
+  "position": "NUM",
+  "officePhone": 14218,
+  "Dect Phone": 55224
+ },
+ {
+  "contact": "Cathy Kavanagh",
+  "hospital": "John Hunter Hospital",
+  "department": "Emergency Department",
+  "position": "NUM",
+  "officePhone": 47313
+ },
+ {
+  "contact": "Paul Spicer",
+  "hospital": "John Hunter Hospital",
+  "department": "Emergency Department",
+  "position": "NUM",
+  "officePhone": 47311
+ },
+ {
+  "contact": "Red Shirt",
+  "hospital": "John Hunter Hospital",
+  "department": "Emergency Department",
+  "position": "In-Charge Nurse",
+  "officePhone": 47312
+ },
+ {
+  "contact": "Nadine Pilley",
+  "hospital": "Royal Newcastle Centre",
+  "department": "Endoscopy ",
+  "position": "NUM",
+  "officePhone": 23934
+ },
+ {
+  "contact": "Kane Hill",
+  "hospital": "John Hunter Hospital",
+  "department": "ICU",
+  "position": "Equipment Officer",
+  "officePhone": 55315
+ },
+ {
+  "contact": "Cathy Kavanagh",
+  "hospital": "Royal Newcastle Centre",
+  "department": "Infusion Lounge",
+  "position": "NUM",
+  "officePhone": 66724
+ },
+ {
+  "contact": "Justin Gilbert",
+  "hospital": "John Hunter Hospital",
+  "department": "JHH Operating Theatres",
+  "position": "Equipment Officer",
+  "officePhone": 23573,
+  "Mobile Phone": "0420976396"
+ },
+ {
+  "contact": "Nicole Johns",
+  "hospital": "John Hunter Hospital",
+  "department": "NICU",
+  "position": "Technical Assistant",
+  "officePhone": 55989
+ },
+ {
+  "contact": "Greg McKinnon ",
+  "hospital": "John Hunter Hospital",
+  "department": "NICU",
+  "position": "Technical Assistant",
+  "officePhone": 55989
+ },
+ {
+  "contact": "Alex Stevens",
+  "hospital": "John Hunter Hospital",
+  "department": "Paediatric Palliative Care",
+  "position": "NUM",
+  "officePhone": 13448,
+  "Mobile Phone": "0477754468"
+ },
+ {
+  "contact": "Judith Fishburne",
+  "hospital": "John Hunter Hospital",
+  "department": "Paeds Outpatients",
+  "position": "NUM",
+  "officePhone": 13677
+ },
+ {
+  "contact": "Carolyn Matthews",
+  "hospital": "John Hunter Hospital",
+  "department": "Paeds Physiotherapy",
+  "position": "NUM",
+  "officePhone": 14377
+ },
+ {
+  "contact": "Lauren Platt",
+  "hospital": "John Hunter Hospital",
+  "department": "Paeds Respiratory Lab",
+  "position": "Lab Manager",
+  "officePhone": 13679
+ },
+ {
+  "contact": "Kasey Pearce",
+  "hospital": "John Hunter Hospital",
+  "department": "Paeds Respiratory Lab",
+  "position": "Hospital Scientist",
+  "officePhone": 13679
+ },
+ {
+  "contact": "Ruth Johnson ",
+  "hospital": "John Hunter Hospital",
+  "department": "Renal Procedures",
+  "position": "NUM",
+  "officePhone": 14460
+ },
+ {
+  "contact": "Danielle Sommer",
+  "hospital": "Royal Newcastle Centre",
+  "department": "RNC Operating Theatres",
+  "position": "NUM",
+  "officePhone": 23935
+ },
+ {
+  "contact": "Sheridan Ward",
+  "hospital": "John Hunter Hospital",
+  "department": "Transplant\/ AGSU",
+  "position": "NUM",
+  "officePhone": 14341
+ },
+ {
+  "contact": "Jody Shipp",
+  "hospital": "Royal Newcastle Centre",
+  "department": "Ward E1",
+  "position": "NUM",
+  "officePhone": 68584,
+  "Mobile Phone": "0423846952"
+ },
+ {
+  "contact": "Sarah MacDonald",
+  "hospital": "Royal Newcastle Centre",
+  "department": "Ward E2",
+  "position": "NUM",
+  "officePhone": 23453,
+  "Dect Phone": 23964
+ },
+ {
+  "contact": "Andrew Martin",
+  "hospital": "Royal Newcastle Centre",
+  "department": "Ward E3",
+  "position": "NUM",
+  "officePhone": 23963,
+  "Mobile Phone": "0407226749"
+ },
+ {
+  "contact": "Kelly Musgrave",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward F1",
+  "position": "NUM",
+  "officePhone": 13497
+ },
+ {
+  "contact": "Evan O'Reilly",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward F2",
+  "position": "NUM",
+  "officePhone": 13820,
+  "Dect Phone": 55221
+ },
+ {
+  "contact": "Amy Revett",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward F3",
+  "position": "NUM",
+  "officePhone": 14316,
+  "Dect Phone": 55123
+ },
+ {
+  "contact": "Gemma Melileo",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward G1",
+  "position": "NUM",
+  "officePhone": 14349
+ },
+ {
+  "contact": "Alison Willetts",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward G2",
+  "position": "NUM",
+  "officePhone": 13224
+ },
+ {
+  "contact": "Lindsay Rowsell",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward G3",
+  "position": "NUM",
+  "officePhone": 14457
+ },
+ {
+  "contact": "Kristy Chesworth",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward H1",
+  "position": "NUM",
+  "officePhone": 36367
+ },
+ {
+  "contact": "Alexandra Mexon",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward H2",
+  "position": "NUM",
+  "officePhone": 55409
+ },
+ {
+  "contact": "Cath Kirkman",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward H3",
+  "position": "NUM",
+  "officePhone": 55110,
+  "Dect Phone": 55695
+ },
+ {
+  "contact": "Margaret Allwood",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward J1",
+  "position": "NUM",
+  "officePhone": 55082
+ },
+ {
+  "contact": "Paul Widseth",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward J2",
+  "position": "NUM",
+  "officePhone": 13673
+ },
+ {
+  "contact": "Emma Downey",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward J3",
+  "position": "NUM",
+  "officePhone": 55154,
+  "Mobile Phone": "0431050918"
+ },
+ {
+  "contact": "Gemma Fogarty",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward K1",
+  "position": "NUM",
+  "officePhone": 13517
+ },
+ {
+  "contact": "Wendy Tsang",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward K2",
+  "position": "NUM",
+  "officePhone": 13993,
+  "Mobile Phone": 66013
+ },
+ {
+  "contact": " Heidi Chegwidden",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward K2",
+  "position": "NUM",
+  "officePhone": 55709
+ },
+ {
+  "contact": "Cathy Richards",
+  "hospital": "John Hunter Hospital",
+  "department": "Ward K3",
+  "position": "NUM",
+  "officePhone": 14693,
+  "Mobile Phone": "0447406507"
+ },
+ {
+  "contact": "Saneesh Baby",
+  "hospital": "Rankin Park",
+  "department": "North Ward ",
+  "position": "NUM",
+  "officePhone": 14850,
+  "Mobile Phone": "0423845608",
+  "Dect Phone": 68583
+ },
+ {
+  "contact": "Catherine Taylor ",
+  "hospital": "Rankin Park",
+  "department": "South Ward ",
+  "position": "NUM",
+  "officePhone": 14961,
+  "Mobile Phone": "0423846952",
+  "Dect Phone": 68584
+ }
+]

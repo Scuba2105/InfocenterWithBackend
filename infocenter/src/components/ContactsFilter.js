@@ -8,14 +8,14 @@ export function ContactsFilter({selectedDepartment, pageData, onHospitalChange, 
         }
         return acc
     }, [])
-
+    
     const departmentData = pageData.reduce((acc, entry) => {
         if (entry.hospital === selectedDepartment.hospital && !acc.includes(`${entry.department}`)) {
             acc.push(entry.department);
         }
         return acc
     }, [])
-    
+        
     return (
         <div className="contacts-filter-container">
             <SelectInput type="contacts" defaultValue={selectedDepartment.hospital} label="Hospital" optionData={hospitalData} onChange={(e) => onHospitalChange(pageData, e)}></SelectInput>
