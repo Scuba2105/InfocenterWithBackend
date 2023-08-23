@@ -154,7 +154,7 @@ html {
 }
 
 .app-icon-container {
-  background-color: #202950;
+  background-color: var(--icon-theme);
   height: 100%;
   width: 100%;
   display: flex;
@@ -391,12 +391,12 @@ html {
 .error-503 {
   font-weight: bold;
   font-size: 40px;
-  color: #4558a2;
+  color: var(--light-theme);
 }
 
 .message1-503, .message2-503 {
   font-size: 22px;
-  color: #4558a2;
+  color: var(--light-theme);
 }
 
 #gear1-laptop {
@@ -1496,7 +1496,7 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(217, 217, 224);
+  background-color: var(---form-background-color);
 }
 
 .password-display {
@@ -1771,7 +1771,7 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 1fr;
-  background-color: rgb(217, 217, 224);
+  background-color: var(---form-background-color);
   color: rgb(104, 104, 108);
 }
 
@@ -2430,7 +2430,7 @@ html {
   grid-template-rows: 1fr;
   font-size: 7px;
   color: var(--form-font-color);
-  background-color: #202950;
+  background-color: var(--icon-theme);
   padding: 0;
 }
 
