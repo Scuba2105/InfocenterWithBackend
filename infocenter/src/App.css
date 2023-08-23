@@ -15,9 +15,9 @@ html {
   --med-light-theme: #383F4F;
   --light-theme: #4e6089; 
   --icon-theme: #212936;
-  --avatar-menu-color: #383F4F;
-  --display-background-color: rgb(206, 206, 206);
-  --grey-font: rgb(146, 146, 146);
+  --avatar-menu-color: rgb(105, 105, 108);
+  --display-background-color: var(--med-light-theme);
+  --grey-font: rgb(211, 211, 212);
   --form-font-color: rgb(105, 105, 108);
   ---form-background-color: rgb(206, 206, 206);
   --gear-desktop-offsetY: 160px;
@@ -837,7 +837,7 @@ html {
 .display-area-laptop {
   margin-right: 20px;
   width: 500px;
-  background-color: var(---form-background-color);
+  background-color: var(--display-background-color);
   border: 1px solid black;
   height: 80%;
   margin-top: 2%;
@@ -845,7 +845,7 @@ html {
 }
 
 .display-area-desktop {
-  background-color: var(---form-background-color);
+  background-color: var(--display-background-color);
   border: 1px solid black;
   width: 45%;
   height: 80%;
@@ -902,7 +902,7 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 30px;
-  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  background-color: var(--med-theme);
   color: white;
 }
 
@@ -947,6 +947,8 @@ html {
   max-width: 75%;
   max-height: 75%;
   object-fit: contain;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .equipment-summary-laptop {
@@ -977,7 +979,7 @@ html {
 }
 
 #title-container-laptop h2, #title-container-desktop h2 {
-  color: var(--dark-theme);
+  color: white;
 }
 
 .equipment-summary-laptop h4 {
@@ -1158,39 +1160,39 @@ html {
 }
   
 .service {
-    background: linear-gradient(#f5b8ce, #fc86b2);
+    background: linear-gradient(#fd70a3, #fc5190);
     border: 1px solid #7e1439;
-    color: #7e1439;
+    color: var(--dark-theme);
 }
 
 .user-manual {
   background-color: #a5f3f0;
-  background: linear-gradient(#a5f3f0, #46f8f2);
+  background: linear-gradient(#46f8f2, #1ef7f0);
   color: #095250;
   border: 1px solid #095250
 }
 
 .config {
-  background: linear-gradient(#f9e8c4, #f9d27e);
+  background: linear-gradient(#fdd783, #f9d27e);
   color: #815a07;
   border:1px solid #815a07;
 }
 
 .software {
-  background: linear-gradient(#efbdfc, #e174fd);
+  background: linear-gradient(#e274fe, #de65fd);
   color: #320E3B;
   border: 1px solid #320E3B
 }
 
 .documents {
-  background: linear-gradient(#facab4, #fda47b);
+  background: linear-gradient(#fea278, #fd9a6d);
   color: #7f3f21;
   border: 1px solid #7f3f21;
 }
 
 .passwords {
   color: #043254;
-  background: linear-gradient(#a8d6f9, #6dbefc);
+  background: linear-gradient(#74c1fc, #6abdfd);
   border: 1px solid #043254;
 }
 
@@ -1269,14 +1271,14 @@ html {
   width: 65%;
   height: 100%;
   transform: translateY(20px);
-  color: var(--dark-theme);
+  color: white;
 }
 
 .staff-name-desktop {
   width: 65%;
   height: 100%;
   transform: translateY(-20px);
-  color: var(--dark-theme);
+  color: white;
 }
 
 .name-update-container {
