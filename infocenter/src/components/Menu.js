@@ -2,6 +2,9 @@ import { menuOptions } from '../data.js';
 import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon, UtilitiesIcon } from '../svg.js';
 import { useState } from 'react';
 
+const imagelightColor = "#F1A3B7";
+const imageDarkColor = "rgb(128, 128, 129)";
+
 export function Menu({page, onPageSelect}) {
    
   const [hoveredId, setHoveredId] = useState(null);
@@ -19,11 +22,11 @@ export function Menu({page, onPageSelect}) {
     const titleLength = titleArray.length;
     return (
       <div key={option.id} id={option.id} className={option.id === page ? "menu-selected" : "menu-option"} onClick={() => onPageSelect(option.id)} onMouseEnter={() => enterMenuIcon(option.id)} onMouseLeave={leaveMenuIcon}>
-        {option.id === 'staff' ? <StaffIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> : 
-        option.id === 'technical-info' ? <TechnicalIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
-        option.id === 'contacts' ? <ContactsIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
-        option.id === 'admin' ? <AdminIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} /> :
-        <UtilitiesIcon key={option.id} color={option.id === hoveredId || option.id === page ? "#f7aad9" : "rgb(128, 128, 129)"} />
+        {option.id === 'staff' ? <StaffIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> : 
+        option.id === 'technical-info' ? <TechnicalIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
+        option.id === 'contacts' ? <ContactsIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
+        option.id === 'admin' ? <AdminIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
+        <UtilitiesIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} />
         }
         {titleLength === 1 ? <span>{option.title}</span> : 
         <>

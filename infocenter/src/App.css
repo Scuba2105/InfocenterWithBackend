@@ -16,8 +16,8 @@ html {
   --light-theme: #4e6089; 
   --icon-theme: #212936;
   --avatar-menu-color: rgb(105, 105, 108);
-  --display-background-color: var(--med-light-theme);
-  --grey-font: rgb(211, 211, 212);
+  --display-background-color: #383F4F;
+  --info-container-background-color: rgb(224, 224, 224);
   --form-font-color: rgb(105, 105, 108);
   ---form-background-color: rgb(206, 206, 206);
   --gear-desktop-offsetY: 160px;
@@ -335,7 +335,7 @@ html {
 .menu-selected {
   scale: 1.1;
   cursor: pointer;
-  background: radial-gradient(circle at center,#955391, var(--med-theme) 60%);
+  background: radial-gradient(circle at center,rgb(156, 155, 155), var(--med-theme) 60%);
   color: white;
 }
 
@@ -346,7 +346,7 @@ html {
 .menu-option:hover {
   scale: 1.1;
   cursor: pointer;
-  background: radial-gradient(circle at center,#955391, var(--med-theme) 60%);
+  background: radial-gradient(circle at center,rgb(156, 155, 155), var(--med-theme) 60%);
   color:white;
 }
 
@@ -721,21 +721,23 @@ html {
 
 .add-new-btn-laptop {
   background-color: #03C4EB;
-  border: 1px solid var(--dark-theme);
+  border: 1px solid var(--med-light-theme);
   border-radius: 4px;
   font-size: 12px;
   padding: 5px; 
   width: 90px;
   height: 40px;
+  font-weight: 500;
 }
 
 .add-new-btn-desktop {
-  background-color: white;
-  border: 1px solid black;
+  background-color: #03C4EB;
+  border: 1px solid var(--med-light-theme);
   border-radius: 4px;
   font-size: 14px;
   width: 100px;
   height: 40px;
+  font-weight: 600;
 }
 
 .add-new-btn-laptop:hover, .add-new-btn-desktop:hover {
@@ -851,14 +853,14 @@ html {
   height: 80%;
   margin-top: 2%;
   margin-right: 5%;
-  min-height: 500px;
+  min-height: 400px;
 }
 
 .staff-display-laptop {  
   display: grid;
   grid-template-columns: 1fr; 
   grid-template-rows: 80px 1fr;
-  height: 88%;
+  height: 65%;
 }
 
 .staff-display-desktop { 
@@ -872,7 +874,7 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 15% 180px 1fr;
-  height: 88%;
+  height: 68%;
 }
 
 .equipment-display-desktop {
@@ -1002,7 +1004,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dark-theme);
+  color: var(--med-light-theme);
   background-color: rgb(3, 252, 156);
   border: 1px solid rgb(3, 168, 105);
   border-radius: 5px;
@@ -1017,7 +1019,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--med-light-theme);
   background-color: rgb(3, 252, 156);
   border: 1px solid rgb(3, 168, 105);
   border-radius: 5px;
@@ -1025,6 +1027,7 @@ html {
   padding: 1px 0 3px 0 ;
   font-size: 18px;
   transform: translateY(2px);
+  font-weight: 500;
 }
 
 .device-edit-button:hover {
@@ -1111,7 +1114,7 @@ html {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 5%;
-  margin: 10px 3% 10px 3%;
+  margin: 40px 3% 10px 3%;
 }
 
 .technical-area-desktop {
@@ -1292,7 +1295,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dark-theme);
+  color: var(--med-light-theme);
   background-color: rgb(3, 252, 156);
   border: 1px solid rgb(3, 168, 105);
   border-radius: 5px;
@@ -1303,20 +1306,20 @@ html {
   transform: translate(20px, -5px);
 }
 
-.staff-edit-btn-desktop {
-  width: 70px;
+.staff-edit-btn-desktop  {
+  width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--med-light-theme);
   background-color: rgb(3, 252, 156);
   border: 1px solid rgb(3, 168, 105);
   border-radius: 5px;
-  margin-left: 0px;
+  margin-left: 20px;
   padding: 1px 0 3px 0 ;
-  font-size: 10px;
+  font-size: 18px;
+  transform: translateY(2px);
   font-weight: 500;
-  transform: translate(20px, -5px);
 }
 
 .staff-edit-btn-laptop:hover, .staff-edit-btn-desktop:hover {
@@ -1361,7 +1364,7 @@ html {
 .info-container-laptop {
   grid-column: 1;
   grid-row: 2;
-  grid-gap: 15px 0;
+  grid-gap: 12% 0px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -1383,39 +1386,17 @@ html {
 .info-entry-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 35px 1fr;
+  grid-template-rows: 25px 1fr;
   border: 1px solid black;
   width: 90%;
-  height: 100%;
+  height: 80%;
   margin: auto auto;
-}
-
-.info-entry-container span {
-  background-color: var(---form-background-color);
-}
-
-.info-container-laptop .email-link {
-  font-size: 12px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #03C4EB;
-  background-color: white;
-  margin-top: 0;
-}
-
-.info-container-desktop .email-link {
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .info-container-desktop .info-entry-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 50px 1fr;
   border: 1px solid black;
   width: 90%;
   height: 80%;
@@ -1425,7 +1406,7 @@ html {
 .info-entry-container > h5 {
   grid: 1 / 1;
   width: 100%;
-  height: 75%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1440,19 +1421,19 @@ html {
 
 .info-entry-container #heading1 {
   background-color: rgb(217, 95, 97);
+  margin: 0;
 }
 
-.info-entry-container > span {
+.info-entry-container > span, .email-link {
   grid: 1/ 2;
   width: 100%;
-  height: 100%;
+  height: 110%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--info-container-background-color);
   margin: 0;
   padding-top: 10px;
-  transform: translateY(-10px);
 }
 
 /* link modal formatting */
