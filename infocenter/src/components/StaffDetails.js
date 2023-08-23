@@ -59,7 +59,7 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
                         <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
                         {!workshops.includes(selectedData.name) && editPermissions && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>}
                     </div>
-                    <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"} style={selectedData.id !== '-' ? {color: getTextColor(selectedData.team)} : {color: getTextColor("default")}}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
+                    <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
             </div>            
             <div className={mediaQueries.laptop ? "info-container-laptop" : "info-container-desktop"}>

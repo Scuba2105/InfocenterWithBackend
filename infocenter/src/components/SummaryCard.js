@@ -64,7 +64,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
     
     return (
         <div className={getClassName(page)}>
-                <h2>{page === 'staff' ? "Employee Summary" : page === 'staff' ? "Equipment Summary" : "Department Contacts"}</h2>
+                <h2>{page === 'staff' ? "Employee Summary" : page === 'technical-info' ? "Equipment Summary" : "Department Contacts"}</h2>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} openAddUpdateForm={openAddUpdateForm} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} onLinkClick={onLinkClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {addUpdateFormVisible && page === 'staff' && 

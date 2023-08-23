@@ -21,7 +21,7 @@ export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, 
                 <tbody>
                     
                     {paginatedData[tableIndex].map((data, index) => {
-                        const rowColor = index % 2 === 0 ? 'white' : '#a3afe1' 
+                        const rowColor = index % 2 === 0 ? '#383F4F' : '#212936' 
                         return (
                             <>
                                 <tr style={{backgroundColor: rowColor}} key={`${data.model}-row`} onClick={onRowClick}>
