@@ -2,7 +2,7 @@ import { menuOptions } from '../data.js';
 import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon, UtilitiesIcon } from '../svg.js';
 import { useState } from 'react';
 
-const imagelightColor = "#F1A3B7";
+const imagelightColor = "#FF8C61";
 const imageDarkColor = "rgb(128, 128, 129)";
 
 export function Menu({page, onPageSelect}) {
