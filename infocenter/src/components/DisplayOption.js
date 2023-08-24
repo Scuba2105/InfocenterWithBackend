@@ -69,7 +69,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                     <Input inputType='text' identifier='config-data' labelText='Department' placeholdertext='eg. ICU, ED, Ward H1 etc.'/>
                     <Input inputType='text' identifier='config-data' labelText='Software Rev. (optional)' placeholdertext='eg. M.03.01, L.01.02'/>
                     <Input inputType='text' identifier='config-data' labelText='Sub-Location (optional)' placeholdertext='eg. Transport, Paediatric etc.'/>
-                    <Input inputType='date' identifier='date-entry' labelText='`Date Created'/>
+                    <Input inputType='date' identifier='date-entry' labelText='Date Created'/>
                 </div>
                 <div className="config-file-container">
                     <label>Select Config File</label>
@@ -86,7 +86,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                     <div key={`container-${number}`} className={mediaQueries.laptop ? "description-file-container-laptop" : "description-file-container-desktop"}>
                         <div className={mediaQueries.laptop ? "label-input-container1-laptop" : "label-input-container1-desktop"}>
                             <label key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
-                            <input key={`text${number}`} type="text" className={mediaQueries.laptop ? "other-doc-text-input-laptop" : "other-doc-text-input-desktop"}  placeholder="Enter a short title/description" name={`description-${number}`}></input>
+                            <input key={`text${number}`} type="text" className={mediaQueries.laptop ? "other-doc-text-input-laptop text-input" : "other-doc-text-input-desktop text-input"}  placeholder="Enter a short title/description" name={`description-${number}`}></input>
                         </div>
                         <div className={mediaQueries.laptop ? "label-input-container2-laptop" : "label-input-container2-desktop"}>
                             <label key={`label-input-${number}`}>{`File ${number}:`} </label>

@@ -15,14 +15,15 @@ html {
   --med-light-theme: #383F4F;
   --light-theme: #4e6089; 
   --icon-theme: #212936;
-  --avatar-menu-color: rgb(105, 105, 108);
+  --avatar-menu-color: var(--form-input-color);
   --display-background-color: #383F4F;
-  --info-container-background-color: rgb(224, 224, 224);
+  --info-container-background-color: #5d6881;
   --form-font-color: white;
   ---form-background-color: #4d555c;
   --form-input-color: rgb(105, 115, 122); 
   --green-button-color: rgb(3, 252, 156);
-  --green-button-border: 1px solid rgb(3, 168, 105); 
+  --green-button-border: 1px solid rgb(3, 168, 105);
+  --blue-button-color: #03a9eb; 
   --gear-desktop-offsetY: 160px;
   --gear-desktop-offsetX: 415px;
 }
@@ -686,7 +687,7 @@ html {
   display: flex;
   align-items: center;
   margin-left: 19px;
-  border: 2px solid var(--light-theme);
+  border: 2px solid var(--form-font-color);
   border-radius: 5px;
   width: 75%;
 }
@@ -695,7 +696,7 @@ html {
   display: flex;
   align-items: center;
   margin-left: 19px;
-  border: 2px solid var(--light-theme);
+  border: 2px solid var(--form-font-color);
   border-radius: 5px;
   width: 80%;
 }
@@ -723,7 +724,7 @@ html {
 }
 
 .add-new-btn-laptop {
-  background-color: #03C4EB;
+  background-color: var(--blue-button-color);
   border: 1px solid var(--med-light-theme);
   border-radius: 4px;
   font-size: 12px;
@@ -734,7 +735,7 @@ html {
 }
 
 .add-new-btn-desktop {
-  background-color: #03C4EB;
+  background-color: var(--blue-button-color);
   border: 1px solid var(--med-light-theme);
   border-radius: 4px;
   font-size: 14px;
@@ -748,16 +749,42 @@ html {
 }
 
 .search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--light-theme);
+  color: var(--form-font-color);
   opacity: 1; /* Firefox */
 }
 
 .search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: var(--light-theme);
+  color: var(--form-font-color);
 }
 
 .search-input::-ms-input-placeholder { /* Microsoft Edge */
-  color: var(--light-theme);
+  color: var(--form-font-color);
+}
+
+.text-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--form-font-color);
+  opacity: 1; /* Firefox */
+}
+
+.text-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--form-font-color);
+}
+
+.text-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--form-font-color);
+}
+
+.select-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--form-font-color);
+  opacity: 1; /* Firefox */
+}
+
+.select-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--form-font-color);
+}
+
+.select-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--form-font-color);
 }
 
 .search-table-container {
@@ -1051,6 +1078,7 @@ html {
   justify-content: center;
   align-items: center; 
   transform: translateY(100px);
+  color: var(--form-font-color)
 }
 
 .device-input-container-laptop {
@@ -1059,7 +1087,8 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateY(75px)
+  transform: translateY(75px);
+  color: var(--form-input-color);
 }
 
 .device-text-input, .add-new.input, .change-password-input {
@@ -1067,7 +1096,8 @@ html {
   width: 275px;
   height: 25px;
   margin-top: 8px;
-  background-color: transparent;
+  background-color: var(--form-input-color);
+  border: 1px solid var(--form-input-color);
   color: var(--form-font-color);
 }
 
@@ -1089,13 +1119,13 @@ html {
 
 .device-file-upload {
   font-size: 12px;
-  border: 1px solid black;
+  border: 1px solid var(--form-input-color);
   height: 20px;
   width: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--form-input-color);
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 10px;
@@ -1109,6 +1139,7 @@ html {
   margin-bottom: 30px;
   width: 210px;
   font-size: 14px;
+  color: var(--form-font-color)
 }
 
 /* Format the technical links equipment area */
@@ -1391,7 +1422,6 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 25px 1fr;
-  border: 1px solid black;
   width: 90%;
   height: 80%;
   margin: auto auto;
@@ -1401,7 +1431,6 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
-  border: 1px solid black;
   width: 90%;
   height: 80%;
   margin: auto auto;
@@ -1435,9 +1464,14 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--form-font-color);
   background-color: var(--info-container-background-color);
   margin: 0;
   padding-top: 10px;
+}
+
+.email-link {
+  color: var(--blue-button-color) 
 }
 
 /* link modal formatting */
@@ -2007,6 +2041,8 @@ html {
   padding-right: 20px;
   padding-left: 10px;
   margin-top: 3px;
+  background-color: var(--form-input-color);
+  border: none;
 }
 
 .config-file-container {
@@ -2023,7 +2059,6 @@ html {
 
 .config-file-container > label {
   font-size: 13px;
-  font-weight: bold;
   transform: translateY(5px);
 }
 
@@ -2033,7 +2068,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--form-input-color);
   padding: 5px;
   padding: 2px -5px 4px 0;
   margin-top: 10px;
@@ -2043,13 +2078,20 @@ html {
   color: var(--form-font-color);
 }
 
+.date-entry::-webkit-datetime-edit-day-field:focus,
+.date-entry::-webkit-datetime-edit-month-field:focus,
+.date-entry::-webkit-datetime-edit-year-field:focus {
+    color: var(--form-font-color) !important;
+}
+
 .other-input-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding-top: 20px;
-  transform: translateY(20px)
+  transform: translateY(20px);
+  color: var(--form-font-color) 
 }
 
 .other-input-container > input {
@@ -2077,7 +2119,7 @@ html {
 #remove-file {
   color: #a21212;
   border-radius: 5px;
-  border: 1px solid #a21212;
+  border: 1px solid var(--dark-theme);
   background-color: white; 
   font-size: 13px; 
   height: 30px;
@@ -2139,14 +2181,15 @@ html {
 }
 
 .other-doc-text-input-laptop {
-  border: 1px solid black;
+  border: 1px solid var(--form-input-color);
   font-size: 10px;
   height: 13px;
   width: 170px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  color: var(--form-font-color);
+  background-color: var(--form-input-color);
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 3px;
@@ -2154,14 +2197,15 @@ html {
 }
 
 .other-doc-text-input-desktop {
-  border: 1px solid black;
+  border: 1px solid var(--form-input-color);
   font-size: 12px;
   height: 20px;
   width: 180px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  color: var(--form-font-color);
+  background-color: var(--form-input-color);
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 3px;
@@ -2170,13 +2214,14 @@ html {
 
 .other-doc-file-upload-laptop {
   font-size: 10px;
-  border: 1px solid black;
+  border: 1px solid var(--form-input-color);
   height: 15px;
   width: 180px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--form-input-color);
+  color: var(--form-font-color);
   padding: 4px 5px 5px 5px;
   margin-top: 3px;
   margin-bottom: 5px;
@@ -2184,13 +2229,14 @@ html {
 
 .other-doc-file-upload-desktop {
   font-size: 12px;
-  border: 1px solid black;
+  border: 1px solid var(--form-input-color);
   height: 20px;
   width: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  color: var(--form-font-color);
+  background-color: var(--form-input-color);
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 3px;
