@@ -221,11 +221,11 @@ export async function populateFM30TransducersDeliveryNote(name, ultrasoundNumber
 export async function populateFreseniusKabiRepairRequest(name, hospital, model, serialNumber, faultDescription, errorCode, contactNumber, pickup, rootDirectory) {
     try {
         
-        const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'FKA_Request_Template.pdf'));
-        //const existingPdfBytesTest = fs.readFileSync('C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/templates/FKA_Request_Template.pdf');
+        //const existingPdfBytes = fs.readFileSync(path.join(rootDirectory, 'public','templates', 'FKA_Request_Template.pdf'));
+        const existingPdfBytesTest = fs.readFileSync('C:/Users/60146774/Web Development/Information Centre With Backend/InfocenterWithBackend/public/templates/FKA_Request_Template.pdf');
                 
         // Load a PDFDocument from the existing PDF bytes
-        const pdfDoc = await PDFDocument.load(existingPdfBytes)
+        const pdfDoc = await PDFDocument.load(existingPdfBytesTest)
         
         // Get the first page of the document
         const pages = pdfDoc.getPages()
@@ -236,7 +236,7 @@ export async function populateFreseniusKabiRepairRequest(name, hospital, model, 
         const returnAddress = `ATTN: ${reducedName}, HNE Clinical Technology, Level 1 John Hunter Hospital, Lookout Road, New Lambton Heights, NSW, 2305`
         const date = new Date().toLocaleDateString();
 
-        const pngImageBytes = readTickImage("C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/images/tick.png")
+        const pngImageBytes = readTickImage("C:/Users/60146774/Web Development/Information Centre With Backend/InfocenterWithBackend/public/images/tick.png")
         const tickImage = await pdfDoc.embedPng(pngImageBytes)
 
         // Specify the array of text elements to draw to the form.
@@ -303,8 +303,8 @@ export async function populateFreseniusKabiRepairRequest(name, hospital, model, 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save();
         
-        return pdfBytes;
-        //fs.writeFileSync('C:/Users/officeworks/Documents/Web Development/React Tutorial/technical_information_app/InfocenterWithBackend/public/templates/Request_Test.pdf', pdfBytes); 
+        //return pdfBytes;
+        fs.writeFileSync('C:/Users/60146774/Web Development/Information Centre With Backend/InfocenterWithBackend/public/templates/Request_Test.pdf', pdfBytes); 
         
     } catch (err) {
         console.log(err);
@@ -312,4 +312,4 @@ export async function populateFreseniusKabiRepairRequest(name, hospital, model, 
     }
 }
 
-// populateFreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hopsital", "Volumat", "2N135423", "Air bubble detector fault.", "No Code", "49213144", "TNT", "directory")
+populateFreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hopsital", "Volumat", "2N135423", "Air bubble detector fault.", "No Code", "49213144", "TNT", "directory")

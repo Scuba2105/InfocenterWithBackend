@@ -1200,7 +1200,7 @@ html {
 }
   
 .service {
-    background: linear-gradient(#fd70a3, #fc5190);
+    background: linear-gradient(#fd80ae, #ff73a6);
     border: 1px solid #7e1439;
     color: var(--dark-theme);
 }
@@ -1789,9 +1789,9 @@ html {
   height: 60px;
   margin-bottom: 20px;
   border: 1px solid black;
-  background-color: white;
+  background-color: var(--form-input-color);
   text-decoration: none;
-  color: black;
+  color: var(--form-font-color);
 }
 
 .document-icon {
@@ -2381,8 +2381,8 @@ html {
 .contacts-heading {
   height: 100%;
   width: 90%;
-  color: var(--dark-theme);
-  background: linear-gradient(#FAF2A1, #e2db87);
+  color: white;
+  background-color: var(--med-theme);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2393,8 +2393,8 @@ html {
 }
 
 .contacts-main-display {
-  background-color: white;
-  color: var(--dark-theme);
+  background-color: var(--med-light-theme);
+  color: white;
   height: 100%;
   width: 90%;
   margin: auto auto;
@@ -2410,6 +2410,7 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .contacts-display {
@@ -2441,7 +2442,7 @@ html {
 }
 
 .contacts-select-label {
-  color: #cad2f5;
+  color: var(--form-font-color);
   font-weight: 700;
 }
 
@@ -2449,9 +2450,9 @@ html {
   width: 220px;
   height: 25px;
   text-align: center;
-  background-color: #4d60ad;
-  border: 1px solid #cad2f5;
-  color: #cad2f5;
+  background-color: var(--form-input-color);
+  border: 1px solid var(--form-input-color);
+  color: var(--form-font-color);
   padding-right: 10px;
   transform: translateY(-10px)
 }
