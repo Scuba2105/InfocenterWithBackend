@@ -18,8 +18,11 @@ html {
   --avatar-menu-color: rgb(105, 105, 108);
   --display-background-color: #383F4F;
   --info-container-background-color: rgb(224, 224, 224);
-  --form-font-color: rgb(105, 105, 108);
-  ---form-background-color: rgb(206, 206, 206);
+  --form-font-color: white;
+  ---form-background-color: #4d555c;
+  --form-input-color: rgb(105, 115, 122); 
+  --green-button-color: rgb(3, 252, 156);
+  --green-button-border: 1px solid rgb(3, 168, 105); 
   --gear-desktop-offsetY: 160px;
   --gear-desktop-offsetX: 415px;
 }
@@ -335,7 +338,7 @@ html {
 .menu-selected {
   scale: 1.1;
   cursor: pointer;
-  background: radial-gradient(circle at center,rgb(156, 155, 155), var(--med-theme) 60%);
+  background: radial-gradient(circle at center,rgb(105, 105, 105), var(--med-theme) 60%);
   color: white;
 }
 
@@ -346,7 +349,7 @@ html {
 .menu-option:hover {
   scale: 1.1;
   cursor: pointer;
-  background: radial-gradient(circle at center,rgb(156, 155, 155), var(--med-theme) 60%);
+  background: radial-gradient(circle at center,rgb(105, 105, 105), var(--med-theme) 60%);
   color:white;
 }
 
@@ -727,7 +730,7 @@ html {
   padding: 5px; 
   width: 90px;
   height: 40px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .add-new-btn-desktop {
@@ -737,7 +740,7 @@ html {
   font-size: 14px;
   width: 100px;
   height: 40px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .add-new-btn-laptop:hover, .add-new-btn-desktop:hover {
@@ -1005,8 +1008,8 @@ html {
   justify-content: center;
   align-items: center;
   color: var(--med-light-theme);
-  background-color: rgb(3, 252, 156);
-  border: 1px solid rgb(3, 168, 105);
+  background-color: var(--green-button-color);
+  border: var(--green-button-border);
   border-radius: 5px;
   margin-left: 20px;
   padding: 1px 0 3px 0 ;
@@ -1020,8 +1023,8 @@ html {
   justify-content: center;
   align-items: center;
   color: var(--med-light-theme);
-  background-color: rgb(3, 252, 156);
-  border: 1px solid rgb(3, 168, 105);
+  background-color: var(--green-button-color);
+  border: 1px solid var(--green-button-border);
   border-radius: 5px;
   margin-left: 20px;
   padding: 1px 0 3px 0 ;
@@ -1064,6 +1067,7 @@ html {
   width: 275px;
   height: 25px;
   margin-top: 8px;
+  background-color: transparent;
   color: var(--form-font-color);
 }
 
@@ -1296,8 +1300,8 @@ html {
   justify-content: center;
   align-items: center;
   color: var(--med-light-theme);
-  background-color: rgb(3, 252, 156);
-  border: 1px solid rgb(3, 168, 105);
+  background-color: var(--green-button-color);
+  border: 1px solid var(--green-button-border);
   border-radius: 5px;
   margin-left: 0px;
   padding: 1px 0 3px 0 ;
@@ -1312,13 +1316,13 @@ html {
   justify-content: center;
   align-items: center;
   color: var(--med-light-theme);
-  background-color: rgb(3, 252, 156);
-  border: 1px solid rgb(3, 168, 105);
+  background-color: var(--green-button-color);
+  border: 1px solid var(--green-button-border);
   border-radius: 5px;
   margin-left: 20px;
   padding: 1px 0 3px 0 ;
   font-size: 18px;
-  transform: translateY(2px);
+  transform: translateY(-8px);
   font-weight: 500;
 }
 
@@ -1471,7 +1475,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(var(--dark-theme), var(--med-theme));
+  background-color: var(--med-light-theme);
   color: white;
 }
 
@@ -1564,11 +1568,11 @@ html {
   padding-left: 10px;
   margin-top: 3px;
   transform: translateY(-4px);
-  background-color: white;
+  background-color: var(--form-input-color);
 }
 
 .add-new-input, .new-image-input {
-  border: 1px solid var(--form-font-color);
+  border: 1px solid var(--form-input-color);
   padding: 3px;
   width: 210px;
 }
@@ -1861,13 +1865,14 @@ html {
 .update-button {
   width: 150px;
   height: 30px;
-  border: 1px solid black;
+  border: 1px solid var(--green-button-border);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(var(--med-theme), var(--light-theme));
-  color: white;
+  background-color: var(--green-button-color);
+  color: var(--med-light-theme);
   border-radius: 5px;
+  font-weight: 500;
 }
 
 .update-button:hover {
@@ -1932,6 +1937,8 @@ html {
 
 .hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
   color: var(--form-font-color);
+  background-color: var(--form-input-color);
+  border: none;
 }
 
 .hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
