@@ -5,17 +5,7 @@ import { serverConfig } from "../server";
 export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospitals,  departmentName, departmentsIndex, hospitalsIndex}) {
     
     const [configIndex, setConfigIndex] = useState(0);
-    const [leftArrowHovered, setLeftArrowHovered] = useState(false);
-    const [rightArrowHovered, setRightArrowHovered] = useState(false);
-
-    function toggleLeftArrowHovered() {
-        setLeftArrowHovered(a => !a);
-    }
-
-    function toggleRightArrowHovered() {
-        setRightArrowHovered(a => !a);
-    }
-
+    
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -90,7 +80,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
             })}
             </div>}
                 <div className="config-display-container">
-                    <img className="config-arrow config-left-arrow" onClick={updateIndicator} onMouseOver={toggleLeftArrowHovered} onMouseOut={toggleLeftArrowHovered} src={leftArrowHovered ? `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow-highlight.jpg` : `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <img className="config-arrow config-left-arrow" onClick={updateIndicator} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
                         <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className={mediaQueries.laptop ? "config-link config-link-laptop" : "config-link"}>
                                 <div className="options-info">
@@ -108,7 +98,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
                                 <a href={`http://${serverConfig.host}:${serverConfig.port}${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
                         </div>
                     </div>
-                    <img className="config-arrow config-right-arrow" onClick={updateIndicator} onMouseOver={toggleRightArrowHovered} onMouseOut={toggleRightArrowHovered} src={rightArrowHovered ? `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow-highlight.jpg` : `http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>
+                    <img className="config-arrow config-right-arrow" onClick={updateIndicator} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>
                 </div>
             </>
         );

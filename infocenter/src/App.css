@@ -20,7 +20,8 @@ html {
   --info-container-background-color: #5d6881;
   --form-font-color: white;
   ---form-background-color: #4d555c;
-  --form-input-color: rgb(105, 115, 122); 
+  --form-input-color: #69737a;
+  --grey-font: rgb(183, 190, 195); 
   --green-button-color: rgb(3, 252, 156);
   --green-button-border: 1px solid rgb(3, 168, 105);
   --blue-button-color: #03a9eb; 
@@ -337,7 +338,6 @@ html {
 }
 
 .menu-selected {
-  scale: 1.1;
   cursor: pointer;
   background-color: var(--med-light-theme);
   /*background: radial-gradient(circle at center,rgb(105, 105, 105), var(--med-theme) 60%);*/
@@ -1024,9 +1024,9 @@ html {
 }
 
 .equipment-summary-desktop h4 {
-  border-top: 2px solid#536095;
+  border-top: 2px solid var(--light-theme);
   padding-top: 10px;
-  color:rgb(172, 172, 173);
+  color: var(--grey-font);
   height: 75px;
   font-size: 20px;
 }
@@ -1957,6 +1957,7 @@ html {
   width: 200px;
   text-align: center;
   color: var(--form-font-color);
+  background-color: var(--form-input-color);
 }
 
 .hospital-select-container, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
@@ -2283,7 +2284,7 @@ html {
 }
 
 .active-indicator {
-  background-color: #ff69b4;
+  background-color: var(--green-button-color);
 }
 
 .config-display-container {
@@ -2297,11 +2298,12 @@ html {
 .config-arrow {
   height: 50px;
   width: 50px;
+  opacity: 0.3;
 }
 
 .config-arrow:hover {
-  scale: 1.1;
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .config-right-arrow {

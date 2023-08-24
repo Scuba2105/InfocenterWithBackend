@@ -312,4 +312,4 @@ export async function populateFreseniusKabiRepairRequest(name, hospital, model, 
     }
 }
 
-populateFreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hopsital", "Volumat", "2N135423", "Air bubble detector fault.", "No Code", "49213144", "TNT", "directory")
+//populateFreseniusKabiRepairRequest("Steven Bradbury", "John Hunter Hopsital", "Volumat", "2N135423", "Air bubble detector fault.", "No Code", "49213144", "TNT", "directory")
