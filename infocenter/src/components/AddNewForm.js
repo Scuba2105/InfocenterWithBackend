@@ -186,7 +186,7 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
                     </div>
                     <Input inputType="file" identifier="new-image" labelText="New Device Image" />
                 </div>            
-                <div className="update-button add-new-upload-button" onClick={() => uploadEquipmentFormData(formContainer)}>Upload New Data</div>
+                <div className="update-button add-new-upload-button" onClick={() => uploadEquipmentFormData(formContainer)}>Upload Data</div>
             </div>
         );
     }

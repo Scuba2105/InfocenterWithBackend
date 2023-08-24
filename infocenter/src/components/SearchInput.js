@@ -43,7 +43,7 @@ export function SearchInput({onQueryChange, openAddModal}) {
         <div className="search-box-container">
             <div className={mediaQueries.laptop ? "search-box-laptop" : "search-box-desktop"} style={currentUser.permissions !== "admin" ? searchBoxTransform(mediaQueries.laptop) : null}>
                 <input style={{
-                                color: "white", 
+                                color: "#69737a", 
                                 backgroundColor: "transparent", 
                                 border: 'none',
                                 paddingLeft: "50px"
@@ -53,8 +53,8 @@ export function SearchInput({onQueryChange, openAddModal}) {
                     onChange={onQueryChange}>
                 </input>   
             </div>
-            <SearchIcon color="white" size="25px" searchIconClassName={searchIconClassName}/> 
-            {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop" : "add-new-btn-desktop"} onClick={openAddModal}>+ Add New</button>} 
+            <SearchIcon color="#69737a" size="25px" searchIconClassName={searchIconClassName}/> 
+            {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop" : "add-new-btn-desktop"} onClick={openAddModal}>+</button>} 
         </div>
     );
 }

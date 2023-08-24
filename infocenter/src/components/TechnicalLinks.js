@@ -50,7 +50,7 @@ export function TechnicalLinks({selectedData, page, onLinkClick, queryClient, sh
                     <div className={mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
                             <h2>{selectedData.model}</h2>
-                            {currentUser.permissions === "admin" && <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>Update</div>}
+                            {currentUser.permissions === "admin" && <div className="device-edit-button" onClick={showDeviceUpdate}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
                         </div>
                         <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                     </div>

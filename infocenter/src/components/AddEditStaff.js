@@ -317,7 +317,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />}
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
-            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload New Data</div>
+            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload Data</div>
         </div>
     )
 }
