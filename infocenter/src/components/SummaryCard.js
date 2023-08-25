@@ -83,10 +83,10 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
 
     return (
         <div className={getClassName(page, mediaQueries)}>
-            <div className="summary-card-header">
-                <div id="summary-header-aligner"></div>
+            <div className={(workshops.includes(selectedData.name) || !staffEditPermissions) ? "summary-card-header-center" : "summary-card-header"}>
+                {!workshops.includes(selectedData.name) && staffEditPermissions && <div id="summary-header-aligner"></div>}
                 <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
-                {!workshops.includes(selectedData.name) && staffEditPermissions && page === "staff" && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
+                {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
                 {equipmentEditPermissions && page === "technical-info" && <div className="device-edit-button" onClick={() => showDeviceUpdate(setUpdateFormVisible)}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
             </div>                
             {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
