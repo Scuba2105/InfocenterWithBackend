@@ -10,7 +10,7 @@ function logoutFromApp(logout) {
     logout();
 }
 
-export function Avatar() {
+export function Avatar({showMessage, closeDialog}) {
 
     const [menuVisible, setMenuVisible] = useState(false);
     const currentUser = useUser((state) => state.userCredentials);
@@ -53,7 +53,7 @@ export function Avatar() {
                     </div>
                 </div>}
             </div>
-            {changePasswordVisible && <ChangePassword closeModal={closePasswordModal}></ChangePassword>}
+            {changePasswordVisible && <ChangePassword closeModal={closePasswordModal} showMessage={showMessage} closeDialog={closeDialog}></ChangePassword>}
         </>
         
     )

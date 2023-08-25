@@ -13,23 +13,18 @@ import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { workshops } from "../data";
 
-export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
+// Update the selected entry when changing the hospital select input
+function onDepartmentChange(selectedDepartment, setSelectedDepartment, e) {
+    const newDepartment = e.currentTarget.value;
+    setSelectedDepartment({...selectedDepartment, department: newDepartment});
+}
+
+export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeDialog, showMessage, onRowClick, queryClient}) {
     
     const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     const [utilityPage, setUtilityPage] = useState(0)
     const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
     
-    function closeDialog() {
-        setDialogOpen(false);
-    };
-    
-    function showMessage(dialogType, message) {
-        setDialogMessage({type: dialogType, message: message});
-        setDialogOpen(true);
-    }
-
     function selectUtility(index) {
         setUtilityPage(index);
     }
@@ -43,12 +38,6 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
         const initialDepartment = matchingEntry.department;
         setSelectedDepartment({hospital: newHospital, department: initialDepartment})
     }    
-
-    // Update the selected entry when changing the hospital select input
-    function onDepartmentChange(e) {
-        const newDepartment = e.currentTarget.value;
-        setSelectedDepartment({...selectedDepartment, department: newDepartment});
-    }
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     if (isLoading) {
@@ -91,7 +80,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 page === "contacts" ?
                 <div className="contacts-page-container">
                     <div className="contacts-summary-container">
-                        <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange}></ContactsSummary>
+                        <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={(e) => onDepartmentChange(selectedDepartment, setSelectedDepartment, e)}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </div> :

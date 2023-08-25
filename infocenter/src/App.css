@@ -491,7 +491,8 @@ html {
   grid-template-rows: 65px 1fr;
   padding: 0px;
   border: 1px solid black;
-  background-color: white;
+  color: var(--form-font-color);
+  background-color: var(---form-background-color);
 }
 
 #dialog-box-error-request {
@@ -501,14 +502,14 @@ html {
   grid-template-rows: 65px 1fr;
   padding: 0px;
   border: 1px solid black;
-  background-color: white;
+  background-color: var(---form-background-color);
 }
 
 #uploading-dialog {
   width: 320px;
   height: 140px;
   display: flex;
-  background-color: white;
+  background-color: var(---form-background-color);
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -523,6 +524,13 @@ html {
   margin-left: 20px;
 }
 
+#closeBtn {
+  background-color: var(--form-input-color);
+  color: var(--form-font-color);
+  border: 1px solid black;
+  cursor: pointer;
+}
+
 .upload-body {
   width: 100%;
   height: 60px;
@@ -530,6 +538,10 @@ html {
   justify-content: center;
   align-items: center;
   transform: translateY(-20px)
+}
+
+#uploading-dialog {
+  color: var(--form-font-color);
 }
 
 .upload-body > p {
