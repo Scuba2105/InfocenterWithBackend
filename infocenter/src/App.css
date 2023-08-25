@@ -724,6 +724,7 @@ html {
   font-size: 30px;
   width: 40px;
   height: 40px;
+  padding: 0;
 }
 
 .add-new-btn-desktop {
@@ -733,6 +734,7 @@ html {
   font-size: 30px;
   width: 40px;
   height: 40px;
+  padding: 0;
 }
 
 .add-new-btn-laptop:hover, .add-new-btn-desktop:hover {
