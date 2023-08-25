@@ -41,7 +41,7 @@ function generateHospitalLabel(name) {
     }
 }
 
-export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, showMessage, closeDialog}) {
+export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -103,7 +103,7 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
                 showMessage("info", 'Resources have been successfully updated!');
                 setTimeout(() => {
                     closeDialog();
-                    closeUpdate();
+                    closeUpdate(setUpdateFormVisible);
                 }, 1600);
             }
         }
@@ -304,7 +304,7 @@ export function DeviceUpdateForm({selectedData, page, closeUpdate, queryClient, 
     }
     
     return (
-        <ModalSkeleton selectedData={selectedData} closeModal={closeUpdate} type="update" page={page}>
+        <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
             <div className="update-form-display">
                 <div className="update-options">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={updateSelectedOption}>

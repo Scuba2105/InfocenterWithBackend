@@ -1,4 +1,3 @@
-import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react" ;
 import { workshops } from "../data";
 import { serverConfig } from "../server";
@@ -26,10 +25,13 @@ function emailFontSize(name, laptop) {
     }
 } 
 
-export function StaffDetails({selectedData, openAddUpdateForm}) {
-    
-    // Get user state from Zustand state
-    const currentUser = useUser((state) => state.userCredentials);
+function getTextColor(team) {
+    const colorString = teamColors[team].background.split(' rgb')[1];
+    const rgb = colorString.substring(0, colorString.length - 1)
+    return `rgb${rgb}`;
+}
+
+export function StaffDetails({selectedData}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -38,14 +40,6 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
 
     const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
 
-    function getTextColor(team) {
-        const colorString = teamColors[team].background.split(' rgb')[1];
-        const rgb = colorString.substring(0, colorString.length - 1)
-        return `rgb${rgb}`;
-    }
-
-    const editPermissions = (currentUser.permissions === "admin" || currentUser.user === selectedData.name)
-    
     return (
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
@@ -57,7 +51,6 @@ export function StaffDetails({selectedData, openAddUpdateForm}) {
                 <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
                     <div className="name-update-container">
                         <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && editPermissions && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={openAddUpdateForm}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
                     </div>
                     {!workshops.includes(selectedData.name) && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><img id="email-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/email.svg`} alt="email"></img></a>}
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>

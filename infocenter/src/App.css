@@ -892,28 +892,21 @@ html {
   height: 92%;
 }
 
-.display-area-laptop > h2 { 
-  font-size: 24px;
+.summary-card-header { 
+  font-size: 22px;
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--med-theme);
   color: white;
 }
 
-.display-area-desktop > h2 {
-  width: 100%;
-  margin: 0 auto 0 auto;
-  grid-row: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  background-color: var(--med-theme);
-  color: white;
+#summary-header-aligner {
+  height: 40px;
+  width: 40px;
 }
 
 .summary-area-laptop {
@@ -1017,19 +1010,7 @@ html {
   background-color: var(--green-button-color);
   border: var(--green-button-border);
   border-radius: 50%;
-  transform: translate(170px, -100px);
-}
-
-.equipment-summary-desktop .device-edit-button {
-  transform: translate(330px, -157px);
-}
-
-.staff-edit-btn-laptop {
-  transform: translate(120px, -110px);
-}
-
-.staff-edit-btn-desktop  {
-  transform: translate(242px, -180px);
+  transform: translateX(-15px);
 }
 
 .staff-edit-btn-laptop:hover, .staff-edit-btn-desktop:hover, .device-edit-button:hover {
