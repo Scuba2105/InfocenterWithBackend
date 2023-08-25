@@ -89,7 +89,7 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
                 {!workshops.includes(selectedData.name) && staffEditPermissions && page === "staff" && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
                 {equipmentEditPermissions && page === "technical-info" && <div className="device-edit-button" onClick={() => showDeviceUpdate(setUpdateFormVisible)}><img id="edit-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img></div>}
             </div>                
-            {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} />}                    
+            {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
             {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
             {addUpdateFormVisible && page === 'staff' && 
                 <ModalSkeleton selectedData={selectedData} closeModal={() => closeAddUpdateForm(setAddUpdateFormVisible)} type="update" page={page}>

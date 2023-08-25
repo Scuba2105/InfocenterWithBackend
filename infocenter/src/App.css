@@ -1387,7 +1387,6 @@ html {
 }
 
 .email-link {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1395,17 +1394,8 @@ html {
   width: 40px;
   border-radius: 50%;
   background-color: yellow;
-  color: var(--light-theme)
-}
-
-.staff-name-laptop .email-link {
-  left: 180px;
-  top: 30px;
-}
-
-.staff-name-desktop .email-link {
-  left: 280px;
-  top: 54px;
+  color: var(--light-theme);
+  transform: translate(30px, -7px);
 }
 
 /* link modal formatting */

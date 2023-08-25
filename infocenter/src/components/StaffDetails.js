@@ -31,7 +31,7 @@ function getTextColor(team) {
     return `rgb${rgb}`;
 }
 
-export function StaffDetails({selectedData}) {
+export function StaffDetails({selectedData, user}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -51,8 +51,8 @@ export function StaffDetails({selectedData}) {
                 <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
                     <div className="name-update-container">
                         <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><img id="email-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/email.svg`} alt="email"></img></a>}
                     </div>
-                    {!workshops.includes(selectedData.name) && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><img id="email-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/email.svg`} alt="email"></img></a>}
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
             </div>            
