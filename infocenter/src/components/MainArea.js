@@ -1,7 +1,6 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
 import { ContactsSummary } from "./ContactsSummary";
-import { ContactsFilter } from "./ContactsFilter";
 import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
 import { LoadingPage } from "./LoadingPage";
@@ -92,7 +91,6 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 page === "contacts" ?
                 <div className="contacts-page-container">
                     <div className="contacts-summary-container">
-                        <ContactsFilter selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} ></ContactsFilter>
                         <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />

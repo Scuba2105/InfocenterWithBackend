@@ -2365,18 +2365,19 @@ html {
 }
 
 .contacts-filter-container {
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .contacts-select-container {
-  margin-right: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  grid: 1;
+  width: 350px;
 }
 
 .contacts-select-label {
@@ -2385,8 +2386,8 @@ html {
 }
 
 .contacts-select {
-  width: 220px;
-  height: 25px;
+  width: 320px;
+  height: 40px;
   text-align: center;
   background-color: var(--form-input-color);
   border: 1px solid var(--form-input-color);
