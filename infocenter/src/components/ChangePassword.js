@@ -3,8 +3,8 @@ import { Input } from "./Input";
 import { useState } from "react";
 
 const passwordStrengths = ["Undefined", "Very Bad", "Bad", "Average", "Good", "Very Good"];
-const passwordStrengthBar = {"Undefined": [0, "red"], "Very Bad": [67, "red"], "Bad": [134, "red"], 
-                            "Average": [201, "orange"], "Good": [268, "yellow"], "Very Good": [335, "green"]};
+const passwordStrengthBar = {"Undefined": [0, "red"], "Very Bad": [67, "rgb(252, 82, 82)"], "Bad": [134, "rgb(252, 82, 82)"], 
+                            "Average": [201, "orange"], "Good": [268, "yellow"], "Very Good": [335, "rgb(3, 252, 156)"]};
 
 function checkPasswordStrength(setPasswordStrength, setNewPassword, e) {
     const currentValue = e.currentTarget.value;
@@ -59,7 +59,7 @@ export function ChangePassword({closeModal}) {
                         <label>{`Password Strength: ${passwordStrengths[passwordStrength]}`}</label>
                         <div className="strength-indicator" style={{width: strengthBarWidth + 'px', backgroundColor: strengthBarColor}}></div>
                     </div>}
-                    {passwordMatch !== null && <p id="password-match" style={passwordMatch ? {color: 'green'} : {color: 'red'}}>{passwordMatch === true ? "Passwords Match!" : "Passwords Do Not Match!"}</p>}
+                    {passwordMatch !== null && <p id="password-match" style={passwordMatch ? {color: 'rgb(3, 252, 156)'} : {color: 'rgb(252, 82, 82)'}}>{passwordMatch === true ? "Passwords Match!" : "Passwords Do Not Match!"}</p>}
                 </div>                                            
                 <button id="submit-password-change" className="update-button">Submit</button>
             </div>

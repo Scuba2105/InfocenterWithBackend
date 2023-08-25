@@ -1,6 +1,7 @@
 import useMediaQueries from "media-queries-in-react" ;
 import { workshops } from "../data";
 import { serverConfig } from "../server";
+import { EmailIcon } from "../svg";
 
 const teamColors = {Management: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
 border: '1px solid rgb(137, 44, 44)', color: 'rgb(137, 44, 44)'}, JHH: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
@@ -51,7 +52,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
                     <div className="name-update-container">
                         <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><img id="email-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/email.svg`} alt="email"></img></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><EmailIcon color="#383F4F"></EmailIcon></a>}
                     </div>
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

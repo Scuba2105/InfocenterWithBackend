@@ -717,19 +717,10 @@ html {
   transform: translateX(-620px);
 }
 
-.add-new-btn-laptop {
+.add-new-btn-laptop, .add-new-btn-desktop {
   background-color: var(--blue-button-color);
   border: 1px solid var(--med-light-theme);
-  border-radius: 50%;
-  font-size: 30px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-}
-
-.add-new-btn-desktop {
-  background-color: var(--blue-button-color);
-  border: 1px solid var(--dark-theme);
+  color: #383F4F;
   border-radius: 50%;
   font-size: 30px;
   width: 40px;
@@ -1408,7 +1399,6 @@ html {
   width: 40px;
   border-radius: 50%;
   background-color: yellow;
-  color: var(--light-theme);
   transform: translate(30px, -7px);
 }
 
@@ -2393,7 +2383,7 @@ html {
   border: 1px solid var(--form-input-color);
   color: var(--form-font-color);
   padding-right: 10px;
-  transform: translateY(-10px)
+  transform: translateY(-10px);
 }
 
 .department-title {
