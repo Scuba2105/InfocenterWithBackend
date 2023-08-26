@@ -93,7 +93,7 @@ export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeD
                         <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>
                 </> :
-                    <h1>Page has not been implemented yet</h1>}
+                    <h1 style={{color: 'white', width: 600 + 'px', margin: 'auto auto'}}>Page has not been implemented yet</h1>}
             </div>
         );
     }

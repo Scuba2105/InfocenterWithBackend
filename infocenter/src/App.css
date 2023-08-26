@@ -12,7 +12,7 @@ html {
   --row-hover: #62709b;
   --dark-theme: #121826;
   --med-theme: #212936;
-  --med-light-theme: #383F4F;
+  --med-light-theme: rgba(56,63,79,1.0);
   --light-theme: #4e6089; 
   --icon-theme: #212936;
   --avatar-menu-color: var(--form-input-color);
@@ -365,8 +365,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(../public/error-background.png);
-  background-size: cover;
+  background-color: var(--med-theme);
 }
 
 .error-description-laptop {
@@ -898,7 +897,7 @@ html {
 }
 
 .summary-card-header { 
-  font-size: 22px;
+  font-size: 16px;
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
@@ -910,7 +909,7 @@ html {
 }
 
 .summary-card-header-center { 
-  font-size: 22px;
+  font-size: 16px;
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
