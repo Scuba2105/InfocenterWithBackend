@@ -2,6 +2,7 @@ import { ModalSkeleton } from "./ModalSkeleton"
 import { Input } from "./Input";
 import { useState } from "react";
 import { useUser } from "./StateStore";
+import { serverConfig } from "../server";
 
 const passwordStrengths = ["Undefined", "Very Bad", "Bad", "Average", "Good", "Very Good"];
 const passwordStrengthBar = {"Undefined": [0, "red"], "Very Bad": [67, "rgb(252, 82, 82)"], "Bad": [134, "rgb(252, 82, 82)"], 
@@ -44,13 +45,17 @@ function checkPasswordsMatch(newPassword, setPasswordMatch, e) {
     }
 }
 
-async function submitNewPassword(staffId, currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog) {
+async function submitNewPassword(staffId, currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog, closeModal) {
     if (passwordStrengths[passwordStrength] !== "Very Good") {
-        showMessage("error", "New password is not of sufficient strength. It must be at least 8 characters, and have at least 1 each of lower case and upper case letter, a number and a special character");
+        showMessage("warning", "New password is not of sufficient strength. It must be at least 8 characters, and have at least 1 each of a lower case and upper case letter, a number and a special character");
         return
     }
     if (!passwordMatch) {
-        showMessage("error", "The entered passwords do not match. Please make sure the passwords match before submitting.")
+        showMessage("warning", "The entered passwords do not match. Please make sure the passwords match before submitting.")
+        return
+    }
+    if (currentPassword === newPassword) {
+        showMessage("warning", "The new password cannot be the same as your current password");
         return
     }
 
@@ -58,7 +63,32 @@ async function submitNewPassword(staffId, currentPassword, newPassword, password
     showMessage("uploading", `Storing New Password`); 
     
     const passwordData = JSON.stringify({staffId: staffId, currentPassword: currentPassword, newPassword: newPassword})
-    console.log(passwordData);
+    
+    // Post the form data to the server. 
+    const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/ChangePassword`, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer",
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        body: passwordData
+    })
+
+    // Parse the json response.
+    const data = await res.json();
+    
+    if (data.type === "Error") {
+        showMessage("error", data.message);
+    }
+    else {
+        showMessage("info", "Password has been successfully changed");
+        setTimeout(() => {
+            closeDialog();
+            closeModal();
+        }, 1600);
+    }
 }
 
 export function ChangePassword({closeModal, showMessage, closeDialog}) {
@@ -87,7 +117,7 @@ export function ChangePassword({closeModal, showMessage, closeDialog}) {
                         </div>}
                         {passwordMatch !== null && <p id="password-match" style={passwordMatch ? {color: 'rgb(3, 252, 156)'} : {color: 'rgb(252, 82, 82)'}}>{passwordMatch === true ? "Passwords Match!" : "Passwords Do Not Match!"}</p>}
                     </div>                                            
-                    <button id="submit-password-change" className="update-button" onClick={() => submitNewPassword(currentUser.staffId ,currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog)}>Submit</button>
+                    <button id="submit-password-change" className="update-button" onClick={() => submitNewPassword(currentUser.staffId ,currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog, closeModal)}>Submit</button>
                 </div>
             </ModalSkeleton>
         </>

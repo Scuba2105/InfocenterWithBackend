@@ -30,7 +30,7 @@ export function Login() {
         const sessionData = sessionStorage.getItem("currentInfoCentreSession");
         if (sessionData) {
             const currentSession = JSON.parse(sessionData);
-            setUser(currentSession.name, currentSession.permissions);
+            setUser(currentSession.name, currentSession.staffId, currentSession.permissions);
             login();
         }
     }, [])
