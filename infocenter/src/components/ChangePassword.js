@@ -1,6 +1,7 @@
 import { ModalSkeleton } from "./ModalSkeleton"
 import { Input } from "./Input";
 import { useState } from "react";
+import { useUser } from "./StateStore";
 
 const passwordStrengths = ["Undefined", "Very Bad", "Bad", "Average", "Good", "Very Good"];
 const passwordStrengthBar = {"Undefined": [0, "red"], "Very Bad": [67, "rgb(252, 82, 82)"], "Bad": [134, "rgb(252, 82, 82)"], 
@@ -43,7 +44,7 @@ function checkPasswordsMatch(newPassword, setPasswordMatch, e) {
     }
 }
 
-async function submitNewPassword(currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog) {
+async function submitNewPassword(staffId, currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog) {
     if (passwordStrengths[passwordStrength] !== "Very Good") {
         showMessage("error", "New password is not of sufficient strength. It must be at least 8 characters, and have at least 1 each of lower case and upper case letter, a number and a special character");
         return
@@ -54,11 +55,17 @@ async function submitNewPassword(currentPassword, newPassword, passwordStrength,
     }
 
     // Start uploading new password
-    showMessage("uploading", `Storing New Password`);    
+    showMessage("uploading", `Storing New Password`); 
+    
+    const passwordData = JSON.stringify({staffId: staffId, currentPassword: currentPassword, newPassword: newPassword})
+    console.log(passwordData);
 }
 
 export function ChangePassword({closeModal, showMessage, closeDialog}) {
     
+    // Get user state from Zustand state
+    const currentUser = useUser((state) => state.userCredentials);
+
     const [passwordStrength, setPasswordStrength] = useState(0);
     const [newPassword, setNewPassword] = useState(null);
     const [currentPassword, setCurrentPassword] = useState(null);
@@ -80,7 +87,7 @@ export function ChangePassword({closeModal, showMessage, closeDialog}) {
                         </div>}
                         {passwordMatch !== null && <p id="password-match" style={passwordMatch ? {color: 'rgb(3, 252, 156)'} : {color: 'rgb(252, 82, 82)'}}>{passwordMatch === true ? "Passwords Match!" : "Passwords Do Not Match!"}</p>}
                     </div>                                            
-                    <button id="submit-password-change" className="update-button" onClick={() => submitNewPassword(currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog)}>Submit</button>
+                    <button id="submit-password-change" className="update-button" onClick={() => submitNewPassword(currentUser.staffId ,currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog)}>Submit</button>
                 </div>
             </ModalSkeleton>
         </>

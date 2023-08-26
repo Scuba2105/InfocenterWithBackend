@@ -54,13 +54,13 @@ export async function validateLoginCredentials(req, res, __dirname) {
         }
 
         // Extract the values from the object
-        const {Email, FullName, Password, AccessPermissions} = data[0];
+        const {Email, FullName, Password, AccessPermissions, StaffId} = data[0];
         
         // Compare the submitted password and hashed password and determine if they match
         const passwordResult = await bcrypt.compare(submittedPassword, Password);
         
         if (passwordResult === true) {
-            const appPermissions = {name: FullName, accessPermissions: AccessPermissions};
+            const appPermissions = {name: FullName, staffId: StaffId, accessPermissions: AccessPermissions};
             res.json({type: "Success", credentials: appPermissions});
         }
         else {

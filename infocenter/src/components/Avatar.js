@@ -15,7 +15,7 @@ export function Avatar({showMessage, closeDialog}) {
     const [menuVisible, setMenuVisible] = useState(false);
     const currentUser = useUser((state) => state.userCredentials);
     const [changePasswordVisible, setChangePasswordVisible] = useState(false);
-
+    //console.log(currentUser)
     // Get the logout function from the state store
     const logout = useLoggedIn((state) => state.logout);
 
