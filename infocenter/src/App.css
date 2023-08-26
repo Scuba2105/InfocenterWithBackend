@@ -1228,9 +1228,9 @@ html {
 
 .staff-heading-desktop {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  transform: translateY(70px);
+  transform: translate(30px, 70px);
 }
 
 .staff-logo-laptop {
@@ -1263,15 +1263,14 @@ html {
 }
 
 .logo-desktop {
-  height: 190px;
-  width: 190px;
+  height: 200px;
+  width: 200px;
   border: 1px solid rgb(137, 44, 44);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
-  transform: translateX(50px)
 }
 
 #blank-picture-laptop, #blank-picture-desktop {
@@ -1279,10 +1278,12 @@ html {
   border-radius: 50%;
 }
 
+
+
 .staff-name-laptop {
   width: 65%;
   height: 100%;
-  transform: translateY(20px);
+  transform: translateY(25px);
   color: white;
 }
 
@@ -1300,28 +1301,32 @@ html {
 }
 
 .name-text-laptop {
-  font-size: 27px;
-  border-bottom: 2px solid var(--light-theme);
+  font-size: 23px;
   padding-bottom: 10px;
 }
 
 .name-text-desktop {
   font-size: 43px;
-  border-bottom: 2px solid var(--light-theme);
-  padding-bottom: 20px;
 }
 
 .position-laptop {
+  width: 90%;
   font-weight: bold;
   transform: translateY(-30px);
   color: var(--grey-font);
+  border-top: 2px solid var(--light-theme);
+  padding-top: 10px;
+  font-size: 12px;
 }
 
 .position-desktop {
+  width: 90%;
   font-weight: bold;
   transform: translateY(-40px);
   font-size: 21px;
   color: var(--grey-font);
+  border-top: 2px solid var(--light-theme);
+  padding-top: 20px;
 }
 
 .phone-image-laptop {
@@ -1417,6 +1422,10 @@ html {
   border-radius: 50%;
   background-color: yellow;
   transform: translate(30px, -7px);
+}
+
+.staff-name-desktop .email-link {
+  transform: translate(30px, 4px);
 }
 
 /* link modal formatting */
