@@ -2383,7 +2383,7 @@ html {
 .contacts-filter-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -2393,7 +2393,6 @@ html {
   justify-content: center;
   align-items: center;
   grid: 1;
-  width: 350px;
 }
 
 .contacts-select-label {
@@ -2401,15 +2400,20 @@ html {
   font-weight: 700;
 }
 
-.contacts-select {
-  width: 320px;
-  height: 40px;
+.contacts-main-display-laptop .contacts-select, .contacts-main-display-desktop .contacts-select {
+  width: 220px;
+  height: 28px;
   text-align: center;
   background-color: var(--form-input-color);
   border: 1px solid var(--form-input-color);
   color: var(--form-font-color);
   padding-right: 10px;
   transform: translateY(-10px);
+}
+
+.contacts-main-display-desktop .contacts-select {
+  width: 350px;
+  height: 40px;
 }
 
 .department-title {
