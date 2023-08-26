@@ -15,7 +15,8 @@ html {
   --med-light-theme: rgba(56,63,79,1.0);
   --light-theme: #4e6089; 
   --icon-theme: #212936;
-  --avatar-menu-color: var(--form-input-color);
+  --profile-pic-background-color: #DEE5E7;
+  --avatar-menu-color: #5d6e71;
   --display-background-color: #383F4F;
   --info-container-background-color: #5d6881;
   --form-font-color: white;
@@ -196,8 +197,8 @@ html {
 }
 
 #avatar-image {
-  height: 25px;
-  width: 25x;
+  background-color: var(--profile-pic-background-color);
+  padding: 5px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -365,7 +366,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--med-theme);
+  background-color: var(--dark-theme);
 }
 
 .error-description-laptop {
@@ -391,12 +392,12 @@ html {
 .error-503 {
   font-weight: bold;
   font-size: 40px;
-  color: var(--light-theme);
+  color: var(--form-font-color);
 }
 
 .message1-503, .message2-503 {
   font-size: 22px;
-  color: var(--light-theme);
+  color: var(--form-font-color);
 }
 
 #gear1-laptop {
@@ -1271,6 +1272,11 @@ html {
   align-items: center;
   background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
   transform: translateX(50px)
+}
+
+#blank-picture-laptop, #blank-picture-desktop {
+  background-color: var(--profile-pic-background-color);
+  border-radius: 50%;
 }
 
 .staff-name-laptop {
