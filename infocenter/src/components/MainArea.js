@@ -13,12 +13,6 @@ import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { workshops } from "../data";
 
-// Update the selected entry when changing the hospital select input
-function onDepartmentChange(selectedDepartment, setSelectedDepartment, e) {
-    const newDepartment = e.currentTarget.value;
-    setSelectedDepartment({...selectedDepartment, department: newDepartment});
-}
-
 export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeDialog, showMessage, onRowClick, queryClient}) {
     
     const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
@@ -30,13 +24,21 @@ export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeD
     }
 
     // Update the selected entry when changing the hospital select input
-    function onHospitalChange(pageData, e) {
+    function onDepartmentChange(setContactPage, e) {
+        const newDepartment = e.currentTarget.value;
+        setSelectedDepartment({...selectedDepartment, department: newDepartment});
+        setContactPage(0);
+    }
+
+    // Update the selected entry when changing the hospital select input
+    function onHospitalChange(pageData, setContactPage, e) {
         const newHospital = e.currentTarget.value;
         const matchingEntry = pageData.find((entry) => {
             return entry.hospital === newHospital
         })        
         const initialDepartment = matchingEntry.department;
-        setSelectedDepartment({hospital: newHospital, department: initialDepartment})
+        setSelectedDepartment({hospital: newHospital, department: initialDepartment});
+        setContactPage(0);
     }    
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
@@ -80,7 +82,7 @@ export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeD
                 page === "contacts" ?
                 <div className="contacts-page-container">
                     <div className="contacts-summary-container">
-                        <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={(e) => onDepartmentChange(selectedDepartment, setSelectedDepartment, e)}></ContactsSummary>
+                        <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </div> :
