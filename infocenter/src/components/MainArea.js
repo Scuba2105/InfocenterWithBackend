@@ -13,42 +13,45 @@ import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { workshops } from "../data";
 
-export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
+export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeDialog, showMessage, onRowClick, queryClient}) {
     
     const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     const [utilityPage, setUtilityPage] = useState(0)
     const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
-    
-    function closeDialog() {
-        setDialogOpen(false);
-    };
-    
-    function showMessage(dialogType, message) {
-        setDialogMessage({type: dialogType, message: message});
-        setDialogOpen(true);
-    }
+    const [vendor, setVendor] = useState("Philips Healthcare");
 
     function selectUtility(index) {
         setUtilityPage(index);
     }
 
+    // Update the selected entry when changing the department select input
+    function onVendorChange(setVendorContactPage, e) {
+        const newVendor = e.currentTarget.value;
+        setVendor(newVendor);
+        setVendorContactPage(0);
+    }
+
+    // Update the selected entry when changing the department select input
+    function onDepartmentChange(setContactPage, e) {
+        const newDepartment = e.currentTarget.value;
+        setSelectedDepartment({...selectedDepartment, department: newDepartment});
+        setContactPage(0);
+    }
+
     // Update the selected entry when changing the hospital select input
-    function onHospitalChange(pageData, e) {
+    function onHospitalChange(pageData, setContactPage, inputsContainer, e) {
         const newHospital = e.currentTarget.value;
         const matchingEntry = pageData.find((entry) => {
             return entry.hospital === newHospital
-        })        
+        })   
+        // Get the department select element
+        const departmentSelectElement = inputsContainer.current.querySelectorAll("select")[1];     
         const initialDepartment = matchingEntry.department;
-        setSelectedDepartment({hospital: newHospital, department: initialDepartment})
+        departmentSelectElement.value = initialDepartment;
+        setSelectedDepartment({hospital: newHospital, department: initialDepartment});
+        
+        setContactPage(0);
     }    
-
-    // Update the selected entry when changing the hospital select input
-    function onDepartmentChange(e) {
-        const newDepartment = e.currentTarget.value;
-        setSelectedDepartment({...selectedDepartment, department: newDepartment});
-    }
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     if (isLoading) {
@@ -91,7 +94,10 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                 page === "contacts" ?
                 <div className="contacts-page-container">
                     <div className="contacts-summary-container">
-                        <ContactsSummary selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange}></ContactsSummary>
+                        <ContactsSummary identifier="staff" selectedDepartment={selectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange}></ContactsSummary>
+                    </div>
+                    <div className="contacts-summary-container">
+                        <ContactsSummary identifier="vendor" selectedVendor={vendor} pageData={data.vendorContactsData} onVendorChange={onVendorChange}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </div> :
@@ -104,7 +110,7 @@ export function MainArea({page, selectedEntry, onRowClick, queryClient}) {
                         <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>
                 </> :
-                    <h1>Page has not been implemented yet</h1>}
+                    <h1 style={{color: 'white', width: 600 + 'px', margin: 'auto auto'}}>Page has not been implemented yet</h1>}
             </div>
         );
     }

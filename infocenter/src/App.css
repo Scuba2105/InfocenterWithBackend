@@ -12,14 +12,15 @@ html {
   --row-hover: #62709b;
   --dark-theme: #121826;
   --med-theme: #212936;
-  --med-light-theme: #383F4F;
+  --med-light-theme: rgba(56,63,79,1.0);
   --light-theme: #4e6089; 
   --icon-theme: #212936;
-  --avatar-menu-color: var(--form-input-color);
+  --profile-pic-background-color: #DEE5E7;
+  --avatar-menu-color: #5d6e71;
   --display-background-color: #383F4F;
   --info-container-background-color: #5d6881;
   --form-font-color: white;
-  ---form-background-color: #4d555c;
+  --form-background-color: #4d555c;
   --form-input-color: #69737a;
   --grey-font: rgb(183, 190, 195); 
   --green-button-color: rgb(3, 252, 156);
@@ -196,8 +197,8 @@ html {
 }
 
 #avatar-image {
-  height: 25px;
-  width: 25x;
+  background-color: var(--profile-pic-background-color);
+  padding: 5px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -264,7 +265,7 @@ html {
 .change-password-form {
   height: 100%;
   width: 100%;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -365,8 +366,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(../public/error-background.png);
-  background-size: cover;
+  background-color: var(--dark-theme);
 }
 
 .error-description-laptop {
@@ -392,12 +392,12 @@ html {
 .error-503 {
   font-weight: bold;
   font-size: 40px;
-  color: var(--light-theme);
+  color: var(--form-font-color);
 }
 
 .message1-503, .message2-503 {
   font-size: 22px;
-  color: var(--light-theme);
+  color: var(--form-font-color);
 }
 
 #gear1-laptop {
@@ -491,7 +491,8 @@ html {
   grid-template-rows: 65px 1fr;
   padding: 0px;
   border: 1px solid black;
-  background-color: white;
+  color: var(--form-font-color);
+  background-color: var(--form-background-color);
 }
 
 #dialog-box-error-request {
@@ -501,14 +502,14 @@ html {
   grid-template-rows: 65px 1fr;
   padding: 0px;
   border: 1px solid black;
-  background-color: white;
+  background-color: var(---form-background-color);
 }
 
 #uploading-dialog {
   width: 320px;
   height: 140px;
   display: flex;
-  background-color: white;
+  background-color: var(--form-background-color);
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -523,6 +524,13 @@ html {
   margin-left: 20px;
 }
 
+#closeBtn {
+  background-color: var(--form-input-color);
+  color: var(--form-font-color);
+  border: 1px solid black;
+  cursor: pointer;
+}
+
 .upload-body {
   width: 100%;
   height: 60px;
@@ -530,6 +538,10 @@ html {
   justify-content: center;
   align-items: center;
   transform: translateY(-20px)
+}
+
+#uploading-dialog {
+  color: var(--form-font-color);
 }
 
 .upload-body > p {
@@ -886,7 +898,7 @@ html {
 }
 
 .summary-card-header { 
-  font-size: 22px;
+  font-size: 16px;
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
@@ -898,7 +910,7 @@ html {
 }
 
 .summary-card-header-center { 
-  font-size: 22px;
+  font-size: 16px;
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
@@ -1216,9 +1228,9 @@ html {
 
 .staff-heading-desktop {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  transform: translateY(70px);
+  transform: translate(30px, 70px);
 }
 
 .staff-logo-laptop {
@@ -1251,21 +1263,27 @@ html {
 }
 
 .logo-desktop {
-  height: 190px;
-  width: 190px;
+  height: 200px;
+  width: 200px;
   border: 1px solid rgb(137, 44, 44);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
-  transform: translateX(50px)
 }
+
+#blank-picture-laptop, #blank-picture-desktop {
+  background-color: var(--profile-pic-background-color);
+  border-radius: 50%;
+}
+
+
 
 .staff-name-laptop {
   width: 65%;
   height: 100%;
-  transform: translateY(20px);
+  transform: translateY(25px);
   color: white;
 }
 
@@ -1283,8 +1301,7 @@ html {
 }
 
 .name-text-laptop {
-  font-size: 27px;
-  border-bottom: 2px solid var(--light-theme);
+  font-size: 23px;
   padding-bottom: 10px;
 }
 
@@ -1295,16 +1312,23 @@ html {
 }
 
 .position-laptop {
+  width: 90%;
   font-weight: bold;
   transform: translateY(-30px);
   color: var(--grey-font);
+  border-top: 2px solid var(--light-theme);
+  padding-top: 10px;
+  font-size: 12px;
 }
 
 .position-desktop {
+  width: 90%;
   font-weight: bold;
   transform: translateY(-40px);
   font-size: 21px;
   color: var(--grey-font);
+  border-top: 2px solid var(--light-theme);
+  padding-top: 20px;
 }
 
 .phone-image-laptop {
@@ -1402,6 +1426,10 @@ html {
   transform: translate(30px, -7px);
 }
 
+.staff-name-desktop .email-link {
+  transform: translate(30px, 4px);
+}
+
 /* link modal formatting */
 .modal-container-laptop {
   position: absolute;
@@ -1465,7 +1493,7 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
 }
 
 .password-display {
@@ -1474,7 +1502,7 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   overflow-y: auto;
 }
 
@@ -1740,7 +1768,7 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 1fr;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   color: rgb(104, 104, 108);
 }
 
@@ -2288,14 +2316,15 @@ html {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
 }
 
 .contacts-summary-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .hospital-contacts-container {
@@ -2303,7 +2332,7 @@ html {
   width: 100%;
   display: grid;
   grid-template-rows: 80px 1fr;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .contacts-heading {
@@ -2316,8 +2345,6 @@ html {
   align-items: center;
   margin: auto auto;
   border: 1px solid black;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .contacts-main-display {
@@ -2327,10 +2354,8 @@ html {
   width: 90%;
   margin: auto auto;
   border: 1px solid black;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 100px 1fr 50px;
 }
 
 .contact-location-summary {
@@ -2342,6 +2367,7 @@ html {
 }
 
 .contacts-display {
+  grid: 1 / 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -2357,7 +2383,7 @@ html {
 .contacts-filter-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -2367,7 +2393,6 @@ html {
   justify-content: center;
   align-items: center;
   grid: 1;
-  width: 350px;
 }
 
 .contacts-select-label {
@@ -2375,15 +2400,20 @@ html {
   font-weight: 700;
 }
 
-.contacts-select {
-  width: 320px;
-  height: 40px;
+.contacts-main-display-laptop .contacts-select, .contacts-main-display-desktop .contacts-select {
+  width: 220px;
+  height: 28px;
   text-align: center;
   background-color: var(--form-input-color);
   border: 1px solid var(--form-input-color);
   color: var(--form-font-color);
   padding-right: 10px;
   transform: translateY(-10px);
+}
+
+.contacts-main-display-desktop .contacts-select {
+  width: 350px;
+  height: 40px;
 }
 
 .department-title {
@@ -2395,10 +2425,67 @@ html {
   width: 200px;
   border: 1px solid black;
   border-radius: 10px;
-  display: flex; 
+  display: grid; 
+  grid-template-rows: 30% 1fr;
+  overflow: hidden;
+}
+
+.contact-card-header {
+  grid: 1 / 1;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#contact-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+#contact-position, #contact-hospital, #contact-department {
+  font-size: 12px;
+}
+
+.contact-numbers-container {
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  background-color: #bdc6c7;
+  color: var(--med-light-theme);
+  border-top: 1px solid black;
+}
+
+.contact-number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 10px;
+}
+
+.number-description {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.number-value {
+  font-size: 12px;
+}
+
+.page-controls {
+  grid: 1 / 3;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 /* Formatting the utilities page */
@@ -2452,7 +2539,7 @@ html {
 
 .request-form-laptop {
   height: 400px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 80px 1fr;
@@ -2460,7 +2547,7 @@ html {
 
 .request-form-desktop {
   height: 550px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 16% 1fr;
@@ -2478,7 +2565,7 @@ html {
 .thermometer-form-laptop {
   height: 400px;
   width: 350px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 16% 10% 50% 1fr;
@@ -2488,7 +2575,7 @@ html {
 .thermometer-form-desktop {
   height: 550px;
   width: 500px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 16% 10% 50% 1fr;
@@ -2496,7 +2583,7 @@ html {
 }
 
 .request-form-laptop, .request-form-desktop {
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2768,7 +2855,7 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
 }
 
 #thermometer-batch-heading {
@@ -2805,7 +2892,7 @@ html {
   border-radius: 5px;
   font-size: 12px;
   color: black;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   padding: 5px;
 }
 

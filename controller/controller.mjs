@@ -1,9 +1,11 @@
 import { Mutex } from 'async-mutex';
-import bcrypt from "bcrypt"
-import {readDeviceData, readStaffData, readContactsData, writeDeviceData, writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
+import bcrypt, { hash } from "bcrypt"
+import {readDeviceData, readStaffData, readContactsData, writeDeviceData, writeStaffData, 
+    generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, 
+    determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/repair-request.mjs';
-import { getGenius3Serial, disposeGenius3, retrieveUserCredentials } from '../models/models.mjs';
+import { getGenius3Serial, disposeGenius3, retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';
 import { isValidBME, brandOptions, convertHospitalName } from '../utils/utils.mjs';
 
 // Define the mutex objects for both staff and device files.
@@ -28,24 +30,9 @@ export async function validateLoginCredentials(req, res, __dirname) {
 
         // Check if password valid
         if (invalidPasswordRegex.test(submittedPassword)) {
-            throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
+            throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter, 1 number and 1 special character");
         }
 
-        const staffData = await readStaffData(__dirname);
-        
-        const staffIds = staffData
-            .filter((entry) => {
-                return entry.id !== "-";
-            }) 
-            .map((entry) => {
-                return {name: entry.name, id: entry.id};
-            }) 
-
-        //Define hashing parameters and generate password hash
-        // const saltRounds = 10;
-        // const hashedPassword = await bcrypt.hash(submittedPassword, saltRounds);
-        // console.log(hashedPassword);  
-        
         // Retrieve the use credentials from the database
         const data = await retrieveUserCredentials(email);
         
@@ -54,13 +41,13 @@ export async function validateLoginCredentials(req, res, __dirname) {
         }
 
         // Extract the values from the object
-        const {Email, FullName, Password, AccessPermissions} = data[0];
+        const {FullName, Password, AccessPermissions, StaffId} = data[0];
         
         // Compare the submitted password and hashed password and determine if they match
         const passwordResult = await bcrypt.compare(submittedPassword, Password);
         
         if (passwordResult === true) {
-            const appPermissions = {name: FullName, accessPermissions: AccessPermissions};
+            const appPermissions = {name: FullName, staffId: StaffId, accessPermissions: AccessPermissions};
             res.json({type: "Success", credentials: appPermissions});
         }
         else {
@@ -69,7 +56,59 @@ export async function validateLoginCredentials(req, res, __dirname) {
 
     } catch (error) {
         console.log(error);
-        res.status(400).json({type: "Error", message: `Login Failed. An unexpected error occured`});
+        res.status(400).json({type: "Error", message: error.message});
+    }
+}
+
+export async function changeLoginPassword(req, res, __dirname) {
+    try {
+        // Get the data from the request body
+        const staffId = req.body.staffId;
+        const currentPassword = req.body.currentPassword;
+        const newPassword = req.body.newPassword;
+
+        // Define invalid password regex
+        const invalidPasswordRegex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/
+
+        // Check if entered passwords are valid
+        if (invalidPasswordRegex.test(currentPassword)) {
+            throw new Error("The entered value for your current password is incorrect and does not match the correct format.");
+        }
+
+        if (invalidPasswordRegex.test(newPassword)) {
+            throw new Error("The value of your new password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter, 1 number and 1 special character");
+        }
+
+        // Get the hashed password for the current user from the database and compare to submitted password
+        // Retrieve the use credentials from the database
+        const passwordData = await retrieveUserCredentials(staffId);
+            
+        if (passwordData === undefined) {
+            throw new Error("An unexpected error occurred. You user credentials could not be found in the database. Please contact an administartor.");
+        }        
+
+        // Extract the hashed password from the returned database object for the current user.
+        const {Password} = passwordData[0];
+        
+        // Compare the submitted password and hashed password and determine if they match
+        const passwordResult = await bcrypt.compare(currentPassword, Password);
+        
+        if (passwordResult) {
+            // Define hashing parameters and generate password hash
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+            
+            // Update the password in the database
+            const result = await updateUserPassword(staffId, hashedPassword); 
+            res.json({type: "Success", message: "Password successfully updated"});
+        }
+        else {
+            res.status(400).json({type: "Error", message: `The value entered for you current password is incorrect.`})
+        }
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({type: "Error", message: error.message});
     }
 }
 

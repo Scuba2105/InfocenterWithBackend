@@ -14,6 +14,8 @@ export default function App() {
 
     const [page, setPage] = useState('staff');
     const [selectedEntry, setSelectedEntry] = useState('60146568');
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     
     // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
@@ -32,6 +34,15 @@ export default function App() {
         setSelectedEntry(entryIdentifier);
     }
 
+    function closeDialog() {
+        setDialogOpen(false);
+    };
+    
+    function showMessage(dialogType, message) {
+        setDialogMessage({type: dialogType, message: message});
+        setDialogOpen(true);
+    }
+
     if (!loggedIn) {
         return (
            <Login></Login> 
@@ -44,11 +55,11 @@ export default function App() {
             <div className="header-bar">
                 <div id='header-aligner'></div>
                 HNECT Information Center
-                <Avatar></Avatar>
+                <Avatar showMessage={showMessage} closeDialog={closeDialog}></Avatar>
             </div>
             <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>
-                <MainArea page={page} selectedEntry={selectedEntry} onRowClick={onRowClick} queryClient={queryClient} />
+                <MainArea page={page} selectedEntry={selectedEntry} dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} showMessage={showMessage} onRowClick={onRowClick} queryClient={queryClient} />
             </QueryClientProvider>
         </div>
     );

@@ -132,22 +132,51 @@ export async function disposeGenius3(parameter) {
 }
 
 export async function retrieveUserCredentials(email) {
-    
+        try {
+            // Connect to the database
+            await sql.connect(infoCenterDBConfig);  
+        
+            // Create a new request object
+            const request = new sql.Request();
+
+            // Query the database for user credentials
+            const result = await request
+                .input('input_parameter', sql.VarChar, email)
+                .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
+
+            // Return the recordset
+            return result.recordset
+        }
+        catch (error) {
+            console.log(error);
+            throw error;
+        }
+}
+
+export async function updateUserPassword(staffId, hashedPassword) {
+    try {
         // Connect to the database
         await sql.connect(infoCenterDBConfig);  
-    
+        
         // Create a new request object
         const request = new sql.Request();
 
         // Query the database for user credentials
         const result = await request
-            .input('input_parameter', sql.VarChar, email)
-            .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
-
+            .input('input_parameter1', sql.VarChar, staffId)
+            .input('input_parameter2', sql.VarChar, hashedPassword)
+            .query(`UPDATE Users SET Password = @input_parameter2 WHERE StaffID = @input_parameter1`);
+        if (result.rowsAffected == 0){
+            throw 'Nothing was inserted into the database!';
+        }
         // Return the recordset
         return result.recordset
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
 }
-
 
 
 

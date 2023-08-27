@@ -1,21 +1,57 @@
-import { serverConfig } from "../server";
 import { useUser, useLoggedIn } from "./StateStore";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import useMediaQueries from "media-queries-in-react";
 import { ChangePassword } from "./ChangePassword";
-import { PadlockIcon, LogoutIcon } from "../svg";
+import { PadlockIcon, LogoutIcon, BlankProfile } from "../svg";
 
 function logoutFromApp(logout) {
     sessionStorage.removeItem("currentInfoCentreSession");
     logout();
 }
 
-export function Avatar() {
+function toggleMenu(setMenuVisible, e) {
+    const profilePhoto = e.currentTarget.children[0];
+    const label = e.currentTarget.children[1];
+    if (profilePhoto.contains(e.target) || label.contains(e.target)) {
+        setMenuVisible(m => !m);
+    }
+}
+
+function showModal(setChangePasswordVisible, setMenuVisible) {
+    setMenuVisible(false);
+    setChangePasswordVisible(true);
+}
+
+function closePasswordModal(setChangePasswordVisible) {
+    setChangePasswordVisible(false);
+}
+
+function useOutsideAlerter(ref, setMenuVisible) {
+    useEffect(() => {
+      
+      // Close avatar menu if clicked on outside of element
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setMenuVisible(false);
+        }
+      }
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref, setMenuVisible]);
+  }
+
+export function Avatar({showMessage, closeDialog}) {
 
     const [menuVisible, setMenuVisible] = useState(false);
+    const avatarMenu = useRef(null);
+    useOutsideAlerter(avatarMenu, setMenuVisible);
     const currentUser = useUser((state) => state.userCredentials);
     const [changePasswordVisible, setChangePasswordVisible] = useState(false);
-
+    
     // Get the logout function from the state store
     const logout = useLoggedIn((state) => state.logout);
 
@@ -24,26 +60,14 @@ export function Avatar() {
         desktop: "(min-width: 1800px)"
     });
 
-    function toggleMenu() {
-        setMenuVisible(m => !m)
-    }
-
-    function showModal() {
-        setChangePasswordVisible(true);
-    }
-
-    function closePasswordModal() {
-        setChangePasswordVisible(false);
-    }
-
     return (
         <>
-            <div className="avatar-container" onClick={toggleMenu}>
-                <img id="avatar-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/blank-profile.png`} alt="staff"></img>
+            <div ref={avatarMenu} className="avatar-container" onClick={(e) => toggleMenu(setMenuVisible, e)}>
+                <BlankProfile identifier="avatar-image" size="25px" foregroundColor="#6B7F82" ></BlankProfile>
                 <label>{currentUser.user}</label>
                 {menuVisible && <div className={mediaQueries.laptop ? "avatar-menu-laptop" : "avatar-menu avatar-menu-desktop"}>
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>
-                    <div className="avatar-option" onClick={showModal}>
+                    <div className="avatar-option" onClick={() => showModal(setChangePasswordVisible, setMenuVisible)}>
                         <PadlockIcon color="white" size="25px"></PadlockIcon>
                         <label id="change-password">Change Password</label>
                     </div>
@@ -53,7 +77,7 @@ export function Avatar() {
                     </div>
                 </div>}
             </div>
-            {changePasswordVisible && <ChangePassword closeModal={closePasswordModal}></ChangePassword>}
+            {changePasswordVisible && <ChangePassword closeModal={() => closePasswordModal(setChangePasswordVisible)} showMessage={showMessage} closeDialog={closeDialog}></ChangePassword>}
         </>
         
     )

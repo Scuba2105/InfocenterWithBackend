@@ -234,7 +234,7 @@ export function EditIcon({color, size='25px'}) {
     return (
         <>
             <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-                <path d="M18.3785 8.44975L8.9636 17.8648C8.6844 18.144 8.3288 18.3343 7.94161 18.4117L4.99988 19.0001L5.58823 16.0583C5.66566 15.6711 5.85597 15.3155 6.13517 15.0363L15.5501 5.62132M18.3785 8.44975L19.7927 7.03553C20.1832 6.64501 20.1832 6.01184 19.7927 5.62132L18.3785 4.20711C17.988 3.81658 17.3548 3.81658 16.9643 4.20711L15.5501 5.62132M18.3785 8.44975L15.5501 5.62132" stroke={color} stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.3785 8.44975L8.9636 17.8648C8.6844 18.144 8.3288 18.3343 7.94161 18.4117L4.99988 19.0001L5.58823 16.0583C5.66566 15.6711 5.85597 15.3155 6.13517 15.0363L15.5501 5.62132M18.3785 8.44975L19.7927 7.03553C20.1832 6.64501 20.1832 6.01184 19.7927 5.62132L18.3785 4.20711C17.988 3.81658 17.3548 3.81658 16.9643 4.20711L15.5501 5.62132M18.3785 8.44975L15.5501 5.62132" stroke={color} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         </>
     );
@@ -262,6 +262,17 @@ export function EmailIcon({color, size='25px'}) {
             </svg>
         </>
     );
+}
+
+export function BlankProfile({identifier, size="25px", foregroundColor}) {
+    return (
+        <>
+            <svg id={identifier} width={size} height={size} viewBox="0 0 24 24">
+                <circle cx="12" cy="6" r="4" fill={foregroundColor} transform="translate(0 1)" />
+                <path d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z" fill={foregroundColor} transform="translate(0 -1)" />
+            </svg>
+        </>
+    )
 }
 
 export function ComputerScreen({size="400px", color}) {
