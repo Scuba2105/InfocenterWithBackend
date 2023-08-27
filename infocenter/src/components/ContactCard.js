@@ -1,4 +1,4 @@
-const backgroundColors = ["#44CF6C", "#A833B9", "#F06543", "#5938EB"]
+const backgroundColors = ["#06BE77", "#A833B9", "#F06543", "#5938EB"]
 
 export function ContactCard({contact, index}) {
     
