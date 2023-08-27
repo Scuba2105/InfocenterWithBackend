@@ -20,7 +20,7 @@ html {
   --display-background-color: #383F4F;
   --info-container-background-color: #5d6881;
   --form-font-color: white;
-  ---form-background-color: #4d555c;
+  --form-background-color: #4d555c;
   --form-input-color: #69737a;
   --grey-font: rgb(183, 190, 195); 
   --green-button-color: rgb(3, 252, 156);
@@ -265,7 +265,7 @@ html {
 .change-password-form {
   height: 100%;
   width: 100%;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -492,7 +492,7 @@ html {
   padding: 0px;
   border: 1px solid black;
   color: var(--form-font-color);
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
 }
 
 #dialog-box-error-request {
@@ -509,7 +509,7 @@ html {
   width: 320px;
   height: 140px;
   display: flex;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -1491,7 +1491,7 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
 }
 
 .password-display {
@@ -1500,7 +1500,7 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   overflow-y: auto;
 }
 
@@ -1766,7 +1766,7 @@ html {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 1fr;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   color: rgb(104, 104, 108);
 }
 
@@ -2427,7 +2427,7 @@ html {
   border: 1px solid black;
   border-radius: 10px;
   display: grid; 
-  grid-template-rows: 35% 1fr;
+  grid-template-rows: 30% 1fr;
   overflow: hidden;
 }
 
@@ -2435,7 +2435,6 @@ html {
   grid: 1 / 1;
   height: 100%;
   width: 100%;
-  background-color: #059066;
   color: white;
   display: flex;
   flex-direction: column;
@@ -2458,6 +2457,7 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
+  background-color: var(--form-background-color);
 }
 
 .contact-number {
@@ -2539,7 +2539,7 @@ html {
 
 .request-form-laptop {
   height: 400px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 80px 1fr;
@@ -2547,7 +2547,7 @@ html {
 
 .request-form-desktop {
   height: 550px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 16% 1fr;
@@ -2565,7 +2565,7 @@ html {
 .thermometer-form-laptop {
   height: 400px;
   width: 350px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 16% 10% 50% 1fr;
@@ -2575,7 +2575,7 @@ html {
 .thermometer-form-desktop {
   height: 550px;
   width: 500px;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 16% 10% 50% 1fr;
@@ -2583,7 +2583,7 @@ html {
 }
 
 .request-form-laptop, .request-form-desktop {
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2855,7 +2855,7 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
 }
 
 #thermometer-batch-heading {
@@ -2892,7 +2892,7 @@ html {
   border-radius: 5px;
   font-size: 12px;
   color: black;
-  background-color: var(---form-background-color);
+  background-color: var(--form-background-color);
   padding: 5px;
 }
 

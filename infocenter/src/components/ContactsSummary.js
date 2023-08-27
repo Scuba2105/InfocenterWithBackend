@@ -50,9 +50,11 @@ export function ContactsSummary({selectedDepartment, pageData, onHospitalChange,
                 <ContactsFilter selectedDepartment={selectedDepartment} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setContactPage={setContactPage}></ContactsFilter>
                 <div className="contacts-display">
                     {displayedDepartmentContacts.map((contact) => {
+                        const index = allDepartmentContacts.indexOf(contact);
+                        const colorIndex = index % 4;
                         return (
                             <div className="contact-container">
-                                <ContactCard  contact={contact}></ContactCard>
+                                <ContactCard  contact={contact} index={colorIndex}></ContactCard>
                             </div>
                         )
                     })}
