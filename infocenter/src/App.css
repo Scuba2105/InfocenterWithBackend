@@ -720,7 +720,7 @@ html {
 .add-new-btn-laptop, .add-new-btn-desktop {
   background-color: var(--blue-button-color);
   border: 1px solid var(--med-light-theme);
-  color: #383F4F;
+  color: #212936;
   border-radius: 50%;
   font-size: 30px;
   width: 40px;
@@ -1289,7 +1289,7 @@ html {
 }
 
 .name-text-desktop {
-  font-size: 43px;
+  font-size: 38px;
   border-bottom: 2px solid var(--light-theme);
   padding-bottom: 20px;
 }
