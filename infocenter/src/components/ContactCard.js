@@ -24,7 +24,7 @@ export function ContactCard({identifier, contact, index}) {
                 </div> 
                 {identifier === "vendor" && <div className="contact-number">
                     <label className="number-description">Email </label>
-                    <label className="number-value">{contact.email}</label>
+                    <a className="number-value" href={`mailto:${contact.email}`}>{contact.email}</a>
                 </div>}                
             </div>   
         </div>
