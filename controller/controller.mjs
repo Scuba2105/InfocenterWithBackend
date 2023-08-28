@@ -1,6 +1,6 @@
 import { Mutex } from 'async-mutex';
 import bcrypt, { hash } from "bcrypt"
-import {readDeviceData, readStaffData, readContactsData, writeDeviceData, writeStaffData, 
+import {readDeviceData, readStaffData, readContactsData, readVendorContactsData, writeDeviceData, writeStaffData, 
     generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, 
     determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
@@ -117,7 +117,8 @@ export async function getAllData(req, res, __dirname) {
         const staffData = await readStaffData(__dirname);
         const deviceData = await readDeviceData(__dirname);
         const contactsData = await readContactsData(__dirname);
-        const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData};
+        const vendorContactsData = await readVendorContactsData(__dirname);
+        const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData, vendorContactsData: vendorContactsData};
         res.json(allData);
     }
     catch(error) {

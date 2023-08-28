@@ -15,8 +15,14 @@ export function ContactsSummary({identifier, selectedDepartment, selectedVendor,
         desktop: "(min-width: 1800px)"
     });
 
+    // Get all contacts for the selected department
     const allDepartmentContacts = pageData.filter((entry) => {
-        return (entry.hospital === selectedDepartment.hospital && entry.department === selectedDepartment.department) || entry.vendor === selectedVendor;
+        if (identifier === "staff") {
+            return entry.hospital === selectedDepartment.hospital && entry.department === selectedDepartment.department
+        }
+        else {
+            return entry.vendor === selectedVendor;
+        }  
     });
 
     // Define the number of contacts to display per page and the max page number
@@ -62,7 +68,7 @@ export function ContactsSummary({identifier, selectedDepartment, selectedVendor,
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
             </div>   
             <div className={mediaQueries.laptop ? "contacts-main-display contacts-main-display-laptop" : "contacts-main-display contacts-main-display-desktop"}>
-                <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setContactPage={setContactPage}></ContactsFilter>
+                <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
                 <div className="contacts-display">
                     {displayedContacts.map((contact) => {
                         const index = allDepartmentContacts.indexOf(contact);

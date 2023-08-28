@@ -1302,13 +1302,10 @@ html {
 
 .name-text-laptop {
   font-size: 23px;
-  padding-bottom: 10px;
 }
 
 .name-text-desktop {
   font-size: 38px;
-  border-bottom: 2px solid var(--light-theme);
-  padding-bottom: 20px;
 }
 
 .position-laptop {
