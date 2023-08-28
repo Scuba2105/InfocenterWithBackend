@@ -1,10 +1,11 @@
-const backgroundColors = ["#06BE77", "#A833B9", "#F06543", "#5938EB"]
+const backgroundColors = ["#59B561", "#A833B9", "#F06543", "#5938EB"]
+const vendorBackgroundColors = ["#D23B6B", "#2D5CC9", "#419D78", "#DD614A"]
 
 export function ContactCard({identifier, contact, index}) {
     
     return (
         <div className="contact-card-container">
-            <div className="contact-card-header" style={{backgroundColor: backgroundColors[index]}}>
+            <div className="contact-card-header" style={identifier === "staff" ? {backgroundColor: backgroundColors[index]} : {backgroundColor: vendorBackgroundColors[index]}}>
                 <label id="contact-name">{contact.contact}</label>
                 <label id="contact-position">{contact.position}</label>
             </div> 

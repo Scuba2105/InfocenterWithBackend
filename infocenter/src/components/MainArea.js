@@ -18,7 +18,7 @@ export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeD
     const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
     const [utilityPage, setUtilityPage] = useState(0)
     const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
-    const [vendor, setVendor] = useState("Philips Healthcare");
+    const [vendor, setVendor] = useState("Device Technologies Australia");
 
     function selectUtility(index) {
         setUtilityPage(index);
