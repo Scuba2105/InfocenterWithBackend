@@ -13,14 +13,14 @@ export function ContactsFilter({identifier, selectedDepartment, selectedVendor, 
                 acc.push(entry.hospital);
             }
             return acc
-        }, [])
+        }, []).sort()
 
         departmentData = pageData.reduce((acc, entry) => {
             if (entry.hospital === selectedDepartment.hospital && !acc.includes(`${entry.department}`)) {
                 acc.push(entry.department);
             }
             return acc
-        }, [])
+        }, []).sort()
     }
     else {
         vendorNames = pageData.reduce((acc, entry) => {
@@ -28,7 +28,7 @@ export function ContactsFilter({identifier, selectedDepartment, selectedVendor, 
                 acc.push(entry.vendor);
             } 
             return acc
-        }, [])
+        }, []).sort()
     }
             
     if (identifier === "staff") {

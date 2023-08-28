@@ -44,24 +44,24 @@ export function ContactsSummary({identifier, selectedDepartment, selectedVendor,
         
         const pressed = id.split('_')[0];
         
-        if (pressed === "forward-next" && contactPage < maxIndex) {
-            if (identifier === "staff") {
+        if (identifier === "staff") {
+            if (pressed === "forward-next" && contactPage < maxIndex) {
                 setContactPage(p => p + 1);
             }
-            else if (identifier === "vendor") {
-                setVendorContactPage(v => v + 1);
-            }
-        } 
-        else if (pressed === "back-next" && contactPage > 0) {
-            if (identifier === "staff") {
+            else if (pressed === "back-next" && contactPage > 0) {
                 setContactPage(p => p - 1);
             }
-            else if (identifier === "vendor") {
-                setVendorContactPage(v => v - 1);
-            }
         }
-    }
-
+        else if (identifier === "vendor") {
+            if (pressed === "forward-next" && vendorContactPage < maxIndex) {
+                setVendorContactPage(v => v + 1);
+            }
+            else if (pressed === "back-next" && vendorContactPage > 0) {
+                setVendorContactPage(v => v - 1);
+            }   
+        }
+    } 
+        
     return (
         <div className="hospital-contacts-container">
             <div className="contacts-heading">
@@ -75,14 +75,14 @@ export function ContactsSummary({identifier, selectedDepartment, selectedVendor,
                         const colorIndex = index % 4;
                         return (
                             <div className="contact-container">
-                                <ContactCard  contact={contact} index={colorIndex}></ContactCard>
+                                <ContactCard identifier={identifier} contact={contact} index={colorIndex}></ContactCard>
                             </div>
                         )
                     })}
                 </div>
                 <div className="page-controls" onClick={pageArrowClick}>
                     <NextIcon className="back-next-icon" color="white" size="11px" offset="1" angle="180" id="back-next" />
-                    <label className="table-page-info">{`Page ${contactPage + 1} of ${maxIndex + 1}`}</label>
+                    <label className="table-page-info">{`Page ${identifier === "staff" ? contactPage + 1 : vendorContactPage + 1} of ${maxIndex + 1}`}</label>
                     <NextIcon className="forward-next-icon" color="white" size="11px" offset="0" angle="0" id="forward-next" />
                 </div>
             </div>                  

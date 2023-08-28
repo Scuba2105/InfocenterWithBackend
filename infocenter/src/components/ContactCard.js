@@ -1,6 +1,6 @@
 const backgroundColors = ["#06BE77", "#A833B9", "#F06543", "#5938EB"]
 
-export function ContactCard({contact, index}) {
+export function ContactCard({identifier, contact, index}) {
     
     return (
         <div className="contact-card-container">
@@ -13,14 +13,18 @@ export function ContactCard({contact, index}) {
                     <label className="number-description">Office Phone</label>
                     <label className="number-value">{contact.officePhone}</label>
                 </div>
-                <div className="contact-number">
+                {identifier === "staff" && <div className="contact-number">
                     <label className="number-description">Dect Phone</label>
                     <label className="number-value">{contact.dectPhone ? contact.dectPhone : "-"}</label>
-                </div>
+                </div>}
                 <div className="contact-number">
                     <label className="number-description">Mobile Phone</label>
                     <label className="number-value">{contact.mobilePhone ? contact.mobilePhone : "-"}</label>
-                </div>                
+                </div> 
+                {identifier === "vendor" && <div className="contact-number">
+                    <label className="number-description">Email </label>
+                    <label className="number-value">{contact.email}</label>
+                </div>}                
             </div>   
         </div>
     );
