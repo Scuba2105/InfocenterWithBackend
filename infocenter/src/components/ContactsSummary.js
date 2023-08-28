@@ -4,7 +4,33 @@ import { ContactCard } from "./ContactCard";
 import { ContactsFilter } from "./ContactsFilter";
 import useMediaQueries from "media-queries-in-react"
 
-export function ContactsSummary({identifier, selectedDepartment, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange}) {
+function pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e) {
+    let id = e.target.id;
+    while (!id) {
+        id = e.target.parentNode.id;
+    }
+    
+    const pressed = id.split('_')[0];
+    
+    if (identifier === "staff") {
+        if (pressed === "forward-next" && contactPage < maxIndex) {
+            setContactPage(p => p + 1);
+        }
+        else if (pressed === "back-next" && contactPage > 0) {
+            setContactPage(p => p - 1);
+        }
+    }
+    else if (identifier === "vendor") {
+        if (pressed === "forward-next" && vendorContactPage < maxIndex) {
+            setVendorContactPage(v => v + 1);
+        }
+        else if (pressed === "back-next" && vendorContactPage > 0) {
+            setVendorContactPage(v => v - 1);
+        }   
+    }
+} 
+
+export function ContactsSummary({identifier, selectedDepartment, setSelectedDepartment, setVendor, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange}) {
     
     // Contacts for each department are viewed over several pages. Store the state of the page.
     const [contactPage, setContactPage] = useState(0);
@@ -36,39 +62,13 @@ export function ContactsSummary({identifier, selectedDepartment, selectedVendor,
     allDepartmentContacts.slice(contactPage*entriesPerPage, contactPage*entriesPerPage + entriesPerPage) :
     allDepartmentContacts.slice(vendorContactPage*entriesPerPage, vendorContactPage*entriesPerPage + entriesPerPage)
     
-    function pageArrowClick(e) {
-        let id = e.target.id;
-        while (!id) {
-            id = e.target.parentNode.id;
-        }
-        
-        const pressed = id.split('_')[0];
-        
-        if (identifier === "staff") {
-            if (pressed === "forward-next" && contactPage < maxIndex) {
-                setContactPage(p => p + 1);
-            }
-            else if (pressed === "back-next" && contactPage > 0) {
-                setContactPage(p => p - 1);
-            }
-        }
-        else if (identifier === "vendor") {
-            if (pressed === "forward-next" && vendorContactPage < maxIndex) {
-                setVendorContactPage(v => v + 1);
-            }
-            else if (pressed === "back-next" && vendorContactPage > 0) {
-                setVendorContactPage(v => v - 1);
-            }   
-        }
-    } 
-        
     return (
         <div className="hospital-contacts-container">
             <div className="contacts-heading">
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
             </div>   
             <div className={mediaQueries.laptop ? "contacts-main-display contacts-main-display-laptop" : "contacts-main-display contacts-main-display-desktop"}>
-                <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
+                <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setVendor={setVendor} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
                 <div className="contacts-display">
                     {displayedContacts.map((contact) => {
                         const index = allDepartmentContacts.indexOf(contact);
@@ -80,7 +80,7 @@ export function ContactsSummary({identifier, selectedDepartment, selectedVendor,
                         )
                     })}
                 </div>
-                <div className="page-controls" onClick={pageArrowClick}>
+                <div className="page-controls" onClick={(e) => pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e)}>
                     <NextIcon className="back-next-icon" color="white" size="11px" offset="1" angle="180" id="back-next" />
                     <label className="table-page-info">{`Page ${identifier === "staff" ? contactPage + 1 : vendorContactPage + 1} of ${maxIndex + 1}`}</label>
                     <NextIcon className="forward-next-icon" color="white" size="11px" offset="0" angle="0" id="forward-next" />

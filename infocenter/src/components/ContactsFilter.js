@@ -1,7 +1,7 @@
 import { SelectInput } from "./SelectInput";
 import { useRef } from "react";
 
-export function ContactsFilter({identifier, selectedDepartment, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange, setContactPage, setVendorContactPage}) {
+export function ContactsFilter({identifier, selectedDepartment, setSelectedDepartment, selectedVendor, pageData, onHospitalChange, onDepartmentChange, setVendor, onVendorChange, setContactPage, setVendorContactPage}) {
     
     const inputsContainer = useRef(null);
 
@@ -34,15 +34,15 @@ export function ContactsFilter({identifier, selectedDepartment, selectedVendor, 
     if (identifier === "staff") {
         return (
             <div ref={inputsContainer} className="contacts-filter-container">
-                <SelectInput type="contacts-hospitals" defaultValue={selectedDepartment.hospital} label="Hospital" optionData={hospitalData} onChange={(e) => onHospitalChange(pageData, setContactPage, inputsContainer, e)}></SelectInput>
-                <SelectInput type="contacts-departments" defaultValue={selectedDepartment.department} label="Department" optionData={departmentData} onChange={(e) => onDepartmentChange(setContactPage, e)}></SelectInput>
+                <SelectInput type="contacts-hospitals" defaultValue={selectedDepartment.hospital} label="Hospital" optionData={hospitalData} onChange={(e) => onHospitalChange(pageData, setSelectedDepartment, setContactPage, inputsContainer, e)}></SelectInput>
+                <SelectInput type="contacts-departments" defaultValue={selectedDepartment.department} label="Department" optionData={departmentData} onChange={(e) => onDepartmentChange(selectedDepartment, setSelectedDepartment, setContactPage, e)}></SelectInput>
             </div>
         );
     }
     else {
         return (
             <div className="contacts-filter-container">
-                <SelectInput type="contacts-hospitals" defaultValue={selectedVendor} label="Vendor" optionData={vendorNames} onChange={(e) => onVendorChange(setVendorContactPage, e)}></SelectInput>
+                <SelectInput type="contacts-hospitals" defaultValue={selectedVendor} label="Vendor" optionData={vendorNames} onChange={(e) => onVendorChange(setVendor, setVendorContactPage, e)}></SelectInput>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import { utilityFunctions } from "../data";
 
-export function Utilities({children, utilityPage, onClick}) {
+export function Utilities({children, utilityPage, onClick, setUtilityPage}) {
     
     return (
         <>
@@ -8,7 +8,7 @@ export function Utilities({children, utilityPage, onClick}) {
                 <div className="utility-options">
                     {utilityFunctions.map((entry, index) => {
                         return (
-                            <h2 key={`utility-option${index}`} className={index === utilityPage ? "utility-selected" : undefined} onClick={() => onClick(index)}>{entry}</h2>
+                            <h2 key={`utility-option${index}`} className={index === utilityPage ? "utility-selected" : undefined} onClick={() => onClick(setUtilityPage, index)}>{entry}</h2>
                         )
                     })}
                 </div>
