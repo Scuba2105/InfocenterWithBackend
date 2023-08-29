@@ -51,7 +51,7 @@ export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeD
     const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
     const [utilityPage, setUtilityPage] = useState(0)
     const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
-    const [vendor, setVendor] = useState("Device Technologies Australia");
+    const [vendor, setVendor] = useState("3M Australia");
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     if (isLoading) {
