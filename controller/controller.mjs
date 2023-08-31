@@ -274,7 +274,7 @@ export async function addNewStaffData(req, res, __dirname) {
             // Add any optional data provided to the data object
             const optionalData = {"dect-phone": "dectPhone", "work-mobile": "workMobile", "personal-mobile": "personalMobile",
             "extension": "img"};
-            console.log(req.body);
+            
             // Loop over optional data and add to data object
             Object.keys(optionalData).forEach((key) => {
                 if (req.body[key]) {

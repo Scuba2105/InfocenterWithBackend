@@ -1625,10 +1625,6 @@ html {
   grid-gap: 0px 13px;
 }
 
-.add-new-staff-container .new-image {
-  transform: translateX(calc((430px - 215px)/2));
-}
-
 .add-new-upload-button {
   transform: translateY(-20px);
 }

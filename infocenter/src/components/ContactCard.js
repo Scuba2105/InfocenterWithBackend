@@ -24,7 +24,7 @@ export function ContactCard({identifier, contact, index}) {
                 </div> 
                 {identifier === "vendor" && <div className="contact-number">
                     <label className="number-description">Email </label>
-                    <a className="number-value" href={contact.email !== "-" ? `mailto:${contact.email}` : null} style={contact.vendor === "3M Australia" ?{fontSize: 10 + 'px'} : null}>{contact.email}</a>
+                    <a className="number-value" href={contact.email !== "-" ? `mailto:${contact.email}` : null}>{contact.email}</a>
                 </div>}                
             </div>   
         </div>

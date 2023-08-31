@@ -8,7 +8,7 @@ import { serverConfig } from "../server"
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
 const mandatoryFields = ["workshop", "position", "office-phone"];
-const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile"];
+const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile", "hostname"];
 
 function createFormData(updateData, formData) {
     for (const [key, value] of Object.entries(updateData)) {
@@ -101,7 +101,6 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         }    
     }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage]);
           
-
     async function uploadStaffFormData(formContainer) {
         const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
         
@@ -112,9 +111,9 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 
         // Convert text value node lists to arrays and store 
         const textInputArray = Array.from(textInputs);
-        const [name, id, officePhone, dectPhone, workMobile, personalMobile] = Array.from(textInputs);
+        const [name, id, officePhone, dectPhone, workMobile, personalMobile, hostname] = Array.from(textInputs);
         const [workshop, position] = Array.from(selectInputs);
-        const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile];
+        const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile, hostname];
         
         // Initialise the staffId variable. Binding is used to name the image file if present.
         let staffId;
@@ -129,7 +128,6 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             };
         
             // Filter the empty data inputs out of the data and save to the Form Data
-            const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile"]
             textValueInputsArray.forEach((input, index) => {
                 if (input.value !== "") {
                     updateData.current[keyIdentifier[index]] = input.value;
@@ -195,7 +193,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         }
         else if (type === "update") {
             // Filter the empty data inputs out of the data and save to the Form Data
-            const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile"]
+            const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname"]
             textValueInputsArray.forEach((input, index) => {
                 if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
                     updateData.current[keyIdentifier[index]] = input.value;
@@ -206,6 +204,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                     updateData.current["existing-id"] = staffId;
                 }
             });
+
+            console.log(updateData.current);
 
             // Add the uploaded file and file extension if it has been selected 
             if (fileInput[0].value !== "") {
@@ -295,7 +295,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             }
         }
     }
-     return (
+    
+    return (
         <div className="modal-display">
             <h3 className="add-new-heading">{type === "update" ? `${selectedData.name} Details` : "New Employee Details"}</h3>
             <div className="add-new-staff-container" ref={formContainer}>
@@ -315,6 +316,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="text" identifier="add-new" labelText="Work Mobile" placeholdertext={`Enter Work Mobile Number`} />}
                 {type === "update" && selectedData.personalMobile !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.personalMobile} identifier="add-new" labelText="Personal Mobile" /> :                  
                 <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />}
+                {type === "update" && selectedData.hostname !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.hostname} identifier="add-new" labelText="Laptop Hostname" /> :                  
+                <Input inputType="text" identifier="add-new" labelText="Laptop Hostname" placeholdertext={`Enter Laptop Hostname`} />}
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
             <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload Data</div>

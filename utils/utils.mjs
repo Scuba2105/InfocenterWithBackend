@@ -157,7 +157,8 @@ export function generateNewStaffData(name, id, workshop, position, officePhone, 
         dectPhone: "",
         workMobile: "",
         personalMobile: "",
-        team: team
+        team: team,
+        hostname: "",
       }
 }
 
