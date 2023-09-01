@@ -18,7 +18,7 @@ const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
 
-export function DisplayOption({selectedOption, selectedData, fileNumber, updateFileCount}) {
+export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount}) {
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -98,8 +98,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, updateF
                 
                 }
                 <div className={mediaQueries.laptop ? "other-file-button-container-laptop" : "other-file-button-container-desktop"}>
-                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={updateFileCount} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
-                    {fileNumber.length !== 1 && <div id="remove-file" onClick={updateFileCount} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
+                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
+                    {fileNumber.length !== 1 && <div id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
                 </div>
             </div>
         );

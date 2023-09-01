@@ -12,7 +12,7 @@ async function copyTextToClipboard(text) {
 }
 
 // onClick handler function for the copy button
-function handleCopyClick(copyTextToClipboard, copyText) {
+function handleCopyClick(copyTextToClipboard, copyText, setIsCopied) {
         
   // Asynchronously call copyTextToClipboard
    copyTextToClipboard(copyText)
@@ -33,7 +33,7 @@ export function ClipboardCopy({ copyText, identifier }) {
   
     return (
         <>
-            {isCopied ? <span className={`copied-text${identifier}`} >Copied!</span> : <img src={`http://${serverConfig.host}:${serverConfig.port}/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : `copy-image${identifier}`} onClick={() => handleCopyClick(copyTextToClipboard, copyText)}></img>}
+            {isCopied ? <span className={`copied-text${identifier}`} >Copied!</span> : <img src={`http://${serverConfig.host}:${serverConfig.port}/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : `copy-image${identifier}`} onClick={() => handleCopyClick(copyTextToClipboard, copyText, setIsCopied)}></img>}
         </>
     );
 }
