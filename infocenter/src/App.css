@@ -1002,18 +1002,25 @@ html {
   color: white;
 }
 
+.type-vendor-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 .equipment-summary-laptop h4 {
   border-top: 2px solid var(--light-theme);
   padding-top: 10px;
   color: var(--grey-font);
-  height: 75px;
+  height: 15px;
 }
 
 .equipment-summary-desktop h4 {
   border-top: 2px solid var(--light-theme);
   padding-top: 10px;
   color: var(--grey-font);
-  height: 75px;
+  height: 15px;
   font-size: 20px;
 }
 
@@ -2469,7 +2476,11 @@ html {
 }
 
 .number-value {
-  font-size: 10px;
+  font-size: 12px;
+}
+
+.website-link:visited {
+  color: blue;
 }
 
 .page-controls {

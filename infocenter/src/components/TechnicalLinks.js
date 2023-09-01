@@ -37,7 +37,10 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
                             <h2>{selectedData.model}</h2>
                         </div>
-                        <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
+                        <div className="type-vendor-container">
+                            <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
+                            <h5>{'Go to Vendor Contacts ==>'}</h5>
+                        </div>
                     </div>
                 </div>
                 <div className={mediaQueries.laptop ? "technical-area-laptop" : "technical-area-desktop"}>
