@@ -24,7 +24,7 @@ export function ContactCard({identifier, contact, index}) {
                 </div> 
                 {identifier === "vendor" && <div className="contact-number">
                     <label className="number-description">{contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? "GE Portal" : "Email" }</label>
-                    <a className="number-value" href={contact.email === "-" ? null : contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? contact.email : `mailto:${contact.email}`}>{contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? "Website" : contact.email}</a>
+                    <a className="number-value website-link" href={contact.email === "-" ? null : contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? contact.email : `mailto:${contact.email}`}>{contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? "Website" : contact.email}</a>
                 </div>}                
             </div>   
         </div>
