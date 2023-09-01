@@ -6,6 +6,52 @@ import { generateDataPages } from "../utils/utils";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { AddNewForm } from "./AddNewForm";
 
+// Update table index when arrow clicked
+function onTableArrowClick(e, tableIndex, setTableIndex, maxIndex) {
+    let id = e.target.id;
+    while (!id) {
+        id = e.target.parentNode.id;
+    }
+    
+    const pressed = id.split('_')[0];
+    
+    if (pressed === "forward-next" && tableIndex < maxIndex) {
+        setTableIndex(i => i + 1);
+    } 
+    else if (pressed === "back-next" && tableIndex > 0) {
+        setTableIndex(i => i - 1);
+    }
+    else if (pressed === "forward-skip") {
+        setTableIndex(maxIndex);
+    }
+    else if (pressed === "back-skip") {
+        setTableIndex(0);
+    }
+}
+
+// Change the search query when search input changes
+function onQueryChange(e, setQuery, setTableIndex) {
+    const lastCharacter = e.target.value.split("").slice(-1)[0];
+    const prevCharacters = e.target.value.split("").slice(0, -1).join("");
+    if (lastCharacter !== "\\") {
+        setQuery(e.target.value);
+        setTableIndex(0);
+    }
+    else {
+        e.target.value = prevCharacters;
+        setQuery(prevCharacters);
+        setTableIndex(0);
+    }
+}
+
+function openAddModal(setAddNewModal) {
+    setAddNewModal(true);
+}
+
+function closeAddModal(setAddNewModal) {
+    setAddNewModal(false);
+}
+
 export function SearchFilter({page, pageData, onRowClick, queryClient, showMessage, closeDialog}) {
     const [query, setQuery] = useState('null');
     const [tableIndex, setTableIndex] = useState(0);
@@ -18,50 +64,6 @@ export function SearchFilter({page, pageData, onRowClick, queryClient, showMessa
     
     const entriesPerPage = mediaQueries.laptop ? 11 : 15;
     
-    function onTableArrowClick(e) {
-        let id = e.target.id;
-        while (!id) {
-            id = e.target.parentNode.id;
-        }
-        
-        const pressed = id.split('_')[0];
-        
-        if (pressed === "forward-next" && tableIndex < maxIndex) {
-            setTableIndex(i => i + 1);
-        } 
-        else if (pressed === "back-next" && tableIndex > 0) {
-            setTableIndex(i => i - 1);
-        }
-        else if (pressed === "forward-skip") {
-            setTableIndex(maxIndex);
-        }
-        else if (pressed === "back-skip") {
-            setTableIndex(0);
-        }
-    }
-
-    function onQueryChange(e) {
-        const lastCharacter = e.target.value.split("").slice(-1)[0];
-        const prevCharacters = e.target.value.split("").slice(0, -1).join("");
-        if (lastCharacter !== "\\") {
-            setQuery(e.target.value);
-            setTableIndex(0);
-        }
-        else {
-            e.target.value = prevCharacters;
-            setQuery(prevCharacters);
-            setTableIndex(0);
-        }
-    }
-
-    function openAddModal() {
-        setAddNewModal(true);
-    }
-
-    function closeAddModal() {
-        setAddNewModal(false);
-    }
-
     // Set the page selected and currentDataSet
     const pageSelected = page;
     const currentDataSet = pageData;
@@ -85,11 +87,11 @@ export function SearchFilter({page, pageData, onRowClick, queryClient, showMessa
     
     return (
         <div className="search-filter">
-            <SearchInput key={`${pageSelected}-input`} onQueryChange={onQueryChange} openAddModal={openAddModal}/>
-            <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={onTableArrowClick} />
+            <SearchInput key={`${pageSelected}-input`} onQueryChange={(e) => onQueryChange(e, setQuery, setTableIndex)} openAddModal={() => openAddModal(setAddNewModal)}/>
+            <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={(e) => onTableArrowClick(e, tableIndex, setTableIndex, maxIndex)} />
             {addNewModal && 
-            <ModalSkeleton closeModal={closeAddModal} type="add-new" page={page}>
-                <AddNewForm page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={closeAddModal}></AddNewForm>
+            <ModalSkeleton closeModal={() => closeAddModal(setAddNewModal)} type="add-new" page={page}>
+                <AddNewForm page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={() => closeAddModal(setAddNewModal)}></AddNewForm>
             </ModalSkeleton>}
         </div>
     );

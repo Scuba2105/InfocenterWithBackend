@@ -9,13 +9,14 @@ const saModels = {"Cardinal Health": ["SCD700", "ePump"], "Fresenius Kabi": ["Vo
 const fkaShippingOptions = ["TNT", "FKA Arranged"];
 const numericalOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+// Update service agent when select input changes
+function changeServiceAgent(e, setServiceAgent) {
+    setServiceAgent(e.currentTarget.value);
+}
+
 export function ServiceRequestGenerator({staffNames}) {
 
     const [serviceAgent, setServiceAgent] = useState("Cardinal Health");
-
-    function changeServiceAgent(e) {
-        setServiceAgent(e.currentTarget.value);
-    }
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -35,7 +36,7 @@ export function ServiceRequestGenerator({staffNames}) {
                             <Input inputType="text" identifier="bme" labelText={`BME`}></Input>
                             {saModels[serviceAgent] !== "" && <SelectInput label="Model" optionData={saModels[serviceAgent]} onChange={changeServiceAgent}></SelectInput>}
                         </div>}
-                    <SelectInput label="Service Agent" optionData={serviceAgents} onChange={changeServiceAgent}></SelectInput>
+                    <SelectInput label="Service Agent" optionData={serviceAgents} onChange={(e) => changeServiceAgent(e, setServiceAgent)}></SelectInput>
                     {serviceAgent !== "Ecomed (CTG Transducers)" && <TextArea label="Fault Description"></TextArea>}
                     {serviceAgent === "Fresenius Kabi" && <SelectInput label="Shipping Option" optionData={fkaShippingOptions}></SelectInput>} 
                     {serviceAgent === "Ecomed (CTG Transducers)" && 
