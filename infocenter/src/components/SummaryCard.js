@@ -8,7 +8,6 @@ import useMediaQueries from "media-queries-in-react"
 import { AddEditStaff } from "./AddEditStaff";
 import { EditIcon } from "../svg";
 import { workshops } from "../data";
-import { serverConfig } from "../server";
 
 function getClassName(page, mediaQueries) {
     if (page === 'staff' && mediaQueries.laptop === true) {
@@ -89,7 +88,10 @@ export function SummaryCard({page, pageData, selectedEntry, queryClient, showMes
                 <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
                 {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><EditIcon color="#212936"></EditIcon></div>}
                 {equipmentEditPermissions && page === "technical-info" && <div className="device-edit-button" onClick={() => showDeviceUpdate(setUpdateFormVisible)}><EditIcon color="#212936"></EditIcon></div>}
-            </div>                
+            </div>
+            {page === "technical-info" && <div className="vendor-link">
+                <h5 className="">{'View Vendor Contacts'}</h5>   
+            </div>}
             {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
             {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
             {addUpdateFormVisible && page === 'staff' && 

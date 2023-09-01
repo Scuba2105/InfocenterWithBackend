@@ -42,7 +42,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                 <>
                     <dialog open id="dialog-background">
                         <div id="dialog-box">
-                            <div className="dialog-title" style={{color: "#fea500", backgroundColor: "#fdefd6"}}>
+                            <div className="dialog-title" style={{color: "white", backgroundColor: "#fea500"}}>
                                 <img className="info-icon" src={`http://${serverConfig.host}:${serverConfig.port}/images/warning-icon.jpg`} alt="warning"></img>
                                 <h3>Confirmation to Proceed</h3>
                             </div>
