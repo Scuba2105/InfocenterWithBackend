@@ -152,10 +152,6 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             const formData = new FormData(); 
             createFormData(updateData.current, formData);
             
-            for (const pair of formData.entries()) {
-                console.log(pair[0], pair[1]);
-            }
-
             try {
 
                 //Post the data to the server  
