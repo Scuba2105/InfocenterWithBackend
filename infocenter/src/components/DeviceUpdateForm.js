@@ -57,7 +57,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
                        
-    async function sendFormData() {
+    async function sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
             
         let dataKeys = [];
         for (const key of updateData.current.keys()) {
