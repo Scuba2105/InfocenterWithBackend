@@ -275,6 +275,16 @@ export function BlankProfile({identifier, size="25px", foregroundColor}) {
     )
 }
 
+export function VendorArrow({size="25px", color}) {
+    return (
+        <>
+            <svg fill={color} height={size} width={size} viewBox="0 0 512 512" enableBackground="new 0 0 512 512">
+                <polygon points="512,261.5 298.7,90.8 298.7,218.8 0,218.8 0,304.2 298.7,304.2 298.7,432.2 "/>
+            </svg>
+        </>
+    )
+}
+
 export function ComputerScreen({size="400px", color}) {
     return (
         <>

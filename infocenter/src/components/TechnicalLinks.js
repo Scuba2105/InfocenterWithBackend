@@ -33,7 +33,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                     <div className={mediaQueries.laptop ? "image-container-laptop" : "image-container-desktop"}>
                         <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData, 'image')} alt="Medical Equipment"></img>
                     </div>
-                    <div className={mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
+                    <div className= {mediaQueries.laptop ? "equipment-summary-laptop" : "equipment-summary-desktop"}>
                         <div id={mediaQueries.laptop ? "title-container-laptop" : "title-container-desktop"}>
                             <h2>{selectedData.model}</h2>
                         </div>
