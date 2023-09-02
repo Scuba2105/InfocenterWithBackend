@@ -31,7 +31,7 @@ export function SelectInput({type, defaultValue, label, optionData, onChange}) {
         return (
             <div className={`contacts-select-container`}>
                 <p className={`contacts-select-label`}>{label}</p>
-                <select name={label} className="select-input contacts-select" onChange={onChange}>
+                <select name={label} className="select-input contacts-select" value={defaultValue} onChange={onChange}>
                     {optionData.map((hospital, index) => {
                         return (
                         <option key={index} value={hospital}>{hospital}</option>

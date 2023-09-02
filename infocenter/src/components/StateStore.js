@@ -18,5 +18,11 @@ export const useUser = create((set) => ({
     userCredentials: {user: null, staffId: null, permissions: null},
     setUser: (name, id, permissions) => set((state) => ({userCredentials: {user: name, staffId: id, permissions: permissions}})),
     clearUser: () => set((state) => ({userCredentials: {user: null, staffId: null, permissions: null}})),
-}))  
+}))
+
+export const useVendor = create((set) => ({
+    vendor: "3M Australia",
+    setVendor: (newVendor) => set((state) => ({vendor: newVendor})),
+    resetVendor: () => set((state) => ({vendor: "3M Australia"})),
+}))
 

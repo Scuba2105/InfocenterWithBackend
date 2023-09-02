@@ -960,6 +960,7 @@ html {
 .vendor-link-laptop .vendor-button {
   font-size: 12px;
   width: 160px;
+  border: none;
 }
 
 .vendor-button:hover {

@@ -12,6 +12,7 @@ import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { workshops } from "../data";
+import { useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
 function selectUtility(setUtilityPage, index) {
@@ -46,12 +47,15 @@ function onHospitalChange(pageData, setSelectedDepartment, setContactPage, input
     setContactPage(0);
 }  
 
-export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeDialog, showMessage, onRowClick, queryClient}) {
+export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessage, closeDialog, showMessage, onRowClick, queryClient}) {
     
     const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
     const [utilityPage, setUtilityPage] = useState(0)
     const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
-    const [vendor, setVendor] = useState("3M Australia");
+    
+    // Get the vendor and setVendor function from the state store
+    const vendor = useVendor((state) => state.vendor);
+    const setVendor = useVendor((state) => state.setVendor);
 
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     if (isLoading) {
@@ -82,7 +86,7 @@ export function MainArea({page, selectedEntry, dialogOpen, dialogMessage, closeD
                 {page === "technical-info" ? 
                 <>
                     <SearchFilter key={`${page}-device-filter`} page={page} pageData={data.deviceData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
-                    <SummaryCard key={`${page}-device-card`} page={page} pageData={data.deviceData} selectedEntry={selectedEntry} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
+                    <SummaryCard key={`${page}-device-card`} page={page} setPage={setPage} pageData={data.deviceData} selectedEntry={selectedEntry} setVendor={setVendor} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "staff" ?

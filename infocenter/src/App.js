@@ -59,7 +59,7 @@ export default function App() {
             </div>
             <Menu page={page} onPageSelect={onPageSelect} />
             <QueryClientProvider client={queryClient}>
-                <MainArea page={page} selectedEntry={selectedEntry} dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} showMessage={showMessage} onRowClick={onRowClick} queryClient={queryClient} />
+                <MainArea page={page} setPage={setPage} selectedEntry={selectedEntry} dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} showMessage={showMessage} onRowClick={onRowClick} queryClient={queryClient} />
             </QueryClientProvider>
         </div>
     );
