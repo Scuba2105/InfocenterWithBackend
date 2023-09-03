@@ -41,6 +41,20 @@ export function SelectInput({type, defaultValue, label, optionData, onChange}) {
             </div>
         );
     }
+    else if (type === "vendor") {
+        return (
+            <div className={`supplier-select-container`}>
+                <p className={`supplier-select-label`}>{label === 'Hospital' ? `${label}/Region` : label}</p>
+                <select name={label} className={label === 'Configuration Type' ? `select-input config-data-input supplier-select` : `select-input supplier-select`} onChange={onChange}>
+                    {optionData.map((hospital, index) => {
+                        return (
+                        <option key={index} value={hospital}>{hospital}</option>
+                        );
+                    })}
+                </select>           
+            </div>
+        );
+    }
     else {
         return (
             <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>

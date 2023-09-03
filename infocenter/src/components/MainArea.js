@@ -11,7 +11,6 @@ import { useState } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
-import { workshops } from "../data";
 import { useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
@@ -73,19 +72,11 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
     // If data retrieved then render the main area based on returned data.
     if (data) {
 
-        const staffNames = data.staffData.reduce((acc, currStaff) => {
-            if (!workshops.includes(currStaff.name)) {
-                acc.push(currStaff.name);
-                return acc;
-            }
-            return acc;
-        }, [])
-        
         return (
             <div key={page} className="main-area">
                 {page === "technical-info" ? 
                 <>
-                    <SearchFilter key={`${page}-device-filter`} page={page} pageData={data.deviceData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
+                    <SearchFilter key={`${page}-device-filter`} page={page} pageData={data.deviceData} vendorData={data.vendorContactsData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <SummaryCard key={`${page}-device-card`} page={page} setPage={setPage} pageData={data.deviceData} selectedEntry={selectedEntry} setVendor={setVendor} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
@@ -109,8 +100,8 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 <>
                     <Utilities utilityPage={utilityPage} onClick={selectUtility} setUtilityPage={setUtilityPage}>
                         {utilityPage === 0 && <ServiceReportUploads></ServiceReportUploads>}
-                        {utilityPage === 1 && <ServiceRequestGenerator staffNames={staffNames}></ServiceRequestGenerator>}
-                        {utilityPage === 2 && <ThermometerManagement staffNames={staffNames} page={page} dialogOpen={dialogOpen} closeDialog={closeDialog} showMessage={showMessage}></ThermometerManagement>}
+                        {utilityPage === 1 && <ServiceRequestGenerator></ServiceRequestGenerator>}
+                        {utilityPage === 2 && <ThermometerManagement page={page} dialogOpen={dialogOpen} closeDialog={closeDialog} showMessage={showMessage}></ThermometerManagement>}
                         <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>
                 </> :

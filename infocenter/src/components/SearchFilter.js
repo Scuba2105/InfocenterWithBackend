@@ -52,7 +52,7 @@ function closeAddModal(setAddNewModal) {
     setAddNewModal(false);
 }
 
-export function SearchFilter({page, pageData, onRowClick, queryClient, showMessage, closeDialog}) {
+export function SearchFilter({page, pageData, vendorData, onRowClick, queryClient, showMessage, closeDialog}) {
     const [query, setQuery] = useState('null');
     const [tableIndex, setTableIndex] = useState(0);
     const [addNewModal, setAddNewModal] = useState(false);
@@ -91,7 +91,7 @@ export function SearchFilter({page, pageData, onRowClick, queryClient, showMessa
             <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={(e) => onTableArrowClick(e, tableIndex, setTableIndex, maxIndex)} />
             {addNewModal && 
             <ModalSkeleton closeModal={() => closeAddModal(setAddNewModal)} type="add-new" page={page}>
-                <AddNewForm page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={() => closeAddModal(setAddNewModal)}></AddNewForm>
+                <AddNewForm page={page} pageData={pageData} vendorData={vendorData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={() => closeAddModal(setAddNewModal)}></AddNewForm>
             </ModalSkeleton>}
         </div>
     );

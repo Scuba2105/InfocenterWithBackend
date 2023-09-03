@@ -294,7 +294,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     
     return (
         <div className="modal-display">
-            <h3 className="add-new-heading">{type === "update" ? `${selectedData.name} Details` : "New Employee Details"}</h3>
+            <h3 className="add-new-heading">{type === "update" ? `${selectedData.name} Details` : null}</h3>
             <div className="add-new-staff-container" ref={formContainer}>
                 {type === "update" ? <Input type="disabled" inputType="text" identifier="add-new" labelText={nameInputLabel} defaultValue={selectedData.name} /> :
                 <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter ${placeholderValue}`} />}

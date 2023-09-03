@@ -1664,18 +1664,15 @@ html {
   border-radius: 3px;
 }
 
-.add-new-heading {
-  color: var(--form-font-color);
-}
-
 .add-new-input-container {
-  transform: translateY(-30px);
+  transform: translateY(-10px);
 }
 
 .add-new-staff-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0px 13px;
+  transform: translateY(-20px);
 }
 
 .add-new-upload-button {
@@ -1955,7 +1952,9 @@ html {
   transform: translateY(-30px);
 }
 
-.hospitals-select-label, .department-select-label, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
+.hospitals-select-label, .department-select-label, .device-type-select-container, 
+.manufacturer-select-container, .supplier-select-container, .location-select-container, 
+.position-select-container {
   font-weight: bold;
 }
 
@@ -1967,25 +1966,31 @@ html {
   background-color: var(--form-input-color);
 }
 
-.hospital-select-container, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
+.hospital-select-container, .configuration-type-select-container, .device-type-select-container,
+.manufacturer-select-container, .supplier-select-container, 
+.location-select-container, .position-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.hospital-select-label, .configuration-type-select-container, .device-type-select-container, .manufacturer-select-container, .location-select-container, .position-select-container {
+.hospital-select-label, .configuration-type-select-container, .device-type-select-container, 
+.manufacturer-select-container, .supplier-select-container, .location-select-container, 
+.position-select-container {
   font-size: 13px;
   color: var(--form-font-color);
 }
 
-.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
+.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, 
+.supplier-select, .location-select, .position-select {
   color: var(--form-font-color);
   background-color: var(--form-input-color);
   border: none;
 }
 
-.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, .location-select, .position-select {
+.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, 
+.supplier-select, .location-select, .position-select {
   font-size: 12px;
   display: block;
   height: 25px;
@@ -2524,6 +2529,7 @@ html {
   justify-content: center;
   align-items: flex-start;
   padding-left: 10px;
+  padding-right: 10px;
 }
 
 .number-description {
@@ -2534,6 +2540,8 @@ html {
 
 .number-value {
   font-size: 12px;
+  word-break: break-word;
+  -ms-word-break: break-word;
 }
 
 .website-link:visited {

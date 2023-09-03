@@ -6,8 +6,8 @@ import { AddEditStaff } from "./AddEditStaff";
 import { serverConfig } from "../server";
 
 // Generate the values for the models, types and manufacturers select menus
-function generateExistingSelectValues(pageData) {
-    const values = pageData.reduce((acc, currEntry) => {
+function generateExistingSelectValues(pageData, vendorData) {
+    const selectInputsLists = pageData.reduce((acc, currEntry) => {
         if (!acc.models.includes(currEntry.model)) {
             acc.models.push(currEntry.model);
         }
@@ -18,8 +18,20 @@ function generateExistingSelectValues(pageData) {
             acc.manufacturers.push(currEntry.manufacturer);
         }
         return acc;
-    }, {models: [], types: [], manufacturers: []});
-    return values;
+    }, {models: [], types: [], manufacturers: [], vendors: []});
+    
+    // Get the available vendors from the vendor data
+    const availableVendors = vendorData.reduce((acc, currVendor) => {
+        if (!acc.includes(currVendor.vendor)) {
+            acc.push(currVendor.vendor);
+        }
+        return acc;
+    }, []).sort();
+
+    // Push the available vendors to the select input vendors list.
+    selectInputsLists.vendors.push(...availableVendors);    
+
+    return selectInputsLists;
 }
 
 // Toggle the type input between select and text input
@@ -141,7 +153,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     }
 }
 
-export function AddNewForm({page, selectedData, pageData, queryClient, showMessage, closeDialog, closeAddModal}) {
+export function AddNewForm({page, selectedData, pageData, vendorData, queryClient, showMessage, closeDialog, closeAddModal}) {
     
     const [addNewManufacturer, setAddNewManufacturer] = useState(false);
     const [addNewType, setAddNewType] = useState(false);
@@ -154,12 +166,17 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
     const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
       
+    let existingSelectValues, unavailableModels, currentTypes, currentManufacturers, currentVendors;
     // Generate existing values for data validation and consistency. 
-    const existingSelectValues = generateExistingSelectValues(pageData);
-    // Need to validate inserted model to make sure it is no a conflict with existing entries.
-    const unavailableModels = existingSelectValues.models;
-    const currentTypes = existingSelectValues.types.sort();
-    const currentManufacturers = existingSelectValues.manufacturers.sort(); 
+
+    if (page === "technical-info") {
+        existingSelectValues = generateExistingSelectValues(pageData, vendorData);
+        // Need to validate inserted model to make sure it is no a conflict with existing entries.
+        unavailableModels = existingSelectValues.models;
+        currentTypes = existingSelectValues.types.sort();
+        currentManufacturers = existingSelectValues.manufacturers.sort(); 
+        currentVendors = existingSelectValues.vendors;
+    } 
 
     // Render the html based on the page prop
     if (page === "staff") {        
@@ -172,7 +189,6 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
     else if (page === "technical-info") {
         return (
             <div className="modal-display">
-                <h3 className="add-new-heading">New Equipment Details</h3>
                 <div className="add-new-input-container" ref={formContainer}>
                     <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter new ${placeholderValue}`} />
                     <div className="edit-add-new-container">
@@ -187,6 +203,7 @@ export function AddNewForm({page, selectedData, pageData, queryClient, showMessa
                         <SelectInput label="Manufacturer" optionData={currentManufacturers} />}
                         <div className="add-new-aligner"></div>
                     </div>
+                    <SelectInput type="vendor" label="Vendor / Service Agent" optionData={currentVendors} />
                     <Input inputType="file" identifier="new-image" labelText="New Device Image" />
                 </div>            
                 <div className="update-button add-new-upload-button" onClick={() => uploadEquipmentFormData(addNewManufacturer, addNewType, formContainer, newData, unavailableModels, page, queryClient, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
