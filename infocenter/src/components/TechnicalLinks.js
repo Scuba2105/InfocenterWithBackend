@@ -43,11 +43,17 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 <div className={mediaQueries.laptop ? "technical-area-laptop" : "technical-area-desktop"}>
                     <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} target="_blank" rel="noopener noreferrer" >
                         <ServiceIcon color="#98053b" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                        Service Manual
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <span>Service</span>
+                            <span>Manual</span> 
+                        </div>
                     </a>
                     <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} target="_blank" rel="noopener noreferrer">
                         <UserManualIcon color="#037470" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                        User Manual                    
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <span>User</span>
+                            <span>Manual</span> 
+                        </div>                    
                     </a>
                     <div className="technical-link config" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
                         <ConfigIcon color="#f4af1a" size={mediaQueries.desktop ? "50px" : "30px"}/>
@@ -59,7 +65,10 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                     </div>
                     <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <DocumentsIcon color="#bf5a2b" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                        Other Documents
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <span>Other</span>
+                            <span>Documents</span> 
+                        </div>
                     </div>
                     <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <PasswordsIcon color="#33658A" size={mediaQueries.desktop ? "50px" : "30px"}/>
