@@ -740,6 +740,10 @@ html {
   padding: 0;
 }
 
+.contact-add-new-btn {
+  margin-right: 15px;
+}
+
 .add-new-btn-laptop:hover, .add-new-btn-desktop:hover {
   cursor: pointer; 
 }
@@ -925,6 +929,8 @@ html {
   height: 40px;
   width: 40px;
 }
+
+
 
 .vendor-link, .vendor-link-laptop {
   grid-row: 2;
@@ -2393,16 +2399,22 @@ html {
   margin-top: 30px;
 }
 
-.contacts-heading {
+.contacts-heading-admin, .contacts-heading {
   height: 100%;
   width: 90%;
   color: white;
   background-color: var(--med-theme);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: auto auto;
   border: 1px solid black;
+}
+
+.contacts-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .contacts-main-display {

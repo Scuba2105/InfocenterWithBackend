@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NextIcon } from "../svg";
 import { ContactCard } from "./ContactCard";
 import { ContactsFilter } from "./ContactsFilter";
+import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react"
 
 function pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e) {
@@ -41,6 +42,9 @@ export function ContactsSummary({identifier, selectedDepartment, setSelectedDepa
         desktop: "(min-width: 1800px)"
     });
 
+    // Get the permissions of the current user from the state store
+    const currentUser = useUser((state) => state.userCredentials);
+    
     // Get all contacts for the selected department
     const allDepartmentContacts = pageData.filter((entry) => {
         if (identifier === "staff") {
@@ -64,8 +68,10 @@ export function ContactsSummary({identifier, selectedDepartment, setSelectedDepa
     
     return (
         <div className="hospital-contacts-container">
-            <div className="contacts-heading">
+            <div className={currentUser.permissions === "admin" ? "contacts-heading-admin" : "contacts-heading"}>
+                {currentUser.permissions === "admin" && <div id="summary-header-aligner" style={{marginLeft: 15 + 'px'}}></div>}
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
+                {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop contact-add-new-btn" : "add-new-btn-desktop contact-add-new-btn"}>+</button>}
             </div>   
             <div className={mediaQueries.laptop ? "contacts-main-display contacts-main-display-laptop" : "contacts-main-display contacts-main-display-desktop"}>
                 <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setVendor={setVendor} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
