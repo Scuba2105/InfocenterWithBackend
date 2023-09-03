@@ -2464,6 +2464,10 @@ html {
   transform: translateY(-10px);
 }
 
+.vendor-select {
+  width: 270px;
+}
+
 .contacts-main-display-desktop .contacts-select {
   width: 350px;
   height: 40px;
