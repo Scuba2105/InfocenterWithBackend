@@ -1552,6 +1552,10 @@ html {
   background-color: var(--form-background-color);
 }
 
+.add-new-heading {
+  color: var(--form-font-color);
+}
+
 .password-display {
   grid-row: 2;
   display: flex;
@@ -1678,7 +1682,7 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0px 13px;
-  transform: translateY(-20px);
+  transform: translateY(0px);
 }
 
 .add-new-upload-button {

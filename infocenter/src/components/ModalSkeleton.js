@@ -3,6 +3,8 @@ import useMediaQueries from "media-queries-in-react";
 import { useRef, useState } from 'react';
 import { serverConfig } from "../server";
 
+const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 'disposal', 'change-password'];
+
 function getFormHeading(page, type, selectedData) {
     
     if (page === "staff") {
@@ -18,7 +20,13 @@ function getFormHeading(page, type, selectedData) {
         return heading;
     }
     else if (type === "change-password") {
-        return "Change Password"
+        return "Change Password";
+    }
+    else if (type === "new-department-contact") {
+        return "Add New Department Contact";
+    }
+    else if (type === "new-vendor") {
+        return "Add New Vendor Contact";
     }
 }
 
@@ -85,7 +93,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
         desktop: "(min-width: 1800px)"
     });
 
-    if (type === 'add-new' || type === 'update' || type === 'check' || type === 'disposal' || type === 'change-password') {
+    if (formTypes.includes(type)) {
         return (
             <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={(type === "software") && mediaQueries.laptop ? 
             { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :

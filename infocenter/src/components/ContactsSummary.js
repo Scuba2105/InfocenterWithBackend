@@ -2,6 +2,8 @@ import { useState } from "react";
 import { NextIcon } from "../svg";
 import { ContactCard } from "./ContactCard";
 import { ContactsFilter } from "./ContactsFilter";
+import { ModalSkeleton } from "./ModalSkeleton";
+import { AddNewContact } from "./AddNewContact";
 import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react"
 
@@ -31,11 +33,20 @@ function pageArrowClick(identifier, contactPage, vendorContactPage, setContactPa
     }
 } 
 
+function openAddContactModal(setAddContactVisible) {
+    setAddContactVisible(true);
+}
+
+function closeAddContactModal(setAddContactVisible) {
+    setAddContactVisible(false);
+}
+
 export function ContactsSummary({identifier, selectedDepartment, setSelectedDepartment, setVendor, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange}) {
     
     // Contacts for each department are viewed over several pages. Store the state of the page.
     const [contactPage, setContactPage] = useState(0);
     const [vendorContactPage, setVendorContactPage] = useState(0);
+    const [addContactVisible, setAddContactVisible] = useState(false);
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -71,7 +82,7 @@ export function ContactsSummary({identifier, selectedDepartment, setSelectedDepa
             <div className={currentUser.permissions === "admin" ? "contacts-heading-admin" : "contacts-heading"}>
                 {currentUser.permissions === "admin" && <div id="summary-header-aligner" style={{marginLeft: 15 + 'px'}}></div>}
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
-                {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop contact-add-new-btn" : "add-new-btn-desktop contact-add-new-btn"}>+</button>}
+                {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop contact-add-new-btn" : "add-new-btn-desktop contact-add-new-btn"} onClick={() => openAddContactModal(setAddContactVisible)}>+</button>}
             </div>   
             <div className={mediaQueries.laptop ? "contacts-main-display contacts-main-display-laptop" : "contacts-main-display contacts-main-display-desktop"}>
                 <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setVendor={setVendor} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
@@ -80,7 +91,7 @@ export function ContactsSummary({identifier, selectedDepartment, setSelectedDepa
                         const index = allDepartmentContacts.indexOf(contact);
                         const colorIndex = index % 4;
                         return (
-                            <div className="contact-container">
+                            <div key={`contact-${index}`} className="contact-container">
                                 <ContactCard identifier={identifier} contact={contact} index={colorIndex}></ContactCard>
                             </div>
                         )
@@ -92,6 +103,10 @@ export function ContactsSummary({identifier, selectedDepartment, setSelectedDepa
                     <NextIcon className="forward-next-icon" color="white" size="11px" offset="0" angle="0" id="forward-next" />
                 </div>
             </div>                  
+            {addContactVisible && 
+            <ModalSkeleton closeModal={() => closeAddContactModal(setAddContactVisible)} type={identifier === "staff" ? 'new-department-contact' : 'new-vendor'}>
+                <AddNewContact formType={identifier}></AddNewContact>
+            </ModalSkeleton>}
         </div>
     )
 }
