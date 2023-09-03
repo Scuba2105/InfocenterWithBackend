@@ -26,3 +26,9 @@ export const useVendor = create((set) => ({
     resetVendor: () => set((state) => ({vendor: "3M Australia"})),
 }))
 
+export const useDevice = create((set) => ({
+    device: "MX450",
+    setDevice: (newDevice) => set((state) => ({device: newDevice})),
+    resetDevice: () => set((state) => ({vendor: "MX450"})),
+}))
+

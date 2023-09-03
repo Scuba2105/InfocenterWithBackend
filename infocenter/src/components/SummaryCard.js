@@ -1,6 +1,6 @@
 import { TechnicalLinks } from "./TechnicalLinks";
 import { StaffDetails } from "./StaffDetails";
-import { useUser } from "./StateStore";
+import { useUser, useDevice } from "./StateStore";
 import { LinkModal } from "./LinkModal";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
@@ -60,9 +60,10 @@ function closeUpdate(setUpdateFormVisible) {
     setUpdateFormVisible(false)
 }
 
-function renderContactsPage(setPage, setVendor, currentVendor) {
+function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, currentVendor) {
     setPage('contacts');
     setVendor(currentVendor);
+    setCurrentDevice(currentModel);
 }
 
 export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, queryClient, showMessage, closeDialog}) {
@@ -87,6 +88,9 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
     const staffEditPermissions = (currentUser.permissions === "admin" || currentUser.user === selectedData.name)
     const equipmentEditPermissions = currentUser.permissions === "admin";
 
+    // Get the state setter for selected device from Zustand state
+    const setCurrentDevice = useDevice((state) => state.setDevice);
+    
     return (
         <div className={getClassName(page, mediaQueries)}>
             <div className={(workshops.includes(selectedData.name) || !staffEditPermissions) ? "summary-card-header-center" : "summary-card-header"}>
@@ -98,7 +102,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
             {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
             {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
             {page === "technical-info" && selectedData.vendor && <div className={mediaQueries.laptop ? "vendor-link vendor-link-laptop" : "vendor-link vendor-link-desktop"}>
-                <button className="vendor-button" onClick={() => renderContactsPage(setPage, setVendor, selectedData.vendor)}>View Vendor Contacts <VendorArrow size={mediaQueries.laptop ? '15px' : '25px'} color="white"></VendorArrow></button> 
+                <button className="vendor-button" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size={mediaQueries.laptop ? '15px' : '25px'} color="white"></VendorArrow></button> 
             </div>}
             {addUpdateFormVisible && page === 'staff' && 
                 <ModalSkeleton selectedData={selectedData} closeModal={() => closeAddUpdateForm(setAddUpdateFormVisible)} type="update" page={page}>

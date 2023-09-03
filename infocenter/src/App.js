@@ -4,7 +4,7 @@ import { MainArea } from './components/MainArea';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider} from 'react-query';
 import { Login } from './components/Login';
-import { useLoggedIn } from './components/StateStore';
+import { useLoggedIn, useDevice } from './components/StateStore';
 import { Avatar } from './components/Avatar';
 
 // Create a client
@@ -19,10 +19,14 @@ export default function App() {
     
     // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
+    const initialDevice = useDevice((state) => state.device);
         
+    // Get the state setter for selected device from Zustand state
+    const setCurrentDevice = useDevice((state) => state.setDevice);
+
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
-        const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? 'MX450' : null;
+        const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? initialDevice : null;
         setSelectedEntry(initialEntry);
         setPage(page);
     }
@@ -32,6 +36,7 @@ export default function App() {
         const row = e.target.parentNode;
         const entryIdentifier = row.children[0].textContent === '-' ? row.children[1].textContent : row.children[0].textContent
         setSelectedEntry(entryIdentifier);
+        setCurrentDevice(entryIdentifier);
     }
 
     function closeDialog() {
