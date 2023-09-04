@@ -130,12 +130,13 @@ export function capitaliseFirstLetters(input) {
     return formattedWords
 }
 
-export function generateNewDeviceData(fileExt, newType, manufacturer, newModel) {
+export function generateNewDeviceData(fileExt, newType, manufacturer, vendor, newModel) {
 
     return {
         img: fileExt,
         type: newType,
         manufacturer: manufacturer,
+        vendor: vendor,
         model: newModel,
         serviceManual: false,
         userManual: false,

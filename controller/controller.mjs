@@ -233,10 +233,11 @@ export async function addNewDeviceData(req, res, __dirname) {
             const newModel = req.body.model;
             const newType = req.body.type;
             const manufacturer = req.body.manufacturer;
+            const vendor = req.body.vendor;
             const fileExt = req.body.extension;
         
             // Create the new data for the added device 
-            const newDevice  = generateNewDeviceData(fileExt, newType, manufacturer, newModel);
+            const newDevice  = generateNewDeviceData(fileExt, newType, manufacturer, vendor, newModel);
                             
             // Push the new device data to the current device data array 
             deviceData.push(newDevice);

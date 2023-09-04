@@ -47,30 +47,35 @@ function toggleAddNewManufacturer(setAddNewManufacturer) {
 // Get the input elements from the add new form for validation
 function getInputElements(addNewManufacturer, addNewType, newForm) {
     const modelInput = newForm.querySelector('.text-input');
-    let manufacturerInput, deviceTypeInput 
+    let manufacturerInput, deviceTypeInput, vendorInput
     if (addNewManufacturer && !addNewType) {
-        deviceTypeInput = newForm.querySelector('.select-input');
+        deviceTypeInput = newForm.querySelectorAll('.select-input')[0];
         manufacturerInput = newForm.querySelectorAll('.text-input')[1];
+        vendorInput = newForm.querySelectorAll('.select-input')[1];
     }
     else if (!addNewManufacturer && addNewType) {
         deviceTypeInput = newForm.querySelectorAll('.text-input')[1];
-        manufacturerInput = newForm.querySelector('.select-input')[0]
+        manufacturerInput = newForm.querySelector('.select-input')[0];
+        vendorInput = newForm.querySelectorAll('.select-input')[1];
     }
     else if (addNewManufacturer && addNewType) {
         deviceTypeInput = newForm.querySelectorAll('.text-input')[1];
         manufacturerInput = newForm.querySelectorAll('.text-input')[2]
+        vendorInput = newForm.querySelectorAll('.select-input')[0];
     }
     else {
         deviceTypeInput = newForm.querySelectorAll('.select-input')[0];
         manufacturerInput = newForm.querySelectorAll('.select-input')[1]
+        vendorInput = newForm.querySelectorAll('.select-input')[2];
     }
+    
     const fileInput = newForm.querySelector(".file-input")
     
-    return [modelInput, deviceTypeInput, manufacturerInput, fileInput];
+    return [modelInput, deviceTypeInput, manufacturerInput, vendorInput, fileInput];
 }
 
 async function uploadEquipmentFormData(addNewManufacturer, addNewType, formContainer, newData, unavailableModels, page, queryClient, showMessage, closeDialog, closeAddModal) {
-    const deviceDataOptions = ["Model", "Type", "Manufacturer", "Image File"]
+    const deviceDataOptions = ["Model", "Type", "Manufacturer", "Vendor", "Image File"]
     const formDataNames = deviceDataOptions.map((option) => {
         return option.toLocaleLowerCase().replace(' ', '-');
     });
@@ -78,7 +83,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     
     // Get all the input elements in the add-new form
     const inputElements = getInputElements(addNewManufacturer, addNewType, newForm);
-
+    
     // Validate the input data for the new device. All fields mandatory
     for (let [index, input] of inputElements.entries()) {
         if (input.value === "") {
@@ -96,7 +101,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
 
     // Append the input data to the form data object
     inputElements.forEach((input, index) => {
-        if (index <= 2) {
+        if (index <= 3) {
             if (index === 0) {
                 model = input.value.toLocaleLowerCase().replace(/\s/ig, '_');
             } 
