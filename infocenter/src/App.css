@@ -22,6 +22,7 @@ html {
   --form-font-color: white;
   --form-background-color: #4d555c;
   --form-input-color: #69737a;
+  --input-placeholder-color: rgb(188, 188, 188);
   --grey-font: rgb(183, 190, 195); 
   --green-button-color: rgb(3, 252, 156);
   --green-button-border: 1px solid rgb(3, 168, 105);
@@ -761,17 +762,17 @@ html {
   color: var(--search-bar-color);
 }
 
-.text-input::placeholder, .change-password-input::placeholder, .select-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--form-font-color);
+.text-input::placeholder, .change-password-input::placeholder, .select-input::placeholder, .file-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--input-placeholder-color);
   opacity: 1; /* Firefox */
 }
 
-.text-input:-ms-input-placeholder, .change-password-input:-ms-input-placeholder, .select-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: var(--form-font-color);
+.text-input:-ms-input-placeholder, .change-password-input:-ms-input-placeholder, .select-input:-ms-input-placeholder, .file-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
 }
 
-.text-input::-ms-input-placeholder, .change-password-input::-ms-input-placeholder, .select-input::-ms-input-placeholder { /* Microsoft Edge */
-  color: var(--form-font-color);
+.text-input::-ms-input-placeholder, .change-password-input::-ms-input-placeholder, .select-input::-ms-input-placeholder, .file-input.text-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: black;
 }
 
 .search-table-container {
