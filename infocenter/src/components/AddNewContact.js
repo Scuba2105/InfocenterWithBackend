@@ -2,16 +2,19 @@ import { useRef } from "react"
 import { Input } from "./Input";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
-const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-8]d{8}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
 
 function uploadNewContact(inputContainer, formType) {
     const inputs = inputContainer.current.querySelectorAll("input");
+    const staffRegexArray = inputsRegexArray.slice(0, 5);
+    const vendorRegexArray = inputsRegexArray.slice(0, 3).concat(inputsRegexArray.slice(4)); 
+    
     inputs.forEach((input, index) => {
-        if (index >= 3 && formType === "vendor") {
-            console.log(inputsRegexArray[index + 1].test(input.value));
+        if (formType === "vendor") {
+            console.log(vendorRegexArray[index].test(input.value), vendorRegexArray[index]);
         }
         else {
-            console.log(inputsRegexArray[index].test(input.value));
+            console.log(staffRegexArray[index].test(input.value), staffRegexArray[index]);
         }
     })
 }
