@@ -1,9 +1,25 @@
 import { useState, useRef } from "react"
 import { Input } from "./Input";
+import { SelectInput } from "./SelectInput";
 import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+
+function uploadNewStaffContact(inputContainer, formType) {
+    const inputs = inputContainer.current.querySelectorAll("input");
+    const staffRegexArray = inputsRegexArray.slice(0, 5);
+    const vendorRegexArray = inputsRegexArray.slice(0, 3).concat(inputsRegexArray.slice(4)); 
+    
+    inputs.forEach((input, index) => {
+        if (index === 2 || index === 3) {
+            console.log(staffRegexArray[1].test(input.value), staffRegexArray[index]);
+        }
+        else {
+            console.log(staffRegexArray[index].test(input.value), staffRegexArray[index]);
+        }
+    })
+}
 
 function updatePage(staffInputPage, setStaffInputPage, e) {
     if (e.currentTarget.classList.contains("config-left-arrow") && staffInputPage === 2) {
@@ -13,29 +29,34 @@ function updatePage(staffInputPage, setStaffInputPage, e) {
         setStaffInputPage(2);
     }
 }
-    
 
-function uploadNewContact(inputContainer, formType) {
-    const inputs = inputContainer.current.querySelectorAll("input");
-    const staffRegexArray = inputsRegexArray.slice(0, 5);
-    const vendorRegexArray = inputsRegexArray.slice(0, 3).concat(inputsRegexArray.slice(4)); 
-    
-    inputs.forEach((input, index) => {
-        if (formType === "vendor") {
-            console.log(vendorRegexArray[index].test(input.value), vendorRegexArray[index]);
-        }
-        else {
-            console.log(staffRegexArray[index].test(input.value), staffRegexArray[index]);
-        }
-    })
+function updateHospital(e, setHospital) {
+    setHospital(e.currentTarget.value);
 }
 
-export function AddNewContact({formType}) {
+export function AddNewContact({formType, pageData}) {
     
     const [staffInputPage, setStaffInputPage] = useState(1);
+    const [hospital, setHospital] = useState("John Hunter Hospital")
     const inputContainer = useRef(null);
 
     if (formType === "staff") {
+        const hospitalSelectOptions = pageData.reduce((acc, entry) => {
+            if (!acc.includes(entry.hospital)) {
+                acc.push(entry.hospital);
+            }
+            return acc;
+        }, []).sort();
+
+        const departmentSelectOptions = pageData.filter((entry) => {
+            return entry.hospital === hospital;
+        }).reduce((acc, entry) => {
+            if (!acc.includes(entry.department)) {
+                acc.push(entry.department);
+            }
+            return acc; 
+        }, []).sort()
+
         return (
             <div className="contact-modal-display">
                 <div className="contact-indicator-container">
@@ -47,8 +68,8 @@ export function AddNewContact({formType}) {
                     <div className="add-new-input-container" ref={inputContainer}>
                         {staffInputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
                         {staffInputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
-                        {staffInputPage === 1 && <Input inputType="text" identifier="add-new" labelText="Hospital" />}
-                        {staffInputPage === 1 && <Input inputType="text" identifier="add-new" labelText="Department" />}
+                        {staffInputPage === 1 && <SelectInput label="Contact Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital)}/>}
+                        {staffInputPage === 1 && <SelectInput label="Contact Department" value={departmentSelectOptions[0]} optionData={departmentSelectOptions}/>}
                         {staffInputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
                         {staffInputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
                         {staffInputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
@@ -57,7 +78,7 @@ export function AddNewContact({formType}) {
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button">Save Changes</div>
-                    <div className="update-button">Upload Updates</div>
+                    <div className="update-button" onClick={() => uploadNewStaffContact(inputContainer, formType)}>Upload Updates</div>
                 </div>
             </div>
         );
@@ -66,13 +87,13 @@ export function AddNewContact({formType}) {
         return (
             <div className="modal-display">
                 <div className="add-new-contact-input-container" ref={inputContainer}>
-                    <Input inputType="text" identifier="add-new" labelText="Vendor Name" placeholdertext="Enter vendor for new contact" />
+                    <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" />
                     <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext="Enter new contact name" />
                     <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. Sales Rep, Clinical Specialist etc." />
                     <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />
                     <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />
                 </div>            
-                <div className="update-button add-new-upload-button" onClick={() => uploadNewContact(inputContainer, formType)}>Upload Data</div>
+                <div className="update-button add-new-upload-button">Upload Data</div>
             </div>
         );
     }
