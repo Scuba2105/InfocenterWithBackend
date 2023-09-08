@@ -4,9 +4,11 @@ import { SelectInput } from "./SelectInput";
 import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
-const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const staffInputsDescriptions = ["Contact Name", "Contact Position", "Contact Hospital", "Contact Department", "Office Phone", "Mobile Phone", "Email"];
+const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
 
-function saveNewStaffContact(inputContainer, staffInputPage) {
+function saveNewStaffContact(inputContainer, inputPage) {
     const inputs = inputContainer.current.querySelectorAll("input");
     const selectInputs = inputContainer.current.querySelectorAll("select");
     const staffRegexArray = inputsRegexArray.slice(0, 5);
@@ -14,26 +16,32 @@ function saveNewStaffContact(inputContainer, staffInputPage) {
     
     // Validate text inputs
     inputs.forEach((input, index) => {
-        if (staffInputPage === 1) {
-            console.log(staffRegexArray[index].test(input.value), staffRegexArray[index]);
+        if (inputPage === 1) {
+            if (staffRegexArray[index].test(input.value) === false) {
+                console.log(`${staffInputsDescriptions[index]} is not a valid entry`)
+                // Need to throw error if doesnt match regex
+            }
         }
         else {
-            console.log(staffRegexArray[index + 2].test(input.value), staffRegexArray[index]);
+            if (staffRegexArray[index + 2].test(input.value) === false) {
+                console.log(`${staffInputsDescriptions[index + 2]} is not a valid entry`)
+            }
+            // Need to throw error if it doesn't match regex
         }
     })
 
     // Validate select inputs
     selectInputs.forEach((input, index) => {
-        console.log(staffRegexArray[1].test(input.value), staffRegexArray[index]);
+        console.log(staffRegexArray[1].test(input.value), staffRegexArray[1]);
     })
 }
 
-function updatePage(staffInputPage, setStaffInputPage, e) {
-    if (e.currentTarget.classList.contains("config-left-arrow") && staffInputPage === 2) {
-        setStaffInputPage(1);
+function updatePage(inputPage, setinputPage, e) {
+    if (e.currentTarget.classList.contains("config-left-arrow") && inputPage === 2) {
+        setinputPage(1);
     }
-    else if (e.currentTarget.classList.contains("config-right-arrow") && staffInputPage === 1) {
-        setStaffInputPage(2);
+    else if (e.currentTarget.classList.contains("config-right-arrow") && inputPage === 1) {
+        setinputPage(2);
     }
 }
 
@@ -47,9 +55,8 @@ function updateDepartment(e, setDepartment) {
 
 export function AddNewContact({formType, pageData}) {
     
-    const [staffInputPage, setStaffInputPage] = useState(1);
+    const [inputPage, setinputPage] = useState(1);
     const [hospital, setHospital] = useState("John Hunter Hospital")
-    const [department, setDepartment] = useState(null);
     const inputContainer = useRef(null);
 
     if (formType === "staff") {
@@ -72,24 +79,24 @@ export function AddNewContact({formType, pageData}) {
         return (
             <div className="contact-modal-display">
                 <div className="contact-indicator-container">
-                    <div className={staffInputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
-                    <div className={staffInputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
+                    <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
+                    <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
-                <div className="staff-contacts-input-container" style={staffInputPage === 2 ? {transform: 'translateY(31px)'} : null}>
-                    <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(staffInputPage, setStaffInputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                <div className="staff-contacts-input-container" style={inputPage === 2 ? {transform: 'translateY(31px)'} : null}>
+                    <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className="add-new-input-container" ref={inputContainer}>
-                        {staffInputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
-                        {staffInputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
-                        {staffInputPage === 1 && <SelectInput label="Contact Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital)}/>}
-                        {staffInputPage === 1 && <SelectInput label="Contact Department" defaultValue={departmentSelectOptions[0]} optionData={departmentSelectOptions} onChange={(e) => updateDepartment(e, setDepartment)}/>}
-                        {staffInputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
-                        {staffInputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
-                        {staffInputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
+                        {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
+                        {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
+                        {inputPage === 1 && <SelectInput label="Contact Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital)}/>}
+                        {inputPage === 1 && <SelectInput label="Contact Department" defaultValue={departmentSelectOptions[0]} optionData={departmentSelectOptions} />}
+                        {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
+                        {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
+                        {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
                     </div>  
-                    <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(staffInputPage, setStaffInputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
-                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, staffInputPage)}>Save Changes</div>
+                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, inputPage)}>Save Changes</div>
                     <div className="update-button">Upload Updates</div>
                 </div>
             </div>
@@ -97,15 +104,27 @@ export function AddNewContact({formType, pageData}) {
     }
     else {
         return (
-            <div className="modal-display">
-                <div className="add-new-contact-input-container" ref={inputContainer}>
-                    <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" />
-                    <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext="Enter new contact name" />
-                    <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. Sales Rep, Clinical Specialist etc." />
-                    <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />
-                    <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />
-                </div>            
-                <div className="update-button add-new-upload-button">Upload Data</div>
+            <div className="contact-modal-display">
+                <div className="contact-indicator-container">
+                    <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
+                    <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
+                </div>
+                <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
+                    <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <div className="add-new-input-container" ref={inputContainer}>
+                        {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" />}
+                        {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext="Enter new contact name" />}
+                        {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. Sales Rep, Clinical Specialist etc." />}
+                        {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
+                        {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter office phone number" />}
+                        {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />}
+                    </div> 
+                    <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                </div>
+                <div className={"form-buttons-laptop"}>
+                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, inputPage)}>Save Changes</div>
+                    <div className="update-button">Upload Updates</div>
+                </div>
             </div>
         );
     }
