@@ -1990,7 +1990,7 @@ html {
 
 .hospitals-select-label, .department-select-label, .device-type-select-container, 
 .manufacturer-select-container, .supplier-select-container, .location-select-container, 
-.position-select-container {
+.position-select-container, .contact-hospital-select-container, .contact-department-select-container {
   font-weight: bold;
 }
 
@@ -2003,30 +2003,20 @@ html {
 }
 
 .hospital-select-container, .configuration-type-select-container, .device-type-select-container,
-.manufacturer-select-container, .supplier-select-container, 
-.location-select-container, .position-select-container {
+.manufacturer-select-container, .supplier-select-container, .location-select-container, 
+.position-select-container, .contact-hospital-select-container, 
+.contact-department-select-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.hospital-select-label, .configuration-type-select-container, .device-type-select-container, 
-.manufacturer-select-container, .supplier-select-container, .location-select-container, 
-.position-select-container {
   font-size: 13px;
   color: var(--form-font-color);
 }
 
 .hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, 
-.supplier-select, .location-select, .position-select {
-  color: var(--form-font-color);
-  background-color: var(--form-input-color);
-  border: none;
-}
-
-.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, 
-.supplier-select, .location-select, .position-select {
+.supplier-select, .location-select, .position-select, .contact-hospital-select,
+.contact-department-select {
   font-size: 12px;
   display: block;
   height: 25px;
@@ -2035,6 +2025,9 @@ html {
   padding-right: 20px;
   padding-left: 10px;
   transform: translateY(-10px);
+  color: var(--form-font-color);
+  background-color: var(--form-input-color);
+  border: none;
 }
 
 #device-config-container-desktop {
