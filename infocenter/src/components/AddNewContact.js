@@ -4,11 +4,11 @@ import { SelectInput } from "./SelectInput";
 import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
-const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Contact Hospital", "Contact Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
 
-function saveNewStaffContact(inputContainer, newContactData, inputPage) {
+function saveNewStaffContact(inputContainer, newContactData, inputPage, queryClient, showMessage, closeDialog) {
     const textInputs = inputContainer.current.querySelectorAll("input");
     const selectInputs = inputContainer.current.querySelectorAll("select");
     const staffRegexArray = inputsRegexArray.slice(0, 5);
@@ -22,7 +22,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage) {
         if (inputPage === 1) {
             if (staffRegexArray[index].test(input.value) === false) {
                 // Show warning message
-                console.log(`${staffInputsDescriptions[index]} is not a valid entry`)
+                showMessage("warning", `The value entered for ${staffInputsDescriptions[index]} is not a valid entry`)
                 return
             }
             else {
@@ -34,7 +34,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage) {
                 console.log(input.value)
                 if (staffRegexArray[index + 2].test(input.value) === false) {
                     // Show warning
-                    console.log(`${staffInputsDescriptions[index + 42]} is not a valid entry`)
+                    showMessage("warning", `The value entered for ${staffInputsDescriptions[index + 4]} is not a valid entry`)
                     return
                 }
                 else {
@@ -49,7 +49,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage) {
         for (let [index, input] of Array.from(selectInputs).entries()) {
             if (staffRegexArray[1].test(input.value) === false) {
                 // Show warning message
-                console.log(`${staffInputsDescriptions[index + 2]} is not a valid entry`);
+                showMessage("warning", `The value entered for ${staffInputsDescriptions[index + 2]} is not a valid entry`);
                 return
             }
             else {
@@ -59,7 +59,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage) {
     }
 }
 
-function uploadNewStaffData(newContactData) {
+function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog) {
     // Check at least one phone number has been added.
     let phoneKeyCount = 0;
     for (let key of ["Office Phone", "Dect Phone", "Mobile Phone"]) {
@@ -69,7 +69,7 @@ function uploadNewStaffData(newContactData) {
 
     if (phoneKeyCount === 0) {
         // Show warning message
-        console.log("At least one phone number is required");
+        showMessage("warning", "At least one phone number is required for upload.");
     }
 
     // Start uploading dialog and begin post request
@@ -93,7 +93,7 @@ function updateDepartment(e, setDepartment) {
     setDepartment(e.currentTarget.value);
 }
 
-export function AddNewContact({formType, pageData}) {
+export function AddNewContact({formType, pageData, queryClient, showMessage, closeDialog}) {
     
     const [inputPage, setinputPage] = useState(1);
     const [hospital, setHospital] = useState("John Hunter Hospital");
@@ -137,8 +137,8 @@ export function AddNewContact({formType, pageData}) {
                     <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
-                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage)}>Save Changes</div>
-                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData)}>Upload Updates</div>
+                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, queryClient, showMessage, closeDialog)}>Save Changes</div>
+                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog)}>Upload Updates</div>
                 </div>
             </div>
         );
