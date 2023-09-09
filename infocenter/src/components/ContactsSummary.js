@@ -41,7 +41,7 @@ function closeAddContactModal(setAddContactVisible) {
     setAddContactVisible(false);
 }
 
-export function ContactsSummary({identifier, selectedDepartment, setSelectedDepartment, setVendor, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange, queryClient, showMessage, closeDialog}) {
+export function ContactsSummary({page, identifier, selectedDepartment, setSelectedDepartment, setVendor, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange, queryClient, showMessage, closeDialog}) {
     
     // Contacts for each department are viewed over several pages. Store the state of the page.
     const [contactPage, setContactPage] = useState(0);
@@ -105,7 +105,7 @@ export function ContactsSummary({identifier, selectedDepartment, setSelectedDepa
             </div>                  
             {addContactVisible && 
             <ModalSkeleton closeModal={() => closeAddContactModal(setAddContactVisible)} type={identifier === "staff" ? 'new-department-contact' : 'new-vendor'}>
-                <AddNewContact formType={identifier} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} ></AddNewContact>
+                <AddNewContact formType={identifier} page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} ></AddNewContact>
             </ModalSkeleton>}
         </div>
     )

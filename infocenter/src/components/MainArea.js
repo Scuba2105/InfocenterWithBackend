@@ -89,10 +89,10 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 page === "contacts" ?
                 <div className="contacts-page-container">
                     <div className="contacts-summary-container">                                                                                                                                                                                    
-                        <ContactsSummary identifier="staff" selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
+                        <ContactsSummary page={page} identifier="staff" selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
                     <div className="contacts-summary-container">
-                        <ContactsSummary identifier="vendor" selectedVendor={vendor} setVendor={setVendor} pageData={data.vendorContactsData} onVendorChange={onVendorChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
+                        <ContactsSummary page={page} identifier="vendor" selectedVendor={vendor} setVendor={setVendor} pageData={data.vendorContactsData} onVendorChange={onVendorChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </div> :

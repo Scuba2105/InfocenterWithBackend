@@ -6,6 +6,7 @@ import multer from 'multer';
 import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, validateLoginCredentials, 
          changeLoginPassword, updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, 
          updateThermometerList, getInactiveThermometers, disposeSelectedThermometers } from './controller/controller.mjs';
+import { addNewContactData } from './controller/contacts-controller.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
@@ -128,7 +129,7 @@ app.put("/UpdateEntry/:page", (req, res, next) => {
 
 
 // Define route to add new staff or equipment. 
-app.post('/AddNewEntry/:page', (req, res, next) => {
+app.post('/AddNewEntry/:page/:formType', (req, res, next) => {
     try {
         cpUpload(req, res, (err) => {
             if (err) {
@@ -141,6 +142,9 @@ app.post('/AddNewEntry/:page', (req, res, next) => {
                 }
                 else if (page === "staff") {
                     addNewStaffData(req, res, __dirname);
+                }
+                else if (page === "contacts") {
+                    addNewContactData(req, res, __dirname)
                 }
             }
         })
