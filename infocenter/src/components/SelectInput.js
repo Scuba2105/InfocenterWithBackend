@@ -17,7 +17,7 @@ export function SelectInput({type, defaultValue, label, optionData, value, onCha
         return (
             <div className={`form-select-input-container`}>
                 <p className={`form-select-input-label`}>{label}</p>
-                <select name={label} defaultValue={defaultValue} className={"select-input form-select-input"}>
+                <select name={label} defaultValue={defaultValue} className={"select-input form-select-input"} onChange={onChange}>
                     {optionData.map((hospital, index) => {
                         return (
                         <option key={index} value={hospital}>{hospital}</option>

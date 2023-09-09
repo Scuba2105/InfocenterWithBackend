@@ -60,6 +60,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, queryCli
 }
 
 function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog) {
+    
     // Check at least one phone number has been added.
     let phoneKeyCount = 0;
     for (let key of ["Office Phone", "Dect Phone", "Mobile Phone"]) {
@@ -70,10 +71,11 @@ function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialo
     if (phoneKeyCount === 0) {
         // Show warning message
         showMessage("warning", "At least one phone number is required for upload.");
+        return
     }
 
     // Start uploading dialog and begin post request
-
+    showMessage("uploading", `Uploading Employee Data`);
 }
 
 function updatePage(inputPage, setinputPage, e) {
@@ -85,12 +87,15 @@ function updatePage(inputPage, setinputPage, e) {
     }
 }
 
-function updateHospital(e, setHospital) {
-    setHospital(e.currentTarget.value);
-}
-
-function updateDepartment(e, setDepartment) {
-    setDepartment(e.currentTarget.value);
+// Update hospital and department select inputs
+function updateHospital(e, setHospital, pageData, inputContainer) {
+    const selectedHospital = e.currentTarget.value;
+    const departmentSelectInput = inputContainer.current.querySelectorAll("select")[1];
+    const initialDepartment = pageData.filter((entry) => {
+        return entry.hospital === selectedHospital;
+    }).map(entry => entry.department).sort()[0];
+    setHospital(selectedHospital);
+    departmentSelectInput.value = (initialDepartment);
 }
 
 export function AddNewContact({formType, pageData, queryClient, showMessage, closeDialog}) {
@@ -116,7 +121,7 @@ export function AddNewContact({formType, pageData, queryClient, showMessage, clo
             }
             return acc; 
         }, []).sort()
-
+        
         return (
             <div className="contact-modal-display">
                 <div className="contact-indicator-container">
@@ -128,8 +133,8 @@ export function AddNewContact({formType, pageData, queryClient, showMessage, clo
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
-                        {inputPage === 1 && <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital)}/>}
-                        {inputPage === 1 && <SelectInput type="form-select-input" label="Department" defaultValue={departmentSelectOptions[0]} optionData={departmentSelectOptions} />}
+                        {inputPage === 1 && <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
+                        {inputPage === 1 && <SelectInput type="form-select-input" label="Department" optionData={departmentSelectOptions} />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
