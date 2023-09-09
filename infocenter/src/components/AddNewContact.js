@@ -5,35 +5,75 @@ import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
-const staffInputsDescriptions = ["Contact Name", "Contact Position", "Contact Hospital", "Contact Department", "Office Phone", "Mobile Phone", "Email"];
+const staffInputsDescriptions = ["Contact Name", "Contact Position", "Contact Hospital", "Contact Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
 
-function saveNewStaffContact(inputContainer, inputPage) {
-    const inputs = inputContainer.current.querySelectorAll("input");
+function saveNewStaffContact(inputContainer, newContactData, inputPage) {
+    const textInputs = inputContainer.current.querySelectorAll("input");
     const selectInputs = inputContainer.current.querySelectorAll("select");
     const staffRegexArray = inputsRegexArray.slice(0, 5);
     const vendorRegexArray = inputsRegexArray.slice(0, 3).concat(inputsRegexArray.slice(4)); 
     
-    // Validate text inputs
-    inputs.forEach((input, index) => {
+    // Specify the whether the new contact data is staff or vendor
+    newContactData.current.contactType = "staff"
+
+    // Validate text inputs with the appropriate regex, 
+    for (let [index, input] of Array.from(textInputs).entries()) {
         if (inputPage === 1) {
             if (staffRegexArray[index].test(input.value) === false) {
+                // Show warning message
                 console.log(`${staffInputsDescriptions[index]} is not a valid entry`)
-                // Need to throw error if doesnt match regex
+                return
+            }
+            else {
+                newContactData.current[staffInputsDescriptions[index]] = input.value;
             }
         }
         else {
-            if (staffRegexArray[index + 2].test(input.value) === false) {
-                console.log(`${staffInputsDescriptions[index + 2]} is not a valid entry`)
+            if (input.value !== "") {
+                console.log(input.value)
+                if (staffRegexArray[index + 2].test(input.value) === false) {
+                    // Show warning
+                    console.log(`${staffInputsDescriptions[index + 42]} is not a valid entry`)
+                    return
+                }
+                else {
+                    newContactData.current[staffInputsDescriptions[index + 4]] = input.value;
+                }
             }
-            // Need to throw error if it doesn't match regex
         }
-    })
+    }
 
-    // Validate select inputs
-    selectInputs.forEach((input, index) => {
-        console.log(staffRegexArray[1].test(input.value), staffRegexArray[1]);
-    })
+    // Validate select inputs with appropriate regex
+    if (inputPage === 1) {
+        for (let [index, input] of Array.from(selectInputs).entries()) {
+            if (staffRegexArray[1].test(input.value) === false) {
+                // Show warning message
+                console.log(`${staffInputsDescriptions[index + 2]} is not a valid entry`);
+                return
+            }
+            else {
+                newContactData.current[staffInputsDescriptions[index + 2]] = input.value;
+            }
+        }
+    }
+}
+
+function uploadNewStaffData(newContactData) {
+    // Check at least one phone number has been added.
+    let phoneKeyCount = 0;
+    for (let key of ["Office Phone", "Dect Phone", "Mobile Phone"]) {
+        if (Object.keys(newContactData.current).includes(key))
+        phoneKeyCount++
+    }
+
+    if (phoneKeyCount === 0) {
+        // Show warning message
+        console.log("At least one phone number is required");
+    }
+
+    // Start uploading dialog and begin post request
+
 }
 
 function updatePage(inputPage, setinputPage, e) {
@@ -56,7 +96,8 @@ function updateDepartment(e, setDepartment) {
 export function AddNewContact({formType, pageData}) {
     
     const [inputPage, setinputPage] = useState(1);
-    const [hospital, setHospital] = useState("John Hunter Hospital")
+    const [hospital, setHospital] = useState("John Hunter Hospital");
+    const newContactData = useRef({});
     const inputContainer = useRef(null);
 
     if (formType === "staff") {
@@ -87,8 +128,8 @@ export function AddNewContact({formType, pageData}) {
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
-                        {inputPage === 1 && <SelectInput label="Contact Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital)}/>}
-                        {inputPage === 1 && <SelectInput label="Contact Department" defaultValue={departmentSelectOptions[0]} optionData={departmentSelectOptions} />}
+                        {inputPage === 1 && <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital)}/>}
+                        {inputPage === 1 && <SelectInput type="form-select-input" label="Department" defaultValue={departmentSelectOptions[0]} optionData={departmentSelectOptions} />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
@@ -96,8 +137,8 @@ export function AddNewContact({formType, pageData}) {
                     <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
-                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, inputPage)}>Save Changes</div>
-                    <div className="update-button">Upload Updates</div>
+                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage)}>Save Changes</div>
+                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData)}>Upload Updates</div>
                 </div>
             </div>
         );

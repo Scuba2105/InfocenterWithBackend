@@ -300,10 +300,10 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter ${placeholderValue}`} />}
                 {type === "update" ? <Input type="disabled" inputType="text" identifier="add-new" labelText="Staff ID" defaultValue={selectedData.id} /> :
                 <Input inputType="text" identifier="add-new" labelText="Staff ID" placeholdertext={`Enter Employee Staff ID`} />}
-                {type === "update" ? <SelectInput type="update" defaultValue={selectedData.hospital} label="Location" optionData={locations} /> : 
-                <SelectInput label="Location" optionData={locations} />}
-                {type === "update" ? <SelectInput type="update" defaultValue={selectedData.position} label="Position" optionData={positions} /> : 
-                <SelectInput label="Position" optionData={positions} />}
+                {type === "update" ? <SelectInput type="form-select-input" defaultValue={selectedData.hospital} label="Location" optionData={locations} /> : 
+                <SelectInput type="form-select-input" label="Location" optionData={locations} />}
+                {type === "update" ? <SelectInput type="form-select-input" defaultValue={selectedData.position} label="Position" optionData={positions} /> : 
+                <SelectInput type="form-select-input" label="Position" optionData={positions} />}
                 { type === "update" ? <Input type="update" inputType="text" identifier="add-new" labelText="Office Phone" defaultValue={selectedData.officePhone} /> :
                 <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext={`Enter Office Phone Number`} />}
                 {type === "update" && selectedData.dectPhone !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.dectPhone} identifier="add-new" labelText="Dect Phone" /> : 

@@ -199,16 +199,16 @@ export function AddNewForm({page, selectedData, pageData, vendorData, queryClien
                     <div className="edit-add-new-container">
                         <TooltipButton identifier="type" content={addNewType ? "Undo" :"Add New"} boolean={addNewType} setAddNewType={setAddNewType} toggleFunction={toggleAddNewType}/>
                         {addNewType ? <Input inputType="text" identifier="add-new" labelText="Device Type" placeholdertext={`Enter new device type`} /> : 
-                        <SelectInput label="Device Type" optionData={currentTypes} />}
+                        <SelectInput type="form-select-input" label="Device Type" optionData={currentTypes} />}
                         <div className="add-new-aligner"></div>
                     </div>
                     <div className="edit-add-new-container">
                         <TooltipButton identifier="manufacturer" content={addNewManufacturer ? "Undo" :"Add New"} boolean={addNewManufacturer} setAddNewManufacturer={setAddNewManufacturer} toggleFunction={toggleAddNewManufacturer}/>
                         {addNewManufacturer ? <Input inputType="text" identifier="add-new" labelText="Device Manufacturer" placeholdertext={`Enter new device type`} /> : 
-                        <SelectInput label="Manufacturer" optionData={currentManufacturers} />}
+                        <SelectInput type="form-select-input" label="Manufacturer" optionData={currentManufacturers} />}
                         <div className="add-new-aligner"></div>
                     </div>
-                    <SelectInput type="vendor" label="Vendor / Service Agent" optionData={currentVendors} />
+                    <SelectInput type="form-select-input" label="Vendor / Service Agent" optionData={currentVendors} />
                     <Input inputType="file" identifier="new-image" labelText="New Device Image" />
                 </div>            
                 <div className="update-button add-new-upload-button" onClick={() => uploadEquipmentFormData(addNewManufacturer, addNewType, formContainer, newData, unavailableModels, page, queryClient, showMessage, closeDialog, closeAddModal)}>Upload Data</div>

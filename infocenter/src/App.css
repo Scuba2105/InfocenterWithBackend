@@ -1988,9 +1988,7 @@ html {
   transform: translateY(-30px);
 }
 
-.hospitals-select-label, .department-select-label, .device-type-select-container, 
-.manufacturer-select-container, .supplier-select-container, .location-select-container, 
-.position-select-container, .contact-hospital-select-container, .contact-department-select-container {
+.form-select-input-container {
   font-weight: bold;
 }
 
@@ -2002,10 +2000,7 @@ html {
   background-color: var(--form-input-color);
 }
 
-.hospital-select-container, .configuration-type-select-container, .device-type-select-container,
-.manufacturer-select-container, .supplier-select-container, .location-select-container, 
-.position-select-container, .contact-hospital-select-container, 
-.contact-department-select-container {
+.form-select-input-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2014,9 +2009,7 @@ html {
   color: var(--form-font-color);
 }
 
-.hospital-select, .configuration-type-select, .device-type-select, .manufacturer-select, 
-.supplier-select, .location-select, .position-select, .contact-hospital-select,
-.contact-department-select {
+.form-select-input {
   font-size: 12px;
   display: block;
   height: 25px;

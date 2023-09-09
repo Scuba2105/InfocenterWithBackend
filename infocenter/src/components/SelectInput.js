@@ -1,9 +1,23 @@
 export function SelectInput({type, defaultValue, label, optionData, value, onChange}) {
-    if (type === "disabled") {
+    if (type === "form-select-input-disabled") {
         return (
             <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
                 <p className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-label`}>{label === 'Hospital' ? `${label}/Region` : label}</p>
                 <select name={label} disabled defaultValue={defaultValue} className={label === 'Configuration Type' ? `select-input config-data-input ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select` : `select-input ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select`} onChange={onChange}>
+                    {optionData.map((hospital, index) => {
+                        return (
+                        <option key={index} value={hospital}>{hospital}</option>
+                        );
+                    })}
+                </select>           
+            </div>
+        );
+    }
+    else if (type === "form-select-input") {
+        return (
+            <div className={`form-select-input-container`}>
+                <p className={`form-select-input-label`}>{label}</p>
+                <select name={label} defaultValue={defaultValue} className={"select-input form-select-input"}>
                     {optionData.map((hospital, index) => {
                         return (
                         <option key={index} value={hospital}>{hospital}</option>
@@ -38,20 +52,6 @@ export function SelectInput({type, defaultValue, label, optionData, value, onCha
                         );
                     })}
                 </select>  
-            </div>
-        );
-    }
-    else if (type === "vendor") {
-        return (
-            <div className={`supplier-select-container`}>
-                <p className={`supplier-select-label`}>{label === 'Hospital' ? `${label}/Region` : label}</p>
-                <select name={label} className={label === 'Configuration Type' ? `select-input config-data-input supplier-select` : `select-input supplier-select`} onChange={onChange}>
-                    {optionData.map((hospital, index) => {
-                        return (
-                        <option key={index} value={hospital}>{hospital}</option>
-                        );
-                    })}
-                </select>           
             </div>
         );
     }
