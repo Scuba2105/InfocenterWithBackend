@@ -6,10 +6,22 @@ import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
-const staffInputsDescriptions = ["Contact Name", "Contact Position", "Contact Hospital", "Contact Department", "Office Phone", "Dect Phone", "Mobile Phone"];
+const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
 
-function saveNewStaffContact(inputContainer, newContactData, inputPage, queryClient, showMessage, closeDialog) {
+function getDescriptionIndex(index, addNewHospital, addNewDepartment) {
+    if (!addNewHospital && !addNewDepartment) {
+        return index + 2;
+    }
+    else if (!addNewHospital && addNewDepartment) {
+        return index + 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog) {
     const textInputs = inputContainer.current.querySelectorAll("input");
     const selectInputs = inputContainer.current.querySelectorAll("select");
     const staffRegexArray = inputsRegexArray.slice(0, 5);
@@ -21,20 +33,19 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, queryCli
     // Validate text inputs with the appropriate regex, 
     for (let [index, input] of Array.from(textInputs).entries()) {
         if (inputPage === 1) {
-            if (staffRegexArray[index].test(input.value) === false) {
-                // Show warning message
-                showMessage("warning", `The value entered for ${staffInputsDescriptions[index]} is not a valid entry`)
+            const regexIndex = index <= 1 ? index : 1;
+            const descIndex = !addNewHospital && addNewDepartment && index >= 2 ? index + 1 : index
+            if (staffRegexArray[regexIndex].test(input.value) === false) {
+                showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`)
                 return
             }
             else {
-                newContactData.current[staffInputsDescriptions[index]] = input.value;
+                newContactData.current[staffInputsDescriptions[descIndex]] = input.value;
             }
         }
         else {
             if (input.value !== "") {
-                console.log(input.value)
                 if (staffRegexArray[index + 2].test(input.value) === false) {
-                    // Show warning
                     showMessage("warning", `The value entered for ${staffInputsDescriptions[index + 4]} is not a valid entry`)
                     return
                 }
@@ -48,17 +59,18 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, queryCli
     // Validate select inputs with appropriate regex
     if (inputPage === 1) {
         for (let [index, input] of Array.from(selectInputs).entries()) {
+            console.log(input.value)
+            const descIndex = getDescriptionIndex(index, addNewHospital, addNewDepartment)
             if (staffRegexArray[1].test(input.value) === false) {
-                // Show warning message
-                showMessage("warning", `The value entered for ${staffInputsDescriptions[index + 2]} is not a valid entry`);
+                showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`);
                 return
             }
             else {
-                newContactData.current[staffInputsDescriptions[index + 2]] = input.value;
+                newContactData.current[staffInputsDescriptions[descIndex]] = input.value;
             }
         }
     }
-
+    console.log(newContactData);
     let message;
     if (inputPage === 1) {
         message = "Name, Position, Hospital and Department data for new contact has been saved ready for upload." 
@@ -73,7 +85,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, queryCli
 }
 
 async function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, page, formType) {
-    for (let key of ["Contact Name", "Contact Position", "Contact Hospital", "Contact Department"]) {
+    for (let key of ["Contact Name", "Contact Position", "Hospital", "Department"]) {
         if (!Object.keys(newContactData.current).includes(key)) {
             showMessage("warning", `The ${key} data is empty. Please complete this field and try again.`);
             return;
@@ -135,9 +147,10 @@ function updateHospital(e, setHospital, pageData, inputContainer) {
     departmentSelectInput.value = (initialDepartment);
 }
 
-function toggleNewHospital(setAddNewHospital, setAddNewDepartment) {
+function toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment) {
+    const departToggleVisible = addNewHospital === true ? false : true;
     setAddNewHospital(h => !h)
-    setAddNewDepartment(d => !d)
+    setAddNewDepartment(departToggleVisible);
 }
 
 function toggleNewDepartment(setAddNewHospital, setAddNewDepartment) {
@@ -152,7 +165,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
     const [addNewDepartment, setAddNewDepartment] = useState(false);
     const newContactData = useRef({});
     const inputContainer = useRef(null);
-    console.log(addNewHospital, addNewDepartment)
+    
     if (formType === "staff") {
         const hospitalSelectOptions = pageData.reduce((acc, entry) => {
             if (!acc.includes(entry.hospital)) {
@@ -183,7 +196,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
                         {inputPage === 1 && 
                         <div className="edit-add-new-container">
-                            <TooltipButton identifier="manufacturer" content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewHospital={setAddNewHospital} toggleFunction={() => toggleNewHospital(setAddNewHospital, setAddNewDepartment)}/>
+                            <TooltipButton identifier="manufacturer" content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewHospital={setAddNewHospital} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
                             {addNewHospital ? <Input inputType="text" identifier="add-new" labelText="Hospital" placeholdertext={`Enter new contact Hospital`} /> : 
                             <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
                             <div className="add-new-aligner"></div>
@@ -202,7 +215,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <img className="config-arrow config-right-arrow" style={{transform: 'translate(-60px, 0px) rotate(180deg)'}} onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
-                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, queryClient, showMessage, closeDialog)}>Save Changes</div>
+                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)}>Save Changes</div>
                     <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, page, formType)}>Upload Updates</div>
                 </div>
             </div>
