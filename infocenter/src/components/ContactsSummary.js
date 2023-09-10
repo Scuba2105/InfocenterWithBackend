@@ -105,7 +105,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
             </div>                  
             {addContactVisible && 
             <ModalSkeleton closeModal={() => closeAddContactModal(setAddContactVisible)} type={identifier === "staff" ? 'new-department-contact' : 'new-vendor'}>
-                <AddNewContact formType={identifier} page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} ></AddNewContact>
+                <AddNewContact formType={identifier} page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddContactModal={() => closeAddContactModal(setAddContactVisible)}></AddNewContact>
             </ModalSkeleton>}
         </div>
     )

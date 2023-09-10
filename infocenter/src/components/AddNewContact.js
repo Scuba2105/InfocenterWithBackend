@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Input } from "./Input";
 import { SelectInput } from "./SelectInput";
 import { TooltipButton } from "./TooltipButton";
@@ -6,6 +6,7 @@ import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const vendorRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
 
@@ -21,12 +22,21 @@ function getDescriptionIndex(index, addNewHospital, addNewDepartment) {
     }
 }
 
+function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog) {
+    const textInputs = inputContainer.current.querySelectorAll("input");
+    // 3 inputs per page
+    for (let [index, input] of Array.from(textInputs).entries()) {
+        console.log("working")
+        const regexIndex = index + (inputPage - 1)*3;
+        console.log(regexIndex, vendorRegexArray[regexIndex]);
+    }
+}
+
 function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog) {
     const textInputs = inputContainer.current.querySelectorAll("input");
     const selectInputs = inputContainer.current.querySelectorAll("select");
     const staffRegexArray = inputsRegexArray.slice(0, 5);
-    const vendorRegexArray = inputsRegexArray.slice(0, 3).concat(inputsRegexArray.slice(4)); 
-    
+        
     // Specify the whether the new contact data is staff or vendor
     newContactData.current.contactType = "staff"
 
@@ -84,7 +94,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     }, 1600);
 }
 
-async function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType) {
+async function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal) {
     for (let key of ["Contact Name", "Contact Position", "Hospital", "Department"]) {
         if (!Object.keys(newContactData.current).includes(key)) {
             showMessage("warning", `The ${key} data is empty. Please complete this field and try again.`);
@@ -136,6 +146,7 @@ async function uploadNewStaffData(newContactData, queryClient, showMessage, clos
             showMessage("info", 'Resources have been successfully updated!');
             setTimeout(() => {
                 closeDialog();
+                closeAddContactModal();
             }, 1600);
         }
 
@@ -176,14 +187,21 @@ function toggleNewDepartment(setAddNewHospital, setAddNewDepartment) {
     setAddNewDepartment(d => !d)
 }
 
-export function AddNewContact({formType, page, pageData, queryClient, showMessage, closeDialog}) {
+export function AddNewContact({formType, page, pageData, queryClient, showMessage, closeDialog, closeAddContactModal}) {
     
     const [inputPage, setinputPage] = useState(1);
-    const [hospital, setHospital] = useState("Belmont Hospital");
+    const [hospital, setHospital] = useState("John Hunter Hospital");
     const [addNewHospital, setAddNewHospital] = useState(false);
     const [addNewDepartment, setAddNewDepartment] = useState(false);
     const newContactData = useRef({});
     const inputContainer = useRef(null);
+
+    useEffect(() => {
+        if (formType === "staff" && inputPage === 1 && !addNewHospital) {
+            const hospitalSelect = inputContainer.current.querySelectorAll("select")[0];
+            hospitalSelect.value = hospital;
+        }
+    }, [addNewHospital, formType, hospital, inputPage]);
     
     if (formType === "staff") {
         const hospitalSelectOptions = pageData.reduce((acc, entry) => {
@@ -235,7 +253,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)}>Save Changes</div>
-                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType)}>Upload Updates</div>
+                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>
             </div>
         );
@@ -248,7 +266,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
-                    <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext="Enter new contact name" />}
@@ -257,10 +275,10 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />}
                     </div> 
-                    <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
-                    <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, inputPage)}>Save Changes</div>
+                    <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog)}>Save Changes</div>
                     <div className="update-button">Upload Updates</div>
                 </div>
             </div>
