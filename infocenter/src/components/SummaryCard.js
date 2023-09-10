@@ -82,7 +82,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
     const selectedData = currentDataSet.find((entry) => {
         return entry.model === selectedEntry || entry.id === selectedEntry || entry.name === selectedEntry;
     });
-
+    
     // Get user state from Zustand state
     const currentUser = useUser((state) => state.userCredentials);
     const staffEditPermissions = (currentUser.permissions === "admin" || currentUser.user === selectedData.name)

@@ -20,7 +20,7 @@ export default function App() {
     // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
     const initialDevice = useDevice((state) => state.device);
-        
+    console.log(initialDevice);
     // Get the state setter for selected device from Zustand state
     const setCurrentDevice = useDevice((state) => state.setDevice);
 
@@ -35,8 +35,13 @@ export default function App() {
     function onRowClick(e) {
         const row = e.target.parentNode;
         const entryIdentifier = row.children[0].textContent === '-' ? row.children[1].textContent : row.children[0].textContent
-        setSelectedEntry(entryIdentifier);
-        setCurrentDevice(entryIdentifier);
+        if (page === 'technical-info') {
+            setSelectedEntry(entryIdentifier);
+            setCurrentDevice(entryIdentifier);
+        }
+        else {
+            setSelectedEntry(entryIdentifier);
+        } 
     }
 
     function closeDialog() {
