@@ -143,15 +143,21 @@ app.post('/AddNewEntry/:page/:formType', (req, res, next) => {
                 else if (page === "staff") {
                     addNewStaffData(req, res, __dirname);
                 }
-                else if (page === "contacts") {
-                    addNewContactData(req, res, __dirname)
-                }
             }
         })
     } 
     catch (err) {
         next(err);
     }   
+})
+
+// Define route to add new hne staff contacts or vendor contacts. 
+app.post('/AddNewContact/:formType', (req, res, next) => {
+    try {
+       addNewContactData(req, res, __dirname); 
+    } catch (err) {
+        next(err);
+    }
 })
 
 // define route for processing Genius 3 thermometers

@@ -87,6 +87,24 @@ export function writeDeviceData(__dirname, data) {
     });
 }
 
+export function writeStaffContactsData(__dirname, data) {
+    fs.writeFile(path.join(__dirname, 'data', 'staff-contacts.json'), data, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log('The file has been saved!');
+    });
+}
+
+export function writeVendorContactsData(__dirname, data) {
+    fs.writeFile(path.join(__dirname, 'data', 'vendor-contacts.json'), data, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log('The file has been saved!');
+    });
+}
+
 export function readThermometerData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'thermometers.json'), (err, data) => {
@@ -144,6 +162,19 @@ export function generateNewDeviceData(fileExt, newType, manufacturer, vendor, ne
         software: "",
         documents: "",
         passwords: ""
+    }
+}
+
+export function generateNewStaffContactData(reqBody) {
+
+    return {
+        "contact": reqBody["Contact Name"],
+        "hospital": reqBody["Hospital"],
+        "department": reqBody["Department"],
+        "position": reqBody["Contact Position"],
+        "officePhone": "-",
+        "mobilePhone": "-",
+        "dectPhone": "-"
     }
 }
 

@@ -70,7 +70,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
             }
         }
     }
-    console.log(newContactData);
+    
     let message;
     if (inputPage === 1) {
         message = "Name, Position, Hospital and Department data for new contact has been saved ready for upload." 
@@ -84,11 +84,11 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     }, 1600);
 }
 
-async function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, page, formType) {
+async function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType) {
     for (let key of ["Contact Name", "Contact Position", "Hospital", "Department"]) {
         if (!Object.keys(newContactData.current).includes(key)) {
             showMessage("warning", `The ${key} data is empty. Please complete this field and try again.`);
-            return;
+            return
         }
     }
 
@@ -111,25 +111,44 @@ async function uploadNewStaffData(newContactData, queryClient, showMessage, clos
     // Start the post request
     try {
         // Post the data to the server  
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}/${formType}`, {
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewContact/${formType}`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error
                 referrerPolicy: "no-referrer",
-                body: newContactData.current,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newContactData.current),
         });
 
         const data = await res.json()
-        console.log(data)
+        
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+        }
+        else {                            
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+            }, 1600);
+        }
 
     } catch (error) {
-        
+        showMessage("error", `${error.message}.`)
     }
 }
 
-function updatePage(inputPage, setinputPage, e) {
+function updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e) {
     if (e.currentTarget.classList.contains("config-left-arrow") && inputPage === 2) {
         setinputPage(1);
+        setAddNewHospital(false);
+        setAddNewDepartment(false);
     }
     else if (e.currentTarget.classList.contains("config-right-arrow") && inputPage === 1) {
         setinputPage(2);
@@ -160,7 +179,7 @@ function toggleNewDepartment(setAddNewHospital, setAddNewDepartment) {
 export function AddNewContact({formType, page, pageData, queryClient, showMessage, closeDialog}) {
     
     const [inputPage, setinputPage] = useState(1);
-    const [hospital, setHospital] = useState("John Hunter Hospital");
+    const [hospital, setHospital] = useState("Belmont Hospital");
     const [addNewHospital, setAddNewHospital] = useState(false);
     const [addNewDepartment, setAddNewDepartment] = useState(false);
     const newContactData = useRef({});
@@ -190,7 +209,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container" style={inputPage === 2 ? {transform: 'translateY(31px)'} : null}>
-                    <img className="config-arrow config-left-arrow" style={{transform: 'translateX(40px)'}} onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <img className="config-arrow config-left-arrow" style={inputPage === 1 ? {transform: 'translateX(40px)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
@@ -198,7 +217,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         <div className="edit-add-new-container">
                             <TooltipButton identifier="manufacturer" content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewHospital={setAddNewHospital} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
                             {addNewHospital ? <Input inputType="text" identifier="add-new" labelText="Hospital" placeholdertext={`Enter new contact Hospital`} /> : 
-                            <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
+                            <SelectInput type="form-select-input" label="Hospital" value={hospitalSelectOptions.find(entry=> entry.hospital === hospital)} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
                             <div className="add-new-aligner"></div>
                         </div>}
                         {inputPage === 1 &&
@@ -212,11 +231,11 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
                     </div>  
-                    <img className="config-arrow config-right-arrow" style={{transform: 'translate(-60px, 0px) rotate(180deg)'}} onClick={(e) => updatePage(inputPage, setinputPage, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translate(-60px, 0px) rotate(180deg)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)}>Save Changes</div>
-                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, page, formType)}>Upload Updates</div>
+                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType)}>Upload Updates</div>
                 </div>
             </div>
         );
