@@ -217,14 +217,14 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         <div className="edit-add-new-container">
                             <TooltipButton identifier="manufacturer" content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewHospital={setAddNewHospital} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
                             {addNewHospital ? <Input inputType="text" identifier="add-new" labelText="Hospital" placeholdertext={`Enter new contact Hospital`} /> : 
-                            <SelectInput type="form-select-input" label="Hospital" value={hospitalSelectOptions.find(entry=> entry.hospital === hospital)} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
+                            <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
                             <div className="add-new-aligner"></div>
                         </div>}
                         {inputPage === 1 &&
                         <div className="edit-add-new-container">
                             {!addNewDepartment && <TooltipButton identifier="manufacturer" content={addNewDepartment ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewDepartment={setAddNewDepartment} toggleFunction={() => toggleNewDepartment(setAddNewHospital, setAddNewDepartment)}/>}
                             {addNewDepartment ? <Input inputType="text" identifier="add-new" labelText="Department" placeholdertext={`Enter new contact Department`} /> : 
-                            <SelectInput type="form-select-input" label="Department" value={hospital} optionData={departmentSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
+                            <SelectInput type="form-select-input" label="Department" optionData={departmentSelectOptions} />}
                             {!addNewDepartment && <div className="add-new-aligner"></div>}
                         </div>}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
