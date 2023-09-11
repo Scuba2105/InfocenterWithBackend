@@ -24,12 +24,39 @@ function getDescriptionIndex(index, addNewHospital, addNewDepartment) {
 
 function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog) {
     const textInputs = inputContainer.current.querySelectorAll("input");
-    // 3 inputs per page
+    
+    // Validate the provided input values.
     for (let [index, input] of Array.from(textInputs).entries()) {
-        console.log("working")
+        // Get index based on whether page 1 or page 2.
         const regexIndex = index + (inputPage - 1)*3;
-        console.log(regexIndex, vendorRegexArray[regexIndex]);
+        // Check the mandatory inputs.
+        if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 1) {
+            showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
+            return
+        }
+        // Check the contact numbers and emails.
+        else if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 2 && input.value !== "") {
+            showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
+            return
+        }
+        else {
+            newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
+        }
     }
+
+    console.log(newContactData.current)
+    let message;
+    if (inputPage === 1) {
+        message = "Vendor, Name, and Position, data for new contact has been saved ready for upload." 
+    }
+    else {
+        message = "Phone number/s and/or email data for new contact has been saved ready for upload."
+    }
+    showMessage("info", message)
+    setTimeout(() => {
+        closeDialog()
+    }, 1600);
+    
 }
 
 function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog) {
@@ -69,7 +96,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     // Validate select inputs with appropriate regex
     if (inputPage === 1) {
         for (let [index, input] of Array.from(selectInputs).entries()) {
-            console.log(input.value)
+            
             const descIndex = getDescriptionIndex(index, addNewHospital, addNewDepartment)
             if (staffRegexArray[1].test(input.value) === false) {
                 showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`);
