@@ -143,7 +143,7 @@ function saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedDat
     }
     // Add the data from the configurations form to the formData ref
     else if (selectedOption === 'Configs') {
-        const selectedHospital = e.target.parentNode.parentNode.querySelector('.hospital-select');
+        const selectedHospital = e.target.parentNode.parentNode.querySelector('.form-select-input');
         const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.config-data-input');
         const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry-input');
         const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
@@ -205,8 +205,8 @@ function saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedDat
 
         // Generates the file name based on config input and config file extension
         const fileExtension = configFileInput.files[0].name.split('.').slice(-1)[0];
-        configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model)}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
-        configFilename = `${formatText(selectedData.model)}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
+        configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model, "field-name")}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
+        configFilename = `${formatText(selectedData.model, "field-name")}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
         
         if (configFileInput.files.length === 0) {
             showMessage("error", 'No config files selected. Please choose a config file and try again.')

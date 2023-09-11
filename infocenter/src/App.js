@@ -20,7 +20,7 @@ export default function App() {
     // Get loggedIn state from Zustand state
     const loggedIn = useLoggedIn((state) => state.loggedIn);
     const initialDevice = useDevice((state) => state.device);
-    console.log(initialDevice);
+    
     // Get the state setter for selected device from Zustand state
     const setCurrentDevice = useDevice((state) => state.setDevice);
 

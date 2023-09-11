@@ -49,6 +49,7 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
             
             return departmentId === departmentName;
         })
+        
         const parsedEntries =  filteredCurrentEntries.map((entry) => {
             return entry.split('/').slice(-1)[0];
         })
@@ -61,13 +62,11 @@ export function IntellivueConfigDisplay({selectedData, parsedConfigData, hospita
 
         function updateIndicator(e) {
             const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
-            console.log(rightArrowPressed, configNumber);
+            
             if (rightArrowPressed && configIndex < (configNumber -1)) {
-                console.log("right arrow pressed");
                 setConfigIndex(c => c + 1);
             }
             else if (!rightArrowPressed && configIndex > 0) {
-                console.log("left arrow pressed");
                 setConfigIndex(c => c - 1);
             }
         }
