@@ -43,8 +43,20 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewH
             newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
         }
     }
+    
+    const vendorNumbers = vendorInputsDescriptions.slice(3)
+    let inputCount = 0;
+    for (let [index, value] of vendorNumbers.entries()) {
+        if (newContactData.current[value] === "") {
+            inputCount++
+        }
+    }
+    
+    if (inputCount > 0) {
+        showMessage("warning", "Contact details are incomplete. Please enter at least one phone number or email address.")
+        return
+    }
 
-    console.log(newContactData.current)
     let message;
     if (inputPage === 1) {
         message = "Vendor, Name, and Position, data for new contact has been saved ready for upload." 
@@ -56,6 +68,13 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewH
     setTimeout(() => {
         closeDialog()
     }, 1600);
+}
+
+function uploadNewVendorData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal) {
+    // Check the saved contact data meets minimum requirements.
+    if (Object.keys(newContactData.current).length < 4) {
+        showMessage("warning", "Contact data is incomplete. You must complete Vendor, Name and Position then also enter at least one Contact Number or Email Address. Please update the contact details and try again.")
+    }
     
 }
 
@@ -306,7 +325,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog)}>Save Changes</div>
-                    <div className="update-button">Upload Updates</div>
+                    <div className="update-button" onClick={() => uploadNewVendorData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>
             </div>
         );
