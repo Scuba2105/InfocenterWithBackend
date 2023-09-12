@@ -39,7 +39,7 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewH
             showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
             return
         }
-        else {
+        else if (input.value !== "") {
             newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
         }
     }
@@ -68,14 +68,6 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewH
     setTimeout(() => {
         closeDialog()
     }, 1600);
-}
-
-function uploadNewVendorData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal) {
-    // Check the saved contact data meets minimum requirements.
-    if (Object.keys(newContactData.current).length < 4) {
-        showMessage("warning", "Contact data is incomplete. You must complete Vendor, Name and Position then also enter at least one Contact Number or Email Address. Please update the contact details and try again.")
-    }
-    
 }
 
 function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog) {
@@ -140,29 +132,23 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     }, 1600);
 }
 
-async function uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal) {
-    for (let key of ["Contact Name", "Contact Position", "Hospital", "Department"]) {
-        if (!Object.keys(newContactData.current).includes(key)) {
-            showMessage("warning", `The ${key} data is empty. Please complete this field and try again.`);
+async function uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal) {
+    if (formType === "staff") {
+        if (Object.keys(newContactData.current).length < 5) {
+            showMessage("warning", "Contact data is incomplete. You must complete Name, Position, Hospital and Deprtment then also enter at least one Contact Number. Please update the contact details and try again.")
+            return
+        }
+    }
+    else {
+        // Check the saved contact data meets minimum requirements.
+        if (Object.keys(newContactData.current).length < 4) {
+            showMessage("warning", "Contact data is incomplete. You must complete Vendor, Name and Position then also enter at least one Contact Number or Email Address. Please update the contact details and try again.")
             return
         }
     }
 
-    // Check at least one phone number has been added.
-    let phoneKeyCount = 0;
-    for (let key of ["Office Phone", "Dect Phone", "Mobile Phone"]) {
-        if (Object.keys(newContactData.current).includes(key))
-        phoneKeyCount++
-    }
-
-    if (phoneKeyCount === 0) {
-        // Show warning message
-        showMessage("warning", "At least one phone number is required for upload.");
-        return
-    }
-
     // Start uploading dialog and begin post request
-    showMessage("uploading", `Uploading New Contact Data`);
+    //showMessage("uploading", `Uploading New Contact Data`);
 
     // Start the post request
     try {
@@ -299,7 +285,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)}>Save Changes</div>
-                    <div className="update-button" onClick={() => uploadNewStaffData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
+                    <div className="update-button" onClick={() => uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>
             </div>
         );
@@ -325,7 +311,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog)}>Save Changes</div>
-                    <div className="update-button" onClick={() => uploadNewVendorData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
+                    <div className="update-button" onClick={() => uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>
             </div>
         );

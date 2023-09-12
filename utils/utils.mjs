@@ -168,13 +168,25 @@ export function generateNewDeviceData(fileExt, newType, manufacturer, vendor, ne
 export function generateNewStaffContactData(reqBody) {
 
     return {
-        "contact": reqBody["Contact Name"],
-        "hospital": reqBody["Hospital"],
-        "department": reqBody["Department"],
-        "position": reqBody["Contact Position"],
-        "officePhone": "-",
-        "mobilePhone": "-",
-        "dectPhone": "-"
+        contact: reqBody["Contact Name"],
+        hospital: reqBody["Hospital"],
+        department: reqBody["Department"],
+        position: reqBody["Contact Position"],
+        officePhone: "-",
+        mobilePhone: "-",
+        dectPhone: "-"
+    }
+}
+
+export function generateNewVendorContactData(reqBody) {
+
+    return {
+        vendor: reqBody["Vendor"],
+        name: reqBody["Contact Name"],
+        position: reqBody["Contact Position"],
+        officePhone: "-",
+        mobilePhone: "-",
+        email: "-"
     }
 }
 
