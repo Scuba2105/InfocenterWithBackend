@@ -272,7 +272,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         }, []).sort()
         
         return (
-            <div className="contact-modal-display" style={{width: 500 +'px'}}>
+            <div className="contact-modal-display">
                 <div className="contact-indicator-container">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
@@ -318,13 +318,13 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
             return acc;
         }, []).sort();
         return (
-            <div className="contact-modal-display" style={{width: 500 +'px'}}>
+            <div className="contact-modal-display">
                 <div className="contact-indicator-container">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
-                    <img className="config-arrow config-left-arrow" style={inputPage === 1 ? {transform: 'translateX(40px)'} : {marginRight: '70px', marginLeft: '20px'}} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <img className="config-arrow config-left-arrow" style={inputPage === 1 ? {transform: 'translateX(40px)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
                         <div className="edit-add-new-container">
@@ -339,7 +339,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />}
                     </div> 
-                    <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translateX(-40px) rotate(180deg)'} : {marginLeft: '70px', marginRight: '20px'}} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translateX(-60px) rotate(180deg)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
                     <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewVendor, showMessage, closeDialog)}>Save Changes</div>
