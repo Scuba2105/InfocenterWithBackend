@@ -6,9 +6,21 @@ import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
-const vendorRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
+
+function getInputs(inputContainer, inputPage, addNewVendor) {
+    if (inputPage === 1 && !addNewVendor) {
+        const selectInput = inputContainer.querySelector("select");
+        const textInputs = inputContainer.querySelectorAll("input");
+        return [selectInput, textInputs[0], textInputs[1]];
+    }
+    else {
+        const textInputs = inputContainer.querySelectorAll("input");
+        return Array.from(textInputs);
+    }
+}
 
 function getDescriptionIndex(index, addNewHospital, addNewDepartment) {
     if (!addNewHospital && !addNewDepartment) {
@@ -22,13 +34,15 @@ function getDescriptionIndex(index, addNewHospital, addNewDepartment) {
     }
 }
 
-function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog) {
-    const textInputs = inputContainer.current.querySelectorAll("input");
+function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewVendor, showMessage, closeDialog) {
+    
+    const inputElements = getInputs(inputContainer.current, inputPage, addNewVendor)
     
     // Validate the provided input values.
-    for (let [index, input] of Array.from(textInputs).entries()) {
+    for (let [index, input] of inputElements.entries()) {
         // Get index based on whether page 1 or page 2.
         const regexIndex = index + (inputPage - 1)*3;
+
         // Check the mandatory inputs.
         if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 1) {
             showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
@@ -56,7 +70,7 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewH
         showMessage("warning", "Contact details are incomplete. Please enter at least one phone number or email address.")
         return
     }
-
+    
     let message;
     if (inputPage === 1) {
         message = "Vendor, Name, and Position, data for new contact has been saved ready for upload." 
@@ -258,7 +272,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         }, []).sort()
         
         return (
-            <div className="contact-modal-display">
+            <div className="contact-modal-display" style={{width: 500 +'px'}}>
                 <div className="contact-indicator-container">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
@@ -304,13 +318,13 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
             return acc;
         }, []).sort();
         return (
-            <div className="contact-modal-display">
+            <div className="contact-modal-display" style={{width: 500 +'px'}}>
                 <div className="contact-indicator-container">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
-                    <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <img className="config-arrow config-left-arrow" style={inputPage === 1 ? {transform: 'translateX(40px)'} : {marginRight: '70px', marginLeft: '20px'}} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
                         <div className="edit-add-new-container">
@@ -325,10 +339,10 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />}
                     </div> 
-                    <img className="config-arrow config-right-arrow" onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translateX(-40px) rotate(180deg)'} : {marginLeft: '70px', marginRight: '20px'}} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
                 <div className={"form-buttons-laptop"}>
-                    <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, showMessage, closeDialog)}>Save Changes</div>
+                    <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewVendor, showMessage, closeDialog)}>Save Changes</div>
                     <div className="update-button" onClick={() => uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>
             </div>
