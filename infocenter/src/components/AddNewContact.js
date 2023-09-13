@@ -215,8 +215,12 @@ function toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartmen
     setAddNewDepartment(departToggleVisible);
 }
 
-function toggleNewDepartment(setAddNewHospital, setAddNewDepartment) {
+function toggleNewDepartment(setAddNewDepartment) {
     setAddNewDepartment(d => !d)
+}
+
+function toggleNewVendor(setAddNewVendor) {
+    setAddNewVendor(d => !d)
 }
 
 export function AddNewContact({formType, page, pageData, queryClient, showMessage, closeDialog, closeAddContactModal}) {
@@ -225,6 +229,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
     const [hospital, setHospital] = useState("John Hunter Hospital");
     const [addNewHospital, setAddNewHospital] = useState(false);
     const [addNewDepartment, setAddNewDepartment] = useState(false);
+    const [addNewVendor, setAddNewVendor] = useState(false);
     const newContactData = useRef({});
     const inputContainer = useRef(null);
 
@@ -265,14 +270,14 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
                         {inputPage === 1 && 
                         <div className="edit-add-new-container">
-                            <TooltipButton identifier="manufacturer" content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewHospital={setAddNewHospital} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
+                            <TooltipButton content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
                             {addNewHospital ? <Input inputType="text" identifier="add-new" labelText="Hospital" placeholdertext={`Enter new contact Hospital`} /> : 
                             <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
                             <div className="add-new-aligner"></div>
                         </div>}
                         {inputPage === 1 &&
                         <div className="edit-add-new-container">
-                            {!addNewDepartment && <TooltipButton identifier="manufacturer" content={addNewDepartment ? "Undo" :"Add New"} boolean={addNewHospital} setAddNewDepartment={setAddNewDepartment} toggleFunction={() => toggleNewDepartment(setAddNewHospital, setAddNewDepartment)}/>}
+                            {!addNewDepartment && <TooltipButton content={addNewDepartment ? "Undo" :"Add New"} boolean={addNewHospital} toggleFunction={() => toggleNewDepartment(setAddNewDepartment)}/>}
                             {addNewDepartment ? <Input inputType="text" identifier="add-new" labelText="Department" placeholdertext={`Enter new contact Department`} /> : 
                             <SelectInput type="form-select-input" label="Department" optionData={departmentSelectOptions} />}
                             {!addNewDepartment && <div className="add-new-aligner"></div>}
@@ -291,6 +296,13 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         );
     }
     else {
+
+        const vendorSelectOptions = pageData.reduce((acc, entry) => {
+            if (!acc.includes(entry.vendor)) {
+                acc.push(entry.vendor);
+            }
+            return acc;
+        }, []).sort();
         return (
             <div className="contact-modal-display">
                 <div className="contact-indicator-container">
@@ -300,7 +312,13 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                 <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
                     <img className="config-arrow config-left-arrow" onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
                     <div className="add-new-input-container" ref={inputContainer}>
-                        {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" />}
+                        {inputPage === 1 &&
+                        <div className="edit-add-new-container">
+                            {<TooltipButton content={addNewVendor ? "Undo" :"Add New"} boolean={addNewVendor} toggleFunction={() => toggleNewVendor(setAddNewVendor)}/>}
+                            {addNewVendor ? <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" /> : 
+                            <SelectInput type="form-select-input" label="Vendor" optionData={vendorSelectOptions} />}
+                            {<div className="add-new-aligner"></div>}
+                        </div>}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext="Enter new contact name" />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. Sales Rep, Clinical Specialist etc." />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Office Phone" placeholdertext="Enter office phone number" />}
