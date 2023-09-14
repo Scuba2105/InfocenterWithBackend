@@ -5,8 +5,8 @@ import { TooltipButton } from "./TooltipButton";
 import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
-const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
-const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/g, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const inputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
 
@@ -42,7 +42,7 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewV
     for (let [index, input] of inputElements.entries()) {
         // Get index based on whether page 1 or page 2.
         const regexIndex = index + (inputPage - 1)*3;
-
+        console.log(!vendorRegexArray[regexIndex].test(input.value),  vendorRegexArray[regexIndex], input.value)
         // Check the mandatory inputs.
         if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 1) {
             showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
@@ -162,7 +162,7 @@ async function uploadNewContactData(newContactData, queryClient, showMessage, cl
     }
 
     // Start uploading dialog and begin post request
-    //showMessage("uploading", `Uploading New Contact Data`);
+    showMessage("uploading", `Uploading New Contact Data`);
 
     // Start the post request
     try {
