@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SelectInput } from "./SelectInput";
-import { IntellivueConfigDisplay } from "./IntellivueConfigDisplay";
+import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "./CopyToClipboard";
 import { Documents } from "./Documents";
 import useMediaQueries from "media-queries-in-react";
@@ -157,7 +157,7 @@ export function LinkModal({selectedData, modalType}) {
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
                 <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
-                <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
+                <ConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
             </div>
         );
     }
