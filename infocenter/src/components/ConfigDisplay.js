@@ -21,17 +21,18 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     // Parse the config string to get the department it belongs to
     const filteredCurrentEntries = currentConfigEntries.filter((entry) => {
         const departmentArray = entry.split('/').slice(-1)[0].split('_')[2].split('--');
-        const departmentId  = departmentArray.map((word) => {
-            return word.replace('-', ' ');
-        }).join(' - ');
         
+        const departmentId  = departmentArray.map((word) => {
+            return word.replace(/-/g, ' ');
+        }).join(' - ');
+        console.log(departmentId, departmentName);
         return departmentId === departmentName;
     })
     
     const parsedEntries =  filteredCurrentEntries.map((entry) => {
         return entry.split('/').slice(-1)[0];
     })
-    
+        
     // Get the current entry data based on config index
     const parsedConfigData = parsedEntries[configIndex].split('_');
 
@@ -64,7 +65,7 @@ export function ConfigDisplay({selectedData, hospitals,  departmentName, departm
                 <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
                     <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className={mediaQueries.laptop ? "config-link config-link-laptop" : "config-link"}>
                             <div className="options-info">
-                                <label>Type: {parsedConfigData[3] === '-' && '-'}</label>
+                                <label>{/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? "Options:" : "Type:"} {parsedConfigData[3] === '-' && '-'}</label>
                                 {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}
                             </div>
                             <div className="software-info">
