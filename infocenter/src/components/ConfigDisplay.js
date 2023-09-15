@@ -1,5 +1,4 @@
 import useMediaQueries from "media-queries-in-react"
-import { useState } from "react";
 import { serverConfig } from "../server";
 
 function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
@@ -14,8 +13,7 @@ function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
 }
 
 function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName, departmentsIndex) {
-    const fileName = selectedData.config[hospitals[hospitalsIndex]][departmentsIndex].split('/').slice(-1)[0];
-
+    
     const currentConfigEntries = selectedData.config[hospitals[hospitalsIndex]];
     
     // Parse the config string to get the department it belongs to
@@ -36,13 +34,17 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     // Get the current entry data based on config index
     const parsedConfigData = parsedEntries[configIndex].split('_');
 
+    // Create the filename for the saved link
+    const fileName = parsedEntries[configIndex];
+    
+
     // Calculate the number of configs for chosen department
     const configNumber = parsedEntries.length;
 
     return [parsedConfigData, parsedEntries, configNumber, fileName]
 }
 
-export function ConfigDisplay({selectedData, hospitals,  departmentName, departmentsIndex, hospitalsIndex, configIndex, setConfigIndex}) {
+export function ConfigDisplay({selectedData, hospitals, departmentName, departmentsIndex, hospitalsIndex, configIndex, setConfigIndex}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
@@ -74,7 +76,7 @@ export function ConfigDisplay({selectedData, hospitals,  departmentName, departm
                                 <label>Date Created:</label>
                                 <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                             </div>
-                            <a href={`http://${serverConfig.host}:${serverConfig.port}${selectedData.config[hospitals[hospitalsIndex]][configIndex]}`} download={fileName} >Download</a>
+                            <a href={`http://${serverConfig.host}:${serverConfig.port}${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex].split('/').slice(0, -1)}/${fileName}`} download={fileName} >Download</a>
                     </div>
                 </div>
                 {configNumber > 1 && <img className="config-arrow config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>}
