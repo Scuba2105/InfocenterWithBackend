@@ -34,14 +34,14 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     // Get the current entry data based on config index
     const parsedConfigData = parsedEntries[configIndex].split('_');
 
-    // Create the filename for the saved link
+    // Create the confing link and filename for the downloaded link
+    const configLink = filteredCurrentEntries[configIndex];
     const fileName = parsedEntries[configIndex];
     
-
     // Calculate the number of configs for chosen department
     const configNumber = parsedEntries.length;
 
-    return [parsedConfigData, parsedEntries, configNumber, fileName]
+    return [parsedConfigData, parsedEntries, configNumber, configLink, fileName]
 }
 
 export function ConfigDisplay({selectedData, hospitals, departmentName, departmentsIndex, hospitalsIndex, configIndex, setConfigIndex}) {
@@ -51,7 +51,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, departme
         desktop: "(min-width: 1800px)"
     });
 
-    const [parsedConfigData, parsedEntries, configNumber, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName, departmentsIndex);
+    const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName, departmentsIndex);
 
     return (
         <>
@@ -76,7 +76,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, departme
                                 <label>Date Created:</label>
                                 <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                             </div>
-                            <a href={`http://${serverConfig.host}:${serverConfig.port}${selectedData.config[hospitals[hospitalsIndex]][departmentsIndex].split('/').slice(0, -1)}/${fileName}`} download={fileName} >Download</a>
+                            <a href={`http://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
                     </div>
                 </div>
                 {configNumber > 1 && <img className="config-arrow config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>}
