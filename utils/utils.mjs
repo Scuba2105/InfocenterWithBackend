@@ -182,7 +182,7 @@ export function generateNewVendorContactData(reqBody) {
 
     return {
         vendor: reqBody["Vendor"],
-        name: reqBody["Contact Name"],
+        contact: reqBody["Contact Name"],
         position: reqBody["Contact Position"],
         officePhone: "-",
         mobilePhone: "-",

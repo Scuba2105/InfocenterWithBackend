@@ -46,6 +46,10 @@ export async function addNewContactData(req, res, __dirname) {
         // Append new contact data to existing data
         existingContactsData.push(newContactData);
 
-        console.log(existingContactsData)
+        // Write the data to file
+        writeVendorContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
+
+        // Send the success response message.
+        res.json({type: "Success", message: 'Data Upload Successful'});
     }
 }

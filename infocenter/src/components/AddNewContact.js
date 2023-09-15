@@ -40,20 +40,21 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewV
     
     // Validate the provided input values.
     for (let [index, input] of inputElements.entries()) {
+        
         // Get index based on whether page 1 or page 2.
         const regexIndex = index + (inputPage - 1)*3;
-
+        console.log(!vendorRegexArray[regexIndex].test(input.value))
         // Check the mandatory inputs.
         if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 1) {
             showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
             return
         }
         // Check the contact numbers and emails.
-        else if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 2 && input.value !== "") {
+        else if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 2) {
             showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
             return
         }
-        else if (input.value !== "") {
+        else {
             newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
         }
     }
