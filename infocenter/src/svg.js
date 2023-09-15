@@ -294,7 +294,7 @@ export function ComputerScreen({size="400px", color}) {
                     <rect width="32" height="32"/>
                     </clipPath>
                 </defs>
-                <g id="computer" clip-path="url(#clip-computer)">
+                <g id="computer" clipPath="url(#clip-computer)">
                     <g id="Group_3463" data-name="Group 3463">
                     <g id="Group_3456" data-name="Group 3456">
                         <g id="Group_3449" data-name="Group 3449">

@@ -19,7 +19,7 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     // Parse the config string to get the department it belongs to
     const filteredCurrentEntries = currentConfigEntries.filter((entry) => {
         const departmentArray = entry.split('/').slice(-1)[0].split('_')[2].split('--');
-        
+        console.log(departmentArray)
         const departmentId  = departmentArray.map((word) => {
             return word.replace(/-/g, ' ');
         }).join(' - ');
@@ -40,7 +40,7 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     
     // Calculate the number of configs for chosen department
     const configNumber = parsedEntries.length;
-
+    
     return [parsedConfigData, parsedEntries, configNumber, configLink, fileName]
 }
 

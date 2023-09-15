@@ -43,7 +43,7 @@ function generateConfigData(hospitals, selectedData) {
 }
 
 function parseConfigData(configData) {
-    const department = capitaliseFirstLetter(configData[2]);
+    const department = formatDepartmentString(configData[2]);
     const options = configData[3] === 'none' ? '-' : configData[3].replace(/-/g, ', ');
     const software = configData[4] === 'none' ? '-' : configData[4];
     const dateCreated = configData[configData.length -1].split('.').slice(0, -1).join('/');
@@ -51,17 +51,11 @@ function parseConfigData(configData) {
     return [department, options, software, dateCreated];
 }
 
-function capitaliseFirstLetter(word) {
+function formatDepartmentString(word) {
     const wordArray = word.split('--');
     const formattedDepartment = wordArray.map((word) => {
-        const array = word.split('-');
-        const capitalisedWords = array.map((item) => {
-            if (departmentAcronyms.includes(item)) {
-                return item.toUpperCase();
-            }
-            return item[0].toUpperCase() + item.slice(1);
-        }).join(' ');
-        return capitalisedWords;
+        const formattedWord = word.split('-').join(' ');
+        return formattedWord;
     }).join(' - ');
     
     return formattedDepartment;

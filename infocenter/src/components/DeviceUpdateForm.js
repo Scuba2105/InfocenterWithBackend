@@ -162,17 +162,13 @@ function saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedDat
 
         // Initialise config data array with hospital label            
         let configDataArray = [generateHospitalLabel(selectedHospital.value)];
+        
         // Loop over the Department, Sub-Location, Options and Software config data inputs
-                  
         const interimArray = [];
         configDataInputs.forEach((input, index) => {
+            // Push the department and sub-location input values
             if (index === 1 || index === 3) {
-                if (acronyms.includes(input.value.toUpperCase())) {
-                    interimArray.push((input.value.toUpperCase()))
-                }
-                else {
-                    interimArray.push(capitaliseFirstLetters(input.value));
-                }
+                interimArray.push(input.value);                
             }
             
             // Parse options string. Filter out Intellivue monitors so options string can be parsed otherwise format the data appropriately.
