@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SelectInput } from "./SelectInput";
-import { IntellivueConfigDisplay } from "./IntellivueConfigDisplay";
+import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "./CopyToClipboard";
 import { Documents } from "./Documents";
 import useMediaQueries from "media-queries-in-react";
@@ -76,6 +76,7 @@ export function LinkModal({selectedData, modalType}) {
     
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
+    const [configIndex, setConfigIndex] = useState(0);
     
     if (modalType === "documents") {
 
@@ -146,18 +147,20 @@ export function LinkModal({selectedData, modalType}) {
             const newHospitalIndex = hospitals.indexOf(e.target.value);
             setHospitalsIndex(newHospitalIndex);
             setDepartmentsIndex(0);
+            setConfigIndex(0);
         }
 
         function onDepartmentChange(e) {
             const newDepartmentIndex = getDepartments().indexOf(e.target.value);        
             setDepartmentsIndex(newDepartmentIndex);
+            setConfigIndex(0);
         }
                 
         return (
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
                 <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
-                <IntellivueConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} />    
+                <ConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} configIndex={configIndex} setConfigIndex={setConfigIndex}/>    
             </div>
         );
     }
