@@ -25,14 +25,14 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
         const departmentId  = departmentArray.map((word) => {
             return word.replace(/-/g, ' ');
         }).join(' - ');
-        console.log(departmentId, departmentName);
+        
         return departmentId === departmentName;
     })
     
     const parsedEntries =  filteredCurrentEntries.map((entry) => {
         return entry.split('/').slice(-1)[0];
     })
-        
+         
     // Get the current entry data based on config index
     const parsedConfigData = parsedEntries[configIndex].split('_');
 
@@ -42,9 +42,7 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     return [parsedConfigData, parsedEntries, configNumber, fileName]
 }
 
-export function ConfigDisplay({selectedData, hospitals,  departmentName, departmentsIndex, hospitalsIndex}) {
-    
-    const [configIndex, setConfigIndex] = useState(0);
+export function ConfigDisplay({selectedData, hospitals,  departmentName, departmentsIndex, hospitalsIndex, configIndex, setConfigIndex}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
