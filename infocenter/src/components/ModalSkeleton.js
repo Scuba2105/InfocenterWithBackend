@@ -3,7 +3,8 @@ import useMediaQueries from "media-queries-in-react";
 import { useRef, useState } from 'react';
 import { serverConfig } from "../server";
 
-const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 'disposal', 'change-password'];
+const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
+'disposal', 'change-password', "update-staff-contact", "update-vendor-contact"];
 
 function getFormHeading(page, type, selectedData) {
     
@@ -27,6 +28,9 @@ function getFormHeading(page, type, selectedData) {
     }
     else if (type === "new-vendor") {
         return "Add New Vendor Contact";
+    }
+    else if (type === "update-staff-contact" || type === "update-vendor-contact") {
+        return type === "update-staff-contact" ? "Update Staff Contact" : "Update Vendor Contact";
     }
 }
 

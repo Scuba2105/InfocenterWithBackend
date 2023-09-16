@@ -4,6 +4,7 @@ import { ContactCard } from "./ContactCard";
 import { ContactsFilter } from "./ContactsFilter";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { AddNewContact } from "./AddNewContact";
+import { UpdateContact } from "./UpdateContact";
 import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react"
 
@@ -41,13 +42,24 @@ function closeAddContactModal(setAddContactVisible) {
     setAddContactVisible(false);
 }
 
+function openUpdateContactModal(setCurrentContact, contactData ,setUpdateContactVisible) {
+    setCurrentContact(contactData)
+    setUpdateContactVisible(true)
+}
+
+function closeUpdateContactModal(setUpdateContactVisible) {
+    setUpdateContactVisible(false)
+}
+
 export function ContactsSummary({page, identifier, selectedDepartment, setSelectedDepartment, setVendor, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange, queryClient, showMessage, closeDialog}) {
     
     // Contacts for each department are viewed over several pages. Store the state of the page.
     const [contactPage, setContactPage] = useState(0);
     const [vendorContactPage, setVendorContactPage] = useState(0);
     const [addContactVisible, setAddContactVisible] = useState(false);
-
+    const [currentContact, setCurrentContact] = useState(null);
+    const [updateContactVisible, setUpdateContactVisible] = useState(false);
+    
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -92,7 +104,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
                         const colorIndex = index % 4;
                         return (
                             <div key={`contact-${index}`} className="contact-container">
-                                <ContactCard identifier={identifier} contact={contact} index={colorIndex}></ContactCard>
+                                <ContactCard identifier={identifier} contact={contact} index={colorIndex}  setCurrentContact={setCurrentContact} openUpdateContactModal={() => openUpdateContactModal(setCurrentContact, contact, setUpdateContactVisible)}></ContactCard>
                             </div>
                         )
                     })}
@@ -104,8 +116,12 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
                 </div>
             </div>                  
             {addContactVisible && 
-            <ModalSkeleton closeModal={() => closeAddContactModal(setAddContactVisible)} type={identifier === "staff" ? 'new-department-contact' : 'new-vendor'}>
+            <ModalSkeleton type={identifier === "staff" ? 'new-department-contact' : 'new-vendor'} closeModal={() => closeAddContactModal(setAddContactVisible)}>
                 <AddNewContact formType={identifier} page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddContactModal={() => closeAddContactModal(setAddContactVisible)}></AddNewContact>
+            </ModalSkeleton>}
+            {updateContactVisible && 
+            <ModalSkeleton selectedData={currentContact} type={identifier === "staff" ? "update-staff-contact" : "update-vendor-contact"} closeModal={() => closeUpdateContactModal(setUpdateContactVisible)}>
+                <UpdateContact currentContact={currentContact} formType={identifier} page={page} pageData={pageData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeUpdateContactModal={() => closeUpdateContactModal(setUpdateContactVisible)}></UpdateContact>
             </ModalSkeleton>}
         </div>
     )
