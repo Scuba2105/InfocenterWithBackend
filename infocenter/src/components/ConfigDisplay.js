@@ -12,14 +12,13 @@ function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
     }
 }
 
-function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName, departmentsIndex) {
+function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName) {
     
     const currentConfigEntries = selectedData.config[hospitals[hospitalsIndex]];
     
     // Parse the config string to get the department it belongs to
     const filteredCurrentEntries = currentConfigEntries.filter((entry) => {
         const departmentArray = entry.split('/').slice(-1)[0].split('_')[2].split('--');
-        console.log(departmentArray)
         const departmentId  = departmentArray.map((word) => {
             return word.replace(/-/g, ' ');
         }).join(' - ');
@@ -44,22 +43,22 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     return [parsedConfigData, parsedEntries, configNumber, configLink, fileName]
 }
 
-export function ConfigDisplay({selectedData, hospitals, departmentName, departmentsIndex, hospitalsIndex, configIndex, setConfigIndex}) {
+export function ConfigDisplay({selectedData, hospitals, departmentName, hospitalsIndex, configIndex, setConfigIndex}) {
     
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
     });
 
-    const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName, departmentsIndex);
+    const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName);
 
     return (
         <>
-        {configNumber > 1 && <div className="indicator-container">
-            {parsedEntries.map((entry, index) => {
-            return <div key={`indicator${index}`} className={index === configIndex ? "indicator active-indicator" : "indicator"}></div>
-        })}
-        </div>}
+            {configNumber > 1 && <div className="indicator-container">
+                {parsedEntries.map((entry, index) => {
+                return <div key={`indicator${index}`} className={index === configIndex ? "indicator active-indicator" : "indicator"}></div>
+            })}
+            </div>}
             <div className="config-display-container">
                 {configNumber > 1 && <img className="config-arrow config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>}
                 <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>

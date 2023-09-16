@@ -5,8 +5,6 @@ import { ClipboardCopy } from "./CopyToClipboard";
 import { Documents } from "./Documents";
 import useMediaQueries from "media-queries-in-react";
 
-const departmentAcronyms = ['ct', 'agsu'];
-
 function passwordEntryClassName(num) {
     if (num === 0) {
         return "service"
@@ -71,7 +69,7 @@ export function LinkModal({selectedData, modalType}) {
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);
-    
+    console.log(hospitalsIndex, departmentsIndex);
     if (modalType === "documents") {
 
         const documentData = selectedData.documents;
@@ -153,7 +151,7 @@ export function LinkModal({selectedData, modalType}) {
         return (
             <div className="modal-display">
                 <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
-                <SelectInput label="Department" optionData={getDepartments()} onChange={onDepartmentChange} />
+                <SelectInput label="Department" value={getDepartments()[departmentsIndex]} optionData={getDepartments()} onChange={onDepartmentChange} />
                 <ConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} configIndex={configIndex} setConfigIndex={setConfigIndex}/>    
             </div>
         );
