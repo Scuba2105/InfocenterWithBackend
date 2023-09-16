@@ -16,7 +16,7 @@ export function UpdateContact({currentContact, formType, page, pageData, queryCl
                 <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext={currentContact.mobilePhone === "-" ? "" : currentContact.mobilePhone} />
                 {formType === "vendor" && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext={currentContact.mobilePhone === "-" ? "" : currentContact.email} />}
             </div>
-            <div className={"form-buttons-laptop"} style={formType === "staff" ? {transform: 'translateY(-10px)'} : {transform: 'translateY(-40px)'}}>
+            <div className={"form-buttons-laptop"} style={formType === "staff" ? {transform: 'translateY(-10px)'} : currentContact.position !== "" ? {transform: 'translateY(-20px)'} : {transform: 'translateY(-40px)'}}>
                     <div className="update-button save-button">Save Changes</div>
                     <div className="update-button">Upload Updates</div>
             </div>

@@ -2550,7 +2550,7 @@ html {
 }
 
 .contact-card-container {
-  height: 275px;
+  height: 250px;
   width: 200px;
   border: 1px solid black;
   border-radius: 10px;
@@ -2631,13 +2631,13 @@ html {
 }
 
 .number-description {
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
 .number-value {
-  font-size: 12px;
+  font-size: 11px;
   word-break: break-word;
   -ms-word-break: break-word;
 }
