@@ -43,19 +43,16 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewV
         
         // Get index based on whether page 1 or page 2.
         const regexIndex = index + (inputPage - 1)*3;
-        console.log(!vendorRegexArray[regexIndex].test(input.value))
-        // Check the mandatory inputs.
-        if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 1) {
-            showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
-            return
-        }
-        // Check the contact numbers and emails.
-        else if (!vendorRegexArray[regexIndex].test(input.value) && inputPage === 2) {
-            showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
-            return
-        }
-        else {
-            newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
+        
+        // Validate the inputs for each page and show warning if fails validation. Else, add entry to contact data.
+        if (inputPage === 1 || (input.value !== "" && inputPage === 2)) {
+            if (!vendorRegexArray[regexIndex].test(input.value)) {
+                showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
+                return
+            }
+            else {
+                newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
+            }
         }
     }
     
@@ -148,6 +145,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
 }
 
 async function uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal) {
+    
     if (formType === "staff") {
         if (Object.keys(newContactData.current).length < 5) {
             showMessage("warning", "Contact data is incomplete. You must complete Name, Position, Hospital and Deprtment then also enter at least one Contact Number. Please update the contact details and try again.")
