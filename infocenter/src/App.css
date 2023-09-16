@@ -1562,6 +1562,37 @@ html {
   background-color: var(--form-background-color);
 }
 
+.contact-update-display {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--form-background-color);
+}
+
+.contact-update-department-container {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.contact-update-input-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+
+
 .add-new-heading {
   color: var(--form-font-color);
 }
@@ -2531,7 +2562,6 @@ html {
 .contact-update-header {
   grid: 1 / 1;
   font-size: 10px;
-  background-color: #bdc6c7;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -2543,8 +2573,8 @@ html {
 }
 
 #edit-icon {
-  background-color: white;
-  border: 1px solid white;
+  background-color: #bdc6c7;
+  border: 1px solid #bdc6c7;
   padding: 2px;
   border-radius: 50%;
   margin-right: 10px;
@@ -2552,7 +2582,8 @@ html {
 
 #edit-icon:hover {
   cursor: pointer;
-
+  background-color: white;
+  border: 1px solid white;
 }
 
 .contact-card-header {
@@ -2562,8 +2593,12 @@ html {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.contact-header-centered {
+  justify-content: center;
 }
 
 #contact-name {

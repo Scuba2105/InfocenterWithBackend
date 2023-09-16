@@ -12,7 +12,7 @@ export function ContactCard({identifier, contact, index, openUpdateContactModal}
                 <label>{`Last Updated: ${contact.lastUpdate}`}</label>
                 <EditIcon onClick={openUpdateContactModal} color={identifier === "staff" ? backgroundColors[index] : vendorBackgroundColors[index]} size="15px"></EditIcon>
             </div>
-            <div className="contact-card-header" style={identifier === "staff" ? {backgroundColor: backgroundColors[index]} : {backgroundColor: vendorBackgroundColors[index]}}>
+            <div className={contact.position === "" ? "contact-card-header contact-header-centered" : "contact-card-header"} style={identifier === "staff" ? {backgroundColor: backgroundColors[index]} : {backgroundColor: vendorBackgroundColors[index]}}>
                 <label id="contact-name">{contact.contact}</label>
                 <label id="contact-position">{contact.position}</label>
             </div> 
