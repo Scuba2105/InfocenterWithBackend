@@ -213,9 +213,14 @@ export function formatPhoneNumber(type, value) {
             `${numberArray.slice(0,4).join("")} ${numberArray.slice(4,7).join("")} ${numberArray.slice(7,10).join("")}` : 
             value.length === 10 && numberArray[0] === '0' ? 
             `${numberArray.slice(0,2).join("")} ${numberArray.slice(2,6).join("")} ${numberArray.slice(6,10).join("")}` :
-            `${numberArray.slice(0,2).join("")} ${numberArray.slice(2,5).join("")} ${numberArray.slice(5,8).join("")}`
+            value.length === 10 ? 
+            `${numberArray.slice(0,2).join("")} ${numberArray.slice(2,5).join("")} ${numberArray.slice(5,8).join("")}` :
+            value
     }
     else if (type === "Mobile Phone") {
+        return `${numberArray.slice(0,4).join("")} ${numberArray.slice(4,7).join("")} ${numberArray.slice(7,10).join("")}`
+    }
+    else if (type === "Dect Phone") {
         return `${numberArray.slice(0,4).join("")} ${numberArray.slice(4,7).join("")} ${numberArray.slice(7,10).join("")}`
     }
     else {
