@@ -90,7 +90,10 @@ export function Login() {
         }
 
         return () => {
-            setLoggingIn(false);
+            setTimeout(() => {
+                setLoggingIn(false);
+            }, 2000);
+            
         }
 
     }, [loggingIn, login, setUser])
