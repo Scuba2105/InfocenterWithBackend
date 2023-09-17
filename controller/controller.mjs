@@ -1,8 +1,8 @@
 import { Mutex } from 'async-mutex';
 import bcrypt, { hash } from "bcrypt"
-import {readDeviceData, readStaffData, readContactsData, readVendorContactsData, writeDeviceData, writeStaffData, 
-    generateNewDeviceData, writeThermometerData, readThermometerData, generateNewStaffData, 
-    determineTeam } from '../utils/utils.mjs';
+import {readDeviceData, readStaffData, readContactsData, readVendorContactsData, writeDeviceData, 
+    writeStaffData, generateNewDeviceData, writeThermometerData, readThermometerData, 
+    generateNewStaffData, determineTeam } from '../utils/utils.mjs';
 import { updateStaffEntry } from '../models/models.mjs';
 import { populateGenius3RequestTemplate } from '../file-handling/repair-request.mjs';
 import { getGenius3Serial, disposeGenius3, retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';

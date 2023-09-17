@@ -14,10 +14,10 @@ export function UpdateContact({currentContact, formType, page, pageData, queryCl
                 <Input inputType="text" identifier="add-new" labelText="Office Phone" type="update" defaultValue={currentContact.officePhone !== "" ? currentContact.officePhone : null} placeholdertext={currentContact.officePhone === "" ? "Enter Office Phone number" : null} />
                 {formType === "staff" && <Input inputType="text" identifier="add-new" type="update" labelText="Dect Phone" defaultValue={currentContact.dectPhone !== "" ? currentContact.dectPhone : null} placeholdertext={currentContact.dectPhone === "" ? "Enter Dect Phone number" : null} />}
                 <Input inputType="text" identifier="add-new" labelText="Mobile Phone" type="update" defaultValue={currentContact.mobilePhone !== "" ? currentContact.mobilePhone : null} placeholdertext={currentContact.mobilePhone === "" ? "Enter Mobile Phone number" : null} />
-                {formType === "vendor" && <Input inputType="text" identifier="add-new" type="update" labelText="Email Address" defaultValue={currentContact.email !== "" ? currentContact.email : null} placeholdertext={currentContact.email === "" ? "Enter Email Address" : null} />}
+                {formType === "vendor" && <Input inputType="text" identifier="add-new" type="update" labelText={currentContact.vendor === "GE Healthcare" && currentContact.contact === "Technical Service" ? "Website" : "Email Address"} defaultValue={currentContact.email !== "" ? currentContact.email : null} placeholdertext={currentContact.email === "" ? "Enter Email Address" : null} />}
             </div>
             <div className={"form-buttons-laptop"} style={formType === "staff" ? {transform: 'translateY(-10px)'} : currentContact.position !== "" ? {transform: 'translateY(-20px)'} : {transform: 'translateY(-40px)'}}>
-                    <div className="update-button">Upload Updates</div>
+                <div className="update-button">Upload Updates</div>
             </div>
         </div>
     )

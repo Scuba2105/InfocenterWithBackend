@@ -172,9 +172,10 @@ export function generateNewStaffContactData(reqBody) {
         hospital: reqBody["Hospital"],
         department: reqBody["Department"],
         position: reqBody["Contact Position"],
-        officePhone: "-",
-        mobilePhone: "-",
-        dectPhone: "-"
+        officePhone: "",
+        mobilePhone: "",
+        dectPhone: "",
+        lastUpdate: reqBody["Current Date"]
     }
 }
 
@@ -186,7 +187,8 @@ export function generateNewVendorContactData(reqBody) {
         position: reqBody["Contact Position"],
         officePhone: "",
         mobilePhone: "",
-        email: ""
+        email: "",
+        lastUpdate: reqBody["Current Date"]
     }
 }
 

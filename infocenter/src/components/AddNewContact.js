@@ -160,6 +160,10 @@ async function uploadNewContactData(newContactData, queryClient, showMessage, cl
         }
     }
 
+    // Add the date string to the update data to track when it was added.
+    const currentDate = new Date();
+    newContactData.current["Current Date"] = currentDate.toLocaleDateString();
+
     // Start uploading dialog and begin post request
     showMessage("uploading", `Uploading New Contact Data`);
 
