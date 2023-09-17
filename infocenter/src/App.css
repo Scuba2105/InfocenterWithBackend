@@ -2555,7 +2555,7 @@ html {
   border: 1px solid black;
   border-radius: 10px;
   display: grid; 
-  grid-template-rows: 40px 25% 1fr;
+  grid-template-rows: 40px 22% 1fr;
   overflow: hidden;
 }
 
@@ -2572,7 +2572,7 @@ html {
   margin-left: 10px;
 }
 
-#edit-icon {
+#contact-update-edit {
   background-color: #bdc6c7;
   border: 1px solid #bdc6c7;
   padding: 2px;
@@ -2580,7 +2580,7 @@ html {
   margin-right: 10px;
 }
 
-#edit-icon:hover {
+#contact-update-edit:hover {
   cursor: pointer;
   background-color: white;
   border: 1px solid white;
