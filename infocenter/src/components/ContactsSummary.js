@@ -42,8 +42,8 @@ function closeAddContactModal(setAddContactVisible) {
     setAddContactVisible(false);
 }
 
-function openUpdateContactModal(setCurrentContact, contactData ,setUpdateContactVisible) {
-    setCurrentContact(contactData)
+function openUpdateContactModal(setCurrentContact, contactData , id, setUpdateContactVisible) {
+    setCurrentContact({id: id, data: contactData})
     setUpdateContactVisible(true)
 }
 
@@ -104,7 +104,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
                         const colorIndex = index % 4;
                         return (
                             <div key={`contact-${index}`} className="contact-container">
-                                <ContactCard identifier={identifier} contact={contact} index={colorIndex}  setCurrentContact={setCurrentContact} openUpdateContactModal={() => openUpdateContactModal(setCurrentContact, contact, setUpdateContactVisible)}></ContactCard>
+                                <ContactCard identifier={identifier} contact={contact} index={colorIndex}  setCurrentContact={setCurrentContact} openUpdateContactModal={() => openUpdateContactModal(setCurrentContact, contact, index, setUpdateContactVisible)}></ContactCard>
                             </div>
                         )
                     })}

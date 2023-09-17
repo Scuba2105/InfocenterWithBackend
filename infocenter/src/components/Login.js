@@ -89,13 +89,6 @@ export function Login() {
             submitData(setLoginError, setLoginErrorMessage, login, setUser);
         }
 
-        return () => {
-            setTimeout(() => {
-                setLoggingIn(false);
-            }, 2000);
-            
-        }
-
     }, [loggingIn, login, setUser])
 
     return (
