@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { Input } from "./Input"
+import { serverConfig } from "../server";
 
 const namePropertyLookup = {"contact": "Name", "position": "Position", "officePhone": "Office Phone", "dectPhone": "Dect Phone", "mobilePhone": "Mobile Phone"};
 const staffObjectProperties = ["contact", "position", "officePhone", "dectPhone", "mobilePhone"];
@@ -17,7 +18,7 @@ function inputIsValid(formType, index, value) {
     }
 }
 
-function uploadUpdatedDetails(idNumber, currentContact, formType, formContainer, updatedContactData, page, pageData, queryClient, showMessage, closeDialog, closeUpdateContactModal) {
+async function uploadUpdatedDetails(idNumber, currentContact, formType, formContainer, updatedContactData, page, pageData, queryClient, showMessage, closeDialog, closeUpdateContactModal) {
     // Check which fields have changed and validate new data.
     const formInputs = formContainer.current.querySelectorAll("input");
     
@@ -51,12 +52,37 @@ function uploadUpdatedDetails(idNumber, currentContact, formType, formContainer,
         return
     }
 
-    // May not be necessary. Might be able to send some old data to find old entry.
-    if (changedEntries.includes("contact") && changedEntries.includes("position")) {
-        showMessage("warning", `The Contact Name and Position cannot both be changed as at least one is required to identify the updated entry. If you do need to update both have an administrator add a new contact for this ${formType === "staff" ? "department" : "vendor"}.`)
-    }
+    // Add the existing name and officer to the data to identify the entry to update
+    updatedContactData.current["existingName"] = currentContact.contact;
+    updatedContactData.current["existingPosition"] = currentContact.position;
 
-    // Now can send data to server.
+    // Add the date string to the update data to track when it was added.
+    const currentDate = new Date();
+    updatedContactData.current["lastUpdate"] = currentDate.toLocaleDateString();
+
+    console.log(updatedContactData.current)
+    // Start uploading dialog and begin post request
+    //showMessage("uploading", `Uploading New Contact Data`);
+
+    // Start the post request
+    try {
+        // Post the data to the server  
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedContactData.current),
+        });
+
+        const data = await res.json()
+    }
+    catch (error) {
+        showMessage("error", `${error.message}.`)
+    }
 }
 
 export function UpdateContact({currentContact, formType, page, pageData, queryClient, showMessage, closeDialog, closeUpdateContactModal}) {
