@@ -116,9 +116,8 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
 
     // Show the uploading spinner dialog while uploading.
     showMessage("uploading", `Uploading ${model} Data`)
-
-    try {
     
+    try {
         // Post the data to the server  
         const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -127,7 +126,8 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
                 referrerPolicy: "no-referrer",
                 body: newData.current,
         });
-
+        
+        console.log(res)
         const data = await res.json();
         
         if (data.type === "Error") {

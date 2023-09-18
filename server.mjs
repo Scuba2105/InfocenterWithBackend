@@ -126,10 +126,8 @@ app.put("/UpdateEntry/:page", (req, res, next) => {
     }     
 })
 
-
-
 // Define route to add new staff or equipment. 
-app.post('/AddNewEntry/:page/:formType', (req, res, next) => {
+app.post('/AddNewEntry/:page', (req, res, next) => {
     try {
         cpUpload(req, res, (err) => {
             if (err) {
