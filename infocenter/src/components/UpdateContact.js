@@ -60,9 +60,8 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
     const currentDate = new Date();
     updatedContactData.current["lastUpdate"] = currentDate.toLocaleDateString();
 
-    console.log(updatedContactData.current)
     // Start uploading dialog and begin post request
-    //showMessage("uploading", `Uploading New Contact Data`);
+    showMessage("uploading", `Uploading New Contact Data`);
 
     // Start the post request
     try {
@@ -79,6 +78,22 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
         });
 
         const data = await res.json()
+
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+        }
+        else {                            
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeUpdateContactModal();
+            }, 1600);
+        }
     }
     catch (error) {
         showMessage("error", `${error.message}.`)

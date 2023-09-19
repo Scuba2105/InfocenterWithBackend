@@ -89,3 +89,65 @@ export async function addNewContactData(req, res, __dirname) {
         res.json({type: "Success", message: 'Data Upload Successful'});
     }
 }
+
+export async function updateContactData(req, res, __dirname) {
+    if (req.params.formType === "staff") {
+        
+        const updatedData = req.body;
+        const existingContactsData = await readContactsData(__dirname);
+        console.log(updatedData);
+        // Validate the supplied input values.
+        for (let [index, input] of staffInputsDescriptions.entries()) {
+            if (updatedData[input]) {
+                const descIndex = staffInputsDescriptions.indexOf(input);
+                if (!staffRegexArray[descIndex].test(updatedData[input])) {
+                    res.json({type: "Error", message: `The input ${input} is not of the required pattern. Please edit the value and try again`});
+                }
+            }
+        }
+        
+        // Use destructuring to get properties required for finding entries.
+        const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
+
+        // Edit the updated entry in the staff data 
+        const updatedContactsData = existingContactsData.map((entry) => {
+            if (entry.contact === existingName && entry.position === existingPosition && entry.hospital === requiredUpdateData.hospital && entry.department === requiredUpdateData.department) {
+                return requiredUpdateData;
+            }
+            else {
+                return entry;
+            }
+        })
+        
+        // Write the data to file
+        writeStaffContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
+
+        // Send the success response message.
+        res.json({type: "Success", message: 'Data Upload Successful'});
+    }
+    else if (req.params.formType === "vendor") {
+        
+        const existingContactsData = await readVendorContactsData(__dirname);
+
+        // Validate the supplied input values
+        for (let [index, input] of vendorInputsDescriptions.entries()) {
+            if (req.body[input]) {
+                const descIndex = vendorInputsDescriptions.indexOf(input);
+                if (!vendorRegexArray[descIndex].test(req.body[input])) {
+                    res.json({type: "Error", message: `The input ${input} is not of the required pattern. Please edit the value and try again`});
+                }
+            }
+        }
+
+        // Need to do the vendors API both front and backend
+
+        // Append new contact data to existing data
+        existingContactsData.push(newContactData);
+
+        // Write the data to file
+        writeVendorContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
+
+        // Send the success response message.
+        res.json({type: "Success", message: 'Data Upload Successful'});
+    }
+}

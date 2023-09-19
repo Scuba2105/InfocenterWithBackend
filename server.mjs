@@ -6,7 +6,7 @@ import multer from 'multer';
 import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, validateLoginCredentials, 
          changeLoginPassword, updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, 
          updateThermometerList, getInactiveThermometers, disposeSelectedThermometers } from './controller/controller.mjs';
-import { addNewContactData } from './controller/contacts-controller.mjs';
+import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 
 // Define the root directory and the port for the server 
@@ -153,6 +153,15 @@ app.post('/AddNewEntry/:page', (req, res, next) => {
 app.post('/AddNewContact/:formType', (req, res, next) => {
     try {
        addNewContactData(req, res, __dirname); 
+    } catch (err) {
+        next(err);
+    }
+})
+
+// Define route to add new hne staff contacts or vendor contacts. 
+app.post('/UpdateContact/:formType', (req, res, next) => {
+    try {
+       updateContactData(req, res, __dirname); 
     } catch (err) {
         next(err);
     }
