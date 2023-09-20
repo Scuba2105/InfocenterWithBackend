@@ -5,12 +5,24 @@ import { serverConfig } from "../server";
 const namePropertyLookup = {"contact": "Name", "position": "Position", "officePhone": "Office Phone", "dectPhone": "Dect Phone", "mobilePhone": "Mobile Phone"};
 const staffObjectProperties = ["contact", "position", "officePhone", "dectPhone", "mobilePhone"];
 const vendorObjectProperties = ["contact", "position", "officePhone", "mobilePhone", "email"] 
-const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
-const vendorRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ,.'-/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, //Contact
+                               /^[a-z &/]+$/i, // Position
+                               /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}/, // Office Phone 
+                               /^[0-9]{5}$/, // Dect Phone
+                               /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}/, // Mobile Phone 
+                               /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ // Email
+                            ]; 
+
+const vendorRegexArray = [/^[a-z ,.'-]+$/i, // Contact 
+                          /^[a-z ,.'-/]+$/i, // Position
+                          /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}/, // Office Phone
+                          /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}/, // Mobile Phone
+                          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ // Email
+                        ];
 const excludedPositions = ["Service Department", "Technical Service", "Customer Service"]
 
 function inputIsValid(formType, index, value, currentContact) {
-    console.log(index, value, vendorRegexArray[index])
+    
     if (formType === "staff") {
         return staffInputsRegexArray[index].test(value)
     }
@@ -39,7 +51,7 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
     for (let [index, input] of Array.from(formInputs).entries()) {
         
         // Get the required object properties based on form type. 
-        const contactObjectProperties = formType === "staff" ? staffObjectProperties : vendorObjectProperties;
+        const contactObjectProperties = formType === "staff" ? staffObjectProperties : formType === "vendor" && excludedPositions.includes(currentContact.contact) ? vendorObjectProperties.slice(0,1).concat(vendorObjectProperties.slice(2)) : vendorObjectProperties;
         
         // Initialise the number of changes and check how many inputs have been changed. 
         if (currentContact[contactObjectProperties[index]] !== input.value) {
