@@ -7,17 +7,17 @@ const staffObjectProperties = ["contact", "position", "officePhone", "dectPhone"
 const vendorObjectProperties = ["contact", "position", "officePhone", "mobilePhone", "email"] 
 const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, //Contact
                                /^[a-z &/]+$/i, // Position
-                               /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}/, // Office Phone 
+                               /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}|^\s*$/, // Office Phone (allows empty string) 
                                /^[0-9]{5}$/, // Dect Phone
-                               /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}/, // Mobile Phone 
-                               /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ // Email
+                               /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^\s*$/, // Mobile Phone (allows empty string)
+                               /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$|^\s*$/ // Email (allows empty string)
                             ]; 
 
 const vendorRegexArray = [/^[a-z ,.'-]+$/i, // Contact 
                           /^[a-z ,.'-/]+$/i, // Position
-                          /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}/, // Office Phone
-                          /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}/, // Mobile Phone
-                          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ // Email
+                          /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}|^\s*$/, // Office Phone (allows empty string)
+                          /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}|^\s*$/, // Mobile Phone (allows empty string)
+                          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$|^\s*$/ // Email (allows empty string)
                         ];
 const excludedPositions = ["Service Department", "Technical Service", "Customer Service"]
 
