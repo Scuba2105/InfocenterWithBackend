@@ -59,45 +59,45 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
     // Add the date string to the update data to track when it was added.
     const currentDate = new Date();
     updatedContactData.current["lastUpdate"] = currentDate.toLocaleDateString();
+    console.log(updatedContactData)
+    // // Start uploading dialog and begin post request
+    // showMessage("uploading", `Uploading New Contact Data`);
 
-    // Start uploading dialog and begin post request
-    showMessage("uploading", `Uploading New Contact Data`);
+    // // Start the post request
+    // try {
+    //     // Post the data to the server  
+    //     const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
+    //             method: "POST", // *GET, POST, PUT, DELETE, etc.
+    //             mode: "cors", // no-cors, *cors, same-origin
+    //             redirect: "follow", // manual, *follow, error
+    //             referrerPolicy: "no-referrer",
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(updatedContactData.current),
+    //     });
 
-    // Start the post request
-    try {
-        // Post the data to the server  
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedContactData.current),
-        });
+    //     const data = await res.json()
 
-        const data = await res.json()
+    //     if (data.type === "Error") {
+    //         closeDialog();
+    //         showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+    //     }
+    //     else {                            
+    //         // Need to update app data.
+    //         queryClient.invalidateQueries('dataSource');
 
-        if (data.type === "Error") {
-            closeDialog();
-            showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
-        }
-        else {                            
-            // Need to update app data.
-            queryClient.invalidateQueries('dataSource');
-
-            closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
-            setTimeout(() => {
-                closeDialog();
-                closeUpdateContactModal();
-            }, 1600);
-        }
-    }
-    catch (error) {
-        showMessage("error", `${error.message}.`)
-    }
+    //         closeDialog();
+    //         showMessage("info", 'Resources have been successfully updated!');
+    //         setTimeout(() => {
+    //             closeDialog();
+    //             closeUpdateContactModal();
+    //         }, 1600);
+    //     }
+    // }
+    // catch (error) {
+    //     showMessage("error", `${error.message}.`)
+    // }
 }
 
 export function UpdateContact({currentContact, formType, page, pageData, queryClient, showMessage, closeDialog, closeUpdateContactModal}) {
