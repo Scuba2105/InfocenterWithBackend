@@ -95,7 +95,7 @@ export async function updateContactData(req, res, __dirname) {
         
         const updatedData = req.body;
         const existingContactsData = await readContactsData(__dirname);
-        console.log(updatedData);
+        
         // Validate the supplied input values.
         for (let [index, input] of staffInputsDescriptions.entries()) {
             if (updatedData[input]) {
@@ -127,6 +127,8 @@ export async function updateContactData(req, res, __dirname) {
     }
     else if (req.params.formType === "vendor") {
         
+        const updatedData = req.body;
+        
         const existingContactsData = await readVendorContactsData(__dirname);
 
         // Validate the supplied input values
@@ -139,13 +141,21 @@ export async function updateContactData(req, res, __dirname) {
             }
         }
 
-        // Need to do the vendors API both front and backend
+        // Use destructuring to get properties required for finding entries.
+        const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
 
-        // Append new contact data to existing data
-        existingContactsData.push(newContactData);
-
+        // Edit the existing vendor data with the updated entry 
+        const updatedContactsData = existingContactsData.map((entry) => {
+            if (entry.contact === existingName && entry.position === existingPosition && requiredUpdateData.vendor) {
+                return requiredUpdateData;
+            }
+            else {
+                return entry;
+            }
+        })
+        
         // Write the data to file
-        writeVendorContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
+        writeVendorContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});

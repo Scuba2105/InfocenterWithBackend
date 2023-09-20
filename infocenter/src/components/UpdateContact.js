@@ -5,16 +5,25 @@ import { serverConfig } from "../server";
 const namePropertyLookup = {"contact": "Name", "position": "Position", "officePhone": "Office Phone", "dectPhone": "Dect Phone", "mobilePhone": "Mobile Phone"};
 const staffObjectProperties = ["contact", "position", "officePhone", "dectPhone", "mobilePhone"];
 const vendorObjectProperties = ["contact", "position", "officePhone", "mobilePhone", "email"] 
-const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
-const vendorRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ,.'-]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const vendorRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z ,.'-/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const excludedPositions = ["Service Department", "Technical Service", "Customer Service"]
 
-
-function inputIsValid(formType, index, value) {
+function inputIsValid(formType, index, value, currentContact) {
+    console.log(index, value, vendorRegexArray[index])
     if (formType === "staff") {
         return staffInputsRegexArray[index].test(value)
     }
     else {
-        return vendorRegexArray[index].test(value)
+        if (index === 1 && excludedPositions.includes(currentContact.contact)) {
+            return true
+        }
+        else if (index !== 0 && excludedPositions.includes(currentContact.contact)) {
+            return vendorRegexArray[index + 1].test(value)
+        }
+        else {
+            return vendorRegexArray[index].test(value)
+        }
     }
 }
 
@@ -35,7 +44,7 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
         // Initialise the number of changes and check how many inputs have been changed. 
         if (currentContact[contactObjectProperties[index]] !== input.value) {
             // Validate the input if it has changed and overwrite the contact data property if valid 
-            if (inputIsValid(formType, index, input.value)) {
+            if (inputIsValid(formType, index, input.value, currentContact)) {
                 updatedContactData.current[contactObjectProperties[index]] = input.value
                 changedEntries.push(contactObjectProperties[index]);
             }
