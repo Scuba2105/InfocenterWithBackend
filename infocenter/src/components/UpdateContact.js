@@ -15,11 +15,12 @@ const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, //Contact
 
 const vendorRegexArray = [/^[a-z ,.'-]+$/i, // Contact 
                           /^[a-z ,.'-/]+$/i, // Position
-                          /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{2}\s[0-9]{4}\s[0-9]{4}$|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Office Phone (allows empty string)
+                          /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^[0-9]{2}\s[0-9]{4}\s[0-9]{4}$|^[0-9]{2}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Office Phone (allows empty string)
                           /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
                           /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$|^\s*$/ // Email (allows empty string)
                         ];
 const excludedPositions = ["Service Department", "Technical Service", "Customer Service"]
+const removeSpacesProperties = ["officePhone", "mobilePhone"]
 
 function inputIsValid(formType, index, value, currentContact) {
     
@@ -27,10 +28,7 @@ function inputIsValid(formType, index, value, currentContact) {
         return staffInputsRegexArray[index].test(value)
     }
     else {
-        if (index === 1 && excludedPositions.includes(currentContact.contact)) {
-            return true
-        }
-        else if (index !== 0 && excludedPositions.includes(currentContact.contact)) {
+        if (index !== 0 && excludedPositions.includes(currentContact.contact)) {
             return vendorRegexArray[index + 1].test(value)
         }
         else {
@@ -53,11 +51,16 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
         // Get the required object properties based on form type. 
         const contactObjectProperties = formType === "staff" ? staffObjectProperties : formType === "vendor" && excludedPositions.includes(currentContact.contact) ? vendorObjectProperties.slice(0,1).concat(vendorObjectProperties.slice(2)) : vendorObjectProperties;
         
+        // Remove spaces from the existing any existing numbers so it can be properly parsed on the backend.
+        if (removeSpacesProperties.includes(contactObjectProperties[index])) {
+            updatedContactData.current[contactObjectProperties[index]] = input.value.replace(/\s/g, "")
+        }
+
         // Initialise the number of changes and check how many inputs have been changed. 
         if (currentContact[contactObjectProperties[index]] !== input.value) {
             // Validate the input if it has changed and overwrite the contact data property if valid 
             if (inputIsValid(formType, index, input.value, currentContact)) {
-                updatedContactData.current[contactObjectProperties[index]] = input.value
+                updatedContactData.current[contactObjectProperties[index]] = removeSpacesProperties.includes(contactObjectProperties[index]) ? input.value.replace(/\s/g, "") : input.value
                 changedEntries.push(contactObjectProperties[index]);
             }
             else {
@@ -80,45 +83,45 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
     // Add the date string to the update data to track when it was added.
     const currentDate = new Date();
     updatedContactData.current["lastUpdate"] = currentDate.toLocaleDateString();
-    console.log(updatedContactData)
-    // // Start uploading dialog and begin post request
-    // showMessage("uploading", `Uploading New Contact Data`);
+    
+    // Start uploading dialog and begin post request
+    showMessage("uploading", `Uploading New Contact Data`);
 
-    // // Start the post request
-    // try {
-    //     // Post the data to the server  
-    //     const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
-    //             method: "POST", // *GET, POST, PUT, DELETE, etc.
-    //             mode: "cors", // no-cors, *cors, same-origin
-    //             redirect: "follow", // manual, *follow, error
-    //             referrerPolicy: "no-referrer",
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(updatedContactData.current),
-    //     });
+    // Start the post request
+    try {
+        // Post the data to the server  
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedContactData.current),
+        });
 
-    //     const data = await res.json()
+        const data = await res.json()
 
-    //     if (data.type === "Error") {
-    //         closeDialog();
-    //         showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
-    //     }
-    //     else {                            
-    //         // Need to update app data.
-    //         queryClient.invalidateQueries('dataSource');
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+        }
+        else {                            
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
 
-    //         closeDialog();
-    //         showMessage("info", 'Resources have been successfully updated!');
-    //         setTimeout(() => {
-    //             closeDialog();
-    //             closeUpdateContactModal();
-    //         }, 1600);
-    //     }
-    // }
-    // catch (error) {
-    //     showMessage("error", `${error.message}.`)
-    // }
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeUpdateContactModal();
+            }, 1600);
+        }
+    }
+    catch (error) {
+        showMessage("error", `${error.message}.`)
+    }
 }
 
 export function UpdateContact({currentContact, formType, page, pageData, queryClient, showMessage, closeDialog, closeUpdateContactModal}) {
