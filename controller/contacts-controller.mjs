@@ -108,12 +108,12 @@ export async function updateContactData(req, res, __dirname) {
         
         // Use destructuring to get properties required for finding entries.
         const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
-
+        
         // Edit the updated entry in the staff data 
         const updatedContactsData = existingContactsData.map((entry) => {
             if (entry.contact === existingName && entry.position === existingPosition && entry.hospital === requiredUpdateData.hospital && entry.department === requiredUpdateData.department) {
-                requiredUpdateData.officePhone = formatPhoneNumber("Office Phone", requiredUpdateData.officePhone)
-                requiredUpdateData.mobilePhone = formatPhoneNumber("Mobile Phone", requiredUpdateData.mobilePhone)
+                requiredUpdateData.officePhone = requiredUpdateData.officePhone === "" ? "" : formatPhoneNumber("Office Phone", requiredUpdateData.officePhone)
+                requiredUpdateData.mobilePhone = requiredUpdateData.mobilePhone === "" ? "" : formatPhoneNumber("Mobile Phone", requiredUpdateData.mobilePhone)
                 return requiredUpdateData;
             }
             else {
@@ -145,12 +145,12 @@ export async function updateContactData(req, res, __dirname) {
 
         // Use destructuring to get properties required for finding entries.
         const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
-        console.log(existingName, existingPosition, requiredUpdateData);
+        console.log(requiredUpdateData)
         // Edit the existing vendor data with the updated entry 
         const updatedContactsData = existingContactsData.map((entry) => {
             if (entry.contact === existingName && entry.position === existingPosition && entry.vendor === requiredUpdateData.vendor) {
-                requiredUpdateData.officePhone = formatPhoneNumber("Office Phone", requiredUpdateData.officePhone)
-                requiredUpdateData.mobilePhone = formatPhoneNumber("Mobile Phone", requiredUpdateData.mobilePhone)
+                requiredUpdateData.officePhone = requiredUpdateData.officePhone === "" ? "" : formatPhoneNumber("Office Phone", requiredUpdateData.officePhone)
+                requiredUpdateData.mobilePhone = requiredUpdateData.mobilePhone === "" ? "" : formatPhoneNumber("Mobile Phone", requiredUpdateData.mobilePhone)
                 return requiredUpdateData;
             }
             else {
