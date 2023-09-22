@@ -7,5 +7,6 @@ config.mjs
 /data/staff-contacts.json
 /data/staff-data.json
 /data/vendor-contacts.json
+/ecosystem.config.js
 
 

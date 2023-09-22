@@ -11,14 +11,14 @@ export const menuOptions = [
         id: 'contacts',
         title: 'Contacts',
     },
-    {
+    /*{
         id: 'admin',
         title: 'Administration',
     },
     {
       id: 'utilities',
       title: 'Utilities',
-    }
+    }*/
 ];
   
 export const utilityFunctions = ["Service Report Uploads", "Service Request Generation","Genius 3 Thermometer Management"];

@@ -145,7 +145,7 @@ export async function updateContactData(req, res, __dirname) {
 
         // Use destructuring to get properties required for finding entries.
         const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
-        console.log(requiredUpdateData)
+        
         // Edit the existing vendor data with the updated entry 
         const updatedContactsData = existingContactsData.map((entry) => {
             if (entry.contact === existingName && entry.position === existingPosition && entry.vendor === requiredUpdateData.vendor) {

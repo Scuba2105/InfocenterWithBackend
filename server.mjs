@@ -21,6 +21,7 @@ app.use(cors({origin: '*'}));
 
 // Serve static files. 
 app.use(express.static('public'));
+app.use(express.static('infocenter/build'));
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
@@ -77,6 +78,15 @@ const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'u
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
 {name: 'employee-photo', maxCount: 1}])
+
+app.get("/", async (req, res, next) => {
+    try {
+        res.sendFile("infocenter/build/index.html", { root: __dirname });
+    } 
+    catch (error) {
+        res.send(error.message);
+    }
+})
 
 app.post("/VerifyLogin", async (req, res, next) => {
     try {

@@ -1,3 +1,5 @@
+import { serverConfig } from "../server";
+
 export function capitaliseFirstLetters(input) {
     const words = input.split(' ');
     const formattedWords = words.map((word) => {
@@ -24,7 +26,7 @@ export function generateDataPages(queryData, entriesPerPage) {
 
 export async function fetchData() {
     try {
-        const res = await fetch("http://localhost:5000/getData", {
+        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/getData`, {
                 method: "GET", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

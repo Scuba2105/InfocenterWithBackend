@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.mjs",
-    "prod": "set NODE_ENV=production&&node server.mjs"
+    "dev": "pm2-dev start ecosystem.config.js --env development",
+    "prod": "pm2-dev start ecosystem.config.js --env production"
   },
   "keywords": [],
   "author": "",
