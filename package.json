@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "prod": "set NODE_ENV=production&&node server.mjs"
   },
   "keywords": [],
   "author": "",
