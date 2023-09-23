@@ -1,13 +1,14 @@
 import express from 'express';
-import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import multer from 'multer';
-import { addNewDeviceData, addNewStaffData, getAllData, updateExistingDeviceData, validateLoginCredentials, 
-         changeLoginPassword, updateExistingStaffData, generateThermometerRepairRequest, getThermometerBatch, 
-         updateThermometerList, getInactiveThermometers, disposeSelectedThermometers } from './controller/controller.mjs';
+import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
+import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
+import { addNewDeviceData, updateExistingDeviceData } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
+import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
+    getInactiveThermometers, disposeSelectedThermometers } from './controller/thermometers-controller.mjs';
 
 // Define the root directory and the port for the server 
 const __dirname = path.dirname('.');

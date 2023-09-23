@@ -55,7 +55,7 @@ function getInputElements(addNewManufacturer, addNewType, newForm) {
     }
     else if (!addNewManufacturer && addNewType) {
         deviceTypeInput = newForm.querySelectorAll('.text-input')[1];
-        manufacturerInput = newForm.querySelector('.select-input')[0];
+        manufacturerInput = newForm.querySelectorAll('.select-input')[0];
         vendorInput = newForm.querySelectorAll('.select-input')[1];
     }
     else if (addNewManufacturer && addNewType) {
@@ -86,6 +86,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     
     // Validate the input data for the new device. All fields mandatory
     for (let [index, input] of inputElements.entries()) {
+
         if (input.value === "") {
             showMessage("error", `The input for the new device ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
             return;
@@ -127,7 +128,6 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
                 body: newData.current,
         });
         
-        console.log(res)
         const data = await res.json();
         
         if (data.type === "Error") {

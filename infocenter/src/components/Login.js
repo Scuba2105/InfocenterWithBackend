@@ -54,7 +54,7 @@ export function Login() {
                 setLoginError(true);
                 return
             }
-        
+            
             // Create login credentials object
             const loginCredentials = {email: emailInput.value, password: passwordInput.value}
             
