@@ -229,7 +229,7 @@ app.use((err, req, res, next) => {
     if (res.headersSent) {
       return next(err);
     }
-    console.log(err);
+    console.log(JSON.stringify({Route: "Error Handler Middleware", Error: err.message}), null, 2);
     return res.status(400).json({type: "Error", message: err.message});
 });
 

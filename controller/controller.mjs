@@ -45,9 +45,9 @@ export async function validateLoginCredentials(req, res, __dirname) {
             res.status(400).json({type: "Error", message: `The entered password is incorrect.`})
         }
 
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({type: "Error", message: error.message});
+    } catch (err) {
+        console.log(JSON.stringify({Route: "Validate Login", Error: err.message}), null, 2);
+        res.status(400).json({type: "Error", message: err.message});
     }
 }
 
@@ -97,9 +97,9 @@ export async function changeLoginPassword(req, res, __dirname) {
             res.status(400).json({type: "Error", message: `The value entered for you current password is incorrect.`})
         }
         
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({type: "Error", message: error.message});
+    } catch (err) {
+        console.log(JSON.stringify({Route: "Change Password", Error: err.message}), null, 2);
+        res.status(400).json({type: "Error", message: err.message});
     }
 }
 
@@ -112,8 +112,8 @@ export async function getAllData(req, res, __dirname) {
         const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData, vendorContactsData: vendorContactsData};
         res.json(allData);
     }
-    catch(error) {
-        console.log(error);
+    catch(err) {
+        console.log(JSON.stringify({Route: "Get App Data", Error: err.message}), null, 2);
     }
 }
 

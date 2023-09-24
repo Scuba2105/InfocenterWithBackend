@@ -57,6 +57,7 @@ export async function addNewContactData(req, res, __dirname) {
         }
         catch (err) {
             // Send the error response message.
+            console.log(JSON.stringify({Route: "Add Staff Contact", Error: err.message}), null, 2);
             res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
         }
     }
@@ -105,6 +106,7 @@ export async function addNewContactData(req, res, __dirname) {
         }
         catch (err) {
             // Send the error response message.
+            console.log(JSON.stringify({Route: "Add Vendor Contact", Error: err.message}), null, 2);
             res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
         }
     }
@@ -151,6 +153,7 @@ export async function updateContactData(req, res, __dirname) {
         }
         catch (err) {
             // Send the error response message.
+            console.log(JSON.stringify({Route: "Update Staff Contact", Error: err.message}), null, 2);
             res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
         }
     }
@@ -194,7 +197,9 @@ export async function updateContactData(req, res, __dirname) {
             })
         }
         catch (err) {
-            
+            // Send the error response message.
+            console.log(JSON.stringify({Route: "Update Vendor Contact", Error: err.message}), null, 2);
+            res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
         }
     } 
 }
