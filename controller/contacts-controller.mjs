@@ -1,5 +1,6 @@
-import { readContactsData, readVendorContactsData, writeStaffContactsData, writeVendorContactsData,
-generateNewStaffContactData, generateNewVendorContactData, formatPhoneNumber } from '../utils/utils.mjs';
+import { getAllStaffContactsData, getAllVendorContactsData, writeAllStaffContactsData, 
+writeAllVendorContactsData, generateNewStaffContactData, generateNewVendorContactData } from '../models/contacts-models.mjs'
+import { formatPhoneNumber } from '../utils/utils.mjs';
 
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const staffRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &\/]+$/i, /^[a-z &\/]+$/i, /^[a-z &\/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
@@ -11,7 +12,7 @@ const vendorPhoneKeys = ["Office Phone", "Mobile Phone", "Email"];
 export async function addNewContactData(req, res, __dirname) {
     if (req.params.formType === "staff") {
         
-        const existingContactsData = await readContactsData(__dirname);
+        const existingContactsData = await getAllStaffContactsData(__dirname);
 
         // Validate the supplied input values
         for (let [index, input] of staffInputsDescriptions.entries()) {
@@ -42,14 +43,14 @@ export async function addNewContactData(req, res, __dirname) {
         existingContactsData.push(newContactData);
         
         // Write the data to file
-        writeStaffContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
+        writeAllStaffContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});
     }
     else if (req.params.formType === "vendor") {
         
-        const existingContactsData = await readVendorContactsData(__dirname);
+        const existingContactsData = await getAllVendorContactsData(__dirname);
 
         // Validate the supplied input values
         for (let [index, input] of vendorInputsDescriptions.entries()) {
@@ -83,7 +84,7 @@ export async function addNewContactData(req, res, __dirname) {
         existingContactsData.push(newContactData);
 
         // Write the data to file
-        writeVendorContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
+        writeAllVendorContactsData(__dirname, JSON.stringify(existingContactsData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});
@@ -94,7 +95,7 @@ export async function updateContactData(req, res, __dirname) {
     if (req.params.formType === "staff") {
         
         const updatedData = req.body;
-        const existingContactsData = await readContactsData(__dirname);
+        const existingContactsData = await getAllStaffContactsData(__dirname);
         
         // Validate the supplied input values.
         for (let [index, input] of staffInputsDescriptions.entries()) {
@@ -122,7 +123,7 @@ export async function updateContactData(req, res, __dirname) {
         })
         
         // Write the data to file
-        writeStaffContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
+        writeAllStaffContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});
@@ -131,7 +132,7 @@ export async function updateContactData(req, res, __dirname) {
         
         const updatedData = req.body;
         
-        const existingContactsData = await readVendorContactsData(__dirname);
+        const existingContactsData = await getAllVendorContactsData(__dirname);
 
         // Validate the supplied input values
         for (let [index, input] of vendorInputsDescriptions.entries()) {
@@ -159,7 +160,7 @@ export async function updateContactData(req, res, __dirname) {
         })
         
         // Write the data to file
-        writeVendorContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
+        writeAllVendorContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});

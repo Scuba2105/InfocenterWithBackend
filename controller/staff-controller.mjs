@@ -1,5 +1,5 @@
-import {readStaffData, writeStaffData, generateNewStaffData, determineTeam } from '../utils/utils.mjs';
-import { updateStaffEntry } from '../models/models.mjs';
+import { getAllStaffData, writeAllStaffData, updateStaffEntry, generateNewStaffData } from '../models/staff-models.mjs';
+import { determineTeam } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
 
 // Use to prevent race conditions
@@ -9,7 +9,7 @@ export async function addNewStaffData(req, res, __dirname) {
     try {
         staffDataMutex.runExclusive(async () => {
             // Get the current device data 
-            const staffData = await readStaffData(__dirname);
+            const staffData = await getAllStaffData(__dirname);
             
             // Define the mandatory data in the request body
             const name = req.body.name;
@@ -37,7 +37,7 @@ export async function addNewStaffData(req, res, __dirname) {
             staffData.push(newStaffData);
 
             // Write the data to file
-            writeStaffData(__dirname, JSON.stringify(staffData, null, 2));
+            writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
 
             // Send the success response message.
             res.json({type: "Success", message: 'Data Upload Successful'}); 
@@ -52,7 +52,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
     try {
         staffDataMutex.runExclusive(async () => {
             // Get the current device data 
-            const staffData = await readStaffData(__dirname);
+            const staffData = await getAllStaffData(__dirname);
         
             // Get the staff ID and find the existing employee data
             const existingId = req.body["existing-id"];
@@ -72,7 +72,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
             })
 
             // Write the data to file
-            writeStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2));
+            writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2));
 
             // Send the success response message.
             res.json({type: "Success", message: 'Data Upload Successful'}); 

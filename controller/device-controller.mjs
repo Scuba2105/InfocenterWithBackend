@@ -1,15 +1,15 @@
-import { readDeviceData, writeDeviceData, generateNewDeviceData } from '../utils/utils.mjs';
+import { getAllDeviceData, writeAllDeviceData, generateNewDeviceData } from '../models/device-models.mjs';
 import { convertHospitalName } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
 
 // Assists with preventing race conditions. 
 const deviceDataMutex = new Mutex();
 
-export async function addNewDeviceData(req, res, __dirname) {
+export async function addNewDeviceData(req, res, __dirname) {2
     try {
         deviceDataMutex.runExclusive(async () => {
             // Get the current device data 
-            const deviceData = await readDeviceData(__dirname);
+            const deviceData = await getAllDeviceData(__dirname);
             
             // Get the new device data from the request object
             const newModel = req.body.model;
@@ -25,7 +25,7 @@ export async function addNewDeviceData(req, res, __dirname) {
             deviceData.push(newDevice);
                                         
             // Write the data to file
-            writeDeviceData(__dirname, JSON.stringify(deviceData, null, 2));
+            writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2));
 
             // Send the success response message.
             res.json({type: "Success", message: 'Data Upload Successful'});
@@ -40,7 +40,7 @@ export async function addNewDeviceData(req, res, __dirname) {
 export async function updateExistingDeviceData(req, res, __dirname) {
     try {
         deviceDataMutex.runExclusive(async () => {
-            const deviceData = await readDeviceData(__dirname);
+            const deviceData = await getAllDeviceData(__dirname);
             
             // Define the variables from the uploaded data
             const model = req.body.model;
@@ -122,7 +122,7 @@ export async function updateExistingDeviceData(req, res, __dirname) {
             })
 
             // Write the data to file
-            writeDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2));
+            writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2));
 
             // Send the success response message.
             res.json({type: "Success", message: 'Data Upload Successful'});

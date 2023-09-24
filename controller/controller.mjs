@@ -1,5 +1,7 @@
-import bcrypt, { hash } from "bcrypt"
-import {readDeviceData, readStaffData, readContactsData, readVendorContactsData } from '../utils/utils.mjs';
+import bcrypt, { hash } from "bcrypt";
+import { getAllDeviceData } from '../models/device-models.mjs';
+import { getAllStaffData } from '../models/staff-models.mjs'; 
+import { getAllStaffContactsData, getAllVendorContactsData } from '../models/contacts-models.mjs';
 import { retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';
 
 export async function validateLoginCredentials(req, res, __dirname) {
@@ -103,10 +105,10 @@ export async function changeLoginPassword(req, res, __dirname) {
 
 export async function getAllData(req, res, __dirname) {
     try {
-        const staffData = await readStaffData(__dirname);
-        const deviceData = await readDeviceData(__dirname);
-        const contactsData = await readContactsData(__dirname);
-        const vendorContactsData = await readVendorContactsData(__dirname);
+        const staffData = await getAllStaffData(__dirname);
+        const deviceData = await getAllDeviceData(__dirname);
+        const contactsData = await getAllStaffContactsData(__dirname);
+        const vendorContactsData = await getAllVendorContactsData(__dirname);
         const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData, vendorContactsData: vendorContactsData};
         res.json(allData);
     }
