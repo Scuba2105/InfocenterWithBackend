@@ -33,7 +33,7 @@ export async function addNewDeviceData(req, res, __dirname) {2
     }
     catch(err) {
         // Send the error response message.
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
     }
 }
 
@@ -130,6 +130,6 @@ export async function updateExistingDeviceData(req, res, __dirname) {
     }
     catch (err) {
         // Send the error response message.
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
     }
 }
