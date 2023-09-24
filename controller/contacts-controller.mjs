@@ -155,40 +155,46 @@ export async function updateContactData(req, res, __dirname) {
         }
     }
     else if (req.params.formType === "vendor") {
-        
-        const updatedData = req.body;
-        
-        const existingContactsData = await getAllVendorContactsData(__dirname);
+        try { 
+            vendorContactsDataMutex.runExclusive(async () => {
+                const updatedData = req.body;
+                
+                const existingContactsData = await getAllVendorContactsData(__dirname);
 
-        // Validate the supplied input values
-        for (let [index, input] of vendorInputsDescriptions.entries()) {
-            if (req.body[input]) {
-                const descIndex = vendorInputsDescriptions.indexOf(input);
-                if (!vendorRegexArray[descIndex].test(req.body[input])) {
-                    res.json({type: "Error", message: `The input ${input} is not of the required pattern. Please edit the value and try again`});
+                // Validate the supplied input values
+                for (let [index, input] of vendorInputsDescriptions.entries()) {
+                    if (req.body[input]) {
+                        const descIndex = vendorInputsDescriptions.indexOf(input);
+                        if (!vendorRegexArray[descIndex].test(req.body[input])) {
+                            res.json({type: "Error", message: `The input ${input} is not of the required pattern. Please edit the value and try again`});
+                        }
+                    }
                 }
-            }
+
+                // Use destructuring to get properties required for finding entries.
+                const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
+                
+                // Edit the existing vendor data with the updated entry 
+                const updatedContactsData = existingContactsData.map((entry) => {
+                    if (entry.contact === existingName && entry.position === existingPosition && entry.vendor === requiredUpdateData.vendor) {
+                        requiredUpdateData.officePhone = requiredUpdateData.officePhone === "" ? "" : formatPhoneNumber("Office Phone", requiredUpdateData.officePhone)
+                        requiredUpdateData.mobilePhone = requiredUpdateData.mobilePhone === "" ? "" : formatPhoneNumber("Mobile Phone", requiredUpdateData.mobilePhone)
+                        return requiredUpdateData;
+                    }
+                    else {
+                        return entry;
+                    }
+                })
+                
+                // Write the data to file
+                writeAllVendorContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
+
+                // Send the success response message.
+                res.json({type: "Success", message: 'Data Upload Successful'});
+            })
         }
-
-        // Use destructuring to get properties required for finding entries.
-        const {existingName, existingPosition, ...requiredUpdateData} = updatedData;
-        
-        // Edit the existing vendor data with the updated entry 
-        const updatedContactsData = existingContactsData.map((entry) => {
-            if (entry.contact === existingName && entry.position === existingPosition && entry.vendor === requiredUpdateData.vendor) {
-                requiredUpdateData.officePhone = requiredUpdateData.officePhone === "" ? "" : formatPhoneNumber("Office Phone", requiredUpdateData.officePhone)
-                requiredUpdateData.mobilePhone = requiredUpdateData.mobilePhone === "" ? "" : formatPhoneNumber("Mobile Phone", requiredUpdateData.mobilePhone)
-                return requiredUpdateData;
-            }
-            else {
-                return entry;
-            }
-        })
-        
-        // Write the data to file
-        writeAllVendorContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2));
-
-        // Send the success response message.
-        res.json({type: "Success", message: 'Data Upload Successful'});
-    }
+        catch (err) {
+            
+        }
+    } 
 }
