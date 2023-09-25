@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import useMediaQueries from "media-queries-in-react";
 import { ChangePassword } from "./ChangePassword";
 import { PadlockIcon, LogoutIcon, BlankProfile } from "../svg";
+import { serverConfig } from "../server";
 
 function logoutFromApp(logout) {
     sessionStorage.removeItem("currentInfoCentreSession");
@@ -63,7 +64,7 @@ export function Avatar({showMessage, closeDialog}) {
     return (
         <>
             <div ref={avatarMenu} className="avatar-container" onClick={(e) => toggleMenu(setMenuVisible, e)}>
-                <BlankProfile identifier="avatar-image" size="25px" foregroundColor="#6B7F82" ></BlankProfile>
+                {currentUser.imageAvailable ? <img src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${currentUser.staffId}`} alt="avatar"></img> : <BlankProfile identifier="avatar-image" size="25px" foregroundColor="#6B7F82" ></BlankProfile>}
                 <label>{currentUser.user}</label>
                 {menuVisible && <div className={mediaQueries.laptop ? "avatar-menu-laptop" : "avatar-menu avatar-menu-desktop"}>
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>

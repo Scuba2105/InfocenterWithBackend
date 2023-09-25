@@ -69,7 +69,7 @@ export function LinkModal({selectedData, modalType}) {
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);
-    console.log(hospitalsIndex, departmentsIndex);
+    
     if (modalType === "documents") {
 
         const documentData = selectedData.documents;

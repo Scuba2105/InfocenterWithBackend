@@ -1,5 +1,5 @@
 // Need to update hostname when deployed
 export const serverConfig = {
-    host: '192.168.1.12',
+    host: 'localhost',
     port: 5000
 }

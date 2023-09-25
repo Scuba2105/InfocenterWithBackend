@@ -67,8 +67,7 @@ export async function disposeGenius3(parameter) {
         // Need to validate the parameter input
         // Connect to the database
         await sql.connect(localEMSConfig);  
-        //await sql.connect(localDBConfig);
-        
+                
         // Create a new request object
         const request = new sql.Request()
         
