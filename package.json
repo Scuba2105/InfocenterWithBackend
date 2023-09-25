@@ -7,7 +7,8 @@
     "start": "node server.mjs",
     "dev": "pm2-dev start ecosystem.config.js --env development",
     "prod": "pm2 start ecosystem.config.js --env production",
-    "stop": "pm2 stop server.mjs"
+    "stop": "pm2 stop server.mjs",
+    "logs": "pm2 logs --lines 50"
   },
   "keywords": [],
   "author": "",
