@@ -2393,7 +2393,7 @@ html {
   width: 100%;
   border: 1px solid #003153;
   border-radius: 20px;
-  background: url('http://localhost:5000/images/configuration-background.jpg');
+  background: url('http://JHHBME005:5000/images/configuration-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;

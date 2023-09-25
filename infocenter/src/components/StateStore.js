@@ -15,7 +15,7 @@ export const useLoggedIn = create((set) => ({
 })) 
 
 export const useUser = create((set) => ({
-    userCredentials: {user: null, staffId: null, permissions: null},
+    userCredentials: {user: null, staffId: null, permissions: null, imageAvailable: null},
     setUser: (name, id, permissions) => set((state) => ({userCredentials: {user: name, staffId: id, permissions: permissions}})),
     clearUser: () => set((state) => ({userCredentials: {user: null, staffId: null, permissions: null}})),
 }))

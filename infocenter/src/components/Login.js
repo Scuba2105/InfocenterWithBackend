@@ -80,8 +80,8 @@ export function Login() {
             else {
                 // Write data to session storage for page reloads
                 sessionStorage.setItem("currentInfoCentreSession", JSON.stringify({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions}));
-                console.log({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions})
-                setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions);
+                console.log({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageAvailable: data.credentials.accessPermissions})
+                setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions, data.credentials.imageAvailable);
                 login();
             }
         }
