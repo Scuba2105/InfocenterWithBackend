@@ -51,6 +51,7 @@ export function Avatar({showMessage, closeDialog}) {
     const avatarMenu = useRef(null);
     useOutsideAlerter(avatarMenu, setMenuVisible);
     const currentUser = useUser((state) => state.userCredentials);
+    
     const [changePasswordVisible, setChangePasswordVisible] = useState(false);
     
     // Get the logout function from the state store
@@ -64,7 +65,7 @@ export function Avatar({showMessage, closeDialog}) {
     return (
         <>
             <div ref={avatarMenu} className="avatar-container" onClick={(e) => toggleMenu(setMenuVisible, e)}>
-                {currentUser.imageAvailable ? <img src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${currentUser.staffId}`} alt="avatar"></img> : <BlankProfile identifier="avatar-image" size="25px" foregroundColor="#6B7F82" ></BlankProfile>}
+                {currentUser.imageType ? <img id="avatar-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${currentUser.staffId}.${currentUser.imageType}`} alt="avatar"></img> : <BlankProfile identifier="avatar-placeholder" size="25px" foregroundColor="#6B7F82" ></BlankProfile>}
                 <label>{currentUser.user}</label>
                 {menuVisible && <div className={mediaQueries.laptop ? "avatar-menu-laptop" : "avatar-menu avatar-menu-desktop"}>
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>

@@ -41,12 +41,11 @@ export async function validateLoginCredentials(req, res, __dirname) {
             // Determine if the staff member has an image available
             const staffData = await getAllStaffData(__dirname)
 
-            const imageAvailable = staffData.find((entry) => {
+            const user = staffData.find((entry) => {
                 return entry.id === StaffId
-            }).img
-
-            const appPermissions = {name: FullName, staffId: StaffId, accessPermissions: AccessPermissions, imageAvailable: imageAvailable};
-            res.json({type: "Success", credentials: appPermissions});
+            })
+            
+            res.json({type: "Success", credentials: {name: FullName, staffId: StaffId, accessPermissions: AccessPermissions, imageType: user.img}});
         }
         else {
             res.status(400).json({type: "Error", message: `The entered password is incorrect.`})

@@ -30,7 +30,7 @@ export function Login() {
         const sessionData = sessionStorage.getItem("currentInfoCentreSession");
         if (sessionData) {
             const currentSession = JSON.parse(sessionData);
-            setUser(currentSession.name, currentSession.staffId, currentSession.permissions);
+            setUser(currentSession.name, currentSession.staffId, currentSession.permissions, currentSession.imageType);
             login();
         }
     }, [])
@@ -71,7 +71,7 @@ export function Login() {
             })
         
             const data = await res.json();
-            
+            console.log(data.type)
             if (data.type === "Error") {
                 setLoginError(true);
                 setLoginErrorMessage(data.message);
@@ -79,9 +79,9 @@ export function Login() {
             }
             else {
                 // Write data to session storage for page reloads
-                sessionStorage.setItem("currentInfoCentreSession", JSON.stringify({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions}));
-                console.log({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageAvailable: data.credentials.accessPermissions})
-                setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions, data.credentials.imageAvailable);
+                console.log({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageType: data.credentials.imageType})
+                sessionStorage.setItem("currentInfoCentreSession", JSON.stringify({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageType: data.credentials.imageType}));
+                setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions, data.credentials.imageType);
                 login();
             }
         }

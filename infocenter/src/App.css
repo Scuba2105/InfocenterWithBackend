@@ -199,6 +199,14 @@ html {
 
 #avatar-image {
   background-color: var(--profile-pic-background-color);
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#avatar-placeholder {
+  background-color: var(--profile-pic-background-color);
   padding: 5px;
   border-radius: 50%;
   cursor: pointer;
