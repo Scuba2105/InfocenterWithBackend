@@ -27,6 +27,7 @@ export function Login() {
     });
 
     useEffect(() => {
+        document.title = 'HNECT Information Centre'
         const sessionData = sessionStorage.getItem("currentInfoCentreSession");
         if (sessionData) {
             const currentSession = JSON.parse(sessionData);

@@ -1,4 +1,5 @@
 import './App.css';
+import { useEffect } from 'react'
 import { Menu } from './components/Menu';
 import { MainArea } from './components/MainArea';
 import { useState } from 'react';
@@ -13,7 +14,8 @@ const queryClient = new QueryClient();
 export default function App() {
 
     const [page, setPage] = useState('staff');
-    const [selectedEntry, setSelectedEntry] = useState('60146568');
+    const [selectedEntry, setSelectedEntry] = useState(null);
+    console.log(selectedEntry)
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogMessage, setDialogMessage] = useState({type: "info", message: ""});
     
@@ -24,9 +26,17 @@ export default function App() {
     // Get the state setter for selected device from Zustand state
     const setCurrentDevice = useDevice((state) => state.setDevice);
 
+    useEffect(() => {
+        const sessionData = sessionStorage.getItem("currentInfoCentreSession");
+        const currentSessionData = JSON.parse(sessionData);
+        setSelectedEntry(currentSessionData.staffId);
+    }, [])
+
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
-        const initialEntry = page === 'staff' ? '60146568' : page === 'technical-info' ? initialDevice : null;
+        const sessionData = sessionStorage.getItem("currentInfoCentreSession");
+        const currentSessionData = JSON.parse(sessionData);
+        const initialEntry = page === 'staff' ? currentSessionData.staffId : page === 'technical-info' ? initialDevice : null;
         setSelectedEntry(initialEntry);
         setPage(page);
     }
