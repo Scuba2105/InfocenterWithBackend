@@ -8,5 +8,6 @@ config.mjs
 /data/staff-data.json
 /data/vendor-contacts.json
 /ecosystem.config.js
+./infocenter/src/server.js
 
 
