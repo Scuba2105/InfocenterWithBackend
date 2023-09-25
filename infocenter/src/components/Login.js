@@ -72,7 +72,7 @@ export function Login() {
             })
         
             const data = await res.json();
-            console.log(data.type)
+            
             if (data.type === "Error") {
                 setLoginError(true);
                 setLoginErrorMessage(data.message);

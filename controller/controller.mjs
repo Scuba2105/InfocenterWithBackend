@@ -30,17 +30,17 @@ export async function validateLoginCredentials(req, res, __dirname) {
         if (data === undefined) {
             throw new Error("The entered email address is not in the database");
         }
-
+        
         // Extract the values from the object
         const {FullName, Password, AccessPermissions, StaffId} = data[0];
-
+        
         // Compare the submitted password and hashed password and determine if they match
         const passwordResult = await bcrypt.compare(submittedPassword, Password);
         
         if (passwordResult === true) {
             // Determine if the staff member has an image available
             const staffData = await getAllStaffData(__dirname)
-
+                        
             const user = staffData.find((entry) => {
                 return entry.id === StaffId
             })
