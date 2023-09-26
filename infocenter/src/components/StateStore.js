@@ -5,8 +5,13 @@ export const useConfirmation = create((set) => ({
     proceedUpdate: () => set((state) => ({updateConfirmation: "proceed"})),
     cancelUpdate: () => set((state) => ({updateConfirmation: "cancel"})),
     resetConfirmation: () => set((state) => ({updateConfirmation: null}))
-})) 
+}))
 
+export const useProfilePhotoUpdate = create((set) => ({
+    profilePhotoUpdated: null,
+    setProfilePhotoUpdated: () => set((state) => ({profilePhotoUpdated: true})),
+    resetProfilePhotoUpdated: () => set((state) => ({profilePhotoUpdated: false}))
+}))
 
 export const useLoggedIn = create((set) => ({
     loggedIn: false,
