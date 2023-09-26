@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useConfirmation } from "./StateStore"
+import { useConfirmation, useProfilePhotoUpdate } from "./StateStore"
 import { Input } from "./Input"
 import { SelectInput } from "./SelectInput"
 import { capitaliseFirstLetters, sortMandatoryFields } from "../utils/utils"
@@ -38,6 +38,9 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     const confirmationResult = useConfirmation((state) => state.updateConfirmation)
     const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation)
     
+    // Get the profile picture update state from Zustand state store.
+    const setProfilePictureUpdates = useProfilePhotoUpdate((state) => state.setProfilePhotoUpdates)
+
     const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
 
@@ -75,6 +78,9 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             
                         closeDialog();
                         showMessage("info", 'Resources have been successfully updated!');
+                        if (updateData.current['employee-photo']) {
+                            setProfilePictureUpdates();
+                        }
                         setTimeout(() => {
                             closeDialog();
                             closeAddModal();
@@ -177,6 +183,9 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             
                     closeDialog();
                     showMessage("info", 'Resources have been successfully updated!');
+                    if (updateData.current['employee-photo']) {
+                        setProfilePictureUpdates();
+                    }
                     setTimeout(() => {
                         closeDialog();
                         closeAddModal();
@@ -200,8 +209,6 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                     updateData.current["existing-id"] = staffId;
                 }
             });
-
-            console.log(updateData.current);
 
             // Add the uploaded file and file extension if it has been selected 
             if (fileInput[0].value !== "") {
@@ -280,6 +287,9 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             
                         closeDialog();
                         showMessage("info", 'Resources have been successfully updated!');
+                        if (updateData.current['employee-photo']) {
+                            setProfilePictureUpdates();
+                        }
                         setTimeout(() => {
                             closeDialog();
                             closeAddModal();

@@ -8,9 +8,8 @@ export const useConfirmation = create((set) => ({
 }))
 
 export const useProfilePhotoUpdate = create((set) => ({
-    profilePhotoUpdated: null,
-    setProfilePhotoUpdated: () => set((state) => ({profilePhotoUpdated: true})),
-    resetProfilePhotoUpdated: () => set((state) => ({profilePhotoUpdated: false}))
+    profilePhotoUpdates: 0,
+    setProfilePhotoUpdates: () => set((state) => ({profilePhotoUpdates: state.profilePhotoUpdates + 1})),
 }))
 
 export const useLoggedIn = create((set) => ({
