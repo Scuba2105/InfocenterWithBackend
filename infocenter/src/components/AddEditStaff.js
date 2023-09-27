@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useConfirmation, useProfilePhotoUpdate } from "./StateStore"
+import { useConfirmation, useProfilePhotoUpdate, useUser } from "./StateStore"
 import { Input } from "./Input"
 import { SelectInput } from "./SelectInput"
 import { capitaliseFirstLetters, sortMandatoryFields } from "../utils/utils"
@@ -35,11 +35,12 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     const message = useRef({type: "confirmation", message: "Message has not been set during confirmation." });
     
     // Get the confirmation result from Zustand state store.
-    const confirmationResult = useConfirmation((state) => state.updateConfirmation)
-    const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation)
+    const confirmationResult = useConfirmation((state) => state.updateConfirmation);
+    const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
     
-    // Get the profile picture update state from Zustand state store.
-    const setProfilePictureUpdates = useProfilePhotoUpdate((state) => state.setProfilePhotoUpdates)
+    // Get the profile picture update state from Zustand state store and the state setter to update file type
+    const setImageType = useUser((state) => state.updateImageType);
+    const setProfilePictureUpdates = useProfilePhotoUpdate((state) => state.setProfilePhotoUpdates);
 
     const placeholderValue = page === "staff" ? "Full Name" : "equipment model" 
     const nameInputLabel = page === "staff" ? "Full Name" : "Equipment Model/Name"
@@ -78,9 +79,13 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             
                         closeDialog();
                         showMessage("info", 'Resources have been successfully updated!');
+                        
+                        // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
                         if (updateData.current['employee-photo']) {
                             setProfilePictureUpdates();
+                            setImageType(updateData.current['extension']);
                         }
+                        
                         setTimeout(() => {
                             closeDialog();
                             closeAddModal();
@@ -183,9 +188,13 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             
                     closeDialog();
                     showMessage("info", 'Resources have been successfully updated!');
+                    
+                    // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
                     if (updateData.current['employee-photo']) {
                         setProfilePictureUpdates();
+                        setImageType(updateData.current['extension']);
                     }
+
                     setTimeout(() => {
                         closeDialog();
                         closeAddModal();
@@ -287,8 +296,11 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
             
                         closeDialog();
                         showMessage("info", 'Resources have been successfully updated!');
+
+                        // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
                         if (updateData.current['employee-photo']) {
                             setProfilePictureUpdates();
+                            setImageType(updateData.current['extension']);
                         }
                         setTimeout(() => {
                             closeDialog();

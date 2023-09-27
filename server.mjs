@@ -20,6 +20,21 @@ const app = express();
 // Set cors for any origin during development. Set to same origin for production.  
 app.use(cors({origin: '*'}));
 
+// set custome route for profile images so response headers can be set to no cache
+app.get("/images/staff/:filename", async (req, res, next) => {
+    try {
+        const filename = req.params.filename;
+        const fileType = filename.split('.')[1];
+        res.set('Content-Type', `image/${fileType}`);
+        res.set('Cache-Control', 'max-age=0');
+        res.sendFile(`public/images/staff/${filename}`, { root: __dirname });
+    } 
+    catch (error) {
+        console.log(error);
+        next();
+    }
+})
+
 // Serve static files. 
 app.use(express.static('public'));
 app.use(express.static('infocenter/build'));
@@ -48,7 +63,7 @@ const storage = multer.diskStorage({
             createDirectory(path.join(__dirname, `public/documents/${model}`))
             cb(null, path.join(__dirname, `public/documents/${model}`))            
         }  
-        else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')) {
+        else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
             cb(null, path.join(__dirname, `public/images/equipment`))
         }
         else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {

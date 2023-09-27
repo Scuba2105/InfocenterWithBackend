@@ -40,7 +40,7 @@ export function StaffDetails({selectedData, user}) {
     });
 
     const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
-
+    
     return (
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
