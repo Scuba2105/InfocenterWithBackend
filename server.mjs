@@ -18,9 +18,11 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Set cors for any origin during development. Set to same origin for production.  
-app.use(cors({origin: '*'}));
+if (process.env.NODE_ENV !== "production") {
+    app.use(cors({origin: '*'}));
+}
 
-// set custome route for profile images so response headers can be set to no cache
+// set custom route for profile images so response headers can be set to no cache.
 app.get("/images/staff/:filename", async (req, res, next) => {
     try {
         const filename = req.params.filename;
@@ -35,11 +37,11 @@ app.get("/images/staff/:filename", async (req, res, next) => {
     }
 })
 
-// Serve static files. 
+// Serve other static files outside staff images. 
 app.use(express.static('public'));
 app.use(express.static('infocenter/build'));
 
-// Parse JSON bodies (as sent by API clients)
+// Parse JSON bodies (as sent by API clients).
 app.use(express.json());
 
 // Used with Multer for storing uploaded files on disk.
