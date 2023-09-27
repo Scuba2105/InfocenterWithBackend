@@ -21,6 +21,208 @@ function createFormData(updateData, formData) {
     }
 }
 
+async function uploadStaffFormData(formContainer, updateData, type, page, selectedData, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal) {
+    const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
+    
+    // Get all the input elements
+    const textInputs = formContainer.current.querySelectorAll('.text-input');
+    const selectInputs = formContainer.current.querySelectorAll('.select-input');
+    const fileInput = formContainer.current.querySelectorAll('.file-input')
+            
+    // Convert text value node lists to arrays and store 
+    const textInputArray = Array.from(textInputs);
+    const [name, id, officePhone, dectPhone, workMobile, personalMobile, hostname] = Array.from(textInputs);
+    const [workshop, position] = Array.from(selectInputs);
+    const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile, hostname];
+    
+    // Initialise the staffId variable. Binding is used to name the image file if present.
+    let staffId;
+
+    // Validate the relevant new staff data inputs over the text inputs only.
+    if (type === "add-new") {
+        for (let [index, input] of textInputArray.entries()) {
+            if (index <= 2 && input.value === "") {
+                showMessage("error", `The input for the new employee ${staffDataOptions[index]} is empty. Please enter the necessary data and try again.`)
+                return;
+            }
+        };
+    
+        // Filter the empty data inputs out of the data and save to the Form Data
+        textValueInputsArray.forEach((input, index) => {
+            if (input.value !== "") {
+                updateData.current[keyIdentifier[index]] = input.value;
+            }
+            if (index === 1) {
+                // Store the staff ID for naming the uploaded image file.
+                staffId = input.value;
+            }
+        });
+
+        // Add the uploaded file and file extension if it has been selected 
+        if (fileInput[0].value !== "") {
+            const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
+            updateData.current['extension'] = extension;
+            updateData.current['employee-photo'] = {file: fileInput[0].files[0], fileName: `${staffId}.${extension}`};
+        }
+
+        // Show the uploading dialog when sending to server
+        showMessage("uploading", `Uploading Employee Data`);
+        
+        // Need to convert update data object into a FormData object.
+        const formData = new FormData(); 
+        createFormData(updateData.current, formData);
+        
+        try {
+
+            //Post the data to the server  
+            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
+                    method: "POST", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer",
+                    body: formData,
+            })
+    
+            // Parse the received response
+            const data = await res.json();
+    
+            if (data.type === "Error") {
+                closeDialog();
+                showMessage("error", `${data.message}. If the issue persists contact an administrator.`);
+            }
+            else {
+            
+                // Need to update app data.
+                queryClient.invalidateQueries('dataSource');
+        
+                closeDialog();
+                showMessage("info", 'Resources have been successfully updated!');
+                
+                // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
+                if (updateData.current['employee-photo']) {
+                    setProfilePictureUpdates();
+                    setImageType(updateData.current['extension']);
+                }
+
+                setTimeout(() => {
+                    closeDialog();
+                    closeAddModal();
+                }, 1600);
+            }
+        }
+        catch (error) {
+            showMessage("error", `${error.message}.`)
+        }
+    }
+    else if (type === "update") {
+        // Filter the empty data inputs out of the data and save to the Form Data
+        const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname"]
+        textValueInputsArray.forEach((input, index) => {
+            if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
+                updateData.current[keyIdentifier[index]] = input.value;
+            }
+            if (index === 1) {
+                // Store the staff ID for naming the uploaded image file.
+                staffId = input.value;
+                updateData.current["existing-id"] = staffId;
+            }
+        });
+
+        // Add the uploaded file and file extension if it has been selected 
+        if (fileInput[0].value !== "") {
+            const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
+            updateData.current['extension'] = extension;
+            updateData.current['employee-photo'] = {file: fileInput[0].files[0], fileName: `${staffId}.${extension}`};
+        }
+    
+        // Calculate the number of updates applied and if any mandatory fields changed.
+        let numberOfUpdates = 0;
+        let numberOfMandatoryUpdates = 0;
+        const changedMandatoryFields = [];
+        for (const [key, value] of Object.entries(updateData.current)) {
+            numberOfUpdates++
+            if (mandatoryFields.includes(key)) {
+                numberOfMandatoryUpdates++
+                if (key === "workshop") {
+                    changedMandatoryFields.push('Location');
+                }
+                else {
+                    const fieldName = key.split('-').join(' ');
+                    changedMandatoryFields.push(capitaliseFirstLetters(fieldName));
+                }
+            }
+        };
+    
+        // Sort the fields into the correct order if more than one changed
+        if (changedMandatoryFields.length > 1) {
+            sortMandatoryFields(changedMandatoryFields);
+        }
+        
+        // If no updates applied show warning message and prevent updates.
+        if (numberOfUpdates === 1) {
+            showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
+            return;
+        }
+    
+        // Ask for confirmation if mandatory update is made and complete in effect hook after re-render
+        if (numberOfMandatoryUpdates !== 0) {
+            // Set the confirmation to proceed dialog box.
+            const changedFieldNumber = changedMandatoryFields.length;
+            message.current = `The mandatory ${changedFieldNumber === 1 ? "field" : "fields"} ${changedMandatoryFields.slice(0, -1).join(', ')}${changedFieldNumber === 1 ? "" : " and"} ${changedMandatoryFields.slice(-1)[0]} ${changedFieldNumber === 1 ? "has" : "have"} been changed. Please confirm you wish to proceed or cancel to prevent updates and make changes.`;
+            
+            // Have user confirm to proceed if changing mandatory data
+            showMessage("confirmation", message.current);
+        }
+
+        else {
+            
+            // Show loading dialog while updating data on the server
+            showMessage("uploading", `Uploading Employee Data`);
+
+            // Need to convert update data object into a FormData object.
+            const formData = new FormData(); 
+            createFormData(updateData.current, formData);
+            
+            try {
+                // Post the data to the server  
+                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                        mode: "cors", // no-cors, *cors, same-origin
+                        redirect: "follow", // manual, *follow, error
+                        referrerPolicy: "no-referrer",
+                        body: formData,
+                })
+
+                const data = await res.json();
+
+                if (data.type === "Error") {
+                    closeDialog();
+                    showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+                }
+                else {                            
+                    // Need to update app data.
+                    queryClient.invalidateQueries('dataSource');
+        
+                    closeDialog();
+                    showMessage("info", 'Resources have been successfully updated!');
+
+                    // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
+                    if (updateData.current['employee-photo']) {
+                        setProfilePictureUpdates();
+                        setImageType(updateData.current['extension']);
+                    }
+                    setTimeout(() => {
+                        closeDialog();
+                        closeAddModal();
+                    }, 1600);
+                }
+            } catch (error) {
+                showMessage("error", `${error.message}.`)
+            }
+        }
+    }
+}
+
 export function AddEditStaff({type, page, selectedData, queryClient, showMessage, closeDialog, closeAddModal}) {
     
     // Define add new form DOM element and formdata refs
@@ -110,210 +312,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage, closeAddModal, queryClient, setImageType, setProfilePictureUpdates]);
           
-    async function uploadStaffFormData(formContainer) {
-        const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
-        
-        // Get all the input elements
-        const textInputs = formContainer.current.querySelectorAll('.text-input');
-        const selectInputs = formContainer.current.querySelectorAll('.select-input');
-        const fileInput = formContainer.current.querySelectorAll('.file-input')
-                
-        // Convert text value node lists to arrays and store 
-        const textInputArray = Array.from(textInputs);
-        const [name, id, officePhone, dectPhone, workMobile, personalMobile, hostname] = Array.from(textInputs);
-        const [workshop, position] = Array.from(selectInputs);
-        const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile, hostname];
-        
-        // Initialise the staffId variable. Binding is used to name the image file if present.
-        let staffId;
-
-        // Validate the relevant new staff data inputs over the text inputs only.
-        if (type === "add-new") {
-            for (let [index, input] of textInputArray.entries()) {
-                if (index <= 2 && input.value === "") {
-                    showMessage("error", `The input for the new employee ${staffDataOptions[index]} is empty. Please enter the necessary data and try again.`)
-                    return;
-                }
-            };
-        
-            // Filter the empty data inputs out of the data and save to the Form Data
-            textValueInputsArray.forEach((input, index) => {
-                if (input.value !== "") {
-                    updateData.current[keyIdentifier[index]] = input.value;
-                }
-                if (index === 1) {
-                    // Store the staff ID for naming the uploaded image file.
-                    staffId = input.value;
-                }
-            });
-
-            // Add the uploaded file and file extension if it has been selected 
-            if (fileInput[0].value !== "") {
-                const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
-                updateData.current['extension'] = extension;
-                updateData.current['employee-photo'] = {file: fileInput[0].files[0], fileName: `${staffId}.${extension}`};
-            }
-
-            // Show the uploading dialog when sending to server
-            showMessage("uploading", `Uploading Employee Data`);
-            
-            // Need to convert update data object into a FormData object.
-            const formData = new FormData(); 
-            createFormData(updateData.current, formData);
-            
-            try {
-
-                //Post the data to the server  
-                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
-                        method: "POST", // *GET, POST, PUT, DELETE, etc.
-                        mode: "cors", // no-cors, *cors, same-origin
-                        redirect: "follow", // manual, *follow, error
-                        referrerPolicy: "no-referrer",
-                        body: formData,
-                })
-        
-                // Parse the received response
-                const data = await res.json();
-        
-                if (data.type === "Error") {
-                    closeDialog();
-                    showMessage("error", `${data.message}. If the issue persists contact an administrator.`);
-                }
-                else {
-                
-                    // Need to update app data.
-                    queryClient.invalidateQueries('dataSource');
-            
-                    closeDialog();
-                    showMessage("info", 'Resources have been successfully updated!');
-                    
-                    // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
-                    if (updateData.current['employee-photo']) {
-                        setProfilePictureUpdates();
-                        setImageType(updateData.current['extension']);
-                    }
-
-                    setTimeout(() => {
-                        closeDialog();
-                        closeAddModal();
-                    }, 1600);
-                }
-            }
-            catch (error) {
-                showMessage("error", `${error.message}.`)
-            }
-        }
-        else if (type === "update") {
-            // Filter the empty data inputs out of the data and save to the Form Data
-            const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname"]
-            textValueInputsArray.forEach((input, index) => {
-                if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
-                    updateData.current[keyIdentifier[index]] = input.value;
-                }
-                if (index === 1) {
-                    // Store the staff ID for naming the uploaded image file.
-                    staffId = input.value;
-                    updateData.current["existing-id"] = staffId;
-                }
-            });
-
-            // Add the uploaded file and file extension if it has been selected 
-            if (fileInput[0].value !== "") {
-                const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
-                updateData.current['extension'] = extension;
-                updateData.current['employee-photo'] = {file: fileInput[0].files[0], fileName: `${staffId}.${extension}`};
-            }
-        
-            // Calculate the number of updates applied and if any mandatory fields changed.
-            let numberOfUpdates = 0;
-            let numberOfMandatoryUpdates = 0;
-            const changedMandatoryFields = [];
-            for (const [key, value] of Object.entries(updateData.current)) {
-                numberOfUpdates++
-                if (mandatoryFields.includes(key)) {
-                    numberOfMandatoryUpdates++
-                    if (key === "workshop") {
-                        changedMandatoryFields.push('Location');
-                    }
-                    else {
-                        const fieldName = key.split('-').join(' ');
-                        changedMandatoryFields.push(capitaliseFirstLetters(fieldName));
-                    }
-                }
-            };
-        
-            // Sort the fields into the correct order if more than one changed
-            if (changedMandatoryFields.length > 1) {
-                sortMandatoryFields(changedMandatoryFields);
-            }
-            
-            // If no updates applied show warning message and prevent updates.
-            if (numberOfUpdates === 1) {
-                showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
-                return;
-            }
-        
-            // Ask for confirmation if mandatory update is made and complete in effect hook after re-render
-            if (numberOfMandatoryUpdates !== 0) {
-                // Set the confirmation to proceed dialog box.
-                const changedFieldNumber = changedMandatoryFields.length;
-                message.current = `The mandatory ${changedFieldNumber === 1 ? "field" : "fields"} ${changedMandatoryFields.slice(0, -1).join(', ')}${changedFieldNumber === 1 ? "" : " and"} ${changedMandatoryFields.slice(-1)[0]} ${changedFieldNumber === 1 ? "has" : "have"} been changed. Please confirm you wish to proceed or cancel to prevent updates and make changes.`;
-                
-                // Have user confirm to proceed if changing mandatory data
-                showMessage("confirmation", message.current);
-            }
-
-            else {
-                
-                // Show loading dialog while updating data on the server
-                showMessage("uploading", `Uploading Employee Data`);
-
-                // Need to convert update data object into a FormData object.
-                const formData = new FormData(); 
-                createFormData(updateData.current, formData);
-                
-                try {
-                    // Post the data to the server  
-                    const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
-                            method: "PUT", // *GET, POST, PUT, DELETE, etc.
-                            mode: "cors", // no-cors, *cors, same-origin
-                            redirect: "follow", // manual, *follow, error
-                            referrerPolicy: "no-referrer",
-                            body: formData,
-                    })
-
-                    const data = await res.json();
-
-                    if (data.type === "Error") {
-                        closeDialog();
-                        showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
-                    }
-                    else {                            
-                        // Need to update app data.
-                        queryClient.invalidateQueries('dataSource');
-            
-                        closeDialog();
-                        showMessage("info", 'Resources have been successfully updated!');
-
-                        // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
-                        if (updateData.current['employee-photo']) {
-                            setProfilePictureUpdates();
-                            setImageType(updateData.current['extension']);
-                        }
-                        setTimeout(() => {
-                            closeDialog();
-                            closeAddModal();
-                        }, 1600);
-                    }
-                } catch (error) {
-                    showMessage("error", `${error.message}.`)
-                }
-            }
-        }
-    }
-    
     return (
         <div className="modal-display">
             <h3 className="add-new-heading">{type === "update" ? `${selectedData.name} Details` : null}</h3>
@@ -338,7 +338,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="text" identifier="add-new" labelText="Laptop Hostname" placeholdertext={`Enter Laptop Hostname`} />}
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
-            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer)}>Upload Data</div>
+            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer, updateData, type, page, selectedData, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
         </div>
     )
 }

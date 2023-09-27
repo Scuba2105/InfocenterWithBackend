@@ -1,4 +1,6 @@
 /node_modules
+/public/images
+/public/manuals
 /public/configurations
 /public/documents
 /public/templates
@@ -7,6 +9,10 @@ config.mjs
 /data/staff-contacts.json
 /data/staff-data.json
 /data/vendor-contacts.json
+/data/importData.mjs
+/data/importData.mjs
+/data/thermometers-copy.json
+/data/thermometers.json
 /ecosystem.config.js
 ./infocenter/src/server.js
 
