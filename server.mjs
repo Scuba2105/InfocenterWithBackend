@@ -27,8 +27,9 @@ app.get("/images/staff/:filename", async (req, res, next) => {
     try {
         const filename = req.params.filename;
         const fileType = filename.split('.')[1];
-        res.set('Content-Type', `image/${fileType}`);
-        res.set('Cache-Control', 'max-age=0');
+        res.header('Content-Type', `image/${fileType}`);
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+        res.header('Pragma', 'no-cache');
         res.sendFile(`public/images/staff/${filename}`, { root: __dirname });
     } 
     catch (error) {

@@ -52,7 +52,7 @@ export function Avatar({showMessage, closeDialog}) {
     useOutsideAlerter(avatarMenu, setMenuVisible);
     const currentUser = useUser((state) => state.userCredentials);
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
-    
+    console.log(currentUser)
     // Create state variable for setting whether password should be visible
     const [changePasswordVisible, setChangePasswordVisible] = useState(false);
     

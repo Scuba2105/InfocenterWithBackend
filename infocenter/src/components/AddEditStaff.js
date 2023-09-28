@@ -21,7 +21,7 @@ function createFormData(updateData, formData) {
     }
 }
 
-async function uploadStaffFormData(formContainer, updateData, type, page, selectedData, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal) {
+async function uploadStaffFormData(formContainer, updateData, type, page, selectedData, currentUser, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal) {
     const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
     
     // Get all the input elements
@@ -99,7 +99,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                 showMessage("info", 'Resources have been successfully updated!');
                 
                 // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
-                if (updateData.current['employee-photo']) {
+                if (updateData.current['employee-photo'] && selectedData.name === currentUser.user) {
                     setProfilePictureUpdates();
                     setImageType(updateData.current['extension']);
                 }
@@ -207,7 +207,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                     showMessage("info", 'Resources have been successfully updated!');
 
                     // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
-                    if (updateData.current['employee-photo']) {
+                    if (updateData.current['employee-photo'] && selectedData.name === currentUser.user) {
                         setProfilePictureUpdates();
                         setImageType(updateData.current['extension']);
                     }
@@ -240,7 +240,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
     const confirmationResult = useConfirmation((state) => state.updateConfirmation);
     const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
     
-    // Get the profile picture update state from Zustand state store and the state setter to update file type
+    // Get the profile picture update state from Zustand state store and the current user details state setter to update file type
+    const currentUser = useUser((state) => state.userCredentials);
     const setImageType = useUser((state) => state.updateImageType);
     const setProfilePictureUpdates = useProfilePhotoUpdate((state) => state.setProfilePhotoUpdates);
 
@@ -283,7 +284,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                         showMessage("info", 'Resources have been successfully updated!');
                         
                         // If image uploaded then re-render avatar component and re-fetch images. They are not cached. Response headers set in the server.
-                        if (updateData.current['employee-photo']) {
+                        if (updateData.current['employee-photo'] && selectedData.name === currentUser.user) {
                             setProfilePictureUpdates();
                             setImageType(updateData.current['extension']);
                         }
@@ -312,7 +313,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage, closeAddModal, queryClient, setImageType, setProfilePictureUpdates]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage, closeAddModal, queryClient, setImageType, setProfilePictureUpdates, currentUser.user, selectedData.name]);
           
     return (
         <div className="modal-display">
@@ -338,7 +339,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="text" identifier="add-new" labelText="Laptop Hostname" placeholdertext={`Enter Laptop Hostname`} />}
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
-            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer, updateData, type, page, selectedData, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
+            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer, updateData, type, page, selectedData, currentUser, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
         </div>
     )
 }
