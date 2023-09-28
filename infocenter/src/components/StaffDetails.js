@@ -1,4 +1,5 @@
 import useMediaQueries from "media-queries-in-react" ;
+import { useProfilePhotoUpdate } from "./StateStore";
 import { workshops } from "../data";
 import { serverConfig } from "../server";
 import { EmailIcon, BlankProfile } from "../svg";
@@ -34,6 +35,8 @@ function getTextColor(team) {
 
 export function StaffDetails({selectedData, user}) {
     
+    const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
+
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1250px)",
         desktop: "(min-width: 1800px)"
@@ -45,7 +48,7 @@ export function StaffDetails({selectedData, user}) {
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
                 <div className={mediaQueries.laptop === true ? "staff-logo-laptop" : "staff-logo-desktop"}>
-                    {selectedData.img ? <img className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
+                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
                     workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
                     <BlankProfile identifier={mediaQueries.laptop === true ? "blank-picture-laptop" : "blank-picture-desktop"} size={mediaQueries.laptop ? "120px" : "200px"} foregroundColor="#6B7F82" ></BlankProfile>}
                 </div>

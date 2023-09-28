@@ -17,10 +17,10 @@ const PORT = process.env.PORT || 5000;
 // Define the express app
 const app = express();
 
-// Set cors for any origin during development. Set to same origin for production.  
-if (process.env.NODE_ENV !== "production") {
+// // Set cors for any origin during development. Set to same origin for production.  
+// if (process.env.NODE_ENV !== "production") {
     app.use(cors({origin: '*'}));
-}
+//}
 
 // set custom route for profile images so response headers can be set to no cache.
 app.get("/images/staff/:filename", async (req, res, next) => {
