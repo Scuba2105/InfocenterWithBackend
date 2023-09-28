@@ -3,12 +3,12 @@ import { serverConfig } from '../server';
 
 // Copy text to clipboard
 async function copyTextToClipboard(text) {
-  if ('clipboard' in navigator) {
-    return await navigator.clipboard.writeText(text);
-  } 
-  else {
+  if (!navigator.clipboard) {
     return document.execCommand('copy', true, text);
   }
+  else {
+    return await navigator.clipboard.writeText(text);
+  } 
 }
 
 // onClick handler function for the copy button
