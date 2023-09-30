@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import cors from 'cors';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
@@ -10,17 +11,23 @@ import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
     getInactiveThermometers, disposeSelectedThermometers } from './controller/thermometers-controller.mjs';
 
-// Define the root directory and the port for the server 
+// Define the root directory and the port for the server. This is a test comment for robocopy.
 const __dirname = path.dirname('.');
 const PORT = process.env.PORT || 5000;
 
 // Define the express app
 const app = express();
 
-// // Set cors for any origin during development. Set to same origin for production.  
-// if (process.env.NODE_ENV !== "production") {
+// This sets the credentials for the HTTPS server based on the ssl credentials.
+var options = {
+    key: fs.readFileSync(`${__dirname}/key.pem`),
+    cert: fs.readFileSync(`${__dirname}/cert.pem`)
+};
+
+// Set cors for any origin during development. Set to same origin for production.  
+if (process.env.NODE_ENV !== "production") {
     app.use(cors({origin: '*'}));
-//}
+}
 
 // set custom route for profile images so response headers can be set to no cache.
 app.get("/images/staff/:filename", async (req, res, next) => {
@@ -251,7 +258,14 @@ app.use((err, req, res, next) => {
     return res.status(400).json({type: "Error", message: err.message});
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+// Create an HTTP service.
+http.createServer(app).listen(80, () => {
+    console.log(`HTTP Server is listening on port 80`);
+});
+;
+
+// Create an HTTPS service identical to the HTTP service.
+https.createServer(options, app).listen(PORT, () => {
+    console.log(`HTTPS Server is listening on port ${PORT}`);
 });
 

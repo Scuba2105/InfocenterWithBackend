@@ -10,7 +10,6 @@ config.mjs
 /data/staff-data.json
 /data/vendor-contacts.json
 /data/importData.mjs
-/data/importData.mjs
 /data/thermometers-copy.json
 /data/thermometers.json
 /ecosystem.config.js
