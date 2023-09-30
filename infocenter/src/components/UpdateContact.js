@@ -90,7 +90,7 @@ async function uploadUpdatedDetails(idNumber, currentContact, formType, formCont
     // Start the post request
     try {
         // Post the data to the server  
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateContact/${formType}`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

@@ -65,7 +65,7 @@ async function submitNewPassword(staffId, currentPassword, newPassword, password
     const passwordData = JSON.stringify({staffId: staffId, currentPassword: currentPassword, newPassword: newPassword})
     
     // Post the form data to the server. 
-    const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/ChangePassword`, {
+    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/ChangePassword`, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         redirect: "follow", // manual, *follow, error

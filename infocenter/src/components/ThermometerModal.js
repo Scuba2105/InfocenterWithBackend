@@ -58,7 +58,7 @@ async function returnSelected(selectedList, closeDialog, showMessage, closeModal
 
     try {
         // Send the data to the backend
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/UpdateReturns`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/Thermometers/UpdateReturns`, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error
@@ -100,7 +100,7 @@ async function disposeSelected(selectedList, closeDialog, showMessage, closeModa
 
     try {
        // Send the data to the backend
-       const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/Disposals`, {
+       const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/Thermometers/Disposals`, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error

@@ -60,7 +60,7 @@ export function Login() {
             const loginCredentials = {email: emailInput.value, password: passwordInput.value}
             
             // Post the form data to the server. 
-            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/VerifyLogin`, {
+            const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/VerifyLogin`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error
@@ -96,7 +96,7 @@ export function Login() {
         <div className="wrapper login-container">
             <form ref={loginForm} className={mediaQueries.laptop ? "login-form-laptop": "login-form-desktop"}>
                 <div className="login-header">
-                    <img className="app-logo" src={`http://${serverConfig.host}:${serverConfig.port}/images/app-logo.png`} alt="app-logo"></img>
+                    <img className="app-logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/app-logo.png`} alt="app-logo"></img>
                 </div>
                 <div className="login-body">
                     <div className="inputs-container">

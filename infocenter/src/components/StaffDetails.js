@@ -48,8 +48,8 @@ export function StaffDetails({selectedData, user}) {
         <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
             <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
                 <div className={mediaQueries.laptop === true ? "staff-logo-laptop" : "staff-logo-desktop"}>
-                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
-                    workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`http://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
+                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
+                    workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`https://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
                     <BlankProfile identifier={mediaQueries.laptop === true ? "blank-picture-laptop" : "blank-picture-desktop"} size={mediaQueries.laptop ? "120px" : "200px"} foregroundColor="#6B7F82" ></BlankProfile>}
                 </div>
                 <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>

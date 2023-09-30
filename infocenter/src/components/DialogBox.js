@@ -43,7 +43,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                     <dialog open id="dialog-background">
                         <div id="dialog-box">
                             <div className="dialog-title" style={{color: "white", backgroundColor: "#fea500"}}>
-                                <img className="info-icon" src={`http://${serverConfig.host}:${serverConfig.port}/images/warning-icon.jpg`} alt="warning"></img>
+                                <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/warning-icon.jpg`} alt="warning"></img>
                                 <h3>Confirmation to Proceed</h3>
                             </div>
                             <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
@@ -66,7 +66,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                             <div className="dialog-title" style={dialogType === "error" || dialogType === "error-request" ? {color: "white", backgroundColor: "#ed1b2e"} : 
                             dialogType === "info" ? {color: "white", backgroundColor: "#4052c5"} : 
                             {color: "white", backgroundColor: "#fea500"}}>
-                                <img className="info-icon" src={`http://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
+                                <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
                                 <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType).split("-")[0]} Message`}</h3>
                             </div>
                             <div className={dialogType === "info" ? "dialog-body-info" : dialogType === "error-request" ? "dialog-body-error-request" : "dialog-body"}>

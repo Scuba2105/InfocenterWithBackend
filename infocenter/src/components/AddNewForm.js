@@ -120,7 +120,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     
     try {
         // Post the data to the server  
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

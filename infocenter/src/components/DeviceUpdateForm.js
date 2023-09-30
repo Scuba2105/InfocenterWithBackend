@@ -59,7 +59,7 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
     try {
     
         // Post the form data to the server. 
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
                 method: "PUT", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

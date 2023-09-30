@@ -26,7 +26,7 @@ export function generateDataPages(queryData, entriesPerPage) {
 
 export async function fetchData() {
     try {
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/getData`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/getData`, {
                 method: "GET", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

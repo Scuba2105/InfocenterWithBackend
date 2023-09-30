@@ -33,7 +33,7 @@ export function ClipboardCopy({ copyText, identifier }) {
   
     return (
         <>
-            {isCopied ? <span className={`copied-text${identifier}`} >Copied!</span> : <img src={`http://${serverConfig.host}:${serverConfig.port}/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : `copy-image${identifier}`} onClick={() => handleCopyClick(copyTextToClipboard, copyText, setIsCopied)}></img>}
+            {isCopied ? <span className={`copied-text${identifier}`} >Copied!</span> : <img src={`https://${serverConfig.host}:${serverConfig.port}/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : `copy-image${identifier}`} onClick={() => handleCopyClick(copyTextToClipboard, copyText, setIsCopied)}></img>}
         </>
     );
 }

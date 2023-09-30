@@ -60,7 +60,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
             })}
             </div>}
             <div className="config-display-container">
-                {configNumber > 1 && <img className="config-arrow config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>}
+                {configNumber > 1 && <img className="config-arrow config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>}
                 <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
                     <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className={mediaQueries.laptop ? "config-link config-link-laptop" : "config-link"}>
                             <div className="options-info">
@@ -75,10 +75,10 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
                                 <label>Date Created:</label>
                                 <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                             </div>
-                            <a href={`http://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
+                            <a href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
                     </div>
                 </div>
-                {configNumber > 1 && <img className="config-arrow config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`http://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>}
+                {configNumber > 1 && <img className="config-arrow config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>}
             </div>
         </>
     );

@@ -7,14 +7,14 @@ function generateLinks(deviceData, type) {
     const formattedModel = deviceData.model.toLowerCase().replace(/\s/ig, '_');
     let link;
     if (type === 'service') {
-        link = `http://${serverConfig.host}:${serverConfig.port}/manuals/service_manuals/${formattedModel}_service_manual.pdf`
+        link = `https://${serverConfig.host}:${serverConfig.port}/manuals/service_manuals/${formattedModel}_service_manual.pdf`
     } 
     else if (type === 'image') {
         const fileExtension = deviceData.img ? deviceData.img : 'jpg';
-         link = `http://${serverConfig.host}:${serverConfig.port}/images/equipment/${formattedModel}.${fileExtension}`
+         link = `https://${serverConfig.host}:${serverConfig.port}/images/equipment/${formattedModel}.${fileExtension}`
     } 
     else if (type === 'user') {
-        link = `http://${serverConfig.host}:${serverConfig.port}/manuals/user_manuals/${formattedModel}_user_manual.pdf`
+        link = `https://${serverConfig.host}:${serverConfig.port}/manuals/user_manuals/${formattedModel}_user_manual.pdf`
     } 
     
     return link

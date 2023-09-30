@@ -73,7 +73,7 @@ async function sendRequestData(closeDialog, showMessage, index, e) {
 
     try {
         // Send the data to the backend
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/${formTypes[index].replace(/\s/ig, "")}`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/Thermometers/${formTypes[index].replace(/\s/ig, "")}`, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error
@@ -132,7 +132,7 @@ async function getReturnBatch(closeDialog, showMessage, setBatchData, openForm, 
 
     try {
         // Send the input BME to the backend to fetch the thermometer batch
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/CheckReturns`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/Thermometers/CheckReturns`, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error
@@ -175,7 +175,7 @@ async function getThermometersForDisposal(closeDialog, showMessage, setBatchData
 
     try {
         // Send the input BME to the backend to fetch the thermometer batch
-        const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/Thermometers/GetInactive`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/Thermometers/GetInactive`, {
             method: "PUT", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             redirect: "follow", // manual, *follow, error

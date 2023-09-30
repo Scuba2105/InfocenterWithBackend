@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
+import https from 'https';
+import http from 'http';
 import cors from 'cors';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
@@ -19,9 +21,11 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // This sets the credentials for the HTTPS server based on the ssl credentials.
+// Certificate Password: hnect-cert-password123456.
 var options = {
     key: fs.readFileSync(`${__dirname}/key.pem`),
-    cert: fs.readFileSync(`${__dirname}/cert.pem`)
+    pfx: fs.readFileSync(`${__dirname}/hnect_cert.pfx`),
+    passphrase: 'hnect-cert-password123456'
 };
 
 // Set cors for any origin during development. Set to same origin for production.  
@@ -45,7 +49,7 @@ app.get("/images/staff/:filename", async (req, res, next) => {
     }
 })
 
-// Serve other static files outside staff images. 
+// Use this middleware for serving static
 app.use(express.static('public'));
 app.use(express.static('infocenter/build'));
 

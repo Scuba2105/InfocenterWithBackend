@@ -75,7 +75,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         try {
 
             //Post the data to the server  
-            const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
+            const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/AddNewEntry/${page}`, {
                     method: "POST", // *GET, POST, PUT, DELETE, etc.
                     mode: "cors", // no-cors, *cors, same-origin
                     redirect: "follow", // manual, *follow, error
@@ -185,7 +185,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
             
             try {
                 // Post the data to the server  
-                const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
                         method: "PUT", // *GET, POST, PUT, DELETE, etc.
                         mode: "cors", // no-cors, *cors, same-origin
                         redirect: "follow", // manual, *follow, error
@@ -262,7 +262,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 try {
 
                     // Post the data to the server  
-                    const res = await fetch(`http://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
                             method: "PUT", // *GET, POST, PUT, DELETE, etc.
                             mode: "cors", // no-cors, *cors, same-origin
                             redirect: "follow", // manual, *follow, error

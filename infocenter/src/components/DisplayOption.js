@@ -98,8 +98,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                 
                 }
                 <div className={mediaQueries.laptop ? "other-file-button-container-laptop" : "other-file-button-container-desktop"}>
-                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
-                    {fileNumber.length !== 1 && <div id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`http://${serverConfig.host}:${serverConfig.port}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
+                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
+                    {fileNumber.length !== 1 && <div id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
                 </div>
             </div>
         );
