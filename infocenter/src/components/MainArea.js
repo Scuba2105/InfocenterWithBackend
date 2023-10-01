@@ -65,7 +65,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
     
     if (error !== null) {
         return (
-            <ErrorPage></ErrorPage>
+            <ErrorPage errorType="fetch-error"></ErrorPage>
         )
     }
 

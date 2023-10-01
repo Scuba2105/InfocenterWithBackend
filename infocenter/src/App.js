@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider} from 'react-query';
 import { Login } from './components/Login';
 import { useLoggedIn, useDevice } from './components/StateStore';
 import { Avatar } from './components/Avatar';
+import ErrorBoundary from './components/ErrorBoundary';
+import { ErrorPage } from './components/ErrorPage';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -72,17 +74,19 @@ export default function App() {
     }
 
     return (
-        <div className="wrapper">
-            <div className="app-icon-container"></div>
-            <div className="header-bar">
-                <div id='header-aligner'></div>
-                HNECT Information Center
-                <Avatar showMessage={showMessage} closeDialog={closeDialog}></Avatar>
+        <ErrorBoundary children fallback={ErrorPage}>
+            <div className="wrapper">
+                <div className="app-icon-container"></div>
+                <div className="header-bar">
+                    <div id='header-aligner'></div>
+                    HNECT Information Center
+                    <Avatar showMessage={showMessage} closeDialog={closeDialog}></Avatar>
+                </div>
+                <Menu page={page} onPageSelect={onPageSelect} />
+                <QueryClientProvider client={queryClient}>
+                    <MainArea page={page} setPage={setPage} selectedEntry={selectedEntry} dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} showMessage={showMessage} onRowClick={onRowClick} queryClient={queryClient} />
+                </QueryClientProvider>
             </div>
-            <Menu page={page} onPageSelect={onPageSelect} />
-            <QueryClientProvider client={queryClient}>
-                <MainArea page={page} setPage={setPage} selectedEntry={selectedEntry} dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} showMessage={showMessage} onRowClick={onRowClick} queryClient={queryClient} />
-            </QueryClientProvider>
-        </div>
+        </ErrorBoundary>
     );
 }

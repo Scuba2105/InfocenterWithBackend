@@ -379,9 +379,9 @@ html {
 }
 
 .error-description-laptop {
-  width: 375px;
+  width: 550px;
   height: 375px;
-  margin-right: 250px;
+  margin-right: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -389,7 +389,7 @@ html {
 }
 
 .error-description-desktop {
-  width: 375px;
+  width: 550px;
   height: 375px;
   margin-right: 450px;
   display: flex;
@@ -402,6 +402,10 @@ html {
   font-weight: bold;
   font-size: 40px;
   color: var(--form-font-color);
+}
+
+.error-503-subheading {
+  font-size: 32px;
 }
 
 .message1-503, .message2-503 {

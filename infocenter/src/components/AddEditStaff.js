@@ -313,7 +313,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage, closeAddModal, queryClient, setImageType, setProfilePictureUpdates, currentUser.user, selectedData.name]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, page, showMessage, closeAddModal, queryClient, setImageType, setProfilePictureUpdates, currentUser, selectedData]);
           
     return (
         <div className="modal-display">
