@@ -14,5 +14,10 @@ config.mjs
 /data/thermometers.json
 /ecosystem.config.js
 ./infocenter/src/server.js
+./cert.pem
+./key.pem
+./san.cnf
+./hnect_cert.pfx
+
 
 
