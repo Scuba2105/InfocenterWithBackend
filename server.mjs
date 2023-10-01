@@ -21,10 +21,17 @@ const app = express();
 
 // This sets the credentials for the HTTPS server based on the ssl credentials.
 // Certificate Password: hnect-cert-password123456.
+let certPassword;
+if (process.env.NODE_ENV !== "production") {
+    certPassword = 'hnect-dev-cert-password123456'
+}
+else if (process.env.NODE_ENV !== "production") {
+    certPassword = 'hnect-cert-password123456'
+}
 const options = {
     key: fs.readFileSync(`${__dirname}/key.pem`),
     pfx: fs.readFileSync(`${__dirname}/hnect_cert.pfx`),
-    passphrase: 'hnect-cert-password123456'
+    passphrase: certPassword
 };
 
 // Set cors for any origin during development. Set to same origin for production.  
