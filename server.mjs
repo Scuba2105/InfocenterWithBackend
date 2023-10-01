@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import https from 'https';
-import http from 'http';
 import cors from 'cors';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
@@ -20,13 +19,24 @@ const PORT = process.env.PORT || 5000;
 // Define the express app
 const app = express();
 
-// This sets the credentials for the HTTPS server based on the ssl credentials.
+// This sets the credentials for the HTTPS server based on the ssl credentials. Read the appropriate credentials whether in dev or production
 // Certificate Password: hnect-cert-password123456.
-var options = {
-    key: fs.readFileSync(`${__dirname}/key.pem`),
-    pfx: fs.readFileSync(`${__dirname}/hnect_cert.pfx`),
-    passphrase: 'hnect-cert-password123456'
-};
+let options;
+
+if (process.env.NODE_ENV !== "production") {
+    options = {
+        key: fs.readFileSync(`${__dirname}/key.pem`),
+        pfx: fs.readFileSync(`${__dirname}/hnect_cert.pfx`),
+        passphrase: 'hnect-cert-password123456'
+    };
+}
+else {
+    options = {
+        key: fs.readFileSync(`${__dirname}/key.pem`),
+        pfx: fs.readFileSync(`${__dirname}/hnect_cert.pfx`),
+        passphrase: 'hnect-cert-password123456'
+    };
+}
 
 // Set cors for any origin during development. Set to same origin for production.  
 if (process.env.NODE_ENV !== "production") {
@@ -261,12 +271,6 @@ app.use((err, req, res, next) => {
     console.log(JSON.stringify({Route: "Error Handler Middleware", Error: err.message}), null, 2);
     return res.status(400).json({type: "Error", message: err.message});
 });
-
-// Create an HTTP service.
-http.createServer(app).listen(80, () => {
-    console.log(`HTTP Server is listening on port 80`);
-});
-;
 
 // Create an HTTPS service identical to the HTTP service.
 https.createServer(options, app).listen(PORT, () => {
