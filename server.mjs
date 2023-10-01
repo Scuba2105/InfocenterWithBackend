@@ -25,7 +25,7 @@ let certPassword;
 if (process.env.NODE_ENV !== "production") {
     certPassword = 'hnect-dev-cert-password123456'
 }
-else if (process.env.NODE_ENV !== "production") {
+else if (process.env.NODE_ENV === "production") {
     certPassword = 'hnect-cert-password123456'
 }
 const options = {
