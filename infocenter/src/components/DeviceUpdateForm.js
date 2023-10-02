@@ -100,7 +100,7 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 function saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
     // Add the files from the service manual and user manual forms to the formData ref
     if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
-        const selectedFile = e.target.parentNode.parentNode.querySelector('.device-file-upload');
+        const selectedFile = e.target.parentNode.parentNode.querySelector('.file-input');
         if (selectedFile.files.length === 0) {
             showMessage("error", `No ${selectedOption} has been provided. Please choose a file and try again.`)
             return

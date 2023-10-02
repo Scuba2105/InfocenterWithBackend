@@ -764,18 +764,18 @@ html {
   color: var(--search-bar-color);
 }
 
-.text-input::placeholder, .change-password-input::placeholder, .select-input::placeholder, 
-.file-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--input-placeholder-color);
   opacity: 1; /* Firefox */
 }
 
-.text-input:-ms-input-placeholder, .change-password-input:-ms-input-placeholder, .select-input:-ms-input-placeholder, .file-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
   color: var(--input-placeholder-color);
   opacity: 1;
 }
 
-.text-input::-ms-input-placeholder, .change-password-input::-ms-input-placeholder, .select-input::-ms-input-placeholder, .file-input::-ms-input-placeholder { /* Microsoft Edge */
+/*.text-input::-ms-input-placeholder, .change-password-input::-ms-input-placeholder, .select-input::-ms-input-placeholder, .file-input::-ms-input-placeholder { /* Microsoft Edge */ 
+::-ms-input-placeholder {
   color: var(--input-placeholder-color);
   opacity: 1;
 }
@@ -2025,7 +2025,7 @@ html {
 }
 
 .form-select-input-container {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .hospitals-select, .department-select {
@@ -2083,6 +2083,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 500;
 }
 
 .config-info {
