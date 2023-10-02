@@ -29,7 +29,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
         return (
             <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}> 
                 <label className="available-label">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
-                <label>Update Service Manual: </label><input type="file" className="device-file-upload" id="file1" name="service-upload"></input>
+                <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update Service Manual:" uniqueId="file1" name="service-upload"/>
             </div>
         );
     }
@@ -37,22 +37,21 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
         return (
             <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
                 <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
-                <label>Update User Manual: </label><input type="file" className="device-file-upload" id="file2" name="user-upload"></input>
+                <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update User Manual:" uniqueId="file2" name="user-upload"/>
             </div>
         );
     }
     else if (selectedOption === 'Software') {
         return (
             <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
-                {/*<label id="software-available" className="available-label">Current Location Provided: {selectedData.software !== "" ? <Tick color="rgb(7, 171, 138)" size="18px" margin="25px" /> : <Cross color="#de0d37" size="18px" margin="25px" />} </label>*/}
-                <label>Software Type</label>
+                <label className="update-device-file-label">Software Type:</label>
                 <div className="software-type">
                     <input type="radio" id="device-software" name="software-type" value="device-software"></input>
                     <label id="device-software-label" htmlFor="device-software">Device Software</label><br></br>
                     <input type="radio" id="service-software" name="software-type" value="service-software"></input>
                     <label id="service-software-label" htmlFor="service-software">Service Software</label><br></br>
                 </div>
-                <label>Update Software File Location: </label><input type="text" className="device-text-input" ></input>
+                <label className="update-device-file-label">Update Software File Location: </label><input type="text" className="device-text-input" ></input>
             </div>
         );
     }
@@ -72,7 +71,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                     <Input inputType='date' identifier='date-entry' labelText='Date Created'/>
                 </div>
                 <div className="config-file-container">
-                    <label>Select Config File</label>
+                    <label className="config-file-input-label">Select Config File</label>
                     <input type="file" className="device-file-upload" id="config-file" name="config-upload"></input>
                 </div>
             </div> 
@@ -85,11 +84,11 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                     return (
                     <div key={`container-${number}`} className={mediaQueries.laptop ? "description-file-container-laptop" : "description-file-container-desktop"}>
                         <div className={mediaQueries.laptop ? "label-input-container1-laptop" : "label-input-container1-desktop"}>
-                            <label key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
+                            <label className="other-doc-label" key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
                             <input key={`text${number}`} type="text" className={mediaQueries.laptop ? "other-doc-text-input-laptop text-input" : "other-doc-text-input-desktop text-input"}  placeholder="Enter a short title/description" name={`description-${number}`}></input>
                         </div>
                         <div className={mediaQueries.laptop ? "label-input-container2-laptop" : "label-input-container2-desktop"}>
-                            <label key={`label-input-${number}`}>{`File ${number}:`} </label>
+                            <label className="other-doc-label" key={`label-input-${number}`}>{`File ${number}:`} </label>
                             <input key={`file${number}`} type="file" className={mediaQueries.laptop ? "other-doc-file-upload-laptop" : "other-doc-file-upload-desktop"} name="user-upload"></input>
                         </div>
                     </div>

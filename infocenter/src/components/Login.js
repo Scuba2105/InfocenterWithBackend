@@ -80,7 +80,6 @@ export function Login() {
             }
             else {
                 // Write data to session storage for page reloads
-                console.log({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageType: data.credentials.imageType})
                 sessionStorage.setItem("currentInfoCentreSession", JSON.stringify({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageType: data.credentials.imageType}));
                 setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions, data.credentials.imageType);
                 login();

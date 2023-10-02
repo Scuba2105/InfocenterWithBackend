@@ -764,17 +764,20 @@ html {
   color: var(--search-bar-color);
 }
 
-.text-input::placeholder, .change-password-input::placeholder, .select-input::placeholder, .file-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.text-input::placeholder, .change-password-input::placeholder, .select-input::placeholder, 
+.file-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--input-placeholder-color);
   opacity: 1; /* Firefox */
 }
 
 .text-input:-ms-input-placeholder, .change-password-input:-ms-input-placeholder, .select-input:-ms-input-placeholder, .file-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: black;
+  color: var(--input-placeholder-color);
+  opacity: 1;
 }
 
-.text-input::-ms-input-placeholder, .change-password-input::-ms-input-placeholder, .select-input::-ms-input-placeholder, .file-input.text-input::-ms-input-placeholder { /* Microsoft Edge */
-  color: black;
+.text-input::-ms-input-placeholder, .change-password-input::-ms-input-placeholder, .select-input::-ms-input-placeholder, .file-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--input-placeholder-color);
+  opacity: 1;
 }
 
 .search-table-container {
@@ -1142,21 +1145,6 @@ html {
 
 #device-software-label {
   margin-right: 40px;
-}
-
-.device-file-upload {
-  font-size: 12px;
-  border: 1px solid var(--form-input-color);
-  height: 20px;
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--form-input-color);
-  padding: 5px;
-  padding: 6px -5px 2px 0;
-  margin-top: 10px;
-  color: var(--form-font-color);
 }
 
 .available-label {
@@ -1641,7 +1629,7 @@ html {
 }
 
 /* Format the add new staff/equipment modal */
-.add-new, .new-image {
+.add-new, .new-image, .update-device-file {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1651,7 +1639,18 @@ html {
   margin-top: 15px;
 }
 
-.add-new-input, .new-image-input {
+.update-device-file {
+  margin-top: 0px;
+}
+
+.update-device-file-label {
+  font-size: 15px;
+  color: var(--form-font-color);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.add-new-input, .new-image-input, .update-device-file-input {
   font-size: 12px;
   color: var(--form-font-color);
   height: 20px;
@@ -1662,6 +1661,10 @@ html {
   margin-top: 3px;
   transform: translateY(-4px);
   background-color: var(--form-input-color);
+}
+
+.update-device-file-input {
+  padding: 5px 20px 5px 5px;
 }
 
 .add-new-input, .new-image-input {
@@ -2102,6 +2105,10 @@ html {
   color: var(--form-font-color);
 }
 
+.config-data-label, .date-entry-label, .config-file-input-label, .other-doc-label {
+  font-weight: 500;
+}
+
 .config-data-input, .date-entry-input, .change-password-input {
   font-size: 12px;
   color: var(--form-font-color);
@@ -2139,8 +2146,8 @@ html {
   justify-content: space-between;
   align-items: center;
   background-color: var(--form-input-color);
-  padding: 5px;
-  padding: 2px -5px 4px 0;
+  padding: 3px;
+  padding-bottom: 7px;
   margin-top: 10px;
 }
 
