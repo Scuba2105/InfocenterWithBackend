@@ -9,6 +9,7 @@ html {
   width: 100%;
   overflow: hidden;
   background-color: #121826; 
+  --pageWidth: 100vw;
   --row-hover: #62709b;
   --dark-theme: #121826;
   --med-theme: #212936;
@@ -717,19 +718,19 @@ html {
 }
 
 .search-icon-laptop-user {
-  transform: translateX(-515px);
+  transform: translateX(calc(var(--pageWidth) * -0.385)); /* transform: translateX(-715px); */
 }
 
 .search-icon-laptop-admin {
-  transform: translateX(-430px);
+  transform: translateX(calc(var(--pageWidth) * -0.33)); /* transform: translateX(-430px); */
 }
 
 .search-icon-desktop-user {
-  transform: translateX(-715px);
+  transform: translateX(calc(var(--pageWidth) * -0.385)); /* transform: translateX(-715px); */
 }
 
 .search-icon-desktop-admin {
-  transform: translateX(-620px);
+  transform: translateX(calc(var(--pageWidth) * -0.33)); /* transform: translateX(-620px); */
 }
 
 .add-new-btn-laptop, .add-new-btn-desktop {
