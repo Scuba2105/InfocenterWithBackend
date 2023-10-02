@@ -1674,7 +1674,7 @@ html {
 }
 
 .add-new-label, .new-image-label {
-  font-weight: bold;
+  font-weight: 500;
   transform: translateY(-4px);  
 }
 
