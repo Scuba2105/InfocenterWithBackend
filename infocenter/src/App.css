@@ -717,20 +717,12 @@ html {
   font-size: 20px;
 }
 
-.search-icon-laptop-user {
-  transform: translateX(calc(var(--pageWidth) * -0.385)); /* transform: translateX(-715px); */
+.search-icon-laptop-user, .search-icon-desktop-user {
+  transform: translateX(calc(var(--pageWidth) * -0.385)); 
 }
 
-.search-icon-laptop-admin {
-  transform: translateX(calc(var(--pageWidth) * -0.33)); /* transform: translateX(-430px); */
-}
-
-.search-icon-desktop-user {
-  transform: translateX(calc(var(--pageWidth) * -0.385)); /* transform: translateX(-715px); */
-}
-
-.search-icon-desktop-admin {
-  transform: translateX(calc(var(--pageWidth) * -0.33)); /* transform: translateX(-620px); */
+.search-icon-laptop-admin, .search-icon-desktop-admin {
+  transform: translateX(calc(var(--pageWidth) * -0.33)); 
 }
 
 .add-new-btn-laptop, .add-new-btn-desktop {
