@@ -55,7 +55,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
     // Get the vendor and setVendor function from the state store
     const vendor = useVendor((state) => state.vendor);
     const setVendor = useVendor((state) => state.setVendor);
-
+    
     // If is loading then show the loading dialog, or error dialog if error. Once data loaded, then close dialog.
     if (isLoading) {
         return (

@@ -376,35 +376,25 @@ html {
   justify-content: center;
   align-items: center;
   background-color: var(--dark-theme);
+  color: white;
 }
 
-.error-description-laptop {
+.error-description {
   width: 550px;
   height: 375px;
-  margin-right: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.error-description-desktop {
-  width: 550px;
-  height: 375px;
-  margin-right: 450px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.error-503 {
+.error-heading {
   font-weight: bold;
   font-size: 40px;
   color: var(--form-font-color);
 }
 
-.error-503-subheading {
+.error-subheading {
   font-size: 32px;
 }
 
@@ -2405,7 +2395,7 @@ html {
   width: 100%;
   border: 1px solid #003153;
   border-radius: 20px;
-  background: url('http://JHHBME005:5000/images/configuration-background.jpg');
+  background: url('https://JHHBME005:5000/images/configuration-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
