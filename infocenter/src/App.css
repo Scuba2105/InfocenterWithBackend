@@ -1667,6 +1667,7 @@ html {
   padding: 5px 20px 5px 5px;
 }
 
+/* Formatting for the form labels and inputs. */
 .add-new-input, .new-image-input {
   border: 1px solid var(--form-input-color);
   padding: 3px;
