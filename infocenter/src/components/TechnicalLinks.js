@@ -41,14 +41,14 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                     </div>
                 </div>
                 <div className={mediaQueries.laptop ? "technical-area-laptop" : "technical-area-desktop"}>
-                    <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} target="_blank" rel="noopener noreferrer" >
+                    <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
                         <ServiceIcon color="#98053b" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Service</span>
                             <span>Manual</span> 
                         </div>
                     </a>
-                    <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} target="_blank" rel="noopener noreferrer">
+                    <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
                         <UserManualIcon color="#037470" size={mediaQueries.desktop ? "50px" : "30px"}/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>User</span>
