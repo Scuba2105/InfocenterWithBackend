@@ -717,11 +717,19 @@ html {
   font-size: 20px;
 }
 
-.search-icon-laptop-user, .search-icon-desktop-user {
+.search-icon-laptop-user {
+  transform: translateX(calc(var(--pageWidth) * -0.395)); 
+}
+
+.search-icon-desktop-user {
   transform: translateX(calc(var(--pageWidth) * -0.385)); 
 }
 
-.search-icon-laptop-admin, .search-icon-desktop-admin {
+.search-icon-laptop-admin {
+  transform: translateX(calc(var(--pageWidth) * -0.345)); 
+}
+
+.search-icon-desktop-admin {
   transform: translateX(calc(var(--pageWidth) * -0.33)); 
 }
 

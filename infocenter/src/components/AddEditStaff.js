@@ -5,10 +5,21 @@ import { SelectInput } from "./SelectInput"
 import { capitaliseFirstLetters, sortMandatoryFields } from "../utils/utils"
 import { serverConfig } from "../server"
 
+// Define the arrays used for mapping over to simplify logic
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
 const mandatoryFields = ["workshop", "position", "office-phone"];
 const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile", "hostname"];
+const inputFields = ["Name", "Staff ID", "Workshop", "Position", "Office Phone", "Dect Phone", "Work Mobile", "Personal Mobile", "Laptop Hostname"];
+
+// Define array of regex's to use for validation of non-mandatory input.
+const NonMandatoryInputsRegexArray = [/^[0-9]{8}$|^[0-9]{3}\s[0-9]{5}$|^[0-9]{5}$/, //Office Phone
+                                      /^[0-9]{5}$|^\s*$/, // Dect Phone (allows empty string)
+                                      /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
+                                      /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
+                                      /^JHHBME[0-9]{3}|^\s*$/ // Hostname (allows empty string)
+                            ];
+
 
 function createFormData(updateData, formData) {
     for (const [key, value] of Object.entries(updateData)) {
@@ -117,16 +128,30 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
     else if (type === "update") {
         // Filter the empty data inputs out of the data and save to the Form Data
         const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname"]
-        textValueInputsArray.forEach((input, index) => {
-            if (input.value !== "" && input.value !== selectedData[staffObjectProperties[index]]) {
+        for (let [index, input] of textValueInputsArray.entries()) {
+            // if (index >= 4) {
+            //     console.log(input.value, NonMandatoryInputsRegexArray[index - 4].test(input.value))
+            // }            
+            // These inputs are either not editable or are select lists
+            if (index > 1 && index <= 3 && input.value !== selectedData[staffObjectProperties[index]]) {
                 updateData.current[keyIdentifier[index]] = input.value;
             }
+            // These are non-mandatory inputs that must be validated2
+            else if (index >= 4 && input.value !== selectedData[staffObjectProperties[index]]) {
+                if (!NonMandatoryInputsRegexArray[index - 4].test(input.value)) {
+                    showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
+                    return;
+                }
+                updateData.current[keyIdentifier[index]] = input.value;
+            }
+            
+            // Add the staff ID to the upload data to identify the entry
             if (index === 1) {
                 // Store the staff ID for naming the uploaded image file.
                 staffId = input.value;
                 updateData.current["existing-id"] = staffId;
             }
-        });
+        };
 
         // Add the uploaded file and file extension if it has been selected 
         if (fileInput[0].value !== "") {
