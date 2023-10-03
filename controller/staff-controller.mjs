@@ -40,11 +40,11 @@ export async function addNewStaffData(req, res, __dirname) {
             writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
 
             // Send the success response message.
-            console.log(JSON.stringify({Route: "Add New Staff", Error: err.message}), null, 2);
             res.json({type: "Success", message: 'Data Upload Successful'}); 
         })   
     } catch (err) {
         // Send the error response message.
+        console.log(JSON.stringify({Route: "Add New Staff", Error: err.message}), null, 2);
         res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
     }
 }

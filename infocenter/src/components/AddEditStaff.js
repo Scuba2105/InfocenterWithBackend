@@ -13,12 +13,16 @@ const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "de
 const inputFields = ["Name", "Staff ID", "Workshop", "Position", "Office Phone", "Dect Phone", "Work Mobile", "Personal Mobile", "Laptop Hostname"];
 
 // Define array of regex's to use for validation of non-mandatory input.
-const NonMandatoryInputsRegexArray = [/^[0-9]{8}$|^[0-9]{3}\s[0-9]{5}$|^[0-9]{5}$/, //Office Phone
-                                      /^[0-9]{5}$|^\s*$/, // Dect Phone (allows empty string)
-                                      /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
-                                      /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
-                                      /^JHHBME[0-9]{3}|^\s*$/ // Hostname (allows empty string)
-                            ];
+const inputsRegexArray = [/^[a-z ,.'-]+$/i, //Name
+                          /^[0-9]{8}$/i, //Staff ID
+                          /^[a-z ,.'-]+$/i, //Workshop
+                          /^[a-z ,.'-]+$/i, //Position
+                          /^[0-9]{8}$|^[0-9]{3}\s[0-9]{5}$|^[0-9]{5}$/, //Office Phone
+                          /^[0-9]{5}$|^\s*$/, // Dect Phone (allows empty string)
+                          /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
+                          /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
+                          /^JHHBME[0-9]{3}|^\s*$/ // Hostname (allows empty string)
+                        ];
 
 
 function createFormData(updateData, formData) {
@@ -33,8 +37,7 @@ function createFormData(updateData, formData) {
 }
 
 async function uploadStaffFormData(formContainer, updateData, type, page, selectedData, currentUser, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal) {
-    const staffDataOptions = ["Full Name", "Staff ID", "Office Phone"];
-    
+        
     // Get all the input elements
     const textInputs = formContainer.current.querySelectorAll('.text-input');
     const selectInputs = formContainer.current.querySelectorAll('.select-input');
@@ -51,24 +54,29 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
 
     // Validate the relevant new staff data inputs over the text inputs only.
     if (type === "add-new") {
-        for (let [index, input] of textInputArray.entries()) {
-            if (index <= 2 && input.value === "") {
-                showMessage("error", `The input for the new employee ${staffDataOptions[index]} is empty. Please enter the necessary data and try again.`)
-                return;
-            }
-        };
-    
-        // Filter the empty data inputs out of the data and save to the Form Data
-        textValueInputsArray.forEach((input, index) => {
-            if (input.value !== "") {
+        for (let [index, input] of textValueInputsArray.entries()) {
+            console.log(input.value, inputsRegexArray[index].test(input.value))
+            if (index <= 3) {
+                if (input.value === "") {
+                    showMessage("warning", `The input for the new employee ${inputFields[index]} is empty. Please enter the necessary data and try again.`)
+                    return;
+                }
+                else if (!inputsRegexArray[index].test(input.value)) {
+                    showMessage("warning", `The input for the new employee ${inputFields[index]} is not valid. Please enter a valid value and try again.`)
+                    return;
+                }
                 updateData.current[keyIdentifier[index]] = input.value;
             }
-            if (index === 1) {
-                // Store the staff ID for naming the uploaded image file.
-                staffId = input.value;
+            else if (index >= 4 && input.value !== "") {
+                if (!inputsRegexArray[index].test(input.value)) {
+                    console.log("Found false entry")
+                    showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
+                    return;
+                }
+                updateData.current[keyIdentifier[index]] = input.value;
             }
-        });
-
+        };
+        
         // Add the uploaded file and file extension if it has been selected 
         if (fileInput[0].value !== "") {
             const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
@@ -82,7 +90,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         // Need to convert update data object into a FormData object.
         const formData = new FormData(); 
         createFormData(updateData.current, formData);
-        
+        console.log(updateData.current);
         try {
 
             //Post the data to the server  
@@ -136,9 +144,9 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
             if (index > 1 && index <= 3 && input.value !== selectedData[staffObjectProperties[index]]) {
                 updateData.current[keyIdentifier[index]] = input.value;
             }
-            // These are non-mandatory inputs that must be validated2
+            // These are non-mandatory inputs that must be validated
             else if (index >= 4 && input.value !== selectedData[staffObjectProperties[index]]) {
-                if (!NonMandatoryInputsRegexArray[index - 4].test(input.value)) {
+                if (!inputsRegexArray[index].test(input.value)) {
                     showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
                     return;
                 }
