@@ -61,7 +61,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
     const [updateContactVisible, setUpdateContactVisible] = useState(false);
     
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

@@ -93,7 +93,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
     const [incrementChange, setIncrementChange] = useState({dx: 0, dy: 0});
     
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

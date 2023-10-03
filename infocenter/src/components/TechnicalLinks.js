@@ -23,7 +23,7 @@ function generateLinks(deviceData, type) {
 export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdateFormVisible, closeUpdate, onLinkClick, queryClient, showMessage, closeDialog}) {
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
     

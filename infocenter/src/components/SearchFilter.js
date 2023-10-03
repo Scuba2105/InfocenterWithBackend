@@ -58,7 +58,7 @@ export function SearchFilter({page, pageData, vendorData, onRowClick, queryClien
     const [addNewModal, setAddNewModal] = useState(false);
     
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
     

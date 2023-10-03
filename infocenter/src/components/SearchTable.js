@@ -4,7 +4,7 @@ import useMediaQueries from "media-queries-in-react";
 export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, onRowClick, onTableArrowClick}) {
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

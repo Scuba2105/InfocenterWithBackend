@@ -38,7 +38,7 @@ export function StaffDetails({selectedData, user}) {
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

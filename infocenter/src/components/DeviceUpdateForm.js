@@ -276,7 +276,7 @@ function updateFileCount(e, fileNumber, setFileNumber, showMessage) {
 export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

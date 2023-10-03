@@ -90,7 +90,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         // Need to convert update data object into a FormData object.
         const formData = new FormData(); 
         createFormData(updateData.current, formData);
-        console.log(updateData.current);
+        
         try {
 
             //Post the data to the server  
@@ -137,9 +137,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         // Filter the empty data inputs out of the data and save to the Form Data
         const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname"]
         for (let [index, input] of textValueInputsArray.entries()) {
-            // if (index >= 4) {
-            //     console.log(input.value, NonMandatoryInputsRegexArray[index - 4].test(input.value))
-            // }            
+                      
             // These inputs are either not editable or are select lists
             if (index > 1 && index <= 3 && input.value !== selectedData[staffObjectProperties[index]]) {
                 updateData.current[keyIdentifier[index]] = input.value;

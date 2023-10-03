@@ -22,7 +22,7 @@ export function Login() {
     const setUser = useUser((state) => state.setUser)
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

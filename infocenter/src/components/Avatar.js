@@ -60,7 +60,7 @@ export function Avatar({showMessage, closeDialog}) {
     const logout = useLoggedIn((state) => state.logout);
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

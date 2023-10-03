@@ -30,7 +30,7 @@ function searchIconClass(laptop, permissions) {
 export function SearchInput({onQueryChange, openAddModal}) {
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
 

@@ -69,7 +69,7 @@ function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, 
 export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, queryClient, showMessage, closeDialog}) {
     
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     });
     

@@ -19,7 +19,7 @@ export function ServiceRequestGenerator({staffNames}) {
     const [serviceAgent, setServiceAgent] = useState("Cardinal Health");
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
+        laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
     }); 
 
