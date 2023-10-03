@@ -13,7 +13,10 @@ config.mjs
 /data/thermometers-copy.json
 /data/thermometers.json
 /ecosystem.config.js
-./infocenter/src/server.js
+/infocenter/src/server.js
+/hnect_cert.pfx
+/key.pem
+
 
 
 
