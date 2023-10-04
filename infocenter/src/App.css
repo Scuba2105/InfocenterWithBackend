@@ -366,7 +366,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  min-width: 1150px;
+  min-width: 100%;
   overflow: hidden;
 }
 
@@ -681,7 +681,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 45%;
+  width: 48%;
   min-width: calc(1300px * 0.45);
 }
 
@@ -861,13 +861,14 @@ html {
 }
 
 .display-area-laptop {
-  margin-right: 20px;
-  width: 500px;
+  margin-right: 2%;
+  width: 42%;
   background-color: var(--display-background-color);
   border: 1px solid black;
   height: 80%;
   margin-top: 2%;
   min-height: 550px;
+  min-width: calc(1100px * 0.45);
 }
 
 .display-area-desktop {
