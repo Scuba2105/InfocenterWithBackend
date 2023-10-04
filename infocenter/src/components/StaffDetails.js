@@ -38,10 +38,12 @@ export function StaffDetails({selectedData, user}) {
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
 
     const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
+        laptop: "(max-width: 1250px)",
+        midScreen: "((max-width: 1700px))",
         desktop: "(min-width: 1800px)"
     });
 
+    console.log(mediaQueries.midScreen)
     const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
     
     return (
@@ -60,7 +62,7 @@ export function StaffDetails({selectedData, user}) {
                     <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
             </div>            
-            <div className={mediaQueries.laptop ? "info-container-laptop" : "info-container-desktop"}>
+            <div className={mediaQueries.laptop ? "info-container info-container-laptop" : mediaQueries.desktop ? "info-container info-container-desktop" : "info-container info-container-mid-screen"}>
                 {selectedData.id !== "-" && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Staff ID</h5><span style={{border: '1px solid black'}}>{selectedData.id}</span></div>}
                 {!workshops.includes(selectedData.name) && <div className="info-entry-container"><h5 style={selectedData.hostname !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Computer Name</h5><span style={{border: '1px solid black'}}>{selectedData.hostname === "" ? "-" : selectedData.hostname}</span></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Office Phone</h5><span style={{border: '1px solid black'}}>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}

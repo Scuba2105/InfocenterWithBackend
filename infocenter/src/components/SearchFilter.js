@@ -86,13 +86,15 @@ export function SearchFilter({page, pageData, vendorData, onRowClick, queryClien
     const maxIndex = paginatedData.length - 1;
     
     return (
-        <div className="search-filter">
-            <SearchInput key={`${pageSelected}-input`} onQueryChange={(e) => onQueryChange(e, setQuery, setTableIndex)} openAddModal={() => openAddModal(setAddNewModal)}/>
-            <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={(e) => onTableArrowClick(e, tableIndex, setTableIndex, maxIndex)} />
-            {addNewModal && 
-            <ModalSkeleton closeModal={() => closeAddModal(setAddNewModal)} type="add-new" page={page}>
-                <AddNewForm page={page} pageData={pageData} vendorData={vendorData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={() => closeAddModal(setAddNewModal)}></AddNewForm>
-            </ModalSkeleton>}
+        <div className="search-filter-container">
+            <div className="search-filter">
+                <SearchInput key={`${pageSelected}-input`} onQueryChange={(e) => onQueryChange(e, setQuery, setTableIndex)} openAddModal={() => openAddModal(setAddNewModal)}/>
+                <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={(e) => onTableArrowClick(e, tableIndex, setTableIndex, maxIndex)} />
+                {addNewModal && 
+                <ModalSkeleton closeModal={() => closeAddModal(setAddNewModal)} type="add-new" page={page}>
+                    <AddNewForm page={page} pageData={pageData} vendorData={vendorData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={() => closeAddModal(setAddNewModal)}></AddNewForm>
+                </ModalSkeleton>}
+            </div>
         </div>
-    );
+        );
 }
