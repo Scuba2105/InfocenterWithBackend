@@ -341,7 +341,6 @@ html {
 .menu-selected {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  /*background: radial-gradient(circle at center,rgb(105, 105, 105), var(--med-theme) 60%);*/
   color: white;
 }
 
@@ -353,7 +352,6 @@ html {
   scale: 1.1;
   cursor: pointer;
   background-color: var(--med-light-theme);
-  /*background: radial-gradient(circle at center,rgb(105, 105, 105), var(--med-theme) 60%);*/
   color:white;
 }
 
@@ -363,7 +361,8 @@ html {
   background-color: var(--dark-theme);
   display: grid;
   grid-template-columns: 50% 50%;
-  overflow: hidden;
+  overflow-y: hidden;
+  min-width: 1000px;
 }
 
 .computer-container {
@@ -1313,7 +1312,7 @@ html {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   overflow: hidden;
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 25px;
 }
 
@@ -1359,8 +1358,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   background-color: yellow;
   transform: translate(30px, -7px);

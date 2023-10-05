@@ -57,7 +57,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><EmailIcon color="#212936"></EmailIcon></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><EmailIcon size="20px" color="#212936"></EmailIcon></a>}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
