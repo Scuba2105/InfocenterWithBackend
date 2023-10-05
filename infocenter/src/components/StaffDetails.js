@@ -51,7 +51,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-logo">
                     {selectedData.img ? <img key={profilePhotoUpdates * 10} className="logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
                     workshops.includes(selectedData.name) ? <div className="logo" style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className="phone-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
-                    <BlankProfile identifier={mediaQueries.laptop === true ? "blank-picture-laptop" : "blank-picture-desktop"} size="110%" foregroundColor="#6B7F82" ></BlankProfile>}
+                    <BlankProfile identifier="blank-picture" size="20vh" foregroundColor="#6B7F82" ></BlankProfile>}
                 </div>
                 <div className="staff-name">
                     <div className="name-update-container">
@@ -61,7 +61,7 @@ export function StaffDetails({selectedData, user}) {
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
             </div>            
-            <div className={mediaQueries.laptop ? "info-container info-container-laptop" : mediaQueries.desktop ? "info-container info-container-desktop" : "info-container info-container-mid-screen"}>
+            <div className="info-container">
                 {selectedData.id !== "-" && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Staff ID</h5><span style={{border: '1px solid black'}}>{selectedData.id}</span></div>}
                 {!workshops.includes(selectedData.name) && <div className="info-entry-container"><h5 style={selectedData.hostname !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Computer Name</h5><span style={{border: '1px solid black'}}>{selectedData.hostname === "" ? "-" : selectedData.hostname}</span></div>}
                 {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Office Phone</h5><span style={{border: '1px solid black'}}>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
