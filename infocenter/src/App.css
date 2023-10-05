@@ -868,24 +868,16 @@ html {
   width: 94%;
   background-color: var(--display-background-color);
   border: 1px solid black;
-  height: 80%;
   margin-top: 2%;
   min-height: 550px;
   min-width: calc(1100px * 0.45);
 }
 
-.staff-display-laptop {  
-  display: grid;
-  grid-template-columns: 1fr; 
-  grid-template-rows: 80px 1fr;
-  height: 65%;
-}
-
-.staff-display-desktop { 
+.staff-display {  
   display: grid;
   grid-template-columns: 1fr; 
   grid-template-rows: 12% 1fr;
-  height: 92%;
+  height: 95%;
 }
 
 .equipment-display-laptop {
@@ -1251,79 +1243,54 @@ html {
 
 
 /* CSS for staff display area */
-.staff-info-laptop {
+.staff-info {
   font-size: 14px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 180px 1fr;
+  grid-template-rows: minmax(80px, 150px) 1fr;
+  /* set max height of first row  using minmax() */
 }
 
-.staff-info-desktop {
-  font-size: 14px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 180px 1fr;
-}
-
-.staff-heading-laptop {
+.staff-heading {
+  grid: 1 / 1;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
-.staff-heading-desktop {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  transform: translate(30px, 70px);
-}
-
-.staff-logo-laptop {
-  height: 175px;
-  width: 175px;
+.staff-logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  font-size: 35px;
+  padding-left: 40px;
+  padding-top: 40px;
 }
 
-.staff-logo-desktop {
-  height: 200px;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 40px;
-}
-
-.logo-laptop {
-  height: 120px;
-  width: 120px;
+.logo {
   border: 1px solid rgb(137, 44, 44);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
+  aspect-ratio: 1 / 1;
+  height: 110%;
+  width: 110%;
 }
 
-.logo-desktop {
-  height: 200px;
-  width: 200px;
-  border: 1px solid rgb(137, 44, 44);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
+.phone-image {
+  height: 65%;
+  width: 65%;
 }
 
 #blank-picture-laptop, #blank-picture-desktop {
   background-color: var(--profile-pic-background-color);
   border-radius: 50%;
 }
-
-
 
 .staff-name-laptop {
   width: 65%;
@@ -1373,15 +1340,6 @@ html {
   padding-top: 20px;
 }
 
-.phone-image-laptop {
-  height: 80px;
-  width: 80px;
-}
-
-.phone-image-desktop {
-  height: 110px;
-  width: 110px;
-}
 /* --------------------- */
 .info-container {
   grid-column: 1;

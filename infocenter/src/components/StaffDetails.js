@@ -43,23 +43,22 @@ export function StaffDetails({selectedData, user}) {
         desktop: "(min-width: 1800px)"
     });
 
-    console.log(mediaQueries.midScreen)
     const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
     
     return (
-        <div className={mediaQueries.laptop === true ? 'staff-info-laptop' : 'staff-info-desktop'}>
-            <div className={mediaQueries.laptop === true ? "staff-heading-laptop" : "staff-heading-desktop"}>
-                <div className={mediaQueries.laptop === true ? "staff-logo-laptop" : "staff-logo-desktop"}>
-                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className={mediaQueries.laptop === true ? "logo-laptop" : "logo-desktop"} src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
-                    workshops.includes(selectedData.name) ? <div className={mediaQueries.laptop ? "logo-laptop" : "logo-desktop"} style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className={mediaQueries.laptop ? "phone-image-laptop" : "phone-image-desktop"} src={`https://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
-                    <BlankProfile identifier={mediaQueries.laptop === true ? "blank-picture-laptop" : "blank-picture-desktop"} size={mediaQueries.laptop ? "120px" : "200px"} foregroundColor="#6B7F82" ></BlankProfile>}
+        <div className='staff-info'>
+            <div className="staff-heading">
+                <div className="staff-logo">
+                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className="logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
+                    workshops.includes(selectedData.name) ? <div className="logo" style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className="phone-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
+                    <BlankProfile identifier={mediaQueries.laptop === true ? "blank-picture-laptop" : "blank-picture-desktop"} size="110%" foregroundColor="#6B7F82" ></BlankProfile>}
                 </div>
-                <div className={mediaQueries.laptop ? "staff-name-laptop" : "staff-name-desktop"}>
+                <div className="staff-name">
                     <div className="name-update-container">
-                        <p className={mediaQueries.laptop ? "name-text-laptop" : "name-text-desktop"}>{selectedData.name}</p>
+                        <p className="name-text">{selectedData.name}</p>
                         {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><EmailIcon color="#212936"></EmailIcon></a>}
                     </div>
-                    <p className={mediaQueries.laptop === true ? "position-laptop" : "position-desktop"}>{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
+                    <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
             </div>            
             <div className={mediaQueries.laptop ? "info-container info-container-laptop" : mediaQueries.desktop ? "info-container info-container-desktop" : "info-container info-container-mid-screen"}>

@@ -10,17 +10,20 @@ import { EditIcon, VendorArrow } from "../svg";
 import { workshops } from "../data";
 
 function getClassName(page, mediaQueries) {
-    if (page === 'staff' && mediaQueries.laptop === true) {
-        return 'display-area staff-display-laptop'
-    }
-    else if (page === 'staff' && mediaQueries.desktop === true) {
-        return 'display-area staff-display-desktop'
+    if (page === 'staff') {
+        return 'display-area staff-display'
     }
     else if (page === 'technical-info' && mediaQueries.laptop === true) {
         return 'display-area equipment-display-laptop'
     }
     else if (page === 'technical-info' && mediaQueries.desktop === true) {
         return 'display-area equipment-display-desktop'
+    }
+    else if (page === 'contacts' && mediaQueries.laptop === true) {
+        return 'display-area-laptop staff-display-laptop'
+    }
+    else {
+        return 'display-area-desktop staff-display-desktop'
     }
 }
 
