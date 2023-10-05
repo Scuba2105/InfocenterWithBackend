@@ -3,6 +3,7 @@ import { useProfilePhotoUpdate } from "./StateStore";
 import { workshops } from "../data";
 import { serverConfig } from "../server";
 import { EmailIcon, BlankProfile } from "../svg";
+import { StaffInfoEntry } from "./StaffInfoEntry";
 
 const teamColors = {Management: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
 border: '1px solid rgb(137, 44, 44)', color: 'rgb(137, 44, 44)'}, JHH: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
@@ -27,7 +28,7 @@ function emailFontSize(name, laptop) {
     }
 } 
 
-function getTextColor(team) {
+function getTextColor(team, teamColors) {
     const colorString = teamColors[team].background.split(' rgb')[1];
     const rgb = colorString.substring(0, colorString.length - 1)
     return `rgb${rgb}`;
@@ -62,12 +63,12 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Staff ID</h5><span style={{border: '1px solid black'}}>{selectedData.id}</span></div>}
-                {!workshops.includes(selectedData.name) && <div className="info-entry-container"><h5 style={selectedData.hostname !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Computer Name</h5><span style={{border: '1px solid black'}}>{selectedData.hostname === "" ? "-" : selectedData.hostname}</span></div>}
-                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}}>Office Phone</h5><span style={{border: '1px solid black'}}>{selectedData.officePhone === "" ? "-" : selectedData.officePhone}</span></div>}
-                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}} >Dect Phone</h5><span style={{border: '1px solid black'}}>{selectedData.dectPhone === '' ? "-" : selectedData.dectPhone}</span></div>}
-                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}} >Work Mobile</h5><span style={{border: '1px solid black'}}>{selectedData.workMobile === '' ? "-" : selectedData.workMobile}</span></div>}
-                {<div className="info-entry-container"><h5 style={selectedData.id !== '-' ? {backgroundColor: getTextColor(selectedData.team), border: '1px solid black'} : {backgroundColor: getTextColor("default"), border: '1px solid black'}} >Personal Mobile</h5><span style={{border: '1px solid black'}}>{selectedData.personalMobile === '' ? "-" : selectedData.personalMobile}</span></div>}
+                {selectedData.id !== "-" && <StaffInfoEntry entry="id" headerLabel="Staff ID" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry entry="hostname" headerLabel="Computer Name" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="officePhone" headerLabel="Office Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="dectPhone" headerLabel="Dect Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="workMobile" headerLabel="Work Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="personalMobile" headerLabel="Personal Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
             </div>
         </div>
     );
