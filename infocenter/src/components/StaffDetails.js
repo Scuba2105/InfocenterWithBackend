@@ -63,12 +63,12 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <StaffInfoEntry entry="id" headerLabel="Staff ID" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry entry="hostname" headerLabel="Computer Name" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="officePhone" headerLabel="Office Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="dectPhone" headerLabel="Dect Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="workMobile" headerLabel="Work Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="personalMobile" headerLabel="Personal Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default")}></StaffInfoEntry>}
+                {selectedData.id !== "-" && <StaffInfoEntry entry="id" headerLabel="Staff ID" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry entry="hostname" headerLabel="Computer Name" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="officePhone" headerLabel="Office Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="dectPhone" headerLabel="Dect Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="workMobile" headerLabel="Work Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {<StaffInfoEntry entry="personalMobile" headerLabel="Personal Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
             </div>
         </div>
     );
