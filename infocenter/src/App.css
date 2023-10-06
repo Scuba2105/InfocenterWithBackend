@@ -864,18 +864,11 @@ html {
   height: 95%;
 }
 
-.equipment-display-laptop {
+.equipment-display {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 15% 20px 180px 1fr;
+  grid-template-rows: 15% 20px 25% 1fr;
   height: 82%;
-}
-
-.equipment-display-desktop {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 12% 25px 180px 1fr;
-  height: 92%;
 }
 
 .summary-card-header { 
@@ -906,8 +899,6 @@ html {
   height: 40px;
   width: 40px;
 }
-
-
 
 .vendor-link, .vendor-link-laptop {
   grid-row: 2;
@@ -957,7 +948,6 @@ html {
   align-items: center;
   width: 100%;
   height: 100%;
-  min-height: 200px;
 }
 
 .image-container {
@@ -989,18 +979,9 @@ html {
   transform: translateY(25px);
 }
 
-#title-container-desktop {
-  width: 100%;
-  height: 50%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  transform: translateY(50px);
-  font-size: 26px;
-}
-
-#title-container-laptop h2, #title-container-desktop h2 {
+#title-container h2 {
   color: white;
+  font-size: 4vh;
 }
 
 .type-vendor-container {
@@ -1010,19 +991,12 @@ html {
   align-items: flex-start;
 }
 
-.equipment-summary-laptop h4 {
+.equipment-summary h4 {
   border-top: 2px solid var(--light-theme);
   padding-top: 10px;
   color: var(--grey-font);
   height: 50px;
-}
-
-.equipment-summary-desktop h4 {
-  border-top: 2px solid var(--light-theme);
-  padding-top: 10px;
-  color: var(--grey-font);
-  height: 80px;
-  font-size: 20px;
+  font-size: 2vh;
 }
 
 .device-edit-button, .staff-edit-btn-desktop, .staff-edit-btn-laptop {
@@ -1105,58 +1079,45 @@ html {
 }
 
 /* Format the technical links equipment area */
-.technical-area-laptop, .technical-area-desktop {
+.technical-area {
   grid-row: 4;
+  height: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 5%;
-  margin: 10px 3% 10px 3%;
+  grid-template-rows: 1fr 1fr;
 }
 
-.technical-area-laptop {
-  transform: translateY(-20px);
+.technical-link-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.technical-area-desktop {
-  grid-row: 4;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 5%;
-  margin: 100px 3% 10px 8%;
-  padding-bottom: 20px;
+.technical-link-container:first-of-type, .technical-link-container:nth-of-type(2), .technical-link-container:nth-of-type(3) {
+  transform: translateY(10%)
 }
 
-.technical-area-laptop .technical-link {
+.technical-link-container:nth-of-type(4), .technical-link-container:nth-of-type(5), .technical-link-container:nth-of-type(6) {
+  transform: translateY(-10%)
+}
+
+.technical-link {
   font-size: 11px;
-  width: 93px;
-  height: 93px;
+  aspect-ratio: 1 / 1;
+  height: 65%;
+  max-height: 175px;
   border-radius: 6px;
-  transform: translateX(25px);
   text-decoration: none;
   color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  font-size: clamp(12px, 1.75vh, 20px);
   font-weight: bold;
-}
-
-.technical-area-desktop .technical-link {
-  width: 140px;
-  height: 140px;
-  border-radius: 6px;
-  transform: translateX(25px);
-  text-decoration: none;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 20px;
 }
 
 .technical-link:last-child {
@@ -1172,35 +1133,33 @@ html {
 .user-manual {
   background-color: #a5f3f0;
   background: linear-gradient(#46f8f2, #1ef7f0);
-  color: #095250;
+  color: var(--dark-theme);
   border: 1px solid #095250
 }
 
 .config {
   background: linear-gradient(#fdd783, #f9d27e);
-  color: #815a07;
+  color: var(--dark-theme);
   border:1px solid #815a07;
 }
 
 .software {
   background: linear-gradient(#e274fe, #de65fd);
-  color: #320E3B;
+  color: var(--dark-theme);
   border: 1px solid #320E3B
 }
 
 .documents {
   background: linear-gradient(#fea278, #fd9a6d);
-  color: #7f3f21;
+  color: var(--dark-theme);
   border: 1px solid #7f3f21;
 }
 
 .passwords {
-  color: #043254;
+  color: var(--dark-theme);
   background: linear-gradient(#74c1fc, #6abdfd);
   border: 1px solid #043254;
 }
-
-
 
 /* CSS for staff display area */
 .staff-info {

@@ -13,11 +13,8 @@ function getClassName(page, mediaQueries) {
     if (page === 'staff') {
         return 'display-area staff-display'
     }
-    else if (page === 'technical-info' && mediaQueries.laptop === true) {
-        return 'display-area equipment-display-laptop'
-    }
-    else if (page === 'technical-info' && mediaQueries.desktop === true) {
-        return 'display-area equipment-display-desktop'
+    else if (page === 'technical-info') {
+        return 'display-area equipment-display'
     }
     else if (page === 'contacts' && mediaQueries.laptop === true) {
         return 'display-area-laptop staff-display-laptop'

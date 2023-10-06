@@ -87,7 +87,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "contacts" ?
-                <div className="contacts-page-container">
+                <>
                     <div className="contacts-summary-container">                                                                                                                                                                                    
                         <ContactsSummary page={page} identifier="staff" selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
@@ -95,7 +95,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                         <ContactsSummary page={page} identifier="vendor" selectedVendor={vendor} setVendor={setVendor} pageData={data.vendorContactsData} onVendorChange={onVendorChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
-                </div> :
+                </> :
                 page === "utilities" ?
                 <>
                     <Utilities utilityPage={utilityPage} onClick={selectUtility} setUtilityPage={setUtilityPage}>

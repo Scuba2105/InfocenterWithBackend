@@ -1,6 +1,5 @@
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PasswordsIcon} from "../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
-import useMediaQueries from "media-queries-in-react";
 import { serverConfig } from "../server";
 
 function generateLinks(deviceData, type) {
@@ -22,11 +21,6 @@ function generateLinks(deviceData, type) {
 
 export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdateFormVisible, closeUpdate, onLinkClick, queryClient, showMessage, closeDialog}) {
 
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-    
     return (
         <>
             <div className="summary-area">
@@ -40,39 +34,51 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                     <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                 </div>
             </div>
-            <div className={mediaQueries.laptop ? "technical-area-laptop" : "technical-area-desktop"}>
-                <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
-                    <ServiceIcon color="#98053b" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                        <span>Service</span>
-                        <span>Manual</span> 
-                    </div>
-                </a>
-                <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
-                    <UserManualIcon color="#037470" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                        <span>User</span>
-                        <span>Manual</span> 
-                    </div>                    
-                </a>
-                <div className="technical-link config" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
-                    <ConfigIcon color="#f4af1a" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                    Configuration
+            <div className="technical-area">
+                <div className="technical-link-container">
+                    <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
+                        <ServiceIcon color="#98053b" size="5vh"/>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <span>Service</span>
+                            <span>Manual</span> 
+                        </div>
+                    </a>
                 </div>
-                <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                    <SoftwareIcon color="#8504a5" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                    Software
+                <div className="technical-link-container">
+                    <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
+                        <UserManualIcon color="#037470" size="5vh"/>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <span>User</span>
+                            <span>Manual</span> 
+                        </div>                    
+                    </a>   
                 </div>
-                <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                    <DocumentsIcon color="#bf5a2b" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                        <span>Other</span>
-                        <span>Documents</span> 
-                    </div>
+                <div className="technical-link-container">
+                    <div className="technical-link config" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
+                        <ConfigIcon color="#f4af1a" size="5vh"/>
+                        Configuration
+                    </div>  
                 </div>
-                <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                    <PasswordsIcon color="#33658A" size={mediaQueries.desktop ? "50px" : "30px"}/>
-                    Passwords
+                <div className="technical-link-container">
+                    <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
+                        <SoftwareIcon color="#8504a5" size="5vh"/>
+                        Software
+                    </div> 
+                </div>
+                <div className="technical-link-container">
+                    <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
+                        <DocumentsIcon color="#bf5a2b" size="5vh"/>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                            <span>Other</span>
+                            <span>Documents</span> 
+                        </div>
+                    </div> 
+                </div>
+                <div className="technical-link-container">
+                    <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
+                        <PasswordsIcon color="#33658A" size="5vh"/>
+                        Passwords
+                    </div>   
                 </div>
             </div>
             {updateFormVisible && <DeviceUpdateForm selectedData={selectedData} page={page} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
