@@ -78,6 +78,10 @@ function mouseUp(buttonClicked, startPosition) {
     startPosition.current = ({dx: 0, dy: 0});
 }
 
+function mouseOut(buttonClicked, startPosition) {
+    buttonClicked.current = false;
+}
+
 function getCursorPosition(e, buttonClicked, startPosition, setIncrementChange) {
     if (buttonClicked.current) {
         const dx = e.clientX - startPosition.current.x; 

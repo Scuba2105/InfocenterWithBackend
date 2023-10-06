@@ -720,7 +720,7 @@ html {
   padding-left: 50px;
 }
 
-.add-new-btn-laptop, .add-new-btn-desktop {
+.add-new-btn {
   background-color: var(--blue-button-color);
   border: 1px solid var(--med-light-theme);
   color: #212936;
@@ -2363,9 +2363,9 @@ html {
   font-weight: 700;
 }
 
-.contacts-main-display-laptop .contacts-select, .contacts-main-display-desktop .contacts-select {
-  width: 220px;
-  height: 28px;
+.contacts-select {
+  width: 120%;
+  height: 30px;
   text-align: center;
   background-color: var(--form-input-color);
   border: 1px solid var(--form-input-color);
@@ -2375,12 +2375,7 @@ html {
 }
 
 .vendor-select {
-  width: 270px;
-}
-
-.contacts-main-display-desktop .contacts-select {
-  width: 350px;
-  height: 40px;
+  width: 150%;
 }
 
 .department-title {

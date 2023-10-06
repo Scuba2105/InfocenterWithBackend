@@ -26,7 +26,7 @@ export function SearchInput({onQueryChange, openAddModal}) {
                 <input className="search-input" placeholder="Search..." onChange={onQueryChange}>
                 </input>   
             </div>
-            {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop" : "add-new-btn-desktop"} onClick={openAddModal}>+</button>} 
+            {currentUser.permissions === "admin" && <button className="add-new-btn" onClick={openAddModal}>+</button>} 
         </div>
     );
 }

@@ -94,9 +94,9 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
             <div className={currentUser.permissions === "admin" ? "contacts-heading-admin" : "contacts-heading"}>
                 {currentUser.permissions === "admin" && <div id="summary-header-aligner" style={{marginLeft: 15 + 'px'}}></div>}
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
-                {currentUser.permissions === "admin" && <button className={mediaQueries.laptop ? "add-new-btn-laptop contact-add-new-btn" : "add-new-btn-desktop contact-add-new-btn"} onClick={() => openAddContactModal(setAddContactVisible)}>+</button>}
+                {currentUser.permissions === "admin" && <button className="add-new-btn contact-add-new-btn" onClick={() => openAddContactModal(setAddContactVisible)}>+</button>}
             </div>   
-            <div className={mediaQueries.laptop ? "contacts-main-display contacts-main-display-laptop" : "contacts-main-display contacts-main-display-desktop"}>
+            <div className="contacts-main-display">
                 <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setVendor={setVendor} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
                 <div className="contacts-display">
                     {displayedContacts.map((contact) => {
