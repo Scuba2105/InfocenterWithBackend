@@ -69,7 +69,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
     }
     else {
         return (
-            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`}>
+            <div className={mediaQueries.laptop ? `modal-container-laptop modal-container` : mediaQueries.laptop ? `modal-container-desktop modal-container` : `modal-container-mid-screen modal-container`}>
                 <div className="modal-title-bar">
                     <div id="title-aligner"></div>     
                     <h2 className="model-title">{type !== "update" ? `${selectedData.model} ${formatTypeHeading(type)}` : `Update ${selectedData.model} Resources`}</h2> 
