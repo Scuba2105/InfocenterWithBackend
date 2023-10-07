@@ -4,7 +4,6 @@ import { useUser, useDevice } from "./StateStore";
 import { LinkModal } from "./LinkModal";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
-import useMediaQueries from "media-queries-in-react" 
 import { AddEditStaff } from "./AddEditStaff";
 import { EditIcon, VendorArrow } from "../svg";
 import { workshops } from "../data";
@@ -56,11 +55,6 @@ function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, 
 
 export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, queryClient, showMessage, closeDialog}) {
     
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-    
     const [modalVisible, setModalVisible] = useState(false);
     const [addUpdateFormVisible, setAddUpdateFormVisible] = useState(false);
     const [updateFormVisible, setUpdateFormVisible] = useState(false);
@@ -91,7 +85,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {page === "technical-info" && selectedData.vendor && <div className="vendor-link">
-                    <button className="vendor-button" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size={mediaQueries.laptop ? '15px' : '25px'} color="white"></VendorArrow></button> 
+                    <button className="vendor-button" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size="2.31vh" color="white"></VendorArrow></button> 
                 </div>}
                 {addUpdateFormVisible && page === 'staff' && 
                     <ModalSkeleton selectedData={selectedData} closeModal={() => closeAddUpdateForm(setAddUpdateFormVisible)} type="update" page={page}>
