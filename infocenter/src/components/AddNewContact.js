@@ -305,7 +305,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     </div>  
                     <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translate(-60px, 0px) rotate(180deg)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
-                <div className={"form-buttons-laptop"}>
+                <div className="form-buttons" style={inputPage === 1 ? {marginTop: 40 + 'px'} : {marginTop: 60 + 'px'}}>
                     <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)}>Save Changes</div>
                     <div className="update-button" onClick={() => uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>
@@ -344,7 +344,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     </div> 
                     <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translateX(-60px) rotate(180deg)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
                 </div>
-                <div className={"form-buttons-laptop"}>
+                <div className="form-buttons" style={{marginTop: 60 + 'px'}}>
                     <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewVendor, showMessage, closeDialog)}>Save Changes</div>
                     <div className="update-button" onClick={() => uploadNewContactData(newContactData, queryClient, showMessage, closeDialog, formType, closeAddContactModal)}>Upload Updates</div>
                 </div>

@@ -144,7 +144,7 @@ export function UpdateContact({currentContact, formType, page, pageData, queryCl
                 <Input inputType="text" identifier="add-new" labelText="Mobile Phone" type="update" defaultValue={currentContact.data.mobilePhone !== "" ? currentContact.data.mobilePhone : null} placeholdertext={currentContact.data.mobilePhone === "" ? "Enter Mobile Phone number" : null} />
                 {formType === "vendor" && <Input inputType="text" identifier="add-new" type="update" labelText={currentContact.data.vendor === "GE Healthcare" && currentContact.data.contact === "Technical Service" ? "Website" : "Email Address"} defaultValue={currentContact.data.email !== "" ? currentContact.data.email : null} placeholdertext={currentContact.data.email === "" ? "Enter Email Address" : null} />}
             </div>
-            <div className={"form-buttons-laptop"} style={formType === "staff" ? {transform: 'translateY(-10px)'} : currentContact.data.position !== "" ? {transform: 'translateY(-20px)'} : {transform: 'translateY(-40px)'}}>
+            <div className="form-buttons">
                 <div className="update-button" onClick={() => uploadUpdatedDetails(currentContact.id, currentContact.data, formType, formContainer, updatedContactData, page, pageData, queryClient, showMessage, closeDialog, closeUpdateContactModal)}>Upload Updates</div>
             </div>
         </div>

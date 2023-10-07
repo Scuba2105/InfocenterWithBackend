@@ -1303,7 +1303,7 @@ html {
   top: calc(0.1944 * 100vh - 90px);
   left: calc(0.5703 * 100vw - 355px);
   min-width: 500px;
-  max-height: 600px;
+  max-height: 550px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -1556,10 +1556,6 @@ html {
   transform: translateY(0px);
 }
 
-.add-new-upload-button {
-  transform: translateY(-20px);
-}
-
 .add-new-staff-upload-button {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -1761,26 +1757,15 @@ html {
   height: 400px;
 }
 
-.form-buttons-desktop {
+.form-buttons {
   margin: auto auto;
   grid-row: 3;
   width: 400px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  transform: translateY(20px);
-  margin-bottom: 50px;
-}
-
-.form-buttons-laptop {
-  margin: auto auto;
-  grid-row: 3;
-  width: 400px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  transform: translateY(-40px);
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .update-button {
@@ -1794,6 +1779,10 @@ html {
   color: var(--med-theme);
   border-radius: 5px;
   font-weight: 600;
+}
+
+.add-new-upload-button {
+  margin: 20px 0 20px 0;
 }
 
 .update-button:hover {
