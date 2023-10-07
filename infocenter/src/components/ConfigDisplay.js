@@ -1,4 +1,3 @@
-import useMediaQueries from "media-queries-in-react"
 import { serverConfig } from "../server";
 
 function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
@@ -45,11 +44,6 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
 
 export function ConfigDisplay({selectedData, hospitals, departmentName, hospitalsIndex, configIndex, setConfigIndex}) {
     
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-
     const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName);
 
     return (
@@ -61,8 +55,8 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
             </div>}
             <div className="config-display-container">
                 {configNumber > 1 && <img className="config-arrow config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>}
-                <div className={mediaQueries.laptop ? "config-display-laptop" : "config-display-desktop"}>
-                    <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className={mediaQueries.laptop ? "config-link config-link-laptop" : "config-link"}>
+                <div className="config-display">
+                    <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
                             <div className="options-info">
                                 <label>{/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? "Options:" : "Type:"} {parsedConfigData[3] === '-' && '-'}</label>
                                 {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}

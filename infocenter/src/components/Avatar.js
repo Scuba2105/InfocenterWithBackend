@@ -1,6 +1,5 @@
 import { useUser, useLoggedIn, useProfilePhotoUpdate } from "./StateStore";
 import { useState, useEffect, useRef } from "react";
-import useMediaQueries from "media-queries-in-react";
 import { ChangePassword } from "./ChangePassword";
 import { PadlockIcon, LogoutIcon, BlankProfile } from "../svg";
 import { serverConfig } from "../server";
@@ -59,17 +58,12 @@ export function Avatar({showMessage, closeDialog}) {
     // Get the logout function from the state store
     const logout = useLoggedIn((state) => state.logout);
 
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-
     return (
         <>
             <div ref={avatarMenu} className="avatar-container" onClick={(e) => toggleMenu(setMenuVisible, e)}>
                 {currentUser.imageType ? <img key={profilePhotoUpdates * 10} id="avatar-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${currentUser.staffId}.${currentUser.imageType}`} alt="avatar"></img> : <BlankProfile identifier="avatar-placeholder" size="25px" foregroundColor="#6B7F82" ></BlankProfile>}
                 <label>{currentUser.user}</label>
-                {menuVisible && <div className={mediaQueries.laptop ? "avatar-menu-laptop" : "avatar-menu avatar-menu-desktop"}>
+                {menuVisible && <div className="avatar-menu">
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>
                     <div className="avatar-option" onClick={() => showModal(setChangePasswordVisible, setMenuVisible)}>
                         <PadlockIcon color="white" size="25px"></PadlockIcon>

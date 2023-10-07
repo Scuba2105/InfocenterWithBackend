@@ -217,7 +217,7 @@ html {
   cursor: pointer;
 }
 
-.avatar-menu-laptop, .avatar-menu {
+.avatar-menu {
   position: absolute;
   right: 20px;
   top: 50px;
@@ -235,13 +235,7 @@ html {
   align-items: center;
 }
 
-.avatar-menu-desktop {
-  position: absolute;
-  right: 20px;
-  top: 50px;
-}
-
-.avatar-menu-laptop label, .avatar-menu-desktop label {
+.avatar-menu label {
   color: white;
 }
 
@@ -713,7 +707,6 @@ html {
   background-image: url(../../public/images/search.svg);
   background-repeat: no-repeat;
   background-position: 10px 3px;
-  margin-right: 20px;
   color: #69737a;
   background-color: transparent;
   border: none;
@@ -1306,7 +1299,7 @@ html {
 
 /* link modal formatting */
 .modal-container-laptop {
-  position: absolute;
+  position: fixed;
   min-width: 500px;
   max-height: 600px;
   z-index: 50;
@@ -1320,7 +1313,7 @@ html {
 
 .modal-container-desktop {
   position: absolute;
-  width: 700px;
+  width: 550px;
   min-height: 700px;
   max-height: 750px;
   z-index: 50;
@@ -2150,7 +2143,7 @@ html {
 }
 
 /* Formatting for the configuration modal */
-.config-display-laptop {
+.config-display {
   width: 200px;
   height: 200px;
   display: flex;
@@ -2158,17 +2151,7 @@ html {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-}
-
-.config-display-desktop {
-  width: 200px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  transform: translateY(15%);
-  margin-bottom: 50px;
+  transform: translateY(10%);
 }
 
 .indicator-container {
@@ -2231,7 +2214,7 @@ html {
   width: 100%;
   border: 1px solid #003153;
   border-radius: 20px;
-  background: url('https://JHHBME005:5000/images/configuration-background.jpg');
+  background: url('../../public/images/configuration-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -2241,11 +2224,6 @@ html {
   color: white;
   padding: 10px;
   font-size: 13px;
-}
-
-.config-link-laptop {
-  height: 200px;
-  width: 200px;
 }
 
 .config-link a {

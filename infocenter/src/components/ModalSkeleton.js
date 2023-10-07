@@ -1,6 +1,5 @@
 import { capitaliseFirstLetters } from "../utils/utils"; 
 import useMediaQueries from "media-queries-in-react"; 
-import { useRef, useState } from 'react';
 import { serverConfig } from "../server";
 
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
@@ -34,25 +33,6 @@ function getFormHeading(page, type, selectedData) {
     }
 }
 
-function updatedPosition(isLaptopScreen, incrementData) {
-    const laptopX = 375;
-    const laptopY = 30;
-    const desktopX = 625; 
-    const desktopY = 100;
-    
-    let newX, newY
-
-    if (isLaptopScreen) {
-        newX = laptopX + incrementData.dx;
-        newY = laptopY + incrementData.dy;
-    }
-    else {
-        newX = desktopX + incrementData.dx; 
-        newY = desktopY + incrementData.dy;
-    }
-    return ({newX: newX, newY: newY});
-}
-
 function formatTypeHeading(type) {
     let name;
     if (type === "config") {
@@ -68,34 +48,8 @@ function formatTypeHeading(type) {
     return capitaliseFirstLetters(name);
 }
 
-function mouseDown(e, buttonClicked, startPosition) {
-    buttonClicked.current = true;
-    startPosition.current = {x: e.clientX, y: e.clientY}
-} 
-
-function mouseUp(buttonClicked, startPosition) {
-    buttonClicked.current = false;
-    startPosition.current = ({dx: 0, dy: 0});
-}
-
-function mouseOut(buttonClicked, startPosition) {
-    buttonClicked.current = false;
-}
-
-function getCursorPosition(e, buttonClicked, startPosition, setIncrementChange) {
-    if (buttonClicked.current) {
-        const dx = e.clientX - startPosition.current.x; 
-        const dy = e.clientY - startPosition.current.y; 
-        setIncrementChange({dx: dx, dy: dy});
-    }
-}
-
 export function ModalSkeleton({children, selectedData, closeModal, type, page}) {
 
-    const buttonClicked = useRef(false);
-    const startPosition = useRef(null);
-    const [incrementChange, setIncrementChange] = useState({dx: 0, dy: 0});
-    
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1750px)",
         desktop: "(min-width: 1800px)"
@@ -103,11 +57,8 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
 
     if (formTypes.includes(type)) {
         return (
-            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={(type === "software") && mediaQueries.laptop ? 
-            { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
-            type === "software" && mediaQueries.desktop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : 
-            { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={(e) => getCursorPosition(e, buttonClicked, startPosition, setIncrementChange)}>
-                <div className="modal-title-bar" onMouseDown={(e) => mouseDown(e, buttonClicked, startPosition)} onMouseUp={() => mouseUp(buttonClicked, startPosition)}>
+            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`}>
+                <div className="modal-title-bar">
                     <div id="title-aligner"></div>     
                     <h2 className="model-title">{getFormHeading(page, type, selectedData)}</h2> 
                     <img className="cross" src={`https://${serverConfig.host}:${serverConfig.port}/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
@@ -118,11 +69,8 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page}) 
     }
     else {
         return (
-            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`} style={type === "software" && mediaQueries.laptop ? 
-            { minHeight: 300 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : type !== "software" && mediaQueries.laptop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} :
-            type === "software" && mediaQueries.desktop ? { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'} : 
-            { minHeight: 500 + 'px', left: updatedPosition(mediaQueries.laptop, incrementChange).newX +'px', top: updatedPosition(mediaQueries.laptop, incrementChange).newY + 'px'}} onMouseMove={(e) => getCursorPosition(e, buttonClicked, startPosition, setIncrementChange)}>
-                <div className="modal-title-bar" onMouseDown={(e) => mouseDown(e, buttonClicked, startPosition)} onMouseUp={() => mouseUp(buttonClicked, startPosition)}>
+            <div className={mediaQueries.laptop ? `modal-container-laptop` : `modal-container-desktop`}>
+                <div className="modal-title-bar">
                     <div id="title-aligner"></div>     
                     <h2 className="model-title">{type !== "update" ? `${selectedData.model} ${formatTypeHeading(type)}` : `Update ${selectedData.model} Resources`}</h2> 
                     <img className="cross" src={`https://${serverConfig.host}:${serverConfig.port}/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
