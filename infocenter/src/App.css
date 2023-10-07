@@ -893,7 +893,7 @@ html {
   width: 40px;
 }
 
-.vendor-link, .vendor-link-laptop {
+.vendor-link {
   grid-row: 2;
   width: 95%;
   display: flex;
@@ -909,25 +909,18 @@ html {
   cursor: pointer;
 }
 
-.vendor-link > h5 {
-  margin-right: 10px;
-}
-
 .vendor-button {
   background-color: transparent;
+  border: 1px solid white;
   color: white;
   border: none;
-  width: 190px;
+  width: 11.5vw;
+  min-width: 130px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 500;
-}
-
-.vendor-link-laptop .vendor-button {
-  font-size: 12px;
-  width: 160px;
-  border: none;
+  font-size: 1.6vh;
 }
 
 .vendor-button:hover {
@@ -992,7 +985,7 @@ html {
   font-size: 2vh;
 }
 
-.device-edit-button, .staff-edit-btn-desktop, .staff-edit-btn-laptop {
+.device-edit-button, .staff-edit-btn {
   width: 40px;
   height: 40px;
   display: flex;
@@ -1005,7 +998,7 @@ html {
   transform: translateX(-15px);
 }
 
-.staff-edit-btn-laptop:hover, .staff-edit-btn-desktop:hover, .device-edit-button:hover {
+.staff-edit-btn:hover, .device-edit-button:hover {
   cursor: pointer;
 }
 

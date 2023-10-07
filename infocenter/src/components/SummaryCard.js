@@ -9,18 +9,12 @@ import { AddEditStaff } from "./AddEditStaff";
 import { EditIcon, VendorArrow } from "../svg";
 import { workshops } from "../data";
 
-function getClassName(page, mediaQueries) {
+function getClassName(page) {
     if (page === 'staff') {
         return 'display-area staff-display'
     }
     else if (page === 'technical-info') {
         return 'display-area equipment-display'
-    }
-    else if (page === 'contacts' && mediaQueries.laptop === true) {
-        return 'display-area-laptop staff-display-laptop'
-    }
-    else {
-        return 'display-area-desktop staff-display-desktop'
     }
 }
 
@@ -87,16 +81,16 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
     
     return (
         <div className="display-area-container">
-            <div className={getClassName(page, mediaQueries)}>
+            <div className={getClassName(page)}>
                 <div className={(workshops.includes(selectedData.name) || !staffEditPermissions) ? "summary-card-header-center" : "summary-card-header"}>
                     {!workshops.includes(selectedData.name) && staffEditPermissions && <div id="summary-header-aligner"></div>}
                     <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
-                    {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <div className={mediaQueries.laptop ? "staff-edit-btn-laptop" : "staff-edit-btn-desktop"} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><EditIcon color="#212936"></EditIcon></div>}
+                    {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <div className="staff-edit-btn" onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><EditIcon color="#212936"></EditIcon></div>}
                     {equipmentEditPermissions && page === "technical-info" && <div className="device-edit-button" onClick={() => showDeviceUpdate(setUpdateFormVisible)}><EditIcon color="#212936"></EditIcon></div>}
                 </div>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
-                {page === "technical-info" && selectedData.vendor && <div className={mediaQueries.laptop ? "vendor-link vendor-link-laptop" : "vendor-link vendor-link-desktop"}>
+                {page === "technical-info" && selectedData.vendor && <div className="vendor-link">
                     <button className="vendor-button" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size={mediaQueries.laptop ? '15px' : '25px'} color="white"></VendorArrow></button> 
                 </div>}
                 {addUpdateFormVisible && page === 'staff' && 
