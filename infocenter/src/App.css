@@ -1299,6 +1299,11 @@ html {
 
 /* link modal formatting */
 .modal-container {
+  position: absolute;
+  top: calc(0.1944 * 100vh - 90px);
+  left: calc(0.5703 * 100vw - 355px);
+  min-width: 500px;
+  max-height: 600px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -1306,28 +1311,6 @@ html {
   grid-template-columns: 1fr;
   grid-template-rows: 65px 1fr;
   overflow-y: auto;
-}
-
-.modal-container-laptop {
-  position: absolute;
-  top: 100px;
-  left: 350px;
-  min-width: 500px;
-  max-height: 600px;
-}
-
-.modal-container-mid-screen {
-  position: absolute;
-  width: 550px;
-  min-height: 700px;
-  max-height: 750px;
-}
-
-.modal-container-desktop {
-  position: absolute;
-  width: 550px;
-  min-height: 700px;
-  max-height: 750px;
 }
 
 .modal-title-bar {
