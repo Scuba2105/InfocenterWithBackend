@@ -797,7 +797,7 @@ html {
 }
 
 .search-table tbody td {
-  font-size: 1.75vh;
+  font-size: clamp(12px, 1.75vh, 15px);
   height: 4.5vh;
   border-top: 1px solid var(--dark-theme);
   padding-left: 15px;
