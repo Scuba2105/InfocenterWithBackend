@@ -1272,7 +1272,7 @@ html {
   top: calc(0.1944 * 100vh - 90px);
   left: calc(0.5703 * 100vw - 355px);
   min-width: 600px;
-  max-height: 700px;
+  max-height: 550px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
