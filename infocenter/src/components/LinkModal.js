@@ -92,12 +92,18 @@ export function LinkModal({selectedData, modalType}) {
                 <div className="software-summary">
                     <label className="software-device-label">Device Software Location:</label>
                     <label className="software-device-location">{softwareData["device-software"] || "N/A"}</label>
-                    <ClipboardCopy copyText={softwareData["device-software"] || "N/A"} />
+                    <div className="clipboard-copy-container">
+                        <ClipboardCopy copyText={softwareData["device-software"] || "N/A"} />
+                        <div className="clipboard-aligner"></div>
+                    </div>
                 </div>
                 <div className="software-summary">
                     <label className="software-device-label">Service Software Location:</label>
                     <label className="software-device-location">{softwareData["service-software"] || "N/A"}</label>
-                    <ClipboardCopy copyText={softwareData["service-software"] || "N/A"} />
+                    <div className="clipboard-copy-container">
+                        <ClipboardCopy copyText={softwareData["service-software"] || "N/A"} />
+                        <div className="clipboard-aligner"></div>
+                    </div>
                 </div>               
             </div>
         );

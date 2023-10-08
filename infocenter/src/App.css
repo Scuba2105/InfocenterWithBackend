@@ -1557,9 +1557,20 @@ html {
   align-items: center;
 }
 
+.clipboard-copy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clipboard-aligner {
+  height: 20px;
+  width: 20px;
+}
+
 .copy-image {
   position: relative;
-  left: calc(50% - 16px);
+  left: calc(225px);
   top: -23px;
   height: 20px;
   width: 20px;
@@ -1567,8 +1578,8 @@ html {
 
 .copied-text {
   position: relative;
-  left: calc(50% - 18px);
-  top: -21px;
+  left: calc(223px);
+  top: -22px;
   font-size: 9px;
   color: var(--form-font-color);
 }
