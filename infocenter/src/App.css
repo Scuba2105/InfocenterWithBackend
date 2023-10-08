@@ -994,23 +994,13 @@ html {
 }
 
 /* Upload form styles */
-.device-input-container-desktop {
+.device-input-container {
   margin: 25px 0 25px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; 
-  transform: translateY(100px);
-  color: var(--form-font-color)
-}
-
-.device-input-container-laptop {
-  margin: 25px 0 25px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(75px);
+  transform: translateY(30px);
   color: var(--form-font-color);
 }
 
@@ -1281,7 +1271,7 @@ html {
   position: absolute;
   top: calc(0.1944 * 100vh - 90px);
   left: calc(0.5703 * 100vw - 355px);
-  min-width: 500px;
+  min-width: 600px;
   max-height: 700px;
   z-index: 50;
   background-color: white;
@@ -1673,7 +1663,7 @@ html {
   cursor: pointer;
 }
 
-.display-section {
+.display {
   grid-row: 2;
   width: 100%;
   height: 500px;
@@ -1681,10 +1671,6 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
-
-.display-section-laptop {
-  height: 400px;
 }
 
 .form-buttons {
@@ -1787,23 +1773,17 @@ html {
   border: none;
 }
 
-#device-config-container-desktop {
+#device-config-container {
   display: grid;
   grid-template-columns: 250px 250px;
-  grid-template-rows: 50px 90% 1fr;
-  align-items: flex-start;
+  grid-template-rows: 50px 27vh 1fr;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   transform: translateY(-40px);
 }
 
-#device-config-container-laptop {
-  display: grid;
-  grid-template-columns: 250px 250px;
-  grid-template-rows: 50px 55% 1fr;
-  align-items: flex-start;
-  transform: translateY(-40px);
-}
-
-#device-config-container-laptop > h4, #device-config-container-desktop > h4 {
+#device-config-container > h4 {
   grid-column: 1 / 3;
   grid-row: 1;
   width: 100%;
@@ -1812,6 +1792,7 @@ html {
   justify-content: center;
   align-items: center;
   font-weight: 500;
+  margin-top: 60px;
 }
 
 .config-info {
@@ -1945,48 +1926,33 @@ html {
   margin-right: 5px;
 }
 
-.other-file-button-container-laptop {
+.other-file-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(15px);
+  transform: translate(-5px, 20px);
 }
 
-.other-file-button-container-desktop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translateY(35px);
-}
-
-.description-file-container-laptop {
+.description-file-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
 }
 
-.description-file-container-desktop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  transform: translateY(20px);
-}
-
-.label-input-container1-laptop, .label-input-container2-laptop {
+.label-input-container, .label-input-container2 {
   font-size: 12px;
 }
 
-.label-input-container1-laptop, .label-input-container1-desktop {
+.label-input-container {
   transform: translateX(-10px); 
 }
 
-.label-input-container2-laptop, .label-input-container2-desktop {
+.label-input-container2 {
   transform: translateX(10px);
 }
 
-.other-doc-text-input-laptop {
+.other-doc-text-input {
   border: 1px solid var(--form-input-color);
   font-size: 10px;
   height: 13px;
@@ -2002,23 +1968,7 @@ html {
   margin-bottom: 5px;
 }
 
-.other-doc-text-input-desktop {
-  border: 1px solid var(--form-input-color);
-  font-size: 12px;
-  height: 20px;
-  width: 180px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--form-font-color);
-  background-color: var(--form-input-color);
-  padding: 5px;
-  padding: 6px -5px 2px 0;
-  margin-top: 3px;
-  margin-bottom: 5px;
-}
-
-.other-doc-file-upload-laptop {
+.other-doc-file-upload {
   font-size: 10px;
   border: 1px solid var(--form-input-color);
   height: 15px;
@@ -2029,22 +1979,6 @@ html {
   background-color: var(--form-input-color);
   color: var(--form-font-color);
   padding: 4px 5px 5px 5px;
-  margin-top: 3px;
-  margin-bottom: 5px;
-}
-
-.other-doc-file-upload-desktop {
-  font-size: 12px;
-  border: 1px solid var(--form-input-color);
-  height: 20px;
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--form-font-color);
-  background-color: var(--form-input-color);
-  padding: 5px;
-  padding: 6px -5px 2px 0;
   margin-top: 3px;
   margin-bottom: 5px;
 }

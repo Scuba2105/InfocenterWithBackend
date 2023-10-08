@@ -27,7 +27,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
 
     if (selectedOption === 'Service Manual') {
         return (
-            <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}> 
+            <div key={selectedOption} className="device-input-container"> 
                 <label className="available-label">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update Service Manual:" uniqueId="file1" name="service-upload"/>
             </div>
@@ -35,7 +35,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else if (selectedOption === 'User Manual') {
         return (
-            <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
+            <div key={selectedOption} className="device-input-container">
                 <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update User Manual:" uniqueId="file2" name="user-upload"/>
             </div>
@@ -43,7 +43,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else if (selectedOption === 'Software') {
         return (
-            <div key={selectedOption} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
+            <div key={selectedOption} className="device-input-container">
                 <label className="update-device-file-label">Software Type:</label>
                 <div className="software-type">
                     <input type="radio" id="device-software" name="software-type" value="device-software"></input>
@@ -57,8 +57,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else if (selectedOption === 'Configs') {
         return (
-            <div key={selectedOption} id={mediaQueries.laptop ? "device-config-container-laptop" : "device-config-container-desktop"} className={mediaQueries.laptop ? "device-input-container-laptop" : "device-input-container-desktop"}>
-                <h4 id="add-config-heading">Add New Configuration</h4>
+            <div key={selectedOption} id="device-config-container" className="device-input-container">
+                <h4>Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput type="form-select-input" label='Hospital' optionData={hospitalLocations} />
                     {/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/> : 
@@ -82,21 +82,21 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
             <div key={selectedOption} className="other-input-container">
                 {fileNumber.map((number) => {
                     return (
-                    <div key={`container-${number}`} className={mediaQueries.laptop ? "description-file-container-laptop" : "description-file-container-desktop"}>
-                        <div className={mediaQueries.laptop ? "label-input-container1-laptop" : "label-input-container1-desktop"}>
+                    <div key={`container-${number}`} className="description-file-container">
+                        <div className="label-input-container">
                             <label className="other-doc-label" key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
-                            <input key={`text${number}`} type="text" className={mediaQueries.laptop ? "other-doc-text-input-laptop text-input" : "other-doc-text-input-desktop text-input"}  placeholder="Enter a short title/description" name={`description-${number}`}></input>
+                            <input key={`text${number}`} type="text" className="other-doc-text-input" placeholder="Enter a short title/description" name={`description-${number}`}></input>
                         </div>
-                        <div className={mediaQueries.laptop ? "label-input-container2-laptop" : "label-input-container2-desktop"}>
+                        <div className="label-input-container2">
                             <label className="other-doc-label" key={`label-input-${number}`}>{`File ${number}:`} </label>
-                            <input key={`file${number}`} type="file" className={mediaQueries.laptop ? "other-doc-file-upload-laptop" : "other-doc-file-upload-desktop"} name="user-upload"></input>
+                            <input key={`file${number}`} type="file" className="other-doc-file-upload" name="user-upload"></input>
                         </div>
                     </div>
                     );
                 })
                 
                 }
-                <div className={mediaQueries.laptop ? "other-file-button-container-laptop" : "other-file-button-container-desktop"}>
+                <div className="other-file-button-container">
                     {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><img className="file-add-remove-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/add-square.svg`} alt="add-square"></img>Add File</div>}
                     {fileNumber.length !== 1 && <div id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><img className="file-add-remove-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/trash-can.svg`} alt="trash"></img>Delete File</div>}
                 </div>

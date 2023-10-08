@@ -5,7 +5,6 @@ import { ModalSkeleton } from './ModalSkeleton';
 import { serverConfig } from '../server';
 import useMediaQueries from 'media-queries-in-react';
 
-const acronyms = ['ICU', 'ED', 'AGSU', 'HDU', 'CCU', 'OT', 'PACU', 'SCU'];
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
 
@@ -22,16 +21,16 @@ function capitaliseFirstLetters(input) {
 
 function buttonOffset(selectedOption) {
     if (selectedOption === "User Manual" || selectedOption === "Service Manual") {
-        return "120px"
+        return "90px"
     }
     else if (selectedOption === "Configs") {
-        return "55px"
+        return "-30px"
     }
     else if (selectedOption === "Software") {
         return "90px"
     }
     else if (selectedOption === "Other Documents") {
-        return "70px"
+        return "90px"
     }
 }
 
@@ -329,7 +328,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                         Other Documents
                     </div>                    
                 </div>
-                <div className={mediaQueries.laptop ? 'display-section display-section-laptop' : "display-section"}>
+                <div className="display-section">
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <div className="update-button save-button" onClick={(e) => saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Save Changes</div>
