@@ -769,27 +769,21 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .search-table {
   border-spacing: "0px";
   overflow: hidden;
+  width: 100%;
 }
 
-.search-table-laptop > thead td {
-  font-size: 16px;
-  height: 24px;
-  width: 200px;
+.header-row {
+  height: 4.5vh;
+  font-size: 2.3vh;
+  width: 100%;
   background-color: transparent;
   font-weight: bold;
-}
-
-.search-table-desktop > thead td {
-  background-color: transparent;
-  font-size: 16px;
-  font-weight: bold;
-  height: 40px;
-  width: 300px;
 }
 
 .header {
@@ -802,27 +796,19 @@ html {
   border-right: none;
 }
 
-.search-table-laptop tbody td {
-  height: 30px;
-  font-size: 12px;
+.search-table tbody td {
+  font-size: 2vh;
+  height: 4.5vh;
   border-top: 1px solid var(--dark-theme);
   padding-left: 15px;
   color: white;
 }
 
-.search-table-desktop tbody td {
-  height: 35px;
-  font-size: 14px;
-  border-top: 1px solid var(--dark-theme);
-  padding-left: 15px;
-  color: white;
-}
-
-.search-table-laptop tbody tr:last-child, .search-table-desktop tbody tr:last-child {
+.search-table tbody tr:last-child {
   border-bottom: 1px solid rgb(156, 155, 155);
 }
 
-.search-table-laptop tbody tr:hover td, .search-table-desktop tbody tr:hover td {
+.search-table tbody tr:hover td {
   background-color: var(--row-hover);
   color: white;
   cursor: pointer;
@@ -1233,7 +1219,7 @@ html {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 2vh;
   margin-bottom: 25px;
 }
 
@@ -1279,8 +1265,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 30px;
+  height: 4.17vh;
+  width: 4.17vh;
   border-radius: 50%;
   background-color: yellow;
   transform: translate(30px, -7px);

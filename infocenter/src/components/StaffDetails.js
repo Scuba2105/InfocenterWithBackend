@@ -1,4 +1,3 @@
-import useMediaQueries from "media-queries-in-react" ;
 import { useProfilePhotoUpdate } from "./StateStore";
 import { workshops } from "../data";
 import { serverConfig } from "../server";
@@ -13,21 +12,6 @@ border: '1px solid rgb(2, 57, 87)', color: 'rgb(2, 57, 87)'}, Mechanical: {backg
 border: '1px solid rgb(73, 16, 92)', color: 'rgb(73, 16, 92)'}, default: {background: 'radial-gradient(rgb(250, 193, 112), rgb(250, 169, 55))', 
 border: '1px solid rgb(163, 98, 3)', color: 'rgb(163, 98, 3)'}} 
 
-function emailFontSize(name, laptop) {
-    if (name === "Azmi Refal" && laptop) {
-        return {fontSize: "9px", border: '1px solid black'}
-    }
-    if (name !== "Azmi Refal" && laptop) {
-        return {fontSize: "12px", border: '1px solid black'}
-    }
-    if (name === "Azmi Refal" && !laptop) {
-        return {fontSize: "12px", border: '1px solid black'}
-    }
-    if (name !== "Azmi Refal" && !laptop) {
-        return {fontSize: "16px", border: '1px solid black'}
-    }
-} 
-
 function getTextColor(team, teamColors) {
     const colorString = teamColors[team].background.split(' rgb')[1];
     const rgb = colorString.substring(0, colorString.length - 1)
@@ -37,12 +21,6 @@ function getTextColor(team, teamColors) {
 export function StaffDetails({selectedData, user}) {
     
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
-
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1250px)",
-        midScreen: "((max-width: 1700px))",
-        desktop: "(min-width: 1800px)"
-    });
 
     const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
     
@@ -57,7 +35,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link" style={emailFontSize(selectedData.name, mediaQueries.laptop)}><EmailIcon size="20px" color="#212936"></EmailIcon></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link"><EmailIcon size="2.78vh" color="#212936"></EmailIcon></a>}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

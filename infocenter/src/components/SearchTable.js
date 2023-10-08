@@ -1,18 +1,12 @@
 import { NextIcon, SkipIcon } from "../svg";
-import useMediaQueries from "media-queries-in-react";
 
 export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, onRowClick, onTableArrowClick}) {
 
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-
     return (
         <div className="search-table-container">
-            <table className={mediaQueries.laptop ? "search-table-laptop" : "search-table-desktop"} cellSpacing="0px">
+            <table className="search-table" cellSpacing="0px">
                 <thead>
-                    <tr key="header-row">
+                    <tr key="header-row" className="header-row">
                         <td className="header" >{pageSelected === "staff" ? "Staff ID" : "Model"}</td>
                         <td className="header">{pageSelected === "staff" ? "Name" : "Manufacturer"}</td>
                         <td className="header">{pageSelected === "staff" ? "Office Phone No." : "Type"}</td>
