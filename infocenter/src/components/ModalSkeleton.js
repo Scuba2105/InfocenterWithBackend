@@ -1,5 +1,4 @@
 import { capitaliseFirstLetters } from "../utils/utils"; 
-import useMediaQueries from "media-queries-in-react"; 
 import { serverConfig } from "../server";
 
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
@@ -49,11 +48,6 @@ function formatTypeHeading(type) {
 }
 
 export function ModalSkeleton({children, selectedData, closeModal, type, page}) {
-
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
 
     if (formTypes.includes(type)) {
         return (

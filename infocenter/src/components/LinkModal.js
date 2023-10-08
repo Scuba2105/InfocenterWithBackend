@@ -3,7 +3,6 @@ import { SelectInput } from "./SelectInput";
 import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "./CopyToClipboard";
 import { Documents } from "./Documents";
-import useMediaQueries from "media-queries-in-react";
 
 function passwordEntryClassName(num) {
     if (num === 0) {
@@ -61,11 +60,6 @@ function formatDepartmentString(word) {
 
 export function LinkModal({selectedData, modalType}) {
 
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-    
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);
@@ -98,12 +92,12 @@ export function LinkModal({selectedData, modalType}) {
                 <div className="software-summary">
                     <label className="software-device-label">Device Software Location:</label>
                     <label className="software-device-location">{softwareData["device-software"] || "N/A"}</label>
-                    <ClipboardCopy copyText={softwareData["device-software"] || "N/A"} identifier={mediaQueries.laptop ? "1-laptop" : "1-desktop"} />
+                    <ClipboardCopy copyText={softwareData["device-software"] || "N/A"} />
                 </div>
                 <div className="software-summary">
                     <label className="software-device-label">Service Software Location:</label>
                     <label className="software-device-location">{softwareData["service-software"] || "N/A"}</label>
-                    <ClipboardCopy copyText={softwareData["service-software"] || "N/A"} identifier={mediaQueries.laptop ? "2-laptop" : "2-desktop"} />
+                    <ClipboardCopy copyText={softwareData["service-software"] || "N/A"} />
                 </div>               
             </div>
         );

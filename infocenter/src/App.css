@@ -1282,7 +1282,7 @@ html {
   top: calc(0.1944 * 100vh - 90px);
   left: calc(0.5703 * 100vw - 355px);
   min-width: 500px;
-  max-height: 550px;
+  max-height: 700px;
   z-index: 50;
   background-color: white;
   border: 1px solid black;
@@ -1566,68 +1566,19 @@ html {
   align-items: center;
 }
 
-.copy-image1-laptop {
-  position: absolute;
-  color: var(--form-font-color);
-  left: 455px;
-  top: 108px;
+.copy-image {
+  position: relative;
+  left: calc(50% - 16px);
+  top: -23px;
   height: 20px;
   width: 20px;
 }
 
-.copy-image1-desktop {
-  position: absolute;
-  left: 555px;
-  top: 158px;
-  height: 20px;
-  width: 20px;
-}
-
-.copy-image2-laptop {
-  position: absolute;
-  left: 455px;
-  top: 226px;
-  height: 20px;
-  width: 20px;
-}
-
-.copy-image2-desktop {
-  position: absolute;
-  left: 555px;
-  top: 375px;
-  height: 20px;
-  width: 20px;
-}
-
-.copied-text1-laptop {
-  position: absolute;
-  left: 450px;
-  top: 112px;
+.copied-text {
+  position: relative;
+  left: calc(50% - 18px);
+  top: -21px;
   font-size: 9px;
-  color: var(--form-font-color);
-}
-
-.copied-text1-desktop {
-  position: absolute;
-  left: 543px;
-  top: 159px;
-  font-size: 11px;
-  color: var(--form-font-color);
-}
-
-.copied-text2-laptop {
-  position: absolute;
-  left: 450px;
-  top: 228px;
-  font-size: 9px;
-  color: var(--form-font-color);
-}
-
-.copied-text2-desktop {
-  position: absolute;
-  left: 543px;
-  top: 376px;
-  font-size: 11px;
   color: var(--form-font-color);
 }
 
@@ -1716,7 +1667,6 @@ html {
   background-color: #ff69b4;
   font-weight:500;
 }
-
 
 .update-options > label:hover {
   cursor: pointer;

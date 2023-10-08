@@ -20,6 +20,21 @@ function capitaliseFirstLetters(input) {
     return formattedWords.join('-')
 }
 
+function buttonOffset(selectedOption) {
+    if (selectedOption === "User Manual" || selectedOption === "Service Manual") {
+        return "120px"
+    }
+    else if (selectedOption === "Configs") {
+        return "-35px"
+    }
+    else if (selectedOption === "Software") {
+        return "90px"
+    }
+    else if (selectedOption === "Other Documents") {
+        return "70px"
+    }
+}
+
 function formatText(text, fieldName) {
     if (fieldName === "field-name") {
         return text.toLocaleLowerCase().replace(/\s/ig, '-');
@@ -316,7 +331,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                 </div>
                 <div className={mediaQueries.laptop ? 'display-section display-section-laptop' : "display-section"}>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} />
-                    <div className={mediaQueries.laptop ? "form-buttons-laptop" : "form-buttons-desktop"}>
+                    <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <div className="update-button save-button" onClick={(e) => saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Save Changes</div>
                         <div className="update-button" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Upload Updates</div>
                     </div>                    
