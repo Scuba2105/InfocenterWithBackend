@@ -3,7 +3,6 @@ import { Input } from "./Input";
 import { capitaliseFirstLetters } from "../utils/utils";
 import { Cross, Tick } from "../svg";
 import { serverConfig } from "../server";
-import useMediaQueries from "media-queries-in-react";
 
 const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'MATER HOSPITAL','BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
 'CESSNOCK HOSPITAL', 'TAREE HOSPITAL', 'DUNGOG HOSPITAL', 'SINGLETON HOSPITAL', 'DENMAN MPS','GLOUCESTOR HOSPITAL', 'SCONE HOSPITAL', 'MUSWELBROOK HOSPITAL', 
@@ -19,11 +18,6 @@ const hospitalLocations = hospitals.map((hospital) => {
 }).sort();
 
 export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount}) {
-
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
 
     if (selectedOption === 'Service Manual') {
         return (

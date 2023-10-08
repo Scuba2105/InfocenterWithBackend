@@ -3,7 +3,6 @@ import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
 import { ModalSkeleton } from './ModalSkeleton';
 import { serverConfig } from '../server';
-import useMediaQueries from 'media-queries-in-react';
 
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
@@ -111,7 +110,7 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 } 
 
 // Save the form data ready for upload
-function saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
+function saveUpdateData(e, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
     // Add the files from the service manual and user manual forms to the formData ref
     if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
         const selectedFile = e.target.parentNode.parentNode.querySelector('.file-input');
@@ -232,8 +231,8 @@ function saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedDat
     }
     else if (selectedOption === "Other Documents") {
 
-        const descriptions = e.target.parentNode.parentNode.querySelectorAll(`.other-doc-text-input-${mediaQueries.laptop ? 'laptop' : 'desktop'}`);
-        const fileInputs = e.target.parentNode.parentNode.querySelectorAll(`.other-doc-file-upload-${mediaQueries.laptop ? 'laptop' : 'desktop'}`);
+        const descriptions = e.target.parentNode.parentNode.querySelectorAll(".other-doc-text-input");
+        const fileInputs = e.target.parentNode.parentNode.querySelectorAll(".other-doc-file-upload");
         
         descriptions.forEach((description, index) => {
             if (description.value === "") {
@@ -289,11 +288,6 @@ function updateFileCount(e, fileNumber, setFileNumber, showMessage) {
 
 export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
-
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
                     
@@ -331,7 +325,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                 <div className="display-section">
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
-                        <div className="update-button save-button" onClick={(e) => saveUpdateData(e, selectedOption, mediaQueries, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Save Changes</div>
+                        <div className="update-button save-button" onClick={(e) => saveUpdateData(e, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Save Changes</div>
                         <div className="update-button" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Upload Updates</div>
                     </div>                    
                 </div>
