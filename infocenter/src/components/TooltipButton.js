@@ -13,7 +13,7 @@ export function TooltipButton({content, boolean, toggleFunction}) {
         <div className="tooltip-button">
             <div className="tooltip" style={hovered ? {opacity: 1} : {opacity: 0}}>{content}</div>
             <button onMouseOut={() => toggleHovered(setHovered)} onMouseOver={() => toggleHovered(setHovered)} onClick={toggleFunction} style={boolean ? {backgroundColor: '#ff69b4'} : {backgroundColor: 'rgb(3, 252, 156)'}}>
-                <img className="add-new-edit-button" src={boolean ? `https://${serverConfig.host}:${serverConfig.port}/images/undo.svg` : `https://localhost:5000/images/edit.svg`} alt="edit"></img>
+                <img className="add-new-edit-button" src={boolean ? `https://${serverConfig.host}:${serverConfig.port}/images/undo.svg` : `https://${serverConfig.host}:${serverConfig.port}/images/edit.svg`} alt="edit"></img>
             </button>
         </div>
     );

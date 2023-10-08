@@ -25,7 +25,7 @@ function buttonOffset(selectedOption) {
         return "120px"
     }
     else if (selectedOption === "Configs") {
-        return "-35px"
+        return "55px"
     }
     else if (selectedOption === "Software") {
         return "90px"
