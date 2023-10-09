@@ -88,7 +88,7 @@ export function LinkModal({selectedData, modalType}) {
         const softwareData = selectedData.software;
         
         return (
-            <div className="modal-display" style={{height: 250 + 'px'}}>
+            <div className="modal-display" style={{justifyContent: 'center', maxHeight: 250 + 'px'}}>
                 <div className="software-summary">
                     <label className="software-device-label">Device Software Location:</label>
                     <label className="software-device-location">{softwareData["device-software"] || "N/A"}</label>

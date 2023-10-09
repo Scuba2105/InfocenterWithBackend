@@ -1284,7 +1284,6 @@ html {
   top: calc(0.1944 * 100vh - 90px);
   left: calc(0.5703 * 100vw - 355px);
   min-width: 600px;
-  min-height: 550px;
   max-height: 550px;
   z-index: 50;
   background-color: white;
@@ -1331,6 +1330,7 @@ html {
   justify-content: space-around;
   align-items: center;
   background-color: var(--form-background-color);
+  min-height: 400px;
 }
 
 .contact-modal-display {
@@ -1384,6 +1384,7 @@ html {
   justify-content: flex-start;
   align-items: center;
   background-color: var(--form-background-color);
+  min-height: 400px;
   overflow-y: auto;
 }
 
@@ -1549,7 +1550,15 @@ html {
   justify-content: center;
   align-items: center;
   margin-top: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.software-summary:first-of-type {
+  margin-top: 75px;
+}
+
+.software-summary:nth-of-type(2) {
+  margin-bottom: 60px;
 }
 
 .software-device-label {
