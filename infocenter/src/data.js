@@ -11,11 +11,11 @@ export const menuOptions = [
         id: 'contacts',
         title: 'Contacts',
     },
-    /*{
+    {
         id: 'on-call',
         title: 'On-Call'
     }
-    {
+    /*{
         id: 'admin',
         title: 'Administration',
     },
