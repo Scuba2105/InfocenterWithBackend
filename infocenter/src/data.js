@@ -12,6 +12,10 @@ export const menuOptions = [
         title: 'Contacts',
     },
     /*{
+        id: 'on-call',
+        title: 'On-Call'
+    }
+    {
         id: 'admin',
         title: 'Administration',
     },
