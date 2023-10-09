@@ -792,6 +792,18 @@ html {
   text-align: center;
 }
 
+.header:first-of-type {
+  width: 26%
+}
+
+.header:nth-of-type(2) {
+  width: 36%
+}
+
+.header:nth-of-type(3) {
+  width: 38%
+}
+
 .header:last-of-type {
   border-right: none;
 }
