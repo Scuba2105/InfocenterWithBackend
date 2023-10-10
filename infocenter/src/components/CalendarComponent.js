@@ -2,6 +2,18 @@ import { useLayoutEffect } from "react";
 import Calendar from "color-calendar";
 import "color-calendar/dist/css/theme-glass.css";
 
+/* Import the on-call roster
+Kendo Wu - 09/10/2023
+Matthew Murrell - Please divert phone to 0419295532
+Durga Sompalle
+Mitchell Pyne
+Atif Siddiqui
+Mitchell Pacey
+Steven Bradbury
+Ray Aunei Mose
+Rodney Birt
+*/
+
 export function CalendarComponent() {
 
     useLayoutEffect(() => {
@@ -10,7 +22,7 @@ export function CalendarComponent() {
         theme: "glass",
         weekdayType: "long-upper",
         monthDisplayType: "long",
-        calendarSize: "small",
+        calendarSize: "large",
         layoutModifiers: ["month-left-align"],
         eventsData: [
             {
