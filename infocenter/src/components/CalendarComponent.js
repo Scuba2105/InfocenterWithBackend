@@ -1,6 +1,5 @@
-import { useLayoutEffect } from "react";
-import Calendar from "color-calendar";
-import "color-calendar/dist/css/theme-glass.css";
+import { useState } from 'react';
+import Calendar from 'react-calendar';
 
 /* Import the on-call roster
 Kendo Wu - 09/10/2023
@@ -14,40 +13,20 @@ Ray Aunei Mose
 Rodney Birt
 */
 
-export function CalendarComponent() {
+export function CalendarComponent({date, setDate}) {
+  const [date, setDate] = useState(new Date());
 
-    useLayoutEffect(() => {
-        new Calendar({
-        id: "#myCal",
-        theme: "glass",
-        weekdayType: "long-upper",
-        monthDisplayType: "long",
-        calendarSize: "large",
-        layoutModifiers: ["month-left-align"],
-        eventsData: [
-            {
-            id: 1,
-            name: "French class",
-            start: "2023-10-17T06:00:00",
-            end: "2023-10-18T20:30:00"
-            },
-            {
-            id: 2,
-            name: "Blockchain 101",
-            start: "2023-10-09T10:00:00",
-            end: "2023-10-20T11:30:00"
-            }
-        ],
-        dateChanged: (currentDate, events) => {
-            console.log("date change", currentDate, events);
-        },
-        monthChanged: (currentDate, events) => {
-            console.log("month change", currentDate, events);
-        }
-        });
-    })
-
-    return (
-        <div id="myCal"></div>
-    )
+  return (
+    <div className='on-call-page'>
+      <h1 className='text-center'>React Calendar</h1>
+      <div className='calendar-container'>
+        <Calendar onChange={setDate} value={date} />
+      </div>
+      <p className='text-center'>
+        <span className='bold'>Selected Date:</span>{' '}
+        {date.toDateString()}
+      </p>
+    </div>
+  );
 }
+
