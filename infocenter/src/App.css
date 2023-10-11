@@ -2902,6 +2902,20 @@ abbr[title] {
     text-decoration: none;
 }
 
+.react-calendar__tile {
+  color: var(--calendar-tile-font);
+  font-weight: normal;
+  font-size: 20px;
+  background: none;
+  border: 1px solid transparent;
+  margin: 5px auto 5px auto;
+  aspect-ratio: 1 / 1;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
     background: var(--calendar-tile-hover);
@@ -2913,7 +2927,8 @@ abbr[title] {
 .react-calendar__tile--now,
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
-    background: var(--calendar-tile-hover);
+    border: 2px solid var(--calendar-tile-active);
+    color: white;
     border-radius: 6px;
     font-weight: bold;
 }
@@ -2953,24 +2968,8 @@ abbr[title] {
     border-bottom-right-radius: 6px;
     background-color: var(--calendar-tile-hover);
 }
-.react-calendar__tile {
-    color: var(--calendar-tile-font);
-    font-weight: normal;
-    font-size: 20px;
-    background: none;
-    border: 1px solid transparent;
-    margin: 5px auto 5px auto;
-    aspect-ratio: 1 / 1;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 /* Remove the neighbouring months from showing in the current month */
 .react-calendar__month-view__days__day--neighboringMonth {
   color: transparent;
-}
-.react-calendar__month-view__days__day--neighboringMonth:enabled:hover {
-  background: transparent;
 }
