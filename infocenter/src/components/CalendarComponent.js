@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import Calendar from 'react-calendar';
+import { OnCallSummary } from './OnCallSummary';
 
 const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
@@ -8,7 +9,7 @@ const onCallRoster = ["Kendo Wu", "Matthew Murrell", "Durga Sompalle", "Mitchell
 
 const comments = {"Matthew Murrell": "Please divert phone to 0419295532"};
 
-function weeksSinceBegin(beginDate, date) {
+function currentOnCallName(beginDate, date) {
   const diff = (date - beginDate)
   // Number of weeks is difference in ms divided by number of ms in one week rounded down
   const numberOfWeeks = Math.floor(diff/(604800000))
@@ -33,11 +34,10 @@ export function CalendarComponent() {
 
   return (
     <div className='calendar-half-page'>
-        <div className='calendar-container'>
-            <Calendar onChange={setDate} value={date} inputRef={calendarContainer} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, setSelectedMonth)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
-        </div>
-        <div className='current-on-call'>{weeksSinceBegin(beginDate, date)}</div>
-        <div className='next-on-call'></div>
+      <OnCallSummary name={currentOnCallName(beginDate, date)} comments={comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"} title="Current On-Call"></OnCallSummary>
+      <div className='calendar-container'>
+        <Calendar onChange={setDate} value={date} inputRef={calendarContainer} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, setSelectedMonth)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+      </div>
     </div>
   );
 }

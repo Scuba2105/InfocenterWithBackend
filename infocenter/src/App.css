@@ -2813,18 +2813,53 @@ html {
     background-color: var(--med-theme);
 }
 
-#month-year, #day {
-  font-size: 22px;
+/* Format the table */
+.on-call-table {
+  height: 15vh;
+  width: 90%;
+  background-color: var(--med-theme);
+  margin-bottom: 50px;
+}
+
+.on-call-table > thead, .on-call-table > thead > tr {
+  height: 35%;
+  width: 100%;
+}
+
+.on-call-table tbody  {
+  height: 65%;
+  width: 100%;
+}
+
+.on-call-title {
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: var(--med-theme);
   color: white;
-  margin-bottom: 10px;
 }
 
-#month-year {
-  margin-right: 25px;
+.on-call-name, .on-call-comment {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--med-light-theme);
 }
 
-#day {
-  margin-left: 25px;
+.on-call-name {
+  width: 40%;
+}
+
+.on-call-comment {
+  width: 60%;
+}
+
+.on-call-data {
+  padding-left: 20px;
+  font-weight: normal;
+  color: white;
 }
 
 .react-calendar { 
