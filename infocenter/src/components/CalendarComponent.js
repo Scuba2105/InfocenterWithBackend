@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Calendar from 'react-calendar';
-import { OnCallSummary } from './OnCallSummary';
+import { DateCard } from './DateCard';
 
-const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+const dateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
 const onCallRoster = ["Kendo Wu", "Matthew Murrell", "Durga Sompalle", "Mitchell Pyne", "Atif Siddiqui",
 "Mitchell Pacey", "Steven Bradbury", "Ray Aunei Mose", "Rodney Birt"];
@@ -17,8 +17,27 @@ function currentOnCallName(beginDate, date) {
   return onCallRoster[rosterCycleNumber]; 
 }
 
-function updateMonth(activeStartDate, setSelectedMonth) {
+function getBoundingDates(inputDate) {
+  const selectedDay = inputDate.getDay();
+  // Adjust day to make Monday the start, not Sunday.
+  const adjustedDay = selectedDay === 0 ? 6 : selectedDay - 1;
+  const lowerDay = inputDate - adjustedDay * (24*60*60*1000);
+  const upperDay = lowerDay + 6 * (24*60*60*1000);
+  const upperBoundDate = new Date(upperDay);
+  const lowerBoundDate = new Date(lowerDay);
+  return [lowerBoundDate, upperBoundDate];
+}
+
+function updateMonth(activeStartDate, setSelectedMonth, setBoundingDates) {
+  const newBoundingDates = getBoundingDates(activeStartDate);
+  setBoundingDates(newBoundingDates);
   setSelectedMonth(activeStartDate.getMonth());
+}
+
+function updateSelectedDate(newDate, setDate, setBoundingDates) {
+  const newBoundingDates = getBoundingDates(newDate);
+  setDate(newDate);
+  setBoundingDates(newBoundingDates);
 }
 
 export function CalendarComponent() {
@@ -28,15 +47,20 @@ export function CalendarComponent() {
 
   // Set the initial selected page and select month with state variables
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth());
-    
-  // Use ref to access calendar DOM
-  const calendarContainer = useRef(null);
-
+  const [boundingDates, setBoundingDates] = useState(getBoundingDates(date))
+  
   return (
     <div className='calendar-half-page'>
-      <OnCallSummary name={currentOnCallName(beginDate, date)} comments={comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"} title="Current On-Call"></OnCallSummary>
+      <div className='on-call-summary'>
+        <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions}></DateCard>
+        <div className='on-call-staff'>
+          <span className='on-call-name'>{currentOnCallName(beginDate, date)}</span> 
+          <span className='on-call-comment'>{comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"}</span>
+        </div>
+        <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
+      </div>
       <div className='calendar-container'>
-        <Calendar onChange={setDate} value={date} inputRef={calendarContainer} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, setSelectedMonth)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+        <Calendar onChange={(value) => updateSelectedDate(value, setDate, setBoundingDates)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, setSelectedMonth, setBoundingDates)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>
   );
