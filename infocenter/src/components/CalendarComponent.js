@@ -47,11 +47,21 @@ function updateSelectedDate(newDate, setDate, setBoundingDates) {
   setBoundingDates(newBoundingDates);
 }
 
-export function CalendarComponent() {
+function filterUpdateData(date, onCallChangedData) {
+  const changedData = onCallChangedData.filter((entry) => {
+    return date.getTime() >= entry.startDate && date.getTime() <= entry.endDate
+  })
+  return changedData;
+}
 
+export function CalendarComponent({onCallChangedData}) {
+  
   // Currently selected date
   const [date, setDate] = useState(new Date());
 
+  // Get any changed data for the current date
+  const selectedDateChangedData = filterUpdateData(date, onCallChangedData);
+  
   // Begin date is mm/dd/yyyy so actually Mon 09/10/2023
   const beginDate = new Date("10/09/2023");
 
@@ -66,10 +76,10 @@ export function CalendarComponent() {
         <div className='on-call-staff-card'>
           <span className="card-head">Selected On-Call Details</span>
           <div className='on-call-staff'>
-            <span className='on-call-name'>{currentOnCallName(beginDate, date)}</span> 
+            <span className='on-call-name'>{selectedDateChangedData.length !== 0 ? selectedDateChangedData[0].name : currentOnCallName(beginDate, date)}</span> 
             <div className='comments-container'>
               <label className='comment-label'>Comments:</label>
-              <span className='on-call-comment'>{comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"}</span>
+              <span className='on-call-comment'>{selectedDateChangedData.length !== 0 ? selectedDateChangedData[0].comments : comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"}</span>
             </div>
           </div>
         </div>

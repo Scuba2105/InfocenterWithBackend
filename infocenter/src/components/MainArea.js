@@ -108,7 +108,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 </> :
                 page === "on-call" ?
                 <>
-                    <CalendarComponent></CalendarComponent>
+                    <CalendarComponent onCallChangedData={data.onCallData}></CalendarComponent>
                 </> :
                     <h1 style={{color: 'white', width: 600 + 'px', margin: 'auto auto'}}>Page has not been implemented yet</h1>}
             </div>

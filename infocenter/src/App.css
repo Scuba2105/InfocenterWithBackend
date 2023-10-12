@@ -2850,7 +2850,10 @@ html {
 
 .date-card-day {
   font-size: clamp(20px,5vh,45px);
-  
+}
+
+.suffix {
+  font-size: clamp(12px,2.6vh,30px);
 }
 
 .on-call-staff-card {
@@ -2998,7 +3001,6 @@ abbr[title] {
   justify-content: center;
   align-items: center;
 }
-
 .react-calendar__tile:enabled:hover {
   background: var(--calendar-tile-hover);
   border-radius: 6px;
