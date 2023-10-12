@@ -29,8 +29,8 @@ html {
   --green-button-border: 1px solid rgb(3, 168, 105);
   --blue-button-color: #03a9eb; 
   --search-bar-color: #69737a;
-  --calendar-tile-active: #9f06cd; 
-  --calendar-tile-hover: #602d6d;
+  --calendar-tile-active: #06BF88; 
+  --calendar-tile-hover: #437264;
   --calendar-tile-font: rgb(230, 229, 229);
 }
 
@@ -3010,7 +3010,7 @@ abbr[title] {
   color: white;
 }
 .react-calendar__tile--now:not(.react-calendar__tile--active) {
-  border: 2px solid #F46036;
+  border: 2px solid var(--calendar-tile-active);
   color: white;
   border-radius: 6px;
   font-weight: bold;

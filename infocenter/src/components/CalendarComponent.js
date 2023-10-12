@@ -12,9 +12,15 @@ const comments = {"Matthew Murrell": "Please divert phone to 0419295532"};
 function currentOnCallName(beginDate, date) {
   const diff = (date - beginDate)
   // Number of weeks is difference in ms divided by number of ms in one week rounded down
-  const numberOfWeeks = Math.floor(diff/(604800000))
+  const numberOfWeeks = Math.abs(Math.floor(diff/(604800000)));
   const rosterCycleNumber = numberOfWeeks % onCallRoster.length;
-  return onCallRoster[rosterCycleNumber]; 
+  const reversedRoster = onCallRoster.slice(1).reverse();
+  // Add the initial entry to the roster
+  reversedRoster.unshift(onCallRoster[0]);
+  if (beginDate <= date) {
+    return onCallRoster[rosterCycleNumber]; 
+  }
+  return reversedRoster[rosterCycleNumber];  
 }
 
 function getBoundingDates(inputDate) {
@@ -42,14 +48,17 @@ function updateSelectedDate(newDate, setDate, setBoundingDates) {
 }
 
 export function CalendarComponent() {
+
+  // Currently selected date
   const [date, setDate] = useState(new Date());
+
   // Begin date is mm/dd/yyyy so actually Mon 09/10/2023
   const beginDate = new Date("10/09/2023");
 
   // Set the initial selected page and select month with state variables
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth());
   const [boundingDates, setBoundingDates] = useState(getBoundingDates(date))
-  
+
   return (
     <div className='calendar-half-page'>
       <div className='on-call-summary'>
