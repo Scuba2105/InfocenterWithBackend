@@ -28,8 +28,9 @@ function getBoundingDates(inputDate) {
   return [lowerBoundDate, upperBoundDate];
 }
 
-function updateMonth(activeStartDate, setSelectedMonth, setBoundingDates) {
+function updateMonth(activeStartDate, setSelectedMonth, setDate, setBoundingDates) {
   const newBoundingDates = getBoundingDates(activeStartDate);
+  setDate(activeStartDate);
   setBoundingDates(newBoundingDates);
   setSelectedMonth(activeStartDate.getMonth());
 }
@@ -66,7 +67,7 @@ export function CalendarComponent() {
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
       <div className='calendar-container'>
-        <Calendar onChange={(value) => updateSelectedDate(value, setDate, setBoundingDates)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, setSelectedMonth, setBoundingDates)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+        <Calendar onChange={(value) => updateSelectedDate(value, setDate, setBoundingDates)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, setSelectedMonth, setDate, setBoundingDates)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>
   );
