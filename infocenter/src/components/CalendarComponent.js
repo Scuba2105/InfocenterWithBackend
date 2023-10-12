@@ -53,9 +53,15 @@ export function CalendarComponent() {
     <div className='calendar-half-page'>
       <div className='on-call-summary'>
         <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions}></DateCard>
-        <div className='on-call-staff'>
-          <span className='on-call-name'>{currentOnCallName(beginDate, date)}</span> 
-          <span className='on-call-comment'>{comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"}</span>
+        <div className='on-call-staff-card'>
+          <span className="card-head">Selected On-Call Details</span>
+          <div className='on-call-staff'>
+            <span className='on-call-name'>{currentOnCallName(beginDate, date)}</span> 
+            <div className='comments-container'>
+              <label className='comment-label'>Comments:</label>
+              <span className='on-call-comment'>{comments[currentOnCallName(beginDate, date)] ? comments[currentOnCallName(beginDate, date)] : "N/A"}</span>
+            </div>
+          </div>
         </div>
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
