@@ -2795,7 +2795,7 @@ html {
 }
 
 .calendar-container {
-  max-width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2804,18 +2804,9 @@ html {
   overflow: hidden;
 }
 
-.calendar-header {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--med-theme);
-}
-
 .on-call-summary {
   width: 90%;
-  height: 20%;
+  height: 18%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2832,6 +2823,7 @@ html {
   grid-template-rows: 3.4vh 1fr;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  padding-bottom: 10px;
 }
 
 .card-head {
@@ -2863,8 +2855,9 @@ html {
 
 .on-call-staff-card {
   height: 100%;
-  width: 60%;
-  min-width: 300px;
+  width: 30vw;
+  min-width: 250px;
+  max-width: 500px;
   border: 1px solid var(--dark-theme);
   background-color: var(--med-light-theme);
   color: white;
@@ -2872,6 +2865,7 @@ html {
   grid-template-rows: 3.4vh 1fr;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  padding-bottom: 10px;
 }
 
 .on-call-staff {
@@ -2901,7 +2895,7 @@ html {
 }
 
 .on-call-name {
-  font-size: clamp(20px, 3.5vh, 35px);
+  font-size: clamp(16px, 3.3vh, 35px);
 }
 
 .comment-label {
@@ -2935,12 +2929,13 @@ html {
 /* Format the navigation bar */
 .react-calendar__navigation {
   width: 100%;
-  height: 50px;
+  height: 3vw;
+  min-height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: var(--calendar-tile-active);
-  padding: 20px;
+  padding: 1vw;
   margin-top: 0px;
   margin-bottom: 30px;
 }
@@ -2949,7 +2944,7 @@ html {
   color: white;
   min-width: 44px;
   background: none;
-  font-size: 22px;
+  font-size: clamp(16px, 1.15vw, 22px);
   font-weight: bold;
   margin-top: 6px;
   border: none;
@@ -2983,7 +2978,7 @@ html {
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 20px;
+  font-size: clamp(14px, 1vw, 20px);
 }
 
 abbr[title] {
@@ -2993,12 +2988,12 @@ abbr[title] {
 .react-calendar__tile {
   color: var(--calendar-tile-font);
   font-weight: normal;
-  font-size: 20px;
+  font-size: clamp(14px, 1vw, 20px);
   background: none;
   border: 1px solid transparent;
-  margin: 5px auto 5px auto;
-  aspect-ratio: 1 / 1;
-  height: 70px;
+  margin: 3px auto 3px auto;
+  width: 6.5vh;
+  height: 6.5vh;
   display: flex;
   justify-content: center;
   align-items: center;
