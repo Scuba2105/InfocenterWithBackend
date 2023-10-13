@@ -126,8 +126,7 @@ export function CalendarComponent({onCallChangedData}) {
           <div className='on-call-staff'>
             <span className='on-call-name'>{onCallEmployee.name}</span> 
             <div className='comments-container'>
-              <label className='comment-label'>Comments:</label>
-              <span className='on-call-comment'>{onCallEmployee.comment}</span>
+              <span className='on-call-comment'>{onCallEmployee.comment ? onCallEmployee.comment : "No Comments"}</span>
             </div>
           </div>
         </div>

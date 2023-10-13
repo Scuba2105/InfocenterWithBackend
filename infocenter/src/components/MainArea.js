@@ -12,6 +12,7 @@ import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { CalendarComponent } from "./CalendarComponent";
+import { OnCallFunctions } from "./OnCallFunctions";
 import { useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
@@ -109,6 +110,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 page === "on-call" ?
                 <>
                     <CalendarComponent onCallChangedData={data.onCallData}></CalendarComponent>
+                    <OnCallFunctions></OnCallFunctions>
                 </> :
                     <h1 style={{color: 'white', width: 600 + 'px', margin: 'auto auto'}}>Page has not been implemented yet</h1>}
             </div>
