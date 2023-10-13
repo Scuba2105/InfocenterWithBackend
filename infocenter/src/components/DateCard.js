@@ -1,5 +1,4 @@
 export function DateCard({date, dateBoundary, dateOptions}) {
-    
     const month = date.toDateString(('en-us', dateOptions)).split(" ")[1];
     const dayNumber = date.toDateString(('en-us', dateOptions)).split(" ")[2];
     const lastDigit = dayNumber.split("")[1];

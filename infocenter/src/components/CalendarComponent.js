@@ -10,7 +10,7 @@ const onCallRoster = ["Kendo Wu", "Matthew Murrell", "Durga Sompalle", "Mitchell
 const comments = {"Matthew Murrell": "Please divert phone to 0419295532"};
 
 function dateInRange(date, range) {
-  if (date >= range[0] && date <= range[1]) {
+  if (date >= range[0].getTime() && date <= range[1].getTime()) {
     return true
   }
   return false;
@@ -30,6 +30,14 @@ function currentOnCallName(beginDate, date) {
   return reversedRoster[rosterCycleNumber];  
 }
 
+function filterUpdateData(date, onCallChangedData) {
+  const [lowerWeekBoundingDate, upperWeekBoundingDate] = getWeekBoundingDates(date);
+  const changedData = onCallChangedData.filter((entry) => {
+    return entry.startDate >= lowerWeekBoundingDate && entry.endDate <= upperWeekBoundingDate; 
+  })
+  return changedData[0];
+}
+
 function getWeekBoundingDates(inputDate) {
   const selectedDay = inputDate.getDay();
   // Adjust day to make Monday the start, not Sunday.
@@ -41,10 +49,11 @@ function getWeekBoundingDates(inputDate) {
   return [lowerBoundDate, upperBoundDate];
 }
 
-function getOnCallData(inputDate, beginDate, selectedDateChangedData) {
-  const changedData = selectedDateChangedData[0];
+function getOnCallData(inputDate, beginDate, onCallChangedData) {
+
+  // Check to see if there is any roster changes for the selected week 
+  const changedData = filterUpdateData(inputDate, onCallChangedData);
   const [lowerWeekBoundingDate, upperWeekBoundingDate] = getWeekBoundingDates(inputDate);
-  
   // Return the default data if no changed data available for selected week. 
   if (changedData === undefined) {
     return {dateRange: [lowerWeekBoundingDate, upperWeekBoundingDate], employeeData: {name: currentOnCallName(beginDate, inputDate), comment: comments[currentOnCallName(beginDate, inputDate)]}};
@@ -56,30 +65,29 @@ function getOnCallData(inputDate, beginDate, selectedDateChangedData) {
   
   // Early return if changed on call is for the entire week.
   if (lowerWeekBoundingDate === lowerChangedBound && upperWeekBoundingDate === upperChangedBound) {
-    console.log("Error. Wrong condition entered");
     return {dateRange: [lowerChangedBound, upperChangedBound], employeeData: {name: changedData.name, comment: changedData.comment}};
   }
   // Determine if selected date is within the changed bounds or not.
   if (dateInRange(inputDate, [lowerChangedBound, upperChangedBound])) {
-    console.log("Cicked between Mon 8th and Wed 4th October");
     return {dateRange: [lowerChangedBound, upperChangedBound], employeeData: {name: changedData.name, comment: changedData.comment}};
   }
   else if (inputDate < lowerChangedBound) {
-    console.log("Error. Wrong condition entered.")
-    const newDefaultUpperBound = lowerChangedBound - (24*60*60*1000);
+    // Set the new default end date to one day before the start date of the roster change
+    const newDefaultUpperBound = lowerChangedBound.getTime() - (24*60*60*1000);
     const newDefaultEndDate = new Date(newDefaultUpperBound);
     return {dateRange: [lowerWeekBoundingDate, newDefaultEndDate], employeeData: {name: currentOnCallName(beginDate, inputDate), comment: comments[currentOnCallName(beginDate, inputDate)]}};
   }
   else if (inputDate > upperChangedBound) {
-    console.log("Clicked after Wed 4th.")
-    const newDefaultStartDate = upperChangedBound + (24*60*60*1000);
+    // Set the new default start 1 day after end of changed end date
+    const newDefaultLowerBound = upperChangedBound.getTime() + (24*60*60*1000);
+    const newDefaultStartDate = new Date(newDefaultLowerBound);
     return {dateRange: [newDefaultStartDate, upperWeekBoundingDate], employeeData: {name: currentOnCallName(beginDate, inputDate), comment: comments[currentOnCallName(beginDate, inputDate)]}};
   }
 }
 
 // Triggered state changes when month is changed
-function updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, selectedDateChangedData) {
-  const onCallData = getOnCallData(activeStartDate, beginDate, selectedDateChangedData);
+function updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData) {
+  const onCallData = getOnCallData(activeStartDate, beginDate, onCallChangedData);
   setDate(activeStartDate);
   setBoundingDates(onCallData.dateRange);
   setOnCallEmployee(onCallData.employeeData)
@@ -87,19 +95,11 @@ function updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setB
 }
 
 // Triggered state changes when selected date is changed.
-function updateSelectedDate(newDate, beginDate, setDate, setBoundingDates, setOnCallEmployee, selectedDateChangedData) {
-  const onCallData = getOnCallData(newDate, beginDate, selectedDateChangedData);
+function updateSelectedDate(newDate, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData) {
+  const onCallData = getOnCallData(newDate, beginDate, onCallChangedData);
   setDate(newDate)
   setBoundingDates(onCallData.dateRange);
   setOnCallEmployee(onCallData.employeeData)
-}
-
-function filterUpdateData(date, onCallChangedData) {
-  const [lowerWeekBoundingDate, upperWeekBoundingDate] = getWeekBoundingDates(date);
-  const changedData = onCallChangedData.filter((entry) => {
-    return entry.startDate >= lowerWeekBoundingDate && entry.endDate <= upperWeekBoundingDate; 
-  })
-  return changedData;
 }
 
 export function CalendarComponent({onCallChangedData}) {
@@ -113,9 +113,6 @@ export function CalendarComponent({onCallChangedData}) {
   // Store the name of the current on call employee for selected date 
   const [onCallEmployee, setOnCallEmployee] = useState({name: currentOnCallName(beginDate, date), comment: comments[currentOnCallName(beginDate, date)]})
 
-  // Get any changed data for the current date
-  const selectedDateChangedData = filterUpdateData(date, onCallChangedData);
-  
   // Set the initial selected page and select month with state variables
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth());
   const [boundingDates, setBoundingDates] = useState(getWeekBoundingDates(date))
@@ -137,7 +134,7 @@ export function CalendarComponent({onCallChangedData}) {
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
       <div className='calendar-container'>
-        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, selectedDateChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, selectedDateChangedData)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>
   );
