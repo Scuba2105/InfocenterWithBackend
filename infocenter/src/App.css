@@ -1120,7 +1120,7 @@ html {
 }
 
 .user-manual {
-  background-color: #06BF88;
+  background: linear-gradient(#1ae3a6, #07ce93);
   color: var(--dark-theme);
   border: 1px solid #095250
 }
@@ -3040,23 +3040,46 @@ abbr[title] {
 
 /* On call functions formatting */
 .on-call-functions-container {
+  height: 90%;
+  width: 90%;
+  margin: auto auto;
+  background-color: var(--med-light-theme);
+  border-radius: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 4vw 1fr 1fr 1fr;
+  overflow: hidden;
+}
+
+.on-call-functions-header {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  font-size: clamp(14px, 1.75vw, 28px);
+  background-color: var(--med-theme);
+  color: white;
 }
 
 .on-call-function-button {
-  height: 10vw;
-  width: 10vw;
+  height: 9vw;
+  width: 9vw;
+  max-height: 145px;
+  max-width: 145px;
+  font-size: clamp(12px, 0.85vw, 18px);
   flex-direction: column;
   justify-content: space-around;
+  color: var(--dark-theme);
+  font-weight: bold;
   border: none;
-  color: white;
+  border-radius: 15px;
   cursor: pointer;
 }
 
+.on-call-label-container {
+  flex-direction: column;
+}
+
 .my-on-call {
-  background-color: #D5224C;
+  background-color: #f13a65;
 }
 
 .edit-roster {
