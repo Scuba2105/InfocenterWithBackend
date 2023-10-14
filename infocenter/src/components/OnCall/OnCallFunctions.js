@@ -1,6 +1,9 @@
-import { EditRosterIcon, ConfirmRosterIcon, MyRosterIcon, StaffRosterIcon, KeyContactsIcon, CheatsheetIcon } from "../svg"
-import { ModalSkeleton } from "./ModalSkeleton";
+import { EditRosterIcon, ConfirmRosterIcon, MyRosterIcon, StaffRosterIcon, KeyContactsIcon, CheatsheetIcon } from "../../svg"
+import { ModalSkeleton } from "../ModalSkeleton";
+import { MyOnCall } from "./MyOnCall";
+import { StaffRoster } from "./StaffRoster";
 import { useState } from "react";
+import { staffOnCallRoster, getAdjustedBeginRoster, beginDate } from '../../utils/utils';
 
 // Define the labels and icons for mapping the buttons.
 const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#036d4d"},
@@ -9,9 +12,6 @@ const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#0
 {label: "Staff Roster", "icon": StaffRosterIcon, color: "#C34003"}, 
 {label: "Key Contacts", "icon": KeyContactsIcon, color: "#022A7A"}, 
 {label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#5E0275"}];
-
-const staffOnCallRoster = ["Durga Sompalle", "Mitchell Pyne", "Atif Siddiqui",
-"Mitchell Pacey", "Steven Bradbury", "Ray Aunei Mose", "Rodney Birt", "Kendo Wu", "Matthew Murrell"];
 
 const modalLinkButtons = ["my-on-call", "edit-roster", "staff-roster", "confirm-roster"]
 
@@ -48,7 +48,11 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
                     </div>
                 )
             })}
-            {formVisible && <ModalSkeleton type={formType} closeModal={() => hideForm(setFormVisibile)} page={page} ></ModalSkeleton>}
+            {formVisible && 
+            <ModalSkeleton type={formType} closeModal={() => hideForm(setFormVisibile)} page={page} >
+                {formType === "my-on-call" && <MyOnCall></MyOnCall>}
+                {formType === "staff-roster" && <StaffRoster></StaffRoster>}
+            </ModalSkeleton>}
         </div>
     )
 }

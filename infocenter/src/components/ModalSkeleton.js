@@ -33,6 +33,9 @@ function getFormHeading(page, type, selectedData, name) {
     else if (type === "my-on-call") {
         return "Upcoming On-Call Duties";
     }
+    else if (type === "staff-roster") {
+        return "On-Call Roster";
+    }
 }
 
 function formatTypeHeading(type) {

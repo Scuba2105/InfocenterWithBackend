@@ -11,8 +11,8 @@ import { useState } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
-import { CalendarComponent } from "./CalendarComponent";
-import { OnCallFunctions } from "./OnCallFunctions";
+import { CalendarComponent } from "./OnCall/CalendarComponent";
+import { OnCallFunctions } from "./OnCall/OnCallFunctions";
 import { useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
