@@ -3057,6 +3057,7 @@ abbr[title] {
   font-size: clamp(14px, 1.75vw, 28px);
   background-color: var(--med-theme);
   color: white;
+  font-weight: 500;
 }
 
 .on-call-function-button {
@@ -3091,7 +3092,7 @@ abbr[title] {
 }
 
 .key-contacts {
-  background-color: #3168d6;
+  background-color: #3972e4;
 }
 
 .on-call-cheatsheet {

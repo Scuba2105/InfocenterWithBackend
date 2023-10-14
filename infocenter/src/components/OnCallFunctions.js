@@ -3,9 +3,9 @@ import { EditRosterIcon, MyRosterIcon, StaffRosterIcon, KeyContactsIcon, Cheatsh
 // Define the labels and icons for mapping the buttons.
 const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#036d4d"}, 
 {label: "My On-Call", "icon": MyRosterIcon, color: "#7E0320"}, 
-{label: "Staff Roster", "icon": StaffRosterIcon, color: "#7E0320"}, 
-{label: "Key Contacts", "icon": KeyContactsIcon, color: "#7E0320"}, 
-{label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#7E0320"}];
+{label: "Staff Roster", "icon": StaffRosterIcon, color: "#C34003"}, 
+{label: "Key Contacts", "icon": KeyContactsIcon, color: "#022A7A"}, 
+{label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#5E0275"}];
 
 export function OnCallFunctions() {
 
