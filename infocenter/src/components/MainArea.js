@@ -110,7 +110,8 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 page === "on-call" ?
                 <>
                     <CalendarComponent onCallChangedData={data.onCallData}></CalendarComponent>
-                    <OnCallFunctions></OnCallFunctions>
+                    <OnCallFunctions page={page} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></OnCallFunctions>
+                    <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                     <h1 style={{color: 'white', width: 600 + 'px', margin: 'auto auto'}}>Page has not been implemented yet</h1>}
             </div>

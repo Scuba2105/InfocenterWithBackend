@@ -110,6 +110,11 @@ export function CalendarComponent({onCallChangedData}) {
   // Begin date is mm/dd/yyyy so actually Mon 09/10/2023
   const beginDate = new Date("10/09/2023");
 
+  // Set the minimum date accessible from the calendar at 2 weeks prior to the current date.
+  const currentDate = new Date();
+  const minDateMillisec = currentDate.getTime() - 14 * (24*60*60*1000);
+  const minDate = new Date(minDateMillisec);
+
   // Store the name of the current on call employee for selected date 
   const [onCallEmployee, setOnCallEmployee] = useState({name: currentOnCallName(beginDate, date), comment: comments[currentOnCallName(beginDate, date)]})
 
@@ -133,7 +138,7 @@ export function CalendarComponent({onCallChangedData}) {
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
       <div className='calendar-container'>
-        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} minDate={beginDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} minDate={minDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>
   );
