@@ -37,7 +37,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
             <div className="technical-area">
                 <div className="technical-link-container">
                     <a className="technical-link service" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
-                        <ServiceIcon color="#98053b" size="5vh"/>
+                        <ServiceIcon color="#7E0320" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Service</span>
                             <span>Manual</span> 
@@ -46,7 +46,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container">
                     <a className="technical-link user-manual" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
-                        <UserManualIcon color="#04553d" size="5vh"/>
+                        <UserManualIcon color="#036d4d" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>User</span>
                             <span>Manual</span> 
@@ -55,19 +55,19 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link config" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
-                        <ConfigIcon color="#f4af1a" size="5vh"/>
+                        <ConfigIcon color="#D59406" size="5vh"/>
                         Configuration
                     </div>  
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link software" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <SoftwareIcon color="#8504a5" size="5vh"/>
+                        <SoftwareIcon color="#5E0275" size="5vh"/>
                         Software
                     </div> 
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link documents" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <DocumentsIcon color="#bf5a2b" size="5vh"/>
+                        <DocumentsIcon color="#C34003" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Other</span>
                             <span>Documents</span> 
@@ -76,7 +76,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link passwords" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <PasswordsIcon color="#33658A" size="5vh"/>
+                        <PasswordsIcon color="#022A7A" size="5vh"/>
                         Passwords
                     </div>   
                 </div>

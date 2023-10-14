@@ -1113,40 +1113,34 @@ html {
   margin-bottom: 20px;
 }
   
-.service {
-  background: linear-gradient(#fd80ae, #ff73a6);
-  border: 1px solid #7e1439;
+.service, .my-on-call {
+  background-color: #f13a65;
   color: var(--dark-theme);
 }
 
-.user-manual {
-  background: linear-gradient(#1ae3a6, #07ce93);
+.user-manual, .edit-roster {
+  background-color: #06BF88;
   color: var(--dark-theme);
-  border: 1px solid #095250
 }
 
-.config {
-  background: linear-gradient(#fdd783, #f9d27e);
+.config, .confirm-roster {
+  background-color: #fcc757;
   color: var(--dark-theme);
-  border:1px solid #815a07;
 }
 
-.software {
-  background: linear-gradient(#e274fe, #de65fd);
+.software, .on-call-cheatsheet {
+  background-color: #b232d2;
   color: var(--dark-theme);
-  border: 1px solid #320E3B
 }
 
-.documents {
-  background: linear-gradient(#fea278, #fd9a6d);
+.documents, .staff-roster {
+  background-color: #f07b45;
   color: var(--dark-theme);
-  border: 1px solid #7f3f21;
 }
 
-.passwords {
+.passwords, .key-contacts {
   color: var(--dark-theme);
-  background: linear-gradient(#74c1fc, #6abdfd);
-  border: 1px solid #043254;
+  background-color: #3972e4;
 }
 
 /* CSS for staff display area */
@@ -3079,22 +3073,4 @@ abbr[title] {
   flex-direction: column;
 }
 
-.my-on-call {
-  background-color: #f13a65;
-}
 
-.edit-roster {
-  background-color: #06BF88;
-}
-
-.staff-roster {
-  background-color: #f07b45;
-}
-
-.key-contacts {
-  background-color: #3972e4;
-}
-
-.on-call-cheatsheet {
-  background-color: #b232d2;
-}

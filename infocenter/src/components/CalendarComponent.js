@@ -133,7 +133,7 @@ export function CalendarComponent({onCallChangedData}) {
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
       <div className='calendar-container'>
-        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} minDate={beginDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>
   );
