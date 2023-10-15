@@ -1431,7 +1431,7 @@ html {
 }
 
 /* Format the add new staff/equipment modal */
-.add-new, .new-image, .update-device-file {
+.add-new, .new-image, .update-device-file, .date-change {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1452,7 +1452,7 @@ html {
   margin-bottom: 14px;
 }
 
-.add-new-input, .new-image-input, .update-device-file-input {
+.add-new-input, .new-image-input, .update-device-file-input, .date-change-input {
   font-size: 12px;
   color: var(--form-font-color);
   height: 20px;
@@ -1463,6 +1463,7 @@ html {
   margin-top: 3px;
   transform: translateY(-4px);
   background-color: var(--form-input-color);
+  border: none;
 }
 
 .update-device-file-input {
@@ -1476,7 +1477,7 @@ html {
   width: 210px;
 }
 
-.add-new-label, .new-image-label {
+.add-new-label, .new-image-label, .date-change-label {
   font-weight: 500;
   transform: translateY(-4px);  
 }
@@ -2538,7 +2539,9 @@ html {
   margin-top: -10px;
 }
 
-.employee-requestor-select-label, .service-agent-select-label, .model-select-label, .us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, .text-area-container label {
+.employee-requestor-select-label, .service-agent-select-label, .model-select-label, 
+.us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, 
+.text-area-container label {
   font-size: 15px;
   font-weight: 600;
   color: var(--form-font-color);
@@ -3141,4 +3144,12 @@ abbr[title] {
   width: 50px;
 }
 
+/* Edit roster form formatting */ 
+.edit-roster-form {
+  margin-top: 40px;
+}
+
+.edit-roster-update-btn {
+  margin: 40px;
+}
 
