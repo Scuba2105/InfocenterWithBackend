@@ -2867,6 +2867,14 @@ html {
   font-size: clamp(20px,5vh,45px);
 }
 
+.date-card-month-small {
+  font-size: 20px;
+}
+
+.date-card-day-small {
+  font-size: 30px;
+}
+
 .suffix {
   font-size: clamp(12px,2.6vh,30px);
 }

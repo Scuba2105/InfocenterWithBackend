@@ -56,13 +56,13 @@ export function MyOnCall() {
     return (
         <div className="modal-display">
             <div className='my-roster-start-end-label flex-c'>
-                <label>Start Date</label>
+                <label className='flex-c'>Start Date</label>
                 <div className='my-roster-label-aligner'></div>
-                <label>End Date</label>
+                <label className='flex-c'>End Date</label>
             </div>
-            {onCallShifts.map((entry) => {
+            {onCallShifts.map((entry, index) => {
                 return (
-                    <div className="date-range-container flex-c">
+                    <div key={`on-call-date-range-${index}`} className="date-range-container flex-c">
                         <DateCard date={entry.startDate} size="small" dateBoundary="lower" dateOptions={dateOptions}></DateCard>
                         <RightArrow color="white"></RightArrow>
                         <DateCard date={entry.endDate} size="small" dateBoundary="upper" dateOptions={dateOptions}></DateCard>
