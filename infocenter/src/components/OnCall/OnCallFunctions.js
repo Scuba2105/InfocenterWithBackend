@@ -8,12 +8,12 @@ import { staffOnCallRoster, getAdjustedBeginRoster, beginDate } from '../../util
 // Define the labels and icons for mapping the buttons.
 const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#036d4d"},
 {label: "Confirm Roster", "icon": ConfirmRosterIcon, color: "#D59406"},
-{label: "My On-Call", "icon": MyRosterIcon, color: "#7E0320"}, 
+{label: "My Roster", "icon": MyRosterIcon, color: "#7E0320"}, 
 {label: "Staff Roster", "icon": StaffRosterIcon, color: "#C34003"}, 
 {label: "Key Contacts", "icon": KeyContactsIcon, color: "#022A7A"}, 
 {label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#5E0275"}];
 
-const modalLinkButtons = ["my-on-call", "edit-roster", "staff-roster", "confirm-roster"]
+const modalLinkButtons = ["my-roster", "edit-roster", "staff-roster", "confirm-roster"]
 
 function showForm(setFormVisibile, setFormType, type) {
     if (modalLinkButtons.includes(type)) {
@@ -50,7 +50,7 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
             })}
             {formVisible && 
             <ModalSkeleton type={formType} closeModal={() => hideForm(setFormVisibile)} page={page} >
-                {formType === "my-on-call" && <MyOnCall></MyOnCall>}
+                {formType === "my-roster" && <MyOnCall></MyOnCall>}
                 {formType === "staff-roster" && <StaffRoster></StaffRoster>}
             </ModalSkeleton>}
         </div>

@@ -30,7 +30,7 @@ function getFormHeading(page, type, selectedData, name) {
     else if (type === "update-staff-contact" || type === "update-vendor-contact") {
         return type === "update-staff-contact" ? "Update Staff Contact" : "Update Vendor Contact";
     }
-    else if (type === "my-on-call") {
+    else if (type === "my-roster") {
         return "Upcoming On-Call Duties";
     }
     else if (type === "staff-roster") {

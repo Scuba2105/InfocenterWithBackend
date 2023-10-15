@@ -493,6 +493,15 @@ export function CheatsheetIcon({color, size='22px'}) {
     );
 }
 
+export function RightArrow({color, size='50px'}) {
+    return (
+        <>
+            <svg fill={color} width={size} height={size} viewBox="0 0 24 24"><path id="primary" d="M21.71,11.29l-3-3a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,21.71,11.29Z"></path></svg>
+        </>
+    );
+}
+
+
 
 
 

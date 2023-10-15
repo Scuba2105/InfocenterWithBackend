@@ -1113,7 +1113,7 @@ html {
   margin-bottom: 20px;
 }
   
-.service, .my-on-call {
+.service, .my-roster {
   background-color: #f13a65;
   color: var(--dark-theme);
 }
@@ -2831,14 +2831,24 @@ html {
   padding-bottom: 10px;
 }
 
+.date-card-small {
+  height: 100px;
+  width: 110px;
+  grid-template-rows: 15px 1fr;
+}
+
 .card-head {
   grid-row: 1;
   font-size: 2vh;
-  background-color: #D5224C;  
+  background-color: #f13a65;  
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card-head-small {
+  font-size: 14px;
 }
 
 .date-card-data {
@@ -3071,6 +3081,51 @@ abbr[title] {
 
 .on-call-label-container {
   flex-direction: column;
+}
+
+/* Staff Roster Formatting */
+.staff-roster-label {
+  height: 35px;
+  width: 40%;
+  background: var(--med-light-theme);
+  color: white;
+  margin: 6px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+  border-radius: 10px;
+}
+
+.staff-roster-label:last-of-type {
+  margin-bottom: 30px;
+}
+
+.staff-roster-label:first-of-type {
+  margin-top: 30px;
+}
+
+/* My roster formatting */
+.date-range-container, .my-roster-start-end-label {
+  justify-content: space-around;
+  margin-bottom: 15px;
+  width: 75%;
+}
+
+.date-range-container:first-of-type, .my-roster-start-end-label {
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.my-roster-start-end-label label{
+  font-size: 14px;
+  color: white;
+  width: 110px;
+}
+
+.my-roster-label-aligner {
+  height: 10px;
+  width: 50px;
 }
 
 

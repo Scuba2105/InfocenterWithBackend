@@ -1,5 +1,7 @@
 import { staffOnCallRoster, getAdjustedBeginRoster, beginDate, currentOnCallName, getWeekBoundingDates } from '../../utils/utils';
 import { useUser } from "../StateStore"
+import { DateCard } from '../DateCard';
+import { RightArrow } from '../../svg';
 
 // Options for fomatting date strings.
 const dateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
@@ -24,7 +26,7 @@ function getOnCallShifts(currentUser) {
     futureOnCallDates.push(advancedDate);
 
     // Loop to add the next 3 on call dates.
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 2; i++) {
         const dateInMs = nextOnCallMs + i * onCallRoster.length * (7*24*60*60*1000);
         const nextDate = new Date(dateInMs);
         futureOnCallDates.push(nextDate);
@@ -38,6 +40,11 @@ function getOnCallShifts(currentUser) {
     return boundingDates;
 }
 
+function formatDateString(date) {
+    const formattedDate = date.toDateString('en-us', dateOptions)
+    return formattedDate;
+}
+
 export function MyOnCall() {
 
     // Get user state from Zustand state
@@ -48,11 +55,17 @@ export function MyOnCall() {
     
     return (
         <div className="modal-display">
+            <div className='my-roster-start-end-label flex-c'>
+                <label>Start Date</label>
+                <div className='my-roster-label-aligner'></div>
+                <label>End Date</label>
+            </div>
             {onCallShifts.map((entry) => {
                 return (
-                    <div className="date-range-container">
-                        <date>{entry.startDate.toDateString('en-us', dateOptions)}</date>
-                        <date>{entry.endDate.toDateString('en-us', dateOptions)}</date>
+                    <div className="date-range-container flex-c">
+                        <DateCard date={entry.startDate} size="small" dateBoundary="lower" dateOptions={dateOptions}></DateCard>
+                        <RightArrow color="white"></RightArrow>
+                        <DateCard date={entry.endDate} size="small" dateBoundary="upper" dateOptions={dateOptions}></DateCard>
                     </div>
                 )
             })}
