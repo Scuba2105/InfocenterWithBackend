@@ -25,13 +25,18 @@ html {
   --form-input-color: #69737a;
   --input-placeholder-color: rgb(188, 188, 188);
   --grey-font: rgb(183, 190, 195); 
-  --green-button-color: rgb(3, 252, 156);
   --green-button-border: 1px solid rgb(3, 168, 105);
   --blue-button-color: #03a9eb; 
   --search-bar-color: #69737a;
-  --calendar-tile-active: #06BF88; 
+  --calendar-tile-active: var(--green-accent); 
   --calendar-tile-hover: #437264;
   --calendar-tile-font: rgb(230, 229, 229);
+  --red-accent: #f13a65;
+  --green-accent: #06BF88;
+  --yellow-accent: #fcc757;
+  --purple-accent: #b232d2;
+  --orange-accent: #f07b45;
+  --blue-accent: #3972e4;
 }
 
 /* Define some utility classes to minimise repetitive css */
@@ -729,7 +734,7 @@ html {
 }
 
 .add-new-btn {
-  background-color: var(--blue-button-color);
+  background-color: var(--blue-accent);
   border: 1px solid var(--med-light-theme);
   color: #212936;
   border-radius: 50%;
@@ -1005,7 +1010,7 @@ html {
   justify-content: center;
   align-items: center;
   color: var(--med-light-theme);
-  background-color: var(--green-button-color);
+  background-color: var(--green-accent);
   border: var(--green-button-border);
   border-radius: 50%;
   transform: translateX(-15px);
@@ -1114,33 +1119,33 @@ html {
 }
   
 .service, .my-roster {
-  background-color: #f13a65;
+  background-color: var(--red-accent);
   color: var(--dark-theme);
 }
 
 .user-manual, .edit-roster {
-  background-color: #06BF88;
+  background-color: var(--green-accent);
   color: var(--dark-theme);
 }
 
 .config, .confirm-roster {
-  background-color: #fcc757;
+  background-color: var(--yellow-accent);
   color: var(--dark-theme);
 }
 
 .software, .on-call-cheatsheet {
-  background-color: #b232d2;
+  background-color: var(--purple-accent);
   color: var(--dark-theme);
 }
 
 .documents, .staff-roster {
-  background-color: #f07b45;
+  background-color: var(--orange-accent);
   color: var(--dark-theme);
 }
 
 .passwords, .key-contacts {
   color: var(--dark-theme);
-  background-color: #3972e4;
+  background-color: var(--blue-accent);
 }
 
 /* CSS for staff display area */
@@ -1722,7 +1727,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--green-button-color);
+  background-color: var(--green-accent);
   color: var(--med-theme);
   border-radius: 5px;
   font-weight: 600;
@@ -1737,7 +1742,7 @@ html {
 }
 
 .save-button {
-  background-color: var(--blue-button-color);
+  background-color: var(--blue-accent);
   border: 1.3px solid var(--med-theme);
   color: var(--med-theme);
 }
@@ -2050,7 +2055,7 @@ html {
 }
 
 .active-indicator {
-  background-color: var(--green-button-color);
+  background-color: var(--green-accent);
 }
 
 .config-display-container {
@@ -2840,7 +2845,7 @@ html {
 .card-head {
   grid-row: 1;
   font-size: 2vh;
-  background-color: #f13a65;  
+  background-color: var(--red-accent);  
   color: white;
   display: flex;
   justify-content: center;
