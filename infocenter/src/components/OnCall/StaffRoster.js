@@ -1,17 +1,14 @@
 import { staffOnCallRoster } from "../../utils/utils"
 
 function getBackgroundColor(index) {
-    if (index % 4 === 0 ) {
-        return {backgroundColor: '#3972e4'}
+    if (index % 3 === 0 ) {
+        return {backgroundColor: '#05A475'}
     }
-    else if (index % 4 === 1 ) {
-        return {backgroundColor: '#f13a65'}
-    }
-    else if (index % 4 === 2 ) {
-        return {backgroundColor: '#06BF88'}
+    if (index % 3 === 1 ) {
+        return {backgroundColor: '#fcc757'}
     }
     else {
-        return {backgroundColor: '#f07b45'}
+        return {backgroundColor: '#b232d2'} 
     }
 }
 
