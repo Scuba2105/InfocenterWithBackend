@@ -1213,7 +1213,7 @@ html {
 
 .name-text {
   font-size: 4vh;
-  transform: translateY(-5px);
+  transform: translateY(calc(4.63vh - 30px));
 }
 
 .position {
