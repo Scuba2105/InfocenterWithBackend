@@ -1,10 +1,10 @@
 import { TechnicalLinks } from "./TechnicalLinks";
-import { StaffDetails } from "./StaffDetails";
+import { StaffDetails } from "./Staff/StaffDetails";
 import { useUser, useDevice } from "./StateStore";
 import { LinkModal } from "./LinkModal";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
-import { AddEditStaff } from "./AddEditStaff";
+import { AddEditStaff } from "./Staff/AddEditStaff";
 import { EditIcon, VendorArrow } from "../svg";
 import { workshops } from "../data";
 

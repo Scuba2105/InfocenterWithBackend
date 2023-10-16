@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
-import { AddEditStaff } from "./AddEditStaff";
+import { AddEditStaff } from "./Staff/AddEditStaff";
 import { serverConfig } from "../server";
 
 // Generate the values for the models, types and manufacturers select menus

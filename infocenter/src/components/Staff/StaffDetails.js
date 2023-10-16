@@ -1,7 +1,7 @@
-import { useProfilePhotoUpdate } from "./StateStore";
-import { workshops } from "../data";
-import { serverConfig } from "../server";
-import { EmailIcon, BlankProfile } from "../svg";
+import { useProfilePhotoUpdate } from "../StateStore";
+import { workshops } from "../../data";
+import { serverConfig } from "../../server";
+import { EmailIcon, BlankProfile } from "../../svg";
 import { StaffInfoEntry } from "./StaffInfoEntry";
 
 const teamColors = {Management: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
@@ -41,12 +41,10 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <StaffInfoEntry entry="id" headerLabel="Staff ID" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry entry="hostname" headerLabel="Computer Name" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="officePhone" headerLabel="Office Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="dectPhone" headerLabel="Dect Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="workMobile" headerLabel="Work Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="personalMobile" headerLabel="Personal Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" dataProps={["id"]} selectedData={selectedData}></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer Name" dataProps={["hostname"]} selectedData={selectedData}></StaffInfoEntry>}
+                <StaffInfoEntry heading="Phone Numbers" dataProps={["officePhone", "dectPhone"]} selectedData={selectedData}></StaffInfoEntry>
+                <StaffInfoEntry heading="Mobile Numbers" dataProps={["workMobile", "personalMobile"]} selectedData={selectedData}></StaffInfoEntry>
             </div>
         </div>
     );
