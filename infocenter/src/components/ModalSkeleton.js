@@ -4,6 +4,9 @@ import { serverConfig } from "../server";
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
 'disposal', 'change-password', "update-staff-contact", "update-vendor-contact"];
 
+const onCallPageHeadings = {"my-roster": "Upcoming On-Call Duties", "staff-roster": "On-Call Roster", "edit-roster": "Edit On-Call Roster", "confirm-roster": "Confirm On-Call Roster",
+"key-contacts": "Key On-Call Contacts", "on-call-cheatsheet": "On-Call Cheatsheet"} 
+
 function getFormHeading(page, type, selectedData, name) {
     
     if (page === "staff") {
@@ -30,14 +33,8 @@ function getFormHeading(page, type, selectedData, name) {
     else if (type === "update-staff-contact" || type === "update-vendor-contact") {
         return type === "update-staff-contact" ? "Update Staff Contact" : "Update Vendor Contact";
     }
-    else if (type === "my-roster") {
-        return "Upcoming On-Call Duties";
-    }
-    else if (type === "staff-roster") {
-        return "On-Call Roster";
-    }
-    else if (type === "edit-roster") {
-        return "Edit On-Call Roster";
+    else if (page === "on-call") {
+        return onCallPageHeadings[type];
     }
 }
 

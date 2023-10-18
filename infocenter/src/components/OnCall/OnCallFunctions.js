@@ -14,7 +14,7 @@ const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#0
 {label: "Key Contacts", "icon": KeyContactsIcon, color: "#0B3A99"}, 
 {label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#58056D"}];
 
-const modalLinkButtons = ["my-roster", "edit-roster", "staff-roster", "confirm-roster"]
+const modalLinkButtons = ["my-roster", "edit-roster", "staff-roster", "confirm-roster", "key-contacts", "on-call-cheatsheet"];
 
 function showForm(setFormVisibile, setFormType, type) {
     if (modalLinkButtons.includes(type)) {
@@ -51,9 +51,12 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
             })}
             {formVisible && 
             <ModalSkeleton type={formType} closeModal={() => hideForm(setFormVisibile)} page={page} >
-                {formType === "my-roster" && <MyOnCall></MyOnCall>}
-                {formType === "staff-roster" && <StaffRoster></StaffRoster>}
-                {formType === "edit-roster" && <EditRoster></EditRoster>}
+                {formType === "my-roster" ? <MyOnCall></MyOnCall> :
+                formType === "staff-roster" ? <StaffRoster></StaffRoster> :
+                /*formType === "edit-roster" ? <EditRoster></EditRoster> :*/
+                <div className="modal-display">
+                    <h2 className="on-call-form-placeholder">Yet to be implemented</h2>
+                </div>}                
             </ModalSkeleton>}
         </div>
     )

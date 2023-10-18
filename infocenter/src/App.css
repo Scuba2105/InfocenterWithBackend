@@ -3158,3 +3158,13 @@ abbr[title] {
   margin: 40px;
 }
 
+.on-call-form-placeholder {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
+  color: var(--dark-theme);
+}
+

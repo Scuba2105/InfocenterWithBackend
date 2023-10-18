@@ -5,7 +5,7 @@ function getBackgroundColor(index) {
         return {backgroundColor: '#05A475'}
     }
     if (index % 3 === 1 ) {
-        return {backgroundColor: '#fcc757'}
+        return {backgroundColor: '#fa854f'}
     }
     else {
         return {backgroundColor: '#b232d2'} 
