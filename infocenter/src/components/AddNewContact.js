@@ -6,9 +6,11 @@ import { serverConfig } from "../server";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
-const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
+const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-/]+$|^\s*$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
+
+const genericVendorNames = ["Customer Service", "Service Department", "Technical Service"];
 
 function getInputs(inputContainer, inputPage, addNewVendor) {
     if (inputPage === 1 && !addNewVendor) {
@@ -45,7 +47,7 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewV
         const regexIndex = index + (inputPage - 1)*3;
         
         // Validate the inputs for each page and show warning if fails validation. Else, add entry to contact data.
-        if (inputPage === 1 || (input.value !== "" && inputPage === 2)) {
+        if ((inputPage === 1) || (input.value !== "" && inputPage === 2)) {
             if (!vendorRegexArray[regexIndex].test(input.value)) {
                 showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
                 return
@@ -164,6 +166,7 @@ async function uploadNewContactData(newContactData, queryClient, showMessage, cl
     const currentDate = new Date();
     newContactData.current["Current Date"] = currentDate.toLocaleDateString();
 
+    console.log(newContactData.current);
     // Start uploading dialog and begin post request
     showMessage("uploading", `Uploading New Contact Data`);
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react"
-import { useConfirmation, useProfilePhotoUpdate, useUser } from "./StateStore"
-import { Input } from "./Input"
-import { SelectInput } from "./SelectInput"
-import { capitaliseFirstLetters, sortMandatoryFields } from "../utils/utils"
-import { serverConfig } from "../server"
+import { useConfirmation, useProfilePhotoUpdate, useUser } from "../StateStore"
+import { Input } from "../Input"
+import { SelectInput } from "../SelectInput"
+import { capitaliseFirstLetters, sortMandatoryFields } from "../../utils/utils"
+import { serverConfig } from "../../server"
 
 // Define the arrays used for mapping over to simplify logic
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]

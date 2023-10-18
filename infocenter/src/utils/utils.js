@@ -81,3 +81,41 @@ export function getOrdinalNumber(number) {
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
+
+export function getWeekBoundingDates(inputDate) {
+    const selectedDay = inputDate.getDay();
+    // Adjust day to make Monday the start, not Sunday.
+    const adjustedDay = selectedDay === 0 ? 6 : selectedDay - 1;
+    const weekStart = inputDate - adjustedDay * (24*60*60*1000);
+    const weekEnd = weekStart + 6 * (24*60*60*1000);
+    const upperBoundDate = new Date(weekEnd);
+    const lowerBoundDate = new Date(weekStart);
+    return [lowerBoundDate, upperBoundDate];
+}
+
+// Variables and functions used in multiple places in on-call page
+export const staffOnCallRoster = ["Durga Sompalle", "Mitchell Pyne", "Atif Siddiqui",
+"Mitchell Pacey", "Steven Bradbury", "Ray Aunei Mose", "Rodney Birt", "Kendo Wu", "Matthew Murrell"];
+
+export function getAdjustedBeginRoster(staffOnCallRoster) {
+    const startIndex = staffOnCallRoster.indexOf("Kendo Wu");
+    return staffOnCallRoster.slice(startIndex).concat(staffOnCallRoster.slice(0, startIndex));
+}
+
+export function currentOnCallName(onCallRoster, beginDate, date) {
+    const diff = (date - beginDate)
+    // Number of weeks is difference in ms divided by number of ms in one week rounded down
+    const numberOfWeeks = Math.abs(Math.floor(diff/(604800000)));
+    const rosterCycleNumber = numberOfWeeks % onCallRoster.length;
+    const reversedRoster = onCallRoster.slice(1).reverse();
+    // Add the initial entry to the roster
+    reversedRoster.unshift(onCallRoster[0]);
+    if (beginDate <= date) {
+      return onCallRoster[rosterCycleNumber]; 
+    }
+    return reversedRoster[rosterCycleNumber];  
+  }
+
+// Begin date is mm/dd/yyyy so actually Mon 09/10/2023
+export const beginDate = new Date("10/09/2023");
+

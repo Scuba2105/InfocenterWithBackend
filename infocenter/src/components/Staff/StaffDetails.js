@@ -1,8 +1,9 @@
-import { useProfilePhotoUpdate } from "./StateStore";
-import { workshops } from "../data";
-import { serverConfig } from "../server";
-import { EmailIcon, BlankProfile } from "../svg";
+import { useProfilePhotoUpdate } from "../StateStore";
+import { workshops } from "../../data";
+import { serverConfig } from "../../server";
+import { EmailIcon, BlankProfile } from "../../svg";
 import { StaffInfoEntry } from "./StaffInfoEntry";
+import { Laptop, StaffID, OfficePhone, DectPhone, MobilePhone } from "../../svg"
 
 const teamColors = {Management: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
 border: '1px solid rgb(137, 44, 44)', color: 'rgb(137, 44, 44)'}, JHH: {background: 'radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97))', 
@@ -41,12 +42,12 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <StaffInfoEntry entry="id" headerLabel="Staff ID" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry entry="hostname" headerLabel="Computer Name" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="officePhone" headerLabel="Office Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="dectPhone" headerLabel="Dect Phone" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="workMobile" headerLabel="Work Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
-                {<StaffInfoEntry entry="personalMobile" headerLabel="Personal Mobile" selectedData={selectedData} headerColor={() => getTextColor(selectedData.team, teamColors)} defaultColor={() => getTextColor("default", teamColors)}></StaffInfoEntry>}
+                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#A8061C" bColor="red"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer Name" value={selectedData.hostname} Icon={Laptop} color="#095841" bColor="green"></StaffInfoEntry>}
+                <StaffInfoEntry heading="Office Phone" value={selectedData.officePhone} Icon={OfficePhone} color="#B07903" bColor="yellow"></StaffInfoEntry>
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Phone" value={selectedData.dectPhone} Icon={DectPhone} color="#58056D" bColor="purple"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Work Mobile" value={selectedData.workMobile} Icon={MobilePhone} color="#A93601" bColor="orange"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Personal Mobile" value={selectedData.personalMobile} Icon={MobilePhone} color="#0B3A99" bColor="blue"></StaffInfoEntry>}
             </div>
         </div>
     );

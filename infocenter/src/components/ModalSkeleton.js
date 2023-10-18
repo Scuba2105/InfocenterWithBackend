@@ -4,7 +4,10 @@ import { serverConfig } from "../server";
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
 'disposal', 'change-password', "update-staff-contact", "update-vendor-contact"];
 
-function getFormHeading(page, type, selectedData) {
+const onCallPageHeadings = {"my-roster": "Upcoming On-Call Duties", "staff-roster": "On-Call Roster", "edit-roster": "Edit On-Call Roster", "confirm-roster": "Confirm On-Call Roster",
+"key-contacts": "Key On-Call Contacts", "on-call-cheatsheet": "On-Call Cheatsheet"} 
+
+function getFormHeading(page, type, selectedData, name) {
     
     if (page === "staff") {
         const heading = type === "add-new" ? "Add New Employee" : `Update Employee Details`;
@@ -30,6 +33,9 @@ function getFormHeading(page, type, selectedData) {
     else if (type === "update-staff-contact" || type === "update-vendor-contact") {
         return type === "update-staff-contact" ? "Update Staff Contact" : "Update Vendor Contact";
     }
+    else if (page === "on-call") {
+        return onCallPageHeadings[type];
+    }
 }
 
 function formatTypeHeading(type) {
@@ -47,14 +53,13 @@ function formatTypeHeading(type) {
     return capitaliseFirstLetters(name);
 }
 
-export function ModalSkeleton({children, selectedData, closeModal, type, page}) {
-
-    if (formTypes.includes(type)) {
+export function ModalSkeleton({children, selectedData, closeModal, type, page, name}) {
+    if (formTypes.includes(type) || page === "on-call") {
         return (
             <div className="modal-container">
                 <div className="modal-title-bar">
                     <div id="title-aligner"></div>     
-                    <h2 className="model-title">{getFormHeading(page, type, selectedData)}</h2> 
+                    <h2 className="model-title">{getFormHeading(page, type, selectedData, name)}</h2> 
                     <img className="cross" src={`https://${serverConfig.host}:${serverConfig.port}/images/cross.svg`} alt="cross" onClick={closeModal}></img> 
                 </div>
                 {children}

@@ -11,6 +11,8 @@ import { useState } from "react";
 import { ServiceReportUploads } from "./ServiceReportUploads";
 import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
+import { CalendarComponent } from "./OnCall/CalendarComponent";
+import { OnCallFunctions } from "./OnCall/OnCallFunctions";
 import { useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
@@ -104,6 +106,12 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                         {utilityPage === 2 && <ThermometerManagement page={page} dialogOpen={dialogOpen} closeDialog={closeDialog} showMessage={showMessage}></ThermometerManagement>}
                         <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>
+                </> :
+                page === "on-call" ?
+                <>
+                    <CalendarComponent onCallChangedData={data.onCallData}></CalendarComponent>
+                    <OnCallFunctions page={page} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></OnCallFunctions>
+                    <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                     <h1 style={{color: 'white', width: 600 + 'px', margin: 'auto auto'}}>Page has not been implemented yet</h1>}
             </div>

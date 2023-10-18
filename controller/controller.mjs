@@ -2,6 +2,7 @@ import bcrypt, { hash } from "bcrypt";
 import { getAllDeviceData } from '../models/device-models.mjs';
 import { getAllStaffData } from '../models/staff-models.mjs'; 
 import { getAllStaffContactsData, getAllVendorContactsData } from '../models/contacts-models.mjs';
+import { getOnCallData } from '../models/on-call-models.mjs'
 import { retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';
 
 export async function validateLoginCredentials(req, res, __dirname) {
@@ -115,7 +116,8 @@ export async function getAllData(req, res, __dirname) {
         const deviceData = await getAllDeviceData(__dirname);
         const contactsData = await getAllStaffContactsData(__dirname);
         const vendorContactsData = await getAllVendorContactsData(__dirname);
-        const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData, vendorContactsData: vendorContactsData};
+        const onCallData = await getOnCallData(__dirname);
+        const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData, vendorContactsData: vendorContactsData, onCallData: onCallData};
         res.json(allData);
     }
     catch(err) {

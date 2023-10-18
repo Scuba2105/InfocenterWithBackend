@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 import { Menu } from './components/Menu';
 import { MainArea } from './components/MainArea';
 import { useState } from 'react';

@@ -25,11 +25,33 @@ html {
   --form-input-color: #69737a;
   --input-placeholder-color: rgb(188, 188, 188);
   --grey-font: rgb(183, 190, 195); 
-  --green-button-color: rgb(3, 252, 156);
   --green-button-border: 1px solid rgb(3, 168, 105);
   --blue-button-color: #03a9eb; 
   --search-bar-color: #69737a;
+  --calendar-tile-active: var(--green-accent); 
+  --calendar-tile-hover: #437264;
+  --calendar-tile-font: rgb(230, 229, 229);
+  --red-accent: #fa4f66;
+  --green-accent: #06BF88;
+  --yellow-accent: #fdcd66;
+  --purple-accent: #c242e2;
+  --orange-accent: #fa854f;
+  --blue-accent: #5A90FD;
 }
+
+/* Define some utility classes to minimise repetitive css */
+.size-100 {
+  height: 100%;
+  width: 100%;
+}
+
+.flex-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Start of the CSS for the page elements */
 
 .wrapper {
   height: 100%;
@@ -714,7 +736,7 @@ html {
 }
 
 .add-new-btn {
-  background-color: var(--blue-button-color);
+  background-color: var(--blue-accent);
   border: 1px solid var(--med-light-theme);
   color: #212936;
   border-radius: 50%;
@@ -990,7 +1012,7 @@ html {
   justify-content: center;
   align-items: center;
   color: var(--med-light-theme);
-  background-color: var(--green-button-color);
+  background-color: var(--green-accent);
   border: var(--green-button-border);
   border-radius: 50%;
   transform: translateX(-15px);
@@ -1098,41 +1120,34 @@ html {
   margin-bottom: 20px;
 }
   
-.service {
-    background: linear-gradient(#fd80ae, #ff73a6);
-    border: 1px solid #7e1439;
-    color: var(--dark-theme);
+.service, .my-roster, .red-background {
+  background-color: var(--red-accent);
+  color: var(--dark-theme);
 }
 
-.user-manual {
-  background-color: #a5f3f0;
-  background: linear-gradient(#46f8f2, #1ef7f0);
+.user-manual, .edit-roster, .green-background {
+  background-color: var(--green-accent);
   color: var(--dark-theme);
-  border: 1px solid #095250
 }
 
-.config {
-  background: linear-gradient(#fdd783, #f9d27e);
+.config, .confirm-roster, .yellow-background {
+  background-color: var(--yellow-accent);
   color: var(--dark-theme);
-  border:1px solid #815a07;
 }
 
-.software {
-  background: linear-gradient(#e274fe, #de65fd);
+.software, .on-call-cheatsheet, .purple-background {
+  background-color: var(--purple-accent);
   color: var(--dark-theme);
-  border: 1px solid #320E3B
 }
 
-.documents {
-  background: linear-gradient(#fea278, #fd9a6d);
+.documents, .staff-roster, .orange-background {
+  background-color: var(--orange-accent);
   color: var(--dark-theme);
-  border: 1px solid #7f3f21;
 }
 
-.passwords {
+.passwords, .key-contacts, .blue-background {
   color: var(--dark-theme);
-  background: linear-gradient(#74c1fc, #6abdfd);
-  border: 1px solid #043254;
+  background-color: var(--blue-accent);
 }
 
 /* CSS for staff display area */
@@ -1200,7 +1215,7 @@ html {
 
 .name-text {
   font-size: 4vh;
-  transform: translateY(-5px);
+  transform: translateY(calc(4.63vh - 30px));
 }
 
 .position {
@@ -1218,10 +1233,10 @@ html {
   grid-column: 1;
   grid-row: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   overflow: hidden;
-  font-size: 2vh;
+  font-size: 1.7vh;
   margin-bottom: 25px;
 }
 
@@ -1229,38 +1244,41 @@ html {
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .info-entry {
-  width: 80%;
-  height: 80%;
-  display: grid;
-  grid-template-rows: 40% 1fr;
+  font-size: 11px;
+  aspect-ratio: 1 / 1;
+  height: 75%;
+  max-height: 175px;
+  border-radius: 6px;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 5px;
+  font-size: clamp(12px, 1.75vh, 20px);
 }
 
-.info-entry-header {
-  grid: 1 / 1;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background-color: var(--light-theme);
-  margin: 0;
+.info-entry:hover {
+  cursor: pointer;
 }
 
-.info-entry-data {
-  grid: 1/ 2;
+.info-entry-labels-container {
+  flex-direction: column;
+  height: 20px;
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--form-font-color);
-  background-color: var(--info-container-background-color);
+  font-weight: bold;
+}
+
+.info-entry-labels-container:hover {
+  cursor: pointer;
+}
+
+
+.info-entry-value {
+  font-weight: 500;
 }
 
 .email-link {
@@ -1420,7 +1438,7 @@ html {
 }
 
 /* Format the add new staff/equipment modal */
-.add-new, .new-image, .update-device-file {
+.add-new, .new-image, .update-device-file, .date-change {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1441,7 +1459,7 @@ html {
   margin-bottom: 14px;
 }
 
-.add-new-input, .new-image-input, .update-device-file-input {
+.add-new-input, .new-image-input, .update-device-file-input, .date-change-input {
   font-size: 12px;
   color: var(--form-font-color);
   height: 20px;
@@ -1452,6 +1470,7 @@ html {
   margin-top: 3px;
   transform: translateY(-4px);
   background-color: var(--form-input-color);
+  border: none;
 }
 
 .update-device-file-input {
@@ -1465,7 +1484,7 @@ html {
   width: 210px;
 }
 
-.add-new-label, .new-image-label {
+.add-new-label, .new-image-label, .date-change-label {
   font-weight: 500;
   transform: translateY(-4px);  
 }
@@ -1724,7 +1743,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--green-button-color);
+  background-color: var(--green-accent);
   color: var(--med-theme);
   border-radius: 5px;
   font-weight: 600;
@@ -1739,7 +1758,7 @@ html {
 }
 
 .save-button {
-  background-color: var(--blue-button-color);
+  background-color: var(--blue-accent);
   border: 1.3px solid var(--med-theme);
   color: var(--med-theme);
 }
@@ -2052,7 +2071,7 @@ html {
 }
 
 .active-indicator {
-  background-color: var(--green-button-color);
+  background-color: var(--green-accent);
 }
 
 .config-display-container {
@@ -2535,7 +2554,9 @@ html {
   margin-top: -10px;
 }
 
-.employee-requestor-select-label, .service-agent-select-label, .model-select-label, .us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, .text-area-container label {
+.employee-requestor-select-label, .service-agent-select-label, .model-select-label, 
+.us-qty-select-label, .ctg-qty-select-label, .shipping-option-select-label, 
+.text-area-container label {
   font-size: 15px;
   font-weight: 600;
   color: var(--form-font-color);
@@ -2790,3 +2811,370 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+/* format calendar component */
+.calendar-half-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--med-theme);
+  overflow: hidden;
+}
+
+.on-call-summary {
+  width: 90%;
+  height: 18%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5vh;
+}
+
+/* Format the date card */
+.date-card {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--med-light-theme);
+  color: white;
+  display: grid;
+  grid-template-rows: 3.4vh 1fr;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.date-card-small {
+  height: 100px;
+  width: 110px;
+  grid-template-rows: 15px 1fr;
+}
+
+.card-head {
+  grid-row: 1;
+  font-size: 2vh;
+  background-color: var(--red-accent);  
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-head-small {
+  font-size: 14px;
+}
+
+.date-card-data {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.date-card-month {
+  font-size: clamp(20px, 3vh, 35px);
+}
+
+.date-card-day {
+  font-size: clamp(20px,4.2vh,45px);
+}
+
+.date-card-month-small {
+  font-size: 20px;
+}
+
+.date-card-day-small {
+  font-size: 30px;
+}
+
+.suffix {
+  font-size: clamp(12px,2.6vh,30px);
+}
+
+.on-call-staff-card {
+  height: 100%;
+  width: 30vw;
+  min-width: 250px;
+  max-width: 500px;
+  border: 1px solid var(--dark-theme);
+  background-color: var(--med-light-theme);
+  color: white;
+  display: grid;
+  grid-template-rows: 3.4vh 1fr;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.on-call-staff {
+  grid-row: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.comments-container {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  color: white;
+}
+
+.on-call-name, .on-call-comment {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.on-call-name {
+  font-size: clamp(16px, 2.9vh, 35px);
+}
+
+.on-call-comment {
+  font-size: clamp(12px, 2vh, 20px);
+  text-align: center;
+  text-wrap: wrap;
+}
+
+/* Format the on-call calendar component */
+.react-calendar { 
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--med-light-theme);
+  color: white;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto auto;
+}
+
+/* Format the navigation bar */
+.react-calendar__navigation {
+  width: 100%;
+  height: 3vw;
+  min-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--calendar-tile-active);
+  padding: 1vw;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.react-calendar__navigation button {
+  color: white;
+  min-width: 44px;
+  background: none;
+  font-size: clamp(16px, 1.15vw, 22px);
+  font-weight: bold;
+  margin-top: 6px;
+  border: none;
+}
+
+.react-calendar__navigation__arrow {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* Hide the previous and next year buttons and format the nav bar*/
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.react-calendar__navigation__label {
+  width: 30%;
+  max-width: 200px;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: transparent;
+}
+.react-calendar__navigation button[disabled] {
+  background-color: transparent;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: clamp(14px, 1vw, 20px);
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+.react-calendar__tile {
+  color: var(--calendar-tile-font);
+  font-weight: normal;
+  font-size: clamp(14px, 1vw, 20px);
+  background: none;
+  border: 1px solid transparent;
+  margin: 3px auto 3px auto;
+  width: 6.5vh;
+  height: 6.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.react-calendar__tile:enabled:hover {
+  background: var(--calendar-tile-hover);
+  border-radius: 6px;
+}
+.react-calendar__tile--active {
+  background: var(--calendar-tile-active);
+  border-radius: 6px;
+  font-weight: bold;
+  color: white;
+}
+.react-calendar__tile--now:not(.react-calendar__tile--active) {
+  border: 2px solid var(--calendar-tile-active);
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: var(--calendar-tile-active);
+  color: white;
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background: var(--calendar-tile-hover);
+}
+
+/* Remove the neighbouring months from showing in the current month */
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: transparent;
+}
+
+/* On call functions formatting */
+.on-call-functions-container {
+  height: 90%;
+  width: 90%;
+  margin: auto auto;
+  background-color: var(--med-light-theme);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 4vw 1fr 1fr 1fr;
+  overflow: hidden;
+}
+
+.on-call-functions-header {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  font-size: clamp(14px, 1.75vw, 28px);
+  background-color: var(--med-theme);
+  color: white;
+  font-weight: 500;
+}
+
+.on-call-function-button {
+  height: 9vw;
+  width: 9vw;
+  max-height: 145px;
+  max-width: 145px;
+  font-size: clamp(12px, 0.85vw, 18px);
+  flex-direction: column;
+  justify-content: space-around;
+  color: var(--dark-theme);
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.on-call-label-container {
+  flex-direction: column;
+}
+
+/* Staff Roster Formatting */
+.staff-roster-label {
+  height: 35px;
+  width: 40%;
+  background: var(--med-light-theme);
+  color: white;
+  margin: 6px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+  border-radius: 10px;
+}
+
+.staff-roster-label:last-of-type {
+  margin-bottom: 30px;
+}
+
+.staff-roster-label:first-of-type {
+  margin-top: 30px;
+}
+
+/* My roster formatting */
+.date-range-container, .my-roster-start-end-label {
+  justify-content: space-around;
+  margin-bottom: 15px;
+  width: 75%;
+}
+
+.date-range-container:first-of-type, .my-roster-start-end-label {
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.my-roster-start-end-label label{
+  font-size: 14px;
+  color: white;
+  width: 110px;
+}
+
+.my-roster-label-aligner {
+  height: 10px;
+  width: 50px;
+}
+
+/* Edit roster form formatting */ 
+.edit-roster-form {
+  margin-top: 40px;
+}
+
+.edit-roster-update-btn {
+  margin: 40px;
+}
+
+.on-call-form-placeholder {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
+  color: var(--dark-theme);
+}
+
