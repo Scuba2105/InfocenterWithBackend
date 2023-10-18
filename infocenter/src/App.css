@@ -51,30 +51,6 @@ html {
   align-items: center;
 }
 
-.red-background {
-  background-color: var(--red-accent);
-}
-
-.green-background {
-  background-color: var(--green-accent);
-}
-
-.yellow-background {
-  background-color: var(--yellow-accent);
-}
-
-.purple-background {
-  background-color: var(--purple-accent);
-}
-
-.orange-background {
-  background-color: var(--orange-accent);
-}
-
-.blue-background {
-  background-color: var(--blue-accent);
-}
-
 /* Start of the CSS for the page elements */
 
 .wrapper {
@@ -1144,32 +1120,32 @@ html {
   margin-bottom: 20px;
 }
   
-.service, .my-roster {
+.service, .my-roster, .red-background {
   background-color: var(--red-accent);
   color: var(--dark-theme);
 }
 
-.user-manual, .edit-roster {
+.user-manual, .edit-roster, .green-background {
   background-color: var(--green-accent);
   color: var(--dark-theme);
 }
 
-.config, .confirm-roster {
+.config, .confirm-roster, .yellow-background {
   background-color: var(--yellow-accent);
   color: var(--dark-theme);
 }
 
-.software, .on-call-cheatsheet {
+.software, .on-call-cheatsheet, .purple-background {
   background-color: var(--purple-accent);
   color: var(--dark-theme);
 }
 
-.documents, .staff-roster {
+.documents, .staff-roster, .orange-background {
   background-color: var(--orange-accent);
   color: var(--dark-theme);
 }
 
-.passwords, .key-contacts {
+.passwords, .key-contacts, .blue-background {
   color: var(--dark-theme);
   background-color: var(--blue-accent);
 }
@@ -1274,12 +1250,32 @@ html {
 }
 
 .info-entry {
+  font-size: 11px;
+  aspect-ratio: 1 / 1;
+  height: 75%;
+  max-height: 175px;
+  border-radius: 6px;
   flex-direction: column;
-  height: 60%;
-  width: 50%;
-  padding: 8px;
-  border-radius: 10px;
+  justify-content: space-around;
+  padding-bottom: 5px;
+  font-size: clamp(12px, 1.75vh, 20px);
 }
+
+.info-entry:hover {
+  cursor: pointer;
+}
+
+.info-entry-labels-container {
+  flex-direction: column;
+  height: 20px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.info-entry-labels-container:hover {
+  cursor: pointer;
+}
+
 
 .info-entry-value {
   font-weight: 500;
@@ -2881,7 +2877,7 @@ html {
 }
 
 .date-card-day {
-  font-size: clamp(20px,5vh,45px);
+  font-size: clamp(20px,4.2vh,45px);
 }
 
 .date-card-month-small {
@@ -2938,7 +2934,7 @@ html {
 }
 
 .on-call-name {
-  font-size: clamp(16px, 3.3vh, 35px);
+  font-size: clamp(16px, 2.9vh, 35px);
 }
 
 .on-call-comment {

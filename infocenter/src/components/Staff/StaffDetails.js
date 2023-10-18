@@ -42,12 +42,12 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#66182a" bColor="red"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer Name" value={selectedData.hostname} Icon={Laptop} color="#014d36" bColor="green"></StaffInfoEntry>}
-                <StaffInfoEntry heading="Office Phone" value={selectedData.officePhone} Icon={OfficePhone} color="#AC7601" bColor="yellow"></StaffInfoEntry>
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Phone" value={selectedData.dectPhone} Icon={DectPhone} color="#4d115c" bColor="purple"></StaffInfoEntry>}
+                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#A8061C" bColor="red"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer Name" value={selectedData.hostname} Icon={Laptop} color="#095841" bColor="green"></StaffInfoEntry>}
+                <StaffInfoEntry heading="Office Phone" value={selectedData.officePhone} Icon={OfficePhone} color="#B07903" bColor="yellow"></StaffInfoEntry>
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Phone" value={selectedData.dectPhone} Icon={DectPhone} color="#58056D" bColor="purple"></StaffInfoEntry>}
                 {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Work Mobile" value={selectedData.workMobile} Icon={MobilePhone} color="#A93601" bColor="orange"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Personal Mobile" value={selectedData.personalMobile} Icon={MobilePhone} color="#0541BA" bColor="blue"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Personal Mobile" value={selectedData.personalMobile} Icon={MobilePhone} color="#0B3A99" bColor="blue"></StaffInfoEntry>}
             </div>
         </div>
     );
