@@ -31,12 +31,12 @@ html {
   --calendar-tile-active: var(--green-accent); 
   --calendar-tile-hover: #437264;
   --calendar-tile-font: rgb(230, 229, 229);
-  --red-accent: #f13a65;
+  --red-accent: #fa4f66;
   --green-accent: #06BF88;
-  --yellow-accent: #fcc757;
-  --purple-accent: #b232d2;
-  --orange-accent: #f07b45;
-  --blue-accent: #3972e4;
+  --yellow-accent: #fdcd66;
+  --purple-accent: #c242e2;
+  --orange-accent: #fa854f;
+  --blue-accent: #5A90FD;
 }
 
 /* Define some utility classes to minimise repetitive css */
@@ -50,6 +50,32 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+.red-background {
+  background-color: var(--red-accent);
+}
+
+.green-background {
+  background-color: var(--green-accent);
+}
+
+.yellow-background {
+  background-color: var(--yellow-accent);
+}
+
+.purple-background {
+  background-color: var(--purple-accent);
+}
+
+.orange-background {
+  background-color: var(--orange-accent);
+}
+
+.blue-background {
+  background-color: var(--blue-accent);
+}
+
+/* Start of the CSS for the page elements */
 
 .wrapper {
   height: 100%;
@@ -1249,11 +1275,14 @@ html {
 
 .info-entry {
   flex-direction: column;
-  height: 65%;
-  width: 55%;
+  height: 60%;
+  width: 50%;
   padding: 8px;
   border-radius: 10px;
-  color: var(--dark-theme)
+}
+
+.info-entry-value {
+  font-weight: 500;
 }
 
 .email-link {
