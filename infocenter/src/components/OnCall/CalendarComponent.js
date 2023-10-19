@@ -99,7 +99,7 @@ export function CalendarComponent({onCallChangedData}) {
       <div className='on-call-summary'>
         <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions}></DateCard>
         <div className='on-call-staff-card'>
-          <span className="card-head">Selected On-Call Details</span>
+          <span className="card-head">Unconfirmed On-Call Details</span>
           <div className='on-call-staff'>
             <span className='on-call-name'>{onCallEmployee.name}</span> 
             <div className='comments-container'>

@@ -32,6 +32,8 @@ html {
   --calendar-tile-active: var(--green-button-color); 
   --calendar-tile-hover: #437264;
   --calendar-tile-font: rgb(230, 229, 229);
+  --red-accent: red;
+  --green-accent: rgb(2, 189, 118); 
 }
 
 /* Define some utility classes to minimise repetitive css */
@@ -1108,7 +1110,7 @@ html {
   justify-content: space-around;
   align-items: center;
   font-size: clamp(12px, 1.75vh, 20px);
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .technical-link:last-child {
@@ -1116,13 +1118,13 @@ html {
 }
   
 .main-link-button {
-  background-color: #6884bb;
+  background-color: #7c7cd6;
   border: 1px solid var(--med-theme);
   color: var(--med-theme);
 }
 
 .alternate-link-button {
-  background-color: #fec446;
+  background-color: #F0F48B;
   border: 1px solid var(--med-theme);
   color: var(--med-theme);
 }
@@ -2231,7 +2233,7 @@ html {
 .contact-update-header {
   grid: 1 / 1;
   font-size: 10px;
-  color: white;
+  color: var(--med-theme);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2242,8 +2244,9 @@ html {
 }
 
 #contact-update-edit {
-  background-color: #bdc6c7;
-  border: 1px solid #bdc6c7;
+  background-color: var(--med-theme);
+  border: 1px solid var(--med-theme);
+  opacity: 0.3;
   padding: 2px;
   border-radius: 50%;
   margin-right: 10px;
@@ -2251,15 +2254,14 @@ html {
 
 #contact-update-edit:hover {
   cursor: pointer;
-  background-color: white;
-  border: 1px solid white;
+  opacity: 1;
 }
 
 .contact-card-header {
   grid: 1 / 2;
   height: 100%;
   width: 100%;
-  color: white;
+  color: var(--med-light-theme);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2286,7 +2288,7 @@ html {
   justify-content: space-around;
   align-items: flex-start;
   background-color: #bdc6c7;
-  color: var(--med-light-theme);
+  color: var(--med-theme);
   border-top: 1px solid black;
 }
 
@@ -2944,7 +2946,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--calendar-tile-active);
+  background: var(--med-theme);
   padding: 1vw;
   margin-top: 0px;
   margin-bottom: 30px;
@@ -3069,7 +3071,7 @@ abbr[title] {
   flex-direction: column;
   justify-content: space-around;
   color: var(--dark-theme);
-  font-weight: bold;
+  font-weight: 500;
   border: none;
   border-radius: 15px;
   cursor: pointer;
@@ -3083,8 +3085,6 @@ abbr[title] {
 .staff-roster-label {
   height: 35px;
   width: 40%;
-  background: var(--med-light-theme);
-  color: white;
   margin: 6px;
   display: flex;
   justify-content: flex-start;

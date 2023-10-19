@@ -7,12 +7,12 @@ import { staffOnCallRoster, getAdjustedBeginRoster, beginDate } from '../../util
 import { EditRoster } from "./EditRoster";
 
 // Define the labels and icons for mapping the buttons.
-const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#095841"},
-{label: "Confirm Roster", "icon": ConfirmRosterIcon, color: "#B07903"},
-{label: "My Roster", "icon": MyRosterIcon, color: "#A8061C"}, 
-{label: "Staff Roster", "icon": StaffRosterIcon, color: "#A93601"}, 
-{label: "Key Contacts", "icon": KeyContactsIcon, color: "#0B3A99"}, 
-{label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#58056D"}];
+const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon},
+{label: "Confirm Roster", "icon": ConfirmRosterIcon},
+{label: "My Roster", "icon": MyRosterIcon}, 
+{label: "Staff Roster", "icon": StaffRosterIcon}, 
+{label: "Key Contacts", "icon": KeyContactsIcon}, 
+{label: "On-Call Cheatsheet", "icon": CheatsheetIcon}];
 
 const modalLinkButtons = ["my-roster", "edit-roster", "staff-roster", "confirm-roster", "key-contacts", "on-call-cheatsheet"];
 
@@ -35,12 +35,13 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
     return (
         <div className="on-call-functions-container">
             <div className="on-call-functions-header flex-c">On-Call Utilities</div>
-            {functionsData.map((entry) => {
+            {functionsData.map((entry, index) => {
                 const type = entry.label.toLowerCase().replace(/\s/g, "-");
+                const design = [0, 3, 4].includes(index) ? "main-link-button" : "alternate-link-button";
                 return (
                     <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100">
-                        <button className={`on-call-function-button flex-c ${type}`} onClick={() => showForm(setFormVisibile, setFormType, type)}>
-                            <entry.icon color={entry.color} size="2.7vw"></entry.icon>
+                        <button className={`on-call-function-button flex-c ${type} ${design}`} onClick={() => showForm(setFormVisibile, setFormType, type)}>
+                            <entry.icon color="#212936" size="2.7vw"></entry.icon>
                             <div className="on-call-label-container flex-c">
                                 <label className="on-call-label">{entry.label.split(" ")[0]}</label>
                                 <label className="on-call-label">{entry.label.split(" ")[1]}</label>
