@@ -17,7 +17,7 @@ export function DateCard({date, size, dateBoundary, dateOptions}) {
     }
     return (
         <div className="date-card">
-            <span className="card-head">{dateBoundary === "lower" ? "First Day" : "Last Day"}</span>
+            <span className="card-head">{dateBoundary === "lower" ? "Start Date" : "End Date"}</span>
             <div className="date-card-data">
                 <span className="date-card-month">{month}</span>
                 <span className="date-card-day">{dayNumber.replace(/^0/, "")}<span className="suffix">{suffix}</span></span>
