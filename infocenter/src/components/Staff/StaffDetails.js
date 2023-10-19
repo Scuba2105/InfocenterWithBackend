@@ -42,12 +42,12 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#212936" bColor="alternate"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer Name" value={selectedData.hostname} Icon={Laptop} color="#6884bb" bColor="purple"></StaffInfoEntry>}
-                <StaffInfoEntry heading="Office Phone" value={selectedData.officePhone} Icon={OfficePhone} color="#212936" bColor="alternate"></StaffInfoEntry>
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Phone" value={selectedData.dectPhone} Icon={DectPhone} color="#6884bb" bColor="purple"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Work Mobile" value={selectedData.workMobile} Icon={MobilePhone} color="#212936" bColor="alternate"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Personal Mobile" value={selectedData.personalMobile} Icon={MobilePhone} color="#6884bb" bColor="purple"></StaffInfoEntry>}
+                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#212936" bColor="main"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer" value={selectedData.hostname} Icon={Laptop} color="#212936" bColor="alternate"></StaffInfoEntry>}
+                <StaffInfoEntry heading="Office Ph." value={selectedData.officePhone} Icon={OfficePhone} color="#212936" bColor="main"></StaffInfoEntry>
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Ph." value={selectedData.dectPhone} Icon={DectPhone} color="#212936" bColor="alternate"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 1" value={selectedData.workMobile} Icon={MobilePhone} color="#212936" bColor="main"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 2" value={selectedData.personalMobile} Icon={MobilePhone} color="#212936" bColor="alternate"></StaffInfoEntry>}
             </div>
         </div>
     );
