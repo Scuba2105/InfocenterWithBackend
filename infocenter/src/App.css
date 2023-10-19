@@ -34,7 +34,7 @@ html {
   --red-accent: #fa4f66;
   --green-accent: #06BF88;
   --yellow-accent: #fdcd66;
-  --purple-accent: #c242e2;
+  --purple-accent: #a242e2;
   --orange-accent: #fa854f;
   --blue-accent: #5A90FD;
 }
@@ -1148,6 +1148,18 @@ html {
 .passwords, .key-contacts, .blue-background {
   color: var(--dark-theme);
   background-color: var(--blue-accent);
+}
+
+.purple-background {
+  background-color: #283651;
+  border: 1px solid #6884bb;
+  color: #6884bb;
+}
+
+.alternate-background {
+  background-color: #6884bb;
+  border: 1px solid var(--med-theme);
+  color: var(--med-theme);
 }
 
 /* CSS for staff display area */
