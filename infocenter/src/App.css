@@ -17,12 +17,12 @@ html {
   --light-theme: #4e6089; 
   --icon-theme: #1a1f28;
   --profile-pic-background-color: #DEE5E7;
-  --avatar-menu-color: #5d6e71;
+  --avatar-menu-color: var(--med-light-theme);
   --display-background-color: #383F4F;
   --info-container-background-color: #5d6881;
   --form-font-color: white;
-  --form-background-color: #4d555c;
-  --form-input-color: #69737a;
+  --form-background-color: var(--med-theme);
+  --form-input-color: var(--med-light-theme);
   --input-placeholder-color: rgb(188, 188, 188);
   --grey-font: rgb(183, 190, 195); 
   --green-button-color: rgb(5, 234, 146);
@@ -30,8 +30,10 @@ html {
   --blue-button-color: #03a9eb;
   --search-bar-color: #69737a;
   --calendar-tile-active: var(--green-button-color); 
-  --calendar-tile-hover: #437264;
+  --calendar-tile-hover: var(--med-light-theme);
   --calendar-tile-font: rgb(230, 229, 229);
+  --main-color-accent: #6EDDC0;
+  --alternate-color-accent: #CBFF4D;
   --red-accent: rgb(253, 67, 67);
   --green-accent: rgb(2, 189, 118); 
 }
@@ -354,7 +356,7 @@ html {
 .menu-selected {
   cursor: pointer;
   background-color: var(--dark-theme);
-  color: #02f3b2;
+  color: rgb(2, 189, 118);
 }
 
 .menu-icon {
@@ -364,7 +366,7 @@ html {
 .menu-option:hover {
   cursor: pointer;
   background-color: var(--dark-theme);
-  color:#02f3b2;
+  color:rgb(2, 189, 118);
 }
 
 .main-area {
@@ -2072,7 +2074,7 @@ html {
 .config-link {
   height: 100%;
   width: 100%;
-  border: 1px solid #003153;
+  border: 1px solid var(--dark-theme);
   border-radius: 20px;
   background: url('../../public/images/configuration-background.jpg');
   background-repeat: no-repeat;
@@ -2134,7 +2136,7 @@ html {
   height: 100%;
   width: 90%;
   color: white;
-  background-color: var(--med-theme);
+  background-color: var(--med-light-theme);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2149,7 +2151,7 @@ html {
 }
 
 .contacts-main-display {
-  background-color: var(--med-light-theme);
+  background-color: var(--med-theme);
   color: white;
   height: 100%;
   width: 90%;
@@ -2223,7 +2225,6 @@ html {
 .contact-card-container {
   height: 250px;
   width: 200px;
-  border: 1px solid black;
   border-radius: 10px;
   display: grid; 
   grid-template-rows: 40px 22% 1fr;
@@ -2233,7 +2234,6 @@ html {
 .contact-update-header {
   grid: 1 / 1;
   font-size: 10px;
-  color: var(--med-theme);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2287,8 +2287,8 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-  background-color: #bdc6c7;
-  color: var(--med-theme);
+  background-color: var(--med-light-theme);
+  color: white;
   border-top: 1px solid black;
 }
 
@@ -2313,8 +2313,20 @@ html {
   -ms-word-break: break-word;
 }
 
-.website-link:visited {
-  color: blue;
+.number-value-main {
+  color: var(--main-color-accent)
+}
+
+.number-value-alternate {
+  color: var(--alternate-color-accent)
+}
+
+.website-link-main:visited, .website-link-main {
+  color: var(--main-color-accent);
+}
+
+.website-link-alternate:visited, .website-link-alternate {
+  color: var(--alternate-color-accent);
 }
 
 .page-controls {
@@ -2812,7 +2824,7 @@ html {
 .date-card {
   height: 100%;
   aspect-ratio: 1 / 1;
-  background-color: var(--med-light-theme);
+  background-color: var(--med-theme);
   color: white;
   display: grid;
   grid-template-rows: 3.4vh 1fr;
@@ -2825,6 +2837,7 @@ html {
   height: 100px;
   width: 110px;
   grid-template-rows: 15px 1fr;
+  background-color: var(--med-light-theme);
 }
 
 .card-head {
@@ -2875,7 +2888,7 @@ html {
   min-width: 250px;
   max-width: 500px;
   border: 1px solid var(--dark-theme);
-  background-color: var(--med-light-theme);
+  background-color: var(--med-theme);
   color: white;
   display: grid;
   grid-template-rows: 3.4vh 1fr;
@@ -2924,7 +2937,7 @@ html {
 .react-calendar { 
   width: 100%;
   max-width: 100%;
-  background-color: var(--med-light-theme);
+  background-color: var(--med-theme);
   color: white;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -2946,7 +2959,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--med-theme);
+  background: var(--med-light-theme);
   padding: 1vw;
   margin-top: 0px;
   margin-bottom: 30px;
@@ -3018,7 +3031,7 @@ abbr[title] {
   background: var(--calendar-tile-active);
   border-radius: 6px;
   font-weight: bold;
-  color: white;
+  color: var(--med-theme);
 }
 .react-calendar__tile--now:not(.react-calendar__tile--active) {
   border: 2px solid var(--calendar-tile-active);
@@ -3029,7 +3042,7 @@ abbr[title] {
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background: var(--calendar-tile-active);
-  color: white;
+  color: var(--med-theme);
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
   background: var(--calendar-tile-hover);
@@ -3045,7 +3058,7 @@ abbr[title] {
   height: 90%;
   width: 90%;
   margin: auto auto;
-  background-color: var(--med-light-theme);
+  background-color: var(--med-theme);
   border-radius: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3057,7 +3070,7 @@ abbr[title] {
   grid-column: 1 / -1;
   grid-row: 1;
   font-size: clamp(14px, 1.75vw, 28px);
-  background-color: var(--med-theme);
+  background-color: var(--med-light-theme);
   color: white;
   font-weight: 500;
 }
@@ -3070,9 +3083,7 @@ abbr[title] {
   font-size: clamp(12px, 0.85vw, 18px);
   flex-direction: column;
   justify-content: space-around;
-  color: var(--dark-theme);
   font-weight: 500;
-  border: none;
   border-radius: 15px;
   cursor: pointer;
 }
