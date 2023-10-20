@@ -11,11 +11,11 @@ html {
   background-color: #121826; 
   --pageWidth: 100vw;
   --row-hover: #62709b;
-  --dark-theme: #121826;
-  --med-theme: #212936;
-  --med-light-theme: #383f4f;
+  --dark-theme: #0a111c;
+  --med-theme: #1a1f28;
+  --med-light-theme: #242a39;
   --light-theme: #4e6089; 
-  --icon-theme: #212936;
+  --icon-theme: #1a1f28;
   --profile-pic-background-color: #DEE5E7;
   --avatar-menu-color: #5d6e71;
   --display-background-color: #383F4F;
@@ -353,8 +353,8 @@ html {
 
 .menu-selected {
   cursor: pointer;
-  background-color: var(--med-light-theme);
-  color: white;
+  background-color: var(--dark-theme);
+  color: #02f3b2;
 }
 
 .menu-icon {
@@ -363,8 +363,8 @@ html {
 
 .menu-option:hover {
   cursor: pointer;
-  background-color: var(--med-light-theme);
-  color:white;
+  background-color: var(--dark-theme);
+  color:#02f3b2;
 }
 
 .main-area {
@@ -1118,13 +1118,13 @@ html {
 }
   
 .main-link-button {
-  background-color: var(--display-background-color);
-  border: 1.5px solid #29C9BF;
-  color: #29C9BF;
+  background-color: var(--med-light-theme);
+  border: 1.5px solid #6EDDC0;
+  color: #6EDDC0;
 }
 
 .alternate-link-button {
-  background-color: var(--display-background-color);
+  background-color: var(--med-light-theme);
   border: 1.5px solid #CBFF4D;
   color: #CBFF4D;
 }
