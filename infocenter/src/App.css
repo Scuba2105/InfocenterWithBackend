@@ -348,13 +348,13 @@ html {
   padding: 10px;
   font-size: 12px;
   width: 100%;
-  color:rgb(156, 155, 155);
+  color:rgb(97, 97, 97);
 }
 
 .menu-selected {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color: #CBFF4D;
+  color: white;
 }
 
 .menu-icon {
@@ -364,7 +364,7 @@ html {
 .menu-option:hover {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color:#CBFF4D;
+  color:white;
 }
 
 .main-area {
@@ -970,6 +970,7 @@ html {
 
 .equipment-summary {
   width: 60%;
+  transform: translateY(1vh);
 }
 
 #title-container {
@@ -978,10 +979,10 @@ html {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  transform: translateY(25px);
+  transform: translateY(2vh);
 }
 
-#title-container h2 {
+#title-container label {
   color: white;
   font-size: 4vh;
 }

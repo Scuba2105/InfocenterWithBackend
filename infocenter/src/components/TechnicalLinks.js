@@ -29,7 +29,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="equipment-summary">
                     <div id="title-container">
-                        <h2>{selectedData.model}</h2>
+                        <label>{selectedData.model}</label>
                     </div>
                     <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                 </div>
