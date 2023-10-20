@@ -2,7 +2,7 @@ import { menuOptions } from '../data.js';
 import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon, UtilitiesIcon, OnCallIcon } from '../svg.js';
 import { useState } from 'react';
 
-const imagelightColor = "#fec446";
+const imagelightColor = "#CBFF4D";
 const imageDarkColor = "rgb(128, 128, 129)";
 
 function enterMenuIcon(optionID, setHoveredId) {

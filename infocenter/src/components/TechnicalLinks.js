@@ -37,7 +37,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
             <div className="technical-area">
                 <div className="technical-link-container">
                     <a className="technical-link main-link-button" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
-                        <ServiceIcon color="#3C3C65" size="5vh"/>
+                        <ServiceIcon color="#29C9BF" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Service</span>
                             <span>Manual</span> 
@@ -46,7 +46,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container">
                     <a className="technical-link alternate-link-button" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
-                        <UserManualIcon color="#7F6802" size="5vh"/>
+                        <UserManualIcon color="#CBFF4D" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>User</span>
                             <span>Manual</span> 
@@ -55,19 +55,19 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link config main-link-button" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
-                        <ConfigIcon color="#3C3C65" size="5vh"/>
+                        <ConfigIcon color="#29C9BF" size="5vh"/>
                         Configuration
                     </div>  
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link software alternate-link-button" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <SoftwareIcon color="#7F6802" size="5vh"/>
+                        <SoftwareIcon color="#CBFF4D" size="5vh"/>
                         Software
                     </div> 
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link documents main-link-button" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <DocumentsIcon color="#3C3C65" size="5vh"/>
+                        <DocumentsIcon color="#29C9BF" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Other</span>
                             <span>Documents</span> 
@@ -76,7 +76,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container">
                     <div className="technical-link passwords alternate-link-button" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <PasswordsIcon color="#7F6802" size="5vh"/>
+                        <PasswordsIcon color="#CBFF4D" size="5vh"/>
                         Passwords
                     </div>   
                 </div>

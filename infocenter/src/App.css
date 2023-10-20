@@ -354,7 +354,7 @@ html {
 .menu-selected {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color: white;
+  color: #CBFF4D;
 }
 
 .menu-icon {
@@ -362,10 +362,9 @@ html {
 }
 
 .menu-option:hover {
-  scale: 1.1;
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color:white;
+  color:#CBFF4D;
 }
 
 .main-area {
@@ -860,7 +859,7 @@ html {
 .display-area {
   margin-right: 2%;
   width: 94%;
-  background-color: var(--display-background-color);
+  background-color: var(--med-theme);
   border: 1px solid black;
   margin-top: 2%;
   min-height: 550px;
@@ -877,19 +876,19 @@ html {
 .equipment-display {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 15% 20px 25% 1fr;
-  height: 82%;
+  grid-template-rows: 12% 20px 25% 1fr;
+  height: 95%;
 }
 
 .summary-card-header { 
-  font-size: 16px;
+  font-size: clamp(16px, 1.15vw, 24px);
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--med-theme);
+  background-color: var(--med-light-theme);
   color: white;
 }
 
@@ -901,7 +900,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--med-theme);
+  background-color: var(--med-light-theme);
   color: white;
 }
 
@@ -1101,7 +1100,7 @@ html {
   font-size: 11px;
   aspect-ratio: 1 / 1;
   height: 65%;
-  max-height: 165px;
+  max-height: 155px;
   border-radius: 6px;
   text-decoration: none;
   color: black;
@@ -1118,15 +1117,15 @@ html {
 }
   
 .main-link-button {
-  background-color: #7c7cd6;
-  border: 1px solid var(--med-theme);
-  color: var(--med-theme);
+  background-color: var(--display-background-color);
+  border: 1.5px solid #29C9BF;
+  color: #29C9BF;
 }
 
 .alternate-link-button {
-  background-color: #ebd264;
-  border: 1px solid var(--med-theme);
-  color: var(--med-theme);
+  background-color: var(--display-background-color);
+  border: 1.5px solid #CBFF4D;
+  color: #CBFF4D;
 }
 
 /* CSS for staff display area */
@@ -1232,7 +1231,7 @@ html {
   font-size: 11px;
   aspect-ratio: 1 / 1;
   height: 75%;
-  max-height: 140px;
+  max-height: 155px;
   border-radius: 6px;
   flex-direction: column;
   justify-content: space-around;
