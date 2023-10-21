@@ -10,7 +10,7 @@ html {
   overflow: hidden;
   background-color: #121826; 
   --pageWidth: 100vw;
-  --row-hover: #62709b;
+  --row-hover: #37456c;
   --dark-theme: #0a111c;
   --med-theme: #1a1f28;
   --med-light-theme: #242a39;
@@ -1659,8 +1659,8 @@ html {
   font-size: 12px;
   height: 80px;
   width: 80px;
-  color: var(--form-input-color);
-  border: 1px solid var(--form-input-color);
+  color: #69737a;
+  border: 1px solid #69737a;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -1674,9 +1674,8 @@ html {
 }
 
 .device-data-option-selected {
-  color: white;
-  border: 1px solid #ff69b4;
-  background-color: #ff69b4;
+  color: #CBFF4D;
+  border: 1px solid #CBFF4D;
   font-weight:500;
 }
 
@@ -1910,8 +1909,8 @@ html {
 #add-another-file {
   color: white;
   border-radius: 5px;
-  border: 1px solid var(--dark-theme);
-  background-color: #08AB7A;
+  border: 1px solid var(--green-button-color);
+  color: var(--green-button-color);
   font-size: 13px; 
   height: 30px;
   width: 105px;
@@ -1927,8 +1926,8 @@ html {
 #remove-file {
   color: white;
   border-radius: 5px;
-  border: 1px solid var(--dark-theme);
-  background-color: #da2424; 
+  border: 1px solid var(--red-accent);
+  color: var(--red-accent); 
   font-size: 13px; 
   height: 30px;
   width: 105px;

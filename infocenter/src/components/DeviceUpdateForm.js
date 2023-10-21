@@ -302,23 +302,23 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
             <div className="update-form-display">
                 <div className="update-options">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <ServiceIcon color={selectedOption === "Service Manual" ? "white" : "#69737a"} size="25px"/>
+                        <ServiceIcon color={selectedOption === "Service Manual" ? "#CBFF4D" : "#69737a"} size="25px"/>
                         Service Manual
                     </div>
                     <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <UserManualIcon color={selectedOption === "User Manual" ? "white" : "#69737a"} size="25px"/>
+                        <UserManualIcon color={selectedOption === "User Manual" ? "#CBFF4D" : "#69737a"} size="25px"/>
                         User Manual
                     </div>
                     <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <ConfigIcon color={selectedOption === "Configs" ? "white" : "#69737a"} size="25px"/>
+                        <ConfigIcon color={selectedOption === "Configs" ? "#CBFF4D" : "#69737a"} size="25px"/>
                         Configs
                     </div>
                     <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <SoftwareIcon color={selectedOption === "Software" ? "white" : "#69737a"} size="25px"/>
+                        <SoftwareIcon color={selectedOption === "Software" ? "#CBFF4D" : "#69737a"} size="25px"/>
                         Software
                     </div>
                     <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <DocumentsIcon color={selectedOption === "Other Documents" ? "white" : "#69737a"} size="25px"/>
+                        <DocumentsIcon color={selectedOption === "Other Documents" ? "#CBFF4D" : "#69737a"} size="25px"/>
                         Other Documents
                     </div>                    
                 </div>
