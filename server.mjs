@@ -8,6 +8,7 @@ import { changeLoginPassword, validateLoginCredentials, getAllData } from './con
 import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
 import { addNewDeviceData, updateExistingDeviceData } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
+import { updateOnCallData } from "./controller/on-call-controller.mjs";
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
     getInactiveThermometers, disposeSelectedThermometers } from './controller/thermometers-controller.mjs';
@@ -208,6 +209,15 @@ app.post('/AddNewContact/:formType', (req, res, next) => {
 app.post('/UpdateContact/:formType', (req, res, next) => {
     try {
        updateContactData(req, res, __dirname); 
+    } catch (err) {
+        next(err);
+    }
+})
+
+// Define route to add new hne staff contacts or vendor contacts. 
+app.post('/OnCall/:operation', (req, res, next) => {
+    try {
+       updateOnCallData(req, res, __dirname); 
     } catch (err) {
         next(err);
     }

@@ -375,7 +375,7 @@ html {
   min-width: 1000px;
 }
 
-.computer-container {
+.error-container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -392,12 +392,13 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--contact-card-font-color);
 }
 
 .error-heading {
   font-weight: bold;
   font-size: 40px;
-  color: var(--form-font-color);
+  color: var(--contact-card-font-color);
 }
 
 .error-subheading {
@@ -461,8 +462,8 @@ html {
 }
 
 .loader {
-  border: 12px solid rgb(215, 215, 215); /* Light grey */
-  border-top: 12px solid #F7A278; /* Blue */
+  border: 12px solid var(--med-light-theme); 
+  border-top: 12px solid var(--alternate-color-accent); 
   border-radius: 50%;
   width: 80px;
   height: 80px;
@@ -470,7 +471,7 @@ html {
 }
 
 .loading-page-container h2 {
-  color: rgb(215, 215, 215);
+  color: var(--contact-card-font-color);
 }
 
 @keyframes spin {
@@ -564,8 +565,8 @@ html {
 	width: var(--spinner-size);
   height: var(--spinner-size);
 	border-radius: 50%;
-	border: 5px solid #eaf5fe;
-	border-right-color: #5597d4;
+	border: 5px solid var(--med-light-theme);
+	border-right-color: var(--alternate-color-accent);
 	animation: uploadSpinner 1000ms linear infinite;
   margin-right: 15px;
 }
@@ -3160,6 +3161,5 @@ abbr[title] {
   justify-content: center;
   align-items: flex-start;
   margin-top: 30px;
-  color: var(--dark-theme);
+  color: var(--contact-card-font-color);
 }
-
