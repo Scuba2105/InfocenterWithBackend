@@ -10,12 +10,12 @@ html {
   overflow: hidden;
   background-color: #121826; 
   --pageWidth: 100vw;
-  --row-hover: #37456c;
-  --dark-theme: #02050b;
-  --med-theme: #1a1f28;
+  --row-hover: #2a3657;
+  --dark-theme: #101724;
+  --med-theme: #192130;
   --med-light-theme: #242a39;
   --light-theme: #4e6089; 
-  --icon-theme: #1a1f28;
+  --icon-theme: var(--med-theme);
   --profile-pic-background-color: #DEE5E7;
   --avatar-menu-color: var(--med-light-theme);
   --display-background-color: #383F4F;
@@ -351,8 +351,8 @@ html {
 
 .menu-selected {
   cursor: pointer;
-  background-color: var(--dark-theme);
-  color: rgb(2, 189, 118);
+  background-color: var(--med-light-theme);
+  color: rgb(190, 190, 191);
 }
 
 .menu-icon {
@@ -361,8 +361,8 @@ html {
 
 .menu-option:hover {
   cursor: pointer;
-  background-color: var(--dark-theme);
-  color:rgb(2, 189, 118);
+  background-color: var(--med-light-theme);
+  color:rgb(190, 190, 191);
 }
 
 .main-area {
@@ -730,6 +730,17 @@ html {
 }
 
 .add-new-btn {
+  background-color: transparent;
+  border: 2px solid var(--blue-button-color);
+  color: var(--blue-button-color);
+  border-radius: 50%;
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+} 
+
+/* .add-new-btn {
   background-color: var(--blue-button-color);
   border: 1px solid var(--med-light-theme);
   color: #212936;
@@ -738,13 +749,13 @@ html {
   width: 40px;
   height: 40px;
   padding: 0;
-} 
+}  */
 
 .contact-add-new-btn {
   margin-right: 15px;
 }
 
-.add-new-btn-laptop:hover, .add-new-btn-desktop:hover {
+.add-new-btn:hover {
   cursor: pointer; 
 }
 
@@ -983,6 +994,7 @@ html {
 #title-container label {
   color: white;
   font-size: 4vh;
+  margin-bottom: 5px;
 }
 
 .type-vendor-container {
@@ -993,7 +1005,7 @@ html {
 }
 
 .equipment-summary h4 {
-  border-top: 2px solid var(--light-theme);
+  border-top: 2px solid var(--main-color-accent);
   padding-top: 10px;
   color: var(--grey-font);
   height: 50px;
@@ -1006,9 +1018,9 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--med-light-theme);
-  background-color: var(--green-button-color);
-  border: var(--green-button-border);
+  color: var(--green-button-color);
+  background-color: transparent;
+  border: 2px solid var(--green-button-color);
   border-radius: 50%;
   transform: translateX(-15px);
 }
@@ -1200,7 +1212,7 @@ html {
   font-weight: bold;
   transform: translateY(-30px);
   color: var(--grey-font);
-  border-top: 2px solid var(--light-theme);
+  border-top: 2px solid var(--main-color-accent);
   padding-top: 1.6vh;
   font-size: 2vh;
 }
@@ -1705,14 +1717,14 @@ html {
 .update-button {
   width: 150px;
   height: 30px;
-  border: 1px solid var(--green-button-border);
+  border: 1.3px solid var(--alternate-color-accent);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--green-button-color);
-  color: var(--med-theme);
+  background-color: transparent;
+  color: var(--alternate-color-accent);
   border-radius: 5px;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .add-new-upload-button {
@@ -1724,9 +1736,9 @@ html {
 }
 
 .save-button {
-  background-color: var(--blue-button-color);
-  border: 1.3px solid var(--med-theme);
-  color: var(--med-theme);
+  background-color: transparent;
+  border: 1.3px solid var(--main-color-accent);
+  color: var(--main-color-accent);
 }
 
 .add-new-config-select-container {
