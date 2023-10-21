@@ -11,7 +11,7 @@ html {
   background-color: #121826; 
   --pageWidth: 100vw;
   --row-hover: #37456c;
-  --dark-theme: #0a111c;
+  --dark-theme: #02050b;
   --med-theme: #1a1f28;
   --med-light-theme: #242a39;
   --light-theme: #4e6089; 
@@ -68,50 +68,36 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("../public/login-background.jpg");
-  background-size: cover;
+  background-color: var(--dark-theme); /*url("../public/login-background.jpg");
+  background-size: cover;*/
 }
 
 /* Login Form css */
-.login-form-laptop {
-  height: 400px;
-  width: 350px;
+.login-form {
+  height: 50%;
+  width: 25%;
+  max-height: 500px;
   display: grid;
-  grid-template-rows: 60px 1fr;
-  background-color: white;
-}
-
-.login-form-desktop {
-  height: 40%;
-  width: 20%;
-  display: grid;
-  grid-template-rows: 90px 1fr;
-  background-color: white;
+  grid-template-rows: 15vh 1fr;
+  background-color: var(--med-theme);
+  border: 1px solid white;
 }
 
 .login-header {
   grid-row: 1;
   height: 100%;
-  width: 100%;  
+  width: 90%;  
   margin: auto auto;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 
-.login-form-laptop .app-logo {
-  height: 60px;
-  width: 300px;
-  transform: translateY(30px);
+.login-form .app-logo {
+  height: 50%;
+  width: 100%;
   padding-bottom: 10px;
-  border-bottom: 2px solid grey;
-}
-
-.login-form-desktop .app-logo {
-  height: 60px;
-  width: 300px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid grey;
+  border-bottom: 2px solid var(--contact-card-font-color);
 }
 
 .login-body {
@@ -120,7 +106,6 @@ html {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -135,14 +120,12 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.login-form-laptop .login-input-container {
-  transform: translateY(10px);
+  margin-bottom: 15px;
 }
 
 .login-input-icon {
-  background: linear-gradient(var(--med-theme), var(--light-theme));
+  background-color: var(--main-color-accent);
+  border-right: 1px solid var(--med-theme);
   width: 33px;
   height: 33.5px;
   display: flex;
@@ -155,33 +138,45 @@ html {
   width: 200px;
   font-size: 18px;
   font-weight: 600;
-  background: linear-gradient(var(--med-theme), var(--light-theme));
-  color: white;
-  border: none;
+  background-color: transparent;
+  color: var(--alternate-color-accent);
+  border: 1px solid var(--alternate-color-accent);  
   border-radius: 5px;
-  transform: translateY(-20px);
+  margin-bottom: 20px;
 }
 
 .inputs-container {
-  height: 80px;
+  height: 10vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  transform: translateY(40px);
+  transform: translateY(2vh);
 }
 
 .login-input {
-  width: 200px;
+  width: 85%;
   height: 30px;
-  border: 1px solid grey;
+  background: var(--form-background-color);
+  border: 1px solid var(--contact-card-font-color);
   border-left: none;
   padding-left: 10px;
 }
 
+/* Keep dark backgrounds when inputs autofill */
+.login-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px var(--med-theme) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.login-input:focus {
+  background-color: var(--form-background-color);
+}
+
 .login-body label {
-  color: var(--dark-theme);
-  transform: translate(-60px, -10px);
+  color: var(--main-color-accent);
+  transform: translate(-60px);
+  margin-bottom: calc((3.3vh - 15px));
   cursor: pointer;
 }
 
@@ -743,7 +738,7 @@ html {
   width: 40px;
   height: 40px;
   padding: 0;
-}
+} 
 
 .contact-add-new-btn {
   margin-right: 15px;
@@ -953,7 +948,7 @@ html {
   align-items: center;
   width: 100%;
   height: 100%;
-}
+} 
 
 .image-container {
   height: 23vh;
@@ -973,7 +968,7 @@ html {
 
 .equipment-summary {
   width: 60%;
-  transform: translateY(1vh);
+  transform: translateY(15px);
 }
 
 #title-container {

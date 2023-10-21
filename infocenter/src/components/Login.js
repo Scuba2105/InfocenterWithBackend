@@ -93,7 +93,7 @@ export function Login() {
 
     return (
         <div className="wrapper login-container">
-            <form ref={loginForm} className={mediaQueries.laptop ? "login-form-laptop": "login-form-desktop"}>
+            <form ref={loginForm} className="login-form">
                 <div className="login-header">
                     <img className="app-logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/app-logo.png`} alt="app-logo"></img>
                 </div>
