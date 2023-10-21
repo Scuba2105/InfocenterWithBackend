@@ -6,22 +6,10 @@ import { Documents } from "./Documents";
 
 function passwordEntryClassName(num) {
     if (num === 0) {
-        return "service"
+        return "main-link-button"
     }
     else if (num === 1) {
-        return "user-manual"
-    }
-    else if (num === 2) {
-        return "config"
-    }
-    else if (num === 3) {
-        return "software"
-    }
-    else if (num === 4) {
-        return "documents"
-    }
-    else if (num === 5) {
-        return "passwords"
+        return "alternate-link-button"
     }
 }
 
@@ -163,7 +151,7 @@ export function LinkModal({selectedData, modalType}) {
             <div className="password-display">
                 {passwordData.map((entry, index) => {
                     return (
-                        <div className={`password-container ${passwordEntryClassName(index % 6)}`} key={`${selectedData.model}${index}`}>
+                        <div className={`password-container ${passwordEntryClassName(index % 2)}`} key={`${selectedData.model}${index}`}>
                             <label className="password-type">{`${entry.type}`}</label>
                             <div className="password-info">
                                 {entry.values.map((pword) => {
