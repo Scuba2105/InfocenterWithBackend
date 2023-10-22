@@ -40,11 +40,11 @@ function getOnCallData(inputDate, beginDate, onCallChangedData) {
   
   // Early return if changed on call is for the entire week.
   if (lowerWeekBoundingDate === lowerChangedBound && upperWeekBoundingDate === upperChangedBound) {
-    return {dateRange: [lowerChangedBound, upperChangedBound], employeeData: {name: changedData.name, comment: changedData.comment}};
+    return {dateRange: [lowerChangedBound, upperChangedBound], employeeData: {name: changedData.newOnCall, comment: `Replacing ${changedData.originalOnCall} due to ${changedData.reason}`}};
   }
   // Determine if selected date is within the changed bounds or not.
   if (dateInRange(inputDate, [lowerChangedBound, upperChangedBound])) {
-    return {dateRange: [lowerChangedBound, upperChangedBound], employeeData: {name: changedData.name, comment: changedData.comment}};
+    return {dateRange: [lowerChangedBound, upperChangedBound], employeeData: {name: changedData.newOnCall, comment: `Replacing ${changedData.originalOnCall} due to ${changedData.reason}`}};
   }
   else if (inputDate < lowerChangedBound) {
     // Set the new default end date to one day before the start date of the roster change

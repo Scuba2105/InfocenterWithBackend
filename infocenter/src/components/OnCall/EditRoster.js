@@ -9,7 +9,7 @@ const inputNames = ["Original Staff Member", "New Staff Member", "Reason", "Star
 const inputTypes = ["originalOnCall", "newOnCall", "reason", "startDate", "endDate"];
 
 // List of reasons for On-Call roster changes.
-const rosterChangeReasons = ["Sick", "Leave", "Family Reasons", "Other"];
+const rosterChangeReasons = ["Sickness", "Leave", "Family Reasons", "Unspecified Reasons"];
 
 function areDatesValid(startDateInput, endDateInput) {
     const startDate = new Date(startDateInput);
