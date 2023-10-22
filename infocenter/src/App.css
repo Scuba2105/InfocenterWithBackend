@@ -8,35 +8,32 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: #121826; 
+  background-color: var(--dark-theme); 
   --pageWidth: 100vw;
   --row-hover: #2a3657;
   --dark-theme: #101724;
   --med-theme: #192130;
   --med-light-theme: #242a39;
-  --light-theme: #4e6089; 
+  --main-color-accent: #6EDDC0;
+  --alternate-color-accent: #CBFF4D;
+  --contact-card-font-color: rgb(198, 199, 208);
   --icon-theme: var(--med-theme);
   --profile-pic-background-color: #DEE5E7;
   --avatar-menu-color: var(--med-light-theme);
-  --display-background-color: #383F4F;
-  --info-container-background-color: #5d6881;
   --form-font-color: white;
   --form-background-color: var(--med-theme);
   --form-input-color: var(--med-light-theme);
   --input-placeholder-color: rgb(188, 188, 188);
   --grey-font: rgb(183, 190, 195); 
   --green-button-color: rgb(5, 234, 146);
-  --green-button-border: 1px solid rgb(3, 168, 105);
   --blue-button-color: #03a9eb;
   --search-bar-color: #69737a;
+  --red-accent: rgb(253, 67, 67);
+  --green-accent: rgb(2, 189, 118);
+  --orange-accent: #FBB934;
   --calendar-tile-active: var(--green-button-color); 
   --calendar-tile-hover: var(--med-light-theme);
   --calendar-tile-font: rgb(230, 229, 229);
-  --main-color-accent: #6EDDC0;
-  --alternate-color-accent: #CBFF4D;
-  --red-accent: rgb(253, 67, 67);
-  --green-accent: rgb(2, 189, 118); 
-  --contact-card-font-color: rgb(198, 199, 208);
 }
 
 /* Define some utility classes to minimise repetitive css */
@@ -352,7 +349,7 @@ html {
 .menu-selected {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color: rgb(190, 190, 191);
+  color:var(--orange-accent);
 }
 
 .menu-icon {
@@ -362,7 +359,7 @@ html {
 .menu-option:hover {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color:rgb(190, 190, 191);
+  color:var(--orange-accent);
 }
 
 .main-area {
@@ -741,17 +738,6 @@ html {
   padding: 0;
 } 
 
-/* .add-new-btn {
-  background-color: var(--blue-button-color);
-  border: 1px solid var(--med-light-theme);
-  color: #212936;
-  border-radius: 50%;
-  font-size: 30px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-}  */
-
 .contact-add-new-btn {
   margin-right: 15px;
 }
@@ -1052,7 +1038,7 @@ html {
   height: 25px;
   margin-top: 8px;
   background-color: var(--form-input-color);
-  border: 1px solid var(--form-input-color);
+  border: 1px solid var(--search-bar-color);
   color: var(--form-font-color);
 }
 
@@ -1130,14 +1116,14 @@ html {
   
 .main-link-button {
   background-color: var(--med-light-theme);
-  border: 1.5px solid #6EDDC0;
-  color: #6EDDC0;
+  border: 1.5px solid var(--main-color-accent);
+  color: var(--main-color-accent);
 }
 
 .alternate-link-button {
   background-color: var(--med-light-theme);
-  border: 1.5px solid #CBFF4D;
-  color: #CBFF4D;
+  border: 1.5px solid var(--alternate-color-accent);
+  color: var(--alternate-color-accent);
 }
 
 /* CSS for staff display area */
@@ -1685,8 +1671,8 @@ html {
 }
 
 .device-data-option-selected {
-  color: #CBFF4D;
-  border: 1px solid #CBFF4D;
+  color: var(--orange-accent);
+  border: 1px solid var(--orange-accent);
   font-weight:500;
 }
 
@@ -1860,7 +1846,7 @@ html {
   padding-left: 10px;
   margin-top: 3px;
   background-color: var(--form-input-color);
-  border: none;
+  border: 1px solid var(--search-bar-color);
 }
 
 .config-file-container {

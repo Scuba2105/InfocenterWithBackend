@@ -583,9 +583,9 @@ export function MobilePhone({color, size='50px'}) {
 export function AddSquare({size="20px", color, translateX=0, translateY=0}) {
     return (
         <svg className="add-remove-image" width={size} height={size} viewBox="0 0 24 24" transform={`translate(${translateX} ${translateY})`}>
-            <rect fill="none" height="20" rx="2" ry="2" stroke={color} strokeLinecap="round" stroke-Linejoin="round" strokeWidth="2" width="20" x="2" y="2"/>
-            <line fill="none" stroke={color} strokeLinecap="round" stroke-Linejoin="round" strokeWidth="2" x1="15.5" x2="8.5" y1="12" y2="12"/>
-            <line fill="none" stroke={color} strokeLinecap="round" stroke-Linejoin="round" strokeWidth="2" x1="12" x2="12" y1="15.5" y2="8.5"/>
+            <rect fill="none" height="20" rx="2" ry="2" stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" width="20" x="2" y="2"/>
+            <line fill="none" stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="15.5" x2="8.5" y1="12" y2="12"/>
+            <line fill="none" stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12" x2="12" y1="15.5" y2="8.5"/>
         </svg>
     )
 }
