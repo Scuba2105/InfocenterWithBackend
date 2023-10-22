@@ -79,11 +79,11 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                     <div key={`container-${number}`} className="description-file-container">
                         <div className="label-input-container">
                             <label className="other-doc-label" key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
-                            <input key={`text${number}`} type="text" className="other-doc-text-input" placeholder="Enter a short title/description" name={`description-${number}`}></input>
+                            <input key={`text${number}`} type="text" className="other-doc-text-input text-input" placeholder="Enter a short title/description" name={`description-${number}`}></input>
                         </div>
                         <div className="label-input-container2">
                             <label className="other-doc-label" key={`label-input-${number}`}>{`File ${number}:`} </label>
-                            <input key={`file${number}`} type="file" className="other-doc-file-upload" name="user-upload"></input>
+                            <input key={`file${number}`} type="file" className="other-doc-file-upload file-input" name="user-upload"></input>
                         </div>
                     </div>
                     );
