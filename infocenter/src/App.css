@@ -279,14 +279,19 @@ html {
 }
 
 .change-password-form {
-  height: 100%;
+  height: 400px;
   width: 100%;
   background-color: var(--form-background-color);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  margin: 20px auto;
 }  
+
+.passwords-input-container {
+  transform: translateY(-45px);
+}
 
 /* Change the formatting of the update password inputs */
 #new-password, #confirm-new-password, #current-password {
@@ -296,10 +301,6 @@ html {
 
 #new-password, #current-password {
   margin-bottom: 25px;
-}
-
-.passwords-input-container {
-  transform: translateY(-32px)
 }
 
 .password-strength-container {
@@ -349,7 +350,7 @@ html {
 .menu-selected {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color:var(--orange-accent);
+  color:var(--main-color-accent);
 }
 
 .menu-icon {
@@ -359,7 +360,7 @@ html {
 .menu-option:hover {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color:var(--orange-accent);
+  color:var(--main-color-accent);
 }
 
 .main-area {
@@ -1032,7 +1033,7 @@ html {
   color: var(--form-font-color);
 }
 
-.device-text-input, .add-new.input, .change-password-input {
+.device-text-input, .add-new.input /*.change-password-input*/ {
   text-align: center;
   width: 275px;
   height: 25px;
@@ -1435,18 +1436,11 @@ html {
   margin-top: 3px;
   transform: translateY(-4px);
   background-color: var(--form-input-color);
-  border: none;
+  border: 1px solid var(--search-bar-color);
 }
 
 .update-device-file-input {
   padding: 5px 20px 5px 5px;
-}
-
-/* Formatting for the form labels and inputs. */
-.add-new-input, .new-image-input {
-  border: 1px solid var(--form-input-color);
-  padding: 3px;
-  width: 210px;
 }
 
 .add-new-label, .new-image-label, .date-change-label {
@@ -1748,7 +1742,7 @@ html {
   justify-content: center;
   align-items: center;
   margin: 10px 0 20px 0;
-  color: var(--form-font-color)
+  color: var(--form-font-color);
 }
 
 .department-select-container {
@@ -1765,6 +1759,7 @@ html {
   text-align: center;
   color: var(--form-font-color);
   background-color: var(--form-input-color);
+  border: 1px solid var(--search-bar-color)
 }
 
 .form-select-input-container {
@@ -1787,7 +1782,7 @@ html {
   transform: translateY(-10px);
   color: var(--form-font-color);
   background-color: var(--form-input-color);
-  border: none;
+  border: 1px solid var(--search-bar-color);
 }
 
 #device-config-container {
@@ -1876,6 +1871,7 @@ html {
   padding: 3px;
   padding-bottom: 7px;
   margin-top: 10px;
+  border: 1px solid var(--search-bar-color)
 }
 
 .date-entry {
@@ -1979,6 +1975,7 @@ html {
   align-items: center;
   color: var(--form-font-color);
   background-color: var(--form-input-color);
+  border: 1px solid var(--search-bar-color);
   padding: 5px;
   padding: 6px -5px 2px 0;
   margin-top: 3px;
@@ -1995,6 +1992,7 @@ html {
   align-items: center;
   background-color: var(--form-input-color);
   color: var(--form-font-color);
+  border: 1px solid var(--search-bar-color);
   padding: 4px 5px 5px 5px;
   margin-top: 3px;
   margin-bottom: 5px;
@@ -2008,7 +2006,7 @@ html {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 0 30px 20px 30px;
   transform: translateY(10%);
 }
 
@@ -2058,13 +2056,24 @@ html {
   opacity: 0.8;
 }
 
-.config-right-arrow {
-  transform: rotate(180deg);
-  margin-left: 30px; 
+.config-left-arrow1 {
+  transform: translateX(0px);
 }
 
-.config-left-arrow {
-  margin-right: 30px
+.config-left-arrow2 {
+  transform: translateX(-40px)
+}
+
+.config-right-arrow {
+  transform: rotate(180deg);
+}
+
+.config-right-arrow1 {
+  transform: translateX(-35px);
+}
+
+.config-right-arrow2 {
+  transform: translateX(40px);
 }
 
 .config-link {
@@ -3148,4 +3157,9 @@ abbr[title] {
   align-items: flex-start;
   margin-top: 30px;
   color: var(--contact-card-font-color);
+}
+
+/* Global formatting for the form input elements */
+.text-input, .select-input {
+  border: 1px solid var(--search-bar-color);
 }

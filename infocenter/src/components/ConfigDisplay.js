@@ -1,4 +1,5 @@
 import { serverConfig } from "../server";
+import { NavigationArrow } from "../svg"
 
 function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
     const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
@@ -54,7 +55,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
             })}
             </div>}
             <div className="config-display-container">
-                {configNumber > 1 && <img className="config-arrow config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>}
+                {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}
                 <div className="config-display">
                     <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
                             <div className="options-info">
@@ -72,7 +73,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
                             <a href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
                     </div>
                 </div>
-                {configNumber > 1 && <img className="config-arrow config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>}
+                {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}
             </div>
         </>
     );

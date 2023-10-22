@@ -3,6 +3,7 @@ import { Input } from "./Input";
 import { SelectInput } from "./SelectInput";
 import { TooltipButton } from "./TooltipButton";
 import { serverConfig } from "../server";
+import { NavigationArrow } from "../svg";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
@@ -284,7 +285,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container" style={inputPage === 2 ? {transform: 'translateY(31px)'} : null}>
-                    <img className="config-arrow config-left-arrow" style={inputPage === 1 ? {transform: 'translateX(40px)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
@@ -306,7 +307,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
                     </div>  
-                    <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translate(-60px, 0px) rotate(180deg)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-right-arrow config-right-arrow1" : "config-right-arrow config-right-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />          
                 </div>
                 <div className="form-buttons" style={inputPage === 1 ? {marginTop: 40 + 'px'} : {marginTop: 60 + 'px'}}>
                     <div className="update-button save-button" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)}>Save Changes</div>
