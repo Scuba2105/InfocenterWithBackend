@@ -5,10 +5,23 @@ import { staffOnCallRoster } from "../../utils/utils";
 import { serverConfig } from "../../server";
 
 // Input element types
+const inputNames = ["Original Staff Member", "New Staff Member", "Reason", "Start Date", "End Date"]
 const inputTypes = ["originalOnCall", "newOnCall", "reason", "startDate", "endDate"];
 
 // List of reasons for On-Call roster changes.
 const rosterChangeReasons = ["Sick", "Leave", "Family Reasons", "Other"];
+
+function areDatesValid(startDateInput, endDateInput) {
+    const startDate = new Date(startDateInput);
+    const endDate = new Date(endDateInput);
+
+    if (startDate.getTime() <= endDate.getTime()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 async function uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog, page) {
     const selectElements = formContainer.current.querySelectorAll("select");
@@ -20,15 +33,24 @@ async function uploadData(formContainer, queryClient, showMessage, closeModal, c
 
     for (const [index, input] of formElements.entries()) {
         if (input.value === "") {
-            showMessage("warning", "Some input values are empty. Please check the date inputs are valid and try again.")
+            showMessage("warning", `The ${inputNames[index]} input values are empty. Please check the date inputs are valid and try again.`)
             return 
         }
         uploadOnCallData[inputTypes[index]] = input.value;
     }
 
-    // Check endDate is after startDate
-     
+    // Check if original and new selected on-call are not the same person.
+    if (uploadOnCallData["originalOnCall"] === uploadOnCallData["newOnCall"]) {
+        showMessage("warning", "The Original On-Call Staff Member and the New On-Call Staff Member are the same person. Please fix this and try again");
+        return;
+    }     
     
+    // Check the end date is after the start date.
+    if (!areDatesValid(uploadOnCallData["startDate"], uploadOnCallData["endDate"])) {
+        showMessage("warning", "The Start Date must be less than or equal to the End Date.");
+        return;
+    }
+
     // Show the uploading dialog when sending to server
     showMessage("uploading", `Uploading on-call roster changes`);
 
