@@ -2743,8 +2743,9 @@ html {
 .card-head {
   grid-row: 1;
   font-size: 2vh;
-  background-color: var(--red-accent);  
-  color: white;
+  background-color: var(--orange-accent);  
+  color: var(--dark-theme);
+  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
