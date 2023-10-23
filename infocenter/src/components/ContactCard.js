@@ -1,7 +1,7 @@
 import { EditIcon } from "../svg";
 
 // Define arrays for contact header background colors.
-const backgroundColors = ["#6EDDC0", "#CBFF4D", "#CBFF4D", "#6EDDC0"]
+const backgroundColors = ["#6EDDC0", "#d4fc77", "#d4fc77", "#6EDDC0"]
 
 export function ContactCard({identifier, contact, index, openUpdateContactModal}) {
     return (
