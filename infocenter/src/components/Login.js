@@ -95,7 +95,7 @@ export function Login() {
         <div className="wrapper login-container">
             <form ref={loginForm} className="login-form">
                 <div className="login-header">
-                    <img className="app-logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/app-logo.png`} alt="app-logo"></img>
+                    <img className="app-logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/new-app-logo.png`} alt="app-logo"></img>
                 </div>
                 <div className="login-body">
                     <div className="inputs-container">
