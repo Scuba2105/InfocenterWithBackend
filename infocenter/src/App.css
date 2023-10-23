@@ -1253,8 +1253,9 @@ html {
   height: 4.17vh;
   width: 4.17vh;
   border-radius: 50%;
-  background-color: yellow;
-  transform: translate(30px, -7px);
+  background-color: transparent;
+  border: 2px solid var(--alternate-color-accent);
+  transform: translate(30px, 15px);
 }
 
 .staff-name-desktop .email-link {
