@@ -331,7 +331,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
-                    <img className="config-arrow config-left-arrow" style={inputPage === 1 ? {transform: 'translateX(40px)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="left-arrow"></img>
+                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
                         <div className="edit-add-new-container">
@@ -346,7 +346,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />}
                     </div> 
-                    <img className="config-arrow config-right-arrow" style={inputPage === 1 ? {transform: 'translateX(-60px) rotate(180deg)'} : null} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} src={`https://${serverConfig.host}:${serverConfig.port}/images/left-arrow.jpg`} alt="right-arrow"></img>          
+                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-right-arrow config-right-arrow1" : "config-right-arrow config-right-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />          
                 </div>
                 <div className="form-buttons" style={{marginTop: 60 + 'px'}}>
                     <div className="update-button save-button" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewVendor, showMessage, closeDialog)}>Save Changes</div>
