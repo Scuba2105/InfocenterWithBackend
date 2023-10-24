@@ -3,6 +3,9 @@ import { EditIcon } from "../svg";
 // Define arrays for contact header background colors.
 const backgroundColors = ["#6EDDC0", "#d4fc77", "#d4fc77", "#6EDDC0"]
 
+// Service Request Websites
+const serviceRequestSites = ["https://services.gehealthcare.com.au/gehcstorefront/", "https://secure.medtronicinteract.com/SubmitServiceRequest"]
+
 export function ContactCard({identifier, contact, index, openUpdateContactModal}) {
     return (
         <div className="contact-card-container">
@@ -29,7 +32,7 @@ export function ContactCard({identifier, contact, index, openUpdateContactModal}
                 </div> 
                 {identifier === "vendor" && <div className="contact-number">
                     <label className="number-description">{contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? "GE Portal" : "Email" }</label>
-                    <a className="number-value website-link" href={contact.email === "" ? null : contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? contact.email : `mailto:${contact.email}`}>{contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? "Website" : contact.email !== "" ? contact.email : "-"}</a>
+                    <a className="number-value website-link" href={contact.email === "" ? null : serviceRequestSites.includes(contact.email) ? contact.email : `mailto:${contact.email}`}>{serviceRequestSites.includes(contact.email) ? "Website" : contact.email !== "" ? contact.email : "-"}</a>
                 </div>}                
             </div>
         </div>
