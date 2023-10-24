@@ -21,15 +21,15 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
 
     if (selectedOption === 'Service Manual') {
         return (
-            <div key={selectedOption} className="device-input-container"> 
-                <label className="available-label">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
+            <div key={selectedOption} className="device-input-container flex-c-col"> 
+                <label className="available-label flex-c">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update Service Manual:" uniqueId="file1" name="service-upload"/>
             </div>
         );
     }
     else if (selectedOption === 'User Manual') {
         return (
-            <div key={selectedOption} className="device-input-container">
+            <div key={selectedOption} className="device-input-container flex-c-col">
                 <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update User Manual:" uniqueId="file2" name="user-upload"/>
             </div>
@@ -37,9 +37,9 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else if (selectedOption === 'Software') {
         return (
-            <div key={selectedOption} className="device-input-container">
+            <div key={selectedOption} className="device-input-container flex-c-col">
                 <label className="update-device-file-label">Software Type:</label>
-                <div className="software-type">
+                <div className="software-type flex-c">
                     <input type="radio" id="device-software" name="software-type" value="device-software"></input>
                     <label id="device-software-label" htmlFor="device-software">Device Software</label><br></br>
                     <input type="radio" id="service-software" name="software-type" value="service-software"></input>
@@ -51,7 +51,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else if (selectedOption === 'Configs') {
         return (
-            <div key={selectedOption} id="device-config-container" className="device-input-container">
+            <div key={selectedOption} id="device-config-container" className="device-input-container flex-c-col">
                 <h4>Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput type="form-select-input" label='Hospital' optionData={hospitalLocations} />

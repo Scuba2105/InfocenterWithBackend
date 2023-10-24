@@ -60,13 +60,13 @@ export function Avatar({showMessage, closeDialog}) {
 
     return (
         <>
-            <div ref={avatarMenu} className="avatar-container" onClick={(e) => toggleMenu(setMenuVisible, e)}>
+            <div ref={avatarMenu} className="avatar-container flex-c" onClick={(e) => toggleMenu(setMenuVisible, e)}>
                 {currentUser.imageType ? <img key={profilePhotoUpdates * 10} id="avatar-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${currentUser.staffId}.${currentUser.imageType}`} alt="avatar"></img> : <BlankProfile identifier="avatar-placeholder" size="25px" foregroundColor="#6B7F82" ></BlankProfile>}
                 <label>{currentUser.user}</label>
                 {menuVisible && 
                 <div className="avatar-menu flex-c-col">
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>
-                    <div className="avatar-option" onClick={() => showModal(setChangePasswordVisible, setMenuVisible)}>
+                    <div className="avatar-option flex-c" onClick={() => showModal(setChangePasswordVisible, setMenuVisible)}>
                         <PadlockIcon color="white" size="25px"></PadlockIcon>
                         <label id="change-password">Change Password</label>
                     </div>

@@ -69,11 +69,10 @@ html {
 }
 
 .login-container {
+  background-color: var(--dark-theme); 
   display: flex;
-  justify-content: center;
+  flex-direction: center;
   align-items: center;
-  background-color: var(--dark-theme); /*url("../public/login-background.jpg");
-  background-size: cover;*/
 }
 
 /* Login Form css */
@@ -85,6 +84,7 @@ html {
   grid-template-rows: 1fr 1fr;
   background-color: var(--med-theme);
   border: 1px solid white;
+  margin: auto auto;
 }
 
 .login-header {
@@ -92,9 +92,6 @@ html {
   height: 90%;
   width: 90%;  
   margin: auto auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .login-form .app-logo {
@@ -117,9 +114,6 @@ html {
 }
 
 .login-input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-top: 15px;
   transform: translateY(-9vh);
 }
@@ -129,9 +123,6 @@ html {
   border-right: 1px solid var(--med-theme);
   width: 33px;
   height: 33.5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .login-button {
@@ -181,9 +172,6 @@ html {
   background-color: var(--icon-theme);
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .header-bar {
@@ -193,9 +181,7 @@ html {
   color: white;
   font-size: 22px;
   font-weight: bold;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 #header-aligner {
@@ -205,9 +191,6 @@ html {
 
 .avatar-container {
   margin-right: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 #avatar-image {
@@ -262,9 +245,7 @@ html {
 
 .avatar-option {
   width: 100%;
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   transform: translateY(-8px);
   padding-left: 20px;
   cursor: pointer;
@@ -364,9 +345,6 @@ html {
 .error-container {
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: var(--dark-theme);
   color: white;
 }
@@ -392,57 +370,6 @@ html {
   color: var(--form-font-color);
 }
 
-#gear1-laptop {
-  position: absolute;
-  top: 250px;
-  left: 875px;
-  animation: gearSpinnerBackward 3000ms linear infinite;
-}
-
-#gear1-desktop {
-  position: absolute;
-  top: calc(250px + var(--gear-desktop-offsetY));
-  left: calc(875px + var(--gear-desktop-offsetX));
-  animation: gearSpinnerBackward 3000ms linear infinite;
-}
-
-#gear2-laptop {
-  position: absolute;
-  top: 250px;
-  left: 930px;
-  animation: gearSpinnerForward 4500ms linear infinite;
-}
-
-#gear2-desktop {
-  position: absolute;
-  top: calc(250px + var(--gear-desktop-offsetY));
-  left: calc(930px + var(--gear-desktop-offsetX));
-  animation: gearSpinnerForward 4500ms linear infinite;
-}
-
-#gear3-laptop {
-  position: absolute;
-  top: 252px;
-  left: 1006px;
-  animation: gearSpinnerBackward 2800ms linear infinite;
-}
-
-#gear3-desktop {
-  position: absolute;
-  top: calc(252px + var(--gear-desktop-offsetY));
-  left: calc(1006px + var(--gear-desktop-offsetX));
-  animation: gearSpinnerBackward 2800ms linear infinite;
-}
-
-.add-new {
-  border: 12px solid var(--med-light-theme); 
-  border-top: 12px solid var(--alternate-color-accent); 
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1.0s linear infinite;
-}
-
 .loading-page-container h2 {
   color: var(--contact-card-font-color);
 }
@@ -459,9 +386,6 @@ html {
   position: absolute;
   left: 0px;
   top: -100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: rgba(0, 0, 0, 0.2);
   z-index: 75;  
 }
@@ -515,9 +439,6 @@ html {
 .upload-body {
   width: 100%;
   height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transform: translateY(-20px)
 }
 
@@ -544,9 +465,7 @@ html {
 
 .confirmation-btn-container {
   width: 50%;
-  display: flex;
   justify-content: space-around;
-  align-items: center;
 }
 
 .cancel-btn {
@@ -592,9 +511,7 @@ html {
 
 .dialog-title {
   width: 100%;
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   grid: 1 / 1;
   border-bottom: 1px solid black;
 }
@@ -610,8 +527,6 @@ html {
 
 .dialog-body-error-request {
   grid: 1 / 2;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
   height: 175px;
@@ -648,32 +563,20 @@ html {
 
 .search-filter-container, .display-area-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 }
 
 .search-filter {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 90%;
 }
 
 .search-box-container {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 20px;
 }
 
 .search-box {
-  display: flex;
   justify-content: space-around;
-  align-items: center;
   margin-left: 19px;
   border: 2px solid var(--search-bar-color);
   border-radius: 5px;
@@ -746,10 +649,6 @@ html {
   padding: 0 5px 0 5px;
   margin: 20px 0px 20px 20px;
   background-color: var(--med-theme);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
 }
 
@@ -848,9 +747,7 @@ html {
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   background-color: var(--med-light-theme);
   color: white;
 }
@@ -860,9 +757,6 @@ html {
   width: 100%;
   margin: 0 auto 0 auto;
   grid-row: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: var(--med-light-theme);
   color: white;
 }
@@ -875,9 +769,7 @@ html {
 .vendor-link {
   grid-row: 2;
   width: 95%;
-  display: flex;
   justify-content: flex-end;
-  align-items: center;
   color: var(--form-font-color);
   transform: translateY(10px);
   background-color: transparent;
@@ -895,9 +787,7 @@ html {
   border: none;
   width: 11.5vw;
   min-width: 130px;
-  display: flex;
   justify-content: space-around;
-  align-items: center;
   z-index: 500;
   font-size: 1.6vh;
 }
@@ -908,9 +798,7 @@ html {
 
 .summary-area {
   grid-row: 3;
-  display: flex;
   justify-content: space-around;
-  align-items: center;
   width: 100%;
   height: 100%;
 } 
@@ -918,9 +806,6 @@ html {
 .image-container {
   height: 23vh;
   width: 23vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .equipment-image {
@@ -939,9 +824,7 @@ html {
 #title-container {
   width: 100%;
   height: 50%;
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   transform: translateY(2vh);
 }
 
@@ -949,13 +832,6 @@ html {
   color: white;
   font-size: 4vh;
   margin-bottom: 5px;
-}
-
-.type-vendor-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
 }
 
 .equipment-summary h4 {
@@ -969,9 +845,6 @@ html {
 .device-edit-button, .staff-edit-btn {
   width: 40px;
   height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--green-button-color);
   background-color: transparent;
   border: 2px solid var(--green-button-color);
@@ -991,10 +864,6 @@ html {
 /* Upload form styles */
 .device-input-container {
   margin: 25px 0 25px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; 
   transform: translateY(30px);
   color: var(--form-font-color);
 }
@@ -1010,9 +879,6 @@ html {
 }
 
 .software-type {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 30px;
   margin-top: 10px;
 }
@@ -1026,9 +892,7 @@ html {
 }
 
 .available-label {
-  display: flex;
   justify-content: space-around;
-  align-items: center;
   margin-bottom: 30px;
   width: 210px;
   font-size: 14px;
@@ -1048,9 +912,6 @@ html {
 .technical-link-container {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .technical-link-container:first-of-type, .technical-link-container:nth-of-type(2), .technical-link-container:nth-of-type(3) {
@@ -1452,7 +1313,7 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0px 13px;
-  transform: translateY(0px);
+
 }
 
 .add-new-staff-upload-button {

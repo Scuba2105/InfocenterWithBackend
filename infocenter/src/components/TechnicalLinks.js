@@ -23,19 +23,19 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
 
     return (
         <>
-            <div className="summary-area">
-                <div className="image-container">
+            <div className="summary-area flex-c">
+                <div className="image-container flex-c">
                     <img key={selectedData.model} className="equipment-image" src={selectedData.img === false ? generateLinks('question_mark', 'image') : generateLinks(selectedData, 'image')} alt="Medical Equipment"></img>
                 </div>
                 <div className="equipment-summary">
-                    <div id="title-container">
+                    <div id="title-container" className="flex-c">
                         <label>{selectedData.model}</label>
                     </div>
                     <h4>{`${selectedData.type}, ${selectedData.manufacturer}`}</h4>
                 </div>
             </div>
             <div className="technical-area">
-                <div className="technical-link-container">
+                <div className="technical-link-container flex-c">
                     <a className="technical-link main-link-button" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
                         <ServiceIcon color="#29C9BF" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -44,7 +44,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                         </div>
                     </a>
                 </div>
-                <div className="technical-link-container">
+                <div className="technical-link-container flex-c">
                     <a className="technical-link alternate-link-button" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
                         <UserManualIcon color="#d4fc77" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -53,19 +53,19 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                         </div>                    
                     </a>   
                 </div>
-                <div className="technical-link-container">
+                <div className="technical-link-container flex-c">
                     <div className="technical-link config main-link-button" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
                         <ConfigIcon color="#29C9BF" size="5vh"/>
                         Configuration
                     </div>  
                 </div>
-                <div className="technical-link-container">
+                <div className="technical-link-container flex-c">
                     <div className="technical-link software alternate-link-button" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <SoftwareIcon color="#d4fc77" size="5vh"/>
                         Software
                     </div> 
                 </div>
-                <div className="technical-link-container">
+                <div className="technical-link-container flex-c">
                     <div className="technical-link documents main-link-button" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <DocumentsIcon color="#29C9BF" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -74,7 +74,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                         </div>
                     </div> 
                 </div>
-                <div className="technical-link-container">
+                <div className="technical-link-container flex-c">
                     <div className="technical-link passwords alternate-link-button" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <PasswordsIcon color="#d4fc77" size="5vh"/>
                         Passwords

@@ -1,7 +1,7 @@
 export function ErrorPage({errorType}) {
 
     return (
-        <div className="error-container">
+        <div className="error-container flex-c">
             {errorType === "fetch-error" && <div className="error-description flex-c-col">
                 <h1 className="error-heading">Error 503</h1>
                 <p className="error-message1">Service currently unavailable.</p>

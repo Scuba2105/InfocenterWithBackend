@@ -94,7 +94,7 @@ export function Login() {
     return (
         <div className="wrapper login-container">
             <form ref={loginForm} className="login-form">
-                <div className="login-header">
+                <div className="login-header flex-c">
                     <img className="app-logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/new-app-logo.png`} alt="app-logo"></img>
                 </div>
                 <div className="login-body flex-c-col">

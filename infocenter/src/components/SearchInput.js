@@ -21,8 +21,8 @@ export function SearchInput({onQueryChange, openAddModal}) {
     const currentUser = useUser((state) => state.userCredentials);
     
     return (
-        <div className="search-box-container">
-            <div className="search-box" style={currentUser.permissions !== "admin" ? searchBoxTransform(mediaQueries.laptop) : null}>
+        <div className="search-box-container flex-c">
+            <div className="search-box flex-c" style={currentUser.permissions !== "admin" ? searchBoxTransform(mediaQueries.laptop) : null}>
                 <input className="search-input" placeholder="Search..." onChange={onQueryChange}>
                 </input>   
             </div>

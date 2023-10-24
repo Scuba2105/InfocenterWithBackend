@@ -3,7 +3,7 @@ import { NextIcon, SkipIcon } from "../svg";
 export function SearchTable({tableIndex, maxIndex, pageSelected, paginatedData, onRowClick, onTableArrowClick}) {
 
     return (
-        <div className="search-table-container">
+        <div className="search-table-container flex-c-col">
             <table className="search-table" cellSpacing="0px">
                 <thead>
                     <tr key="header-row" className="header-row">

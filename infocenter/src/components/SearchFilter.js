@@ -86,8 +86,8 @@ export function SearchFilter({page, pageData, vendorData, onRowClick, queryClien
     const maxIndex = paginatedData.length - 1;
     
     return (
-        <div className="search-filter-container">
-            <div className="search-filter">
+        <div className="search-filter-container flex-c-col">
+            <div className="search-filter flex-c-col">
                 <SearchInput key={`${pageSelected}-input`} onQueryChange={(e) => onQueryChange(e, setQuery, setTableIndex)} openAddModal={() => openAddModal(setAddNewModal)}/>
                 <SearchTable key={`${pageSelected}-table`} tableIndex={tableIndex} maxIndex={maxIndex} pageSelected={page} paginatedData={paginatedData} onRowClick={onRowClick} onTableArrowClick={(e) => onTableArrowClick(e, tableIndex, setTableIndex, maxIndex)} />
                 {addNewModal && 

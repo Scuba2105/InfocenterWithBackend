@@ -76,8 +76,8 @@ export default function App() {
     return (
         <ErrorBoundary children fallback={ErrorPage}>
             <div className="wrapper">
-                <div className="app-icon-container"></div>
-                <div className="header-bar">
+                <div className="app-icon-container flex-c"></div>
+                <div className="header-bar flex-c">
                     <div id='header-aligner'></div>
                     HNECT Information Center
                     <Avatar showMessage={showMessage} closeDialog={closeDialog}></Avatar>
