@@ -106,7 +106,7 @@ export function ChangePassword({closeModal, showMessage, closeDialog}) {
     return (
         <>
             <ModalSkeleton type="change-password" closeModal={closeModal}>
-                <div className="change-password-form">
+                <div className="change-password-form flex-c-col">
                     <Input type="password" inputType="password" identifier="change-password" labelText="Current Password" placeholdertext="Enter Current Password" onChange={(e) => enteredCurrentPassword(setCurrentPassword, e)}></Input>  
                     <div className="passwords-input-container">
                         <Input type="password" inputType="password" identifier="change-password" labelText="New Password" placeholdertext="Enter New Password" onChange={(e) => checkPasswordStrength(setPasswordStrength, setNewPassword, e)}></Input>  

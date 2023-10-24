@@ -1,7 +1,7 @@
 export function SelectInput({type, defaultValue, label, optionData, value, onChange}) {
     if (type === "form-select-input-disabled") {
         return (
-            <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
+            <div className={`flex-c-col ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
                 <p className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-label`}>{label === 'Hospital' ? `${label}/Region` : label}</p>
                 <select name={label} disabled defaultValue={defaultValue} className={label === 'Configuration Type' ? `select-input config-data-input ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select` : `select-input ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select`} onChange={onChange}>
                     {optionData.map((hospital, index) => {

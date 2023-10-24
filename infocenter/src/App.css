@@ -48,6 +48,13 @@ html {
   align-items: center;
 }
 
+.flex-c-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Start of the CSS for the page elements */
 
 .wrapper {
@@ -98,10 +105,7 @@ html {
 
 .login-body {
   grid-row: 2;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -144,10 +148,6 @@ html {
 
 .inputs-container {
   height: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   transform: translateY(2vh);
 }
 
@@ -243,10 +243,7 @@ html {
   border: 1px solid var(--avatar-menu-color);
   z-index: 100;
   clip-path: polygon(0% 5%, 75% 5%, 80% 0%, 85% 5%, 100% 5%, 100% 100%, 0% 100%);
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
 
 .avatar-menu label {
@@ -282,10 +279,7 @@ html {
   height: 400px;
   width: 100%;
   background-color: var(--form-background-color);
-  display: flex;
-  flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   margin: 20px auto;
 }  
 
@@ -328,19 +322,13 @@ html {
   grid-row: 2 / -1;
   grid-column: 1;
   background: var(--med-theme);
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   overflow: hidden;
   margin-bottom: -20px;
 }
 
 .menu-option, .menu-selected {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   padding: 10px;
   font-size: 12px;
   width: 100%;
@@ -386,10 +374,6 @@ html {
 .error-description {
   width: 550px;
   height: 375px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: var(--contact-card-font-color);
 }
 
@@ -450,16 +434,7 @@ html {
   animation: gearSpinnerBackward 2800ms linear infinite;
 }
 
-.loading-page-container {
-  height: 100%;
-  width: 100%;
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.loader {
+.add-new {
   border: 12px solid var(--med-light-theme); 
   border-top: 12px solid var(--alternate-color-accent); 
   border-radius: 50%;
@@ -516,9 +491,7 @@ html {
 #uploading-dialog {
   width: 320px;
   height: 140px;
-  display: flex;
   background-color: var(--form-background-color);
-  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   padding: 0px;
@@ -628,18 +601,11 @@ html {
 
 .dialog-body {
   grid: 1 / 2;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
 
 .dialog-body-info {
   grid: 1 / 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .dialog-body-error-request {
@@ -1406,10 +1372,6 @@ html {
 
 /* Format the add new staff/equipment modal */
 .add-new, .new-image, .update-device-file, .date-change {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-size: 13px;
   color: var(--form-font-color);
   margin-top: 15px;
@@ -1421,14 +1383,7 @@ html {
 
 .update-device-file-label {
   font-size: 15px;
-  color: var(--form-font-color);
-  font-weight: 500;
   margin-bottom: 14px;
-}
-
-.add-new-label, .new-image-label, .date-change-label {
-  font-weight: 500;
-  transform: translateY(-4px);  
 }
 
 .edit-add-new-container {
@@ -1529,7 +1484,7 @@ html {
 
 .software-device-location {
   font-size: 12px;
-  border: 1px solid var(--form-input-color);
+  border: 1px solid var(--contact-card-font-color);
   background-color: var(--form-input-color);
   color: var(--form-font-color);
   width: 450px;
@@ -1707,10 +1662,7 @@ html {
 
 .add-new-config-select-container {
   height: 80px;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   transform: translateY(-15px);
 }
 
@@ -1720,10 +1672,6 @@ html {
 
 .hospitals-select-container, .department-select-container {
   height: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 10px 0 20px 0;
   color: var(--form-font-color);
 }
@@ -1780,27 +1728,13 @@ html {
 }
 
 .config-data, .date-entry, .change-password {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-size: 13px;
   color: var(--form-font-color);
-}
-
-.config-data-label, .date-entry-label, .config-file-input-label, .other-doc-label {
-  font-weight: 500;
 }
 
 .config-file-container {
   grid-column: 1 / 3;
   grid-row: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; 
-  width: 100%;
-  height: 100%;
   margin-top: 10px;
 }
 
@@ -3139,4 +3073,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 4px;
   margin-right: 2px;
   filter: invert(1) sepia(0%) saturate(10000%) hue-rotate(0deg);
+}
+
+/* Format the input labels */
+.input-label {
+  font-weight: 500;
+  color: var(--form-font-color);
+  transform: translateY(-4px); 
 }

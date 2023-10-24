@@ -64,7 +64,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                     <Input inputType='text' identifier='config-data' labelText='Sub-Location (optional)' placeholdertext='eg. Transport, Paediatric etc.'/>
                     <Input inputType='date' identifier='date-entry' labelText='Date Created'/>
                 </div>
-                <div className="config-file-container">
+                <div className="config-file-container flex-c-col size-100">
                     <label className="config-file-input-label">Select Config File</label>
                     <input type="file" className="device-file-upload" id="config-file" name="config-upload"></input>
                 </div>

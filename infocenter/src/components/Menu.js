@@ -21,7 +21,7 @@ export function Menu({page, onPageSelect}) {
     const titleArray = option.title.split(' ')
     const titleLength = titleArray.length;
     return (
-      <div key={option.id} id={option.id} className={option.id === page ? "menu-selected" : "menu-option"} onClick={() => onPageSelect(option.id)} onMouseEnter={() => enterMenuIcon(option.id, setHoveredId)} onMouseLeave={() => leaveMenuIcon(setHoveredId)}>
+      <div key={option.id} id={option.id} className={option.id === page ? "menu-selected flex-c-col" : "menu-option flex-c-col"} onClick={() => onPageSelect(option.id)} onMouseEnter={() => enterMenuIcon(option.id, setHoveredId)} onMouseLeave={() => leaveMenuIcon(setHoveredId)}>
         {option.id === 'staff' ? <StaffIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> : 
         option.id === 'technical-info' ? <TechnicalIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
         option.id === 'contacts' ? <ContactsIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
@@ -41,7 +41,7 @@ export function Menu({page, onPageSelect}) {
   });
 
   return (
-    <div className="sidenav">
+    <div className="sidenav flex-c-col">
       {menuList}
     </div>
   );

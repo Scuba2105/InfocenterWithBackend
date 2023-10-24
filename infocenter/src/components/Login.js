@@ -97,8 +97,8 @@ export function Login() {
                 <div className="login-header">
                     <img className="app-logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/new-app-logo.png`} alt="app-logo"></img>
                 </div>
-                <div className="login-body">
-                    <div className="inputs-container">
+                <div className="login-body flex-c-col">
+                    <div className="inputs-container flex-c-col">
                         <LoginInput input="name"></LoginInput>
                         <LoginInput input="password"></LoginInput>
                     </div> 

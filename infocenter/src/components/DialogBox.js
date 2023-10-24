@@ -25,7 +25,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
             return (
                 <>
                     <dialog open id="dialog-background">
-                        <div id="uploading-dialog">
+                        <div id="uploading-dialog flex-c-col">
                             <p>Please Wait...</p>
                             <div className="upload-body">
                                 <div className="spinner"></div>
@@ -46,7 +46,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                                 <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/warning-icon.jpg`} alt="warning"></img>
                                 <h3>Confirmation to Proceed</h3>
                             </div>
-                            <div className={dialogType === "info" ? "dialog-body-info" : "dialog-body"}>
+                            <div className={dialogType === "info" ? "dialog-body-info flex-c-col" : "dialog-body flex-c-col"}>
                                 <p>{message}</p>
                                 <div className="confirmation-btn-container">
                                     <button className="cancel-btn" value="default" onClick={() => cancelAndQuitUpdate(cancelUpdate, closeDialog)}>Cancel</button>
@@ -69,7 +69,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                                 <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
                                 <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType).split("-")[0]} Message`}</h3>
                             </div>
-                            <div className={dialogType === "info" ? "dialog-body-info" : dialogType === "error-request" ? "dialog-body-error-request" : "dialog-body"}>
+                            <div className={dialogType === "info" ? "dialog-body-info flex-c-col" : dialogType === "error-request" ? "dialog-body-error-request" : "dialog-body flex-c-col"}>
                                 {dialogType === "error-request" ?
                                     <>
                                         <p>An error occurred generating the request form;</p>
