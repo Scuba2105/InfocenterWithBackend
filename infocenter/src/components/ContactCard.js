@@ -32,7 +32,7 @@ export function ContactCard({identifier, contact, index, openUpdateContactModal}
                 </div> 
                 {identifier === "vendor" && <div className="contact-number">
                     <label className="number-description">{contact.email === "https://services.gehealthcare.com.au/gehcstorefront/" ? "GE Portal" : "Email" }</label>
-                    <a className="number-value website-link" href={contact.email === "" ? null : serviceRequestSites.includes(contact.email) ? contact.email : `mailto:${contact.email}`}>{serviceRequestSites.includes(contact.email) ? "Website" : contact.email !== "" ? contact.email : "-"}</a>
+                    <a className="number-value website-link" href={contact.email === "" ? null : serviceRequestSites.includes(contact.email) ? contact.email : `mailto:${contact.email}`} target={serviceRequestSites.includes(contact.email) ? "_blank" : null} rel={serviceRequestSites.includes(contact.email) ? "noopener noreferrer": null}>{serviceRequestSites.includes(contact.email) ? "Website" : contact.email !== "" ? contact.email : "-"}</a>
                 </div>}                
             </div>
         </div>
