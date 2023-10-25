@@ -46,6 +46,7 @@ export function Login() {
             if (!emailRegex.test(emailInput.value)) {
                 setLoginErrorMessage("Email does not match the required email pattern");
                 setLoginError(true);
+                setLoggingIn(false);
                 return
             }
         
@@ -53,6 +54,7 @@ export function Login() {
             if (invalidPasswordRegex.test(passwordInput.value)) {
                 setLoginErrorMessage("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter and 1 number and 1 special character");
                 setLoginError(true);
+                setLoggingIn(false);
                 return
             }
             

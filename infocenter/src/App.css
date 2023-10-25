@@ -108,7 +108,8 @@ html {
 }
 
 .login-body p {
-  margin: 20px 20px 0 20px;
+  margin: 0 20px 0px 20px;
+  transform: translateY(-4.8vh);
   font-size: 10px;
   color: red;
 }
@@ -145,6 +146,7 @@ html {
 .login-input {
   width: 85%;
   height: 30px;
+  color: var(--contact-card-font-color);
   background: var(--form-background-color);
   border: 1px solid var(--contact-card-font-color);
   border-left: none;
