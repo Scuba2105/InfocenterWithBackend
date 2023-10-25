@@ -27,16 +27,16 @@ export function StaffDetails({selectedData, user}) {
     
     return (
         <div className='staff-info'>
-            <div className="staff-heading">
-                <div className="staff-logo">
-                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className="logo" src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
-                    workshops.includes(selectedData.name) ? <div className="logo" style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className="phone-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
+            <div className="staff-heading flex-c">
+                <div className="staff-logo flex-c">
+                    {selectedData.img ? <img key={profilePhotoUpdates * 10} className="logo flex-c" src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${selectedData.id}.${selectedData.img}`} alt="staff" style={{border: "1px solid black"}}></img> :
+                    workshops.includes(selectedData.name) ? <div className="logo flex-c" style={selectedData.team ? teamColors[selectedData.team] : teamColors.default}><img className="phone-image" src={`https://${serverConfig.host}:${serverConfig.port}/images/phone.svg`} alt="phone"></img></div> :
                     <BlankProfile identifier="blank-picture" size="20vh" foregroundColor="#6B7F82" ></BlankProfile>}
                 </div>
                 <div className="staff-name">
-                    <div className="name-update-container">
+                    <div className="name-update-container flex-c">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link"><EmailIcon size="2.78vh" color="#d4fc77"></EmailIcon></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link flex-c"><EmailIcon size="2.78vh" color="#d4fc77"></EmailIcon></a>}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

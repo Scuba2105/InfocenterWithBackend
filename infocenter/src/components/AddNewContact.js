@@ -279,12 +279,12 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         }, []).sort()
         
         return (
-            <div className="contact-modal-display">
+            <div className="contact-modal-display flex-c-col">
                 <div className="contact-indicator-container">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
-                <div className="staff-contacts-input-container" style={inputPage === 2 ? {transform: 'translateY(31px)'} : null}>
+                <div className="staff-contacts-input-container flex-c" style={inputPage === 2 ? {transform: 'translateY(31px)'} : null}>
                     <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
@@ -325,12 +325,12 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
             return acc;
         }, []).sort();
         return (
-            <div className="contact-modal-display">
+            <div className="contact-modal-display flex-c-col">
                 <div className="contact-indicator-container">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
-                <div className="staff-contacts-input-container" style={{transform: 'translateY(30px)'}}>
+                <div className="staff-contacts-input-container flex-c" style={{transform: 'translateY(30px)'}}>
                     <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&

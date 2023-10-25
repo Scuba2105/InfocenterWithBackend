@@ -69,7 +69,7 @@ export function ModalSkeleton({children, selectedData, closeModal, type, page, n
     else {
         return (
             <div className="modal-container">
-                <div className="modal-title-bar">
+                <div className="modal-title-bar flex-c">
                     <div id="title-aligner"></div>     
                     <h2 className="model-title">{type !== "update" ? `${selectedData.model} ${formatTypeHeading(type)}` : `Update ${selectedData.model} Resources`}</h2> 
                     <img className="cross" src={`https://${serverConfig.host}:${serverConfig.port}/images/cross.svg`} alt="cross" onClick={closeModal}></img> 

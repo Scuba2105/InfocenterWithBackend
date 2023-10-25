@@ -932,10 +932,7 @@ html {
   border-radius: 6px;
   text-decoration: none;
   color: black;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   font-size: clamp(12px, 1.75vh, 20px);
   font-weight: 500;
 }
@@ -968,15 +965,10 @@ html {
   grid: 1 / 1;
   height: 100%;
   width: 100%;
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
 }
 
 .staff-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   aspect-ratio: 1 / 1;
   height: 100%;
   font-size: 35px;
@@ -985,9 +977,6 @@ html {
 .logo {
   border: 1px solid rgb(137, 44, 44);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: radial-gradient(rgb(246, 193, 194), rgb(217, 95, 97));
   aspect-ratio: 1 / 1;
   height: 20vh;
@@ -1014,9 +1003,7 @@ html {
 }
 
 .name-update-container {
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
 }
 
 .name-text {
@@ -1049,10 +1036,6 @@ html {
 .info-entry-container {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .info-entry {
@@ -1076,15 +1059,12 @@ html {
 }
 
 .email-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 4.17vh;
   width: 4.17vh;
   border-radius: 50%;
   background-color: transparent;
   border: 2px solid var(--alternate-color-accent);
-  transform: translate(30px, 15px);
+  transform: translate(30px, 18px);
 }
 
 .staff-name-desktop .email-link {
@@ -1149,29 +1129,18 @@ html {
 
 .contact-modal-display {
   grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--form-background-color);
 }
 
 .contact-update-display {
   grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--form-background-color);
 }
 
 .contact-update-department-container {
   width: 100%;
   height: 60px;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
   color: white;
@@ -1185,28 +1154,21 @@ html {
   grid-gap: 20px;
 }
 
-
-
 .add-new-heading {
   color: var(--form-font-color);
 }
 
+/* Format password display */
 .password-display {
   grid-row: 2;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   background-color: var(--form-background-color);
   min-height: 400px;
   overflow-y: auto;
 }
 
 .password-container {
-  display: flex;
-  flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   min-height: 100px;
   width: 300px;
   border-radius: 10px;
@@ -1222,10 +1184,6 @@ html {
 }
 
 .password-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: 13px;
 }
 
@@ -1256,19 +1214,12 @@ html {
 }
 
 .tooltip-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100px;
 }
 
 .tooltip-button > button {
   border: none;
   border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 30px;
   width: 30px;
 }
@@ -1291,31 +1242,10 @@ html {
   border-radius: 3px;
 }
 
-.add-new-input-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.staff-contacts-input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.add-new-contact-input-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .add-new-staff-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0px 13px;
-
 }
 
 .add-new-staff-upload-button {
@@ -1323,6 +1253,7 @@ html {
   margin-bottom: 20px;
 }
 
+/* Reached this point with the refactor */
 .software-summary {
   display: flex;
   flex-direction: column;

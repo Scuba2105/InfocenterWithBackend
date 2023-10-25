@@ -148,12 +148,12 @@ export function LinkModal({selectedData, modalType}) {
         const passwordData = selectedData.passwords;
 
         return (
-            <div className="password-display">
+            <div className="password-display flex-c-col">
                 {passwordData.map((entry, index) => {
                     return (
-                        <div className={`password-container ${passwordEntryClassName(index % 2)}`} key={`${selectedData.model}${index}`}>
+                        <div className={`password-container ${passwordEntryClassName(index % 2)} flex-c-col`} key={`${selectedData.model}${index}`}>
                             <label className="password-type">{`${entry.type}`}</label>
-                            <div className="password-info">
+                            <div className="password-info flex-c-col">
                                 {entry.values.map((pword) => {
                                         const desc = pword.split(':')[0];
                                         const value = pword.split(':')[1];

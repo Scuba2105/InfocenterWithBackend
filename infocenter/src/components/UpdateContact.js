@@ -130,8 +130,8 @@ export function UpdateContact({currentContact, formType, page, pageData, queryCl
     const updatedContactData = useRef({});
     
     return (
-        <div className="contact-update-display">
-            <div className="contact-update-department-container">
+        <div className="contact-update-display flex-c-col">
+            <div className="contact-update-department-container flex-c-col">
                 {formType === "staff" && <label>{currentContact.data.hospital}</label>}
                 {formType === "staff" && <label>{currentContact.data.department}</label>}
                 {formType === "vendor" && <label>{currentContact.data.vendor}</label>}
