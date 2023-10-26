@@ -42,11 +42,11 @@ export function StaffDetails({selectedData, user}) {
                 </div>
             </div>            
             <div className="info-container">
-                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#6EDDC0" bColor="main"></StaffInfoEntry>}
+                {selectedData.id !== "-" && <StaffInfoEntry heading="Staff ID" value={selectedData.id} Icon={StaffID} color="#5ef8ed" bColor="main"></StaffInfoEntry>}
                 {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer" value={selectedData.hostname} Icon={Laptop} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
-                <StaffInfoEntry heading="Office Ph." value={selectedData.officePhone} Icon={OfficePhone} color="#6EDDC0" bColor="main"></StaffInfoEntry>
+                <StaffInfoEntry heading="Office Ph." value={selectedData.officePhone} Icon={OfficePhone} color="#5ef8ed" bColor="main"></StaffInfoEntry>
                 {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Ph." value={selectedData.dectPhone} Icon={DectPhone} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 1" value={selectedData.workMobile} Icon={MobilePhone} color="#6EDDC0" bColor="main"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 1" value={selectedData.workMobile} Icon={MobilePhone} color="#5ef8ed" bColor="main"></StaffInfoEntry>}
                 {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 2" value={selectedData.personalMobile} Icon={MobilePhone} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
             </div>
         </div>

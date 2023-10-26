@@ -77,7 +77,7 @@ export function LinkModal({selectedData, modalType}) {
         
         return (
             <div className="modal-display" style={{justifyContent: 'center', maxHeight: 250 + 'px'}}>
-                <div className="software-summary">
+                <div className="software-summary flex-c-col">
                     <label className="software-device-label">Device Software Location:</label>
                     <label className="software-device-location">{softwareData["device-software"] || "N/A"}</label>
                     <div className="clipboard-copy-container">

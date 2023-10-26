@@ -297,7 +297,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                             <div className="add-new-aligner"></div>
                         </div>}
                         {inputPage === 1 &&
-                        <div className="edit-add-new-container">
+                        <div className="edit-add-new-container flex-c-col">
                             {!addNewDepartment && <TooltipButton content={addNewDepartment ? "Undo" :"Add New"} boolean={addNewHospital} toggleFunction={() => toggleNewDepartment(setAddNewDepartment)}/>}
                             {addNewDepartment ? <Input inputType="text" identifier="add-new" labelText="Department" placeholdertext={`Enter new contact Department`} /> : 
                             <SelectInput type="form-select-input" label="Department" optionData={departmentSelectOptions} />}
@@ -334,7 +334,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
-                        <div className="edit-add-new-container">
+                        <div className="edit-add-new-container flex-c">
                             {<TooltipButton content={addNewVendor ? "Undo" :"Add New"} boolean={addNewVendor} toggleFunction={() => toggleNewVendor(setAddNewVendor)}/>}
                             {addNewVendor ? <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" /> : 
                             <SelectInput type="form-select-input" label="Vendor" optionData={vendorSelectOptions} />}

@@ -14,7 +14,7 @@ html {
   --dark-theme: #101724;
   --med-theme: #192130;
   --med-light-theme: #242a39;
-  --main-color-accent: #96F8F2;
+  --main-color-accent: #5ef8ed;
   --alternate-color-accent: #BCE7FD;
   --contact-card-font-color: rgb(198, 199, 208);
   --icon-theme: var(--med-theme);
@@ -31,7 +31,7 @@ html {
   --red-accent: rgb(253, 67, 67);
   --green-accent: rgb(2, 189, 118);
   --orange-accent: #FBB934;
-  --calendar-tile-active: var(--alternate-color-accent); 
+  --calendar-tile-active: var(--green-button-color); 
   --calendar-tile-hover: var(--med-light-theme);
   --calendar-tile-font: rgb(230, 229, 229);
 }
@@ -321,7 +321,7 @@ html {
 .menu-selected {
   cursor: pointer;
   background-color: var(--med-light-theme);
-  color:var(--alternate-color-accent);
+  color: var(--alternate-color-accent);
 }
 
 .menu-icon {
@@ -1255,10 +1255,6 @@ html {
 
 /* Reached this point with the refactor */
 .software-summary {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top: 25px;
   margin-bottom: 20px;
 }

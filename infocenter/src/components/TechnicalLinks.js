@@ -37,7 +37,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
             <div className="technical-area">
                 <div className="technical-link-container flex-c">
                     <a className="technical-link main-link-button flex-c-col" style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} >
-                        <ServiceIcon color="#29C9BF" size="5vh"/>
+                        <ServiceIcon color="#5ef8ed" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Service</span>
                             <span>Manual</span> 
@@ -55,7 +55,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container flex-c">
                     <div className="technical-link config main-link-button flex-c-col" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
-                        <ConfigIcon color="#29C9BF" size="5vh"/>
+                        <ConfigIcon color="#5ef8ed" size="5vh"/>
                         Configuration
                     </div>  
                 </div>
@@ -67,7 +67,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container flex-c">
                     <div className="technical-link documents main-link-button flex-c-col" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <DocumentsIcon color="#29C9BF" size="5vh"/>
+                        <DocumentsIcon color="#5ef8ed" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Other</span>
                             <span>Documents</span> 

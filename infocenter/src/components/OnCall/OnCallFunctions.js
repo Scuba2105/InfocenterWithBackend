@@ -7,11 +7,11 @@ import { staffOnCallRoster, getAdjustedBeginRoster, beginDate } from '../../util
 import { EditRoster } from "./EditRoster";
 
 // Define the labels and icons for mapping the buttons.
-const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#6EDDC0"},
+const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#5ef8ed"},
 {label: "Confirm Roster", "icon": ConfirmRosterIcon, color: "#BCE7FD"},
 {label: "My Roster", "icon": MyRosterIcon, color: "#BCE7FD"}, 
-{label: "Staff Roster", "icon": StaffRosterIcon, color: "#6EDDC0"}, 
-{label: "Key Contacts", "icon": KeyContactsIcon, color: "#6EDDC0"}, 
+{label: "Staff Roster", "icon": StaffRosterIcon, color: "#5ef8ed"}, 
+{label: "Key Contacts", "icon": KeyContactsIcon, color: "#5ef8ed"}, 
 {label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#BCE7FD"}];
 
 const modalLinkButtons = ["my-roster", "edit-roster", "staff-roster", "confirm-roster", "key-contacts", "on-call-cheatsheet"];
