@@ -1,7 +1,7 @@
 import { EditIcon } from "../svg";
 
 // Define arrays for contact header background colors.
-const backgroundColors = ["#6EDDC0", "#d4fc77", "#d4fc77", "#6EDDC0"]
+const backgroundColors = ["#6EDDC0", "#BCE7FD", "#BCE7FD", "#6EDDC0"]
 
 // Service Request Websites
 const serviceRequestSites = ["https://services.gehealthcare.com.au/gehcstorefront/", "https://secure.medtronicinteract.com/SubmitServiceRequest"]

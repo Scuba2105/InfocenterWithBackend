@@ -46,7 +46,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container flex-c">
                     <a className="technical-link alternate-link-button flex-c-col" style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} >
-                        <UserManualIcon color="#d4fc77" size="5vh"/>
+                        <UserManualIcon color="#BCE7FD" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>User</span>
                             <span>Manual</span> 
@@ -61,7 +61,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container flex-c">
                     <div className="technical-link software alternate-link-button flex-c-col" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <SoftwareIcon color="#d4fc77" size="5vh"/>
+                        <SoftwareIcon color="#BCE7FD" size="5vh"/>
                         Software
                     </div> 
                 </div>
@@ -76,7 +76,7 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                 </div>
                 <div className="technical-link-container flex-c">
                     <div className="technical-link passwords alternate-link-button flex-c-col" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
-                        <PasswordsIcon color="#d4fc77" size="5vh"/>
+                        <PasswordsIcon color="#BCE7FD" size="5vh"/>
                         Passwords
                     </div>   
                 </div>
