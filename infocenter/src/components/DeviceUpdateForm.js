@@ -300,7 +300,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
     return (
         <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
             <div className="update-form-display">
-                <div className="update-options">
+                <div className="update-options flex-c">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
                         <ServiceIcon color={selectedOption === "Service Manual" ? "#FBB934" : "#69737a"} size="25px"/>
                         Service Manual

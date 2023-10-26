@@ -1280,15 +1280,7 @@ html {
   width: 450px;
   height: 25px;
   padding-left: 20px;
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
-}
-
-.clipboard-copy-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .clipboard-aligner {
@@ -1323,9 +1315,7 @@ html {
 }
 
 .document-container {
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   width: 375px;
   height: 60px;
   margin-bottom: 20px;
@@ -1362,16 +1352,8 @@ html {
 
 .update-options {
   grid-row: 1;
-  display: flex;
   justify-content: space-around;
-  align-items: center;
   margin-top: 20px;
-}
-
-.update-options > label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .device-data-option {
