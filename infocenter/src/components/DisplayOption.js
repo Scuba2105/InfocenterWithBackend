@@ -52,7 +52,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     else if (selectedOption === 'Configs') {
         return (
             <div key={selectedOption} id="device-config-container" className="device-input-container flex-c-col">
-                <h4>Add New Configuration</h4>
+                <h4 className="flex-c size-100">Add New Configuration</h4>
                 <div className="config-info">
                     <SelectInput type="form-select-input" label='Hospital' optionData={hospitalLocations} />
                     {/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/> : 
@@ -66,17 +66,17 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                 </div>
                 <div className="config-file-container flex-c-col size-100">
                     <label className="config-file-input-label">Select Config File</label>
-                    <input type="file" className="device-file-upload" id="config-file" name="config-upload"></input>
+                    <input type="file" className="device-file-upload flex-c" id="config-file" name="config-upload"></input>
                 </div>
             </div> 
         );
     }
     else {
         return (
-            <div key={selectedOption} className="other-input-container">
+            <div key={selectedOption} className="other-input-container flex-c-col">
                 {fileNumber.map((number) => {
                     return (
-                    <div key={`container-${number}`} className="description-file-container">
+                    <div key={`container-${number}`} className="description-file-container flex-c">
                         <div className="label-input-container">
                             <label className="other-doc-label" key={`label-desc-${number}`}>{`File ${number} Description:`} </label>
                             <input key={`text${number}`} type="text" className="other-doc-text-input text-input" placeholder="Enter a short title/description" name={`description-${number}`}></input>
@@ -90,9 +90,9 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                 })
                 
                 }
-                <div className="other-file-button-container">
-                    {fileNumber[fileNumber.length - 1] < 4 && <div id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><AddSquare color="rgb(5, 234, 146)" translateX={-8}/>Add File</div>}
-                    {fileNumber.length !== 1 && <div id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><TrashCan color="rgb(253, 67, 67" translateX={-8}/>Delete File</div>}
+                <div className="other-file-button-container flex-c">
+                    {fileNumber[fileNumber.length - 1] < 4 && <div className="flex-c" id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><AddSquare color="rgb(5, 234, 146)" translateX={-8}/>Add File</div>}
+                    {fileNumber.length !== 1 && <div className="flex-c" id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><TrashCan color="rgb(253, 67, 67" translateX={-8}/>Delete File</div>}
                 </div>
             </div>
         );

@@ -280,7 +280,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         
         return (
             <div className="contact-modal-display flex-c-col">
-                <div className="contact-indicator-container">
+                <div className="contact-indicator-container flex-c">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
@@ -326,7 +326,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         }, []).sort();
         return (
             <div className="contact-modal-display flex-c-col">
-                <div className="contact-indicator-container">
+                <div className="contact-indicator-container flex-c">
                     <div className={inputPage === 1 ? "indicator active-indicator" : "indicator"}></div>
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>

@@ -49,28 +49,28 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
 
     return (
         <>
-            {configNumber > 1 && <div className="indicator-container">
+            {configNumber > 1 && <div className="indicator-container flex-c">
                 {parsedEntries.map((entry, index) => {
                 return <div key={`indicator${index}`} className={index === configIndex ? "indicator active-indicator" : "indicator"}></div>
             })}
             </div>}
-            <div className="config-display-container">
+            <div className="config-display-container flex-c">
                 {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}
-                <div className="config-display">
-                    <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link">
-                            <div className="options-info">
+                <div className="config-display flex-c-col">
+                    <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link flex-c-col">
+                            <div className="options-info flex-c-col">
                                 <label>{/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? "Options:" : "Type:"} {parsedConfigData[3] === '-' && '-'}</label>
                                 {parsedConfigData[3] !== '-' && <label>{parsedConfigData[3].replace('-', ' ')}</label>}
                             </div>
-                            <div className="software-info">
+                            <div className="software-info flex-c-col">
                                 <label>Software: {parsedConfigData[4] === '-' && '-'}</label>
                                 {parsedConfigData[4] !== '-' && <label>{parsedConfigData[4]}</label>}
                             </div>
-                            <div className="date-info">
+                            <div className="date-info flex-c-col">
                                 <label>Date Created:</label>
                                 <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                             </div>
-                            <a href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
+                            <a className="flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
                     </div>
                 </div>
                 {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}

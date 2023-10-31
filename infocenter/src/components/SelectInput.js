@@ -15,7 +15,7 @@ export function SelectInput({type, defaultValue, label, optionData, value, onCha
     }
     else if (type === "form-select-input") {
         return (
-            <div className={`form-select-input-container`}>
+            <div className={`form-select-input-container flex-c-col`}>
                 <p className={`form-select-input-label`}>{label}</p>
                 <select name={label} defaultValue={defaultValue} className={"select-input form-select-input"} onChange={onChange}>
                     {optionData.map((hospital, index) => {

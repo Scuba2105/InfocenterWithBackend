@@ -301,23 +301,23 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
         <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
             <div className="update-form-display">
                 <div className="update-options flex-c">
-                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
+                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
                         <ServiceIcon color={selectedOption === "Service Manual" ? "#FBB934" : "#69737a"} size="25px"/>
                         Service Manual
                     </div>
-                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
+                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
                         <UserManualIcon color={selectedOption === "User Manual" ? "#FBB934" : "#69737a"} size="25px"/>
                         User Manual
                     </div>
-                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
+                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
                         <ConfigIcon color={selectedOption === "Configs" ? "#FBB934" : "#69737a"} size="25px"/>
                         Configs
                     </div>
-                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
+                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
                         <SoftwareIcon color={selectedOption === "Software" ? "#FBB934" : "#69737a"} size="25px"/>
                         Software
                     </div>
-                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected" : "device-data-option" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
+                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
                         <DocumentsIcon color={selectedOption === "Other Documents" ? "#FBB934" : "#69737a"} size="25px"/>
                         Other Documents
                     </div>                    
