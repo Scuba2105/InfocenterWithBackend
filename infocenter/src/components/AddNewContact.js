@@ -6,7 +6,7 @@ import { serverConfig } from "../server";
 import { NavigationArrow } from "../svg";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
-const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
+const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z0-9 &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
 const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-/]+$|^\s*$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/];
 const staffInputsDescriptions = ["Contact Name", "Contact Position", "Hospital", "Department", "Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorInputsDescriptions = ["Vendor", "Contact Name", "Contact Position", "Office Phone", "Mobile Phone", "Email"];
@@ -122,8 +122,8 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     // Validate select inputs with appropriate regex
     if (inputPage === 1) {
         for (let [index, input] of Array.from(selectInputs).entries()) {
-            
             const descIndex = getDescriptionIndex(index, addNewHospital, addNewDepartment)
+            console.log(staffRegexArray[1], input.value)
             if (staffRegexArray[1].test(input.value) === false) {
                 showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`);
                 return
@@ -297,7 +297,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                             <div className="add-new-aligner"></div>
                         </div>}
                         {inputPage === 1 &&
-                        <div className="edit-add-new-container flex-c-col">
+                        <div className="edit-add-new-container">
                             {!addNewDepartment && <TooltipButton content={addNewDepartment ? "Undo" :"Add New"} boolean={addNewHospital} toggleFunction={() => toggleNewDepartment(setAddNewDepartment)}/>}
                             {addNewDepartment ? <Input inputType="text" identifier="add-new" labelText="Department" placeholdertext={`Enter new contact Department`} /> : 
                             <SelectInput type="form-select-input" label="Department" optionData={departmentSelectOptions} />}

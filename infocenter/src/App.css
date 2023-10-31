@@ -16,6 +16,7 @@ html {
   --med-light-theme: #242a39;
   --main-color-accent: #5ef8ed;
   --alternate-color-accent: #BCE7FD;
+  --yellow-green-button-color: #e4fd76;
   --contact-card-font-color: rgb(198, 199, 208);
   --icon-theme: var(--med-theme);
   --profile-pic-background-color: #DEE5E7;
@@ -1404,12 +1405,12 @@ html {
 .update-button {
   width: 150px;
   height: 30px;
-  border: 1.3px solid var(--alternate-color-accent);
+  border: 1.3px solid var(--yellow-green-button-color);
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  color: var(--alternate-color-accent);
+  color: var(--yellow-green-button-color);
   border-radius: 5px;
   font-weight: 400;
 }
