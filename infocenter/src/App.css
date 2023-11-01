@@ -2451,6 +2451,7 @@ html {
   text-transform: uppercase;
   font-weight: bold;
   font-size: clamp(14px, 1vw, 20px);
+  margin-bottom: 10px;
 }
 
 abbr[title] {
