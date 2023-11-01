@@ -1675,24 +1675,7 @@ html {
 }
 
 /* Formatting the Contacts page */
-.contacts-page-container {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.contacts-summary-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
 .hospital-contacts-container {
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template-rows: 80px 1fr;
   margin-top: 30px;
@@ -1703,17 +1686,9 @@ html {
   width: 90%;
   color: white;
   background-color: var(--med-light-theme);
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   margin: auto auto;
   border: 1px solid black;
-}
-
-.contacts-heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .contacts-main-display {
@@ -1727,41 +1702,19 @@ html {
   grid-template-rows: 100px 1fr 50px;
 }
 
-.contact-location-summary {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-}
-
 .contacts-display {
   grid: 1 / 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-.contact-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .contacts-filter-container {
   width: 100%;
-  display: flex;
   justify-content: space-around;
-  align-items: center;
 }
 
 .contacts-select-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  grid: 1;
+ grid: 1;
 }
 
 .contacts-select-label {
@@ -1786,9 +1739,7 @@ html {
 .contact-update-header {
   grid: 1 / 1;
   font-size: 10px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .contact-update-header > label {
@@ -1815,10 +1766,7 @@ html {
   height: 100%;
   width: 100%;
   color: var(--med-light-theme);
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 }
 
 .contact-header-centered {
@@ -1837,8 +1785,6 @@ html {
 }
 
 .contact-numbers-container {
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
   background-color: var(--med-light-theme);
@@ -1847,9 +1793,6 @@ html {
 }
 
 .contact-number {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   padding-left: 10px;
   padding-right: 10px;
@@ -1891,16 +1834,12 @@ html {
 
 /* Formatting the utilities page */
 .utilities-container {
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr;
 }
 
 .utility-options {
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
@@ -1911,11 +1850,6 @@ html {
 }
 
 .utility-options > h2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
   margin: 0;
 }
 
@@ -1928,14 +1862,6 @@ html {
 
 .utility-options > h2:hover {
   cursor: pointer;
-}
-
-.request-page-container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .request-form-laptop {

@@ -26,7 +26,7 @@ export function ServiceRequestGenerator({staffNames}) {
     const serviceAgents = Object.keys(saModels);
 
     return (
-        <div className="request-page-container">
+        <div className="request-page-container size-100 flex-c">
             <form className={mediaQueries.laptop ? `request-form-laptop` : `request-form-desktop`} style={serviceAgent === "Ecomed (CTG Transducers)" ? {width: 400 + "px"} : {width: 600 + "px"}}>
                 <h4>Request Form Generation</h4>
                 <div className={serviceAgent === "Ecomed (CTG Transducers)" ? "input-container" : "two-column-container"}>

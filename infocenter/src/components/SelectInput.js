@@ -43,7 +43,7 @@ export function SelectInput({type, defaultValue, label, optionData, value, onCha
     }
     else if (type === "contacts-hospitals" || type === "contacts-departments") {
         return (
-            <div className={`contacts-select-container`}>
+            <div className={`contacts-select-container flex-c-col`}>
                 <p className={`contacts-select-label`}>{label}</p>
                 <select name={label} className={"select-input contacts-select"} style={label === "Vendor" ? {width: 270 + 'px'} : null} value={defaultValue} onChange={onChange}>
                     {optionData.map((hospital, index) => {

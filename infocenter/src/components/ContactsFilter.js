@@ -33,7 +33,7 @@ export function ContactsFilter({identifier, selectedDepartment, setSelectedDepar
             
     if (identifier === "staff") {
         return (
-            <div ref={inputsContainer} className="contacts-filter-container">
+            <div ref={inputsContainer} className="contacts-filter-container flex-c">
                 <SelectInput type="contacts-hospitals" defaultValue={selectedDepartment.hospital} label="Hospital" optionData={hospitalData} onChange={(e) => onHospitalChange(pageData, setSelectedDepartment, setContactPage, inputsContainer, e)}></SelectInput>
                 <SelectInput type="contacts-departments" defaultValue={selectedDepartment.department} label="Department" optionData={departmentData} onChange={(e) => onDepartmentChange(selectedDepartment, setSelectedDepartment, setContactPage, e)}></SelectInput>
             </div>
@@ -41,7 +41,7 @@ export function ContactsFilter({identifier, selectedDepartment, setSelectedDepar
     }
     else {
         return (
-            <div className="contacts-filter-container">
+            <div className="contacts-filter-container flex-c">
                 <SelectInput type="contacts-hospitals" defaultValue={selectedVendor} label="Vendor" optionData={vendorNames} onChange={(e) => onVendorChange(setVendor, setVendorContactPage, e)}></SelectInput>
             </div>
         )

@@ -90,8 +90,8 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
     allDepartmentContacts.slice(vendorContactPage*entriesPerPage, vendorContactPage*entriesPerPage + entriesPerPage)
     
     return (
-        <div className="hospital-contacts-container">
-            <div className={currentUser.permissions === "admin" ? "contacts-heading-admin" : "contacts-heading"}>
+        <div className="hospital-contacts-container size-100">
+            <div className={currentUser.permissions === "admin" ? "contacts-heading-admin flex-c" : "contacts-heading flex-c"}>
                 {currentUser.permissions === "admin" && <div id="summary-header-aligner" style={{marginLeft: 15 + 'px'}}></div>}
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
                 {currentUser.permissions === "admin" && <button className="add-new-btn contact-add-new-btn" onClick={() => openAddContactModal(setAddContactVisible)}>+</button>}
@@ -103,7 +103,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
                         const index = allDepartmentContacts.indexOf(contact);
                         const colorIndex = index % 4;
                         return (
-                            <div key={`contact-${index}`} className="contact-container">
+                            <div key={`contact-${index}`} className="size-100 flex-c">
                                 <ContactCard identifier={identifier} contact={contact} index={colorIndex}  setCurrentContact={setCurrentContact} openUpdateContactModal={() => openUpdateContactModal(setCurrentContact, contact, index, setUpdateContactVisible)}></ContactCard>
                             </div>
                         )
