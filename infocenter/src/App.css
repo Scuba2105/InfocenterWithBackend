@@ -31,8 +31,8 @@ html {
   --search-bar-color: #69737a;
   --red-accent: rgb(253, 67, 67);
   --green-accent: rgb(2, 189, 118);
-  --orange-accent: #FBB934;
-  --calendar-tile-active: var(--green-button-color); 
+  --orange-accent: #fdc046;
+  --calendar-tile-active: var(--main-color-accent); 
   --calendar-tile-hover: var(--med-light-theme);
   --calendar-tile-font: rgb(230, 229, 229);
 }
@@ -133,8 +133,8 @@ html {
   font-size: 18px;
   font-weight: 600;
   background-color: transparent;
-  color: var(--alternate-color-accent);
-  border: 1px solid var(--alternate-color-accent);  
+  color: var(--yellow-green-button-color);
+  border: 1px solid var(--yellow-green-button-color);  
   border-radius: 5px;
   margin-bottom: 20px;
 }
