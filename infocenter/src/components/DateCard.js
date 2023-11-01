@@ -7,8 +7,8 @@ export function DateCard({date, size, dateBoundary, dateOptions}) {
     if (size === "small") {
         return (
             <div className="date-card date-card-small">
-                <span className="card-head card-head-small" style={dateBoundary === "lower" ? {backgroundColor: "#06BF88"} : null}></span>
-                <div className="date-card-data">
+                <span className="card-head card-head-small flex-c" style={dateBoundary === "lower" ? {backgroundColor: "#06BF88"} : null}></span>
+                <div className="date-card-data flex-c-col">
                     <span className="date-card-month-small">{month}</span>
                     <span className="date-card-day-small">{dayNumber.replace(/^0/, "")}<span className="suffix">{suffix}</span></span>
                 </div>
@@ -17,8 +17,8 @@ export function DateCard({date, size, dateBoundary, dateOptions}) {
     }
     return (
         <div className="date-card">
-            <span className="card-head">{dateBoundary === "lower" ? "Start Date" : "End Date"}</span>
-            <div className="date-card-data">
+            <span className="card-head flex-c">{dateBoundary === "lower" ? "Start Date" : "End Date"}</span>
+            <div className="date-card-data flex-c-col">
                 <span className="date-card-month">{month}</span>
                 <span className="date-card-day">{dayNumber.replace(/^0/, "")}<span className="suffix">{suffix}</span></span>
             </div>

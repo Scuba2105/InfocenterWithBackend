@@ -18,7 +18,7 @@ export function StaffRoster() {
             {staffOnCallRoster.map((staff, index) => {
                 const btnStyle = index % 2 === 0 ? "main-link-button" : "alternate-link-button";
                 return (
-                    <div key={`$roster-entry-${index}`} className={`staff-roster-label ${btnStyle}`}>
+                    <div key={`$roster-entry-${index}`} className={`staff-roster-label flex-c ${btnStyle}`}>
                         <label>{`${index + 1}. ${staff}`}</label>
                     </div>
                 )

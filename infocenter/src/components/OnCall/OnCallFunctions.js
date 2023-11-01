@@ -40,9 +40,9 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
                 const design = [0, 3, 4].includes(index) ? "main-link-button" : "alternate-link-button";
                 return (
                     <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100">
-                        <button className={`on-call-function-button flex-c ${type} ${design}`} onClick={() => showForm(setFormVisibile, setFormType, type)}>
+                        <button className={`on-call-function-button flex-c-col ${type} ${design}`} onClick={() => showForm(setFormVisibile, setFormType, type)}>
                             <entry.icon color={entry.color} size="2.7vw"></entry.icon>
-                            <div className="on-call-label-container flex-c">
+                            <div className="on-call-label-container flex-c-col">
                                 <label className="on-call-label">{entry.label.split(" ")[0]}</label>
                                 <label className="on-call-label">{entry.label.split(" ")[1]}</label>
                             </div>

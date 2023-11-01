@@ -95,21 +95,21 @@ export function CalendarComponent({onCallChangedData}) {
   const [boundingDates, setBoundingDates] = useState(getWeekBoundingDates(date))
 
   return (
-    <div className='calendar-half-page'>
-      <div className='on-call-summary'>
+    <div className='calendar-half-page size-100 flex-c-col'>
+      <div className='on-call-summary flex-c'>
         <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions}></DateCard>
         <div className='on-call-staff-card'>
-          <span className="card-head">Unconfirmed On-Call Details</span>
-          <div className='on-call-staff'>
-            <span className='on-call-name'>{onCallEmployee.name}</span> 
-            <div className='comments-container'>
-              <span className='on-call-comment'>{onCallEmployee.comment ? onCallEmployee.comment : "No Comments"}</span>
+          <span className="card-head flex-c">Unconfirmed On-Call Details</span>
+          <div className='on-call-staff flex-c-col'>
+            <span className='on-call-name flex-c'>{onCallEmployee.name}</span> 
+            <div className='comments-container flex-c-col'>
+              <span className='on-call-comment flex-c'>{onCallEmployee.comment ? onCallEmployee.comment : "No Comments"}</span>
             </div>
           </div>
         </div>
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
-      <div className='calendar-container'>
+      <div className='calendar-container flex-c-col'>
         <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} minDate={minDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>

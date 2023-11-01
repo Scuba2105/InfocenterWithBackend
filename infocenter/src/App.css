@@ -2269,21 +2269,9 @@ html {
 }
 
 /* format calendar component */
-.calendar-half-page {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .calendar-container {
   width: 70%;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   background: var(--med-theme);
   overflow: hidden;
 }
@@ -2291,9 +2279,7 @@ html {
 .on-call-summary {
   width: 90%;
   height: 18%;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 5vh;
 }
 
@@ -2323,9 +2309,6 @@ html {
   background-color: var(--orange-accent);  
   color: var(--dark-theme);
   font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .card-head-small {
@@ -2334,10 +2317,7 @@ html {
 
 .date-card-data {
   grid-row: 2;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
 }
 
 .date-card-month {
@@ -2378,26 +2358,15 @@ html {
 .on-call-staff {
   grid-row: 2;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .comments-container {
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 50%;
   color: white;
 }
 
 .on-call-name, .on-call-comment {
   height: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
 }
 
@@ -2559,15 +2528,10 @@ abbr[title] {
   max-height: 145px;
   max-width: 145px;
   font-size: clamp(12px, 0.85vw, 18px);
-  flex-direction: column;
   justify-content: space-around;
   font-weight: 500;
   border-radius: 15px;
   cursor: pointer;
-}
-
-.on-call-label-container {
-  flex-direction: column;
 }
 
 /* Staff Roster Formatting */
@@ -2575,9 +2539,7 @@ abbr[title] {
   height: 35px;
   width: 40%;
   margin: 6px;
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   padding-left: 15px;
   border-radius: 10px;
 }
