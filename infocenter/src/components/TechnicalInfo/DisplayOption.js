@@ -1,8 +1,8 @@
-import { SelectInput } from "./SelectInput";
-import { Input } from "./Input";
-import { capitaliseFirstLetters } from "../utils/utils";
-import { Cross, Tick, AddSquare, TrashCan } from "../svg";
-import { serverConfig } from "../server";
+import { SelectInput } from "../SelectInput";
+import { Input } from "../Input";
+import { capitaliseFirstLetters } from "../../utils/utils";
+import { Cross, Tick, AddSquare, TrashCan } from "../../svg";
+import { serverConfig } from "../../server";
 
 const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'MATER HOSPITAL','BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
 'CESSNOCK HOSPITAL', 'TAREE HOSPITAL', 'DUNGOG HOSPITAL', 'SINGLETON HOSPITAL', 'DENMAN MPS','GLOUCESTOR HOSPITAL', 'SCONE HOSPITAL', 'MUSWELBROOK HOSPITAL', 

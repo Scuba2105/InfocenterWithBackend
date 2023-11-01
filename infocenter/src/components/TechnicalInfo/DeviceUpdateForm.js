@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
-import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../svg";
-import { ModalSkeleton } from './ModalSkeleton';
-import { serverConfig } from '../server';
+import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../../svg";
+import { ModalSkeleton } from '../ModalSkeleton';
+import { serverConfig } from '../../server';
 
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];

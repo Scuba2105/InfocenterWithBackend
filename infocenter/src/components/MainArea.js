@@ -1,6 +1,6 @@
 import { SearchFilter } from "./SearchFilter";
 import { SummaryCard } from "./SummaryCard";
-import { ContactsSummary } from "./ContactsSummary";
+import { ContactsSummary } from "./Contacts/ContactsSummary";
 import { Utilities } from "./Utilities";
 import { DialogBox } from "./DialogBox"; 
 import { LoadingPage } from "./LoadingPage";

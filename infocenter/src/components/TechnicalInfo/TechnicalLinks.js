@@ -1,6 +1,6 @@
-import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PasswordsIcon} from "../svg";
+import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PasswordsIcon} from "../../svg";
 import { DeviceUpdateForm } from "./DeviceUpdateForm";
-import { serverConfig } from "../server";
+import { serverConfig } from "../../server";
 
 function generateLinks(deviceData, type) {
     const formattedModel = deviceData.model.toLowerCase().replace(/\s/ig, '_');

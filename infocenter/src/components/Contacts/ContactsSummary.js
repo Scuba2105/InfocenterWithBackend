@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { NextIcon } from "../svg";
+import { NextIcon } from "../../svg";
 import { ContactCard } from "./ContactCard";
 import { ContactsFilter } from "./ContactsFilter";
-import { ModalSkeleton } from "./ModalSkeleton";
+import { ModalSkeleton } from "../ModalSkeleton";
 import { AddNewContact } from "./AddNewContact";
 import { UpdateContact } from "./UpdateContact";
-import { useUser } from "./StateStore";
+import { useUser } from "../StateStore";
 import useMediaQueries from "media-queries-in-react"
 
 function pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e) {

@@ -57,7 +57,7 @@ export function SelectInput({type, defaultValue, label, optionData, value, onCha
     }
     else {
         return (
-            <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container`}>
+            <div className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-container flex-c-col`}>
                 <p className={`${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select-label`}>{label === 'Hospital' ? `${label}/Region` : label}</p>
                 <select name={label} value={value} className={label === 'Configuration Type' ? `select-input config-data-input ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select` : `select-input ${label.toLowerCase().replace(/\s/ig,'-').replace(':','')}-select`} onChange={onChange}>
                     {optionData.map((hospital, index) => {

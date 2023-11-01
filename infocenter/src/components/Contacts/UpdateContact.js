@@ -1,6 +1,6 @@
 import { useRef } from "react"
-import { Input } from "./Input"
-import { serverConfig } from "../server";
+import { Input } from "../Input"
+import { serverConfig } from "../../server";
 
 const namePropertyLookup = {"contact": "Name", "position": "Position", "officePhone": "Office Phone", "dectPhone": "Dect Phone", "mobilePhone": "Mobile Phone"};
 const staffObjectProperties = ["contact", "position", "officePhone", "dectPhone", "mobilePhone"];

@@ -1,5 +1,5 @@
-import { serverConfig } from "../server";
-import { NavigationArrow } from "../svg"
+import { serverConfig } from "../../server";
+import { NavigationArrow } from "../../svg"
 
 function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
     const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";

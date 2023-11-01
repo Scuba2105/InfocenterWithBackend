@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react"
-import { Input } from "./Input";
-import { SelectInput } from "./SelectInput";
-import { TooltipButton } from "./TooltipButton";
-import { serverConfig } from "../server";
-import { NavigationArrow } from "../svg";
+import { Input } from "../Input";
+import { SelectInput } from "../SelectInput";
+import { TooltipButton } from "../TooltipButton";
+import { serverConfig } from "../../server";
+import { NavigationArrow } from "../../svg";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z0-9 &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 

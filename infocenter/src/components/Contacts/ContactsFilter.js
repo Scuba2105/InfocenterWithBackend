@@ -1,4 +1,4 @@
-import { SelectInput } from "./SelectInput";
+import { SelectInput } from "../SelectInput";
 import { useRef } from "react";
 
 export function ContactsFilter({identifier, selectedDepartment, setSelectedDepartment, selectedVendor, pageData, onHospitalChange, onDepartmentChange, setVendor, onVendorChange, setContactPage, setVendorContactPage}) {

@@ -1,4 +1,4 @@
-import { EditIcon } from "../svg";
+import { EditIcon } from "../../svg";
 
 // Define arrays for contact header background colors.
 const backgroundColors = ["#6EDDC0", "#BCE7FD", "#BCE7FD", "#6EDDC0"]

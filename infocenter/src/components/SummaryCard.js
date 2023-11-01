@@ -1,7 +1,7 @@
-import { TechnicalLinks } from "./TechnicalLinks";
+import { TechnicalLinks } from "./TechnicalInfo/TechnicalLinks";
 import { StaffDetails } from "./Staff/StaffDetails";
 import { useUser, useDevice } from "./StateStore";
-import { LinkModal } from "./LinkModal";
+import { LinkModal } from "./TechnicalInfo/LinkModal";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
 import { AddEditStaff } from "./Staff/AddEditStaff";
