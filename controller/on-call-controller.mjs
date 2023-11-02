@@ -44,10 +44,10 @@ export async function updateOnCallData(req, res, __dirname) {
             // Add the timestamps to the object.
             newData.startDate = startDate.getTime();
             newData.endDate = endDate.getTime();
-            console.log(onCallData)
+            
             // Add the new data to the existing on call data.
             onCallData.push(newData);
-            console.log(onCallData)
+            
             // Write the data to file.
             writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2));
     

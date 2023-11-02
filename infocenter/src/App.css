@@ -2595,6 +2595,13 @@ abbr[title] {
   color: var(--contact-card-font-color);
 }
 
+/* Formatting for the on-call confirmation form */
+.confirm-instruction {
+  color: var(--form-font-color);
+  font-size: 13px;
+  text-align: center;
+}
+
 /* Formatting input elements. */
 /* Global formatting for the form input elements */
 .text-input, .select-input, .date-input, .file-input, .password-input {

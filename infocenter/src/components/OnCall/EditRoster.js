@@ -23,7 +23,7 @@ function areDatesValid(startDateInput, endDateInput) {
     }
 }
 
-async function uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog, page) {
+async function uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog) {
     const selectElements = formContainer.current.querySelectorAll("select");
     const inputElements = formContainer.current.querySelectorAll("input");
     const formElements = [...selectElements, ...inputElements];
@@ -91,7 +91,7 @@ async function uploadData(formContainer, queryClient, showMessage, closeModal, c
     }
 }
 
-export function EditRoster({queryClient, showMessage, closeModal, closeDialog, page}) {
+export function EditRoster({queryClient, showMessage, closeModal, closeDialog}) {
 
     const formContainer = useRef(null);
 
@@ -103,7 +103,7 @@ export function EditRoster({queryClient, showMessage, closeModal, closeDialog, p
                 <SelectInput type="form-select-input" optionData={rosterChangeReasons} label="Reason for Change"></SelectInput>
                 <Input inputType="date" identifier="date-change" labelText={"Start Date"}></Input>
                 <Input inputType="date" identifier="date-change" labelText={"End Date"}></Input>
-                <div className="update-button edit-roster-update-btn" onClick={() => uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog, page)}>Upload Data</div>
+                <div className="update-button edit-roster-update-btn" onClick={() => uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog)}>Upload Data</div>
             </form>
         </div>
     )

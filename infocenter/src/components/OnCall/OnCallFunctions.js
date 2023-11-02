@@ -5,6 +5,7 @@ import { StaffRoster } from "./StaffRoster";
 import { useState } from "react";
 import { staffOnCallRoster, getAdjustedBeginRoster, beginDate } from '../../utils/utils';
 import { EditRoster } from "./EditRoster";
+import { ConfirmRoster } from "./ConfirmRoster";
 
 // Define the labels and icons for mapping the buttons.
 const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#5ef8ed"},
@@ -54,7 +55,8 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
             <ModalSkeleton type={formType} closeModal={() => hideForm(setFormVisibile)} page={page} >
                 {formType === "my-roster" ? <MyOnCall></MyOnCall> :
                 formType === "staff-roster" ? <StaffRoster></StaffRoster> :
-                formType === "edit-roster" ? <EditRoster queryClient={queryClient} showMessage={showMessage} closeModal={() => hideForm(setFormVisibile)} closeDialog={closeDialog} page={page}></EditRoster> : 
+                formType === "edit-roster" ? <EditRoster queryClient={queryClient} showMessage={showMessage} closeModal={() => hideForm(setFormVisibile)} closeDialog={closeDialog} page={page}></EditRoster> :
+                formType === "confirm-roster" ? <ConfirmRoster queryClient={queryClient} showMessage={showMessage} closeModal={() => hideForm(setFormVisibile)} closeDialog={closeDialog} page={page}></ConfirmRoster> : 
                 <div className="modal-display">
                     <h2 className="on-call-form-placeholder">Yet to be implemented</h2>
                 </div>}                
