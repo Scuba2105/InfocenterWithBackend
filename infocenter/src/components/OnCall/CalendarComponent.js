@@ -10,6 +10,9 @@ const onCallRoster = getAdjustedBeginRoster(staffOnCallRoster);
 const comments = {"Matthew Murrell": "Please divert phone to 0419295532"};
 
 function dateInRange(date, range) {
+  date.setHours(0,0,0,0)
+  range[0].setHours(0,0,0,0);
+  range[1].setHours(0,0,0,0);
   if (date >= range[0].getTime() && date <= range[1].getTime()) {
     return true
   }
@@ -18,8 +21,15 @@ function dateInRange(date, range) {
 
 function filterUpdateData(date, onCallChangedData) {
   const [lowerWeekBoundingDate, upperWeekBoundingDate] = getWeekBoundingDates(date);
+  lowerWeekBoundingDate.setHours(0,0,0,0)
+  upperWeekBoundingDate.setHours(0,0,0,0)
   const changedData = onCallChangedData.filter((entry) => {
-    return entry.startDate >= lowerWeekBoundingDate && entry.endDate <= upperWeekBoundingDate; 
+    const startingDate = new Date(entry.startDate)
+    const endingDate = new Date(entry.endDate)
+    // Set the date objects hours for consistency and comparison accuracy 
+    startingDate.setHours(0,0,0,0);
+    endingDate.setHours(0,0,0,0);
+    return startingDate >= lowerWeekBoundingDate && endingDate <= upperWeekBoundingDate; 
   })
   return changedData[0];
 }
