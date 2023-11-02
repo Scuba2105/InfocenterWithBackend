@@ -20,22 +20,23 @@ export async function updateOnCallData(req, res, __dirname) {
             const newData = req.body;
             const startDate = new Date(newData.startDate);
             const endDate = new Date(newData.endDate);
+            const requestDateBoundaries = {startDate: startDate, endDate: endDate}
     
             // Validate the request object body.
-            for (const [key, value] of newData.entries()) {
+            for (const [key, value] of Object.entries(newData)) {
                 if (["originalOnCall", "newOnCall"].includes(key)) {
                     if (!staffOnCallRoster.includes(value)) {
-                        throw new Error(`The input value for the ${objectPropLookup[key]} is not a valid staff member. Please fix this and try again.`)
+                        throw new Error(`The input value for the ${objectPropLookup[key]} is not a valid staff member. Please fix this and try again`)
                     }
                 }
                 if (key === "reason") {
                     if (!rosterChangeReasons.includes(value)) {
-                        throw new Error(`The input value for the ${objectPropLookup[key]} is not a valid reason. Please fix this and try again.`)
+                        throw new Error(`The input value for the ${objectPropLookup[key]} is not a valid reason. Please fix this and try again`)
                     }
                 }
                 if (["startDate", "endDate"].includes(key)) {
-                    if (!isValidDate(value)) {
-                        throw new Error(`The input value for the ${objectPropLookup[key]} is not a valid date. Please fix this and try again.`)
+                    if (!isValidDate(requestDateBoundaries[key])) {
+                        throw new Error(`The input value for the ${objectPropLookup[key]} is not a valid date. Please fix this and try again`)
                     }
                 }
             }
@@ -43,10 +44,10 @@ export async function updateOnCallData(req, res, __dirname) {
             // Add the timestamps to the object.
             newData.startDate = startDate.getTime();
             newData.endDate = endDate.getTime();
-    
+            console.log(onCallData)
             // Add the new data to the existing on call data.
             onCallData.push(newData);
-            
+            console.log(onCallData)
             // Write the data to file.
             writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2));
     
