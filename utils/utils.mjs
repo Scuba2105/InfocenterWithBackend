@@ -101,6 +101,10 @@ export function isValidBME(bme) {
     }
 }
 
+export function isValidDate(date) {
+    return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
+}
+
 export const brandOptions = ['Genius 3', 'GENIUS 3', '303013'];
 
 export function getReducedName(name) {

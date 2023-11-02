@@ -34,7 +34,7 @@ export async function addNewDeviceData(req, res, __dirname) {2
     catch(err) {
         // Send the error response message.
         console.log(JSON.stringify({Route: "Add New Device", Error: err.message}), null, 2);
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}`});
     }
 }
 
@@ -132,6 +132,6 @@ export async function updateExistingDeviceData(req, res, __dirname) {
     catch (err) {
         // Send the error response message.
         console.log(JSON.stringify({Route: `Update ${req.body.model}`, Error: err.message}), null, 2);
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}. Please try again and if issue persists contact administrator`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}`});
     }
 }
