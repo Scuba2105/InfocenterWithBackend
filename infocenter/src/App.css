@@ -1064,7 +1064,7 @@ html {
   width: 4.17vh;
   border-radius: 50%;
   background-color: transparent;
-  border: 2px solid var(--alternate-color-accent);
+  border: 2px solid var(--yellow-green-button-color);
   transform: translate(30px, 18px);
 }
 

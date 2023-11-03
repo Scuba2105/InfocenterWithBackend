@@ -36,7 +36,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container flex-c">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link flex-c"><EmailIcon size="2.78vh" color="#BCE7FD"></EmailIcon></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link flex-c"><EmailIcon size="2.78vh" color="#D4FB7C"></EmailIcon></a>}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
