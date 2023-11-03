@@ -4,6 +4,7 @@
 /public/configurations
 /public/documents
 /public/templates
+/public/oncall
 config.mjs
 /data/device-data.json
 /data/staff-contacts.json
