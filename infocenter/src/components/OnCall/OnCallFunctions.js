@@ -55,7 +55,7 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
                 }
                 else {
                     return (
-                        <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100">
+                        <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100" >
                             <a className={`on-call-function-button flex-c-col ${type} ${design}`} href={entry.href} download>
                                 <entry.icon color={entry.color} size="2.7vw"></entry.icon>
                                 <div className="on-call-label-container flex-c-col">

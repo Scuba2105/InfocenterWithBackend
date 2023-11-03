@@ -2512,6 +2512,11 @@ abbr[title] {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 4vw 1fr 1fr 1fr;
   overflow: hidden;
+  text-decoration: none;
+}
+
+.on-call-functions-container:visited {
+  text-decoration: none;
 }
 
 .on-call-functions-header {
@@ -2533,11 +2538,21 @@ abbr[title] {
   font-weight: 500;
   border-radius: 15px;
   cursor: pointer;
-  font-style: normal;
+}
+
+.on-call-function-button:link,
+.on-call-function-button:visited {
+  text-decoration: none;
 }
 
 .on-call-function-button:hover {
   cursor: pointer;
+}
+
+.on-call-label {
+  font-size: clamp(12px, 0.85vw, 18px);
+  font-weight: 400;
+  text-decoration: none;
 }
 
 /* Staff Roster Formatting */
