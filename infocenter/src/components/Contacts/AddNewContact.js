@@ -30,7 +30,7 @@ function getDescriptionIndex(index, addNewHospital, addNewDepartment) {
         return index + 2;
     }
     else if (!addNewHospital && addNewDepartment) {
-        return index + 1;
+        return index + 2;
     }
     else {
         return 0;
@@ -89,7 +89,7 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     const textInputs = inputContainer.current.querySelectorAll("input");
     const selectInputs = inputContainer.current.querySelectorAll("select");
     const staffRegexArray = staffInputsRegexArray.slice(0, 5);
-        
+    
     // Specify the whether the new contact data is staff or vendor
     newContactData.current.contactType = "staff"
 
@@ -118,12 +118,12 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
             }
         }
     }
-
+    
     // Validate select inputs with appropriate regex
     if (inputPage === 1) {
         for (let [index, input] of Array.from(selectInputs).entries()) {
             const descIndex = getDescriptionIndex(index, addNewHospital, addNewDepartment)
-            console.log(staffRegexArray[1], input.value)
+            console.log(index, descIndex)
             if (staffRegexArray[1].test(input.value) === false) {
                 showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`);
                 return

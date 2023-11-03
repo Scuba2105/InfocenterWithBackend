@@ -9,9 +9,9 @@ export function StaffInfoEntry({heading, value, Icon, color, bColor}) {
                 <label className="info-entry-label">{heading}</label>
                 {heading === "Computer" ? 
                 <div className="flex-c-col">
-                    {valueArray.map((entry) => {
+                    {valueArray.map((entry,index) => {
                         return (
-                            <label>{entry === "" ? "N/A" : entry}</label> 
+                            <label key={`info-entry-label${index}`}>{entry === "" ? "N/A" : entry}</label> 
                         )
                     })}
                 </div> :
