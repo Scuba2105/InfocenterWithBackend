@@ -1,4 +1,4 @@
-import { EditRosterIcon, ConfirmRosterIcon, MyRosterIcon, StaffRosterIcon, KeyContactsIcon, CheatsheetIcon } from "../../svg"
+import { EditRosterIcon, ConfirmRosterIcon, MyRosterIcon, StaffRosterIcon, CheatsheetIcon, AuthorisationIcon } from "../../svg"
 import { ModalSkeleton } from "../ModalSkeleton";
 import { MyOnCall } from "./MyOnCall";
 import { StaffRoster } from "./StaffRoster";
@@ -12,8 +12,8 @@ const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#5
 {label: "Confirm Roster", "icon": ConfirmRosterIcon, color: "#BCE7FD"},
 {label: "My Roster", "icon": MyRosterIcon, color: "#BCE7FD"}, 
 {label: "Staff Roster", "icon": StaffRosterIcon, color: "#5ef8ed"}, 
-{label: "Key Contacts", "icon": KeyContactsIcon, color: "#5ef8ed", "href": `https://${serverConfig.host}:${serverConfig.port}/oncall/oncall-key-contacts.docx`}, 
-{label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#BCE7FD", "href": `https://${serverConfig.host}:${serverConfig.port}/oncall/oncall-cheatsheet.docx`}];
+{label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#5ef8ed", "href": `https://${serverConfig.host}:${serverConfig.port}/oncall/On Call Cheat Sheet.docx`}, 
+{label: "Authorisation Form", "icon": AuthorisationIcon, color: "#BCE7FD", "href": `https://${serverConfig.host}:${serverConfig.port}/oncall/Callback Authorisation Form.doc`}];
 
 const modalLinkButtons = ["my-roster", "edit-roster", "staff-roster", "confirm-roster"];
 
@@ -56,7 +56,7 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
                 else {
                     return (
                         <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100">
-                            <a className={`on-call-function-button flex-c-col ${type} ${design}`} >
+                            <a className={`on-call-function-button flex-c-col ${type} ${design}`} href={entry.href} download>
                                 <entry.icon color={entry.color} size="2.7vw"></entry.icon>
                                 <div className="on-call-label-container flex-c-col">
                                     <label className="on-call-label">{entry.label.split(" ")[0]}</label>
