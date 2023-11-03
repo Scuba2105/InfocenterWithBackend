@@ -92,6 +92,27 @@ export function CalendarComponent({onCallChangedData}) {
   // Currently selected date
   const [date, setDate] = useState(new Date());
   
+  // Separate the on call data
+  const rosterEdits = onCallChangedData.rosterEdits;
+  const rosterConfirmations = onCallChangedData.rosterConfirmation;
+
+  // Check if roster Confirmations exist for the current selected week.
+  const currentWeekConfirmations = rosterConfirmations.find((entry) => {
+    const currentDate = date;
+    currentDate.setHours(0,0,0,0);
+    const rosterStartDate = new Date(entry.startDate);
+    const rosterEndDate = new Date(entry.endDate);
+    rosterStartDate.setHours(0,0,0,0);
+    rosterEndDate.setHours(0,0,0,0);
+    
+    return currentDate.getTime() >= rosterStartDate.getTime() && currentDate.getTime() <= rosterEndDate.getTime() 
+  })
+
+  let currentWeekConfirmed = false;
+  if (currentWeekConfirmations !== undefined) {
+    currentWeekConfirmed = true;
+  }
+
   // Set the minimum date accessible from the calendar at 2 weeks prior to the current date.
   const currentDate = new Date();
   const minDateMillisec = currentDate.getTime() - 14 * (24*60*60*1000);
@@ -109,7 +130,7 @@ export function CalendarComponent({onCallChangedData}) {
       <div className='on-call-summary flex-c'>
         <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions}></DateCard>
         <div className='on-call-staff-card'>
-          <span className="card-head flex-c">Unconfirmed On-Call Details</span>
+          <span className="card-head flex-c">{currentWeekConfirmed ? "Confirmed On-Call Details" : "Unconfirmed On-Call Details"}</span>
           <div className='on-call-staff flex-c-col'>
             <span className='on-call-name flex-c'>{onCallEmployee.name}</span> 
             <div className='comments-container flex-c-col'>
@@ -120,7 +141,7 @@ export function CalendarComponent({onCallChangedData}) {
         <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
       </div>
       <div className='calendar-container flex-c-col'>
-        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, onCallChangedData)} minDate={minDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
+        <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, rosterEdits)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, rosterEdits)} minDate={minDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>
       </div>
     </div>
   );
