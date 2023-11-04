@@ -368,6 +368,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 <Input inputType="text" identifier="add-new" labelText="Personal Mobile" placeholdertext={`Enter Personal Mobile Number`} />}
                 {type === "update" && selectedData.hostname !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.hostname} identifier="add-new" labelText="Laptop Hostname" /> :                  
                 <Input inputType="text" identifier="add-new" labelText="Laptop Hostname" placeholdertext={`Enter Laptop Hostname`} />}
+                {type === "update" && selectedData.email !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.email} identifier="add-new" labelText="Email Address" /> :                  
+                <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext={`Enter Email Address`} />}
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
             </div>  
             <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer, updateData, type, page, selectedData, currentUser, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
