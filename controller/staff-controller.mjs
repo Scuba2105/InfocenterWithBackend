@@ -1,9 +1,18 @@
-import { getAllStaffData, writeAllStaffData, updateStaffEntry, generateNewStaffData } from '../models/staff-models.mjs';
+import { getAllStaffData, writeAllStaffData, updateStaffEntry, generateNewStaffData, addNewUserCredentials } from '../models/staff-models.mjs';
+import bcrypt, { hash } from "bcrypt";
 import { determineTeam } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
 
 // Use to prevent race conditions
 const staffDataMutex = new Mutex();
+
+// Define array of regex's to use for validation.
+const inputsRegexLookup = {name: /^[a-z ,.'-]+$/i, id: /^[0-9]{8}$/i, workshop: /^[a-z ,.'-]+$/i,
+                          position: /^[a-z ,.'-]+$/i, officePhone: /^[0-9]{8}$|^[0-9]{3}\s[0-9]{5}$|^[0-9]{5}$/,
+                          dectPhone: /^[0-9]{5}$|^\s*$/, workMobile: /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/,
+                          personalMobile: /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/,
+                          hostname: /^[A-Z]{3}BME[0-9]{3}|^\s*$/, 
+                          email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/};
 
 export async function addNewStaffData(req, res, __dirname) {
     try {
@@ -11,30 +20,42 @@ export async function addNewStaffData(req, res, __dirname) {
             // Get the current device data 
             const staffData = await getAllStaffData(__dirname);
             
+            // Validate the request body data
+            for (const [key, value] of Object.entries(req.body)) {
+                if (inputsRegexLookup[key].test(value));
+            }
+
             // Define the mandatory data in the request body
             const name = req.body.name;
             const id = req.body.id;
             const workshop = req.body.workshop;
             const position = req.body.position;
-            const officePhone = req.body["office-phone"];
+            const officePhone = req.body.officePhone;
+            const email = req.body.email;
             const team = determineTeam(position, workshop);
 
             // Generate a new staff data object
-            const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, team)   
+            const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, email, team)   
 
             // Add any optional data provided to the data object
-            const optionalData = {"dect-phone": "dectPhone", "work-mobile": "workMobile", "personal-mobile": "personalMobile",
-            "extension": "img"};
+            const optionalData = ["dectPhone", "workMobile", "personalMobile", "img"];
             
             // Loop over optional data and add to data object
-            Object.keys(optionalData).forEach((key) => {
-                if (req.body[key]) {
-                    newStaffData[optionalData[key]] = req.body[key];
+            optionalData.forEach((entry) => {
+                if (req.body[entry]) {
+                    newStaffData[entry] = req.body[entry];
                 }
             });
 
             // Append the new staff data 
             staffData.push(newStaffData);
+
+            // Define hashing parameters and generate password hash
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
+
+            // Create new entry in the Users table
+            const addNewUser = await addNewUserCredentials(id, name, email, hashedPassword);
 
             // Write the data to file
             writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));

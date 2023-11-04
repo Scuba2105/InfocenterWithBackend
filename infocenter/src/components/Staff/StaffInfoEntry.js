@@ -1,5 +1,5 @@
 export function StaffInfoEntry({heading, value, Icon, color, bColor}) {
-
+    
     const valueArray = value.split(" ");
     
     return (

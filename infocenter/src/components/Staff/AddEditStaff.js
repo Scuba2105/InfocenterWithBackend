@@ -8,11 +8,11 @@ import { serverConfig } from "../../server"
 // Define the arrays used for mapping over to simplify logic
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
-const mandatoryFields = ["workshop", "position", "office-phone"];
-const keyIdentifier = ["name", "id", "workshop", "position", "office-phone", "dect-phone", "work-mobile", "personal-mobile", "hostname"];
-const inputFields = ["Name", "Staff ID", "Workshop", "Position", "Office Phone", "Dect Phone", "Work Mobile", "Personal Mobile", "Laptop Hostname"];
+const mandatoryFields = ["workshop", "position", "office-phone", "email"];
+const keyIdentifier = ["name", "id", "workshop", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname", "email"];
+const inputFields = ["Name", "Staff ID", "Workshop", "Position", "Office Phone", "Dect Phone", "Work Mobile", "Personal Mobile", "Laptop Hostname", "Email Address"];
 
-// Define array of regex's to use for validation of non-mandatory input.
+// Define array of regex's to use for validation.
 const inputsRegexArray = [/^[a-z ,.'-]+$/i, //Name
                           /^[0-9]{8}$/i, //Staff ID
                           /^[a-z ,.'-]+$/i, //Workshop
@@ -21,7 +21,8 @@ const inputsRegexArray = [/^[a-z ,.'-]+$/i, //Name
                           /^[0-9]{5}$|^\s*$/, // Dect Phone (allows empty string)
                           /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
                           /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/, // Mobile Phone (allows empty string)
-                          /^JHHBME[0-9]{3}|^\s*$/ // Hostname (allows empty string)
+                          /^[A-Z]{3}BME[0-9]{3}|^\s*$/, // Hostname (allows empty string)
+                          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ // Email
                         ];
 
 
@@ -44,10 +45,9 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
     const fileInput = formContainer.current.querySelectorAll('.file-input')
             
     // Convert text value node lists to arrays and store 
-    const textInputArray = Array.from(textInputs);
-    const [name, id, officePhone, dectPhone, workMobile, personalMobile, hostname] = Array.from(textInputs);
+    const [name, id, officePhone, dectPhone, workMobile, personalMobile, hostname, email] = Array.from(textInputs);
     const [workshop, position] = Array.from(selectInputs);
-    const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile, hostname];
+    const textValueInputsArray = [name, id, workshop, position, officePhone, dectPhone, workMobile, personalMobile, hostname, email];
     
     // Initialise the staffId variable. Binding is used to name the image file if present.
     let staffId;
@@ -55,8 +55,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
     // Validate the relevant new staff data inputs over the text inputs only.
     if (type === "add-new") {
         for (let [index, input] of textValueInputsArray.entries()) {
-            console.log(input.value, inputsRegexArray[index].test(input.value))
-            if (index <= 3) {
+            if (index <= 4 || index === 9) {
                 if (input.value === "") {
                     showMessage("warning", `The input for the new employee ${inputFields[index]} is empty. Please enter the necessary data and try again.`)
                     return;
@@ -69,7 +68,6 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
             }
             else if (index >= 4 && input.value !== "") {
                 if (!inputsRegexArray[index].test(input.value)) {
-                    console.log("Found false entry")
                     showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
                     return;
                 }

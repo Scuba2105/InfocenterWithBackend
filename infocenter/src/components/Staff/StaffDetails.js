@@ -13,12 +13,6 @@ border: '1px solid rgb(2, 57, 87)', color: 'rgb(2, 57, 87)'}, Mechanical: {backg
 border: '1px solid rgb(73, 16, 92)', color: 'rgb(73, 16, 92)'}, default: {background: 'radial-gradient(rgb(250, 193, 112), rgb(250, 169, 55))', 
 border: '1px solid rgb(163, 98, 3)', color: 'rgb(163, 98, 3)'}} 
 
-function getTextColor(team, teamColors) {
-    const colorString = teamColors[team].background.split(' rgb')[1];
-    const rgb = colorString.substring(0, colorString.length - 1)
-    return `rgb${rgb}`;
-}
-
 export function StaffDetails({selectedData, user}) {
     
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);

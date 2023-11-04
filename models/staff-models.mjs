@@ -1,6 +1,9 @@
+import sql from "mssql";
+import { infoCenterDBConfig } from "../config.mjs";
 import fs from 'fs';
 import path from 'path';
 import { determineTeam } from '../utils/utils.mjs';
+import { hash } from "bcrypt";
 
 // Property lookup translates request data keys to backend keys
 const staffObjectPropLookup = {"name": "name", "id": "id", "hospital": "hospital", "position": "position", 
@@ -52,8 +55,35 @@ export function updateStaffEntry(req, currentData) {
     return currentData;
 }
 
+export async function addNewUserCredentials(id, name, email, hashedPassword) {
+    try {
+        // Connect to the database
+        await sql.connect(infoCenterDBConfig);  
+    
+        // Create a new request object
+        const request = new sql.Request();
+
+        // Query the database for user credentials
+        const result = await request
+            .input('input_parameter1', sql.VarChar, email)
+            .input('input_parameter2', sql.VarChar, name)
+            .input('input_parameter3', sql.VarChar, hashedPassword)
+            .input('input_parameter4', sql.VarChar, "user")
+            .input('input_parameter5', sql.VarChar, id)
+            .query(`INSERT INTO Users(Email, FullName, Password, AccessPermissions, StaffId)
+                    VALUES (@input_parameter1, @input_parameter2, @input_parameter3, @input_parameter4, @input_parameter5)`)
+
+        // Return the recordset
+        return result.recordset
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 // Creates template object for new staff entry
-export function generateNewStaffData(name, id, workshop, position, officePhone, team) {
+export function generateNewStaffData(name, id, workshop, position, officePhone, email, team) {
 
     return {
         hospital: workshop,
@@ -65,6 +95,7 @@ export function generateNewStaffData(name, id, workshop, position, officePhone, 
         workMobile: "",
         personalMobile: "",
         team: team,
+        email: email,
         hostname: "",
       }
 }
