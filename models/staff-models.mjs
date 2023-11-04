@@ -6,9 +6,9 @@ import { determineTeam } from '../utils/utils.mjs';
 import { hash } from "bcrypt";
 
 // Property lookup translates request data keys to backend keys
-const staffObjectPropLookup = {"name": "name", "id": "id", "hospital": "hospital", "position": "position", 
-"office-phone": "officePhone", "dect-phone": "dectPhone", "work-mobile": "workMobile", 
-"personal-mobile": "personalMobile", "hostname": "hostname",  "extension": "img"};
+const staffObjectPropLookup = {"name": "name", "id": "id", "workshop": "hospital", "position": "position", 
+"officePhone": "officePhone", "dectPhone": "dectPhone", "workMobile": "workMobile", 
+"personalMobile": "personalMobile", "hostname": "hostname",  "extension": "img"};
 
 export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
@@ -82,6 +82,32 @@ export async function addNewUserCredentials(id, name, email, hashedPassword) {
     }
 }
 
+export async function updateUserCredentials(existingId, id, name, email) {
+    try {
+        // Connect to the database
+        await sql.connect(infoCenterDBConfig);  
+    
+        // Create a new request object
+        const request = new sql.Request();
+
+        // Query the database for user credentials
+        const result = await request
+            .input('input_parameter1', sql.VarChar, email)
+            .input('input_parameter2', sql.VarChar, name)
+            .input('input_parameter3', sql.VarChar, id)
+            .input('input_parameter4', sql.VarChar, existingId)
+            .query(`UPDATE Users SET Email=@input_parameter1, FullName=@input_parameter2, 
+                    StaffId=@input_parameter3 WHERE StaffId=@input_parameter4`)
+
+        // Return the recordset
+        return result.recordset
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 // Creates template object for new staff entry
 export function generateNewStaffData(name, id, workshop, position, officePhone, email, team) {
 
@@ -105,4 +131,12 @@ export function getEmployee(staffArray, name) {
     return staffArray.find((entry) => {
         return entry.name = name;
     })
+}
+
+// Checks if DB fields have been changed
+export function hasDBFieldsChanged(name, id, email, currentData) {
+    if (name === currentData.email && id === currentData.id && email === currentData.email) {
+        return false;
+    }
+    return true;
 }

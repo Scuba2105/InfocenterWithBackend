@@ -156,6 +156,10 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                 staffId = input.value;
                 updateData.current["existing-id"] = staffId;
             }
+            // Add the email address if it has not been changed
+            if (keyIdentifier[index] === "email" && !updateData.current.email) {
+                updateData.current.email = selectedData.email
+            }
         };
         
         // Add the uploaded file and file extension if it has been selected 
@@ -170,11 +174,19 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         let numberOfMandatoryUpdates = 0;
         const changedMandatoryFields = [];
         for (const [key, value] of Object.entries(updateData.current)) {
-            numberOfUpdates++
+            if (!["id", "name", "email", "existing-id"].includes(key)) {
+                numberOfUpdates++
+            }
             if (mandatoryFields.includes(key)) {
                 numberOfMandatoryUpdates++
                 if (key === "workshop") {
                     changedMandatoryFields.push('Location');
+                }
+                else if (key === "email")  {
+                    if (value !== selectedData.email) {
+                        const keyIndex = keyIdentifier.indexOf(key);
+                        changedMandatoryFields.push(inputFields[keyIndex]);
+                    }
                 }
                 else {
                     const keyIndex = keyIdentifier.indexOf(key);
@@ -182,14 +194,14 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                 }
             }
         };
-        
+        console.log(changedMandatoryFields, numberOfUpdates, numberOfMandatoryUpdates)
         // Sort the fields into the correct order if more than one changed
         if (changedMandatoryFields.length > 1) {
             sortMandatoryFields(changedMandatoryFields);
         }
         
         // If no updates applied show warning message and prevent updates.
-        if (numberOfUpdates <= 3) {
+        if (numberOfUpdates > 0) {
             showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
             return;
         }

@@ -1,4 +1,5 @@
-import { getAllStaffData, writeAllStaffData, updateStaffEntry, generateNewStaffData, addNewUserCredentials } from '../models/staff-models.mjs';
+import { getAllStaffData, writeAllStaffData, updateStaffEntry, generateNewStaffData, 
+    addNewUserCredentials, updateUserCredentials, hasDBFieldsChanged } from '../models/staff-models.mjs';
 import bcrypt, { hash } from "bcrypt";
 import { determineTeam } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
@@ -85,7 +86,17 @@ export async function updateExistingStaffData(req, res, __dirname) {
             // Update the data based on the key value pairs in the request body.
             const updatedEntry = updateStaffEntry(req, currentData);
 
-            // Add the new entry to the staff array
+            // Update the database if any mandatory data is updated
+            const {name, id, email} = (req.body)
+
+            // Check if mandatory fields changed and update Users table if required.
+            const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
+
+            if (dbFieldsChanged) {
+                const updateDBEntry = await updateUserCredentials(existingId, id, name, email);
+            }
+            
+            // Add the new entry to the staff array.
             const updatedStaffData = staffData.map((entry) => {
                 if (entry.id === existingId) {
                     return updatedEntry;
