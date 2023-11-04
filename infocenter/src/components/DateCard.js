@@ -1,8 +1,12 @@
 export function DateCard({date, size, dateBoundary, dateOptions, headColor}) {
     const month = date.toDateString(('en-us', dateOptions)).split(" ")[1];
     const dayNumber = date.toDateString(('en-us', dateOptions)).split(" ")[2];
+    const firstDigit = dayNumber.split("")[0];
     const lastDigit = dayNumber.split("")[1];
-    const suffix= lastDigit === "1" ? 'st' : lastDigit === "2" ? 'nd' : lastDigit === "3" ? 'rd' : 'th';
+    const suffix = lastDigit === "1" && firstDigit !== "1" ? 'st' : 
+                  lastDigit === "2" && firstDigit !== "1" ? 'nd' :
+                  lastDigit === "3" && firstDigit !== "1" ? 'rd' : 
+                  'th';
     
     if (size === "small") {
         return (
