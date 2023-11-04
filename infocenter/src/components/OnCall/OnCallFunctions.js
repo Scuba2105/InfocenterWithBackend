@@ -7,6 +7,7 @@ import { useState } from "react";
 import { EditRoster } from "./EditRoster";
 import { ConfirmRoster } from "./ConfirmRoster";
 import { serverConfig } from "../../server";
+import { staffOnCallRoster } from "../../utils/utils";
 import { useUser } from "../StateStore";
 
 // On-Call Administrators
@@ -15,7 +16,7 @@ const onCallAdministrators = ["Paul Cookson", "Durga Sompalle", "Atif Siddiqui"]
 // Define the labels and icons for mapping the buttons.
 const functionsData = [{label: "Edit Roster", "icon": EditRosterIcon, color: "#5ef8ed", restricted: true},
 {label: "Confirm Roster", "icon": ConfirmRosterIcon, color: "#BCE7FD", restricted: true},
-{label: "My Roster", "icon": MyRosterIcon, color: "#BCE7FD", restricted: false}, 
+{label: "My Roster", "icon": MyRosterIcon, color: "#BCE7FD", restricted: true}, 
 {label: "Staff Roster", "icon": StaffRosterIcon, color: "#5ef8ed", restricted: false}, 
 {label: "On-Call Cheatsheet", "icon": CheatsheetIcon, color: "#5ef8ed", restricted: false, "href": `https://${serverConfig.host}:${serverConfig.port}/oncall/On Call Cheat Sheet.docx`}, 
 {label: "Authorisation Form", "icon": AuthorisationIcon, color: "#BCE7FD", restricted: false, "href": `https://${serverConfig.host}:${serverConfig.port}/oncall/Callback Authorisation Form.doc`}];
@@ -35,6 +36,9 @@ function hideForm(setFormVisibile) {
 }
 
 function isFeatureAccessible(entry, currentUser) {
+    if (entry.label === "My Roster") {
+        return staffOnCallRoster.includes(currentUser.user)
+    }
     return !entry.restricted || (entry.restricted && onCallAdministrators.includes(currentUser.user))
 }
 
