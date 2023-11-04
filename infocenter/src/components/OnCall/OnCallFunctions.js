@@ -34,6 +34,10 @@ function hideForm(setFormVisibile) {
     setFormVisibile(false);
 }
 
+function isFeatureAccessible(entry, currentUser) {
+    return !entry.restricted || (entry.restricted && onCallAdministrators.includes(currentUser.user))
+}
+
 export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
 
     const [formVisible, setFormVisibile] = useState(false);
@@ -50,9 +54,9 @@ export function OnCallFunctions({queryClient, showMessage, closeDialog, page}) {
                 const design = [0, 3, 4].includes(index) ? "main-link-button" : "alternate-link-button";
                 if (modalLinkButtons.includes(type)) {
                     return (
-                        <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100">
-                            <button className={`on-call-function-button flex-c-col ${type} ${design}`} onClick={!entry.restricted || (entry.restricted && onCallAdministrators.includes(currentUser.user)) ? () => showForm(setFormVisibile, setFormType, type) : null }>
-                                {!entry.restricted || (entry.restricted && onCallAdministrators.includes(currentUser.user)) ? <entry.icon color={entry.color} size="2.7vw"></entry.icon> : <PadlockIcon color={entry.color} size="2.7vw"></PadlockIcon>}
+                        <div key={`${entry.label}-key`} className="on-call-function-container flex-c size-100" style={isFeatureAccessible(entry, currentUser) ? {opacity: 1} : {opacity: 0.2}}>
+                            <button className={`on-call-function-button flex-c-col ${type} ${design}`} onClick={isFeatureAccessible(entry, currentUser) ? () => showForm(setFormVisibile, setFormType, type) : null }>
+                                {isFeatureAccessible(entry, currentUser) ? <entry.icon color={entry.color} size="2.7vw"></entry.icon> : <PadlockIcon color={entry.color} size="2.7vw"></PadlockIcon>}
                                 <div className="on-call-label-container flex-c-col">
                                     <label className="on-call-label">{entry.label.split(" ")[0]}</label>
                                     <label className="on-call-label">{entry.label.split(" ")[1]}</label>
