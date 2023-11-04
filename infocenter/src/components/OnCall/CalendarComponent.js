@@ -87,6 +87,31 @@ function updateSelectedDate(newDate, beginDate, setDate, setBoundingDates, setOn
   setOnCallEmployee(onCallData.employeeData)
 }
 
+// Get confirmation status. Has the current selected week been confirmed? TRUE/FALSE
+function getConfirmationStatus(date, rosterConfirmations) {
+  const currentWeekConfirmations = rosterConfirmations.find((entry) => {
+    // Set the hours to 00:00:00:000 to make comparison consitent
+    const currentDate = date;
+    currentDate.setHours(0,0,0,0);
+    // Create new date objects from the milliseconds in the roster confirmation data
+    const rosterStartDate = new Date(entry.startDate);
+    const rosterEndDate = new Date(entry.endDate);
+    // Set the hours to 00:00:00:000 to make comparison consitent
+    rosterStartDate.setHours(0,0,0,0);
+    rosterEndDate.setHours(0,0,0,0);
+    // if current slected date within confirmation range return it from the find method. Otherwise undefined is returned.
+    return currentDate.getTime() >= rosterStartDate.getTime() && currentDate.getTime() <= rosterEndDate.getTime() 
+  })
+
+  // Initialise to false and set to true if current week has been confirmed
+  let currentWeekConfirmed = false;
+  if (currentWeekConfirmations !== undefined) {
+    currentWeekConfirmed = true;
+  }
+
+  return currentWeekConfirmed
+}
+
 export function CalendarComponent({onCallChangedData}) {
   
   // Currently selected date
@@ -97,22 +122,8 @@ export function CalendarComponent({onCallChangedData}) {
   const rosterConfirmations = onCallChangedData.rosterConfirmation;
 
   // Check if roster Confirmations exist for the current selected week.
-  const currentWeekConfirmations = rosterConfirmations.find((entry) => {
-    const currentDate = date;
-    currentDate.setHours(0,0,0,0);
-    const rosterStartDate = new Date(entry.startDate);
-    const rosterEndDate = new Date(entry.endDate);
-    rosterStartDate.setHours(0,0,0,0);
-    rosterEndDate.setHours(0,0,0,0);
-    
-    return currentDate.getTime() >= rosterStartDate.getTime() && currentDate.getTime() <= rosterEndDate.getTime() 
-  })
-
-  let currentWeekConfirmed = false;
-  if (currentWeekConfirmations !== undefined) {
-    currentWeekConfirmed = true;
-  }
-
+  const currentWeekConfirmed = getConfirmationStatus(date, rosterConfirmations)
+  
   // Set the minimum date accessible from the calendar at 2 weeks prior to the current date.
   const currentDate = new Date();
   const minDateMillisec = currentDate.getTime() - 14 * (24*60*60*1000);
@@ -128,9 +139,9 @@ export function CalendarComponent({onCallChangedData}) {
   return (
     <div className='calendar-half-page size-100 flex-c-col'>
       <div className='on-call-summary flex-c'>
-        <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions}></DateCard>
+        <DateCard date={boundingDates[0]} dateBoundary="lower" dateOptions={dateOptions} headColor={currentWeekConfirmed ? "rgb(2, 189, 118)" : "#fdc046"}></DateCard>
         <div className='on-call-staff-card'>
-          <span className="card-head flex-c">{currentWeekConfirmed ? "Confirmed On-Call Details" : "Unconfirmed On-Call Details"}</span>
+          <span className="card-head flex-c" style={currentWeekConfirmed ? {backgroundColor: "rgb(2, 189, 118)"} : {backgroundColor: "#fdc046"}}>{currentWeekConfirmed ? "Confirmed On-Call Details" : "Unconfirmed On-Call Details"}</span>
           <div className='on-call-staff flex-c-col'>
             <span className='on-call-name flex-c'>{onCallEmployee.name}</span> 
             <div className='comments-container flex-c-col'>
@@ -138,7 +149,7 @@ export function CalendarComponent({onCallChangedData}) {
             </div>
           </div>
         </div>
-        <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions}></DateCard>
+        <DateCard date={boundingDates[1]} dateBoundary="upper" dateOptions={dateOptions} headColor={currentWeekConfirmed ? "rgb(2, 189, 118)" : "#fdc046"}></DateCard>
       </div>
       <div className='calendar-container flex-c-col'>
         <Calendar onChange={(value) => updateSelectedDate(value, beginDate, setDate, setBoundingDates, setOnCallEmployee, rosterEdits)} value={date} minDetail='month' onActiveStartDateChange={({activeStartDate}) => updateMonth(activeStartDate, beginDate, setSelectedMonth, setDate, setBoundingDates, setOnCallEmployee, rosterEdits)} minDate={minDate} tileDisabled={({date}) => date.getMonth() !== selectedMonth}/>

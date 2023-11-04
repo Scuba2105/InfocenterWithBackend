@@ -1,4 +1,4 @@
-export function DateCard({date, size, dateBoundary, dateOptions}) {
+export function DateCard({date, size, dateBoundary, dateOptions, headColor}) {
     const month = date.toDateString(('en-us', dateOptions)).split(" ")[1];
     const dayNumber = date.toDateString(('en-us', dateOptions)).split(" ")[2];
     const lastDigit = dayNumber.split("")[1];
@@ -17,7 +17,7 @@ export function DateCard({date, size, dateBoundary, dateOptions}) {
     }
     return (
         <div className="date-card">
-            <span className="card-head flex-c">{dateBoundary === "lower" ? "Start Date" : "End Date"}</span>
+            <span className="card-head flex-c" style={{backgroundColor: headColor}}>{dateBoundary === "lower" ? "Start Date" : "End Date"}</span>
             <div className="date-card-data flex-c-col">
                 <span className="date-card-month">{month}</span>
                 <span className="date-card-day">{dayNumber.replace(/^0/, "")}<span className="suffix">{suffix}</span></span>
