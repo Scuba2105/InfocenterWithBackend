@@ -88,7 +88,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
 
             // Update the database if any mandatory data is updated
             const {name, id, email} = (req.body)
-
+            console.log("updates applied")
             // Check if mandatory fields changed and update Users table if required.
             const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
 
