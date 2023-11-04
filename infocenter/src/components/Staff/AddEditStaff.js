@@ -8,7 +8,7 @@ import { serverConfig } from "../../server"
 // Define the arrays used for mapping over to simplify logic
 const locations = ["John Hunter Hospital", "Royal Newcastle Centre", "Mechanical/Anaesthetics", "Green Team", "Tamworth Hospital", "New England", "Mater Hospital", "Manning Base Hospital"]
 const positions = ["Director", "Deputy Director", "Biomedical Engineer", "Senior Technical Officer", "Technical Officer", "Service Co-ordinator"]
-const mandatoryFields = ["workshop", "position", "office-phone", "email"];
+const mandatoryFields = ["workshop", "position", "officePhone", "email"];
 const keyIdentifier = ["name", "id", "workshop", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname", "email"];
 const inputFields = ["Name", "Staff ID", "Workshop", "Position", "Office Phone", "Dect Phone", "Work Mobile", "Personal Mobile", "Laptop Hostname", "Email Address"];
 
@@ -51,7 +51,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
     
     // Initialise the staffId variable. Binding is used to name the image file if present.
     let staffId;
-
+    
     // Validate the relevant new staff data inputs over the text inputs only.
     if (type === "add-new") {
         for (let [index, input] of textValueInputsArray.entries()) {
@@ -132,16 +132,17 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         }
     }
     else if (type === "update") {
-        // Filter the empty data inputs out of the data and save to the Form Data
-        const staffObjectProperties = ["name", "id", "hospital", "position", "officePhone", "dectPhone", "workMobile", "personalMobile", "hostname"]
+        // Check if any input values have been changed.
         for (let [index, input] of textValueInputsArray.entries()) {
-                      
-            // These inputs are either not editable or are select lists
-            if (index > 1 && index <= 3 && input.value !== selectedData[staffObjectProperties[index]]) {
+            // These are non-mandatory inputs that must be validated
+            if (index === 2 && input.value !== selectedData.hospital) {
+                if (!inputsRegexArray[index].test(input.value)) {
+                    showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
+                    return;
+                }
                 updateData.current[keyIdentifier[index]] = input.value;
             }
-            // These are non-mandatory inputs that must be validated
-            else if (index >= 4 && input.value !== selectedData[staffObjectProperties[index]]) {
+            else if (index !== 2 && input.value !== selectedData[keyIdentifier[index]]) {
                 if (!inputsRegexArray[index].test(input.value)) {
                     showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
                     return;
@@ -156,14 +157,14 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                 updateData.current["existing-id"] = staffId;
             }
         };
-
+        
         // Add the uploaded file and file extension if it has been selected 
         if (fileInput[0].value !== "") {
             const extension = fileInput[0].files[0].name.split('.').slice(-1)[0];
             updateData.current['extension'] = extension;
             updateData.current['employee-photo'] = {file: fileInput[0].files[0], fileName: `${staffId}.${extension}`};
         }
-    
+        
         // Calculate the number of updates applied and if any mandatory fields changed.
         let numberOfUpdates = 0;
         let numberOfMandatoryUpdates = 0;
@@ -176,19 +177,19 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                     changedMandatoryFields.push('Location');
                 }
                 else {
-                    const fieldName = key.split('-').join(' ');
-                    changedMandatoryFields.push(capitaliseFirstLetters(fieldName));
+                    const keyIndex = keyIdentifier.indexOf(key);
+                    changedMandatoryFields.push(inputFields[keyIndex]);
                 }
             }
         };
-    
+        
         // Sort the fields into the correct order if more than one changed
         if (changedMandatoryFields.length > 1) {
             sortMandatoryFields(changedMandatoryFields);
         }
         
         // If no updates applied show warning message and prevent updates.
-        if (numberOfUpdates === 1) {
+        if (numberOfUpdates <= 3) {
             showMessage("warning", `The employee details have not been changed for ${selectedData.name}. No data has been uploaded.`)
             return;
         }
