@@ -954,6 +954,12 @@ html {
   color: var(--alternate-color-accent);
 }
 
+.yellow-green-link-button {
+  background-color: var(--med-light-theme);
+  border: 1.5px solid var(--yellow-green-button-color);
+  color: var(--yellow-green-button-color);
+}
+
 /* CSS for staff display area */
 .staff-info {
   font-size: 14px;
