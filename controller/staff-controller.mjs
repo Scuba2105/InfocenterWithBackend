@@ -7,13 +7,20 @@ import { Mutex } from 'async-mutex';
 // Use to prevent race conditions
 const staffDataMutex = new Mutex();
 
+// Inputs label property lookup
+const propLabelLookup = {name: "Name", if: "Staff Id", workshop: "Workshop", position: "Position",
+                        officePhone: "Office Phone", dectPhone: "Dect Phone", workMobile: "Mobile Phone",
+                        personalMobile: "Personal Mobile", hostname: "Laptop Hostname", email: "Email Address",
+                        "existing-id": "Exisitng Id"}
+
 // Define array of regex's to use for validation.
-const inputsRegexLookup = {name: /^[a-z ,.'-]+$/i, id: /^[0-9]{8}$/i, workshop: /^[a-z ,.'-]+$/i,
+const inputsRegexLookup = {name: /^[a-z\s,.'-]+$/i, id: /^[0-9]{8}$/i, workshop: /^[a-z ,.'-]+$/i,
                           position: /^[a-z ,.'-]+$/i, officePhone: /^[0-9]{8}$|^[0-9]{3}\s[0-9]{5}$|^[0-9]{5}$/,
                           dectPhone: /^[0-9]{5}$|^\s*$/, workMobile: /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/,
                           personalMobile: /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/,
                           hostname: /^[A-Z]{3}BME[0-9]{3}|^\s*$/, 
-                          email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/};
+                          email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                          "existing-id": /^[0-9]{8}$/i};
 
 export async function addNewStaffData(req, res, __dirname) {
     try {
@@ -23,7 +30,9 @@ export async function addNewStaffData(req, res, __dirname) {
             
             // Validate the request body data
             for (const [key, value] of Object.entries(req.body)) {
-                if (inputsRegexLookup[key].test(value));
+                if (!inputsRegexLookup[key].test(value)) {
+                    throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
+                }
             }
 
             // Define the mandatory data in the request body
@@ -76,7 +85,14 @@ export async function updateExistingStaffData(req, res, __dirname) {
         staffDataMutex.runExclusive(async () => {
             // Get the current device data 
             const staffData = await getAllStaffData(__dirname);
-        
+            
+            // Validate the request body data
+            for (const [key, value] of Object.entries(req.body)) {
+                if (!inputsRegexLookup[key].test(value)) {
+                    throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
+                }
+            }
+
             // Get the staff ID and find the existing employee data
             const existingId = req.body["existing-id"];
             const currentData = staffData.find((entry) => {
@@ -88,7 +104,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
 
             // Update the database if any mandatory data is updated
             const {name, id, email} = (req.body)
-            console.log("updates applied")
+            
             // Check if mandatory fields changed and update Users table if required.
             const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
 
