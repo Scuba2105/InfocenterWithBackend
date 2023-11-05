@@ -1,11 +1,28 @@
 import { getAllStaffData, writeAllStaffData, updateStaffEntry, generateNewStaffData, 
     addNewUserCredentials, updateUserCredentials, hasDBFieldsChanged } from '../models/staff-models.mjs';
 import bcrypt, { hash } from "bcrypt";
+import nodemailer from "nodemailer";
+import { nodemailerAuth } from '../config.mjs';
 import { determineTeam } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
 
 // Use to prevent race conditions
 const staffDataMutex = new Mutex();
+
+// Create the nodemailer transport object for sending email.
+const transport = nodemailer.createTransport({
+    host: 'smtp-mail.outlook.com', // hostname
+    service: 'outlook', // service name
+    secureConnection: false,
+    tls: {
+        ciphers: 'SSLv3' // tls version
+    },
+    port: 587, // port
+    auth: {
+        user: nodemailerAuth.username,
+        pass: nodemailerAuth.password
+    }
+});
 
 // Inputs label property lookup
 const propLabelLookup = {name: "Name", if: "Staff Id", workshop: "Workshop", position: "Position",
@@ -71,9 +88,18 @@ export async function addNewStaffData(req, res, __dirname) {
                 res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}`});
                 return
             }
-
+          
             // Write the data to file
             writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
+
+            // Send the account and login details email to the new user
+            const info = await transporter.sendMail({
+                from: '"hnect-information-centre@health.nsw.gov.au>', // sender address
+                to: email, // list of receivers
+                subject: "Welcome to HNECT Information Centre", // Subject line
+                text: "An account has been created on your behalf to access the information within the HNECT Information Centre.", // plain text body
+                //html: "<b>Hello world?</b>", // html body
+              });
 
             // Send the success response message.
             res.json({type: "Success", message: 'Data Upload Successful'}); 
