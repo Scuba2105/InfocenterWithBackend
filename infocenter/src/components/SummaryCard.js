@@ -82,7 +82,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                     {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <div className="staff-edit-btn flex-c" onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>}
                     {equipmentEditPermissions && page === "technical-info" && <div className="device-edit-button flex-c" onClick={() => showDeviceUpdate(setUpdateFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>}
                 </div>
-                {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.user} />}                    
+                {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.staffId} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {page === "technical-info" && selectedData.vendor && <div className="vendor-link flex-c">
                     <button className="vendor-button flex-c" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size="2.31vh" color="white"></VendorArrow></button> 

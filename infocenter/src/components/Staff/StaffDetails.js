@@ -17,8 +17,6 @@ export function StaffDetails({selectedData, user}) {
     
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
 
-    const emailAddress = selectedData.name === "Azmi Refal" ? `mailto:Mohamed${selectedData.name.replace(' ', '.Mohamed')}@health.nsw.gov.au` : `mailto:${selectedData.name.replace(' ', '.').replace(' ', '')}@health.nsw.gov.au`;
-    
     return (
         <div className='staff-info'>
             <div className="staff-heading flex-c">
@@ -30,7 +28,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container flex-c">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={emailAddress} className="email-link flex-c"><EmailIcon size="2.78vh" color="#D4FB7C"></EmailIcon></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={selectedData.email} className="email-link flex-c"><EmailIcon size="2.78vh" color="#D4FB7C"></EmailIcon></a>}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
