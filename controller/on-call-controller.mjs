@@ -1,4 +1,4 @@
-import { getOnCallData, writeOnCallData } from "../models/on-call-models.mjs";
+import { getOnCallData, writeOnCallData, removeStaleEntries } from "../models/on-call-models.mjs";
 import { isValidDate } from "../utils/utils.mjs";
 import { Mutex } from "async-mutex";
 
@@ -17,7 +17,11 @@ const objectPropLookup = {"originalOnCall": "Original Staff Member", "newOnCall"
 const rosterChangeReasons = ["Sickness", "Leave", "Family Reasons", "Unspecified Reasons"];
 
 export async function updateOnCallData(req, res, __dirname) {
-    const onCallData = await getOnCallData(__dirname);
+
+    const existingonCallData = await getOnCallData(__dirname);
+
+    // Remove any existing oncall entries 4 weeks before current date
+    const onCallData = removeStaleEntries(existingonCallData, 4);
     
     try {
         onCallDataMutex.runExclusive(async () => {
