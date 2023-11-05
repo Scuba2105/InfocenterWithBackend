@@ -56,6 +56,10 @@ html {
   align-items: center;
 }
 
+.hovered {
+  cursor: pointer;
+}
+
 /* Start of the CSS for the page elements */
 
 .wrapper {
@@ -2543,16 +2547,11 @@ abbr[title] {
   justify-content: space-around;
   font-weight: 500;
   border-radius: 15px;
-  cursor: pointer;
 }
 
 .on-call-function-button:link,
 .on-call-function-button:visited {
   text-decoration: none;
-}
-
-.on-call-function-button:hover {
-  cursor: pointer;
 }
 
 .on-call-label {
