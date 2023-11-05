@@ -65,7 +65,12 @@ export async function addNewStaffData(req, res, __dirname) {
             const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
 
             // Create new entry in the Users table
-            const addNewUser = await addNewUserCredentials(id, name, email, hashedPassword);
+            const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword);
+
+            if (dbInsertResult.type === "error") {
+                res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}`});
+                return
+            }
 
             // Write the data to file
             writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
@@ -76,7 +81,7 @@ export async function addNewStaffData(req, res, __dirname) {
     } catch (err) {
         // Send the error response message.
         console.log(JSON.stringify({Route: "Add New Staff", Error: err.message}), null, 2);
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
+        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}`});
     }
 }
 
@@ -92,7 +97,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
                     throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
                 }
             }
-
+            
             // Get the staff ID and find the existing employee data
             const existingId = req.body["existing-id"];
             const currentData = staffData.find((entry) => {
@@ -109,7 +114,11 @@ export async function updateExistingStaffData(req, res, __dirname) {
             const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
 
             if (dbFieldsChanged) {
-                const updateDBEntry = await updateUserCredentials(existingId, id, name, email);
+                const dbUpdateResult = await updateUserCredentials(existingId, id, name, email);
+                if (dbUpdateResult.type === "error") {
+                    res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbUpdateResult.data.message}`});
+                    return
+                }
             }
             
             // Add the new entry to the staff array.

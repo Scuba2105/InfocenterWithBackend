@@ -117,26 +117,30 @@ export async function retrieveUserCredentials(email) {
 
 export async function updateUserPassword(staffId, hashedPassword) {
     try {
-        // Connect to the database
+        // Connect to the database.
         await sql.connect(infoCenterDBConfig);  
         
-        // Create a new request object
+        // Create a new request object.
         const request = new sql.Request();
 
-        // Query the database for user credentials
+        // Query the database for user credentials.
         const result = await request
             .input('input_parameter1', sql.VarChar, staffId)
             .input('input_parameter2', sql.VarChar, hashedPassword)
             .query(`UPDATE Users SET Password = @input_parameter2 WHERE StaffID = @input_parameter1`);
+        
+        // Check that the data was inserted into the database.
         if (result.rowsAffected == 0){
-            throw 'Nothing was inserted into the database!';
+            const noRowsError = new Error('Nothing was inserted into the database!')
+            return {type: "error", "data": noRowsError};
         }
-        // Return the recordset
-        return result.recordset
+
+        // Return the recordset.
+        return {type: "success", "data": result.recordset}; 
     }
     catch (error) {
         console.log(error);
-        throw error;
+        return {type: "error", "data": error};
     }
 }
 

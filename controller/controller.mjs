@@ -97,7 +97,13 @@ export async function changeLoginPassword(req, res, __dirname) {
             const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
             
             // Update the password in the database
-            const result = await updateUserPassword(staffId, hashedPassword); 
+            const dbInsertResult = await updateUserPassword(staffId, hashedPassword);
+            
+            // If Insert is an error snd an error response and return
+            if (dbInsertResult.type === "error") {
+                res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}.\r\n Please try again and if issue persists contact administrator`});
+                return
+            } 
             res.json({type: "Success", message: "Password successfully updated"});
         }
         else {

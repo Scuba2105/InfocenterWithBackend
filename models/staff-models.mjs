@@ -8,7 +8,7 @@ import { hash } from "bcrypt";
 // Property lookup translates request data keys to backend keys
 const staffObjectPropLookup = {"name": "name", "id": "id", "workshop": "hospital", "position": "position", 
 "officePhone": "officePhone", "dectPhone": "dectPhone", "workMobile": "workMobile", 
-"personalMobile": "personalMobile", "hostname": "hostname",  "extension": "img"};
+"personalMobile": "personalMobile", "hostname": "hostname",  "extension": "img", "email": "email"};
 
 export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
@@ -33,10 +33,13 @@ export function writeAllStaffData(__dirname, data) {
 
 export function updateStaffEntry(req, currentData) {
     for (const [key, value] of Object.entries(req.body)) {
-        if (value !== currentData.id) {
-            // Get the staff object property corresponding to the form data name.
-            const prop = staffObjectPropLookup[key];
-
+        
+        // Get the staff object property corresponding to the form data name.
+        const prop = staffObjectPropLookup[key];
+        
+        if (value !== currentData[key]) {
+            
+            // prop is valid then overwrite the data entry with req.body entry
             if (prop !== undefined) {
                 // Update the current data
                 currentData[prop] = value;
@@ -73,12 +76,18 @@ export async function addNewUserCredentials(id, name, email, hashedPassword) {
             .query(`INSERT INTO Users(Email, FullName, Password, AccessPermissions, StaffId)
                     VALUES (@input_parameter1, @input_parameter2, @input_parameter3, @input_parameter4, @input_parameter5)`)
 
-        // Return the recordset
-        return result.recordset
+        // Check that the data was inserted into the database.
+        if (result.rowsAffected == 0){
+            const noRowsError = new Error('Nothing was inserted into the database!')
+            return {type: "error", "data": noRowsError};
+        }
+
+        // Return the recordset.
+        return {type: "success", "data": result.recordset}; 
     }
     catch (error) {
         console.log(error);
-        throw error;
+        return {type: "error", "data": error};
     }
 }
 
@@ -98,13 +107,19 @@ export async function updateUserCredentials(existingId, id, name, email) {
             .input('input_parameter4', sql.VarChar, existingId)
             .query(`UPDATE Users SET Email=@input_parameter1, FullName=@input_parameter2, 
                     StaffId=@input_parameter3 WHERE StaffId=@input_parameter4`)
+        
+       // Check that the data was inserted into the database.
+       if (result.rowsAffected == 0){
+        const noRowsError = new Error('Nothing was inserted into the database!')
+        return {type: "error", "data": noRowsError};
+        }
 
-        // Return the recordset
-        return result.recordset
+        // Return the recordset.
+        return {type: "success", "data": result.recordset}; 
     }
     catch (error) {
         console.log(error);
-        throw error;
+        return {type: "error", "data": error};
     }
 }
 
