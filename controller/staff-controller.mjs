@@ -79,7 +79,7 @@ export async function addNewStaffData(req, res, __dirname) {
         // Send the account and login details email to the new user
         const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`).catch((err) => {
             console.log({Route: "Add New Staff", Error: err});
-            res.status(400).json({type: "Error", message: `${err}`});
+            throw new Error(`${err}`);
         })
 
         // Write the data to file

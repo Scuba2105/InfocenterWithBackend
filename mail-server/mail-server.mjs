@@ -7,12 +7,12 @@ export function generateNewAccountEmail(email, password){
         // Create the nodemailer transport object for sending email.
         const transporter = nodemailer.createTransport({
             host: 'mail.nswhealth.net', // hostname
+            port: 587, // port
             secureConnection: false,
             tls: {
                 ciphers: 'SSLv3', // tls version
-                rejectUnauthorized: false
+                rejectUnauthorized: true
             },
-            port: 587, // port
             auth: {
                 user: nodemailerAuth.username,
                 pass: nodemailerAuth.password
