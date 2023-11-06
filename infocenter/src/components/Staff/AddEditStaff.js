@@ -105,7 +105,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
     
             if (data.type === "Error") {
                 closeDialog();
-                showMessage("error", `${data.message}. If the issue persists contact an administrator.`);
+                showMessage("error", `${data.message} If the issue persists contact an administrator.`);
             }
             else {
             
@@ -128,7 +128,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
             }
         }
         catch (error) {
-            showMessage("error", `${error.message}.`)
+            showMessage("error", `${error.message}`)
         }
     }
     else if (type === "update") {
@@ -234,7 +234,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
 
                 if (data.type === "Error") {
                     closeDialog();
-                    showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+                    showMessage("error", `${data.message} If the issue persists please contact an administrator.`);
                 }
                 else {                            
                     // Need to update app data.
@@ -311,7 +311,7 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
 
                     if (data.type === "Error") {
                         closeDialog();
-                        showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+                        showMessage("error", `${data.message} If the issue persists please contact an administrator.`);
                     }
                     else {                            
                         // Need to update app data.

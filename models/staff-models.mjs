@@ -18,10 +18,16 @@ export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
             if (err) {
-                reject(`The staff data was unable to be read: ${err.message}`);
+                reject(`The Staff data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data));
+                try {
+                    const staffData = JSON.parse(data);
+                    resolve(staffData);
+                }
+                catch(err) {
+                    reject(`The Staff data was unable to be parsed: ${err.message}`)
+                }
             }
         });
     })

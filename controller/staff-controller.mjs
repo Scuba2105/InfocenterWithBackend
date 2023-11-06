@@ -81,9 +81,9 @@ export async function addNewStaffData(req, res, __dirname) {
         });
 
         // Send the account and login details email to the new user
-        const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`).catch((err) => {
-            throw new Error(`${err}`);
-        });
+        // const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`).catch((err) => {
+        //     throw new Error(`${err}`);
+        // });
 
         // Write the data to file
         const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {

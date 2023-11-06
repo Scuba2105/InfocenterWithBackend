@@ -6,10 +6,16 @@ export function getOnCallData(__dirname) {
         fs.readFile(path.join(__dirname, 'data', 'on-call-data.json'), (err, data) => {
             if (err) {
                 console.error(err);
-                reject(`The data was unable to be read: ${err.message}`);
+                reject(`The On-Call data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data));
+                try {
+                    const onCallData = JSON.parse(data);
+                    resolve(onCallData);
+                }
+                catch(err) {
+                    reject(`The On-Call data was unable to be parsed: ${err.message}`)
+                }
             }
         });
     })

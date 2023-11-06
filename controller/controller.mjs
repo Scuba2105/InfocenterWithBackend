@@ -121,13 +121,19 @@ export async function changeLoginPassword(req, res, __dirname) {
 
 export async function getAllData(req, res, __dirname) {
     try {
-        // ********************* Promise all these asynchronous requests. ******************** 
-        const staffData = await getAllStaffData(__dirname);
-        const deviceData = await getAllDeviceData(__dirname);
-        const contactsData = await getAllStaffContactsData(__dirname);
-        const vendorContactsData = await getAllVendorContactsData(__dirname);
-        const onCallData = await getOnCallData(__dirname);
-        const allData = {staffData: staffData, deviceData: deviceData, contactsData: contactsData, vendorContactsData: vendorContactsData, onCallData: onCallData};
+        // Await the resolution of all Promises for reading application data files. 
+        const allDataArray = await Promise.all([getAllStaffData(__dirname), getAllDeviceData(__dirname),
+            getAllStaffContactsData(__dirname), getAllVendorContactsData(__dirname),
+            getOnCallData(__dirname)]).catch((err) => {
+                throw new Error(`${err}`);
+            });
+        
+        // Create the allData object from the Promise.all array.
+        const allData = {staffData: allDataArray[0], deviceData: allDataArray[1], 
+                         contactsData: allDataArray[2], vendorContactsData: allDataArray[3], 
+                         onCallData: allDataArray[4]};
+       
+        // Send the data as a json response.
         res.json(allData);
     }
     catch(err) {

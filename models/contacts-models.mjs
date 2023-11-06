@@ -8,7 +8,13 @@ export function getAllStaffContactsData(__dirname) {
                 reject(`The Staff Contacts data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data));
+                try {
+                    const staffContactsData = JSON.parse(data);
+                    resolve(staffContactsData);
+                }
+                catch(err) {
+                    reject(`The Staff Contacts data was unable to be parsed: ${err.message}`)
+                }
             }
         });
     })
@@ -21,7 +27,13 @@ export function getAllVendorContactsData(__dirname) {
                 reject(`The Vendor Contacts data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data));
+                try {
+                    const vendorData = JSON.parse(data);
+                    resolve(vendorData);
+                }
+                catch(err) {
+                    reject(`The Vendor Contacts data was unable to be parsed: ${err.message}`)
+                }
             }
         });
     })

@@ -1,5 +1,4 @@
 import { LoginInput } from "./LoginInput";
-import useMediaQueries from "media-queries-in-react";
 import { useEffect, useState, useRef } from "react";
 import { serverConfig } from "../server";
 import { useLoggedIn, useUser } from "./StateStore";
@@ -20,11 +19,6 @@ export function Login() {
     // Get login function and setUser functions from Zustand state store
     const login = useLoggedIn((state) => state.login)
     const setUser = useUser((state) => state.setUser)
-
-    const mediaQueries = useMediaQueries({
-        laptop: "(max-width: 1750px)",
-        desktop: "(min-width: 1800px)"
-    });
 
     useEffect(() => {
         document.title = 'HNECT Information Centre'
@@ -60,7 +54,7 @@ export function Login() {
             
             // Create login credentials object
             const loginCredentials = {email: emailInput.value, password: passwordInput.value}
-            
+            console.log(loginCredentials);
             // Post the form data to the server. 
             const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/VerifyLogin`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.

@@ -5,10 +5,16 @@ export function getAllDeviceData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'device-data.json'), (err, data) => {
             if (err) {
-                reject(`The data was unable to be read: ${err.message}`);
+                reject(`The Device data was unable to be read: ${err.message}`);
             }
             else {
-                resolve(JSON.parse(data));
+                try {
+                    const deviceData = JSON.parse(data);
+                    resolve(deviceData);
+                }
+                catch(err) {
+                    reject(`The Device data was unable to be parsed: ${err.message}`)
+                }
             }
         });
     })
