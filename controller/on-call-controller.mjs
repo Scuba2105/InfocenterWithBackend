@@ -23,8 +23,9 @@ export async function updateOnCallData(req, res, __dirname) {
     // Remove any existing oncall entries 4 weeks before current date
     const onCallData = removeStaleEntries(existingonCallData, 4);
     
-    try {
-        onCallDataMutex.runExclusive(async () => {
+    // Run this function exclusively to prevent race conditions.
+    onCallDataMutex.runExclusive(async () => {
+        try {
             if (req.params.operation === "edit") {
                 // Get the new data from the request and create the new date objects.
                 const newData = req.body;
@@ -100,12 +101,12 @@ export async function updateOnCallData(req, res, __dirname) {
         
                 // Send the response to the client.
                 res.json({type: "Success", message: 'Data Upload Successful'});
-            }
-        })
-    }
-    catch (err) {
-        // Send the error response message.
-        console.log(JSON.stringify({Route: "Edit On-Call", Error: err.message}), null, 2);
-        res.json({type: "Error", message: `An error occurred while updating the on-call data: ${err.message}`});
-    }
+            }        
+        }
+        catch (err) {
+            // Send the error response message.
+            console.log({Route: "Edit On-Call", Error: err.message});
+            res.json({type: "Error", message: `An error occurred while updating the on-call data. ${err.message}`});
+        }
+    })
 }

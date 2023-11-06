@@ -53,8 +53,8 @@ export async function validateLoginCredentials(req, res, __dirname) {
         }
 
     } catch (err) {
-        console.log(JSON.stringify({Route: "Validate Login", Error: err.message}), null, 2);
-        res.status(400).json({type: "Error", message: err.message});
+        console.log({Route: "Validate Login", Error: err.message});
+        res.status(400).json({type: "Error", message: `An error occurred while verifying the login credentials: ${err.message}`});
     }
 }
 
@@ -111,8 +111,8 @@ export async function changeLoginPassword(req, res, __dirname) {
         }
         
     } catch (err) {
-        console.log(JSON.stringify({Route: "Change Password", Error: err.message}), null, 2);
-        res.status(400).json({type: "Error", message: err.message});
+        console.log({Route: "Change Password", Error: err.message});
+        res.status(400).json({type: "Error", message: `An error occurred while changing the login password: ${err.message}`});
     }
 }
 
@@ -127,7 +127,8 @@ export async function getAllData(req, res, __dirname) {
         res.json(allData);
     }
     catch(err) {
-        console.log(JSON.stringify({Route: "Get App Data", Error: err.message}), null, 2);
+        console.log({Route: "Get App Data", Error: err.message});
+        res.status(400).json({type: "Error", message: `An error occurred reading the application data: ${err.message}`});
     }
 }
 

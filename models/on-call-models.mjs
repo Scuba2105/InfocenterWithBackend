@@ -16,9 +16,14 @@ export function getOnCallData(__dirname) {
 }
 
 export function writeOnCallData(__dirname, data) {
-    fs.writeFile(path.join(__dirname, 'data', 'on-call-data.json'), data, (err) => {
-        if (err) throw err;
-        console.log('The file has been saved!');
+    return new Promise((resolve, reject) => {
+        fs.writeFile(path.join(__dirname, 'data', 'on-call-data.json'), data, (err) => {
+            if (err) {
+                throw new Error(`The error occurred while writing the On-Call data: ${err}`);
+            } 
+            console.log('The file has been saved!');
+            resolve("Success");
+        });
     });
 }
 

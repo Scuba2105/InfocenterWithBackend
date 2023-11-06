@@ -30,20 +30,26 @@ export function getAllVendorContactsData(__dirname) {
 }
 
 export function writeAllStaffContactsData(__dirname, data) {
-    fs.writeFile(path.join(__dirname, 'data', 'staff-contacts.json'), data, (err) => {
-        if (err) {
-            throw err;
-        }
-        console.log('The file has been saved!');
+    return new Promise((resolve, reject) => {
+        fs.writeFile(path.join(__dirname, 'data', 'staff-contacts.json'), data, (err) => {
+            if (err) {
+                throw new Error(`The error occurred while writing the Staff Contacts data: ${err}`);
+            } 
+            console.log('The file has been saved!');
+            resolve("Success");
+        });
     });
 }
 
 export function writeAllVendorContactsData(__dirname, data) {
-    fs.writeFile(path.join(__dirname, 'data', 'vendor-contacts.json'), data, (err) => {
-        if (err) {
-            throw err;
-        }
-        console.log('The file has been saved!');
+    return new Promise((resolve, reject) => {
+        fs.writeFile(path.join(__dirname, 'data', 'vendor-contacts.json'), data, (err) => {
+            if (err) {
+                throw new Error(`The error occurred while writing the Vendor Contacts data: ${err}`);
+            } 
+            console.log('The file has been saved!');
+            resolve("Success");
+        });
     });
 }
 

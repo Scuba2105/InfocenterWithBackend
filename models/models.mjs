@@ -32,7 +32,7 @@ export async function getGenius3Serial(parameter, length) {
   } 
   catch (error) {
     console.log(error);
-    throw new Error(`An error occurred querying the database :- ${error.message}`);
+    throw new Error(`An error occurred querying the database:- ${error.message}`);
   }
 }
 
@@ -94,25 +94,25 @@ export async function disposeGenius3(parameter) {
 }
 
 export async function retrieveUserCredentials(email) {
-        try {
-            // Connect to the database
-            await sql.connect(infoCenterDBConfig);  
-        
-            // Create a new request object
-            const request = new sql.Request();
+    try {
+        // Connect to the database
+        await sql.connect(infoCenterDBConfig);  
+    
+        // Create a new request object
+        const request = new sql.Request();
 
-            // Query the database for user credentials
-            const result = await request
-                .input('input_parameter', sql.VarChar, email)
-                .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
+        // Query the database for user credentials
+        const result = await request
+            .input('input_parameter', sql.VarChar, email)
+            .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
 
-            // Return the recordset
-            return result.recordset
-        }
-        catch (error) {
-            console.log(error);
-            throw error;
-        }
+        // Return the recordset
+        return result.recordset
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error(`An error occurred reading the user credentials from the database: ${error.message}`);
+    }
 }
 
 export async function updateUserPassword(staffId, hashedPassword) {
@@ -131,8 +131,7 @@ export async function updateUserPassword(staffId, hashedPassword) {
         
         // Check that the data was inserted into the database.
         if (result.rowsAffected == 0){
-            const noRowsError = new Error('Nothing was inserted into the database!')
-            return {type: "error", "data": noRowsError};
+            throw new Error('Nothing was inserted into the database');
         }
 
         // Return the recordset.
@@ -140,7 +139,7 @@ export async function updateUserPassword(staffId, hashedPassword) {
     }
     catch (error) {
         console.log(error);
-        return {type: "error", "data": error};
+        throw new Error(`An error occurred updating the user password in the database: ${error.message}`);
     }
 }
 

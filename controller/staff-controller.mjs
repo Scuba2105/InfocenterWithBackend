@@ -24,130 +24,130 @@ const inputsRegexLookup = {name: /^[a-z\s,.'-]+$/i, id: /^[0-9]{8}$/i, workshop:
                           "existing-id": /^[0-9]{8}$/i};
 
 export async function addNewStaffData(req, res, __dirname) {
-    try {
-        staffDataMutex.runExclusive(async () => {
-            // Get the current device data 
-            const staffData = await getAllStaffData(__dirname);
-            
-            // Validate the request body data
-            for (const [key, value] of Object.entries(req.body)) {
-                if (!inputsRegexLookup[key].test(value)) {
-                    throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
-                }
+    staffDataMutex.runExclusive(async () => {
+        try {
+        // Get the current device data 
+        const staffData = await getAllStaffData(__dirname);
+        
+        // Validate the request body data
+        for (const [key, value] of Object.entries(req.body)) {
+            if (!inputsRegexLookup[key].test(value)) {
+                throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`);
             }
+        }
 
-            // Define the mandatory data in the request body
-            const name = req.body.name;
-            const id = req.body.id;
-            const workshop = req.body.workshop;
-            const position = req.body.position;
-            const officePhone = req.body.officePhone;
-            const email = req.body.email;
-            const team = determineTeam(position, workshop);
+        // Define the mandatory data in the request body
+        const name = req.body.name;
+        const id = req.body.id;
+        const workshop = req.body.workshop;
+        const position = req.body.position;
+        const officePhone = req.body.officePhone;
+        const email = req.body.email;
+        const team = determineTeam(position, workshop);
 
-            // Generate a new staff data object
-            const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, email, team)   
+        // Check that the staff ID is unique
+        const currentIDs = staffData.map((entry) => {
+            return entry.id
+        });
+        if (currentIDs.includes(id)) {
+            throw new Error(`The Staff ID entered already exists. Please ensure a unique ID is entered and try again`);
+        }
 
-            // Add any optional data provided to the data object
-            const optionalData = ["dectPhone", "workMobile", "personalMobile", "img"];
-            
-            // Loop over optional data and add to data object
-            optionalData.forEach((entry) => {
-                if (req.body[entry]) {
-                    newStaffData[entry] = req.body[entry];
-                }
-            });
+        // Generate a new staff data object
+        const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, email, team)   
 
-            // Append the new staff data 
-            staffData.push(newStaffData);
-
-            // Define hashing parameters and generate password hash
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
-
-            // Create new entry in the Users table
-            const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword);
-
-            if (dbInsertResult.type === "error") {
-                res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}`});
-                return
+        // Add any optional data provided to the data object
+        const optionalData = ["dectPhone", "workMobile", "personalMobile", "img"];
+        
+        // Loop over optional data and add to data object
+        optionalData.forEach((entry) => {
+            if (req.body[entry]) {
+                newStaffData[entry] = req.body[entry];
             }
-          
-            // Send the account and login details email to the new user
-            //const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`)
+        });
 
-            // if (!sentEmail) {
-            //     res.json({type: "Error", message: `An error occurred sending the account and login details to the new app user ${name}. `});
-            //     return
-            // }
+        // Append the new staff data 
+        staffData.push(newStaffData);
 
-            // Write the data to file
-            writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
+        // Define hashing parameters and generate password hash
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
 
-            // Send the success response message.
-            res.json({type: "Success", message: 'Data Upload Successful'}); 
-        })   
-    } catch (err) {
-        // Send the error response message.
-        console.log(JSON.stringify({Route: "Add New Staff", Error: err.message}), null, 2);
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}`});
-    }
+        // Create new entry in the Users table
+        const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword);
+
+        // Send the account and login details email to the new user
+        //const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`)
+
+        // if (!sentEmail) {
+        //     res.json({type: "Error", message: `An error occurred sending the account and login details to the new app user ${name}. `});
+        //     return
+        // }
+
+        // Write the data to file
+        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
+        
+        // Send the success response message.
+        res.json({type: "Success", message: 'Data Upload Successful'}); 
+        
+        } catch (err) {
+            // Send the error response message.
+            console.log({Route: "Add New Staff", Error: err.message});
+            res.json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+        }
+    })
 }
 
 export async function updateExistingStaffData(req, res, __dirname) {
-    try {
-        staffDataMutex.runExclusive(async () => {
-            // Get the current device data 
-            const staffData = await getAllStaffData(__dirname);
-            
-            // Validate the request body data
-            for (const [key, value] of Object.entries(req.body)) {
-                if (!inputsRegexLookup[key].test(value)) {
-                    throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
-                }
+    staffDataMutex.runExclusive(async () => {
+        try {
+        // Get the current device data 
+        const staffData = await getAllStaffData(__dirname);
+        
+        // Validate the request body data
+        for (const [key, value] of Object.entries(req.body)) {
+            if (!inputsRegexLookup[key].test(value)) {
+                throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
             }
-            
-            // Get the staff ID and find the existing employee data
-            const existingId = req.body["existing-id"];
-            const currentData = staffData.find((entry) => {
-                return entry.id === existingId;
-            });
-                    
-            // Update the data based on the key value pairs in the request body.
-            const updatedEntry = updateStaffEntry(req, currentData);
+        }
+        
+        // Get the staff ID and find the existing employee data
+        const existingId = req.body["existing-id"];
+        const currentData = staffData.find((entry) => {
+            return entry.id === existingId;
+        });
+                
+        // Update the data based on the key value pairs in the request body.
+        const updatedEntry = updateStaffEntry(req, currentData);
 
-            // Update the database if any mandatory data is updated
-            const {name, id, email} = (req.body)
-            
-            // Check if mandatory fields changed and update Users table if required.
-            const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
+        // Update the database if any mandatory data is updated
+        const {name, id, email} = (req.body)
+        
+        // Check if mandatory fields changed and update Users table if required.
+        const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
 
-            if (dbFieldsChanged) {
-                const dbUpdateResult = await updateUserCredentials(existingId, id, name, email);
-                if (dbUpdateResult.type === "error") {
-                    res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbUpdateResult.data.message}`});
-                    return
-                }
+        if (dbFieldsChanged) {
+            const dbUpdateResult = await updateUserCredentials(existingId, id, name, email);
+        }
+        
+        // Add the new entry to the staff array.
+        const updatedStaffData = staffData.map((entry) => {
+            if (entry.id === existingId) {
+                return updatedEntry;
             }
-            
-            // Add the new entry to the staff array.
-            const updatedStaffData = staffData.map((entry) => {
-                if (entry.id === existingId) {
-                    return updatedEntry;
-                }
-                return entry;
-            })
-
-            // Write the data to file
-            writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2));
-
-            // Send the success response message.
-            res.json({type: "Success", message: 'Data Upload Successful'}); 
+            return entry;
         })
-    } catch (err) {
-        // Send the error response message.
-        console.log(JSON.stringify({Route: `Update ${req.body["existing-id"]}`, Error: err.message}), null, 2);
-        res.json({type: "Error", message: `An error occurred while updating the data: ${err.message}.\r\n Please try again and if issue persists contact administrator`});
-    }
+
+        // Write the data to file
+        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2));
+
+        // Send the success response message.
+        res.json({type: "Success", message: 'Data Upload Successful'}); 
     
+        } catch (err) {
+            // Send the error response message.
+            console.log({Route: `Update ${req.body["existing-id"]}`, Error: err.message});
+            res.json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+        }
+    })
 }

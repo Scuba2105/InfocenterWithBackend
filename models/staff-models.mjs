@@ -10,11 +10,14 @@ const staffObjectPropLookup = {"name": "name", "id": "id", "workshop": "hospital
 "officePhone": "officePhone", "dectPhone": "dectPhone", "workMobile": "workMobile", 
 "personalMobile": "personalMobile", "hostname": "hostname",  "extension": "img", "email": "email"};
 
+sql.on("Error", () => {
+
+})
+
 export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
             if (err) {
-                console.error(err);
                 reject(`The data was unable to be read: ${err.message}`);
             }
             else {
@@ -25,9 +28,14 @@ export function getAllStaffData(__dirname) {
 }
 
 export function writeAllStaffData(__dirname, data) {
-    fs.writeFile(path.join(__dirname, 'data', 'staff-data.json'), data, (err) => {
-        if (err) throw err;
-        console.log('The file has been saved!');
+    return new Promise((resolve, reject) => {
+        fs.writeFile(path.join(__dirname, 'data', 'staff-data.json'), data, (err) => {
+            if (err) {
+                throw new Error(`The error occurred while writing the Staff data: ${err}`);
+            } 
+            console.log('The file has been saved!');
+            resolve("Success");
+        });
     });
 }
 
@@ -78,16 +86,15 @@ export async function addNewUserCredentials(id, name, email, hashedPassword) {
 
         // Check that the data was inserted into the database.
         if (result.rowsAffected == 0){
-            const noRowsError = new Error('Nothing was inserted into the database!')
-            return {type: "error", "data": noRowsError};
+            throw new Error('Nothing was inserted into the database');
         }
 
         // Return the recordset.
-        return {type: "success", "data": result.recordset}; 
+        return result.recordset 
     }
     catch (error) {
         console.log(error);
-        return {type: "error", "data": error};
+        throw new Error(`An error occurred inserting into the database: ${error.message}`);
     }
 }
 
@@ -108,18 +115,17 @@ export async function updateUserCredentials(existingId, id, name, email) {
             .query(`UPDATE Users SET Email=@input_parameter1, FullName=@input_parameter2, 
                     StaffId=@input_parameter3 WHERE StaffId=@input_parameter4`)
         
-       // Check that the data was inserted into the database.
-       if (result.rowsAffected == 0){
-        const noRowsError = new Error('Nothing was inserted into the database!')
-        return {type: "error", "data": noRowsError};
+        // Check that the data was inserted into the database.
+        if (result.rowsAffected == 0){
+            throw new Error('Nothing was inserted into the database');
         }
 
         // Return the recordset.
-        return {type: "success", "data": result.recordset}; 
+        return result.recordset 
     }
     catch (error) {
         console.log(error);
-        return {type: "error", "data": error};
+        throw new Error(`The error occurred updating the database: ${error.message}`);
     }
 }
 
