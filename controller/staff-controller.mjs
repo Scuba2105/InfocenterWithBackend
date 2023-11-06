@@ -27,7 +27,9 @@ export async function addNewStaffData(req, res, __dirname) {
     staffDataMutex.runExclusive(async () => {
         try {
         // Get the current device data 
-        const staffData = await getAllStaffData(__dirname);
+        const staffData = await getAllStaffData(__dirname).catch((err) => {
+            throw new Error(`${err}`);
+        });
         
         // Validate the request body data
         for (const [key, value] of Object.entries(req.body)) {
@@ -74,16 +76,19 @@ export async function addNewStaffData(req, res, __dirname) {
         const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
 
         // Create new entry in the Users table
-        const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword);
+        const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
+            throw new Error(`${err}`);
+        });
 
         // Send the account and login details email to the new user
         const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`).catch((err) => {
-            console.log({Route: "Add New Staff", Error: err});
             throw new Error(`${err}`);
-        })
+        });
 
         // Write the data to file
-        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
+        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {
+            throw new Error(`${err}`);
+        });
         
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'}); 
@@ -100,7 +105,9 @@ export async function updateExistingStaffData(req, res, __dirname) {
     staffDataMutex.runExclusive(async () => {
         try {
         // Get the current device data 
-        const staffData = await getAllStaffData(__dirname);
+        const staffData = await getAllStaffData(__dirname).catch((err) => {
+            throw new Error(`${err}`);
+        });
         
         // Validate the request body data
         for (const [key, value] of Object.entries(req.body)) {
@@ -123,9 +130,10 @@ export async function updateExistingStaffData(req, res, __dirname) {
         
         // Check if mandatory fields changed and update Users table if required.
         const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
-
         if (dbFieldsChanged) {
-            const dbUpdateResult = await updateUserCredentials(existingId, id, name, email);
+            const dbUpdateResult = await updateUserCredentials(existingId, id, name, email).catch((err) => {
+                throw new Error(`${err}`);
+            });
         }
         
         // Add the new entry to the staff array.
@@ -137,7 +145,9 @@ export async function updateExistingStaffData(req, res, __dirname) {
         })
 
         // Write the data to file
-        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2));
+        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2)).catch((err) => {
+            throw new Error(`${err}`);
+        });
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'}); 
@@ -145,7 +155,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
         } catch (err) {
             // Send the error response message.
             console.log({Route: `Update ${req.body["existing-id"]}`, Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+            res.status(400).json({type: "Error", message: `An error occurred while updating the staff data. ${err.message}`});
         }
     })
 }

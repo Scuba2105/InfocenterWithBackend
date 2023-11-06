@@ -25,11 +25,13 @@ export async function validateLoginCredentials(req, res, __dirname) {
             throw new Error("Password does not match required pattern. Please ensure it is at least 8 characters and has at least 1 lowercase letter, 1 uppercase letter, 1 number and 1 special character");
         }
 
-        // Retrieve the use credentials from the database
-        const data = await retrieveUserCredentials(email);
+        // Retrieve the user credentials from the database
+        const data = await retrieveUserCredentials(email).catch((err) => {
+            throw new Error(`${err}`);
+        });
         
         if (data === undefined) {
-            throw new Error("The entered email address is not in the database");
+            throw new Error("The entered Staff ID/Email Address is not in the database");
         }
         
         // Extract the values from the object
@@ -39,8 +41,10 @@ export async function validateLoginCredentials(req, res, __dirname) {
         const passwordResult = await bcrypt.compare(submittedPassword, Password);
         
         if (passwordResult === true) {
-            // Determine if the staff member has an image available
-            const staffData = await getAllStaffData(__dirname)
+            // Get the staff member details and credentials and send them
+            const staffData = await getAllStaffData(__dirname).catch((err) => {
+                throw new Error(`${err}`);
+            });
                         
             const user = staffData.find((entry) => {
                 return entry.id === StaffId
@@ -79,10 +83,12 @@ export async function changeLoginPassword(req, res, __dirname) {
 
         // Get the hashed password for the current user from the database and compare to submitted password
         // Retrieve the use credentials from the database
-        const passwordData = await retrieveUserCredentials(staffId);
+        const passwordData = await retrieveUserCredentials(staffId).catch((err) => {
+            throw new Error(`${err}`);
+        });
             
         if (passwordData === undefined) {
-            throw new Error("An unexpected error occurred. You user credentials could not be found in the database. Please contact an administartor.");
+            throw new Error("You user credentials could not be found in the database. Please contact an administartor.");
         }        
 
         // Extract the hashed password from the returned database object for the current user.
@@ -97,17 +103,14 @@ export async function changeLoginPassword(req, res, __dirname) {
             const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
             
             // Update the password in the database
-            const dbInsertResult = await updateUserPassword(staffId, hashedPassword);
+            const dbInsertResult = await updateUserPassword(staffId, hashedPassword).catch((err) => {
+                throw new Error(`${err}`);
+            });
             
-            // If Insert is an error snd an error response and return
-            if (dbInsertResult.type === "error") {
-                res.status(400).json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}.\r\n Please try again and if issue persists contact administrator`});
-                return
-            } 
             res.json({type: "Success", message: "Password successfully updated"});
         }
         else {
-            res.status(400).json({type: "Error", message: `The value entered for you current password is incorrect.`})
+            res.status(400).json({type: "Error", message: `The value entered for your current password is incorrect.`})
         }
         
     } catch (err) {
@@ -118,6 +121,7 @@ export async function changeLoginPassword(req, res, __dirname) {
 
 export async function getAllData(req, res, __dirname) {
     try {
+        // ********************* Promise all these asynchronous requests. ******************** 
         const staffData = await getAllStaffData(__dirname);
         const deviceData = await getAllDeviceData(__dirname);
         const contactsData = await getAllStaffContactsData(__dirname);

@@ -10,7 +10,9 @@ export async function addNewDeviceData(req, res, __dirname) {2
     deviceDataMutex.runExclusive(async () => {
         try {
         // Get the current device data 
-        const deviceData = await getAllDeviceData(__dirname);
+        const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+            throw new Error(`${err}`);
+        });
         
         // Get the new device data from the request object
         const newModel = req.body.model;
@@ -26,7 +28,9 @@ export async function addNewDeviceData(req, res, __dirname) {2
         deviceData.push(newDevice);
                                     
         // Write the data to file
-        const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2));
+        const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
+            throw new Error(`${err}`);
+        });
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});
@@ -43,7 +47,9 @@ export async function addNewDeviceData(req, res, __dirname) {2
 export async function updateExistingDeviceData(req, res, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
-        const deviceData = await getAllDeviceData(__dirname);
+        const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+            throw new Error(`${err}`);
+        });
         
         // Define the variables from the uploaded data
         const model = req.body.model;
@@ -125,7 +131,9 @@ export async function updateExistingDeviceData(req, res, __dirname) {
         })
 
         // Write the data to file
-        const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2));
+        const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)).catch((err) => {
+            throw new Error(`${err}`);
+        });
 
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'});

@@ -18,14 +18,17 @@ const rosterChangeReasons = ["Sickness", "Leave", "Family Reasons", "Unspecified
 
 export async function updateOnCallData(req, res, __dirname) {
 
-    const existingonCallData = await getOnCallData(__dirname);
-
-    // Remove any existing oncall entries 4 weeks before current date
-    const onCallData = removeStaleEntries(existingonCallData, 4);
-    
     // Run this function exclusively to prevent race conditions.
     onCallDataMutex.runExclusive(async () => {
         try {
+            // Read the existing on-call data from file.
+            const existingonCallData = await getOnCallData(__dirname).catch((err) => {
+                throw new Error(`${err}`);
+            });
+
+            // Remove any existing oncall entries 4 weeks before current date.
+            const onCallData = removeStaleEntries(existingonCallData, 4);
+
             if (req.params.operation === "edit") {
                 // Get the new data from the request and create the new date objects.
                 const newData = req.body;
@@ -60,12 +63,15 @@ export async function updateOnCallData(req, res, __dirname) {
                 onCallData.rosterEdits.push(newData);
                 
                 // Write the data to file.
-                writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2));
+                const fileWrittenResult = await writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2)).catch((err) => {
+                    throw new Error(`${err}`);
+                });;
         
                 // Send the response to the client.
                 res.json({type: "Success", message: 'Data Upload Successful'});
             }
             else if (req.params.operation === "confirm") {
+                
                 // Get the confirmation data from the request and create the new date objects.
                 const newData = req.body;
                 const startDate = new Date(newData.startDate);
@@ -97,7 +103,9 @@ export async function updateOnCallData(req, res, __dirname) {
                 onCallData.rosterConfirmation.push(newData);
                 
                 // Write the data to file.
-                writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2));
+                const fileWrittenResult = await writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2)).catch((err) => {
+                    throw new Error(`${err}`);
+                });
         
                 // Send the response to the client.
                 res.json({type: "Success", message: 'Data Upload Successful'});
@@ -106,7 +114,7 @@ export async function updateOnCallData(req, res, __dirname) {
         catch (err) {
             // Send the error response message.
             console.log({Route: "Edit On-Call", Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the on-call data. ${err.message}`});
+            res.status(400).json({type: "Error", message: `An error occurred while updating the On-Call data. ${err.message}`});
         }
     })
 }

@@ -32,7 +32,7 @@ export function generateNewAccountEmail(email, password){
         transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
-            reject(`An error occurred sending the login email: ${error.message}`);
+            reject(`The error occurred sending the login email: ${error.message}`);
         } else {
             console.log(`Email sent: ${info.response}`);
             resolve(true);

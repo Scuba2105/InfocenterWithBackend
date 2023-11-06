@@ -5,8 +5,7 @@ export function getAllStaffContactsData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-contacts.json'), (err, data) => {
             if (err) {
-                console.error(err);
-                reject(`The data was unable to be read: ${err.message}`);
+                reject(`The Staff Contacts data was unable to be read: ${err.message}`);
             }
             else {
                 resolve(JSON.parse(data));
@@ -19,8 +18,7 @@ export function getAllVendorContactsData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'vendor-contacts.json'), (err, data) => {
             if (err) {
-                console.error(err);
-                reject(`The data was unable to be read: ${err.message}`);
+                reject(`The Vendor Contacts data was unable to be read: ${err.message}`);
             }
             else {
                 resolve(JSON.parse(data));
@@ -33,7 +31,7 @@ export function writeAllStaffContactsData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'staff-contacts.json'), data, (err) => {
             if (err) {
-                throw new Error(`The error occurred while writing the Staff Contacts data: ${err}`);
+                reject(`The error occurred while writing the Staff Contacts data: ${err}`);
             } 
             console.log('The file has been saved!');
             resolve("Success");
@@ -45,7 +43,7 @@ export function writeAllVendorContactsData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'vendor-contacts.json'), data, (err) => {
             if (err) {
-                throw new Error(`The error occurred while writing the Vendor Contacts data: ${err}`);
+                reject(`The error occurred while writing the Vendor Contacts data: ${err}`);
             } 
             console.log('The file has been saved!');
             resolve("Success");

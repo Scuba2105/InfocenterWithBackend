@@ -2,6 +2,62 @@ import sql from "mssql";
 import { infoCenterDBConfig } from "../config.mjs";
 import { localEMSConfig } from "../config.mjs";
 
+// Retrieve User credentials from the database
+export async function retrieveUserCredentials(email) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            // Connect to the database
+            await sql.connect(infoCenterDBConfig);  
+        
+            // Create a new request object
+            const request = new sql.Request();
+
+            // Query the database for user credentials
+            const result = await request
+                .input('input_parameter', sql.VarChar, email)
+                .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
+
+            // Return the recordset
+            resolve(result.recordset)
+        }
+        catch (error) {
+            console.log(error);
+            reject(`The error occurred reading the user credentials from the database: ${error.message}`);
+        }
+    })
+}
+
+// Update the User's login password in the database
+export async function updateUserPassword(staffId, hashedPassword) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            // Connect to the database.
+            await sql.connect(infoCenterDBConfig);  
+            
+            // Create a new request object.
+            const request = new sql.Request();
+
+            // Query the database for user credentials.
+            const result = await request
+                .input('input_parameter1', sql.VarChar, staffId)
+                .input('input_parameter2', sql.VarChar, hashedPassword)
+                .query(`UPDATE Users SET Password = @input_parameter2 WHERE StaffID = @input_parameter1`);
+            
+            // Check that the data was inserted into the database.
+            if (result.rowsAffected == 0){
+                reject('Nothing was inserted into the database');
+            }
+
+            // Return the recordset.
+            resolve(result.recordset); 
+        }
+        catch (error) {
+            console.log(error);
+            reject(`The error occurred updating the user password in the database: ${error.message}`);
+        }
+    })
+}
+
 // Get the Genius3 Serial Numbers from the BME list input
 export async function getGenius3Serial(parameter, length) {
   try {
@@ -93,55 +149,7 @@ export async function disposeGenius3(parameter) {
     }
 }
 
-export async function retrieveUserCredentials(email) {
-    try {
-        // Connect to the database
-        await sql.connect(infoCenterDBConfig);  
-    
-        // Create a new request object
-        const request = new sql.Request();
 
-        // Query the database for user credentials
-        const result = await request
-            .input('input_parameter', sql.VarChar, email)
-            .query(`SELECT * FROM Users WHERE Email = @input_parameter OR StaffID = @input_parameter`);
-
-        // Return the recordset
-        return result.recordset
-    }
-    catch (error) {
-        console.log(error);
-        throw new Error(`An error occurred reading the user credentials from the database: ${error.message}`);
-    }
-}
-
-export async function updateUserPassword(staffId, hashedPassword) {
-    try {
-        // Connect to the database.
-        await sql.connect(infoCenterDBConfig);  
-        
-        // Create a new request object.
-        const request = new sql.Request();
-
-        // Query the database for user credentials.
-        const result = await request
-            .input('input_parameter1', sql.VarChar, staffId)
-            .input('input_parameter2', sql.VarChar, hashedPassword)
-            .query(`UPDATE Users SET Password = @input_parameter2 WHERE StaffID = @input_parameter1`);
-        
-        // Check that the data was inserted into the database.
-        if (result.rowsAffected == 0){
-            throw new Error('Nothing was inserted into the database');
-        }
-
-        // Return the recordset.
-        return {type: "success", "data": result.recordset}; 
-    }
-    catch (error) {
-        console.log(error);
-        throw new Error(`An error occurred updating the user password in the database: ${error.message}`);
-    }
-}
 
 
 

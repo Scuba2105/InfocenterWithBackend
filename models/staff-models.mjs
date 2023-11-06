@@ -10,15 +10,15 @@ const staffObjectPropLookup = {"name": "name", "id": "id", "workshop": "hospital
 "officePhone": "officePhone", "dectPhone": "dectPhone", "workMobile": "workMobile", 
 "personalMobile": "personalMobile", "hostname": "hostname",  "extension": "img", "email": "email"};
 
-sql.on("Error", () => {
-
+sql.on("error", (err) => {
+    console.log(`Failed to connect to the database: ${err}`)
 })
 
 export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
             if (err) {
-                reject(`The data was unable to be read: ${err.message}`);
+                reject(`The staff data was unable to be read: ${err.message}`);
             }
             else {
                 resolve(JSON.parse(data));
@@ -31,7 +31,7 @@ export function writeAllStaffData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'staff-data.json'), data, (err) => {
             if (err) {
-                throw new Error(`The error occurred while writing the Staff data: ${err}`);
+                reject(`The error occurred while writing the Staff data: ${err}`);
             } 
             console.log('The file has been saved!');
             resolve("Success");
@@ -67,66 +67,70 @@ export function updateStaffEntry(req, currentData) {
 }
 
 export async function addNewUserCredentials(id, name, email, hashedPassword) {
-    try {
-        // Connect to the database
-        await sql.connect(infoCenterDBConfig);  
-    
-        // Create a new request object
-        const request = new sql.Request();
+    return new Promise(async(resolve, reject) => {
+        try {
+            // Connect to the database
+            await sql.connect(infoCenterDBConfig);  
+        
+            // Create a new request object
+            const request = new sql.Request();
 
-        // Query the database for user credentials
-        const result = await request
-            .input('input_parameter1', sql.VarChar, email)
-            .input('input_parameter2', sql.VarChar, name)
-            .input('input_parameter3', sql.VarChar, hashedPassword)
-            .input('input_parameter4', sql.VarChar, "user")
-            .input('input_parameter5', sql.VarChar, id)
-            .query(`INSERT INTO Users(Email, FullName, Password, AccessPermissions, StaffId)
-                    VALUES (@input_parameter1, @input_parameter2, @input_parameter3, @input_parameter4, @input_parameter5)`)
+            // Query the database for user credentials
+            const result = await request
+                .input('input_parameter1', sql.VarChar, email)
+                .input('input_parameter2', sql.VarChar, name)
+                .input('input_parameter3', sql.VarChar, hashedPassword)
+                .input('input_parameter4', sql.VarChar, "user")
+                .input('input_parameter5', sql.VarChar, id)
+                .query(`INSERT INTO Users(Email, FullName, Password, AccessPermissions, StaffId)
+                        VALUES (@input_parameter1, @input_parameter2, @input_parameter3, @input_parameter4, @input_parameter5)`)
 
-        // Check that the data was inserted into the database.
-        if (result.rowsAffected == 0){
-            throw new Error('Nothing was inserted into the database');
+            // Check that the data was inserted into the database.
+            if (result.rowsAffected == 0){
+                reject('Nothing was inserted into the database');
+            }
+
+            // Return the recordset.
+            resolve(result.recordset); 
         }
-
-        // Return the recordset.
-        return result.recordset 
-    }
-    catch (error) {
-        console.log(error);
-        throw new Error(`An error occurred inserting into the database: ${error.message}`);
-    }
+        catch (error) {
+            console.log(error);
+            reject(`The error occurred inserting into the database: ${error.message}`);
+        }
+    })
 }
 
 export async function updateUserCredentials(existingId, id, name, email) {
-    try {
-        // Connect to the database
-        await sql.connect(infoCenterDBConfig);  
-    
-        // Create a new request object
-        const request = new sql.Request();
-
-        // Query the database for user credentials
-        const result = await request
-            .input('input_parameter1', sql.VarChar, email)
-            .input('input_parameter2', sql.VarChar, name)
-            .input('input_parameter3', sql.VarChar, id)
-            .input('input_parameter4', sql.VarChar, existingId)
-            .query(`UPDATE Users SET Email=@input_parameter1, FullName=@input_parameter2, 
-                    StaffId=@input_parameter3 WHERE StaffId=@input_parameter4`)
+    return new Promise(async(resolve, reject) => {
+        try {
+            // Connect to the database
+            await sql.connect(infoCenterDBConfig);  
         
-        // Check that the data was inserted into the database.
-        if (result.rowsAffected == 0){
-            throw new Error('Nothing was inserted into the database');
-        }
+            // Create a new request object
+            const request = new sql.Request();
 
-        // Return the recordset.
-        return result.recordset 
-    }
-    catch (error) {
-        console.log(error);
-        throw new Error(`The error occurred updating the database: ${error.message}`);
-    }
+            // Query the database for user credentials
+            const result = await request
+                .input('input_parameter1', sql.VarChar, email)
+                .input('input_parameter2', sql.VarChar, name)
+                .input('input_parameter3', sql.VarChar, id)
+                .input('input_parameter4', sql.VarChar, existingId)
+                .query(`UPDATE Users SET Email=@input_parameter1, FullName=@input_parameter2, 
+                        StaffId=@input_parameter3 WHERE StaffId=@input_parameter4`)
+            
+            // Check that the data was inserted into the database.
+            if (result.rowsAffected == 0){
+                reject('Nothing was inserted into the database');
+            }
+
+            // Return the recordset.
+            resolve(result.recordset)
+        }
+        catch (error) {
+            console.log(error);
+            reject(`The error occurred updating the database: ${error.message}`);
+        }
+    })
 }
 
 // Creates template object for new staff entry
