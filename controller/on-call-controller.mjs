@@ -106,7 +106,7 @@ export async function updateOnCallData(req, res, __dirname) {
         catch (err) {
             // Send the error response message.
             console.log({Route: "Edit On-Call", Error: err.message});
-            res.json({type: "Error", message: `An error occurred while updating the on-call data. ${err.message}`});
+            res.status(400).json({type: "Error", message: `An error occurred while updating the on-call data. ${err.message}`});
         }
     })
 }

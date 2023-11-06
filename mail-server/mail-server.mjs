@@ -6,11 +6,11 @@ export function generateNewAccountEmail(email, password){
 
         // Create the nodemailer transport object for sending email.
         const transporter = nodemailer.createTransport({
-            service: "Outlook365",
-            host: 'smtp.office365.com', // hostname
+            host: 'mail.nswhealth.net', // hostname
             secureConnection: false,
             tls: {
-                ciphers: 'SSLv3' // tls version
+                ciphers: 'SSLv3', // tls version
+                rejectUnauthorized: false
             },
             port: 587, // port
             auth: {
@@ -32,7 +32,7 @@ export function generateNewAccountEmail(email, password){
         transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
-            resolve(false);
+            reject(`An error occurred sending the login email: ${error.message}`);
         } else {
             console.log(`Email sent: ${info.response}`);
             resolve(true);

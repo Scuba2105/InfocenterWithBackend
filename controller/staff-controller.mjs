@@ -77,12 +77,10 @@ export async function addNewStaffData(req, res, __dirname) {
         const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword);
 
         // Send the account and login details email to the new user
-        //const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`)
-
-        // if (!sentEmail) {
-        //     res.json({type: "Error", message: `An error occurred sending the account and login details to the new app user ${name}. `});
-        //     return
-        // }
+        const sentEmail = await generateNewAccountEmail(email, `InfoCentreUser${id}?`).catch((err) => {
+            console.log({Route: "Add New Staff", Error: err});
+            res.status(400).json({type: "Error", message: `${err}`});
+        })
 
         // Write the data to file
         const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2));
@@ -92,8 +90,8 @@ export async function addNewStaffData(req, res, __dirname) {
         
         } catch (err) {
             // Send the error response message.
-            console.log({Route: "Add New Staff", Error: err.message});
-            res.json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+            console.log({Route: "Add New Staff", Error: err});
+            res.status(400).json({type: "Error", message: `An error occurred while updating the staff data. ${err.message}`});
         }
     })
 }
@@ -147,7 +145,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
         } catch (err) {
             // Send the error response message.
             console.log({Route: `Update ${req.body["existing-id"]}`, Error: err.message});
-            res.json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+            res.status(400).json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
         }
     })
 }

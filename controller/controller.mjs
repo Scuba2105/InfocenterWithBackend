@@ -101,7 +101,7 @@ export async function changeLoginPassword(req, res, __dirname) {
             
             // If Insert is an error snd an error response and return
             if (dbInsertResult.type === "error") {
-                res.json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}.\r\n Please try again and if issue persists contact administrator`});
+                res.status(400).json({type: "Error", message: `An error occurred inserting into the Database: ${dbInsertResult.data.message}.\r\n Please try again and if issue persists contact administrator`});
                 return
             } 
             res.json({type: "Success", message: "Password successfully updated"});
