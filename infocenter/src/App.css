@@ -1639,11 +1639,16 @@ html {
   opacity: 0.3;
 }
 
+.config-right-arrow {
+  transform: rotate(180deg);
+}
+
 .config-arrow:hover {
   cursor: pointer;
   opacity: 0.8;
 }
 
+/* Adjust the arrows for the contacts page modal forms */
 .config-left-arrow1 {
   transform: translateX(0px);
 }

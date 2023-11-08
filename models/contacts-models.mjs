@@ -64,7 +64,6 @@ export function writeAllVendorContactsData(__dirname, data) {
 }
 
 export function generateNewStaffContactData(reqBody) {
-
     return {
         contact: reqBody["Contact Name"],
         hospital: reqBody["Hospital"],
@@ -78,7 +77,6 @@ export function generateNewStaffContactData(reqBody) {
 }
 
 export function generateNewVendorContactData(reqBody) {
-
     return {
         vendor: reqBody["Vendor"],
         contact: reqBody["Contact Name"],

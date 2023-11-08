@@ -51,25 +51,29 @@ export async function addNewStaffData(req, res, __dirname) {
         const currentIDs = staffData.map((entry) => {
             return entry.id
         });
-        if (currentIDs.includes(id)) {
-            throw new Error(`The Staff ID entered already exists. Please ensure a unique ID is entered and try again`);
+        if (!currentIDs.includes(id)) {
+            // throw new Error(`The Staff ID entered already exists. Please ensure a unique ID is entered and try again`);
+            // Generate a new staff data object
+            const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, email, team)   
+
+            // Add any optional data provided to the data object
+            const optionalData = ["dectPhone", "workMobile", "personalMobile", "img"];
+            
+            // Loop over optional data and add to data object
+            optionalData.forEach((entry) => {
+                if (req.body[entry]) {
+                    newStaffData[entry] = req.body[entry];
+                }
+            });
+
+            // Append the new staff data 
+            staffData.push(newStaffData);
+
+            // Write the data to file
+            const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {
+                throw new Error(`${err}`);
+            });
         }
-
-        // Generate a new staff data object
-        const newStaffData = generateNewStaffData(name, id, workshop, position, officePhone, email, team)   
-
-        // Add any optional data provided to the data object
-        const optionalData = ["dectPhone", "workMobile", "personalMobile", "img"];
-        
-        // Loop over optional data and add to data object
-        optionalData.forEach((entry) => {
-            if (req.body[entry]) {
-                newStaffData[entry] = req.body[entry];
-            }
-        });
-
-        // Append the new staff data 
-        staffData.push(newStaffData);
 
         // Define hashing parameters and generate password hash
         const saltRounds = 10;
@@ -85,11 +89,6 @@ export async function addNewStaffData(req, res, __dirname) {
         //     throw new Error(`${err}`);
         // });
 
-        // Write the data to file
-        const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {
-            throw new Error(`${err}`);
-        });
-        
         // Send the success response message.
         res.json({type: "Success", message: 'Data Upload Successful'}); 
         

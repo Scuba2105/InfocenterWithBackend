@@ -100,8 +100,11 @@ export async function addNewUserCredentials(id, name, email, hashedPassword) {
             resolve(result.recordset); 
         }
         catch (error) {
-            console.log(error);
-            reject(`The error occurred inserting into the database: ${error.message}`);
+            console.log(error.number);
+            if (error.number === 2627) {
+                reject(`Nothing was inserted into the database as the entered Staff ID already exists. Please verify you have entered the correct ID.`);
+            }
+            reject(`The error occurred inserting into the database: ${error.message}`);            
         }
     })
 }
