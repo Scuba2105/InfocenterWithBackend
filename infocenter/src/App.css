@@ -1358,16 +1358,25 @@ html {
 .documents-edit-button {
   height: 60px;
   width: 60px;
-  border: 1px solid #5ef8ed;
+  border: 1.5px solid #5ef8ed;
+  border-radius: 10px;
   background-color: transparent;
   color: #5ef8ed;
   margin-left: 15px;
   cursor: pointer;
   opacity: 0.5;
+  font-size: 10px;
+  font-weight: 500;
 }
 
 .documents-edit-button:hover {
   opacity: 1;
+}
+
+/* documents edit form */
+#updated-document {
+  padding: 5px;
+  width: 300px;
 }
 
 .update-form-display {
@@ -1455,6 +1464,12 @@ html {
   background-color: transparent;
   border: 1.3px solid var(--main-color-accent);
   color: var(--main-color-accent);
+}
+
+.delete-button {
+  background-color: transparent;
+  border: 1.3px solid var(--red-accent);
+  color: var(--red-accent);
 }
 
 .add-new-config-select-container {

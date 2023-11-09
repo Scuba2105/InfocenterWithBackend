@@ -3,6 +3,7 @@ import { SelectInput } from "../SelectInput";
 import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "../CopyToClipboard";
 import { Documents } from "./Documents";
+import { Input } from "../Input";
 
 function passwordEntryClassName(num) {
     if (num === 0) {
@@ -46,29 +47,56 @@ function formatDepartmentString(word) {
     return formattedDepartment;
 }
 
+// Determines whether the documents form is shown or not
+function showForm(setDocumentsEditVisible, setCurrentDocument, description, extension) {
+    setDocumentsEditVisible(true);
+    setCurrentDocument({description: description, extension: extension});
+}
+
+function closeForm(setDocumentsEditVisible, setCurrentDocument, description, extension) {
+    setDocumentsEditVisible(false);
+}
+
 export function LinkModal({selectedData, modalType}) {
 
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);
+
+    // Store state as to whether documents view or edit/remove form is displayed
+    const [documentsEditVisible, setDocumentsEditVisible] = useState(false);
+    const [currentDocument, setCurrentDocument] = useState(null);
     
     if (modalType === "documents") {
 
         const documentData = selectedData.documents;
-        
-        return (
-            <div className="modal-display" style={{justifyContent: 'flex-start'}}>
-                <h3 className="documents-heading">Available Documentation</h3>
-                {documentData.map((document) => {
-                    const description = document.label;
-                    const link = document.filePath;
-                    const extension = link.split('.').slice(-1)[0];
-                    return (
-                            <Documents key={`${description}.${extension}`} description={description} link={link} extension={extension} />
-                        )
-                })}
-            </div>
-        )
+        if (documentsEditVisible) {
+            return (
+                <div className="modal-display">
+                    <h3 className="documents-heading">{`Edit ${currentDocument.description}`}</h3>
+                    <Input inputType="file" identifier="updated-file" labelText="Updated Document"></Input>
+                    <div className="form-buttons">
+                        <div className="update-button">Upload Document</div>
+                        <div className="update-button delete-button">Delete Document</div>
+                    </div>  
+                </div>
+            )
+        } 
+        else {
+            return (
+                <div className="modal-display" style={{justifyContent: 'flex-start'}}>
+                    <h3 className="documents-heading">Available Documentation</h3>
+                    {documentData.map((document) => {
+                        const description = document.label;
+                        const link = document.filePath;
+                        const extension = link.split('.').slice(-1)[0];
+                        return (
+                                <Documents key={`${description}.${extension}`} description={description} link={link} extension={extension} showForm={showForm} setCurrentDocument={setCurrentDocument} setFormVisible={setDocumentsEditVisible}/>
+                            )
+                    })}
+                </div>
+            )
+        }
     }
 
     if (modalType === "software") {

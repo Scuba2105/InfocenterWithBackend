@@ -2,7 +2,7 @@ import { capitaliseFirstLetters } from "../utils/utils";
 import { serverConfig } from "../server";
 
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
-'disposal', 'change-password', "update-staff-contact", "update-vendor-contact"];
+'disposal', 'change-password', "update-staff-contact", "update-vendor-contact", "edit-existing-documents"];
 
 const onCallPageHeadings = {"my-roster": "Upcoming On-Call Duties", "staff-roster": "On-Call Roster", "edit-roster": "Edit On-Call Roster", "confirm-roster": "Confirm On-Call Roster",
 "key-contacts": "Key On-Call Contacts", "on-call-cheatsheet": "On-Call Cheatsheet"} 
