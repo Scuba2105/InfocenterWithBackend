@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SelectInput } from "../SelectInput";
 import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "../CopyToClipboard";
-import { Documents } from "../Documents";
+import { Documents } from "./Documents";
 
 function passwordEntryClassName(num) {
     if (num === 0) {
