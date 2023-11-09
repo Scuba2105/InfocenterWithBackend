@@ -73,6 +73,18 @@ export async function addNewStaffData(req, res, __dirname) {
             const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {
                 throw new Error(`${err}`);
             });
+
+            // Define hashing parameters and generate password hash
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
+
+            // Create new entry in the Users table
+            const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
+                throw new Error(`The Database entry was unable to be created for ${name}. Please try again to upload the data and create the database entry.`);
+            });
+
+            res.json({type: "Success", message: 'Data Upload Successful'}); 
+            return
         }
 
         // Define hashing parameters and generate password hash
@@ -81,7 +93,7 @@ export async function addNewStaffData(req, res, __dirname) {
 
         // Create new entry in the Users table
         const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
-            throw new Error(`${err}`);
+            throw new Error(`App Data already exists for ${name}. Please verify this data is valid and update if required. ${err}`);
         });
 
         // Send the account and login details email to the new user
@@ -90,7 +102,7 @@ export async function addNewStaffData(req, res, __dirname) {
         // });
 
         // Send the success response message.
-        res.json({type: "Success", message: 'Data Upload Successful'}); 
+        res.json({type: "Success", message: `App Data already exists for ${name}. Please verify this data is valid and update if required. Database Entry successfully updated.`}); 
         
         } catch (err) {
             // Send the error response message.
