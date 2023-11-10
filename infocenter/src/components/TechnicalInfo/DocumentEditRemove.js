@@ -2,24 +2,73 @@ import { useUser } from "../StateStore";
 import { useRef } from "react";
 import { Input } from "../Input";
 import { VendorArrow } from "../../svg";
+import { serverConfig } from "../../server"
 
-function uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog) {
-    console.log(showMessage)
+async function uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog) {
+    
     const fileInput = formContainer.current.querySelector(".file-input");
     const file = fileInput.files[0];
-    const fileExtension = file.name.split('.').slice(-1)[0];
     
-    // Validate the supplied inputs for file presence and correct type.
+    // Validate that a file has been supplied for upload.
     if (fileInput.files.length === 0) {
         showMessage("warning", "No file has been selected. Please select a file and try again.")
         return
     } 
-    else if (fileExtension !== currentDocument.extension) {
+
+    // Validate the file is of the correct type.
+    const fileExtension = file.name.split('.').slice(-1)[0];
+    if (fileExtension !== currentDocument.extension) {
         showMessage("warning", "The supplied file is not the same type as the existing document. Please verify you are editing the correct file and contact an administrator if required.")
         return 
     }
     
-    // Add file to multipart form data and begin upload
+    // Add file to multipart form data and begin upload. Always add files last so it populates correctly on backend.
+    const formData = new FormData();
+    formData.set("model", selectedData.model);
+    formData.set("description", currentDocument.description);
+    formData.set("extension", currentDocument.extension);
+    formData.set("updated-document", file, `${currentDocument.description}.${currentDocument.extension}`);
+    
+    
+    // Show the uploading spinner dialog while uploading.
+    showMessage("uploading", `Uploading ${selectedData.model} Data`)
+      
+    try {
+    
+        // Post the form data to the server. 
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateDocuments`, {
+                method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: formData
+        })
+
+        const data = await res.json();
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}.`);
+        }
+        else {
+            // Need to clear formData at this point
+            for (const pair of formData.entries()) {
+                formData.delete(pair[0]);
+            }
+
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeForm();
+            }, 1600);
+        }
+    }
+    catch (error) {
+        showMessage("error", error.message);
+    }
 }
 
 function deleteResource() {

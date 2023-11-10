@@ -58,7 +58,7 @@ function closeForm(setDocumentsEditVisible) {
 }
 
 export function LinkModal({selectedData, modalType, queryClient, showMessage, closeDialog, closeAddModal}) {
-console.log(showMessage)
+    
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);

@@ -146,3 +146,38 @@ export async function updateExistingDeviceData(req, res, __dirname) {
         }
     })
 }
+
+export function updateExistingDocument(req, res, __dirname) {
+    deviceDataMutex.runExclusive(async () => {
+        try {
+        // Read the device data.
+        const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+            throw new Error(`${err}`);
+        });
+        
+        // Define the variables from the uploaded data.
+        const model = req.body.model;
+        const description = req.model.description;
+        const ext = req.model.extension;
+
+        // Get the model data from the device data
+        const modelData = deviceData.find((entry) => {
+            return entry.model === model
+        })
+
+        // Get the model documents.
+        const modelDocuments = modelData.documents.find((entry) => {
+            return entry.label === description
+        });
+
+        
+
+
+        }
+        catch (err) {
+            // Send the error response message.
+            console.log({Route: `Update ${req.body.model}`, Error: err.message});
+            res.status(400).json({type: "Error", message: `An error occurred while updating the document. ${err.message}`});
+        }
+    })
+}
