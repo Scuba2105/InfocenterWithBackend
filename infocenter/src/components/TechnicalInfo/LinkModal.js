@@ -57,7 +57,7 @@ function closeForm(setDocumentsEditVisible) {
     setDocumentsEditVisible(false);
 }
 
-export function LinkModal({selectedData, modalType}) {
+export function LinkModal({selectedData, modalType, queryClient, showMessage, closeDialog, closeAddModal}) {
 
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
@@ -72,7 +72,7 @@ export function LinkModal({selectedData, modalType}) {
         const documentData = selectedData.documents;
         if (documentsEditVisible) {
             return (
-               <DocumentEditRemove currentDocument={currentDocument} closeForm={closeForm} setDocumentsEditVisible={setDocumentsEditVisible} /> 
+               <DocumentEditRemove currentDocument={currentDocument} closeForm={() => closeForm(setDocumentsEditVisible)} /> 
             )
         } 
         else {

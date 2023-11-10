@@ -89,7 +89,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                 </div>}
                 {addUpdateFormVisible && page === 'staff' && 
                     <ModalSkeleton selectedData={selectedData} closeModal={() => closeAddUpdateForm(setAddUpdateFormVisible)} type="update" page={page}>
-                        <AddEditStaff type="update" page={page} selectedData={selectedData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} closeAddModal={() => closeAddUpdateForm(setAddUpdateFormVisible)} />
+                        <AddEditStaff type="update" page={page} selectedData={selectedData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
                     </ModalSkeleton>}
                 {modalVisible.visible && page === 'technical-info' && 
                     <ModalSkeleton selectedData={selectedData} closeModal={() => closeModal(setModalVisible)} type={modalVisible.type} page={page}>
