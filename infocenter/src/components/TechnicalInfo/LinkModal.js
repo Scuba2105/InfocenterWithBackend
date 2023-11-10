@@ -72,7 +72,7 @@ export function LinkModal({selectedData, modalType, queryClient, showMessage, cl
         const documentData = selectedData.documents;
         if (documentsEditVisible) {
             return (
-               <DocumentEditRemove currentDocument={currentDocument} closeForm={() => closeForm(setDocumentsEditVisible)} /> 
+               <DocumentEditRemove currentDocument={currentDocument} closeForm={() => closeForm(setDocumentsEditVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
             )
         } 
         else {

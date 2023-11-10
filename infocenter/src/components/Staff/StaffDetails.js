@@ -38,8 +38,8 @@ export function StaffDetails({selectedData, user}) {
                 {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Computer" value={selectedData.hostname} Icon={Laptop} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
                 <StaffInfoEntry heading="Office Ph." value={selectedData.officePhone} Icon={OfficePhone} color="#5ef8ed" bColor="main"></StaffInfoEntry>
                 {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Dect Ph." value={selectedData.dectPhone} Icon={DectPhone} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 1" value={selectedData.workMobile} Icon={MobilePhone} color="#5ef8ed" bColor="main"></StaffInfoEntry>}
-                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Mobile 2" value={selectedData.personalMobile} Icon={MobilePhone} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Work Mobile" value={selectedData.workMobile} Icon={MobilePhone} color="#5ef8ed" bColor="main"></StaffInfoEntry>}
+                {!workshops.includes(selectedData.name) && <StaffInfoEntry heading="Personal Mobile" value={selectedData.personalMobile} Icon={MobilePhone} color="#BCE7FD" bColor="alternate"></StaffInfoEntry>}
             </div>
         </div>
     );
