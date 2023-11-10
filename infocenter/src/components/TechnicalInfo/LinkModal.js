@@ -3,7 +3,7 @@ import { SelectInput } from "../SelectInput";
 import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "../CopyToClipboard";
 import { Documents } from "./Documents";
-import { Input } from "../Input";
+import { DocumentEditRemove } from "./DocumentEditRemove";
 
 function passwordEntryClassName(num) {
     if (num === 0) {
@@ -53,7 +53,7 @@ function showForm(setDocumentsEditVisible, setCurrentDocument, description, exte
     setCurrentDocument({description: description, extension: extension});
 }
 
-function closeForm(setDocumentsEditVisible, setCurrentDocument, description, extension) {
+function closeForm(setDocumentsEditVisible) {
     setDocumentsEditVisible(false);
 }
 
@@ -72,14 +72,7 @@ export function LinkModal({selectedData, modalType}) {
         const documentData = selectedData.documents;
         if (documentsEditVisible) {
             return (
-                <div className="modal-display">
-                    <h3 className="documents-heading">{`Edit ${currentDocument.description}`}</h3>
-                    <Input inputType="file" identifier="updated-file" labelText="Updated Document"></Input>
-                    <div className="form-buttons">
-                        <div className="update-button">Upload Document</div>
-                        <div className="update-button delete-button">Delete Document</div>
-                    </div>  
-                </div>
+               <DocumentEditRemove currentDocument={currentDocument} closeForm={closeForm} setDocumentsEditVisible={setDocumentsEditVisible} /> 
             )
         } 
         else {

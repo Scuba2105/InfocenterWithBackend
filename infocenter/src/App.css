@@ -1374,10 +1374,37 @@ html {
 }
 
 /* documents edit form */
+.previous-page-arrow-container {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.previous-page-arrow-container:hover {
+  cursor: pointer;
+}
+
+.previous-page-arrow {
+  transform: rotate(180deg);
+  margin-left: 20px;
+}
+
+.previous-page-arrow-label {
+  margin-left: 10px;
+  color: var(--form-font-color);
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.documents-heading {
+  transform: translateY(-20px);
+}
+
 #updated-document {
   padding: 5px;
   width: 300px;
 }
+
+/* End of documents edit/remove */
 
 .update-form-display {
   grid-row: 2;
