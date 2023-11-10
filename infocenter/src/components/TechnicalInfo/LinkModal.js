@@ -58,7 +58,7 @@ function closeForm(setDocumentsEditVisible) {
 }
 
 export function LinkModal({selectedData, modalType, queryClient, showMessage, closeDialog, closeAddModal}) {
-
+console.log(showMessage)
     const [hospitalsIndex, setHospitalsIndex] = useState(0);
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);
@@ -72,7 +72,7 @@ export function LinkModal({selectedData, modalType, queryClient, showMessage, cl
         const documentData = selectedData.documents;
         if (documentsEditVisible) {
             return (
-               <DocumentEditRemove currentDocument={currentDocument} closeForm={() => closeForm(setDocumentsEditVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
+               <DocumentEditRemove selectedData={selectedData} currentDocument={currentDocument} closeForm={() => closeForm(setDocumentsEditVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
             )
         } 
         else {

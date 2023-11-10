@@ -93,7 +93,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                     </ModalSkeleton>}
                 {modalVisible.visible && page === 'technical-info' && 
                     <ModalSkeleton selectedData={selectedData} closeModal={() => closeModal(setModalVisible)} type={modalVisible.type} page={page}>
-                        <LinkModal selectedData={selectedData} modalType={modalVisible.type} />
+                        <LinkModal selectedData={selectedData} modalType={modalVisible.type} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
                     </ModalSkeleton>}
             </div> 
         </div>
