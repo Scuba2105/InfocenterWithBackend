@@ -13,7 +13,7 @@ export function Documents({description, link, extension, showForm, setCurrentDoc
                 <img src={`https://${serverConfig.host}:${serverConfig.port}/images/${iconName}.png`} alt="copy" className="document-icon"></img>
                 <label className="document-label">{description}</label>
             </a>
-            <button className="documents-edit-button flex-c-col" onClick={() => showForm(setFormVisible, setCurrentDocument, description, extension)}>
+            <button className="documents-edit-button flex-c-col" onClick={() => showForm(setFormVisible, setCurrentDocument, link, description, extension)}>
                 <EditIcon size="20px" color="#5ef8ed"/>
                 <span>Edit Resource</span>
             </button>

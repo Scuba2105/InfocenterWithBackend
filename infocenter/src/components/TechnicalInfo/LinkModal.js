@@ -48,9 +48,9 @@ function formatDepartmentString(word) {
 }
 
 // Determines whether the documents form is shown or not
-function showForm(setDocumentsEditVisible, setCurrentDocument, description, extension) {
+function showForm(setDocumentsEditVisible, setCurrentDocument, link, description, extension) {
     setDocumentsEditVisible(true);
-    setCurrentDocument({description: description, extension: extension});
+    setCurrentDocument({description: description, link: link, extension: extension});
 }
 
 function closeForm(setDocumentsEditVisible) {

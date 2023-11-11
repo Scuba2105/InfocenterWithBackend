@@ -5,9 +5,9 @@ import { VendorArrow } from "../../svg";
 import { serverConfig } from "../../server"
 
 async function uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog) {
-    
     const fileInput = formContainer.current.querySelector(".file-input");
     const file = fileInput.files[0];
+    const existingFileName = currentDocument.link.split("/").slice(-1)[0];
     
     // Validate that a file has been supplied for upload.
     if (fileInput.files.length === 0) {
@@ -16,9 +16,10 @@ async function uploadUpdatedResource(selectedData, formContainer, currentDocumen
     } 
 
     // Validate the file is of the correct type.
-    const fileExtension = file.name.split('.').slice(-1)[0];
-    if (fileExtension !== currentDocument.extension) {
-        showMessage("warning", "The supplied file is not the same type as the existing document. Please verify you are editing the correct file and contact an administrator if required.")
+    const uploadFileName = file.name;
+    console.log(uploadFileName, existingFileName)
+    if (uploadFileName !== existingFileName) {
+        showMessage("warning", "The supplied file is not the same as the existing document. Please verify you are editing the correct file and have not renamed it. If problem persists contact an administrator if required.")
         return 
     }
     
@@ -26,9 +27,8 @@ async function uploadUpdatedResource(selectedData, formContainer, currentDocumen
     const formData = new FormData();
     formData.set("model", selectedData.model);
     formData.set("description", currentDocument.description);
-    formData.set("extension", currentDocument.extension);
-    formData.set("updated-document", file, `${currentDocument.description}.${currentDocument.extension}`);
-    
+    formData.set("filepath", currentDocument.link);
+    formData.set("updated-document", file, `${existingFileName}`);    
     
     // Show the uploading spinner dialog while uploading.
     showMessage("uploading", `Uploading ${selectedData.model} Data`)
