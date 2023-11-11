@@ -71,8 +71,9 @@ async function uploadUpdatedResource(selectedData, formContainer, currentDocumen
     }
 }
 
-function deleteResource() {
-
+function deleteResource(showMessage) {
+    // Have user confirm to proceed if changing mandatory data
+    showMessage("confirmation", "You are about to delete the resource permanently form the server. Please confirm you wish to proceed or cancel to prevent deletion.");
 }
 
 export function DocumentEditRemove({selectedData, currentDocument, closeForm, queryClient, showMessage, closeDialog}) {
@@ -84,6 +85,68 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
     const currentUser = useUser((state) => state.userCredentials);
     const documentDeletePermissions = (currentUser.permissions === "admin");    
 
+    // Get the confirmation result from Zustand state store.
+    const confirmationResult = useConfirmation((state) => state.updateConfirmation);
+    const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
+
+    // Run effect hook if confirmation result provided to complete update after re-render
+    useEffect(() => {
+        if (confirmationResult === "proceed") {
+
+            async function proceedwithUpload() {
+                showMessage("uploading", `Uploading Employee Data`);
+
+                try {
+
+                    // Post the data to the server  
+                    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+                            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                            mode: "cors", // no-cors, *cors, same-origin
+                            redirect: "follow", // manual, *follow, error
+                            referrerPolicy: "no-referrer",
+                            body: formData,
+                    })
+        
+                    const data = await res.json();
+
+                    if (data.type === "Error") {
+                        closeDialog();
+                        showMessage("error", `${data.message} If the issue persists please contact an administrator.`);
+                    }
+                    else {                            
+                        // Need to update app data.
+                        queryClient.invalidateQueries('dataSource');
+            
+                        closeDialog();
+                        showMessage("info", 'Resources have been successfully updated!');
+                        
+                        setTimeout(() => {
+                            closeDialog();
+                            closeAddModal();
+                        }, 1600);
+                    }
+                } 
+                catch (error) {
+                    showMessage("error", `${error.message}.`)
+                }
+            }
+            proceedwithUpload();
+        }
+        else if (confirmationResult === "cancel") {
+            // Delete update data if reset
+            for (const [key, value] of Object.entries(updateData.current)) {
+                if (mandatoryFields.includes(key)) {
+                    delete updateData.current[key]
+                }
+            }
+            
+        }
+        return () => {
+            resetConfirmationStatus();
+        }    
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient]);
+     
+
     return (
         <div className="modal-display" ref={formContainer}>
             <div className="previous-page-arrow-container flex-c" onClick={closeForm}>
@@ -94,7 +157,7 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
             <Input inputType="file" identifier="updated-file" labelText="Updated Document"></Input>
             <div className="form-buttons">
                 <div className="update-button" onClick={() => uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog)}>Upload Document</div>
-                {documentDeletePermissions && <div className="update-button delete-button">Delete Document</div>}
+                {documentDeletePermissions && <div className="update-button delete-button" onClick={() => deleteResource(showMessage)}>Delete Document</div>}
             </div>  
         </div>
     )
