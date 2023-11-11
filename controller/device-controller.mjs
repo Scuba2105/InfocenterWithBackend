@@ -1,6 +1,7 @@
-import { getAllDeviceData, writeAllDeviceData, generateNewDeviceData } from '../models/device-models.mjs';
+import { getAllDeviceData, writeAllDeviceData, deleteDocumentFile, generateNewDeviceData } from '../models/device-models.mjs';
 import { convertHospitalName } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
+import fs from 'fs';
 
 // Assists with preventing race conditions. 
 const deviceDataMutex = new Mutex();
@@ -147,37 +148,57 @@ export async function updateExistingDeviceData(req, res, __dirname) {
     })
 }
 
-export function updateExistingDocument(req, res, __dirname) {
+export function deleteExistingDocument(req, res, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
-        // Read the device data.
-        const deviceData = await getAllDeviceData(__dirname).catch((err) => {
-            throw new Error(`${err}`);
-        });
-        
-        // Define the variables from the uploaded data.
-        const model = req.body.model;
-        const description = req.model.description;
-        const ext = req.model.extension;
+            // Read the device data.
+            const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+                throw new Error(`${err}`);
+            });
+            
+            // Define the variables from the uploaded data.
+            const model = req.body.model;
+            const description = req.body.document.description;
+            const filepath = req.body.document.link;
 
-        // Get the model data from the device data
-        const modelData = deviceData.find((entry) => {
-            return entry.model === model
-        })
+            // Get the model data from the device data
+            const modelData = deviceData.find((entry) => {
+                return entry.model === model
+            })
 
-        // Get the model documents.
-        const modelDocuments = modelData.documents.find((entry) => {
-            return entry.label === description
-        });
+            // Remove the entry from the model documents.
+            const modelDocuments = modelData.documents.filter((entry) => {
+                return entry.label !== description
+            });
 
-        
+            modelData.documents = modelDocuments;
+            
+            // Update the device data 
+            const updatedDeviceData = deviceData.map((entry) => {
+                if (entry.model === model) {
+                    return modelData
+                }
+                else {
+                    return entry
+                }
+            })
+            
+            // Complete the write to file and delete document from file concurrently as they are not dependent.
+            const deletionResult = await Promise.all([
+                writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
+                deleteDocumentFile(__dirname, filepath)]).catch((err) => {
+                    throw new Error(`${err}`);
+                });
 
+            // Send the success response message.
+            res.json({type: "Success", message: 'Document Successfully Deleted'});
 
         }
         catch (err) {
             // Send the error response message.
-            console.log({Route: `Update ${req.body.model}`, Error: err.message});
+            console.log({Route: `Delete ${req.body.model}`, Error: err.message});
             res.status(400).json({type: "Error", message: `An error occurred while updating the document. ${err.message}`});
         }
     })
 }
+

@@ -32,6 +32,18 @@ export function writeAllDeviceData(__dirname, data) {
     });
 }
 
+export function deleteDocumentFile(__dirname, filepath) {
+    return new Promise((resolve, reject) => {
+        fs.unlink(path.join(__dirname, "public", filepath), (err) => {
+            if (err) {
+                reject(err.message);
+            } else {
+                resolve("Success");
+            }
+        });
+    })
+}
+
 export function generateNewDeviceData(fileExt, newType, manufacturer, vendor, newModel) {
 
     return {

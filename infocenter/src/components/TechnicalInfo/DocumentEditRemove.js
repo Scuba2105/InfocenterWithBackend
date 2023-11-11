@@ -1,8 +1,9 @@
 import { useUser } from "../StateStore";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Input } from "../Input";
 import { VendorArrow } from "../../svg";
 import { serverConfig } from "../../server"
+import { useConfirmation } from "../StateStore";
 
 async function uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog) {
     const fileInput = formContainer.current.querySelector(".file-input");
@@ -73,7 +74,7 @@ async function uploadUpdatedResource(selectedData, formContainer, currentDocumen
 
 function deleteResource(showMessage) {
     // Have user confirm to proceed if changing mandatory data
-    showMessage("confirmation", "You are about to delete the resource permanently form the server. Please confirm you wish to proceed or cancel to prevent deletion.");
+    showMessage("confirmation", "You are about to delete the resource permanently from the server. Please confirm you wish to proceed or cancel to prevent deletion.");
 }
 
 export function DocumentEditRemove({selectedData, currentDocument, closeForm, queryClient, showMessage, closeDialog}) {
@@ -89,22 +90,29 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
     const confirmationResult = useConfirmation((state) => state.updateConfirmation);
     const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
 
-    // Run effect hook if confirmation result provided to complete update after re-render
+    // Run effect hook if confirmation result provided to complete delete after re-render
     useEffect(() => {
         if (confirmationResult === "proceed") {
 
             async function proceedwithUpload() {
                 showMessage("uploading", `Uploading Employee Data`);
 
+                // Create the object to be sent in the request body.
+                const uploadData = {model: selectedData.model, document: currentDocument} 
+                console.log(uploadData)
+
                 try {
 
                     // Post the data to the server  
-                    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
-                            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/DeleteDocument`, {
+                            method: "DELETE", // *GET, POST, PUT, DELETE, etc.
                             mode: "cors", // no-cors, *cors, same-origin
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
                             redirect: "follow", // manual, *follow, error
                             referrerPolicy: "no-referrer",
-                            body: formData,
+                            body: JSON.stringify(uploadData),
                     })
         
                     const data = await res.json();
@@ -122,7 +130,7 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
                         
                         setTimeout(() => {
                             closeDialog();
-                            closeAddModal();
+                            closeForm();
                         }, 1600);
                     }
                 } 
@@ -133,18 +141,12 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
             proceedwithUpload();
         }
         else if (confirmationResult === "cancel") {
-            // Delete update data if reset
-            for (const [key, value] of Object.entries(updateData.current)) {
-                if (mandatoryFields.includes(key)) {
-                    delete updateData.current[key]
-                }
-            }
-            
+            resetConfirmationStatus();            
         }
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient, closeForm, currentDocument]);
      
 
     return (

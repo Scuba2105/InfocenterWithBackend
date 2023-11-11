@@ -6,7 +6,7 @@ import cors from 'cors';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
 import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
-import { addNewDeviceData, updateExistingDeviceData, updateExistingDocument } from './controller/device-controller.mjs'
+import { addNewDeviceData, updateExistingDeviceData, deleteExistingDocument } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
@@ -211,6 +211,16 @@ app.put("/UpdateDocuments", (req, res, next) => {
                 res.json({type: "Success", message: 'Data Upload Successful'}); 
             }
         })
+    } 
+    catch (err) {
+        next(err);
+    }     
+})
+
+// Define route to delete equipment documents. 
+app.delete("/DeleteDocument", (req, res, next) => {
+    try {
+        deleteExistingDocument(req, res, __dirname)
     } 
     catch (err) {
         next(err);
