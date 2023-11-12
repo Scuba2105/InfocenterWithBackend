@@ -18,7 +18,6 @@ async function uploadUpdatedResource(selectedData, formContainer, currentDocumen
 
     // Validate the file is of the correct type.
     const uploadFileName = file.name;
-    console.log(uploadFileName, existingFileName)
     if (uploadFileName !== existingFileName) {
         showMessage("warning", "The supplied file is not the same as the existing document. Please verify you are editing the correct file and have not renamed it. If problem persists contact an administrator if required.")
         return 
@@ -99,8 +98,7 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
 
                 // Create the object to be sent in the request body.
                 const uploadData = {model: selectedData.model, document: currentDocument} 
-                console.log(uploadData)
-
+                
                 try {
 
                     // Post the data to the server  
@@ -153,14 +151,16 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
         <div className="modal-display" ref={formContainer}>
             <div className="previous-page-arrow-container flex-c" onClick={closeForm}>
                 <VendorArrow size="2.31vh" color="white" identifier="previous-page-arrow"></VendorArrow>
-                <label className="previous-page-arrow-label">Previous Page</label>
+                <label className="previous-page-arrow-label">Back to View Documents</label>
             </div>
-            <h3 className="documents-heading">{`Edit ${currentDocument.description}`}</h3>
-            <Input inputType="file" identifier="updated-file" labelText="Updated Document"></Input>
-            <div className="form-buttons">
-                <div className="update-button" onClick={() => uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog)}>Upload Document</div>
-                {documentDeletePermissions && <div className="update-button delete-button" onClick={() => deleteResource(showMessage)}>Delete Document</div>}
-            </div>  
+            <h3 className="documents-heading-edit">{`Edit ${currentDocument.description}`}</h3>
+            <form className="documents-edit-form">
+                <Input inputType="file" identifier="updated-file" labelText="Updated Document"></Input>
+                <div className="form-buttons">
+                    <div className="update-button" onClick={() => uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog)}>Upload Document</div>
+                    {documentDeletePermissions && <div className="update-button delete-button" onClick={() => deleteResource(showMessage)}>Delete Document</div>}
+                </div>
+            </form>
         </div>
     )
 }
