@@ -1,7 +1,7 @@
 import { getAllDeviceData, writeAllDeviceData, deleteDocumentFile, generateNewDeviceData } from '../models/device-models.mjs';
 import { convertHospitalName } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
-import fs from 'fs';
+import { FileHandlingError } from '../error-handling/file-errors.mjs';
 
 // Assists with preventing race conditions. 
 const deviceDataMutex = new Mutex();
@@ -187,7 +187,7 @@ export function deleteExistingDocument(req, res, __dirname) {
             const deletionResult = await Promise.all([
                 writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
                 deleteDocumentFile(__dirname, filepath)]).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.action, err.route);
                 });
 
             // Send the success response message.
@@ -196,8 +196,8 @@ export function deleteExistingDocument(req, res, __dirname) {
         }
         catch (err) {
             // Send the error response message.
-            console.log({Route: `Delete ${req.body.model}`, Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the document. ${err.message}`});
+            console.log({Route: `Delete Document`, Error: `${err.message}`});
+            res.status(err.httpStatusCode).json({type: "Error", message: err.message});
         }
     })
 }

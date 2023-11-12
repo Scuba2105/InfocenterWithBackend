@@ -34,9 +34,9 @@ export function writeAllDeviceData(__dirname, data) {
 
 export function deleteDocumentFile(__dirname, filepath) {
     return new Promise((resolve, reject) => {
-        fs.unlink(path.join(__dirname, "public", filepath), (err) => {
+        fs.unlink(path.join(__dirname, "public2", filepath), (err) => {
             if (err) {
-                reject(err.message);
+                reject({message: err.message, action: "delete", route: "Device"});
             } else {
                 resolve("Success");
             }
