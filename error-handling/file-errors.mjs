@@ -70,7 +70,7 @@ export class ParsingError extends Error {
 }
 
 export class DBError extends Error {  
-  constructor (message, table, action, querySuccess=false) {
+  constructor (message, table, action, querySuccess=false, PKValue) {
     // Access the properties and methods of the base class it extends
     if (message) {
       super(message);
@@ -87,27 +87,27 @@ export class DBError extends Error {
     
     // Set the abstracted error message for front-end user based on constructor parameters
     //name, code, message
-    if (this.constructor.code === ELOGIN) {
+    if (this.constructor.code === "ELOGIN") {
       this.message = `An error occurred logging into the Information Centre database.`
     }
-    else if (this.constructor.code === ETIMEOUT && this.constructor.name === ConnectionError) {
+    else if (this.constructor.code === "ETIMEOUT" && this.constructor.name === ConnectionError) {
       this.message = `A timeout error occurred while connecting to the Information Centre database.`; 
     }
-    else if (this.constructor.code === ECONNCLOSED) {
+    else if (this.constructor.code === "ECONNCLOSED") {
       this.message = `The Information Centre database could not be accessed as the connection is closed.`; 
     }
-    else if (this.constructor.code === EABORT) {
+    else if (this.constructor.code === "EABORT") {
       this.message = `The request could not be completed since the database transaction with Information Centre database was aborted.`; 
     }
-    else if (this.constructor.code === ETIMEOUT && this.constructor.name === RequestError) {
+    else if (this.constructor.code === "ETIMEOUT" && this.constructor.name === RequestError) {
       this.message = `A timeout error occurred while completing the request to the Information Centre database.`; 
     }
-    else if (this.constructor.code === EARGS) {
+    else if (this.constructor.code === "EARGS") {
       this.message = `An invalid number of arguments was provided to the request with the Information Centre database.`;
     }
-    else if (this.constructor.code === EREQUEST) {
+    else if (this.constructor.code === "EREQUEST") {
       if (this.constructor.number === 2627) {
-        this.message = `There already exists an entry in the Information Centre database with the entered ${primaryKeyLookup[table]} and duplicates are not allowed. Please verify you have entered the correct ${primaryKeyLookup[table]}.`
+        this.message = `There already exists an entry in the Information Centre database with the entered ${primaryKeyLookup[table]} (${PKValue}) and duplicates are not allowed. Please verify you have entered the correct ${primaryKeyLookup[table]}.`
       }
       else if (["INSERT", "UPDATE"].includes(action) && querySuccess === true) {
         this.message = message;
