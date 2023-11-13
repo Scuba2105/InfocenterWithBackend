@@ -5,8 +5,7 @@ export function getOnCallData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'on-call-data.json'), (err, data) => {
             if (err) {
-                console.error(err);
-                reject(`The On-Call data was unable to be read: ${err.message}`);
+                reject({type: "FileHandlingError", message: err.message, action: "read", route: "On-Call"});
             }
             else {
                 try {
@@ -14,7 +13,7 @@ export function getOnCallData(__dirname) {
                     resolve(onCallData);
                 }
                 catch(err) {
-                    reject(`The On-Call data was unable to be parsed: ${err.message}`)
+                    reject({type: "ParsingError", message: err.message, route: "On-Call"})
                 }
             }
         });
@@ -25,9 +24,8 @@ export function writeOnCallData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'on-call-data.json'), data, (err) => {
             if (err) {
-                reject(`The error occurred while writing the On-Call data: ${err}`);
+                reject({type: "FileHandlingError", message: err.message, action: "write", route: "On-Call"});
             } 
-            console.log('The file has been saved!');
             resolve("Success");
         });
     });

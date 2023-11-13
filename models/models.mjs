@@ -21,8 +21,7 @@ export async function retrieveUserCredentials(email) {
             resolve(result.recordset)
         }
         catch (error) {
-            console.log(error);
-            reject(`The error occurred reading the user credentials from the database: ${error.message}`);
+            reject({type: "DBError", message: error.message, table: "Users", action: "SELECT"});    
         }
     })
 }
@@ -45,15 +44,15 @@ export async function updateUserPassword(staffId, hashedPassword) {
             
             // Check that the data was inserted into the database.
             if (result.rowsAffected == 0){
-                reject('Nothing was inserted into the database');
+                reject({type: "DBError", message: `Nothing was inserted into the database as the entered Staff ID already exists. Please verify you have entered the correct ID.`,
+                table: "Users", action: "UPDATE", querySuccess: true});
             }
 
             // Return the recordset.
             resolve(result.recordset); 
         }
         catch (error) {
-            console.log(error);
-            reject(`The error occurred updating the user password in the database: ${error.message}`);
+            reject({type: "DBError", message: error.message, table: "Users", action: "UPDATE"});
         }
     })
 }
