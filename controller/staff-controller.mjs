@@ -4,6 +4,7 @@ import bcrypt, { hash } from "bcrypt";
 import { determineTeam } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
 import { generateNewAccountEmail } from '../mail-server/mail-server.mjs';
+import { FileHandlingError, DBError, ParsingError } from '../error-handling/file-errors.mjs';
 
 // Use to prevent race conditions
 const staffDataMutex = new Mutex();
@@ -80,7 +81,7 @@ export async function addNewStaffData(req, res, __dirname) {
 
             // Create new entry in the Users table
             const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
-                throw new Error(`The Database entry was unable to be created for ${name}. Please try again to upload the data and create the database entry.`);
+                throw new DBError(err.message, err.table, err.action, err.querySuccess);
             });
 
             res.json({type: "Success", message: 'Data Upload Successful'}); 
@@ -105,9 +106,15 @@ export async function addNewStaffData(req, res, __dirname) {
         res.json({type: "Success", message: `App Data already exists for ${name}. Please verify this data is valid and update if required. Database Entry successfully updated.`}); 
         
         } catch (err) {
+            console.log(err)
             // Send the error response message.
             console.log({Route: "Add New Staff", Error: err});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the staff data. ${err.message}`});
+            if (err instanceof DBError) {
+                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            }
+            else {
+                res.status(500).json({type: "Error", message: `An error occurred while updating the staff data. ${err.message}`});    
+            }
         }
     })
 }

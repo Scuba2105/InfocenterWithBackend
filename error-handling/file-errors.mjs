@@ -88,7 +88,7 @@ export class DBError extends Error {
     // Set the abstracted error message for front-end user based on constructor parameters
     //name, code, message
     if (this.constructor.code === ELOGIN) {
-      this.message = `An error occurred logging into the Information Centre database. Please ensure you entered the correct credentials.`
+      this.message = `An error occurred logging into the Information Centre database.`
     }
     else if (this.constructor.code === ETIMEOUT && this.constructor.name === ConnectionError) {
       this.message = `A timeout error occurred while connecting to the Information Centre database.`; 
