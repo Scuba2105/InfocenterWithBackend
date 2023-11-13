@@ -18,7 +18,7 @@ export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
             if (err) {
-                reject(`The Staff data was unable to be read: ${err.message}`);
+                reject({type: "FileHandlingError", message: err.message, action: "read", route: "Staff"});
             }
             else {
                 try {
@@ -26,7 +26,7 @@ export function getAllStaffData(__dirname) {
                     resolve(staffData);
                 }
                 catch(err) {
-                    reject(`The Staff data was unable to be parsed: ${err.message}`)
+                    reject({type: "ParsingError", message: err.message, route: "Staff"})
                 }
             }
         });
@@ -37,9 +37,8 @@ export function writeAllStaffData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'staff-data.json'), data, (err) => {
             if (err) {
-                reject(`The error occurred while writing the Staff data: ${err}`);
+                reject({type: "FileHandlingError", message: err.message, action: "write", route: "Staff"});
             } 
-            console.log('The file has been saved!');
             resolve("Success");
         });
     });

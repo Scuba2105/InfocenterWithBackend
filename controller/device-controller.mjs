@@ -196,8 +196,14 @@ export function deleteExistingDocument(req, res, __dirname) {
         }
         catch (err) {
             // Send the error response message.
-            console.log({Route: `Delete Document`, Error: `${err.message}`});
-            res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            console.log({Route: `Delete Document`, Error: `${err.originalMessage}`});
+            if (err instanceof FileHandlingError) {
+                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            }
+            else {
+                res.status(500).json({type: "Error", message: err.message});
+            }
+            
         }
     })
 }
