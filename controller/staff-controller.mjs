@@ -91,7 +91,7 @@ export async function addNewStaffData(req, res, __dirname) {
         // Define hashing parameters and generate password hash
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(`InfoCentreUser${id}?`, saltRounds);
-
+        
         // Create new entry in the Users table
         const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
             throw new DBError(err.message, err.cause, err.table, err.action, err.querySuccess);
