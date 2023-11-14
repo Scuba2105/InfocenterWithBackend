@@ -21,7 +21,7 @@ export async function retrieveUserCredentials(email) {
             resolve(result.recordset)
         }
         catch (error) {
-            reject({type: "DBError", message: error.message, table: "Users", action: "SELECT"});    
+            reject({type: "DBError", message: error.message, cause: error, table: "Users", action: "SELECT"});    
         }
     })
 }
@@ -52,7 +52,7 @@ export async function updateUserPassword(staffId, hashedPassword) {
             resolve(result.recordset); 
         }
         catch (error) {
-            reject({type: "DBError", message: error.message, table: "Users", action: "UPDATE"});
+            reject({type: "DBError", message: error.message, cause: error, table: "Users", action: "UPDATE"});
         }
     })
 }

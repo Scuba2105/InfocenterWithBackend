@@ -100,7 +100,7 @@ export async function addNewUserCredentials(id, name, email, hashedPassword) {
             resolve(result.recordset); 
         }
         catch (error) {
-            reject({type: "DBError", message: error.message, table: "Users", action: "INSERT"});          
+            reject({type: "DBError", message: error.message, cause: error, table: "Users", action: "INSERT"});          
         }
     })
 }
@@ -133,7 +133,7 @@ export async function updateUserCredentials(existingId, id, name, email) {
             resolve(result.recordset)
         }
         catch (error) {
-            reject({type: "DBError", message: error.message, table: "Users", action: "UPDATE"});  
+            reject({type: "DBError", message: error.message, cause: error, table: "Users", action: "UPDATE"});  
         }
     })
 }

@@ -29,7 +29,7 @@ export async function addNewStaffData(req, res, __dirname) {
         try {
         // Get the current device data 
         const staffData = await getAllStaffData(__dirname).catch((err) => {
-            throw new Error(`${err}`);
+            throw new FileHandlingError(err.message, err.action, err.route);
         });
         
         // Validate the request body data
@@ -72,7 +72,7 @@ export async function addNewStaffData(req, res, __dirname) {
 
             // Write the data to file
             const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {
-                throw new Error(`${err}`);
+                throw new FileHandlingError(err.message, err.action, err.route);
             });
 
             // Define hashing parameters and generate password hash
@@ -81,7 +81,7 @@ export async function addNewStaffData(req, res, __dirname) {
 
             // Create new entry in the Users table
             const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
-                throw new DBError(err.message, err.table, err.action, err.querySuccess);
+                throw new DBError(err.message, err.cause, err.table, err.action, err.querySuccess);
             });
 
             res.json({type: "Success", message: 'Data Upload Successful'}); 
@@ -94,7 +94,7 @@ export async function addNewStaffData(req, res, __dirname) {
 
         // Create new entry in the Users table
         const dbInsertResult = await addNewUserCredentials(id, name, email, hashedPassword).catch((err) => {
-            throw new Error(`App Data already exists for ${name}. Please verify this data is valid and update if required. ${err}`);
+            throw new DBError(err.message, err.cause, err.table, err.action, err.querySuccess);
         });
 
         // Send the account and login details email to the new user
@@ -106,14 +106,13 @@ export async function addNewStaffData(req, res, __dirname) {
         res.json({type: "Success", message: `App Data already exists for ${name}. Please verify this data is valid and update if required. Database Entry successfully updated.`}); 
         
         } catch (err) {
-            console.log(err)
             // Send the error response message.
             console.log({Route: "Add New Staff", Error: err});
-            if (err instanceof DBError) {
+            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
                 res.status(err.httpStatusCode).json({type: "Error", message: err.message});
             }
             else {
-                res.status(500).json({type: "Error", message: `An error occurred while updating the staff data. ${err.message}`});    
+                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
             }
         }
     })
@@ -124,7 +123,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
         try {
         // Get the current device data 
         const staffData = await getAllStaffData(__dirname).catch((err) => {
-            throw new Error(`${err}`);
+            throw new FileHandlingError(err.message, err.action, err.route);
         });
         
         // Validate the request body data
@@ -150,7 +149,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
         const dbFieldsChanged = hasDBFieldsChanged(name, id, email, currentData);
         if (dbFieldsChanged) {
             const dbUpdateResult = await updateUserCredentials(existingId, id, name, email).catch((err) => {
-                throw new Error(`${err}`);
+                throw new DBError(err.message, err.cause, err.table, err.action, err.querySuccess);
             });
         }
         
@@ -164,7 +163,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
 
         // Write the data to file
         const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2)).catch((err) => {
-            throw new Error(`${err}`);
+            throw new FileHandlingError(err.message, err.action, err.route);
         });
 
         // Send the success response message.
@@ -173,7 +172,12 @@ export async function updateExistingStaffData(req, res, __dirname) {
         } catch (err) {
             // Send the error response message.
             console.log({Route: `Update ${req.body["existing-id"]}`, Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the staff data. ${err.message}`});
+            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            }
+            else {
+                res.status(400).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});
+            }
         }
     })
 }
