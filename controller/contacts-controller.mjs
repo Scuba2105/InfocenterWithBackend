@@ -2,6 +2,7 @@ import { getAllStaffContactsData, getAllVendorContactsData, writeAllStaffContact
 writeAllVendorContactsData, generateNewStaffContactData, generateNewVendorContactData } from '../models/contacts-models.mjs'
 import { formatPhoneNumber } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
+import { FileHandlingError, DBError, ParsingError } from '../error-handling/file-errors.mjs';
 
 // Assists with preventing race conditions. 
 const staffContactsDataMutex = new Mutex();
@@ -20,7 +21,12 @@ export async function addNewContactData(req, res, __dirname) {
             try {
                 // Read the existing contacts data.
                 const existingContactsData = await getAllStaffContactsData(__dirname).catch((err) => {
-                    throw new Error(`${err}`);
+                    if (err.type === "FileHandlingError") {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    }
+                    else {
+                        throw new ParsingError(err.message, err.cause, err.route);
+                    }
                 });
 
                 // Validate the supplied input values.
@@ -53,7 +59,7 @@ export async function addNewContactData(req, res, __dirname) {
                 
                 // Write the data to file
                 const fileWrittenResult = await writeAllStaffContactsData(__dirname, JSON.stringify(existingContactsData, null, 2)).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
 
                 // Send the success response message.
@@ -63,7 +69,12 @@ export async function addNewContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Add Staff Contact", Error: err.message});
-                res.status(400).json({type: "Error", message: `An error occurred while updating the Contacts data: ${err.message}`});
+                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+                }
+                else {
+                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+                }
             }
         })
     }
@@ -72,7 +83,12 @@ export async function addNewContactData(req, res, __dirname) {
             try {
                 // Read the existing contacts data.
                 const existingContactsData = await getAllVendorContactsData(__dirname).catch((err) => {
-                    throw new Error(`${err}`);
+                    if (err.type === "FileHandlingError") {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    }
+                    else {
+                        throw new ParsingError(err.message, err.cause, err.route);
+                    }
                 });
 
                 // Validate the supplied input values.
@@ -108,7 +124,7 @@ export async function addNewContactData(req, res, __dirname) {
 
                 // Write the data to file
                 const fileWrittenResult = await writeAllVendorContactsData(__dirname, JSON.stringify(existingContactsData, null, 2)).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
 
                 // Send the success response message.
@@ -118,7 +134,12 @@ export async function addNewContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Add Vendor Contact", Error: err.message});
-                res.status(400).json({type: "Error", message: `An error occurred while updating the Contacts data: ${err.message}`});
+                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+                }
+                else {
+                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+                }
             }
         })
     }
@@ -130,7 +151,12 @@ export async function updateContactData(req, res, __dirname) {
             try {      
                 const updatedData = req.body;
                 const existingContactsData = await getAllStaffContactsData(__dirname).catch((err) => {
-                    throw new Error(`${err}`);
+                    if (err.type === "FileHandlingError") {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    }
+                    else {
+                        throw new ParsingError(err.message, err.cause, err.route);
+                    }
                 });
             
                 // Validate the supplied input values.
@@ -160,7 +186,7 @@ export async function updateContactData(req, res, __dirname) {
             
                 // Write the data to file
                 const fileWrittenResult = writeAllStaffContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2)).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
 
                 // Send the success response message.
@@ -170,7 +196,12 @@ export async function updateContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Update Staff Contact", Error: err.message});
-                res.status(400).json({type: "Error", message: `An error occurred while updating the Contacts data: ${err.message}`});
+                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+                }
+                else {
+                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+                }
             }
         })
     }
@@ -181,7 +212,12 @@ export async function updateContactData(req, res, __dirname) {
                 
                 // Read the existing contacts data from file.
                 const existingContactsData = await getAllVendorContactsData(__dirname).catch((err) => {
-                    throw new Error(`${err}`);
+                    if (err.type === "FileHandlingError") {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    }
+                    else {
+                        throw new ParsingError(err.message, err.cause, err.route);
+                    }
                 });
 
                 // Validate the supplied input values.
@@ -211,7 +247,7 @@ export async function updateContactData(req, res, __dirname) {
             
                 // Write the data to file
                 const fileWrittenResult = await writeAllVendorContactsData(__dirname, JSON.stringify(updatedContactsData, null, 2)).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
 
                 // Send the success response message.
@@ -221,7 +257,12 @@ export async function updateContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Update Vendor Contact", Error: err.message});
-                res.status(400).json({type: "Error", message: `An error occurred while updating the Contacts data: ${err.message}`});
+                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+                }
+                else {
+                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+                }
             }
         })
     } 

@@ -13,7 +13,7 @@ export class FileHandlingError extends Error {
       Error.captureStackTrace(this, this.constructor);
   
       // assign the error class name and error code in your custom error (as a shortcut)
-      this.name = "FileHandlingError";
+      this.type = "FileHandlingError";
       this.httpStatusCode = 500; 
       
       // Set the abstracted error message for front-end user based on constructor parameters

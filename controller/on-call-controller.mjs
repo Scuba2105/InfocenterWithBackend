@@ -23,7 +23,12 @@ export async function updateOnCallData(req, res, __dirname) {
         try {
             // Read the existing on-call data from file.
             const existingonCallData = await getOnCallData(__dirname).catch((err) => {
-                throw new Error(`${err}`);
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
             });
 
             // Remove any existing oncall entries 4 weeks before current date.
@@ -64,7 +69,7 @@ export async function updateOnCallData(req, res, __dirname) {
                 
                 // Write the data to file.
                 const fileWrittenResult = await writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2)).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });;
         
                 // Send the response to the client.
@@ -104,7 +109,7 @@ export async function updateOnCallData(req, res, __dirname) {
                 
                 // Write the data to file.
                 const fileWrittenResult = await writeOnCallData(__dirname, JSON.stringify(onCallData, null, 2)).catch((err) => {
-                    throw new Error(`${err}`);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
         
                 // Send the response to the client.
@@ -114,7 +119,12 @@ export async function updateOnCallData(req, res, __dirname) {
         catch (err) {
             // Send the error response message.
             console.log({Route: "Edit On-Call", Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the On-Call data. ${err.message}`});
+            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            }
+            else {
+                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+            }
         }
     })
 }
