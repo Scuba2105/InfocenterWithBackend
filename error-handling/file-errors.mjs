@@ -90,7 +90,7 @@ export class DBError extends Error {
     if (this.cause.code === "ELOGIN") {
       this.message = `An error occurred logging into the Information Centre database.`
     }
-    else if (this.cause.code === "ETIMEOUT" && this.constructor.name === ConnectionError) {
+    else if (this.cause.code === "ETIMEOUT" && this.constructor.name === "ConnectionError") {
       this.message = `A timeout error occurred while connecting to the Information Centre database.`; 
     }
     else if (this.cause.code === "ECONNCLOSED") {
