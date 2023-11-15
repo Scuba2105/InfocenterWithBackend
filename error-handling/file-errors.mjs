@@ -1,7 +1,7 @@
 const primaryKeyLookup = {"Users": "Staff ID"}
 
 export class FileHandlingError extends Error {  
-    constructor (message, action, route) {
+    constructor (message, cause, action, route) {
       // Access the properties and methods of the base class it extends
       if (message) {
         super(message, {cause: cause});

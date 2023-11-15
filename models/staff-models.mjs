@@ -18,7 +18,7 @@ export function getAllStaffData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'staff-data.json'), (err, data) => {
             if (err) {
-                reject({type: "FileHandlingError", message: err.message, action: "read", route: "Staff"});
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Staff"});
             }
             else {
                 try {
@@ -26,7 +26,7 @@ export function getAllStaffData(__dirname) {
                     resolve(staffData);
                 }
                 catch(err) {
-                    reject({type: "ParsingError", message: err.message, route: "Staff"})
+                    reject({type: "ParsingError", message: err.message, cause: err, route: "Staff"})
                 }
             }
         });
@@ -37,7 +37,7 @@ export function writeAllStaffData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'staff-data.json'), data, (err) => {
             if (err) {
-                reject({type: "FileHandlingError", message: err.message, action: "write", route: "Staff"});
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "write", route: "Staff"});
             } 
             resolve("Success");
         });

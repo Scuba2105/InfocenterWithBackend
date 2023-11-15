@@ -5,7 +5,7 @@ export function getAllDeviceData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'device-data.json'), (err, data) => {
             if (err) {
-                reject({type: "FileHandlingError", message: err.message, action: "read", route: "Device"});
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Device"});
             }
             else {
                 try {
@@ -13,7 +13,7 @@ export function getAllDeviceData(__dirname) {
                     resolve(deviceData);
                 }
                 catch(err) {
-                    reject({type: "ParsingError", message: err.message, route: "Device"})
+                    reject({type: "ParsingError", message: err.message, cause: err, route: "Device"})
                 }
             }
         });
@@ -24,7 +24,7 @@ export function writeAllDeviceData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'device-data.json'), data, (err) => {
             if (err) {
-                reject({type: "FileHandlingError", message: err.message, action: "write", route: "Device"});
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Device"});
             } 
             resolve("Success");
         });
@@ -35,7 +35,7 @@ export function deleteDocumentFile(__dirname, filepath) {
     return new Promise((resolve, reject) => {
         fs.unlink(path.join(__dirname, "public", filepath), (err) => {
             if (err) {
-                reject({type: "FileHandlingError", message: err.message, action: "delete", route: "Device"});
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Device"});
             } else {
                 resolve("Success");
             }

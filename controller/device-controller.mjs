@@ -1,7 +1,7 @@
 import { getAllDeviceData, writeAllDeviceData, deleteDocumentFile, generateNewDeviceData } from '../models/device-models.mjs';
 import { convertHospitalName } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
-import { FileHandlingError } from '../error-handling/file-errors.mjs';
+import { FileHandlingError, DBError, ParsingError } from '../error-handling/file-errors.mjs';
 
 // Assists with preventing race conditions. 
 const deviceDataMutex = new Mutex();
@@ -10,27 +10,32 @@ export async function addNewDeviceData(req, res, __dirname) {2
     
     deviceDataMutex.runExclusive(async () => {
         try {
-        // Get the current device data 
+        // Get the current device data. 
         const deviceData = await getAllDeviceData(__dirname).catch((err) => {
-            throw new Error(`${err}`);
+            if (err.type === "FileHandlingError") {
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            }
+            else {
+                throw new ParsingError(err.message, err.cause, err.route);
+            }
         });
         
-        // Get the new device data from the request object
+        // Get the new device data from the request object.
         const newModel = req.body.model;
         const newType = req.body.type;
         const manufacturer = req.body.manufacturer;
         const vendor = req.body.vendor;
         const fileExt = req.body.extension;
     
-        // Create the new data for the added device 
+        // Create the new data for the added device.
         const newDevice  = generateNewDeviceData(fileExt, newType, manufacturer, vendor, newModel);
                         
-        // Push the new device data to the current device data array 
+        // Push the new device data to the current device data array. 
         deviceData.push(newDevice);
                                     
-        // Write the data to file
+        // Write the data to file.
         const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
-            throw new Error(`${err}`);
+            throw new FileHandlingError(err.message, err.cause, err.action, err.route);
         });
 
         // Send the success response message.
@@ -40,7 +45,12 @@ export async function addNewDeviceData(req, res, __dirname) {2
         catch(err) {
             // Send the error response message.
             console.log({Route: "Add New Device", Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            }
+            else {
+                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+            }    
         }
     })
 }
@@ -49,10 +59,15 @@ export async function updateExistingDeviceData(req, res, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
         const deviceData = await getAllDeviceData(__dirname).catch((err) => {
-            throw new Error(`${err}`);
+            if (err.type === "FileHandlingError") {
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            }
+            else {
+                throw new ParsingError(err.message, err.cause, err.route);
+            }
         });
         
-        // Define the variables from the uploaded data
+        // Define the variables from the uploaded data.
         const model = req.body.model;
         const manufacturer = req.body.manufacturer;
         let hospital, configPath;
@@ -60,12 +75,12 @@ export async function updateExistingDeviceData(req, res, __dirname) {
             return /description[1-4]/.test(key);
         });
             
-        // Retrieve the current data for the updated device
+        // Retrieve the current data for the updated device.
         const updatedDevice = deviceData.find((entry) => {
             return entry.model === model && entry.manufacturer === manufacturer;
         })
         
-        // Update the device details if corresponding key exists in form data
+        // Update the device details if corresponding key exists in form data.
         if (Object.keys(req.files).includes('service-manual')) {
             updatedDevice.serviceManual = true;
         }
@@ -131,9 +146,9 @@ export async function updateExistingDeviceData(req, res, __dirname) {
             }
         })
 
-        // Write the data to file
+        // Write the data to file.
         const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)).catch((err) => {
-            throw new Error(`${err}`);
+            throw new FileHandlingError(err.message, err.cause, err.action, err.route);
         });
 
         // Send the success response message.
@@ -143,7 +158,12 @@ export async function updateExistingDeviceData(req, res, __dirname) {
         catch (err) {
             // Send the error response message.
             console.log({Route: `Update ${req.body.model}`, Error: err.message});
-            res.status(400).json({type: "Error", message: `An error occurred while updating the data. ${err.message}`});
+            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+            }
+            else {
+                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the Device data. ${err.message}`});    
+            }
         }
     })
 }
@@ -153,7 +173,12 @@ export function deleteExistingDocument(req, res, __dirname) {
         try {
             // Read the device data.
             const deviceData = await getAllDeviceData(__dirname).catch((err) => {
-                throw new Error(`${err}`);
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
             });
             
             // Define the variables from the uploaded data.
@@ -187,7 +212,7 @@ export function deleteExistingDocument(req, res, __dirname) {
             const deletionResult = await Promise.all([
                 writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
                 deleteDocumentFile(__dirname, filepath)]).catch((err) => {
-                    throw new FileHandlingError(err.message, err.action, err.route);
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
 
             // Send the success response message.
@@ -197,13 +222,12 @@ export function deleteExistingDocument(req, res, __dirname) {
         catch (err) {
             // Send the error response message.
             console.log({Route: `Delete Document`, Error: `${err.originalMessage}`});
-            if (err instanceof FileHandlingError) {
+            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
                 res.status(err.httpStatusCode).json({type: "Error", message: err.message});
             }
             else {
-                res.status(500).json({type: "Error", message: err.message});
-            }
-            
+                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
+            }            
         }
     })
 }

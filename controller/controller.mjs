@@ -4,6 +4,7 @@ import { getAllStaffData } from '../models/staff-models.mjs';
 import { getAllStaffContactsData, getAllVendorContactsData } from '../models/contacts-models.mjs';
 import { getOnCallData } from '../models/on-call-models.mjs'
 import { retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';
+import { FileHandlingError, ParsingError, DBError } from "../error-handling/file-errors.mjs";
 
 export async function validateLoginCredentials(req, res, __dirname) {
     try {
@@ -125,7 +126,7 @@ export async function getAllData(req, res, __dirname) {
         const allDataArray = await Promise.all([getAllStaffData(__dirname), getAllDeviceData(__dirname),
             getAllStaffContactsData(__dirname), getAllVendorContactsData(__dirname),
             getOnCallData(__dirname)]).catch((err) => {
-                throw new Error(`${err}`);
+                throw new FileHandlingError(err.message, err.action, err.route);
             });
         
         // Create the allData object from the Promise.all array.

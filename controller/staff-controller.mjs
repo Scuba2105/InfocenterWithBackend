@@ -29,7 +29,12 @@ export async function addNewStaffData(req, res, __dirname) {
         try {
         // Get the current device data 
         const staffData = await getAllStaffData(__dirname).catch((err) => {
-            throw new FileHandlingError(err.message, err.action, err.route);
+            if (err.type === "FileHandlingError") {
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            }
+            else {
+                throw new ParsingError(err.message, err.cause, err.route);
+            }
         });
         
         // Validate the request body data
@@ -72,7 +77,7 @@ export async function addNewStaffData(req, res, __dirname) {
 
             // Write the data to file
             const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(staffData, null, 2)).catch((err) => {
-                throw new FileHandlingError(err.message, err.action, err.route);
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });
 
             // Define hashing parameters and generate password hash
@@ -123,13 +128,18 @@ export async function updateExistingStaffData(req, res, __dirname) {
         try {
         // Get the current device data 
         const staffData = await getAllStaffData(__dirname).catch((err) => {
-            throw new FileHandlingError(err.message, err.action, err.route);
+            if (err.type === "FileHandlingError") {
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            }
+            else {
+                throw new ParsingError(err.message, err.cause, err.route);
+            }
         });
         
         // Validate the request body data
         for (const [key, value] of Object.entries(req.body)) {
             if (!inputsRegexLookup[key].test(value)) {
-                throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please update correct this and try again`)
+                throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please correct this value and try again`)
             }
         }
         
@@ -163,7 +173,7 @@ export async function updateExistingStaffData(req, res, __dirname) {
 
         // Write the data to file
         const fileWritten = await writeAllStaffData(__dirname, JSON.stringify(updatedStaffData, null, 2)).catch((err) => {
-            throw new FileHandlingError(err.message, err.action, err.route);
+            throw new FileHandlingError(err.message, err.cause, err.action, err.route);
         });
 
         // Send the success response message.
