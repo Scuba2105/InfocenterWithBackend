@@ -26,7 +26,9 @@ export function writeAllDeviceData(__dirname, data) {
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Device"});
             } 
-            resolve("Success");
+            const error = new Error("A deliberate error was inserted to test the error handling for write device data to file.")
+            reject({type: "FileHandlingError", message: error.message, cause: error, action: "read", route: "Device"});
+            //resolve("Success");
         });
     });
 }
