@@ -6,7 +6,7 @@ import { getOnCallData } from '../models/on-call-models.mjs'
 import { retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';
 import { FileHandlingError, ParsingError, DBError } from "../error-handling/file-errors.mjs";
 
-export async function validateLoginCredentials(req, res, __dirname) {
+export async function validateLoginCredentials(req, res, next, __dirname) {
     try {
         // Define the entered credentials in the request
         const email = req.body.email;
@@ -59,11 +59,11 @@ export async function validateLoginCredentials(req, res, __dirname) {
 
     } catch (err) {
         console.log({Route: "Validate Login", Error: err.message});
-        res.status(400).json({type: "Error", message: `An error occurred while verifying the login credentials: ${err.message}`});
+        next(err);
     }
 }
 
-export async function changeLoginPassword(req, res, __dirname) {
+export async function changeLoginPassword(req, res, next, __dirname) {
     try {
         // Get the data from the request body
         const staffId = req.body.staffId;
@@ -116,11 +116,11 @@ export async function changeLoginPassword(req, res, __dirname) {
         
     } catch (err) {
         console.log({Route: "Change Password", Error: err.message});
-        res.status(400).json({type: "Error", message: `An error occurred while changing the login password: ${err.message}`});
+        next(err)
     }
 }
 
-export async function getAllData(req, res, __dirname) {
+export async function getAllData(req, res, next, __dirname) {
     try {
         // Await the resolution of all Promises for reading application data files. 
         const allDataArray = await Promise.all([getAllStaffData(__dirname), getAllDeviceData(__dirname),
@@ -139,7 +139,7 @@ export async function getAllData(req, res, __dirname) {
     }
     catch(err) {
         console.log({Route: "Get App Data", Error: err.message});
-        res.status(400).json({type: "Error", message: `An error occurred reading the application data: ${err.message}`});
+        next(err)
     }
 }
 

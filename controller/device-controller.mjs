@@ -6,7 +6,7 @@ import { FileHandlingError, DBError, ParsingError } from '../error-handling/file
 // Assists with preventing race conditions. 
 const deviceDataMutex = new Mutex();
 
-export async function addNewDeviceData(req, res, __dirname) {2
+export async function addNewDeviceData(req, res, next, __dirname) {
     
     deviceDataMutex.runExclusive(async () => {
         try {
@@ -43,19 +43,14 @@ export async function addNewDeviceData(req, res, __dirname) {2
     
         }
         catch(err) {
-            // Send the error response message.
+            // Log the route and error message and call error handling middlware.
             console.log({Route: "Add New Device", Error: err.message});
-            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-            }
-            else {
-                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-            }    
+            next(err);   
         }
     })
 }
 
-export async function updateExistingDeviceData(req, res, __dirname) {
+export async function updateExistingDeviceData(req, res, next, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
         const deviceData = await getAllDeviceData(__dirname).catch((err) => {
@@ -156,19 +151,14 @@ export async function updateExistingDeviceData(req, res, __dirname) {
     
         }
         catch (err) {
-            // Send the error response message.
+            // Log the route and error message and call error handling middlware.
             console.log({Route: `Update ${req.body.model}`, Error: err.message});
-            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-            }
-            else {
-                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the Device data. ${err.message}`});    
-            }
+            next(err);
         }
     })
 }
 
-export function deleteExistingDocument(req, res, __dirname) {
+export function deleteExistingDocument(req, res, next, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
             // Read the device data.
@@ -220,14 +210,9 @@ export function deleteExistingDocument(req, res, __dirname) {
 
         }
         catch (err) {
-            // Send the error response message.
-            console.log({Route: `Delete Document`, Error: `${err.originalMessage}`});
-            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-            }
-            else {
-                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-            }            
+            // Log the route and error message and call error handling middlware.
+            console.log({Route: `Delete Document`, Error: err.message});
+            next(err);         
         }
     })
 }

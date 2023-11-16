@@ -50,9 +50,8 @@ app.get("/images/staff/:filename", async (req, res, next) => {
         res.header('Pragma', 'no-cache');
         res.sendFile(`public/images/staff/${filename}`, { root: __dirname });
     } 
-    catch (error) {
-        console.log(error);
-        next();
+    catch (err) {
+        next(err);
     }
 })
 
@@ -123,108 +122,76 @@ app.get("/", async (req, res, next) => {
     try {
         res.sendFile("infocenter/build/index.html", { root: __dirname });
     } 
-    catch (error) {
-        res.send(error.message);
+    catch (err) {
+        next(err);
     }
 })
 
 app.post("/VerifyLogin", async (req, res, next) => {
-    try {
-        await validateLoginCredentials(req, res, __dirname)
-    } catch (err) {
-        next(err);
-    }
+    validateLoginCredentials(req, res, next, __dirname)
 });
 
 app.post("/ChangePassword", async (req, res, next) => {
-    try {
-        await changeLoginPassword(req, res, __dirname)
-    } catch (err) {
-        next(err);
-    }
+    changeLoginPassword(req, res, next, __dirname)
 });
 
 // Define route to get all data.
-app.get("/getData", async (req, res) => {
-    try {
-        await getAllData(req, res, __dirname);
-    } catch (err) {
-        next(err);
-    }
+app.get("/getData", async (req, res, next) => {
+    getAllData(req, res, next, __dirname);
 });
 
 // Define route to update staff or equipment details. 
 app.put("/UpdateEntry/:page", (req, res, next) => {
-    try {
-        cpUpload(req, res, (err) => {
-            if (err) {
-                next(err);
+    cpUpload(req, res, (err) => {
+        if (err) {
+            next(err);
+        }
+        else {
+            const page = req.params.page; 
+            if (page === "technical-info") {
+                updateExistingDeviceData(req, res, next, __dirname);  
             }
-            else {
-                const page = req.params.page; 
-                if (page === "technical-info") {
-                    updateExistingDeviceData(req, res, __dirname);  
-                }
-                else if (page === "staff") {
-                    updateExistingStaffData(req, res, __dirname); 
-                }
+            else if (page === "staff") {
+                updateExistingStaffData(req, res, next, __dirname); 
             }
-        })
-    } 
-    catch (err) {
-        next(err);
-    }     
+        }
+    })
 })
 
 // Define route to add new staff or equipment. 
 app.post('/AddNewEntry/:page', (req, res, next) => {
-    try {
-        cpUpload(req, res, (err) => {
-            if (err) {
-                next(err);
+    cpUpload(req, res, (err) => {
+        if (err) {
+            next(err);
+        }
+        else {
+            const page = req.params.page; 
+            if (page === "technical-info") {
+                addNewDeviceData(req, res, next, __dirname);
             }
-            else {
-                const page = req.params.page; 
-                if (page === "technical-info") {
-                    addNewDeviceData(req, res, __dirname);
-                }
-                else if (page === "staff") {
-                    addNewStaffData(req, res, __dirname);
-                }
+            else if (page === "staff") {
+                addNewStaffData(req, res, next, __dirname);
             }
-        })
-    } 
-    catch (err) {
-        next(err);
-    }   
+        }
+    })
 })
 
 // Define route to update staff or equipment details. 
 app.put("/UpdateDocuments", (req, res, next) => {
-    try {
-        cpUpload(req, res, (err) => {
-            if (err) {
-                next(err);
-            }
-            else {
-                // Send the success response message.
-                res.json({type: "Success", message: 'Data Upload Successful'}); 
-            }
-        })
-    } 
-    catch (err) {
-        next(err);
-    }     
+    cpUpload(req, res, (err) => {
+        if (err) {
+            next(err);
+        }
+        else {
+            // Send the success response message.
+            res.json({type: "Success", message: 'Data Upload Successful'}); 
+        }
+    })
 })
 
 // Define route to delete equipment documents. 
 app.delete("/DeleteDocument", (req, res, next) => {
-    try {
-        deleteExistingDocument(req, res, __dirname)
-    } 
-    catch (err) {
-        next(err);
-    }     
+    deleteExistingDocument(req, res, next, __dirname);
 })
 
 // Define route to add new hne staff contacts or vendor contacts. 
@@ -305,8 +272,13 @@ app.use((err, req, res, next) => {
     if (res.headersSent) {
       return next(err);
     }
-    console.log(JSON.stringify({Route: "Error Handler Middleware", Error: err.message}), null, 2);
-    return res.status(400).json({type: "Error", message: err.message});
+    console.log("testing error middleware", err.message);
+    if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+        res.status(err.httpStatusCode).json({type: "Error", message: err.message});
+    }
+    else {
+        res.status(400).json({type: "Error", message: `An unexpected error occurred while completing the request. ${err.message}`});
+    }
 });
 
 // Create an HTTPS service identical to the HTTP service.

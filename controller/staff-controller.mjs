@@ -24,7 +24,7 @@ const inputsRegexLookup = {name: /^[a-z\s,.'-]+$/i, id: /^[0-9]{8}$/i, workshop:
                           email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                           "existing-id": /^[0-9]{8}$/i};
 
-export async function addNewStaffData(req, res, __dirname) {
+export async function addNewStaffData(req, res, next, __dirname) {
     staffDataMutex.runExclusive(async () => {
         try {
         // Get the current device data 
@@ -111,19 +111,14 @@ export async function addNewStaffData(req, res, __dirname) {
         res.json({type: "Success", message: `App Data already exists for ${name}. Please verify this data is valid and update if required. Database Entry successfully updated.`}); 
         
         } catch (err) {
-            // Send the error response message.
-            console.log({Route: "Add New Staff", Error: err});
-            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-            }
-            else {
-                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-            }
+            // Log the route and error message and call error handling middlware.
+            console.log({Route: "Add New Staff", Error: err.message});
+            next(err);
         }
     })
 }
 
-export async function updateExistingStaffData(req, res, __dirname) {
+export async function updateExistingStaffData(req, res, next, __dirname) {
     staffDataMutex.runExclusive(async () => {
         try {
         // Get the current device data 
@@ -180,14 +175,9 @@ export async function updateExistingStaffData(req, res, __dirname) {
         res.json({type: "Success", message: 'Data Upload Successful'}); 
     
         } catch (err) {
-            // Send the error response message.
+            // Log the route and error message and call error handling middlware.
             console.log({Route: `Update ${req.body["existing-id"]}`, Error: err.message});
-            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-            }
-            else {
-                res.status(400).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});
-            }
+            next(err);
         }
     })
 }
