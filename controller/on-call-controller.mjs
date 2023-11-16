@@ -16,7 +16,7 @@ const objectPropLookup = {"originalOnCall": "Original Staff Member", "newOnCall"
 // List of reasons for On-Call roster changes for validation.
 const rosterChangeReasons = ["Sickness", "Leave", "Family Reasons", "Unspecified Reasons"];
 
-export async function updateOnCallData(req, res, __dirname) {
+export async function updateOnCallData(req, res, next, __dirname) {
 
     // Run this function exclusively to prevent race conditions.
     onCallDataMutex.runExclusive(async () => {
@@ -119,12 +119,7 @@ export async function updateOnCallData(req, res, __dirname) {
         catch (err) {
             // Send the error response message.
             console.log({Route: "Edit On-Call", Error: err.message});
-            if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-            }
-            else {
-                res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-            }
+            next(err);
         }
     })
 }

@@ -196,29 +196,17 @@ app.delete("/DeleteDocument", (req, res, next) => {
 
 // Define route to add new hne staff contacts or vendor contacts. 
 app.post('/AddNewContact/:formType', (req, res, next) => {
-    try {
-       addNewContactData(req, res, __dirname); 
-    } catch (err) {
-        next(err);
-    }
+    addNewContactData(req, res, next, __dirname); 
 })
 
 // Define route to add new hne staff contacts or vendor contacts. 
 app.post('/UpdateContact/:formType', (req, res, next) => {
-    try {
-       updateContactData(req, res, __dirname); 
-    } catch (err) {
-        next(err);
-    }
+    updateContactData(req, res, next, __dirname); 
 })
 
-// Define route to add new hne staff contacts or vendor contacts. 
+// Define route to update on-call details. 
 app.post('/OnCall/:operation', (req, res, next) => {
-    try {
-        updateOnCallData(req, res, __dirname); 
-    } catch (err) {
-        next(err);
-    }
+    updateOnCallData(req, res, next, __dirname); 
 })
 
 // define route for processing Genius 3 thermometers

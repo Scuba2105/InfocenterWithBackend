@@ -15,7 +15,7 @@ const vendorRegexArray = [/^[a-z ,.'-3]+$/i, /^[a-z ,.'-]+$/i, /^[a-z ,.'-/]+$/i
 const phoneEntryKeys = ["Office Phone", "Dect Phone", "Mobile Phone"];
 const vendorPhoneKeys = ["Office Phone", "Mobile Phone", "Email"];
 
-export async function addNewContactData(req, res, __dirname) {
+export async function addNewContactData(req, res, next, __dirname) {
     if (req.params.formType === "staff") {
         staffContactsDataMutex.runExclusive(async () => {
             try {
@@ -69,12 +69,7 @@ export async function addNewContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Add Staff Contact", Error: err.message});
-                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-                }
-                else {
-                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-                }
+                next(err);
             }
         })
     }
@@ -134,18 +129,13 @@ export async function addNewContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Add Vendor Contact", Error: err.message});
-                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-                }
-                else {
-                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-                }
+                next(err);
             }
         })
     }
 }
 
-export async function updateContactData(req, res, __dirname) {
+export async function updateContactData(req, res, next, __dirname) {
     if (req.params.formType === "staff") {
         staffContactsDataMutex.runExclusive(async () => {  
             try {      
@@ -196,12 +186,7 @@ export async function updateContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Update Staff Contact", Error: err.message});
-                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-                }
-                else {
-                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-                }
+                next(err);
             }
         })
     }
@@ -257,12 +242,7 @@ export async function updateContactData(req, res, __dirname) {
             catch (err) {
                 // Send the error response message.
                 console.log({Route: "Update Vendor Contact", Error: err.message});
-                if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
-                    res.status(err.httpStatusCode).json({type: "Error", message: err.message});
-                }
-                else {
-                    res.status(500).json({type: "Error", message: `An unexpected error occurred while updating the staff data. ${err.message}`});    
-                }
+                next(err);
             }
         })
     } 
