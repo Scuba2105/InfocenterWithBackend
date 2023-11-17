@@ -14,6 +14,7 @@ config.mjs
 /data/thermometers-copy.json
 /data/thermometers.json
 /data/on-call-data.json
+.data/forms-template-data.json
 /ecosystem.config.js
 /infocenter/src/server.js
 /hnect_cert.pfx
