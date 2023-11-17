@@ -1,5 +1,5 @@
 import { menuOptions } from '../data.js';
-import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon, UtilitiesIcon, OnCallIcon } from '../svg.js';
+import { AdminIcon, ContactsIcon, StaffIcon, TechnicalIcon, UtilitiesIcon, OnCallIcon, FormsTemplatesIcon } from '../svg.js';
 import { useState } from 'react';
 
 const imagelightColor = "#BCE7FD";
@@ -27,6 +27,7 @@ export function Menu({page, onPageSelect}) {
         option.id === 'contacts' ? <ContactsIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
         option.id === 'admin' ? <AdminIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
         option.id === 'on-call' ? <OnCallIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
+        option.id === 'forms-templates' ? <FormsTemplatesIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
         <UtilitiesIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} />
         }
         {titleLength === 1 ? <span>{option.title}</span> : 

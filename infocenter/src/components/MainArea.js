@@ -13,6 +13,7 @@ import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { CalendarComponent } from "./OnCall/CalendarComponent";
 import { OnCallFunctions } from "./OnCall/OnCallFunctions";
+import { FormsTemplatesDisplay } from "./forms-templates/FormsTemplatesDisplay";
 import { useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
@@ -106,6 +107,10 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                         {utilityPage === 2 && <ThermometerManagement page={page} dialogOpen={dialogOpen} closeDialog={closeDialog} showMessage={showMessage}></ThermometerManagement>}
                         <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                     </Utilities>
+                </> :
+                page === "forms-templates" ?
+                <>
+                    <FormsTemplatesDisplay></FormsTemplatesDisplay>
                 </> :
                 page === "on-call" ?
                 <>

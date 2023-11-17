@@ -2697,6 +2697,37 @@ abbr[title] {
   text-align: center;
 }
 
+/* Formatting the forms-templates page */
+.forms-templates-container {
+  grid-column: 1 / span 2;
+  align-items: flex-start;
+  color: var(--form-font-color);
+}
+
+.templates-section {
+  width: 100%;
+  padding-left: 20px;
+  align-items: flex-start;
+}
+
+.templates-links-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.template-service-request {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.template-service-request:hover {
+  cursor: pointer;
+}
+
 /* Formatting input elements. */
 /* Global formatting for the form input elements */
 .text-input, .select-input, .date-input, .file-input, .password-input {
