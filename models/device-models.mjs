@@ -26,9 +26,7 @@ export function writeAllDeviceData(__dirname, data) {
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Device"});
             } 
-            const error = new Error("A deliberate error was inserted to test the error handling for write device data to file.")
-            reject({type: "FileHandlingError", message: error.message, cause: error, action: "read", route: "Device"});
-            //resolve("Success");
+            resolve("Success");
         });
     });
 }
@@ -46,7 +44,6 @@ export function deleteDocumentFile(__dirname, filepath) {
 }
 
 export function generateNewDeviceData(fileExt, newType, manufacturer, vendor, newModel) {
-
     return {
         img: fileExt,
         type: newType,

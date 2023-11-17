@@ -2717,11 +2717,13 @@ abbr[title] {
 }
 
 .template-service-request {
-  height: 150px;
-  width: 150px;
+  height: clamp(110px, 7.8vw, 150px);
+  width: clamp(110px, 7.8vw, 150px);
+  font-size: clamp(12px, 0.83vw, 16px);
   margin: 10px;
   border-radius: 10px;
   text-decoration: none;
+  text-align: center;
 }
 
 .template-service-request:hover {
@@ -2825,4 +2827,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .modal-container {
     max-height: 550px;
   }
+}
+
+/* Overwrite link css if link is disabled/unavailable*/
+.unavailable-link {
+  opacity: 0.2;
+  cursor: pointer;
+}
+
+.unavailable-link:hover {
+  cursor: default;
 }

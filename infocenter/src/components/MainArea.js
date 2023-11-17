@@ -13,8 +13,8 @@ import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { CalendarComponent } from "./OnCall/CalendarComponent";
 import { OnCallFunctions } from "./OnCall/OnCallFunctions";
-import { FormsTemplatesDisplay } from "./forms-templates/FormsTemplatesDisplay";
-import { useVendor } from "./StateStore";
+import { FormsTemplatesDisplay } from "./Forms-Templates/FormsTemplatesDisplay";
+import { useUser, useVendor } from "./StateStore";
 
 // Set the current utility for the utilities page
 function selectUtility(setUtilityPage, index) {
@@ -50,8 +50,8 @@ function onHospitalChange(pageData, setSelectedDepartment, setContactPage, input
 }  
 
 export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessage, closeDialog, showMessage, onRowClick, queryClient}) {
-    
-    const { isLoading, error, data } = useQuery(['dataSource'], fetchData);
+    const currentUser = useUser((state) => state.userCredentials)
+    const { isLoading, error, data } = useQuery(['dataSource'], () => fetchData(currentUser.staffId));
     const [utilityPage, setUtilityPage] = useState(0)
     const [selectedDepartment, setSelectedDepartment] = useState({hospital: "John Hunter Hospital", department: "Anaesthetics & Recovery"})
     
@@ -74,7 +74,6 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
 
     // If data retrieved then render the main area based on returned data.
     if (data) {
-
         return (
             <div key={page} className="main-area">
                 {page === "technical-info" ? 
@@ -110,7 +109,7 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 </> :
                 page === "forms-templates" ?
                 <>
-                    <FormsTemplatesDisplay></FormsTemplatesDisplay>
+                    <FormsTemplatesDisplay userFormsTemplates={data.formsTemplatesData} currentUserId={currentUser.staffId} ></FormsTemplatesDisplay>
                 </> :
                 page === "on-call" ?
                 <>

@@ -24,13 +24,13 @@ export function generateDataPages(queryData, entriesPerPage) {
     return paginatedData;
 }
 
-export async function fetchData() {
+export async function fetchData(staffId) {
     try {
-        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/getData`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/getData/${staffId}`, {
                 method: "GET", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer"
+                referrerPolicy: "no-referrer",
         })
         
         const data = await res.json();

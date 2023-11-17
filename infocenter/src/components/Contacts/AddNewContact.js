@@ -167,7 +167,7 @@ async function uploadNewContactData(newContactData, queryClient, showMessage, cl
     const currentDate = new Date();
     newContactData.current["Current Date"] = currentDate.toLocaleDateString();
 
-    console.log(newContactData.current);
+    
     // Start uploading dialog and begin post request
     showMessage("uploading", `Uploading New Contact Data`);
 

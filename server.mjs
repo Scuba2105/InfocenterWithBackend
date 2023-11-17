@@ -136,7 +136,7 @@ app.post("/ChangePassword", async (req, res, next) => {
 });
 
 // Define route to get all data.
-app.get("/getData", async (req, res, next) => {
+app.get("/getData/:staffId", async (req, res, next) => {
     getAllData(req, res, next, __dirname);
 });
 
@@ -176,7 +176,7 @@ app.post('/AddNewEntry/:page', (req, res, next) => {
     })
 })
 
-// Define route to update staff or equipment details. 
+// Define route to upload equipment documents. 
 app.put("/UpdateDocuments", (req, res, next) => {
     cpUpload(req, res, (err) => {
         if (err) {
