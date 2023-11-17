@@ -2720,8 +2720,8 @@ abbr[title] {
   height: 150px;
   width: 150px;
   margin: 10px;
-  border: 1px solid white;
   border-radius: 10px;
+  text-decoration: none;
 }
 
 .template-service-request:hover {

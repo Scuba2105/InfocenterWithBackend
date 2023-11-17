@@ -1,5 +1,11 @@
-const serviceAgents = ["B Braun", "Cardinal Health", "Fresenius Kabi", "GE Healthcare", ["Generic Delivery", "Note"], "ICU Medical", ["Independent Living", "Specialists"], "Inline Systems", "JD Healthcare",
-                       "Masimo", "Medtronic", "Neomedix", ["Philips", "Respironics"], "REM Systems", "Resmed", "Verathon", "Welch Allyn"];
+const serviceAgents = ["3M", "B Braun", "Cardinal Health", "Celemetrix", "Fresenius Kabi", "GE Healthcare", ["Generic Delivery", "Note"], "ICU Medical", 
+                      ["Independent Living", "Specialists"], "JD Healthcare", "Masimo", "Medtronic", "Neomedix", ["Philips", "Respironics"], "REM Systems", "Resmed",
+                      "Verathon", "Welch Allyn"];
+
+const onlineForms  = {"Masimo": "https://www.masimo.com/company/global-services/customer-feedback-form/",
+                      "Medtronic": "https://secure.medtronicinteract.com/SubmitServiceRequest",
+                      "GE Healthcare": "https://services.gehealthcare.com.au/gehcstorefront/",
+                      "Welch Allyn": "https://www.welchallyn.com/en/service-support/submit-a-repair.html"}
 
 export function FormsTemplatesDisplay() {
     return (
@@ -7,11 +13,31 @@ export function FormsTemplatesDisplay() {
             <div className="templates-section flex-c-col">
                 <h2 className="template-heading">Service Requests</h2>
                 <div className="templates-links-container">
-                    {serviceAgents.map((entry) => {
-                        return <div className="template-service-request flex-c-col">{typeof entry === "string" ? entry : 
-                        entry.map((word) => {
-                            return <label>{word}</label>
-                        })}</div>
+                    {serviceAgents.map((entry, index) => {
+                        console.log(onlineForms, entry, onlineForms["Masimo"]);
+                        if (onlineForms[entry]) {
+                            return (
+                                <a key={entry} href={onlineForms[entry]} target="_blank" rel="noreferrer" className={index % 2 === 0 ? "template-service-request flex-c-col main-link-button" : "template-service-request flex-c-col alternate-link-button"} >
+                                    {typeof entry === "string" ? entry : 
+                                        entry.map((word, index2) => {
+                                            return <label key={`${entry}-${index2}`}>{word}</label>
+                                        })
+                                    }
+                                </a>
+                            )
+                        }
+                        else {
+                            return (
+                                <div key={entry} className={index % 2 === 0 ? "template-service-request flex-c-col main-link-button" : "template-service-request flex-c-col alternate-link-button"} >
+                                    {typeof entry === "string" ? entry : 
+                                        entry.map((word, index2) => {
+                                            return <label key={`${entry}-${index2}`}>{word}</label>
+                                        })
+                                    }
+                                </div>
+                            )
+                        }
+                        
                     })}
                 </div>                
             </div>
