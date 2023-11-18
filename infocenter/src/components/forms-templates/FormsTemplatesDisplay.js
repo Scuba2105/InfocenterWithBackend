@@ -1,66 +1,48 @@
-import { serverConfig } from "../../server";
+import { useState } from "react";
+import { ServiceRequestForms } from "./ServiceRequestForms";
+import { EditIcon } from "../../svg";
+import { ModalSkeleton } from "../ModalSkeleton";
+import { UpdateServiceRequestForms } from "./UpdateServiceRequestForm";
 
-const serviceAgents = ["3M", "B Braun", "Cardinal Health", "Celemetrix", "Fresenius Kabi", "GE Healthcare", "Generic Delivery Note", "ICU Medical", 
-                      "Independent Living Specialists", "JD Healthcare", "Masimo", "Medtronic", "Neomedix", "Philips Respironics", "REM Systems", "Resmed",
+// Store list of Service Agents with service request forms.
+const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "FM30 Transducers Delivery Note", "Fresenius Kabi", "GE Healthcare", "Generic Delivery Note", "ICU Medical", 
+                      "Independent Living Specialists", "JD Healthcare", "Masimo", "Medtronic", "Philips Respironics", "REM Systems", "Resmed",
                       "Verathon", "Welch Allyn"];
 
-const onlineForms  = {"Masimo": "https://www.masimo.com/company/global-services/customer-feedback-form/",
-                      "Medtronic": "https://secure.medtronicinteract.com/SubmitServiceRequest",
-                      "GE Healthcare": "https://services.gehealthcare.com.au/gehcstorefront/",
-                      "Welch Allyn": "https://www.welchallyn.com/en/service-support/submit-a-repair.html"}
+// Open the form to perform updates. 
+function showForm(setFormVisible) {
+    setFormVisible(true)
+}
 
-export function FormsTemplatesDisplay({userFormsTemplates, currentUserId}) {
+// Close the update form.
+function closeForm(setFormVisible) {
+    setFormVisible(false)
+}
+
+export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, queryClient, showMessage, closeDialog}) {
+
+    const [formVisible, setFormVisible] = useState(false); 
 
     // Get the service forms available for current user
     const serviceFormsAvailable = userFormsTemplates.serviceFormsAvailable
 
-    console.log(serviceFormsAvailable);
-    
     return (
-        <div className="forms-templates-container flex-c-col">
-            <div className="templates-section flex-c-col">
-                <h2 className="template-heading">Service Requests</h2>
-                <div className="templates-links-container">
-                    {serviceAgents.map((entry, index) => {
-                        if (onlineForms[entry]) {
-                            return (
-                                <a key={entry} href={onlineForms[entry]} target="_blank" rel="noreferrer" className={index % 2 === 0 ? "template-service-request flex-c-col main-link-button" : "template-service-request flex-c-col alternate-link-button"} >
-                                    {typeof entry === "string" ? entry : 
-                                        entry.map((word, index2) => {
-                                            return <label key={`${entry}-${index2}`}>{word}</label>
-                                        })
-                                    }
-                                </a>
-                            )
-                        }
-                        else {
-                            // If service form available render link otherwise render faded div element
-                            if (serviceFormsAvailable.includes(entry)) {
-                                return (
-                                    <a key={entry} href={`https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/${currentUserId}/${entry}.pdf`} target="_blank" rel="noreferrer" download className={index % 2 === 0 ? "template-service-request flex-c-col main-link-button" : "template-service-request flex-c-col alternate-link-button"} >
-                                        {typeof entry === "string" ? entry : 
-                                            entry.map((word, index2) => {
-                                                return <label key={`${entry}-${index2}`}>{word}</label>
-                                            })
-                                        }
-                                    </a>
-                                )
-                            }
-                            else {
-                                return (
-                                    <div key={entry} className={index % 2 === 0 ? "template-service-request flex-c-col main-link-button unavailable-link" : "template-service-request flex-c-col alternate-link-button unavailable-link"}>
-                                        {typeof entry === "string" ? entry : 
-                                            entry.map((word, index2) => {
-                                                return <label key={`${entry}-${index2}`}>{word}</label>
-                                            })
-                                        }
-                                    </div>
-                                )
-                            }
-                        }
-                    })}
-                </div>                
+        <>
+            <div className="forms-templates-container flex-c-col">
+                <div className="templates-section flex-c-col">
+                    <div className="templates-section-title-container flex-c">
+                        <h2 className="template-heading">Service Requests</h2> 
+                        <div className="staff-edit-btn flex-c" onClick={() => showForm(setFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>
+                    </div>
+                    <ServiceRequestForms serviceAgents={serviceAgents} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} />               
+                </div>
             </div>
-        </div>
+            {formVisible && 
+                <ModalSkeleton type="service-request-forms" closeModal={() => closeForm(setFormVisible)}>
+                    <UpdateServiceRequestForms serviceAgents={serviceAgents} currentUserId={currentUserId} page={page} queryClient={queryClient} showMessage={showMessage} closeForm={closeForm} closeDialog={closeDialog} />
+                </ModalSkeleton>
+            }
+        </>
+        
     )
 }

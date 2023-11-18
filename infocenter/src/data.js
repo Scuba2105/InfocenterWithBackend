@@ -12,12 +12,12 @@ export const menuOptions = [
         title: 'Contacts',
     },
     {
-        id: 'on-call',
-        title: 'On-Call'
-    },
-    {
         id: 'forms-templates',
         title: 'Forms Templates',
+    },
+    {
+        id: 'on-call',
+        title: 'On-Call'
     }
     /*{
         id: 'admin',

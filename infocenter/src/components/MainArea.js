@@ -109,7 +109,8 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 </> :
                 page === "forms-templates" ?
                 <>
-                    <FormsTemplatesDisplay userFormsTemplates={data.formsTemplatesData} currentUserId={currentUser.staffId} ></FormsTemplatesDisplay>
+                    <FormsTemplatesDisplay userFormsTemplates={data.formsTemplatesData} currentUserId={currentUser.staffId} page={page} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></FormsTemplatesDisplay>
+                    <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "on-call" ?
                 <>

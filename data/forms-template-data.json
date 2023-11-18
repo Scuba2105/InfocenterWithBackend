@@ -4,7 +4,13 @@
         "serviceFormsAvailable": [
             "Resmed", 
             "Philips Respironics", 
-            "Verathon"              
+            "Verathon",
+            "Cardinal Health",
+            "Fresenius Kabi",
+            "ICU Medical",
+            "Independent Living Specialists",
+            "JD Healthcare",
+            "REM Systems"          
         ]
     }
 ]

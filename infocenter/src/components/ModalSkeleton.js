@@ -2,7 +2,7 @@ import { capitaliseFirstLetters } from "../utils/utils";
 import { serverConfig } from "../server";
 
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
-'disposal', 'change-password', "update-staff-contact", "update-vendor-contact", "edit-existing-documents"];
+'disposal', 'change-password', "update-staff-contact", "update-vendor-contact", "edit-existing-documents", "service-request-forms"];
 
 const onCallPageHeadings = {"my-roster": "Upcoming On-Call Duties", "staff-roster": "On-Call Roster", "edit-roster": "Edit On-Call Roster", "confirm-roster": "Confirm On-Call Roster",
 "key-contacts": "Key On-Call Contacts", "on-call-cheatsheet": "On-Call Cheatsheet"} 
@@ -35,6 +35,9 @@ function getFormHeading(page, type, selectedData, name) {
     }
     else if (page === "on-call") {
         return onCallPageHeadings[type];
+    }
+    else if (type === "service-request-forms") {
+        return "Update Available Service Forms"
     }
 }
 

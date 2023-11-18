@@ -1134,6 +1134,7 @@ html {
   justify-content: space-around;
   align-items: center;
   background-color: var(--form-background-color);
+  color: var(--form-font-color);
   min-height: 400px;
   width: 100%;
 }
@@ -2710,6 +2711,11 @@ abbr[title] {
   align-items: flex-start;
 }
 
+.templates-section-title-container {
+  width: 300px;
+  justify-content: space-around;
+}
+
 .templates-links-container {
   display: flex;
   justify-content: flex-start;
@@ -2728,6 +2734,16 @@ abbr[title] {
 
 .template-service-request:hover {
   cursor: pointer;
+}
+
+/* Format the service request forms update models form */
+#service-request-forms-inputs-container {
+  height: 200px;
+  justify-content: space-around;
+}
+
+.service-request-forms-update-btn {
+  transform: translateY(-20px);
 }
 
 /* Formatting input elements. */
@@ -2818,6 +2834,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Format the input labels */
 .input-label {
   font-weight: 500;
+  font-size: 13px;
   color: var(--form-font-color);
   transform: translateY(-4px); 
 }
