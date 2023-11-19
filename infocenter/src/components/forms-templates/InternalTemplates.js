@@ -1,10 +1,12 @@
 import { serverConfig } from "../../server"
 
 // array of the available internal templates
-const internalTemplates = ["AIMS Report", "HAPS Labels", "Kitchen", "Petty Cash"]
+const internalTemplates = ["AIMS Report", "New Asset Label", "Sold Equipment Flyer"]
 
-// Store list of service agents that use Online request forms.
-const templateLinks  = {"AIMS Report Template": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/AIMS Report Template.doc`}
+// Store the list of the links location for the internal request forms.
+const templateLinks  = {"AIMS Report": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/AIMS Report.doc`,
+                        "New Asset Label": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/New Asset Label.docx`,
+                        "Sold Equipment Flyer": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/Sold Equipment Flyer.docx`}
 
 export function InternalTemplates() {
 

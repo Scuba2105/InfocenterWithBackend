@@ -3,6 +3,7 @@ import { ServiceRequestForms } from "./ServiceRequestForms";
 import { UploadIcon } from "../../svg";
 import { ModalSkeleton } from "../ModalSkeleton";
 import { InternalTemplates } from "./InternalTemplates";
+import { HNETemplates } from "./HNETemplates";
 import { UpdateServiceRequestForms } from "./UpdateServiceRequestForm";
 import { OnlineRequestForms } from "./OnlineRequestForms";
 import { serverConfig } from "../../server";
@@ -60,8 +61,15 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
+                        <h2 className="template-heading">HNE Templates</h2>
+                    </div>
+                    <HNETemplates />
+                </div>
+            </div>
+            <div className="forms-templates-container flex-c-col">
+                <div className="templates-section flex-c-col">
+                    <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">HNECT Internal Templates</h2>
-                        <div style={{width: 40 + 'px', height: 40 + 'px'}}></div> 
                     </div>
                     <InternalTemplates />
                 </div>
