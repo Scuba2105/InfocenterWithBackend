@@ -23,7 +23,6 @@ async function uploadData(formContainer, currentUserId, queryClient, showMessage
     const formData = new FormData();
     formData.set("service-agent", selectedServiceAgent);
     formData.set("extension", uploadFileExtension);
-    formData.set("current-user-id", currentUserId);
     formData.set("service-request-form", uploadfile, `${selectedServiceAgent}.${uploadFileExtension}`);
 
     // Show the uploading spinner dialog while uploading.

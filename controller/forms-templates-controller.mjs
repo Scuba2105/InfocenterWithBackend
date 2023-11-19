@@ -11,5 +11,6 @@ export async function updateServiceRequestForms(__dirname, userId, req, res, nex
         }
     });
 
-    console.log(userId, formTemplateData);
+    // Need to check if data already exists or not and add the new entry to the form template data array 
+    
 }

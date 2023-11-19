@@ -8,6 +8,7 @@ import { changeLoginPassword, validateLoginCredentials, getAllData } from './con
 import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
 import { addNewDeviceData, updateExistingDeviceData, deleteExistingDocument } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
+import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
@@ -93,7 +94,7 @@ const storage = multer.diskStorage({
             cb(null, path.join(__dirname, `public/documents/${model}`))
         } 
         else if (file.fieldname === "service-request-form") {
-            const staffId = convertHospitalName(req.body["current-user-id"]);
+            const staffId = req.params.UserId;
             createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
             cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
         }
