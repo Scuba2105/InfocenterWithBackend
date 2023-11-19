@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ServiceRequestForms } from "./ServiceRequestForms";
-import { EditIcon } from "../../svg";
+import { UploadIcon } from "../../svg";
 import { ModalSkeleton } from "../ModalSkeleton";
 import { InternalTemplates } from "./InternalTemplates";
 import { UpdateServiceRequestForms } from "./UpdateServiceRequestForm";
@@ -51,7 +51,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">Service Request Forms</h2> 
-                        <div className="staff-edit-btn flex-c" onClick={() => showForm(setFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>
+                        <div className="staff-edit-btn flex-c" onClick={() => showForm(setFormVisible)}><UploadIcon color="rgb(5, 234, 146)" /></div>
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :
                     <OnlineRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} />}              
@@ -60,7 +60,8 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">HNECT Internal Templates</h2> 
+                        <h2 className="template-heading">HNECT Internal Templates</h2>
+                        <div style={{width: 40 + 'px', height: 40 + 'px'}}></div> 
                     </div>
                     <InternalTemplates />
                 </div>
