@@ -16,7 +16,7 @@ export async function updateServiceRequestForms(__dirname, userId, req, res, nex
         
         // Get the existing service request forms for all staff and current user.
         const allFormTemplateData = formTemplateDataArray[0];
-        const userFormTemplateData = formTemplateDataArray[1];
+        let userFormTemplateData = formTemplateDataArray[1];
         
         // Get the request data from the request body.
         const selectedServiceAgent =  req.body["service-agent"]

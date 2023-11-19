@@ -283,7 +283,7 @@ app.use((err, req, res, next) => {
     if (res.headersSent) {
       return next(err);
     }
-    console.log("testing error middleware", err.message);
+    console.log(err)
     if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
         res.status(err.httpStatusCode).json({type: "Error", message: err.message});
     }

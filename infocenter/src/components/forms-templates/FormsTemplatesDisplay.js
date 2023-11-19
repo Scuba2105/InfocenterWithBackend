@@ -50,7 +50,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">Service Requests</h2> 
+                        <h2 className="template-heading">Service Request Forms</h2> 
                         <div className="staff-edit-btn flex-c" onClick={() => showForm(setFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :
