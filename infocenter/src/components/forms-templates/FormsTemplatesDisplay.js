@@ -33,11 +33,11 @@ function closeForm(setFormVisible) {
 export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, queryClient, showMessage, closeDialog}) {
 
     const [formVisible, setFormVisible] = useState(false); 
-
-    let serviceFormsAvailable;
+    
+    let serviceFormsAvailable = null;
     // Get the service forms available for current user
     if (userFormsTemplates !== undefined) {
-        const serviceFormsAvailable = userFormsTemplates.serviceFormsAvailable
+        serviceFormsAvailable = userFormsTemplates.serviceFormsAvailable
     }
     
     return (

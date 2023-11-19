@@ -23,16 +23,15 @@ async function uploadData(formContainer, currentUserId, queryClient, showMessage
     const formData = new FormData();
     formData.set("service-agent", selectedServiceAgent);
     formData.set("extension", uploadFileExtension);
-    formData.set("current-user-id", currentUserId)
-    formData.set("service-request-form", uploadfile);
+    formData.set("current-user-id", currentUserId);
+    formData.set("service-request-form", uploadfile, `${selectedServiceAgent}.${uploadFileExtension}`);
 
     // Show the uploading spinner dialog while uploading.
-    showMessage("uploading", `Uploading ${selectedServiceAgent} Request Form`)
+    showMessage("uploading", `Uploading ${selectedServiceAgent} Request Form`);
       
     try {
-    
         // Post the form data to the server. 
-        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateServiceRequestForms`, {
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateServiceRequestForms/${currentUserId}`, {
                 method: "PUT", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error

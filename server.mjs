@@ -92,6 +92,11 @@ const storage = multer.diskStorage({
         else if (file.fieldname === "updated-document") {
             cb(null, path.join(__dirname, `public/documents/${model}`))
         } 
+        else if (file.fieldname === "service-request-form") {
+            const staffId = convertHospitalName(req.body["current-user-id"]);
+            createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
+            cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
+        }
         else if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
             const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
             return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the manual is a pdf and try again`));
@@ -116,7 +121,7 @@ const upload = multer({ storage: storage})
 const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'user-manual', maxCount: 1}, 
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
-{name: 'employee-photo', maxCount: 1}, {name: 'updated-document', maxCount: 1}])
+{name: 'employee-photo', maxCount: 1}, {name: 'updated-document', maxCount: 1}, {name: 'service-request-form', maxCount: 1}])
 
 app.get("/", async (req, res, next) => {
     try {
@@ -202,6 +207,20 @@ app.post('/AddNewContact/:formType', (req, res, next) => {
 // Define route to add new hne staff contacts or vendor contacts. 
 app.post('/UpdateContact/:formType', (req, res, next) => {
     updateContactData(req, res, next, __dirname); 
+})
+
+// Define the route to update the service request forms available.  
+app.put("/UpdateServiceRequestForms/:UserId", (req, res, next) => {
+    cpUpload(req, res, (err) => {
+        if (err) {
+            next(err);
+        }
+        else {
+            // Get the current user ID from the request body
+            const userId = req.params.UserId
+            updateServiceRequestForms(__dirname, userId, req, res, next);            
+        }
+    })
 })
 
 // Define route to update on-call details. 
