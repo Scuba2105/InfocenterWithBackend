@@ -2722,7 +2722,7 @@ abbr[title] {
   flex-wrap: wrap;
 }
 
-.template-service-request {
+.template-service-request, .internal-template {
   height: clamp(110px, 7.8vw, 150px);
   width: clamp(110px, 7.8vw, 150px);
   font-size: clamp(12px, 0.83vw, 16px);
@@ -2843,6 +2843,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-height: 700px) {
   .modal-container {
     max-height: 550px;
+  }
+  .email-link {
+    transform: translate(20px, 0px);
   }
 }
 
