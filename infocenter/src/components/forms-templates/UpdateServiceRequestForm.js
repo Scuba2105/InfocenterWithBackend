@@ -63,7 +63,6 @@ async function uploadData(formContainer, currentUserId, queryClient, showMessage
     catch (error) {
         showMessage("error", error.message);
     }
-
 }
 
 export function UpdateServiceRequestForms({serviceAgents, currentUserId, queryClient, showMessage, closeForm, closeDialog}) {

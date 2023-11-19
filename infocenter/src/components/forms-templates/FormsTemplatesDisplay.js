@@ -39,6 +39,11 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
     if (userFormsTemplates !== undefined) {
         serviceFormsAvailable = userFormsTemplates.serviceFormsAvailable
     }
+
+    // Generate options list for service request form uploads
+    const saOptionsList = serviceAgents.filter((entry) => {
+        return !onlineForms[entry];
+    }) 
     
     return (
         <>
@@ -62,7 +67,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             </div>
             {formVisible && 
                 <ModalSkeleton type="service-request-forms" closeModal={() => closeForm(setFormVisible)}>
-                    <UpdateServiceRequestForms serviceAgents={serviceAgents} currentUserId={currentUserId} page={page} queryClient={queryClient} showMessage={showMessage} closeForm={closeForm} closeDialog={closeDialog} />
+                    <UpdateServiceRequestForms serviceAgents={saOptionsList} currentUserId={currentUserId} page={page} queryClient={queryClient} showMessage={showMessage} closeForm={() => closeForm(setFormVisible)} closeDialog={closeDialog} />
                 </ModalSkeleton>
             }
         </>
