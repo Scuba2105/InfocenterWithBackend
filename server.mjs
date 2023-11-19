@@ -93,10 +93,13 @@ const storage = multer.diskStorage({
         else if (file.fieldname === "updated-document") {
             cb(null, path.join(__dirname, `public/documents/${model}`))
         } 
-        else if (file.fieldname === "service-request-form") {
+        else if ((file.fieldname === "service-request-form") && (file.mimetype === 'application/pdf' || file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype === 'application/msword')) {
             const staffId = req.params.UserId;
             createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
             cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
+        }
+        else if ((file.fieldname === "service-request-form") && (file.mimetype !== 'application/pdf' || file.mimetype !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype !== 'application/msword')) {
+            return cb(new Error(`The error occurred trying to save the uploaded file because the file extension is incorrect. Please check the manual is a pdf or word document and try again`));    
         }
         else if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
             const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
@@ -107,7 +110,7 @@ const storage = multer.diskStorage({
             return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the image file is either jpg or png and try again`));
         }   
         else {
-            return cb(new Error('An unknown error occurred. Please try again and contact the administrator if the issue persists'))
+            return cb(new Error('An unknown error occurred with the file upload. Please try again and contact the administrator if the issue persists'))
         } 
     },
     filename: function (req, file, cb) {
