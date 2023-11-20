@@ -1,7 +1,7 @@
 html {
   height: 100%;
   max-height: 100%;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 #root {
@@ -2713,22 +2713,26 @@ abbr[title] {
 }
 
 .templates-section-title-container {
-  width: 330px;
+  width: 230px;
   justify-content: space-between;
   transform: translateX(20px);
+}
+
+.template-heading {
+  font-size: 16px;
 }
 
 .templates-links-container {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  transform: translateY(-10px);
+  transform: translateY(-5px);
 }
 
 .template-service-request, .internal-template {
-  height: clamp(110px, 7vw, 130px);
-  width: clamp(110px, 7vw, 130px);
-  font-size: clamp(12px, 0.75vw, 16px);
+  height: clamp(40px, 5vw, 130px);
+  width: clamp(40px, 5vw, 130px);
+  font-size: clamp(7px, 0.5vw, 16px);
   margin: 10px;
   border-radius: 10px;
   text-decoration: none;

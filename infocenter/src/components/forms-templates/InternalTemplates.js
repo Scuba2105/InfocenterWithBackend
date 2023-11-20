@@ -1,10 +1,12 @@
 import { serverConfig } from "../../server"
 
 // array of the available internal templates
-const internalTemplates = ["AIMS Report", "New Asset Label", "Sold Equipment Flyer"]
+const internalTemplates = ["AIMS Report", "JHH HAPS Tags", "CMN HAPS Tags", "New Asset Label", "Sold Equipment Flyer"]
 
 // Store the list of the links location for the internal request forms.
 const templateLinks  = {"AIMS Report": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/AIMS Report.doc`,
+                        "JHH HAPS Tags": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/JHH HAPS Tags.doc`,
+                        "CMN HAPS Tags": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/CMN HAPS Tags.doc`,                           
                         "New Asset Label": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/New Asset Label.docx`,
                         "Sold Equipment Flyer": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/Sold Equipment Flyer.docx`}
 

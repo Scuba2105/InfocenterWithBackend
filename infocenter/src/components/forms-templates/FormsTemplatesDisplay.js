@@ -6,6 +6,7 @@ import { InternalTemplates } from "./InternalTemplates";
 import { HNETemplates } from "./HNETemplates";
 import { UpdateServiceRequestForms } from "./UpdateServiceRequestForm";
 import { OnlineRequestForms } from "./OnlineRequestForms";
+import { TestingProgressTemplates } from "./TestingProgressTemplates";
 import { serverConfig } from "../../server";
 
 // Store list of Service Agents with service request forms.
@@ -52,7 +53,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">Service Request Forms</h2> 
-                        <div className="staff-edit-btn flex-c" onClick={() => showForm(setFormVisible)}><UploadIcon color="rgb(5, 234, 146)" /></div>
+                        <div className="staff-edit-btn flex-c" style={{height: 25 + 'px', width: 25 + 'px'}} onClick={() => showForm(setFormVisible)}><UploadIcon color="rgb(5, 234, 146)" size="15px" /></div>
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :
                     <OnlineRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} />}              
@@ -61,9 +62,9 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">HNE Templates</h2>
+                        <h2 className="template-heading">JHH Testing Templates</h2>
                     </div>
-                    <HNETemplates />
+                    <TestingProgressTemplates />
                 </div>
             </div>
             <div className="forms-templates-container flex-c-col">
@@ -72,6 +73,14 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
                         <h2 className="template-heading">HNECT Internal Templates</h2>
                     </div>
                     <InternalTemplates />
+                </div>
+            </div>
+            <div className="forms-templates-container flex-c-col">
+                <div className="templates-section flex-c-col">
+                    <div className="templates-section-title-container flex-c">
+                        <h2 className="template-heading">HNE Templates</h2>
+                    </div>
+                    <HNETemplates />
                 </div>
             </div>
             {formVisible && 

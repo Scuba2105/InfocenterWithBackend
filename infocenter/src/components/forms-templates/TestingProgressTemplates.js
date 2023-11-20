@@ -1,15 +1,12 @@
 import { serverConfig } from "../../server"
 
 // array of the available internal templates
-const internalTemplates = ["Petty Cash", "JHH AA Room Storage Request", "PROcure Access Request Form", "Kitchen Request Form"]
+const internalTemplates = ["Coronary Care Unit", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite"]
 
 // Store the list of the links location for the internal request forms.
-const templateLinks  = {"Petty Cash": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/Petty Cash.pdf`,
-                        "JHH AA Room Storage Request": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/JHH AA Room Storage Request.docx`,
-                        "PROcure Access Request Form": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/PROcure Access Request Form.docx`,
-                        "Kitchen Request Form": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/internal-templates/Kitchen Request Form.pdf`}
+const templateLinks  = {}
 
-export function HNETemplates() {
+export function TestingProgressTemplates() {
 
     return (
         <div className="templates-links-container">        
