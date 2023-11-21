@@ -13,17 +13,12 @@ const testData = [{bed: 1, mx700: true, rack: true, x2: false},
 ]
 
 function updateTestingProgress(testingProgress, setTestingProgress, selectedBedData, device) {
-    // Invert the device status 
-    let status;
-    if (selectedBedData[device]) {
-        status = false
-    }
-    else {
-        status = true;
-    }
-    // Copy the selected bed data and update the selected device status.
+    // Get the selected device status 
+    const affectedDeviceStatus = selectedBedData[device];
+    
+    // Copy the selected bed data and invert the selected device status.
     const updatedSelectedBedData = {...selectedBedData};
-    updatedSelectedBedData[device] = status;
+    updatedSelectedBedData[device] = !affectedDeviceStatus;
 
     // Map the testing progress to include the updated bed data.
     const newTestingProgress = testingProgress.map((entry) => {
