@@ -2732,7 +2732,7 @@ abbr[title] {
 .template-service-request, .internal-template {
   height: clamp(40px, 5vw, 130px);
   width: clamp(40px, 5vw, 130px);
-  font-size: clamp(7px, 0.5vw, 16px);
+  font-size: clamp(7px, 0.58vw, 16px);
   margin: 10px;
   border-radius: 10px;
   text-decoration: none;
