@@ -44,10 +44,15 @@ function closeTestingTemplate(setTestingTemplateVisible) {
     setTestingTemplateVisible(false)
 }
 
+function setTestingDept(setTestingDepartment, department) {
+    setTestingDepartment(department)
+}
+
 export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, queryClient, showMessage, closeDialog}) {
 
     const [formVisible, setFormVisible] = useState(false);
     const [testingTemplateVisible, setTestingTemplateVisible] = useState(false); 
+    const [testingDepartment, setTestingDepartment] = useState(null);
     
     let serviceFormsAvailable = null;
     // Get the service forms available for current user
@@ -77,7 +82,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
                     <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">JHH Testing Templates</h2>
                     </div>
-                    <TestingProgressTemplates showTestingTemplate={() => showTestingTemplate(setTestingTemplateVisible)}/>
+                    <TestingProgressTemplates showTestingTemplate={showTestingTemplate} setTestingTemplateVisible={setTestingTemplateVisible} setTestingDepartment={setTestingDepartment} setTestingDept={setTestingDept} />
                 </div>
             </div>
             <div className="forms-templates-container flex-c-col">
@@ -102,7 +107,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
                 </ModalSkeleton>
             }
             {testingTemplateVisible && 
-                <TestingProgressSkeleton closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
+                <TestingProgressSkeleton currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
                     <CCUProgress />
                 </TestingProgressSkeleton> 
             }
