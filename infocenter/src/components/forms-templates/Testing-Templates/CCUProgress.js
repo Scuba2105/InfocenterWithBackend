@@ -50,9 +50,7 @@ export function CCUProgress() {
                     return bedData.bed === entry;
                 })
                 return (
-                    <>
-                        <BedStatusTable bedNumber={entry} bedIndex={index} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["MX700", "Rack", "X2"]} />
-                    </>
+                    <BedStatusTable bedNumber={entry} bedIndex={index} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["MX700", "Rack", "X2"]} />
                 )
             })}
         </div>
