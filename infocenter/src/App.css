@@ -30,6 +30,7 @@ html {
   --blue-button-color: #03a9eb;
   --search-bar-color: #69737a;
   --red-accent: rgb(253, 67, 67);
+  --reset-button-color: rgb(252, 93, 132); 
   --green-accent: rgb(2, 189, 118);
   --orange-accent: #fdc046;
   --calendar-tile-active: var(--main-color-accent); 
@@ -1486,6 +1487,11 @@ html {
   font-weight: 400;
 }
 
+.reset-button {
+  border: 1.3px solid var(--reset-button-color);
+  color: var(--reset-button-color)
+}
+
 .add-new-upload-button {
   margin: 20px 0 20px 0;
 }
@@ -2820,6 +2826,13 @@ abbr[title] {
   text-align: center;
   vertical-align: center;
   border: 1px solid black;
+}
+
+.testing-template-upload-btn-container {
+  width: 400px;
+  transform: translateX(calc((1000px - 400px)/2));
+  margin-bottom: 60px;
+  justify-content: space-around;
 }
 
 /* Formatting input elements. */

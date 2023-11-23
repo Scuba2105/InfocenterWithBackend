@@ -6,9 +6,9 @@ import { InternalTemplates } from "./InternalTemplates";
 import { HNETemplates } from "./HNETemplates";
 import { UpdateServiceRequestForms } from "./UpdateServiceRequestForm";
 import { OnlineRequestForms } from "./OnlineRequestForms";
-import { TestingProgressTemplates } from "./TestingProgressTemplates";
+import { TestingProgressLinks } from "./TestingProgressLinks";
 import { TestingProgressSkeleton } from "./TestingProgressSkeleton";
-import { CCUProgress } from "./Testing-Templates/CCUProgress";
+import { TestingProgressTemplate } from "./Testing-Templates/TestingProgressTemplate";
 import { serverConfig } from "../../server";
 
 // Store list of Service Agents with service request forms.
@@ -48,8 +48,8 @@ function setTestingDept(setTestingDepartment, department) {
     setTestingDepartment(department)
 }
 
-export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, queryClient, showMessage, closeDialog}) {
-
+export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData, currentUserId, page, queryClient, showMessage, closeDialog}) {
+    
     const [formVisible, setFormVisible] = useState(false);
     const [testingTemplateVisible, setTestingTemplateVisible] = useState(false); 
     const [testingDepartment, setTestingDepartment] = useState(null);
@@ -80,9 +80,9 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">JHH Testing Templates</h2>
+                        <h2 className="template-heading">JHH Testing Progress Form</h2>
                     </div>
-                    <TestingProgressTemplates showTestingTemplate={showTestingTemplate} setTestingTemplateVisible={setTestingTemplateVisible} setTestingDepartment={setTestingDepartment} setTestingDept={setTestingDept} />
+                    <TestingProgressLinks showTestingTemplate={showTestingTemplate} setTestingTemplateVisible={setTestingTemplateVisible} setTestingDepartment={setTestingDepartment} setTestingDept={setTestingDept} />
                 </div>
             </div>
             <div className="forms-templates-container flex-c-col">
@@ -107,8 +107,12 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
                 </ModalSkeleton>
             }
             {testingTemplateVisible && 
-                <TestingProgressSkeleton currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
-                    <CCUProgress />
+                <TestingProgressSkeleton  currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
+                    <TestingProgressTemplate testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} />
+                    <div className="testing-template-upload-btn-container size-100 flex-c">
+                        <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
+                        <div className="update-button testing-template-upload-btn">Upload Progress</div>
+                    </div>                    
                 </TestingProgressSkeleton> 
             }
         </>

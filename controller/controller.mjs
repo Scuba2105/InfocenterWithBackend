@@ -4,6 +4,7 @@ import { getAllStaffData } from '../models/staff-models.mjs';
 import { getAllStaffContactsData, getAllVendorContactsData } from '../models/contacts-models.mjs';
 import { getOnCallData } from '../models/on-call-models.mjs';
 import { getUserFormsTemplatesData } from "../models/forms-templates-models.mjs";
+import { getAllTestingTemplateData } from "../models/testing-templates-models.mjs";
 import { retrieveUserCredentials, updateUserPassword } from '../models/models.mjs';
 import { FileHandlingError, ParsingError, DBError } from "../error-handling/file-errors.mjs";
 
@@ -130,14 +131,16 @@ export async function getAllData(req, res, next, __dirname) {
         const allDataArray = await Promise.all([getAllStaffData(__dirname), getAllDeviceData(__dirname),
             getAllStaffContactsData(__dirname), getAllVendorContactsData(__dirname),
             getOnCallData(__dirname),            
-            getUserFormsTemplatesData(__dirname, staffId)]).catch((err) => {
+            getUserFormsTemplatesData(__dirname, staffId),
+            getAllTestingTemplateData(__dirname)]).catch((err) => {
                 throw new FileHandlingError(err.message, err.action, err.route);
             });
         
         // Create the allData object from the Promise.all array.
         const allData = {staffData: allDataArray[0], deviceData: allDataArray[1], 
                          contactsData: allDataArray[2], vendorContactsData: allDataArray[3], 
-                         onCallData: allDataArray[4], formsTemplatesData: allDataArray[5]};
+                         onCallData: allDataArray[4], formsTemplatesData: allDataArray[5],
+                        "testingTemplatesData": allDataArray[6]};
         
         // Send the data as a json response.
         res.json(allData);

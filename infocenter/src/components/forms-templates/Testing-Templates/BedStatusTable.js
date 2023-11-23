@@ -1,6 +1,6 @@
 import { Tick, Cross } from "../../../svg";
 
-export function BedStatusTable({bedNumber, bedIndex, currentBedData, updateTestingProgress, testingProgress, setTestingProgress, bedDevices}) {
+export function BedStatusTable({bedNumber, bedIndex, testingTemplatesData, currentBedData, updateTestingProgress, testingProgress, setTestingProgress, bedDevices}) {
     return (
         <div key={`testing-template-table-${bedIndex}`} className="testing-template-table-container size-100 flex-c">
                         <table className="tg" style={{tableLayout: "fixed", width: 254 + 'px'}}>
@@ -11,16 +11,16 @@ export function BedStatusTable({bedNumber, bedIndex, currentBedData, updateTesti
                             </thead>
                             <tbody>
                                 <tr>
-                                    {bedDevices.map((device) => {
+                                    {bedDevices.map((device, index) => {
                                         return (
-                                            <td className="tg-c3ow">{device}</td>
+                                            <td key={`${device}-Bed${bedNumber}`} className="tg-c3ow">{device}</td>
                                         )
                                     })}
                                 </tr>
                                 <tr>
                                     {bedDevices.map((device) => {
                                         return (
-                                            <td className="tg-c3ow" onClick={() => updateTestingProgress(testingProgress, setTestingProgress, currentBedData, device)}>{currentBedData[device] ? <Tick color="rgb(5, 234, 146)"></Tick> : <Cross color="rgb(253, 67, 67)" />}</td>
+                                            <td key={`${device}-Bed${bedNumber}-Status`} className="tg-c3ow" onClick={() => updateTestingProgress(testingProgress, setTestingProgress, testingTemplatesData, currentBedData, device)}>{currentBedData[device] ? <Tick color="rgb(5, 234, 146)"></Tick> : <Cross color="rgb(253, 67, 67)" />}</td>
                                         )
                                     })}
                                 </tr>
