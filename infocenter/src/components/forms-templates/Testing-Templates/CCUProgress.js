@@ -37,15 +37,22 @@ export function CCUProgress({testingTemplatesData}) {
     }) 
 
     return (
-        <div className="testing-template-display">
-            {bedNumbers.map((entry, index) => {
-                const currentBedData = testingProgress.find((bedData) => {
-                    return bedData.bed === entry;
-                })
-                return (
-                    <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={testingTemplatesData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["MX700", "Rack", "X2"]} />
-                )
-            })}
-        </div>
+        <>
+            <div className="testing-template-display">
+                {bedNumbers.map((entry, index) => {
+                    const currentBedData = testingProgress.find((bedData) => {
+                        return bedData.bed === entry;
+                    })
+                    return (
+                        <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={testingTemplatesData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["MX700", "Rack", "X2"]} />
+                    )
+                })}
+            </div>
+            <div className="testing-template-upload-btn-container size-100 flex-c">
+                <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
+                <div className="update-button testing-template-upload-btn">Upload Progress</div>
+            </div> 
+        </>
+        
     )
 }

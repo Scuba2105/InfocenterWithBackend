@@ -109,10 +109,6 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
             {testingTemplateVisible && 
                 <TestingProgressSkeleton  currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
                     <TestingProgressTemplate testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} />
-                    <div className="testing-template-upload-btn-container size-100 flex-c">
-                        <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
-                        <div className="update-button testing-template-upload-btn">Upload Progress</div>
-                    </div>                    
                 </TestingProgressSkeleton> 
             }
         </>
