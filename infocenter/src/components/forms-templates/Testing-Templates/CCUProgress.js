@@ -1,19 +1,7 @@
 import { useState } from "react";
 import { BedStatusTable } from "./BedStatusTable";
 
-const bedNumbers = [1, 2 , 3, 4, 5, 6, 7, 8];
-
-const testData = [{bed: 1, MX700: true, Rack: true, X2: false},
-                {bed: 2, MX700: true, Rack: true, X2: false},
-                {bed: 3, MX700: true, Rack: true, X2: true},
-                {bed: 4, MX700: true, Rack: true, X2: false},
-                {bed: 5, MX700: true, Rack: false, X2: false},
-                {bed: 6, MX700: true, Rack: true, X2: true},
-                {bed: 7, MX700: true, Rack: true, X2: false},
-                {bed: 8, MX700: false, Rack: true, X2: true}
-]
-
-function updateTestingProgress(testingProgress, setTestingProgress, selectedBedData, device) {
+function updateTestingProgress(testingProgress, setTestingProgress, testingTemplatesData, selectedBedData, device) {
     // Get the selected device status 
     const affectedDeviceStatus = selectedBedData[device];
     
@@ -22,7 +10,7 @@ function updateTestingProgress(testingProgress, setTestingProgress, selectedBedD
     updatedSelectedBedData[device] = !affectedDeviceStatus;
 
     // Check if the original data for the device is permanent or can be changed.
-    const originalEntry = testData.find((entry) => {
+    const originalEntry = testingTemplatesData.find((entry) => {
         return entry.bed === selectedBedData.bed 
     });
 
@@ -39,9 +27,14 @@ function updateTestingProgress(testingProgress, setTestingProgress, selectedBedD
     }    
 }
 
-export function CCUProgress() {
+export function CCUProgress({testingTemplatesData}) {
+    
+    const [testingProgress, setTestingProgress] = useState(testingTemplatesData);
 
-    const [testingProgress, setTestingProgress] = useState(testData);
+    // Get the bed numberes from the testing template data
+    const bedNumbers = testingTemplatesData.map((entry) => {
+        return entry.bed
+    }) 
 
     return (
         <div className="testing-template-display">
@@ -50,7 +43,7 @@ export function CCUProgress() {
                     return bedData.bed === entry;
                 })
                 return (
-                    <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["MX700", "Rack", "X2"]} />
+                    <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={testingTemplatesData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["MX700", "Rack", "X2"]} />
                 )
             })}
         </div>

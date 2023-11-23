@@ -48,12 +48,12 @@ function setTestingDept(setTestingDepartment, department) {
     setTestingDepartment(department)
 }
 
-export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, queryClient, showMessage, closeDialog}) {
-
+export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData, currentUserId, page, queryClient, showMessage, closeDialog}) {
+    
     const [formVisible, setFormVisible] = useState(false);
     const [testingTemplateVisible, setTestingTemplateVisible] = useState(false); 
     const [testingDepartment, setTestingDepartment] = useState(null);
-    console.log(testingDepartment)
+    
     let serviceFormsAvailable = null;
     // Get the service forms available for current user
     if (userFormsTemplates !== undefined) {
@@ -108,7 +108,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, currentUserId, page, 
             }
             {testingTemplateVisible && 
                 <TestingProgressSkeleton  currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
-                    <TestingProgressTemplate currentDept={testingDepartment} />
+                    <TestingProgressTemplate testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} />
                 </TestingProgressSkeleton> 
             }
         </>
