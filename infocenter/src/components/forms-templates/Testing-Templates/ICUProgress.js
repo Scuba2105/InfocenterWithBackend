@@ -78,6 +78,11 @@ export function DeliverySuiteProgress({testingTemplatesData}) {
 
     return (
         <div className="testing-template-form flex-c-col">
+            <div>
+                <NavigationArrow size="45px" color="white" identifier="config-left-arrow" onClick={(e) => updateSubLocation(index, setIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e)} />
+                <label>{subLocation}</label>
+                <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateSubLocation(index, setIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e)} />
+            </div>
             <div className="testing-template-display">
                 {bedNumbers.map((entry, index) => {
                     const currentBedData = testingProgress.find((bedData) => {
