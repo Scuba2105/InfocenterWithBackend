@@ -45,7 +45,7 @@ export function EDProgress({testingTemplatesData}) {
     const currentTemplateData = testingTemplatesData[subLocation];
 
     return (
-        <>
+        <div className="testing-template-form flex-c-col">
             <div className="testing-template-display">
                 {bedNumbers.map((entry, index) => {
                     const currentBedData = testingProgress.find((bedData) => {
@@ -60,7 +60,7 @@ export function EDProgress({testingTemplatesData}) {
                 <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
                 <div className="update-button testing-template-upload-btn">Upload Progress</div>
             </div> 
-        </>
+        </div>
         
     )
 }
