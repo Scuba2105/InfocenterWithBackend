@@ -1,4 +1,6 @@
-import { CCUProgress } from "../Testing-Templates/CCUProgress"
+import { CCUProgress } from "../Testing-Templates/CCUProgress";
+import { DeliverySuiteProgress } from "../Testing-Templates/DeliverySuiteProgress";
+import { EDProgress } from "../Testing-Templates/EDProgress";
 
 const internalTemplates = ["Coronary Care Unit", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite", "Recovery"]
 
@@ -10,11 +12,11 @@ export function TestingProgressTemplate({testingTemplatesData, currentDept}) {
             )
         case "Delivery Suite":
             return (
-                <CCUProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
+                <DeliverySuiteProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
             )
         case "Emergency Department":
             return (
-                <CCUProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
+                <EDProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
             )
         default:
             return (

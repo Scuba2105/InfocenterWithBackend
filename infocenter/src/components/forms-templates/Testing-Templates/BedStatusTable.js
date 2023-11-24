@@ -6,7 +6,7 @@ export function BedStatusTable({bedNumber, bedIndex, testingTemplatesData, curre
                         <table className="tg" style={{tableLayout: "fixed", width: 254 + 'px'}}>
                             <thead>
                                 <tr>
-                                    <th className="tg-c3ow" colSpan="3">{`Room ${bedNumber}`}</th>
+                                    <th className="tg-c3ow" colSpan={bedDevices.length}>{Number.isInteger(bedNumber) ? `Room ${bedNumber}` : bedNumber}</th>
                                 </tr>
                             </thead>
                             <tbody>
