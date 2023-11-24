@@ -1,7 +1,7 @@
 import { serverConfig } from "../../server"
 
 // array of the available internal templates
-const internalTemplates = ["Coronary Care Unit", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite"]
+const internalTemplates = ["Coronary Care Unit", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite", "Recovery"];
 
 export function TestingProgressLinks({showTestingTemplate, setTestingTemplateVisible, setTestingDepartment, setTestingDept}) {
 

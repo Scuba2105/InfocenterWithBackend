@@ -1,10 +1,18 @@
 import { CCUProgress } from "../Testing-Templates/CCUProgress"
 
-const internalTemplates = ["Coronary Care Unit", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite"]
+const internalTemplates = ["Coronary Care Unit", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite", "Recovery"]
 
 export function TestingProgressTemplate({testingTemplatesData, currentDept}) {
     switch (currentDept) {
         case "Coronary Care Unit":
+            return (
+                <CCUProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
+            )
+        case "Delivery Suite":
+            return (
+                <CCUProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
+            )
+        case "Emergency Department":
             return (
                 <CCUProgress testingTemplatesData={testingTemplatesData["John Hunter Hospital"][currentDept]} />
             )
