@@ -8,7 +8,7 @@ import { UpdateServiceRequestForms } from "./UpdateServiceRequestForm";
 import { OnlineRequestForms } from "./OnlineRequestForms";
 import { TestingProgressLinks } from "./TestingProgressLinks";
 import { TestingProgressSkeleton } from "./TestingProgressSkeleton";
-import { TestingProgressTemplate } from "./Testing-Templates/TestingProgressTemplate";
+import { JHHTestingProgressTemplates } from "./Testing-Templates/JHHTestingProgressTemplates";
 import { serverConfig } from "../../server";
 
 // Store list of Service Agents with service request forms.
@@ -108,7 +108,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
             }
             {testingTemplateVisible && 
                 <TestingProgressSkeleton  currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
-                    <TestingProgressTemplate testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} />
+                    <JHHTestingProgressTemplates testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} />
                 </TestingProgressSkeleton> 
             }
         </>

@@ -2782,14 +2782,21 @@ abbr[title] {
   overflow-y: auto;
 }
 
+.testing-template-navigation-container {
+  width: 250px;
+  justify-content: space-between;
+  margin-top: 20px;
+  color: white;
+  font-weight: 600;
+}
+
 .testing-template-display {
   display: grid;
-  height: 75%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
-  margin: 20px 0 20px 0;
+  margin: 20px 20px 20px 20px;
   padding: 10px 20px;
-  overflow-y: auto;
+  border: 1px solid black;
 }
 
 /* Temporary testing template room summary table formatting */
@@ -2946,7 +2953,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: translate(20px, 0px);
   }
   .testing-progress-modal-container {
-    max-height: 600px;
+    max-height: 500px;
   }
 }
 
