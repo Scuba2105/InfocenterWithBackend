@@ -28,18 +28,51 @@ function updateTestingProgress(testingProgress, setTestingProgress, testingTempl
     }    
 }
 
+// Update the sublocation when arrow pushed
+function updateSubLocation(index, setIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e) {
+    const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
+    
+    if (rightArrowPressed && index < (availableSubLocations.length - 1)) {
+        setIndex(i => i + 1);
+        setTestingProgress(testingTemplatesData[availableSubLocations[index + 1]]);
+    }
+    else if (!rightArrowPressed && index > 0) {
+        setIndex(i => i - 1);
+        setTestingProgress(testingTemplatesData[availableSubLocations[index -1]]);
+    }
+}
+
+// Set the accessible room/bedside devices the current sublocation.
+function getAvailableBedSideDevices(subLocation, entry) {
+    if (subLocation === "Birth Suite" && [3, 4].includes(entry)) {
+        return  ["MX450", "Rack", "X2", "CO2"];
+    } 
+    else if (subLocation === "MADU") {
+        return ["CTG"];
+    }
+    else {
+        return ["CTG", "Warmer", "Humidifier", "Rad 8"];
+    }
+}
+
 export function DeliverySuiteProgress({testingTemplatesData}) {
     
-    const [testingProgress, setTestingProgress] = useState(testingTemplatesData["Birth Suite"]);
+    const availableSubLocations = Object.keys(testingTemplatesData);
+
+    // Store the index of the selected sub location
+    const [index, setIndex] = useState(0)
 
     // Store the currently selected sub-location in state.
-    const [subLocation, setSubLocation] = useState("Birth Suite")
+    const subLocation = availableSubLocations[index];
+
+    // Store the current testing progress array.
+    const [testingProgress, setTestingProgress] = useState(testingTemplatesData[subLocation]);
 
     // Get the bed numberes from the testing template data
-    const bedNumbers = testingTemplatesData["Birth Suite"].map((entry) => {
+    const bedNumbers = testingTemplatesData[subLocation].map((entry) => {
         return entry.bed
     }) 
-
+    
     // Get the data for the current selected section of ED.
     const currentTemplateData = testingTemplatesData[subLocation];
 
@@ -51,7 +84,7 @@ export function DeliverySuiteProgress({testingTemplatesData}) {
                         return bedData.bed === entry;
                     })
                     return (
-                        <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={["CTG", "Cosy Cot", "Humidifier", "Rad 8"]} />
+                        <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(subLocation, entry)} />
                     )
                 })}
             </div>

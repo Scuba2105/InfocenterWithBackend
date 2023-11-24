@@ -2945,6 +2945,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .email-link {
     transform: translate(20px, 0px);
   }
+  .testing-progress-modal-container {
+    max-height: 600px;
+  }
 }
 
 /* Overwrite link css if link is disabled/unavailable*/
