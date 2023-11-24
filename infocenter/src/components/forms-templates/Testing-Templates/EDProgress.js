@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BedStatusTable } from "./BedStatusTable";
+import { NavigationArrow } from "../../../svg"
 
 // Function which is called to update bedside testing progress.
 function updateTestingProgress(testingProgress, setTestingProgress, testingTemplatesData, selectedBedData, device) {
@@ -28,31 +29,71 @@ function updateTestingProgress(testingProgress, setTestingProgress, testingTempl
     }    
 }
 
+function updateSubLocation(index, setIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e) {
+    const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
+    
+    if (rightArrowPressed && index < (availableSubLocations.length - 1)) {
+        setIndex(i => i + 1);
+        setTestingProgress(testingTemplatesData[availableSubLocations[index + 1]]);
+    }
+    else if (!rightArrowPressed && index > 0) {
+        setIndex(i => i - 1);
+        setTestingProgress(testingTemplatesData[availableSubLocations[index -1]]);
+    }
+}
+
+function getAvailableBedSideDevices(subLocation, entry) {
+    if (subLocation === "Adult") {
+        return entry === "Single Room" ? ["CVSM"] : ["MX700", "Rack", "X2"];
+    } 
+    else if (subLocation === "Paediatric") {
+        return ["MX550", "Rack", "X2"];
+    }
+    else if (subLocation === "Resus") {
+        return [4, 5].includes(entry) ? ["MX750", "Rack", "X2"] : ["MX700", "Rack", "X2"] 
+    }
+    else {
+        return ["MX700", "Rack", "X2"];
+    }
+}
+
+
 export function EDProgress({testingTemplatesData}) {
 
-    // Store the current testing progress array.
-    const [testingProgress, setTestingProgress] = useState(testingTemplatesData["Adult"]);
+    const availableSubLocations = Object.keys(testingTemplatesData);
+
+    // Store the index of the selected sub location
+    const [index, setIndex] = useState(0)
 
     // Store the currently selected sub-location in state.
-    const [subLocation, setsubLocation] = useState("Adult");
+    const subLocation = availableSubLocations[index];
+
+    // Store the current testing progress array.
+    const [testingProgress, setTestingProgress] = useState(testingTemplatesData[subLocation]);
 
     // Get the bed numberes from the testing template data
-    const bedNumbers = testingTemplatesData["Adult"].map((entry) => {
+    const bedNumbers = testingTemplatesData[subLocation].map((entry) => {
         return entry.bed
     }) 
-
+    
     // Get the data for the current selected section of ED.
     const currentTemplateData = testingTemplatesData[subLocation];
-
+    
     return (
         <div className="testing-template-form flex-c-col">
+            <div>
+                <NavigationArrow size="45px" color="white" identifier="config-left-arrow" onClick={(e) => updateSubLocation(index, setIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e)} />
+                <label>{subLocation}</label>
+                <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateSubLocation(index, setIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e)} />
+            </div>
             <div className="testing-template-display">
                 {bedNumbers.map((entry, index) => {
                     const currentBedData = testingProgress.find((bedData) => {
                         return bedData.bed === entry;
                     })
+
                     return (
-                        <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={entry === "Single Room" ? ["CVSM"] : ["MX700", "Rack", "X2"]} />
+                        <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(subLocation, entry)} />
                     )
                 })}
             </div>
