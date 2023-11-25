@@ -3,7 +3,7 @@ import { BedStatusTable } from "./BedStatusTable";
 import { NavigationArrow } from "../../../svg";
 
 // Departments with no sub-locations
-const noSubLocationDepts = ["Coronary Care Unit"]
+const noSubLocationDepts = ["CCU"];
 
 // Function which is called to update bedside testing progress.
 function updateTestingProgress(testingProgress, setTestingProgress, testingTemplatesData, selectedBedData, device) {
@@ -48,8 +48,11 @@ function updateSubLocation(index, setLocationIndex, setTestingProgress, testingT
 
 // Set the accessible room/bedside devices the current sublocation.
 function getAvailableBedSideDevices(currentDept, subLocation, entry) {
-    if (currentDept === "Coronary Care Unit") {
+    if (currentDept === "CCU") {
         return ["MX700", "Rack", "X2"];
+    }
+    if (currentDept === "ICU/PICU" || currentDept === "NICU") {
+        return ["MX800", "Rack", "X2"];
     }
     else if (currentDept === "Delivery Suite") {
         if (subLocation === "Birth Suite" && [3, 4].includes(entry)) {
@@ -61,13 +64,27 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
         else {
             return ["CTG", "Warmer", "Humidifier", "Rad 8"];
         }
-    }    
+    }  
+    else if (currentDept === "Emergency Department") {
+        if (subLocation === "Adult") {
+            return entry === "Single Room" ? ["CVSM"] : ["MX700", "Rack", "X2"];
+        } 
+        else if (subLocation === "Paediatric") {
+            return ["MX550", "Rack", "X2"];
+        }
+        else if (subLocation === "Resus") {
+            return [4, 5].includes(entry) ? ["MX750", "Rack", "X2"] : ["MX700", "Rack", "X2"] 
+        }
+        else {
+            return ["MX700", "Rack", "X2"];
+        }
+    }  
 }
 
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept}) {
     
     const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept];
-
+    
     const availableSubLocations = Object.keys(currentDeptTestData);
     
     // Store the index of the selected sub location
@@ -90,7 +107,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept})
     // Get the data for the current selected sub department.
     const currentTemplateData = testingProgress;
 
-    if (["Coronary Care Unit", "Delivery Suite"].includes(currentDept)) {
+    if (["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU"].includes(currentDept)) {
         return (
             <div className="testing-template-form flex-c-col">
                 {subLocation && <div className="testing-template-navigation-container flex-c">
@@ -104,7 +121,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept})
                             return bedData.bed === entry;
                         })
                         return (
-                            <BedStatusTable key={`BedStatusTable-${entry}`} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
+                            <BedStatusTable key={`BedStatusTable-${entry}`} currentDept={currentDept} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
                         )
                     })}
                 </div>

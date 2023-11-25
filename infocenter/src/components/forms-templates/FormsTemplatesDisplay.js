@@ -80,7 +80,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">JHH Testing Progress Form</h2>
+                        <h2 className="template-heading">JHH Testing Progress Forms</h2>
                     </div>
                     <TestingProgressLinks showTestingTemplate={showTestingTemplate} setTestingTemplateVisible={setTestingTemplateVisible} setTestingDepartment={setTestingDepartment} setTestingDept={setTestingDept} />
                 </div>

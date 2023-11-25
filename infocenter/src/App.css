@@ -2766,7 +2766,7 @@ abbr[title] {
   top: 40px;
   left: calc((100vw - 1000px)/2);
   min-width: 1000px;
-  max-height: 850px;
+  max-height: 800px;
   z-index: 50;
   background-color: var(--med-theme);
   border: 1px solid black;
@@ -2780,6 +2780,7 @@ abbr[title] {
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  justify-content: flex-start;
 }
 
 .testing-template-navigation-container {
@@ -2794,9 +2795,8 @@ abbr[title] {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
-  margin: 20px 20px 20px 20px;
+  margin: 20px 0px 20px 0px;
   padding: 10px 20px;
-  border: 1px solid black;
 }
 
 /* Temporary testing template room summary table formatting */
@@ -2848,6 +2848,7 @@ abbr[title] {
 .testing-template-upload-btn-container {
   width: 400px;
   height: 160px;
+  margin-bottom: 30px;
   justify-content: space-around;
 }
 

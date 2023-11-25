@@ -1,12 +1,24 @@
 import { Tick, Cross } from "../../../svg";
 
-export function BedStatusTable({bedNumber, bedIndex, testingTemplatesData, currentBedData, updateTestingProgress, testingProgress, setTestingProgress, bedDevices}) {
+function getRoomBedHeading(bedNumber, currentDept) {
+    if (Number.isInteger(bedNumber)) {
+        if (currentDept === "NICU") {
+            return `Bed ${bedNumber}`
+        } 
+        return `Room ${bedNumber}`
+    } 
+    else {
+        return bedNumber
+    }
+}
+
+export function BedStatusTable({currentDept, bedNumber, bedIndex, testingTemplatesData, currentBedData, updateTestingProgress, testingProgress, setTestingProgress, bedDevices}) {
     return (
         <div key={`testing-template-table-${bedIndex}`} className="testing-template-table-container size-100 flex-c">
                         <table className="tg" style={{tableLayout: "fixed", width: 254 + 'px'}}>
                             <thead>
                                 <tr>
-                                    <th className="tg-c3ow" colSpan={bedDevices.length}>{Number.isInteger(bedNumber) ? `Room ${bedNumber}` : bedNumber}</th>
+                                    <th className="tg-c3ow" colSpan={bedDevices.length}>{getRoomBedHeading(bedNumber, currentDept)}</th>
                                 </tr>
                             </thead>
                             <tbody>
