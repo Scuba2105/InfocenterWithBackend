@@ -19,7 +19,7 @@ function updateTestingProgress(testingProgress, setTestingProgress, testingTempl
     const originalEntry = testingTemplatesData.find((entry) => {
         return entry.bed === selectedBedData.bed 
     });
-    console.log(originalEntry)
+    
     // If original device status was false then it can be freely changed until uploaded.
     if (originalEntry[device] === false) {
         // Map the testing progress to include the updated bed data.
@@ -82,11 +82,11 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
     }  
 }
 
-async function uploadTestingProgress(currentDept, testingProgress, queryClient, showMessage, closeDialog) {
-    const updatedTestingData = {hospital: "John Hunter Hospital", department: currentDept, testData: testingProgress};
-
+async function uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog) {
+    const updatedTestingData = {hospital: "John Hunter Hospital", department: currentDept, subLocation: subLocation, testData: testingProgress};
+    console.log(updatedTestingData)
     // Show the uploading dialog when sending to server
-    //showMessage("uploading", `Uploading testing progress updates`);
+    showMessage("uploading", `Uploading testing progress updates`);
 
     // Start the post request
     try {
@@ -164,13 +164,13 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                             return bedData.bed === entry;
                         })
                         return (
-                            <BedStatusTable key={`BedStatusTable-${entry}`} currentDept={currentDept} bedNumber={entry} bedIndex={index} testingTemplatesData={currentTemplateData} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
+                            <BedStatusTable key={`BedStatusTable-${entry}`} currentDept={currentDept} bedNumber={entry} bedIndex={index} testingTemplatesData={noSubLocationDepts.includes(currentDept) ? currentDeptTestData : currentDeptTestData[subLocation]} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
                         )
-                    })}
+                    })} 
                 </div>
                 <div className="testing-template-upload-btn-container size-100 flex-c">
                     <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
-                    <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
+                    <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
                 </div> 
             </div>
         )
