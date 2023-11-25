@@ -9,6 +9,7 @@ import { addNewStaffData, updateExistingStaffData } from './controller/staff-con
 import { addNewDeviceData, updateExistingDeviceData, deleteExistingDocument } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
 import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
+import { updateTestingProgressData } from './controller/testing-templates-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
@@ -225,6 +226,11 @@ app.put("/UpdateServiceRequestForms/:UserId", (req, res, next) => {
             updateServiceRequestForms(__dirname, userId, req, res, next);            
         }
     })
+})
+
+// Update the testing data.
+app.put('/UpdateTestingData', (req, res, next) => {
+    updateTestingProgressData(req, res, next, __dirname); 
 })
 
 // Define route to update on-call details. 

@@ -1,1 +1,32 @@
-import { writeAllTestingTemplateData } from "../models/testing-templates-models.mjs";
+import { getAllTestingTemplateData, writeAllTestingTemplateData } from "../models/testing-templates-models.mjs";
+import { Mutex } from "async-mutex";
+
+// Use to prevent race conditions
+const testingDataMutex = new Mutex();
+
+export async function updateTestingProgressData(req, res, next, __dirname) {
+    testingDataMutex.runExclusive(async () => {
+        try {
+            const allTestingData = await getAllTestingTemplateData(__dirname).catch((err) => {
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
+            })
+
+            // Get variables from the request body.
+            const hospital = req.body.hospital;
+            const department = req.body.department;
+            const updatedTestingData = req.body.testData;
+
+            // Mutate the all testing data to update the testing data
+            allTestingData[hospital][department] = updatedTestingData;
+
+            console.log(allTestingData)
+        } catch (err) {
+            
+        }
+    })
+}

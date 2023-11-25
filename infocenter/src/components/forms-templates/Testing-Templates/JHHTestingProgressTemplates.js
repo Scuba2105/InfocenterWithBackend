@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BedStatusTable } from "./BedStatusTable";
 import { NavigationArrow } from "../../../svg";
+import { serverConfig } from "../../../server";
 
 // Departments with no sub-locations
 const noSubLocationDepts = ["CCU"];
@@ -18,7 +19,7 @@ function updateTestingProgress(testingProgress, setTestingProgress, testingTempl
     const originalEntry = testingTemplatesData.find((entry) => {
         return entry.bed === selectedBedData.bed 
     });
-    
+    console.log(originalEntry)
     // If original device status was false then it can be freely changed until uploaded.
     if (originalEntry[device] === false) {
         // Map the testing progress to include the updated bed data.
@@ -81,7 +82,49 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
     }  
 }
 
-export function JHHTestingProgressTemplates({testingTemplatesData, currentDept}) {
+async function uploadTestingProgress(currentDept, testingProgress, queryClient, showMessage, closeDialog) {
+    const updatedTestingData = {hospital: "John Hunter Hospital", department: currentDept, testData: testingProgress};
+
+    // Show the uploading dialog when sending to server
+    //showMessage("uploading", `Uploading testing progress updates`);
+
+    // Start the post request
+    try {
+        // Post the data to the server  
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateTestingData`, {
+                method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTestingData),
+        });
+
+        const data = await res.json();
+
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}. If the issue persists please contact an administrator.`);
+        }
+        else {                            
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", `${currentDept} testing progress has been successfully updated!`);
+            setTimeout(() => {
+                closeDialog();
+            }, 1600);
+        }
+    }
+    catch (error) {
+        showMessage("error", `${error.message}.`)
+    }
+}
+
+export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeDialog}) {
     
     const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept];
     
@@ -127,7 +170,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept})
                 </div>
                 <div className="testing-template-upload-btn-container size-100 flex-c">
                     <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
-                    <div className="update-button testing-template-upload-btn">Upload Progress</div>
+                    <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
                 </div> 
             </div>
         )
