@@ -2791,6 +2791,12 @@ abbr[title] {
   font-weight: 600;
 }
 
+.testing-template-update-date {
+  color: white;
+  margin-top: 15px;
+  transform: translateX(-370px);
+}
+
 .testing-template-display {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

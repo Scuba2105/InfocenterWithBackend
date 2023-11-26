@@ -84,7 +84,7 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
 
 async function uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog) {
     const updatedTestingData = {hospital: "John Hunter Hospital", department: currentDept, subLocation: subLocation, testData: testingProgress};
-    console.log(updatedTestingData)
+    
     // Show the uploading dialog when sending to server
     showMessage("uploading", `Uploading testing progress updates`);
 
@@ -124,10 +124,15 @@ async function uploadTestingProgress(currentDept, subLocation, testingProgress, 
     }
 }
 
+
+async function resetTestingProgress(currentDept, subLocation, queryClient, showMessage, closeDialog) {
+
+}
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeDialog}) {
     
-    const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept];
-    
+    const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept]["testData"];
+    const lastUpdated = testingTemplatesData["John Hunter Hospital"][currentDept]["lastUpdate"];
+
     const availableSubLocations = Object.keys(currentDeptTestData);
     
     // Store the index of the selected sub location
@@ -158,6 +163,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                     <label>{subLocation}</label>
                     <NavigationArrow size="25px" color="white" identifier="config-right-arrow" onClick={(e) => updateSubLocation(locationIndex, setLocationIndex, setTestingProgress, currentDeptTestData, availableSubLocations, e)} />
                 </div>}
+                <label className="testing-template-update-date">{`Last Updated: ${lastUpdated}`}</label>
                 <div className="testing-template-display">
                     {bedNumbers.map((entry, index) => {
                         const currentBedData = testingProgress.find((bedData) => {
@@ -169,7 +175,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                     })} 
                 </div>
                 <div className="testing-template-upload-btn-container size-100 flex-c">
-                    <div className="update-button reset-button testing-template-upload-btn">Reset Form</div>
+                    <div className="update-button reset-button testing-template-upload-btn" onClick={() => resetTestingProgress(currentDept, subLocation, queryClient, showMessage, closeDialog)}>Reset Form</div>
                     <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
                 </div> 
             </div>

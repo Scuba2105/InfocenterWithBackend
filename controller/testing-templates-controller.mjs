@@ -21,14 +21,22 @@ export async function updateTestingProgressData(req, res, next, __dirname) {
             const department = req.body.department;
             const subLocation = req.body.subLocation;
             const updatedTestingData = req.body.testData;
+            const date = new Date();
+
+            // Convert the date object to date string
+            const newDate = new Date(date.getTime() + 100000000);
+            const newDateString = newDate.toLocaleDateString();
 
             // Mutate the all testing data to update the testing data
             if (subLocation === null) {
-                allTestingData[hospital][department] = updatedTestingData;
+                allTestingData[hospital][department]["testData"] = updatedTestingData;
             }
             else {
-                allTestingData[hospital][department][subLocation] = updatedTestingData;
+                allTestingData[hospital][department]["testData"][subLocation] = updatedTestingData;
             }
+
+            // Update the last updated date for the current department
+            allTestingData[hospital][department]["lastUpdate"] = newDateString;
             
            // Write the data to file.
            const fileWrittenResult = await writeAllTestingTemplateData(__dirname, JSON.stringify(allTestingData, null, 2)).catch((err) => {
