@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BedStatusTable } from "./BedStatusTable";
-import { NavigationArrow } from "../../../svg";
 import { SelectInput } from "../../SelectInput";
 import { serverConfig } from "../../../server";
-
+import { useConfirmation } from "../../StateStore";
+ 
 // Departments with no sub-locations
 const noSubLocationDepts = ["CCU"];
 
@@ -37,7 +37,6 @@ function updateTestingProgress(testingProgress, setTestingProgress, testingTempl
 // Update the sublocation when arrow pushed
 function updateSubLocation(setSubLocation, setTestingProgress, testingTemplatesData, e) {
     const newSubLocation = e.currentTarget.value;
-    console.log("Hello", e.currentTarget)
     setSubLocation(newSubLocation);
     setTestingProgress(testingTemplatesData[newSubLocation]);
 }
@@ -120,8 +119,9 @@ async function uploadTestingProgress(currentDept, subLocation, testingProgress, 
 }
 
 // Function to be called when reset button pushed.
-async function resetTestingProgress(currentDept, subLocation, queryClient, showMessage, closeDialog) {
-
+async function confirmResetTestingProgress(currentDept, showMessage) {
+    // Have user confirm to proceed if changing mandatory data
+    showMessage("confirmation", `You are about to clear all testing data and reset the testing progress data for ${currentDept}. Please confirm you wish to proceed or cancel to prevent clearing the current data.`);
 }
 
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeDialog}) {
@@ -131,7 +131,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
 
     const availableSubLocations = Object.keys(currentDeptTestData);
     
-    // Store the index of the selected sub location
+    // Store the index of the selected sub location.
     const [subLocation, setSubLocation] = useState(!noSubLocationDepts.includes(currentDept) ? availableSubLocations[0] : null);
 
     // Store the current testing progress array.
@@ -141,6 +141,62 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
     const bedNumbers = testingProgress.map((entry) => {
         return entry.bed;
     }) 
+
+    // Get the confirmation result from Zustand state store.
+    const confirmationResult = useConfirmation((state) => state.updateConfirmation);
+    const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
+
+    useEffect(() => {
+        if (confirmationResult === "proceed") {
+
+            const resetData = {hospital: "John Hunter Hospital", department: currentDept}
+
+            async function proceedwithReset() {
+                showMessage("uploading", `Resetting ${currentDept} Testing Progess Data`);
+
+                try {
+                    // Post the data to the server  
+                    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/ResetTestingProgress`, {
+                            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                            mode: "cors", // no-cors, *cors, same-origin
+                            redirect: "follow", // manual, *follow, error
+                            referrerPolicy: "no-referrer",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(resetData),
+                    })
+        
+                    const data = await res.json();
+
+                    if (data.type === "Error") {
+                        closeDialog();
+                        showMessage("error", `${data.message} If the issue persists please contact an administrator.`);
+                    }
+                    else {                            
+                        // Need to update app data.
+                        queryClient.invalidateQueries('dataSource');
+            
+                        closeDialog();
+                        showMessage("info", `${currentDept} testing progress has been successfully reset!`);
+                        
+                        setTimeout(() => {
+                            closeDialog();
+                        }, 1600);
+                    }
+                } 
+                catch (error) {
+                    showMessage("error", `${error.message}.`)
+                }
+            }
+            proceedwithReset();
+        }
+        
+        return () => {
+            resetConfirmationStatus();
+        }    
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient, currentDept]);
+         
     
     if (["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU"].includes(currentDept)) {
         return (
@@ -160,7 +216,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                     })} 
                 </div>
                 <div className="testing-template-upload-btn-container size-100 flex-c">
-                    <div className="update-button reset-button testing-template-upload-btn" onClick={() => resetTestingProgress(currentDept, subLocation, queryClient, showMessage, closeDialog)}>Reset Form</div>
+                    <div className="update-button reset-button testing-template-upload-btn" onClick={() => confirmResetTestingProgress(currentDept, showMessage)}>Reset Form</div>
                     <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
                 </div> 
             </div>
