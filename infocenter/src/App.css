@@ -2784,6 +2784,7 @@ abbr[title] {
 }
 
 .testing-template-navigation-container {
+  font-size: 18px;
   width: 250px;
   justify-content: space-between;
   margin-top: 20px;
@@ -2793,8 +2794,8 @@ abbr[title] {
 
 .testing-template-update-date {
   color: white;
+  font-size: 13px;
   margin-top: 15px;
-  transform: translateX(-370px);
 }
 
 .testing-template-display {

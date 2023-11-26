@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BedStatusTable } from "./BedStatusTable";
 import { NavigationArrow } from "../../../svg";
+import { SelectInput } from "../../SelectInput";
 import { serverConfig } from "../../../server";
 
 // Departments with no sub-locations
@@ -34,17 +35,11 @@ function updateTestingProgress(testingProgress, setTestingProgress, testingTempl
 }
 
 // Update the sublocation when arrow pushed
-function updateSubLocation(index, setLocationIndex, setTestingProgress, testingTemplatesData, availableSubLocations, e) {
-    const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
-    
-    if (rightArrowPressed && index < (availableSubLocations.length - 1)) {
-        setLocationIndex(i => i + 1);
-        setTestingProgress(testingTemplatesData[availableSubLocations[index + 1]]);
-    }
-    else if (!rightArrowPressed && index > 0) {
-        setLocationIndex(i => i - 1);
-        setTestingProgress(testingTemplatesData[availableSubLocations[index -1]]);
-    }
+function updateSubLocation(setSubLocation, setTestingProgress, testingTemplatesData, e) {
+    const newSubLocation = e.currentTarget.value;
+    console.log("Hello", e.currentTarget)
+    setSubLocation(newSubLocation);
+    setTestingProgress(testingTemplatesData[newSubLocation]);
 }
 
 // Set the accessible room/bedside devices the current sublocation.
@@ -124,10 +119,11 @@ async function uploadTestingProgress(currentDept, subLocation, testingProgress, 
     }
 }
 
-
+// Function to be called when reset button pushed.
 async function resetTestingProgress(currentDept, subLocation, queryClient, showMessage, closeDialog) {
 
 }
+
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeDialog}) {
     
     const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept]["testData"];
@@ -136,14 +132,8 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
     const availableSubLocations = Object.keys(currentDeptTestData);
     
     // Store the index of the selected sub location
-    const [locationIndex, setLocationIndex] = useState(0)
+    const [subLocation, setSubLocation] = useState(!noSubLocationDepts.includes(currentDept) ? availableSubLocations[0] : null);
 
-    let subLocation = null;
-    if (!noSubLocationDepts.includes(currentDept)) {
-        // Store the currently selected sub-location in state.
-        subLocation = availableSubLocations[locationIndex];
-    }
-    
     // Store the current testing progress array.
     const [testingProgress, setTestingProgress] = useState(noSubLocationDepts.includes(currentDept) ? currentDeptTestData : currentDeptTestData[subLocation]);
     
@@ -152,16 +142,11 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
         return entry.bed;
     }) 
     
-    // Get the data for the current selected sub department.
-    const currentTemplateData = testingProgress;
-
     if (["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU"].includes(currentDept)) {
         return (
             <div className="testing-template-form flex-c-col">
                 {subLocation && <div className="testing-template-navigation-container flex-c">
-                    <NavigationArrow size="25px" color="white" identifier="config-left-arrow" onClick={(e) => updateSubLocation(locationIndex, setLocationIndex, setTestingProgress, currentDeptTestData, availableSubLocations, e)} />
-                    <label>{subLocation}</label>
-                    <NavigationArrow size="25px" color="white" identifier="config-right-arrow" onClick={(e) => updateSubLocation(locationIndex, setLocationIndex, setTestingProgress, currentDeptTestData, availableSubLocations, e)} />
+                    <SelectInput label="Sub Location" value={subLocation} optionData={availableSubLocations} onChange={(e) => updateSubLocation(setSubLocation, setTestingProgress, currentDeptTestData, e)} />
                 </div>}
                 <label className="testing-template-update-date">{`Last Updated: ${lastUpdated}`}</label>
                 <div className="testing-template-display">
