@@ -124,7 +124,7 @@ async function confirmResetTestingProgress(currentDept, showMessage) {
     showMessage("confirmation", `You are about to clear all testing data and reset the testing progress data for ${currentDept}. Please confirm you wish to proceed or cancel to prevent clearing the current data.`);
 }
 
-export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeDialog}) {
+export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeModal, closeDialog}) {
     
     const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept]["testData"];
     const lastUpdated = testingTemplatesData["John Hunter Hospital"][currentDept]["lastUpdate"];
@@ -176,12 +176,14 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                     else {                            
                         // Need to update app data.
                         queryClient.invalidateQueries('dataSource');
+                        //queryClient.removeQueries('dataSource')
             
                         closeDialog();
                         showMessage("info", `${currentDept} testing progress has been successfully reset!`);
                         
                         setTimeout(() => {
                             closeDialog();
+                            closeModal();
                         }, 1600);
                     }
                 } 
@@ -195,7 +197,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient, currentDept]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, closeModal, showMessage, queryClient, currentDept]);
          
     
     if (["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU"].includes(currentDept)) {

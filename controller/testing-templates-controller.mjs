@@ -81,8 +81,14 @@ export async function resetTestingProgressData(req, res, next, __dirname) {
 
             // If department has several sub locations loop over each one, else loop over all beds and set to false.
             if (!noSubLocationDepts.includes(department)) {
-                for (const pair of Object.entries(currentDeptData)) {
-
+                for (const [sublocation, testData] of Object.entries(currentDeptData)) {
+                    testData.map((bedData) => {
+                        for (const [key, value] of Object.entries(bedData)) {
+                            if (key !== "bed") {
+                                bedData[key] = false;
+                            }
+                        }
+                    })
                 }
             }
             else {

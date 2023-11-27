@@ -108,7 +108,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
             }
             {testingTemplateVisible && 
                 <TestingProgressSkeleton  currentDept={testingDepartment} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)}>
-                    <JHHTestingProgressTemplates testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
+                    <JHHTestingProgressTemplates testingTemplatesData={testingTemplatesData} currentDept={testingDepartment} queryClient={queryClient} showMessage={showMessage} closeModal={() => closeTestingTemplate(setTestingTemplateVisible)} closeDialog={closeDialog}/>
                 </TestingProgressSkeleton> 
             }
         </>
