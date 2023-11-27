@@ -126,8 +126,8 @@ async function confirmResetTestingProgress(currentDept, showMessage) {
 
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeModal, closeDialog}) {
     
-    const currentDeptTestData = testingTemplatesData["John Hunter Hospital"][currentDept]["testData"];
-    const lastUpdated = testingTemplatesData["John Hunter Hospital"][currentDept]["lastUpdate"];
+    const [currentDeptTestData, setCurrentDeptTestData] = useState(testingTemplatesData["John Hunter Hospital"][currentDept]["testData"]);
+    const [lastUpdated, setLastUpdated] = useState(testingTemplatesData["John Hunter Hospital"][currentDept]["lastUpdate"]);
 
     const availableSubLocations = Object.keys(currentDeptTestData);
     
@@ -176,8 +176,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                     else {                            
                         // Need to update app data.
                         queryClient.invalidateQueries('dataSource');
-                        //queryClient.removeQueries('dataSource')
-            
+                                    
                         closeDialog();
                         showMessage("info", `${currentDept} testing progress has been successfully reset!`);
                         
@@ -185,6 +184,9 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                             closeDialog();
                             closeModal();
                         }, 1600);
+                        
+                        // Reset testing progress state to all false using setTestingProgress and algroithm on backend
+
                     }
                 } 
                 catch (error) {
