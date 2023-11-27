@@ -2792,6 +2792,8 @@ abbr[title] {
   font-weight: 600;
 }
 
+
+
 .testing-template-update-date {
   color: white;
   font-size: 13px;
@@ -2950,6 +2952,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 13px;
   color: var(--form-font-color);
   transform: translateY(-4px); 
+}
+
+.sub-location-select {
+  margin-top: 20px;
+  width: 250px;
+  height: 34px;
+  font-size: 20px;
 }
 
 /* Media query to restrict size of document form on smaller screen laptops */

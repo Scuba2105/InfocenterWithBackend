@@ -204,7 +204,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
         return (
             <div className="testing-template-form flex-c-col">
                 {subLocation && <div className="testing-template-navigation-container flex-c">
-                    <SelectInput label="Sub Location" value={subLocation} optionData={availableSubLocations} onChange={(e) => updateSubLocation(setSubLocation, setTestingProgress, currentDeptTestData, e)} />
+                    <SelectInput type="testing-template" label="Sub Location" value={subLocation} optionData={availableSubLocations} onChange={(e) => updateSubLocation(setSubLocation, setTestingProgress, currentDeptTestData, e)} />
                 </div>}
                 <label className="testing-template-update-date">{`Last Updated: ${lastUpdated}`}</label>
                 <div className="testing-template-display">
