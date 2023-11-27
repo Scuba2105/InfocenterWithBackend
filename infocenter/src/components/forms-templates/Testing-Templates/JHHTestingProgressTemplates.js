@@ -7,6 +7,33 @@ import { useConfirmation } from "../../StateStore";
 // Departments with no sub-locations
 const noSubLocationDepts = ["CCU"];
 
+function resetTestingDeptProgress(currentDeptTestData, currentDept) {
+    if (!noSubLocationDepts.includes(currentDept)) {
+        for (const [sublocation, testData] of Object.entries(currentDeptTestData)) {
+            testData.map((bedData) => {
+                for (const [key, value] of Object.entries(bedData)) {
+                    if (key !== "bed") {
+                        bedData[key] = false;
+                    }
+                }
+                return bedData;
+            })
+        }
+    }
+    else {
+        currentDeptTestData.map((bedData) => {
+            for (const [key, value] of Object.entries(bedData)) {
+                if (key !== "bed") {
+                    bedData[key] = false;
+                }
+            }
+            return bedData;
+        })
+    }
+
+    return currentDeptTestData
+}
+
 // Function which is called to update bedside testing progress.
 function updateTestingProgress(testingProgress, setTestingProgress, testingTemplatesData, selectedBedData, device) {
     // Get the selected device status 
@@ -182,11 +209,13 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                         
                         setTimeout(() => {
                             closeDialog();
-                            closeModal();
                         }, 1600);
                         
                         // Reset testing progress state to all false using setTestingProgress and algroithm on backend
-
+                        const resetDeptTestData = resetTestingDeptProgress(currentDeptTestData, currentDept);
+                        setCurrentDeptTestData(resetDeptTestData);
+                        setTestingProgress(noSubLocationDepts.includes(currentDept) ? resetDeptTestData : resetDeptTestData[subLocation])
+                        resetConfirmationStatus();
                     }
                 } 
                 catch (error) {
@@ -199,7 +228,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, closeModal, showMessage, queryClient, currentDept]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, closeModal, showMessage, queryClient, currentDept, currentDeptTestData, subLocation]);
          
     
     if (["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU"].includes(currentDept)) {
