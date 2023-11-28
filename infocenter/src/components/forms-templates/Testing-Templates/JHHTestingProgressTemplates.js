@@ -106,7 +106,7 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
             return ["B450", "PSMP"];
         } 
         else {
-            return entry.Theatre === 7 ? ["Bed", "ESU No.1", "ESU No.2"] : ["Bed", "ESU"];
+            return entry === 7 ? ["Theatre Bed", "ESU No.1", "ESU No.2"] : ["Theatre Bed", "ESU"];
         }
     }  
 }
@@ -160,7 +160,7 @@ async function confirmResetTestingProgress(currentDept, showMessage) {
 }
 
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeModal, closeDialog}) {
-    console.log(testingTemplatesData["John Hunter Hospital"][currentDept])
+    
     const [currentDeptTestData, setCurrentDeptTestData] = useState(testingTemplatesData["John Hunter Hospital"][currentDept]["testData"]);
     const [lastUpdated, setLastUpdated] = useState(testingTemplatesData["John Hunter Hospital"][currentDept]["lastUpdate"]);
     
@@ -175,7 +175,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
     
     // Get the bed numbers from the testing template data.
     const bedNumbers = testingProgress.map((entry) => {
-        return entry.bed;
+        return  entry.bed
     }) 
     
     // Get the confirmation result from Zustand state store.
@@ -251,9 +251,8 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
             <div className="testing-template-display">
                 {bedNumbers.map((entry, index) => {
                     const currentBedData = testingProgress.find((bedData) => {
-                        return bedData.bed === entry || bedData.bay === entry || bedData.Theatre === entry;
+                        return bedData.bed === entry || bedData.bay === entry || bedData.theatre === entry;
                     })
-                    console.log(currentBedData)
                     return (
                         <BedStatusTable key={`BedStatusTable-${entry}`} currentDept={currentDept} bedNumber={entry} bedIndex={index} testingTemplatesData={noSubLocationDepts.includes(currentDept) ? currentDeptTestData : currentDeptTestData[subLocation]} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
                     )

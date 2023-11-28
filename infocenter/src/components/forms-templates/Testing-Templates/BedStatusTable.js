@@ -16,7 +16,6 @@ function getRoomBedHeading(bedNumber, currentDept) {
 }
 
 export function BedStatusTable({currentDept, bedNumber, bedIndex, testingTemplatesData, currentBedData, updateTestingProgress, testingProgress, setTestingProgress, bedDevices}) {
-    
     return (
         <div key={`testing-template-table-${bedIndex}`} className="testing-template-table-container size-100 flex-c">
                         <table className="tg" style={{tableLayout: "fixed", width: 254 + 'px'}}>
