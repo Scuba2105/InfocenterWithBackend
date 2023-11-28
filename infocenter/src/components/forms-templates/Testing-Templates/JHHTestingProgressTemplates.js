@@ -101,6 +101,14 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
             return ["MX700", "Rack", "X2"];
         }
     }  
+    else if (currentDept === "Operating Suite") {
+        if (subLocation === "Anaesthetic Bays") {
+            return ["B450", "PSMP"];
+        } 
+        else {
+            return entry.Theatre === 7 ? ["Bed", "ESU No.1", "ESU No.2"] : ["Bed", "ESU"];
+        }
+    }  
 }
 
 async function uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog) {
@@ -152,10 +160,11 @@ async function confirmResetTestingProgress(currentDept, showMessage) {
 }
 
 export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, queryClient, showMessage, closeModal, closeDialog}) {
-    
+    console.log(testingTemplatesData["John Hunter Hospital"][currentDept])
     const [currentDeptTestData, setCurrentDeptTestData] = useState(testingTemplatesData["John Hunter Hospital"][currentDept]["testData"]);
     const [lastUpdated, setLastUpdated] = useState(testingTemplatesData["John Hunter Hospital"][currentDept]["lastUpdate"]);
-
+    
+    // Get the available sublocations data from the current dept test data.
     const availableSubLocations = Object.keys(currentDeptTestData);
     
     // Store the index of the selected sub location.
@@ -168,7 +177,7 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
     const bedNumbers = testingProgress.map((entry) => {
         return entry.bed;
     }) 
-
+    
     // Get the confirmation result from Zustand state store.
     const confirmationResult = useConfirmation((state) => state.updateConfirmation);
     const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
@@ -213,7 +222,9 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                         
                         // Reset testing progress state to all false using setTestingProgress and algroithm on backend
                         const resetDeptTestData = resetTestingDeptProgress(currentDeptTestData, currentDept);
+                        const date = new Date();
                         setCurrentDeptTestData(resetDeptTestData);
+                        setLastUpdated(date.toLocaleDateString());
                         setTestingProgress(noSubLocationDepts.includes(currentDept) ? resetDeptTestData : resetDeptTestData[subLocation])
                         resetConfirmationStatus();
                     }
@@ -231,35 +242,27 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
     }, [confirmationResult, resetConfirmationStatus, closeDialog, closeModal, showMessage, queryClient, currentDept, currentDeptTestData, subLocation]);
          
     
-    if (["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU"].includes(currentDept)) {
-        return (
-            <div className="testing-template-form flex-c-col">
-                {subLocation && <div className="testing-template-navigation-container flex-c">
-                    <SelectInput type="testing-template" label="Sub Location" value={subLocation} optionData={availableSubLocations} onChange={(e) => updateSubLocation(setSubLocation, setTestingProgress, currentDeptTestData, e)} />
-                </div>}
-                <label className="testing-template-update-date">{`Last Updated: ${lastUpdated}`}</label>
-                <div className="testing-template-display">
-                    {bedNumbers.map((entry, index) => {
-                        const currentBedData = testingProgress.find((bedData) => {
-                            return bedData.bed === entry;
-                        })
-                        return (
-                            <BedStatusTable key={`BedStatusTable-${entry}`} currentDept={currentDept} bedNumber={entry} bedIndex={index} testingTemplatesData={noSubLocationDepts.includes(currentDept) ? currentDeptTestData : currentDeptTestData[subLocation]} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
-                        )
-                    })} 
-                </div>
-                <div className="testing-template-upload-btn-container size-100 flex-c">
-                    <div className="update-button reset-button testing-template-upload-btn" onClick={() => confirmResetTestingProgress(currentDept, showMessage)}>Reset Form</div>
-                    <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
-                </div> 
+    return (
+        <div className="testing-template-form flex-c-col">
+            {subLocation && <div className="testing-template-navigation-container flex-c">
+                <SelectInput type="testing-template" label="Sub Location" value={subLocation} optionData={availableSubLocations} onChange={(e) => updateSubLocation(setSubLocation, setTestingProgress, currentDeptTestData, e)} />
+            </div>}
+            <label className="testing-template-update-date">{`Last Updated: ${lastUpdated}`}</label>
+            <div className="testing-template-display">
+                {bedNumbers.map((entry, index) => {
+                    const currentBedData = testingProgress.find((bedData) => {
+                        return bedData.bed === entry || bedData.bay === entry || bedData.Theatre === entry;
+                    })
+                    console.log(currentBedData)
+                    return (
+                        <BedStatusTable key={`BedStatusTable-${entry}`} currentDept={currentDept} bedNumber={entry} bedIndex={index} testingTemplatesData={noSubLocationDepts.includes(currentDept) ? currentDeptTestData : currentDeptTestData[subLocation]} currentBedData={currentBedData} updateTestingProgress={updateTestingProgress} testingProgress={testingProgress} setTestingProgress={setTestingProgress} bedDevices={getAvailableBedSideDevices(currentDept, subLocation, entry)} />
+                    )
+                })} 
             </div>
-        )
-    }
-    else {
-        return (
-            <div className="flex-c" style={{height: 300 + 'px'}}>
-                <h4 style={{color: "white", gridRow: 1 / -1, gridColumn: 1 / -1}}>{`The template is not yet available for ${currentDept}`}</h4>
-            </div>
-        )
-    }
+            <div className="testing-template-upload-btn-container size-100 flex-c">
+                <div className="update-button reset-button testing-template-upload-btn" onClick={() => confirmResetTestingProgress(currentDept, showMessage)}>Reset Form</div>
+                <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
+            </div> 
+        </div>
+    )
 }

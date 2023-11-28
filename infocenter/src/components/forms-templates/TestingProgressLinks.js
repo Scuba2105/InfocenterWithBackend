@@ -1,14 +1,16 @@
 import { serverConfig } from "../../server"
 
 // array of the available internal templates
-const internalTemplates = ["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite", "Recovery"];
+//const internalTemplates = ["CCU", "Delivery Suite", "Emergency Department", "ICU/PICU", "NICU", "Operating Suite", "Recovery"];
 
-export function TestingProgressLinks({showTestingTemplate, setTestingTemplateVisible, setTestingDepartment, setTestingDept}) {
+export function TestingProgressLinks({testingTemplatesData, showTestingTemplate, setTestingTemplateVisible, setTestingDepartment, setTestingDept}) {
 
     function updateTestingTemplateState(dept) {
         showTestingTemplate(setTestingTemplateVisible);
         setTestingDept(setTestingDepartment, dept)
     }
+
+    const internalTemplates = Object.keys(testingTemplatesData["John Hunter Hospital"])
 
     return (
         <div className="templates-links-container">        
