@@ -186,16 +186,12 @@ html {
   color: white;
   font-size: 14px;
   text-align: center;
-  background: url("../../public/images/christmas-tree.png");
+  background: url("../../public/images/christmas-icon.png");
   background-size: 55px 55px;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
-}
-
-#christmas-message {
-  transform: rotate(-45deg);
 }
 
 .header-bar {
@@ -213,7 +209,7 @@ html {
   grid-column: 2 / -1;
   background: url(../../public/images/tinsel.png);
   background-position: -50px -35px;
-  background-size: 500px 83px;
+  background-size: 400px 105px;
   color: white;
   font-size: 22px;
   font-weight: bold;
