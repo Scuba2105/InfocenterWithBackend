@@ -1,8 +1,8 @@
 import { Tick, Cross } from "../../../svg";
 
 function getRoomBedHeading(bedNumber, currentDept) {
-    if (Number.isInteger(bedNumber)) {
-        if (currentDept === "NICU") {
+    if (Number.isInteger(bedNumber) || ["A", "B", "C"].includes(bedNumber)) {
+        if (currentDept === "NICU" || currentDept === "Recovery") {
             return `Bed ${bedNumber}`
         } 
         else if (currentDept === "Operating Suite") {

@@ -5,7 +5,7 @@ import { Mutex } from "async-mutex";
 const testingDataMutex = new Mutex();
 
 // Departments with no sub-locations
-const noSubLocationDepts = ["CCU"];
+const noSubLocationDepts = ["CCU", "Recovery"];
 
 export async function updateTestingProgressData(req, res, next, __dirname) {
     testingDataMutex.runExclusive(async () => {

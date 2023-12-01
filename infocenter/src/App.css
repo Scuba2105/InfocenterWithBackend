@@ -184,7 +184,7 @@ html {
 
 .app-icon-container-christmas {
   background: url("../../public/images/christmas-tree.png");
-  background-size: contain;
+  background-size: 50px 50px;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;

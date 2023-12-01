@@ -5,7 +5,7 @@ import { serverConfig } from "../../../server";
 import { useConfirmation } from "../../StateStore";
  
 // Departments with no sub-locations
-const noSubLocationDepts = ["CCU"];
+const noSubLocationDepts = ["CCU", "Recovery"];
 
 function resetTestingDeptProgress(currentDeptTestData, currentDept) {
     if (!noSubLocationDepts.includes(currentDept)) {
@@ -73,8 +73,11 @@ function getAvailableBedSideDevices(currentDept, subLocation, entry) {
     if (currentDept === "CCU") {
         return ["MX700", "Rack", "X2"];
     }
-    if (currentDept === "ICU/PICU" || currentDept === "NICU") {
+    else if (currentDept === "ICU/PICU" || currentDept === "NICU") {
         return ["MX800", "Rack", "X2"];
+    }
+    else if (currentDept === "Recovery") {
+        return ["B450", "PSMP", "SCD700"];
     }
     else if (currentDept === "Delivery Suite") {
         if (subLocation === "Birth Suite" && [3, 4].includes(entry)) {
