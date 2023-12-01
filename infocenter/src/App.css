@@ -183,12 +183,19 @@ html {
 }
 
 .app-icon-container-christmas {
+  color: white;
+  font-size: 14px;
+  text-align: center;
   background: url("../../public/images/christmas-tree.png");
-  background-size: 50px 50px;
+  background-size: 55px 55px;
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
+}
+
+#christmas-message {
+  transform: rotate(-45deg);
 }
 
 .header-bar {
@@ -205,12 +212,11 @@ html {
   grid-row: 1;
   grid-column: 2 / -1;
   background: url(../../public/images/tinsel.png);
-  background-position: -50px -20px;
-  background-size: 500px 80px;
+  background-position: -50px -35px;
+  background-size: 500px 83px;
   color: white;
   font-size: 22px;
   font-weight: bold;
-  align-items: flex-end;
   justify-content: space-between;
 }
 
@@ -2725,6 +2731,13 @@ abbr[title] {
   color: var(--form-font-color);
   font-size: 13px;
   text-align: center;
+}
+
+/* Formatting the administration page*/
+.administration-display-container {
+  grid-column: 1 / span 2;
+  color: var(--form-font-color);
+  align-items: center;
 }
 
 /* Formatting the forms-templates page */

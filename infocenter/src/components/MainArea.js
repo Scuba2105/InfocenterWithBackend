@@ -13,6 +13,7 @@ import { ServiceRequestGenerator } from "./ServiceRequestGenerator";
 import { ThermometerManagement } from "./ThermometerManagement";
 import { CalendarComponent } from "./OnCall/CalendarComponent";
 import { OnCallFunctions } from "./OnCall/OnCallFunctions";
+import { AdministrationDisplay } from "./Administration/AdministrationDisplay";
 import { FormsTemplatesDisplay } from "./Forms-Templates/FormsTemplatesDisplay";
 import { useUser, useVendor } from "./StateStore";
 
@@ -110,6 +111,11 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 page === "forms-templates" ?
                 <>
                     <FormsTemplatesDisplay userFormsTemplates={data.formsTemplatesData} testingTemplatesData={data.testingTemplatesData} currentUserId={currentUser.staffId} page={page} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></FormsTemplatesDisplay>
+                    <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
+                </> :
+                page === "admin" ?
+                <>
+                    <AdministrationDisplay queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></AdministrationDisplay>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "on-call" ?

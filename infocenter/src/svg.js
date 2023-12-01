@@ -57,7 +57,6 @@ export function OnCallIcon({color, size='40px'}) {
     );
 }
 
-
 export function FormsTemplatesIcon({color, size='40px'}) {
     return (
         <>

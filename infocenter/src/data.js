@@ -16,13 +16,14 @@ export const menuOptions = [
         title: 'Forms Templates',
     },
     {
-        id: 'on-call',
-        title: 'On-Call'
-    }
-    /*{
         id: 'admin',
         title: 'Administration',
     },
+    {
+        id: 'on-call',
+        title: 'On-Call'
+    }
+    /*,
     {
       id: 'utilities',
       title: 'Utilities',
