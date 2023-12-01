@@ -73,11 +73,14 @@ export default function App() {
         )
     }
 
+    const date = new Date();
+    const month = date.getMonth();
+
     return (
         <ErrorBoundary children fallback={ErrorPage}>
             <div className="wrapper">
-                <div className="app-icon-container flex-c"></div>
-                <div className="header-bar flex-c">
+                <div className={month === 11 ? "app-icon-container-christmas flex-c" : "app-icon-container flex-c"}></div>
+                <div className={month === 11 ? "header-bar-christmas flex-c" : "header-bar flex-c"}>
                     <div id='header-aligner'></div>
                     HNECT Information Center
                     <Avatar showMessage={showMessage} closeDialog={closeDialog}></Avatar>

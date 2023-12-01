@@ -8,7 +8,7 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: var(--dark-theme); 
+  background-color: var(--med-theme); 
   --pageWidth: 100vw;
   --row-hover: #2a3657;
   --dark-theme: #101724;
@@ -182,13 +182,35 @@ html {
   width: 100%;
 }
 
+.app-icon-container-christmas {
+  background: url("../../public/images/christmas-tree.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
 .header-bar {
   grid-row: 1;
   grid-column: 2 / -1;
-  background-color: var(--med-theme);
+  background: var(--med-theme);
   color: white;
   font-size: 22px;
   font-weight: bold;
+  justify-content: space-between;
+}
+
+.header-bar-christmas {
+  grid-row: 1;
+  grid-column: 2 / -1;
+  background: url(../../public/images/tinsel.png);
+  background-position: -50px -20px;
+  background-size: 500px 80px;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
