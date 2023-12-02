@@ -79,7 +79,7 @@ export default function App() {
     return (
         <ErrorBoundary children fallback={ErrorPage}>
             <div className="wrapper">
-                <div className={month === 11 ? "app-icon-container-christmas flex-c" : "app-icon-container flex-c"}></div>
+                <div className="app-icon-container"></div>
                 <div className={month === 11 ? "header-bar-christmas flex-c" : "header-bar flex-c"}>
                     <div id='header-aligner'></div>
                     HNECT Information Center

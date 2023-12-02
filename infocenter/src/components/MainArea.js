@@ -16,6 +16,7 @@ import { OnCallFunctions } from "./OnCall/OnCallFunctions";
 import { AdministrationDisplay } from "./Administration/AdministrationDisplay";
 import { FormsTemplatesDisplay } from "./Forms-Templates/FormsTemplatesDisplay";
 import { useUser, useVendor } from "./StateStore";
+import { SnowFall } from "./SnowFall";
 
 // Set the current utility for the utilities page
 function selectUtility(setUtilityPage, index) {
@@ -75,22 +76,29 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
 
     // If data retrieved then render the main area based on returned data.
     if (data) {
+
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+
         return (
             <div key={page} className="main-area">
                 {page === "technical-info" ? 
                 <>
+                    {currentMonth === 11 && <SnowFall />}
                     <SearchFilter key={`${page}-device-filter`} page={page} pageData={data.deviceData} vendorData={data.vendorContactsData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <SummaryCard key={`${page}-device-card`} page={page} setPage={setPage} pageData={data.deviceData} selectedEntry={selectedEntry} setVendor={setVendor} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "staff" ?
                 <>
+                    {currentMonth === 11 && <SnowFall />}
                     <SearchFilter key={`${page}-staff-filter`} page={page} pageData={data.staffData} onRowClick={onRowClick} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <SummaryCard key={`${page}-staff-card`} page={page} pageData={data.staffData} selectedEntry={selectedEntry} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "contacts" ?
                 <>
+                    {currentMonth === 11 && <SnowFall />}
                     <div className="size-100 flex-c">                                                                                                                                                                                    
                         <ContactsSummary page={page} identifier="staff" selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
@@ -110,16 +118,19 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 </> :
                 page === "forms-templates" ?
                 <>
+                    {currentMonth === 11 && <SnowFall />}
                     <FormsTemplatesDisplay userFormsTemplates={data.formsTemplatesData} testingTemplatesData={data.testingTemplatesData} currentUserId={currentUser.staffId} page={page} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></FormsTemplatesDisplay>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "admin" ?
                 <>
+                    {currentMonth === 11 && <SnowFall />}
                     <AdministrationDisplay queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></AdministrationDisplay>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
                 </> :
                 page === "on-call" ?
                 <>
+                    {currentMonth === 11 && <SnowFall />}
                     <CalendarComponent onCallChangedData={data.onCallData}></CalendarComponent>
                     <OnCallFunctions page={page} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></OnCallFunctions>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />
