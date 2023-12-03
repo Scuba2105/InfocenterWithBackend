@@ -1,7 +1,7 @@
 import { AdminLinksSection } from "./AdminLinksSection";
 import { serverConfig } from "../../server";
 
-// Store list of Policies and procedures with service request forms.
+// Store list of Policies and Procedures and their corresponding locations.
 const policiesProceduresLinks = {
     "Acceptance & Commissioning": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Acceptance and Commissioning.pdf`,
     "Testing and Tagging": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Testing and Tagging.pdf`,
@@ -15,7 +15,7 @@ const policiesProceduresLinks = {
     "Planned Outage Process" : `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Planned Outage Process.pdf`
 }; 
 
-// Store list of Policies and procedures with service request forms.
+// Store list of Modification and Fabrication documents and their corresponding locations.
 const modificationFabricationLinks = {
     "Request Form": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Modification-Fabrication Request.doc`,
     "Decision Chart": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Modification-Fabrication Decision Chart.docx`,
@@ -25,7 +25,7 @@ const modificationFabricationLinks = {
     "Request Assessment Example": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Worked Example-Work request assessment.doc`
 };
 
-// Store list of Policies and procedures with service request forms.
+// Store list of Disaster Plans documents and their corresponding locations.
 const disasterPlansLinks = {
     "HNE Health Disaster Plans": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/HNE Health Disaster Plans.pdf`,
     "Disaster Planning and Management": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/Disaster Planning and Management.pdf`,
@@ -35,8 +35,18 @@ const disasterPlansLinks = {
     "Emergency Plan for Dangerous Goods": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/Emergency Plan for Dangerous Goods.pdf`,
 };
 
+// Store list of common External Applications and their corresponding url.
+const externalApplications = {
+    "Staff Link": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
+    "SARA Leave Application": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
+    "CPACS": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
+    "My Health Learning": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`
+}
+
+// Create the array of admin page sections and their associated url data.
 const adminPageSectionsArray = [
     {section: "Policies and Procedures", linksData: policiesProceduresLinks},
+    {section: "External Applications", linksData: externalApplications},
     {section: "Modification and Fabrication", linksData: modificationFabricationLinks},
     {section: "Disaster Plans", linksData: disasterPlansLinks}
 ]
