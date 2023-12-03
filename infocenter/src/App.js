@@ -28,6 +28,7 @@ export default function App() {
     // Get the state setter for selected device from Zustand state
     const setCurrentDevice = useDevice((state) => state.setDevice);
 
+    // Get the current session data if the browser is refreshed during the current session to prevent logging in again.
     useEffect(() => {
         if (loggedIn) {
             const sessionData = sessionStorage.getItem("currentInfoCentreSession");
@@ -35,6 +36,15 @@ export default function App() {
             setSelectedEntry(currentSessionData.staffId);
         }
     }, [loggedIn])
+
+    // Dynamically import the christmas theme CSS if it is December.
+    useEffect(() => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        if (currentMonth === 11) {
+            import ("./Christmas-Theme.css");
+        }
+    }, [])
 
     //Update the page selected when a new page in the menu is selected
     function onPageSelect(page) {
