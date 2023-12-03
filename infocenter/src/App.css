@@ -1,13 +1,13 @@
 html {
   height: 100%;
   max-height: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 #root {
   height: 100%;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: var(--med-theme); 
   --pageWidth: 100vw;
   --row-hover: #2a3657;
@@ -195,7 +195,7 @@ html {
   grid-row: 1;
   grid-column: 2 / -1;
   background: url(../../public/images/christmas-lights.png);
-  background-position: -50px -35px;
+  background-position: -50px -18px;
   background-size: 600px 95px;
   color: white;
   font-size: 22px;

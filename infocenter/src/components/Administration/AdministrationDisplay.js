@@ -37,10 +37,12 @@ const disasterPlansLinks = {
 
 // Store list of common External Applications and their corresponding url.
 const externalApplications = {
-    "Staff Link": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
-    "SARA Leave Application": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
-    "CPACS": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
-    "My Health Learning": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`
+    "Staff Link": "https://envz.cit.health.nsw.gov.au/OA_HTML/AppsLogin",
+    "SARA Leave Application": "https://sara.health.nsw.gov.au",
+    "CPACS": "http://cpacsweb/",
+    "My Health Learning": "https://nswhealth.seertechsolutions.com.au",
+    "Uniform Orders": "https://nswhss.adaorders.com.au/",
+    "ChemAlert": "https://chemalert.rmt.com.au/nswhealthv5/login/"
 }
 
 // Create the array of admin page sections and their associated url data.
