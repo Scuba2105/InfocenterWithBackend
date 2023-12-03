@@ -54,7 +54,7 @@ export function Login() {
             
             // Create login credentials object
             const loginCredentials = {email: emailInput.value, password: passwordInput.value}
-            console.log(loginCredentials);
+            
             // Post the form data to the server. 
             const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/VerifyLogin`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.

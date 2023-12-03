@@ -10,7 +10,7 @@ const modificationFabricationResources = {
     "Request Assessment Example": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Worked Example-Work request assessment.doc`
 };
                                 
-export function ModificationFabrication({queryClient, showMessage, closeDialog}) {
+export function ModificationFabrication() {
     
     const documentsArray = []; 
     

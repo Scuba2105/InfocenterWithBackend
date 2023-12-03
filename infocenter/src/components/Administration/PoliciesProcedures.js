@@ -14,7 +14,7 @@ const policiesProcedures = {
     "Planned Outage Process" : `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Planned Outage Process.pdf`
 };
                                 
-export function PoliciesProcedures({queryClient, showMessage, closeDialog}) {
+export function PoliciesProcedures() {
     
     const documentsArray = []; 
     
