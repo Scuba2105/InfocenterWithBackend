@@ -1,35 +1,62 @@
-import { PoliciesProcedures } from "./PoliciesProcedures";
-import { ModificationFabrication } from "./ModificationFabrication";
-import { DisasterPlans } from "./DisasterPlans";
+import { AdminLinksSection } from "./AdminLinksSection";
+import { serverConfig } from "../../server";
+
+// Store list of Policies and procedures with service request forms.
+const policiesProceduresLinks = {
+    "Acceptance & Commissioning": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Acceptance and Commissioning.pdf`,
+    "Testing and Tagging": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Testing and Tagging.pdf`,
+    "Corrective Maintenance": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Corrective_Maintenance.pdf`,
+    "Incident Investigation Report": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Incident Investigation Report.doc`,
+    "Orders Process Map": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Orders Process Map.pdf`,
+    "Recalls and Safety Alerts": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Recalls and Safety Alerts.pdf`,
+    "Recall Flowchart": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Recall Flowchart.pdf`,
+    "EMS Recall Process": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/EMS Recall Process.pdf`,
+    "Medical Gas Installation": `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Medical Gas Installation.pdf`,
+    "Planned Outage Process" : `https://${serverConfig.host}:${serverConfig.port}/administration/policies-procedures/Planned Outage Process.pdf`
+}; 
+
+// Store list of Policies and procedures with service request forms.
+const modificationFabricationLinks = {
+    "Request Form": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Modification-Fabrication Request.doc`,
+    "Decision Chart": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Modification-Fabrication Decision Chart.docx`,
+    "Request Assessment Form": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Modification-Fabrication Request Assessment.doc`,
+    "Design Control Process": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Design Control Process.doc`,
+    "Production Process": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Production Process.doc`,
+    "Request Assessment Example": `https://${serverConfig.host}:${serverConfig.port}/administration/fabrication/Worked Example-Work request assessment.doc`
+};
+
+// Store list of Policies and procedures with service request forms.
+const disasterPlansLinks = {
+    "HNE Health Disaster Plans": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/HNE Health Disaster Plans.pdf`,
+    "Disaster Planning and Management": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/Disaster Planning and Management.pdf`,
+    "BME Disaster Plan": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/Biomedical Engineering Area Disaster Response Subplan.pdf`,
+    "JHH Disaster Plan": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/JHH Disaster Plan.pdf`,
+    "JHH Pandemic Response Plan": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/JHH Pandemic Response Plan.pdf`,
+    "Emergency Plan for Dangerous Goods": `https://${serverConfig.host}:${serverConfig.port}/administration/disaster-plans/Emergency Plan for Dangerous Goods.pdf`,
+};
+
+const adminPageSectionsArray = [
+    {section: "Policies and Procedures", linksData: policiesProceduresLinks},
+    {section: "Modification and Fabrication", linksData: modificationFabricationLinks},
+    {section: "Disaster Plans", linksData: disasterPlansLinks}
+]
 
 export function AdministrationDisplay({queryClient, showMessage, closeDialog}) {
     
     return (
         <>
-            <div className="forms-templates-container flex-c-col">
-                <div className="templates-section flex-c-col">
-                    <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">Policies and Procedures</h2>
+            {adminPageSectionsArray.map((entry) => {
+                return (
+                    <div key={entry.section} className="forms-templates-container flex-c-col">
+                        <div className="templates-section flex-c-col">
+                            <div className="templates-section-title-container flex-c">
+                                <h2 className="template-heading">{entry.section}</h2>
+                            </div>
+                            <AdminLinksSection documentLinksObject={entry.linksData} />
+                        </div>
                     </div>
-                    <PoliciesProcedures />
-                </div>
-            </div>
-            <div className="forms-templates-container flex-c-col">
-                <div className="templates-section flex-c-col">
-                    <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">Modification and Fabrication</h2>
-                    </div>
-                    <ModificationFabrication />
-                </div>
-            </div>
-            <div className="forms-templates-container flex-c-col">
-                <div className="templates-section flex-c-col">
-                    <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">Disaster Plans</h2>
-                    </div>
-                    <DisasterPlans />
-                </div>
-            </div>
+                )
+            })}
         </>
     )
 }
