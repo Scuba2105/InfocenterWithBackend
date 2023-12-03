@@ -7,7 +7,7 @@ html {
 #root {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: var(--med-theme); 
   --pageWidth: 100vw;
   --row-hover: #2a3657;
@@ -62,7 +62,6 @@ html {
 }
 
 /* Start of the CSS for the page elements */
-
 .wrapper {
   height: 100%;
   max-height: 100%;
@@ -70,7 +69,7 @@ html {
   display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: 65px 1fr;
-  overflow-y: scroll;
+  overflow-y: none;
   -webkit-overflow-scrolling: touch; /* optional, for smoother scrolling on iOS devices */
 }
 
@@ -358,9 +357,10 @@ html {
   background-color: var(--dark-theme);
   display: grid;
   grid-template-columns: 50% 50%;
-  overflow-y: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
   min-width: 1100px;
+  padding-bottom: 30px;
 }
 
 .error-container {
@@ -1775,10 +1775,15 @@ html {
 }
 
 /* Formatting the Contacts page */
+.hospital-contact-summary {
+  padding-top: 30px;
+  height: 95%;
+  width: 100%;
+}
+
 .hospital-contacts-container {
   display: grid;
   grid-template-rows: 80px 1fr;
-  margin-top: 30px;
 }
 
 .contacts-heading-admin, .contacts-heading {

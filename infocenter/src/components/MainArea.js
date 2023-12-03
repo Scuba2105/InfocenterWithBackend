@@ -99,10 +99,10 @@ export function MainArea({page, setPage, selectedEntry, dialogOpen, dialogMessag
                 page === "contacts" ?
                 <>
                     {currentMonth === 11 && <SnowFall />}
-                    <div className="size-100 flex-c">                                                                                                                                                                                    
+                    <div className="hospital-contact-summary flex-c">                                                                                                                                                                                    
                         <ContactsSummary page={page} identifier="staff" selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} pageData={data.contactsData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
-                    <div className="size-100 flex-c">
+                    <div className="hospital-contact-summary flex-c">
                         <ContactsSummary page={page} identifier="vendor" selectedVendor={vendor} setVendor={setVendor} pageData={data.vendorContactsData} onVendorChange={onVendorChange} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}></ContactsSummary>
                     </div>
                     <DialogBox dialogOpen={dialogOpen} dialogMessage={dialogMessage} closeDialog={closeDialog} />

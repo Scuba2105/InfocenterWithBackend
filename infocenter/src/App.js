@@ -25,7 +25,7 @@ export default function App() {
     const loggedIn = useLoggedIn((state) => state.loggedIn);
     const initialDevice = useDevice((state) => state.device);
     
-    // Get the state setter for selected device from Zustand state
+    // Get the state setter for last selected medical device in Technical Info.  
     const setCurrentDevice = useDevice((state) => state.setDevice);
 
     // Get the current session data if the browser is refreshed during the current session to prevent logging in again.
