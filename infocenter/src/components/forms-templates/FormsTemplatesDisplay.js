@@ -10,6 +10,7 @@ import { TestingProgressLinks } from "./TestingProgressLinks";
 import { TestingProgressSkeleton } from "./TestingProgressSkeleton";
 import { JHHTestingProgressTemplates } from "./Testing-Templates/JHHTestingProgressTemplates";
 import { Tooltip } from "../Tooltip";
+import { MainButton } from "../MainButton";
 import { serverConfig } from "../../server";
 
 // Store list of Service Agents with service request forms.
@@ -49,9 +50,9 @@ function setTestingDept(setTestingDepartment, department) {
     setTestingDepartment(department)
 }
 
-function ButtonComponent({onMouseOver, onClick}) {
+function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <div className="staff-edit-btn flex-c" style={{height: 25 + 'px', width: 25 + 'px'}} onMouseOver={onMouseOver} onClick={onClick}><UploadIcon color="rgb(5, 234, 146)" size="15px" /></div>
+        <MainButton buttonSize="small" Image={UploadIcon} imageColor="rgb(5, 234, 146)" size="15px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -78,7 +79,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">Service Request Forms</h2>
-                        <Tooltip content="Upload" ButtonComponent={ButtonComponent} onClick={() => showForm(setFormVisible)} />
+                        <Tooltip content="Upload" location="right" ButtonComponent={ButtonComponent} onClick={() => showForm(setFormVisible)} />
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :
                     <OnlineRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} />}              

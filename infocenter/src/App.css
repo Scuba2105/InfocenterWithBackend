@@ -61,6 +61,26 @@ html {
   cursor: pointer;
 }
 
+.main-button-small {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid rgb(5, 234, 146);
+}
+
+.main-button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid rgb(5, 234, 146);
+}
+
+.main-button:hover, .main-button-small:hover {
+  cursor: pointer;
+}
+
 /* Start of the CSS for the page elements */
 .wrapper {
   height: 100%;
@@ -1239,6 +1259,7 @@ html {
   align-items: center;
 }
 
+/* Format the tooltip buttons for the main buttons for add-new, update and upload */
 .tooltip-button {
   width: 100px;
 }
@@ -1266,6 +1287,7 @@ html {
   color: black;
   padding: 3px 6px 3px 6px;
   border-radius: 3px;
+  z-index: 700;
 }
 
 .add-new-staff-container {
@@ -2743,7 +2765,7 @@ abbr[title] {
 }
 
 .templates-section-title-container {
-  width: 350px;
+  width: 275px;
   justify-content: space-between;
   transform: translateX(20px);
 }

@@ -6,6 +6,8 @@ import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
 import { AddEditStaff } from "./Staff/AddEditStaff";
 import { EditIcon, VendorArrow } from "../svg";
+import { Tooltip } from "./Tooltip";
+import { MainButton } from "./MainButton";
 import { workshops } from "../data";
 
 function getClassName(page) {
@@ -53,6 +55,12 @@ function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, 
     setCurrentDevice(currentModel);
 }
 
+function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
+    return (
+        <MainButton buttonSize="large" Image={EditIcon} imageColor="rgb(5, 234, 146)" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+    )
+}
+
 export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, queryClient, showMessage, closeDialog}) {
     
     const [modalVisible, setModalVisible] = useState(false);
@@ -80,7 +88,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                     {!workshops.includes(selectedData.name) && staffEditPermissions && <div id="summary-header-aligner"></div>}
                     <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
                     {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <div className="staff-edit-btn flex-c" onClick={() => openAddUpdateForm(setAddUpdateFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>}
-                    {equipmentEditPermissions && page === "technical-info" && <div className="device-edit-button flex-c" onClick={() => showDeviceUpdate(setUpdateFormVisible)}><EditIcon color="rgb(5, 234, 146)"></EditIcon></div>}
+                    {equipmentEditPermissions && page === "technical-info" && <Tooltip content="Edit" location="left" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} />}
                 </div>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.staffId} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
