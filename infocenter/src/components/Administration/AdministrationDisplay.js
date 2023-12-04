@@ -37,16 +37,20 @@ const disasterPlansLinks = {
 
 // Store list of common External Applications and their corresponding url.
 const externalApplications = {
-    "Staff Link": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
-    "SARA Leave Application": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
-    "CPACS": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`,
-    "My Health Learning": `https://${serverConfig.host}:${serverConfig.port}/administration/filler`
+    "TNT": "https://mytnt.tnt.com",
+    "Staff Link": "https://envz.cit.health.nsw.gov.au/OA_HTML/AppsLogin",
+    "SARA Leave Application": "https://sara.health.nsw.gov.au",
+    "CPACS": "http://cpacsweb/",
+    "CPAP Pressure Settings": "https://www.apneaboard.com/adjust-cpap-pressure/change-cpap-pressure-settings-adjusting-your-machine-with-a-clinician-setup-manual",
+    "My Health Learning": "https://nswhealth.seertechsolutions.com.au",
+    "Uniform Orders": "https://nswhss.adaorders.com.au/",
+    "ChemAlert": "https://chemalert.rmt.com.au/nswhealthv5/login/"
 }
 
 // Create the array of admin page sections and their associated url data.
 const adminPageSectionsArray = [
     {section: "Policies and Procedures", linksData: policiesProceduresLinks},
-    {section: "External Applications", linksData: externalApplications},
+    {section: "External Applications and Websites", linksData: externalApplications},
     {section: "Modification and Fabrication", linksData: modificationFabricationLinks},
     {section: "Disaster Plans", linksData: disasterPlansLinks}
 ]
