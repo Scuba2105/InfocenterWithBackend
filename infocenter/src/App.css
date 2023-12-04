@@ -66,6 +66,9 @@ html {
   width: 30px;
   border-radius: 50%;
   background-color: transparent;
+  box-shadow: 7px 7px 5px 0px var(--med-theme);
+  -webkit-box-shadow: 7px 7px 5px 0px var(--med-theme);
+  -moz-box-shadow: 7px 7px 5px 0px var(--med-theme);
 }
 
 .main-button {
@@ -73,10 +76,20 @@ html {
   width: 45px;
   border-radius: 50%;
   background-color: transparent;
+  box-shadow: 7px 7px 5px 0px var(--med-theme);
+  -webkit-box-shadow: 7px 7px 5px 0px var(--med-theme);
+  -moz-box-shadow: 7px 7px 5px 0px var(--med-theme);
 }
 
 .main-button:hover, .main-button-small:hover {
   cursor: pointer;
+}
+
+.main-button:active, .main-button-small:active {
+  scale: 0.95;
+  box-shadow: 2px 2px 5px 0px var(--med-theme);
+  -webkit-box-shadow: 2px 2px 5px 0px var(--med-theme);
+  -moz-box-shadow: 2px 2px 5px 0px var(--med-theme);
 }
 
 /* Start of the CSS for the page elements */
