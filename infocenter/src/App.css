@@ -66,15 +66,13 @@ html {
   width: 30px;
   border-radius: 50%;
   background-color: transparent;
-  border: 2px solid rgb(5, 234, 146);
 }
 
 .main-button {
-  height: 40px;
-  width: 40px;
+  height: 45px;
+  width: 45px;
   border-radius: 50%;
   background-color: transparent;
-  border: 2px solid rgb(5, 234, 146);
 }
 
 .main-button:hover, .main-button-small:hover {
@@ -613,7 +611,8 @@ html {
 
 .search-box-container {
   width: 100%;
-  padding-top: 20px;
+  padding-top: 32px;
+  margin-bottom: 10px;
 }
 
 .search-box {
@@ -1259,7 +1258,7 @@ html {
   align-items: center;
 }
 
-/* Format the tooltip buttons for the main buttons for add-new, update and upload */
+/* Format the tooltip buttons for the equipment add new form */
 .tooltip-button {
   width: 100px;
 }
@@ -1281,13 +1280,27 @@ html {
   width: 100px;
 }
 
-.tooltip {
+.tooltip, .main-btn-tooltip {
   font-size: 10px;
   background-color: #f5f1af;
   color: black;
   padding: 3px 6px 3px 6px;
   border-radius: 3px;
   z-index: 700;
+}
+
+/* Format the main tooltip buttons */
+.tooltip-relative-parent {
+  height: 0;
+  width: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.main-btn-tooltip {
+  text-wrap: nowrap;
+  position: absolute;
 }
 
 .add-new-staff-container {

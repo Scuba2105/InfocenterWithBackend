@@ -122,6 +122,16 @@ export function SearchIcon({color, size='40px', searchIconClassName}) {
     );
 }
 
+export function PlusIcon({color, size='40px'}) {
+    return (
+        <>
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+                <path d="M4 12H20M12 4V20" stroke={color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> 
+        </>
+    );
+}
+
 export function ServiceIcon({color, size='30px'}) {
     return (
         <>

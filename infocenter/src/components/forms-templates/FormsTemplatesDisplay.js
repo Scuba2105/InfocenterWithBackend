@@ -79,7 +79,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">Service Request Forms</h2>
-                        <Tooltip content="Upload" location="right" ButtonComponent={ButtonComponent} onClick={() => showForm(setFormVisible)} />
+                        <Tooltip content="Upload Form" xPos="32px" yPos="-10px" btnTranslateX="-30px" ButtonComponent={ButtonComponent} onClick={() => showForm(setFormVisible)} />
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :
                     <OnlineRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} />}              

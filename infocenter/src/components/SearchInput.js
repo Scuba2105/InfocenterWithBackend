@@ -1,5 +1,8 @@
 import { useUser } from "./StateStore";
 import useMediaQueries from "media-queries-in-react";
+import { Tooltip } from "./Tooltip";
+import { MainButton } from "./MainButton";
+import { PlusIcon } from "../svg";
 
 function searchBoxTransform(laptop) {
     if (laptop) {
@@ -8,6 +11,12 @@ function searchBoxTransform(laptop) {
     else {
         return {width: 100 + '%', transform: 'translateX(13px)'}
     }
+}
+
+function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
+    return (
+        <MainButton buttonSize="large" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+    )
 }
 
 export function SearchInput({onQueryChange, openAddModal}) {
@@ -26,7 +35,7 @@ export function SearchInput({onQueryChange, openAddModal}) {
                 <input className="search-input" placeholder="Search..." onChange={onQueryChange}>
                 </input>   
             </div>
-            {currentUser.permissions === "admin" && <button className="add-new-btn" onClick={openAddModal}>+</button>} 
+            {currentUser.permissions === "admin" && <Tooltip content="Add Employee" xPos="-15px" yPos="-45px" btnTranslateX="0px" ButtonComponent={ButtonComponent} onClick={openAddModal} />} 
         </div>
     );
 }

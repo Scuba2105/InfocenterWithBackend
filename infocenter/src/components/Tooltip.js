@@ -4,24 +4,16 @@ function toggleHovered(setHovered) {
     setHovered(h => !h);   
 }
 
-export function Tooltip({content, location, ButtonComponent, onClick}) {
+export function Tooltip({content, xPos, yPos, btnTranslateX="0px", btnTranslateY="0px", ButtonComponent, onClick}) {
 
     const [hovered, setHovered] = useState(false);
     
-    if (location === "right") {
-        return (
-            <div className="tooltip-button-container flex-c">
-                <ButtonComponent onMouseOver={() => toggleHovered(setHovered)} onMouseOut={() => toggleHovered(setHovered)} onClick={onClick}></ButtonComponent>
-                <div className="tooltip" style={hovered ? {opacity: 1} : {opacity: 0}}>{content}</div>
+    return (
+        <div className="tooltip-button-container flex-c" style={{transform: `translate(${btnTranslateX}, ${btnTranslateY})`}}>
+            <div className="tooltip-relative-parent">
+                <div className="main-btn-tooltip" style={hovered ? {opacity: 1, left: xPos, top: yPos} : {opacity: 0, left: xPos, top: yPos}}>{content}</div>
             </div>
-        );
-    }
-    else {
-        return (
-            <div className="tooltip-button-container flex-c">
-                <div className="tooltip" style={hovered ? {opacity: 1} : {opacity: 0}}>{content}</div>
-                <ButtonComponent onMouseOver={() => toggleHovered(setHovered)} onMouseOut={() => toggleHovered(setHovered)} onClick={onClick}></ButtonComponent>
-            </div>
-        );
-    }
+            <ButtonComponent onMouseOver={() => toggleHovered(setHovered)} onMouseOut={() => toggleHovered(setHovered)} onClick={onClick}></ButtonComponent>
+        </div>
+    );
 }
