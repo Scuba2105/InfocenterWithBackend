@@ -12,7 +12,7 @@ import { JHHTestingProgressTemplates } from "./Testing-Templates/JHHTestingProgr
 import { serverConfig } from "../../server";
 
 // Store list of Service Agents with service request forms.
-const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "FM30 Transducers Delivery Note", "Fresenius Kabi", "GE Healthcare", "Generic Delivery Note", "ICU Medical", 
+const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "Device Technologies", "FM30 Transducers Delivery Note", "Fresenius Kabi", "GE Healthcare", "Generic Delivery Note", "ICU Medical", 
                       "Independent Living Specialists", "JD Healthcare", "Masimo", "Medtronic", "Philips Respironics", "REM Systems", "Resmed",
                       "Verathon", "Welch Allyn"];
 
