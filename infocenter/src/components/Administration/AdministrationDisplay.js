@@ -63,7 +63,7 @@ export function AdministrationDisplay({queryClient, showMessage, closeDialog}) {
                 return (
                     <div key={entry.section} className="forms-templates-container flex-c-col">
                         <div className="templates-section flex-c-col">
-                            <div className="templates-section-title-container flex-c" style={entry.section === "External Applications and Websites" ? {width: 330 + 'px'} : null}>
+                            <div className="templates-section-title-container flex-c">
                                 <h2 className="template-heading">{entry.section}</h2>
                             </div>
                             <AdminLinksSection documentLinksObject={entry.linksData} />

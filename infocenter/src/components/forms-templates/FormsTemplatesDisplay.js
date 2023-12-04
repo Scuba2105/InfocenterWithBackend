@@ -70,7 +70,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
             <div className="forms-templates-container flex-c-col">
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
-                        <h2 className="template-heading">Service Request Forms</h2> 
+                        <h2 className="template-heading">Service Request & Declaration Forms</h2> 
                         <div className="staff-edit-btn flex-c" style={{height: 25 + 'px', width: 25 + 'px'}} onClick={() => showForm(setFormVisible)}><UploadIcon color="rgb(5, 234, 146)" size="15px" /></div>
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :

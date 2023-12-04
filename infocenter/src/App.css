@@ -2743,7 +2743,7 @@ abbr[title] {
 }
 
 .templates-section-title-container {
-  width: 230px;
+  width: 350px;
   justify-content: space-between;
   transform: translateX(20px);
 }
