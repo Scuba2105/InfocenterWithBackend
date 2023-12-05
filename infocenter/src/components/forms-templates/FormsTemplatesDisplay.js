@@ -52,7 +52,7 @@ function setTestingDept(setTestingDepartment, department) {
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="30px" Image={UploadIcon} imageColor="rgb(5, 234, 146)" size="15px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="30px" Image={UploadIcon} imageColor="#D4FB7C" size="15px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -79,7 +79,7 @@ export function FormsTemplatesDisplay({userFormsTemplates, testingTemplatesData,
                 <div className="templates-section flex-c-col">
                     <div className="templates-section-title-container flex-c">
                         <h2 className="template-heading">Service Request Forms</h2>
-                        <Tooltip content="Upload Form" xPos="35px" yPos="-10px" btnTranslateX="-30px" ButtonComponent={ButtonComponent} onClick={() => showForm(setFormVisible)} />
+                        <Tooltip content="Upload Form" xPos="35px" yPos="-10px" btnTranslateX="-50px" ButtonComponent={ButtonComponent} onClick={() => showForm(setFormVisible)} />
                     </div>
                     {serviceFormsAvailable ? <ServiceRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} serviceFormsAvailable={serviceFormsAvailable} currentUserId={currentUserId} /> :
                     <OnlineRequestForms serviceAgents={serviceAgents} onlineForms={onlineForms} />}              
