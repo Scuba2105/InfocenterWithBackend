@@ -14,7 +14,7 @@ function toggleButtonClick(setButtonClicked) {
     setButtonClicked(b => !b);
 }
 
-export function MainButton({buttonType="button", buttonSize, href, Image, imageColor, imageSize, onClick, onMouseOver, onMouseOut}) {
+export function MainButton({buttonType="button", buttonSize, href, Image, imageColor="#BCE7FD", imageSize, onClick, onMouseOver, onMouseOut}) {
     
     const [buttonClicked, setButtonClicked] = useState(false);
 

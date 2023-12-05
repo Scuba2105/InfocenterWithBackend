@@ -57,7 +57,7 @@ function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, 
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut, imageColor="#BCE7FD"}) {
     return (
-        <MainButton buttonSize="40px" Image={EditIcon} imageColor="#5ef8ed" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={EditIcon} imageColor="#D4FB7C" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 

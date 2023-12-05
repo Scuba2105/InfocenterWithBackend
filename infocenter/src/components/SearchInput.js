@@ -15,11 +15,11 @@ function searchBoxTransform(laptop) {
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="40px" Image={PlusIcon} imageColor="#BCE7FD" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={PlusIcon} imageColor="#5ef8ed" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
-export function SearchInput({onQueryChange, openAddModal}) {
+export function SearchInput({page, onQueryChange, openAddModal}) {
 
     const mediaQueries = useMediaQueries({
         laptop: "(max-width: 1750px)",
@@ -35,7 +35,7 @@ export function SearchInput({onQueryChange, openAddModal}) {
                 <input className="search-input" placeholder="Search..." onChange={onQueryChange}>
                 </input>   
             </div>
-            {currentUser.permissions === "admin" && <Tooltip content="Add Employee" xPos="-15px" yPos="-45px" btnTranslateX="0px" ButtonComponent={ButtonComponent} onClick={openAddModal} />} 
+            {currentUser.permissions === "admin" && <Tooltip content={page === "staff" ? "Add Employee" : "Add Device"} xPos={page === "staff" ? "-18px" : "-12px"} yPos="-45px" btnTranslateX="0px" ButtonComponent={ButtonComponent} onClick={openAddModal} />} 
         </div>
     );
 }
