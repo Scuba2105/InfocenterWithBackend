@@ -24,7 +24,7 @@ function ButtonComponent({onMouseOver, onClick, onMouseOut, href, imageColor}) {
 export function StaffDetails({selectedData, user}) {
     
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
-
+    console.log(user)
     return (
         <div className='staff-info'>
             <div className="staff-heading flex-c">
@@ -36,7 +36,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container flex-c">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <Tooltip content="Send Email" xPos="-12px" yPos="-45px" btnTranslateX="30px" btnTranslateY="15px" ButtonComponent={ButtonComponent} href={`mailto: ${selectedData.email}`} />}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.id && <Tooltip content="Send Email" xPos="-12px" yPos="-45px" btnTranslateX="30px" btnTranslateY="15px" ButtonComponent={ButtonComponent} href={`mailto: ${selectedData.email}`} />}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>
