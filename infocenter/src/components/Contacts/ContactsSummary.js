@@ -56,7 +56,7 @@ function closeUpdateContactModal(setUpdateContactVisible) {
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="large" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -103,7 +103,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
             <div className={currentUser.permissions === "admin" ? "contacts-heading-admin flex-c" : "contacts-heading flex-c"}>
                 {currentUser.permissions === "admin" && <div id="summary-header-aligner" style={{marginLeft: 15 + 'px'}}></div>}
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
-                {currentUser.permissions === "admin" && <Tooltip content="Add Contact" xPos="-10px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddContactModal(setAddContactVisible)} />}
+                {currentUser.permissions === "admin" && <Tooltip content="Add Contact" xPos="-13px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddContactModal(setAddContactVisible)} />}
             </div>   
             <div className="contacts-main-display">
                 <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setVendor={setVendor} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>

@@ -2,6 +2,8 @@ import { useProfilePhotoUpdate } from "../StateStore";
 import { workshops } from "../../data";
 import { serverConfig } from "../../server";
 import { EmailIcon, BlankProfile } from "../../svg";
+import { MainButton } from "../MainButton";
+import { Tooltip } from "../Tooltip";
 import { StaffInfoEntry } from "./StaffInfoEntry";
 import { Laptop, StaffID, OfficePhone, DectPhone, MobilePhone } from "../../svg"
 
@@ -12,6 +14,12 @@ border: '1px solid rgb(4, 107, 71)', color: 'rgb(4, 107, 71)'}, Tamworth: {backg
 border: '1px solid rgb(2, 57, 87)', color: 'rgb(2, 57, 87)'}, Mechanical: {background: 'radial-gradient(rgb(217, 126, 247), rgb(166, 66, 199))', 
 border: '1px solid rgb(73, 16, 92)', color: 'rgb(73, 16, 92)'}, default: {background: 'radial-gradient(rgb(250, 193, 112), rgb(250, 169, 55))', 
 border: '1px solid rgb(163, 98, 3)', color: 'rgb(163, 98, 3)'}} 
+
+function ButtonComponent({onMouseOver, onClick, onMouseOut, href}) {
+    return (
+        <MainButton buttonType="link" href={href} buttonSize="40px" Image={EmailIcon} imageColor="#D4FB7C" imageSize="2.78vh" onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+    )
+}
 
 export function StaffDetails({selectedData, user}) {
     
@@ -28,7 +36,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container flex-c">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <a href={selectedData.email} className="email-link flex-c"><EmailIcon size="2.78vh" color="#D4FB7C"></EmailIcon></a>}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <Tooltip content="Send Email" xPos="-12px" yPos="-45px" btnTranslateX="20px" ButtonComponent={ButtonComponent} href={`mailto: ${selectedData.email}`} />}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

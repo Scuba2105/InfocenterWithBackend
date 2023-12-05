@@ -15,7 +15,7 @@ function searchBoxTransform(laptop) {
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="large" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
