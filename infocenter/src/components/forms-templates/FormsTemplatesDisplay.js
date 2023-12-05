@@ -52,7 +52,7 @@ function setTestingDept(setTestingDepartment, department) {
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="small" Image={UploadIcon} imageColor="rgb(5, 234, 146)" size="15px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="30px" Image={UploadIcon} imageColor="rgb(5, 234, 146)" size="15px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 

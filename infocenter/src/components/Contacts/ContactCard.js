@@ -1,3 +1,5 @@
+import { MainButton } from "../MainButton";
+import { Tooltip } from "../Tooltip";
 import { EditIcon } from "../../svg";
 
 // Define arrays for contact header background colors.
@@ -6,12 +8,19 @@ const backgroundColors = ["#6EDDC0", "#BCE7FD", "#BCE7FD", "#6EDDC0"]
 // Service Request Websites
 const serviceRequestSites = ["https://services.gehealthcare.com.au/gehcstorefront/", "https://secure.medtronicinteract.com/SubmitServiceRequest"]
 
-export function ContactCard({identifier, contact, index, openUpdateContactModal}) {
+function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <div className="contact-card-container">
+        <MainButton buttonSize="25px" Image={EditIcon} imageColor="rgb(5, 234, 146)" size="20px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+    )
+}
+
+export function ContactCard({identifier, contact, index, openUpdateContactModal}) {
+    
+    return (
+        <div className="contact-card-container"> 
             <div className="contact-update-header flex-c" style={{color: backgroundColors[index]}}>
                 <label>{`Last Updated: ${contact.lastUpdate}`}</label>
-                <EditIcon id={"contact-update-edit"} onClick={openUpdateContactModal} color={backgroundColors[index]} size="15px"></EditIcon>
+                <Tooltip content="Edit Contact" xPos="-20px" yPos="-35px" btnTranslateX="-10px" ButtonComponent={ButtonComponent} onClick={openUpdateContactModal} />
             </div>
             <div className={contact.position === "" ? "contact-card-header contact-header-centered flex-c-col" : "contact-card-header flex-c-col"} style={{color: backgroundColors[index]}}>
                 <label id="contact-name">{contact.contact}</label>

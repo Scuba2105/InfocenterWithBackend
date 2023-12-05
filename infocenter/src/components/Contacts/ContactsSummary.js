@@ -5,6 +5,9 @@ import { ContactsFilter } from "./ContactsFilter";
 import { ModalSkeleton } from "../ModalSkeleton";
 import { AddNewContact } from "./AddNewContact";
 import { UpdateContact } from "./UpdateContact";
+import { Tooltip } from "../Tooltip";
+import { MainButton } from "../MainButton";
+import { PlusIcon } from "../../svg";
 import { useUser } from "../StateStore";
 import useMediaQueries from "media-queries-in-react"
 
@@ -51,6 +54,12 @@ function closeUpdateContactModal(setUpdateContactVisible) {
     setUpdateContactVisible(false)
 }
 
+function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
+    return (
+        <MainButton buttonSize="large" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+    )
+}
+
 export function ContactsSummary({page, identifier, selectedDepartment, setSelectedDepartment, setVendor, selectedVendor, pageData, onHospitalChange, onDepartmentChange, onVendorChange, queryClient, showMessage, closeDialog}) {
     
     // Contacts for each department are viewed over several pages. Store the state of the page.
@@ -94,7 +103,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
             <div className={currentUser.permissions === "admin" ? "contacts-heading-admin flex-c" : "contacts-heading flex-c"}>
                 {currentUser.permissions === "admin" && <div id="summary-header-aligner" style={{marginLeft: 15 + 'px'}}></div>}
                 <h2>{identifier === "staff" ? "Department Contacts" : "Vendor Contacts"}</h2>
-                {currentUser.permissions === "admin" && <button className="add-new-btn contact-add-new-btn" onClick={() => openAddContactModal(setAddContactVisible)}>+</button>}
+                {currentUser.permissions === "admin" && <Tooltip content="Add Contact" xPos="-10px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddContactModal(setAddContactVisible)} />}
             </div>   
             <div className="contacts-main-display">
                 <ContactsFilter identifier={identifier} selectedDepartment={selectedDepartment} setSelectedDepartment={setSelectedDepartment} selectedVendor={selectedVendor} pageData={pageData} onHospitalChange={onHospitalChange} onDepartmentChange={onDepartmentChange} setVendor={setVendor} onVendorChange={onVendorChange} setContactPage={setContactPage} setVendorContactPage={setVendorContactPage}></ContactsFilter>
@@ -109,7 +118,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
                         )
                     })}
                 </div>
-                <div className="page-controls" onClick={(e) => pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e)}>
+                <div className="page-controls" style={mediaQueries.laptop ? {transform: "translateY(15px)"} : null} onClick={(e) => pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e)}>
                     <NextIcon className="back-next-icon" color="white" size="11px" offset="1" angle="180" id="back-next" />
                     <label className="table-page-info">{`Page ${identifier === "staff" ? contactPage + 1 : vendorContactPage + 1} of ${maxIndex + 1}`}</label>
                     <NextIcon className="forward-next-icon" color="white" size="11px" offset="0" angle="0" id="forward-next" />

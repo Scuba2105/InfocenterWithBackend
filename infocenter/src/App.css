@@ -61,27 +61,19 @@ html {
   cursor: pointer;
 }
 
-.main-button-small {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: none;
-  background-color: transparent;
-}
-
 .main-button {
-  height: 45px;
-  width: 45px;
+  height: 40px; 
+  width: 40px;
   border-radius: 50%;
   border: none;
   background-color: transparent;
 }
 
-.main-button:hover, .main-button-small:hover {
+.main-button:hover {
   cursor: pointer;
 }
 
-.main-button:active, .main-button-small:active {
+.main-button:active {
   scale: 0.95;
 }
 
@@ -643,25 +635,6 @@ html {
   padding-left: 50px;
 }
 
-.add-new-btn {
-  background-color: transparent;
-  border: 2px solid var(--blue-button-color);
-  color: var(--blue-button-color);
-  border-radius: 50%;
-  font-size: 30px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-} 
-
-.contact-add-new-btn {
-  margin-right: 15px;
-}
-
-.add-new-btn:hover {
-  cursor: pointer; 
-}
-
 .search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--search-bar-color);
   opacity: 1; /* Firefox */
@@ -886,20 +859,6 @@ html {
   color: var(--grey-font);
   height: 50px;
   font-size: 2vh;
-}
-
-.device-edit-button, .staff-edit-btn {
-  width: 40px;
-  height: 40px;
-  color: var(--green-button-color);
-  background-color: transparent;
-  border: 2px solid var(--green-button-color);
-  border-radius: 50%;
-  transform: translateX(-15px);
-}
-
-.staff-edit-btn:hover, .device-edit-button:hover {
-  cursor: pointer;
 }
 
 #edit-image, #email-image {
@@ -1878,7 +1837,6 @@ html {
   border-radius: 10px;
   display: grid; 
   grid-template-rows: 40px 22% 1fr;
-  overflow: hidden;
   border: 1px solid var(--contact-card-font-color);
 }
 
@@ -1936,6 +1894,7 @@ html {
   background-color: var(--med-light-theme);
   color: white;
   border-top: 1px solid black;
+  border-radius: 15px;
 }
 
 .contact-number {

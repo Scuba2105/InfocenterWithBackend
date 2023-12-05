@@ -57,7 +57,7 @@ function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, 
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="large" Image={EditIcon} imageColor="rgb(5, 234, 146)" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={EditIcon} imageColor="rgb(5, 234, 146)" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -87,8 +87,8 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                 <div className={(workshops.includes(selectedData.name) || !staffEditPermissions) ? "summary-card-header-center flex-c" : "summary-card-header flex-c"}>
                     {!workshops.includes(selectedData.name) && staffEditPermissions && <div id="summary-header-aligner"></div>}
                     <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
-                    {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <Tooltip content="Edit Employee" xPos="-15px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)} />}
-                    {equipmentEditPermissions && page === "technical-info" && <Tooltip content="Edit Device" xPos="-10px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} />}
+                    {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <Tooltip content="Edit Employee" xPos="-16px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)} />}
+                    {equipmentEditPermissions && page === "technical-info" && <Tooltip content="Edit Device" xPos="-12px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} />}
                 </div>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.staffId} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
