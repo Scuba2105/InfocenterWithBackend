@@ -67,8 +67,6 @@ html {
   border-radius: 50%;
   border: none;
   background-color: transparent;
-  /* -webkit-box-shadow: 7px 7px 5px 0px var(--med-theme);
-  -moz-box-shadow: 7px 7px 5px 0px var(--med-theme); */
 }
 
 .main-button {
@@ -77,8 +75,6 @@ html {
   border-radius: 50%;
   border: none;
   background-color: transparent;
-  /*-webkit-box-shadow: 7px 7px 5px 0px var(--med-theme);*/
-  /*-moz-box-shadow: 7px 7px 5px 0px var(--med-theme);*/
 }
 
 .main-button:hover, .main-button-small:hover {
@@ -87,9 +83,6 @@ html {
 
 .main-button:active, .main-button-small:active {
   scale: 0.95;
-  box-shadow: 2px 2px 5px 0px #0c1525;
-  /* -webkit-box-shadow: 2px 2px 5px 0px var(--med-theme);
-  -moz-box-shadow: 2px 2px 5px 0px var(--med-theme); */
 }
 
 /* Start of the CSS for the page elements */
