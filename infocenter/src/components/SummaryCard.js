@@ -80,7 +80,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
 
     // Get the state setter for selected device from Zustand state
     const setCurrentDevice = useDevice((state) => state.setDevice);
-    console.log(selectedData)
+    
     return (
         <div className="display-area-container flex-c-col">
             <div className={getClassName(page)}>

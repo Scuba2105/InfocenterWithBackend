@@ -2753,6 +2753,10 @@ abbr[title] {
   font-size: 16px;
 }
 
+.upload-icon {
+  transform: translateY(-1.5px);
+}
+
 .templates-links-container {
   display: flex;
   justify-content: flex-start;
@@ -2779,10 +2783,6 @@ abbr[title] {
 #service-request-forms-inputs-container {
   height: 200px;
   justify-content: space-around;
-}
-
-.service-request-forms-update-btn {
-  transform: translateY(-20px);
 }
 
 /* Format the testing templates */
