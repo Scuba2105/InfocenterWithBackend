@@ -1789,9 +1789,12 @@ html {
   width: 90%;
   color: white;
   background-color: var(--med-light-theme);
-  justify-content: space-between;
   margin: auto auto;
   border: 1px solid black;
+}
+
+.contacts-heading-admin {
+  justify-content: space-between;
 }
 
 .contacts-main-display {
