@@ -56,7 +56,7 @@ function closeUpdateContactModal(setUpdateContactVisible) {
 
 function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
     return (
-        <MainButton buttonSize="40px" Image={PlusIcon} imageColor="#03a9eb" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={PlusIcon} imageColor="#BCE7FD" size="25px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -113,7 +113,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
                         const colorIndex = index % 4;
                         return (
                             <div key={`contact-${index}`} className="size-100 flex-c">
-                                <ContactCard identifier={identifier} contact={contact} index={colorIndex}  setCurrentContact={setCurrentContact} openUpdateContactModal={() => openUpdateContactModal(setCurrentContact, contact, index, setUpdateContactVisible)}></ContactCard>
+                                <ContactCard identifier={identifier} contact={contact} index={colorIndex} setCurrentContact={setCurrentContact} openUpdateContactModal={() => openUpdateContactModal(setCurrentContact, contact, index, setUpdateContactVisible)}></ContactCard>
                             </div>
                         )
                     })}

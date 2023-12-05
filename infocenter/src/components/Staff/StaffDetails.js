@@ -15,7 +15,7 @@ border: '1px solid rgb(2, 57, 87)', color: 'rgb(2, 57, 87)'}, Mechanical: {backg
 border: '1px solid rgb(73, 16, 92)', color: 'rgb(73, 16, 92)'}, default: {background: 'radial-gradient(rgb(250, 193, 112), rgb(250, 169, 55))', 
 border: '1px solid rgb(163, 98, 3)', color: 'rgb(163, 98, 3)'}} 
 
-function ButtonComponent({onMouseOver, onClick, onMouseOut, href}) {
+function ButtonComponent({onMouseOver, onClick, onMouseOut, href, imageColor="#BCE7FD"}) {
     return (
         <MainButton buttonType="link" href={href} buttonSize="40px" Image={EmailIcon} imageColor="#D4FB7C" imageSize="2.78vh" onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
@@ -36,7 +36,7 @@ export function StaffDetails({selectedData, user}) {
                 <div className="staff-name">
                     <div className="name-update-container flex-c">
                         <p className="name-text">{selectedData.name}</p>
-                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <Tooltip content="Send Email" xPos="-12px" yPos="-45px" btnTranslateX="20px" ButtonComponent={ButtonComponent} href={`mailto: ${selectedData.email}`} />}
+                        {!workshops.includes(selectedData.name) && user !== selectedData.name && <Tooltip content="Send Email" xPos="-12px" yPos="-45px" btnTranslateX="30px" btnTranslateY="15px" ButtonComponent={ButtonComponent} href={`mailto: ${selectedData.email}`} />}
                     </div>
                     <p className="position">{selectedData.id !== '-' ? `${selectedData.hospital}, ${selectedData.position}` : "Biomed Location"}</p>
                 </div>

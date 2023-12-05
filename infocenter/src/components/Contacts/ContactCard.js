@@ -8,9 +8,9 @@ const backgroundColors = ["#6EDDC0", "#BCE7FD", "#BCE7FD", "#6EDDC0"]
 // Service Request Websites
 const serviceRequestSites = ["https://services.gehealthcare.com.au/gehcstorefront/", "https://secure.medtronicinteract.com/SubmitServiceRequest"]
 
-function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
+function ButtonComponent({onMouseOver, onClick, onMouseOut, imageColor="#BCE7FD"}) {
     return (
-        <MainButton buttonSize="25px" Image={EditIcon} imageColor="rgb(5, 234, 146)" size="20px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="25px" Image={EditIcon} imageColor={imageColor} size="20px" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -20,7 +20,7 @@ export function ContactCard({identifier, contact, index, openUpdateContactModal}
         <div className="contact-card-container"> 
             <div className="contact-update-header flex-c" style={{color: backgroundColors[index]}}>
                 <label>{`Last Updated: ${contact.lastUpdate}`}</label>
-                <Tooltip content="Edit Contact" xPos="-20px" yPos="-35px" btnTranslateX="-10px" ButtonComponent={ButtonComponent} onClick={openUpdateContactModal} />
+                <Tooltip content="Edit Contact" xPos="-20px" yPos="-37px" btnColor={backgroundColors[index]} btnTranslateX="-10px" ButtonComponent={ButtonComponent} onClick={openUpdateContactModal} />
             </div>
             <div className={contact.position === "" ? "contact-card-header contact-header-centered flex-c-col" : "contact-card-header flex-c-col"} style={{color: backgroundColors[index]}}>
                 <label id="contact-name">{contact.contact}</label>

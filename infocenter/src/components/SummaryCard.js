@@ -55,9 +55,9 @@ function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, 
     setCurrentDevice(currentModel);
 }
 
-function ButtonComponent({onMouseOver, onClick, onMouseOut}) {
+function ButtonComponent({onMouseOver, onClick, onMouseOut, imageColor="#BCE7FD"}) {
     return (
-        <MainButton buttonSize="40px" Image={EditIcon} imageColor="rgb(5, 234, 146)" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
+        <MainButton buttonSize="40px" Image={EditIcon} imageColor="#5ef8ed" onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut}/>
     )
 }
 
@@ -80,15 +80,15 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
 
     // Get the state setter for selected device from Zustand state
     const setCurrentDevice = useDevice((state) => state.setDevice);
-    
+    console.log(selectedData)
     return (
         <div className="display-area-container flex-c-col">
             <div className={getClassName(page)}>
                 <div className={(workshops.includes(selectedData.name) || !staffEditPermissions) ? "summary-card-header-center flex-c" : "summary-card-header flex-c"}>
                     {!workshops.includes(selectedData.name) && staffEditPermissions && <div id="summary-header-aligner"></div>}
                     <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
-                    {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <Tooltip content="Edit Employee" xPos="-16px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)} />}
-                    {equipmentEditPermissions && page === "technical-info" && <Tooltip content="Edit Device" xPos="-12px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} />}
+                    {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <Tooltip content="Edit Employee" xPos="-19px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)} btnColor="#D4FB7C" />}
+                    {equipmentEditPermissions && page === "technical-info" && <Tooltip content="Edit Device" xPos="-12px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} btnColor="#D4FB7C" />}
                 </div>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.staffId} />}                    
                 {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
