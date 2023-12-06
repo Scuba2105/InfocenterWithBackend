@@ -2,7 +2,7 @@ import { SearchInput } from "./SearchInput";
 import { SearchTable } from "./SearchTable";
 import { useState } from "react";
 import useMediaQueries from "media-queries-in-react"
-import { generateDataPages } from "../utils/utils";
+import { delayFunctionInitiation, generateDataPages } from "../utils/utils";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { AddNewForm } from "./AddNewForm";
 
@@ -45,7 +45,9 @@ function onQueryChange(e, setQuery, setTableIndex) {
 }
 
 function openAddModal(setAddNewModal) {
-    setAddNewModal(true);
+    delayFunctionInitiation(() => {
+        setAddNewModal(true);
+    })
 }
 
 function closeAddModal(setAddNewModal) {

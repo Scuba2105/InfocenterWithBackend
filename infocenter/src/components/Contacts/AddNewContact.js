@@ -5,6 +5,7 @@ import { TooltipButton } from "../TooltipButton";
 import { serverConfig } from "../../server";
 import { NavigationArrow } from "../../svg";
 import { FormButton } from "../FormButton";
+import { delayFunctionInitiation } from "../../utils/utils";
 
 // Regex for name, position, primary phone, dect, mobile phone, and vendor email
 const staffInputsRegexArray = [/^[a-z ,.'-]+$/i, /^[a-z0-9 &/]+$/i, /^[0-9]{10}$|^[1-9][0-9]{7}$|^[0-9]{5}$/, /^[0-9]{5}$/, /^0[0-9]{9}$/, /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/] 
@@ -211,7 +212,8 @@ async function uploadNewContactData(newContactData, queryClient, showMessage, cl
 
 function updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e) {
     const clickedButton = e.currentTarget;
-    setTimeout(() => {
+    // Delay function initiation to allow button animation.
+    delayFunctionInitiation(() => {
         if (clickedButton.classList.contains("config-left-arrow") && inputPage === 2) {
             setinputPage(1);
             setAddNewHospital(false);
@@ -220,7 +222,7 @@ function updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartm
         else if (clickedButton.classList.contains("config-right-arrow") && inputPage === 1) {
             setinputPage(2);
         }
-    }, 150)    
+    })    
 }
 
 // Update hospital and department select inputs

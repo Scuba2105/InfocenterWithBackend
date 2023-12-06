@@ -9,6 +9,7 @@ import { EditIcon, VendorArrow } from "../svg";
 import { Tooltip } from "./Tooltip";
 import { MainButton } from "./MainButton";
 import { workshops } from "../data";
+import { delayFunctionInitiation } from "../utils/utils";
 
 function getClassName(page) {
     if (page === 'staff') {
@@ -33,7 +34,9 @@ function closeModal(setModalVisible) {
 
 // Functions for opening and closing the staff add/edit form
 function openAddUpdateForm(setAddUpdateFormVisible) {
-    setAddUpdateFormVisible(true);
+    delayFunctionInitiation(() => {
+        setAddUpdateFormVisible(true);
+    })
 }
 
 function closeAddUpdateForm(setAddUpdateFormVisible) {
@@ -42,7 +45,9 @@ function closeAddUpdateForm(setAddUpdateFormVisible) {
 
 // Functions for opening and closing equipment update form
 function showDeviceUpdate(setUpdateFormVisible) {
-    setUpdateFormVisible(true);
+    delayFunctionInitiation(() => {
+        setUpdateFormVisible(true);
+    })
 }
 
 function closeUpdate(setUpdateFormVisible) {

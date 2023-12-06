@@ -41,6 +41,12 @@ export async function fetchData(staffId) {
     }
 }
 
+export function delayFunctionInitiation(func) {
+    setTimeout(() => {
+        func();
+    }, 150)
+}
+
 export function sortMandatoryFields(changedMandatoryFields) {
     // Check if mandatory fields exist in array
     const locationChanged = changedMandatoryFields.includes("Location");

@@ -20,13 +20,13 @@ export function MainButton({buttonType="button", buttonSize, href, Image, imageC
 
     if (buttonType === "link") {
         return (
-            <a className="main-button flex-c" href={href} style={getStyles(buttonClicked, buttonSize, imageColor)} onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} onMouseDown={() => toggleButtonClick(setButtonClicked)} onMouseUp={() => toggleButtonClick(setButtonClicked)}>
+            <a className="main-button flex-c main-btn-transition" href={href} style={getStyles(buttonClicked, buttonSize, imageColor)} onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} onMouseDown={() => toggleButtonClick(setButtonClicked)} onMouseUp={() => toggleButtonClick(setButtonClicked)}>
                 <Image color={imageColor} size={imageSize}></Image>
             </a>
         ) 
     }
     return (
-        <button className="main-button flex-c" style={getStyles(buttonClicked, buttonSize, imageColor)} onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} onMouseDown={() => toggleButtonClick(setButtonClicked)} onMouseUp={() => toggleButtonClick(setButtonClicked)}>
+        <button className="main-button flex-c main-btn-transition" style={getStyles(buttonClicked, buttonSize, imageColor)} onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} onMouseDown={() => toggleButtonClick(setButtonClicked)} onMouseUp={() => toggleButtonClick(setButtonClicked)}>
             <Image color={imageColor} size={imageSize}></Image>
         </button>
     )

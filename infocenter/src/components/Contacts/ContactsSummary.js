@@ -10,6 +10,7 @@ import { MainButton } from "../MainButton";
 import { PlusIcon } from "../../svg";
 import { useUser } from "../StateStore";
 import useMediaQueries from "media-queries-in-react"
+import { delayFunctionInitiation } from "../../utils/utils";
 
 function pageArrowClick(identifier, contactPage, vendorContactPage, setContactPage, setVendorContactPage, maxIndex, e) {
     let id = e.target.id;
@@ -38,7 +39,9 @@ function pageArrowClick(identifier, contactPage, vendorContactPage, setContactPa
 } 
 
 function openAddContactModal(setAddContactVisible) {
-    setAddContactVisible(true);
+    delayFunctionInitiation(() => {
+        setAddContactVisible(true);
+    })    
 }
 
 function closeAddContactModal(setAddContactVisible) {
@@ -46,8 +49,10 @@ function closeAddContactModal(setAddContactVisible) {
 }
 
 function openUpdateContactModal(setCurrentContact, contactData , id, setUpdateContactVisible) {
-    setCurrentContact({id: id, data: contactData})
-    setUpdateContactVisible(true)
+    delayFunctionInitiation(() => {
+        setCurrentContact({id: id, data: contactData})
+        setUpdateContactVisible(true)
+    })
 }
 
 function closeUpdateContactModal(setUpdateContactVisible) {
