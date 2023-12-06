@@ -214,16 +214,18 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         // Create the config filename from the input data
         let configFilename;
 
-        // Generates the file name based on config input and config file extension
-        const fileExtension = configFileInput.files[0].name.split('.').slice(-1)[0];
-        configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model, "field-name")}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
-        configFilename = `${formatText(selectedData.model, "field-name")}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
         
         if (configFileInput.files.length === 0) {
-            showMessage("error", 'No config files selected. Please choose a config file and try again.')
+            showMessage("error", 'Config File has not been selected from the file input. Please choose a config file and try again.')
             return 
         }
         else {
+            // Generates the file name based on config input and config file extension
+            const fileExtension = configFileInput.files[0].name.split('.').slice(-1)[0];
+            configDataArray[2] === "" ? configFilename = `${formatText(selectedData.model, "field-name")}_${configDataArray.slice(0, 2).join('_')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}` :
+            configFilename = `${formatText(selectedData.model, "field-name")}_${configDataArray[0]}_${configDataArray.slice(1, 3).join('--')}_${configDataArray.slice(3).join('_')}_${dateString}.${fileExtension}`
+            
+            // Add the config file to the form data. 
             updateData.current.set(`${formatText(selectedOption)}`, configFileInput.files[0], `${configFilename}`);
         }
         showMessage("info", `The new configuration for ${selectedData.model} has been saved ready for upload.`)
@@ -263,8 +265,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
 }
 
 function updateSelectedOption(e, setSelectedOption, setFileNumber) {
-    const selectedDiv = e.currentTarget;
-    setSelectedOption(selectedDiv.textContent)
+    setSelectedOption(e.currentTarget.textContent)
     setFileNumber([1]);
 }
 
