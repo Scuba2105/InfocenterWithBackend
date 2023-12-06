@@ -20,16 +20,22 @@ function generateLinks(deviceData, type) {
     return link
 }
 
-function getLinkStyles(hovered, ) {
+function getClassList(link, selectedData) {
+    if (selectedData[link] === false || selectedData[link] === "") {
+        return `technical-link main-link-button flex-c-col main-btn-transition inactive ${link}`
+    }
+    else {
+        return `technical-link main-link-button flex-c-col main-btn-transition ${link}`
+    } 
 
 }
 
-function handleLinkHover(setHovered) {
-    setHovered(true);
+function handleLinkHover(setHovered, link) {
+    setHovered(link);
 }
 
 function handleLinkMouseOut(setHovered) {
-    setHovered(false);
+    setHovered(null);
 }
 
 export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdateFormVisible, closeUpdate, onLinkClick, queryClient, showMessage, closeDialog}) {
@@ -51,11 +57,11 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
             </div>
             <div className="technical-area">
                 <div className="technical-link-container flex-c">
-                    <a className="technical-link main-link-button flex-c-col main-btn-transition" 
+                    <a className={getClassList("serviceManual", selectedData)} 
                        style={selectedData.serviceManual === false ? {opacity: 0.1} : {opacity: 1}} 
                        href={selectedData.serviceManual === false ? null : generateLinks(selectedData, 'service')} 
                        download={selectedData.serviceManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-service-manual.pdf`} 
-                       onMouseOver={() => handleLinkHover(setHovered)}
+                       onMouseOver={() => handleLinkHover(setHovered, "service")}
                        onMouseOut={() => handleLinkMouseOut(setHovered)}>
                             <ServiceIcon color="#5ef8ed" size="5vh"/>
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -65,11 +71,11 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                     </a>
                 </div>
                 <div className="technical-link-container flex-c">
-                    <a className="technical-link alternate-link-button flex-c-col main-btn-transition" 
+                    <a className={getClassList("userManual", selectedData)} 
                        style={selectedData.userManual === false ? {opacity: 0.1} : {opacity: 1}} 
                        href={selectedData.userManual === false ? null : generateLinks(selectedData, 'user')} 
                        download={selectedData.userManual === false ? null : `${selectedData.model.toLowerCase().replace(/\s/g, "-")}-user-manual.pdf`} 
-                       onMouseOver={() => handleLinkHover(setHovered)}
+                       onMouseOver={() => handleLinkHover(setHovered, "user")}
                        onMouseOut={() => handleLinkMouseOut(setHovered)}>
                             <UserManualIcon color="#BCE7FD" size="5vh"/>
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
@@ -78,20 +84,20 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                             </div>                    
                     </a>   
                 </div>
-                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered)} onMouseOut={() => handleLinkMouseOut(setHovered)}>
-                    <div className="technical-link config main-link-button flex-c-col main-btn-transition" style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
+                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered, "config")} onMouseOut={() => handleLinkMouseOut(setHovered)}>
+                    <div className={getClassList("config", selectedData)} style={selectedData.config === false || selectedData.config === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick} >
                         <ConfigIcon color="#5ef8ed" size="5vh"/>
                         Configuration
                     </div>  
                 </div>
-                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered)} onMouseOut={() => handleLinkMouseOut(setHovered)}>
-                    <div className="technical-link software alternate-link-button flex-c-col main-btn-transition" style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
+                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered, "software")} onMouseOut={() => handleLinkMouseOut(setHovered)}>
+                    <div className={getClassList("software", selectedData)} style={selectedData.software === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <SoftwareIcon color="#BCE7FD" size="5vh"/>
                         Software
                     </div> 
                 </div>
-                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered)} onMouseOut={() => handleLinkMouseOut(setHovered)}>
-                    <div className="technical-link documents main-link-button flex-c-col main-btn-transition" style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
+                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered, "documents")} onMouseOut={() => handleLinkMouseOut(setHovered)}>
+                    <div className={getClassList("documents", selectedData)} style={selectedData.documents === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <DocumentsIcon color="#5ef8ed" size="5vh"/>
                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                             <span>Other</span>
@@ -99,8 +105,8 @@ export function TechnicalLinks({selectedData, page,  updateFormVisible, setUpdat
                         </div>
                     </div> 
                 </div>
-                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered)} onMouseOut={() => handleLinkMouseOut(setHovered)}>
-                    <div className="technical-link passwords alternate-link-button flex-c-col main-btn-transition" style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
+                <div className="technical-link-container flex-c" onMouseOver={() => handleLinkHover(setHovered, "passwords")} onMouseOut={() => handleLinkMouseOut(setHovered)}>
+                    <div className={getClassList("passwords", selectedData)} style={selectedData.passwords === "" ? {opacity: 0.1} : {opacity: 1, cursor: "pointer"}} onClick={onLinkClick}>
                         <PasswordsIcon color="#BCE7FD" size="5vh"/>
                         Passwords
                     </div>   

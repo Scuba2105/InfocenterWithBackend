@@ -885,6 +885,7 @@ html {
   width: 40px;
 }
 
+/* Format the link on summary card "View Vendor Contacts" */
 .vendor-link {
   grid-row: 2;
   width: 95%;
@@ -897,6 +898,22 @@ html {
 
 .vendor-link:hover {
   cursor: pointer;
+}
+
+.vendor-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border: none;
+  width: 11.5vw;
+  min-width: 130px;
+  justify-content: space-around;
+  z-index: 500;
+  font-size: 1.6vh;
+}
+
+.vendor-button:hover {
+  cursor: pointer !important;
 }
 
 .summary-area {
@@ -3059,5 +3076,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .unavailable-link:hover {
   cursor: default;
+}
+
+/* Overwrite all links scaling if inactive */
+.inactive:hover {
+  scale: 1;
 }
 
