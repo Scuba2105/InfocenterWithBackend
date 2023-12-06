@@ -42,7 +42,7 @@ export async function updateTestingProgressData(req, res, next, __dirname) {
             
            // Write the data to file.
            const fileWrittenResult = await writeAllTestingTemplateData(__dirname, JSON.stringify(allTestingData, null, 2)).catch((err) => {
-            throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });
 
             // Send the response to the client.

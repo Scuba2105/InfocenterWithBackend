@@ -1245,8 +1245,9 @@ html {
 
 .tooltip, .main-btn-tooltip {
   font-size: 10px;
-  background-color: #f5f1af;
-  color: black;
+  background-color: #e8f6fc;
+  /*background-color: #f5f1af;*/
+  color: var(--dark-theme);
   padding: 3px 6px 3px 6px;
   border-radius: 3px;
   z-index: 700;
