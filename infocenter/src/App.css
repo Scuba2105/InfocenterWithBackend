@@ -3068,7 +3068,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-/* Overwrite link css if link is disabled/unavailable*/
+/* Overwrite link css if link is disabled/unavailable/inactive */
 .unavailable-link {
   opacity: 0.2;
   cursor: pointer;
@@ -3076,9 +3076,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .unavailable-link:hover {
   cursor: default;
+  scale: 1;
 }
 
-/* Overwrite all links scaling if inactive */
 .inactive:hover {
   scale: 1;
 }
