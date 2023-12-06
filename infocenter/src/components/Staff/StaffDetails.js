@@ -24,7 +24,7 @@ function ButtonComponent({onMouseOver, onClick, onMouseOut, href, imageColor}) {
 export function StaffDetails({selectedData, user}) {
     
     const profilePhotoUpdates = useProfilePhotoUpdate((state) => state.profilePhotoUpdates);
-    console.log(user)
+    
     return (
         <div className='staff-info'>
             <div className="staff-heading flex-c">

@@ -3,6 +3,7 @@ import { Input } from "./Input";
 import { SelectInput } from "./SelectInput"
 import { TooltipButton } from "./TooltipButton";
 import { AddEditStaff } from "./Staff/AddEditStaff";
+import { FormButton } from "./FormButton";
 import { serverConfig } from "../server";
 
 // Generate the values for the models, types and manufacturers select menus
@@ -210,8 +211,8 @@ export function AddNewForm({page, selectedData, pageData, vendorData, queryClien
                     </div>
                     <SelectInput type="form-select-input" label="Vendor / Service Agent" optionData={currentVendors} />
                     <Input inputType="file" identifier="new-image" labelText="New Device Image" />
-                </div>            
-                <div className="update-button add-new-upload-button" onClick={() => uploadEquipmentFormData(addNewManufacturer, addNewType, formContainer, newData, unavailableModels, page, queryClient, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
+                </div> 
+                <FormButton content="Upload" btnColor="#D4FB7C" marginTop="30px" marginBottom="30px" onClick={() => uploadEquipmentFormData(addNewManufacturer, addNewType, formContainer, newData, unavailableModels, page, queryClient, showMessage, closeDialog, closeAddModal)} /> 
             </div>
         );
     }

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
 import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../../svg";
 import { ModalSkeleton } from '../ModalSkeleton';
+import { FormButton } from '../FormButton';
 import { serverConfig } from '../../server';
 
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
@@ -110,10 +111,11 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 } 
 
 // Save the form data ready for upload
-function saveUpdateData(e, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
+function saveUpdateData(formContainer, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
+    
     // Add the files from the service manual and user manual forms to the formData ref
     if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
-        const selectedFile = e.target.parentNode.parentNode.querySelector('.file-input');
+        const selectedFile = formContainer.querySelector('.file-input');
         if (selectedFile.files.length === 0) {
             showMessage("error", `No ${selectedOption} has been provided. Please choose a file and try again.`)
             return
@@ -131,8 +133,8 @@ function saveUpdateData(e, selectedOption, updateData, selectedData, page, setUp
     
     // Add the data from the software form to the formData ref
     else if (selectedOption === 'Software') {
-        const textInput = e.target.parentNode.parentNode.querySelector('.device-text-input');
-        const radioButtons = e.target.parentNode.parentNode.querySelectorAll('input[type=radio]');
+        const textInput = formContainer.querySelector('.device-text-input');
+        const radioButtons = formContainer.querySelectorAll('input[type=radio]');
         let softwareType = null;
         radioButtons.forEach((radioButton) => {
             if (radioButton.checked) {
@@ -156,10 +158,10 @@ function saveUpdateData(e, selectedOption, updateData, selectedData, page, setUp
     }
     // Add the data from the configurations form to the formData ref
     else if (selectedOption === 'Configs') {
-        const selectedHospital = e.target.parentNode.parentNode.querySelector('.form-select-input');
-        const configDataInputs = e.target.parentNode.parentNode.querySelectorAll('.config-data-input');
-        const dateInput = e.target.parentNode.parentNode.querySelector('.date-entry-input');
-        const configFileInput = e.target.parentNode.parentNode.querySelector('.device-file-upload');
+        const selectedHospital = formContainer.querySelector('.form-select-input');
+        const configDataInputs = formContainer.querySelectorAll('.config-data-input');
+        const dateInput = formContainer.querySelector('.date-entry-input');
+        const configFileInput = formContainer.querySelector('.device-file-upload');
         
         updateData.current.set('hospital', selectedHospital.value);
 
@@ -231,8 +233,8 @@ function saveUpdateData(e, selectedOption, updateData, selectedData, page, setUp
     }
     else if (selectedOption === "Other Documents") {
 
-        const descriptions = e.target.parentNode.parentNode.querySelectorAll(".other-doc-text-input");
-        const fileInputs = e.target.parentNode.parentNode.querySelectorAll(".other-doc-file-upload");
+        const descriptions = formContainer.querySelectorAll(".other-doc-text-input");
+        const fileInputs = formContainer.querySelectorAll(".other-doc-file-upload");
         
         descriptions.forEach((description, index) => {
             if (description.value === "") {
@@ -296,6 +298,9 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
     const updateData = useRef(formData);
+
+    // Store the form container in a ref
+    const formContainer = useRef(null)
         
     return (
         <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
@@ -322,11 +327,11 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                         Other Documents
                     </div>                    
                 </div>
-                <div className="display-section">
+                <div className="display-section" ref={formContainer}>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
-                        <div className="update-button save-button" onClick={(e) => saveUpdateData(e, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Save Changes</div>
-                        <div className="update-button" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)}>Upload Updates</div>
+                        <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={(e) => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
+                        <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                     </div>                    
                 </div>
             </div>                

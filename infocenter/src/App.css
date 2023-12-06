@@ -73,7 +73,7 @@ html {
 }
 
 .main-button:active {
-  scale: 0.95;
+  scale: 0.98;
 }
 
 /* Format the form buttons */
@@ -1187,10 +1187,15 @@ html {
 .cross {
   float: right;
   margin-right: 20px;
+  transition: scale 0.1s ease-out;
 }
 
 .cross:hover {
   cursor: pointer;
+}
+
+.cross:active {
+  scale: 0.8;
 }
 
 #title-aligner {
@@ -1342,7 +1347,9 @@ html {
   position: absolute;
 }
 
+/* Add new staff formatting */
 .add-new-staff-container {
+  transform: translateY(-25px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0px 13px;
