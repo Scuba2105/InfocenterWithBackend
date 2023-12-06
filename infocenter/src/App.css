@@ -140,9 +140,36 @@ html {
   scale: 0.98;
 }
 
+/* Link Buttons for technical links and staff details */
+.main-link-button {
+  background-color: var(--med-light-theme);
+  border: 1.5px solid var(--main-color-accent);
+  color: var(--main-color-accent);
+}
+
+.alternate-link-button {
+  background-color: var(--med-light-theme);
+  border: 1.5px solid var(--alternate-color-accent);
+  color: var(--alternate-color-accent);
+}
+
+.yellow-green-link-button {
+  background-color: var(--med-light-theme);
+  border: 1.5px solid var(--yellow-green-button-color);
+  color: var(--yellow-green-button-color);
+}
+
+.main-link-button:hover, .alternate-link-button:hover {
+  scale: 1.06;
+}
+
+.main-link-button:active, .alternate-link-button:active {
+  scale: 1;
+}
+
 /* Button scale transition */
 .main-btn-transition {
-  transition: all 0.15s ease-in-out;
+  transition: scale 0.15s ease-in-out;
 }
 
 .form-btn-transition {
@@ -872,22 +899,6 @@ html {
   cursor: pointer;
 }
 
-.vendor-button {
-  background-color: transparent;
-  border: 1px solid white;
-  color: white;
-  border: none;
-  width: 11.5vw;
-  min-width: 130px;
-  justify-content: space-around;
-  z-index: 500;
-  font-size: 1.6vh;
-}
-
-.vendor-button:hover {
-  cursor: pointer !important;
-}
-
 .summary-area {
   grid-row: 3;
   justify-content: space-around;
@@ -1007,7 +1018,6 @@ html {
   max-height: 155px;
   border-radius: 6px;
   text-decoration: none;
-  color: black;
   justify-content: space-around;
   font-size: clamp(12px, 1.75vh, 20px);
   font-weight: 500;
@@ -1016,25 +1026,7 @@ html {
 .technical-link:last-child {
   margin-bottom: 20px;
 }
-  
-.main-link-button {
-  background-color: var(--med-light-theme);
-  border: 1.5px solid var(--main-color-accent);
-  color: var(--main-color-accent);
-}
-
-.alternate-link-button {
-  background-color: var(--med-light-theme);
-  border: 1.5px solid var(--alternate-color-accent);
-  color: var(--alternate-color-accent);
-}
-
-.yellow-green-link-button {
-  background-color: var(--med-light-theme);
-  border: 1.5px solid var(--yellow-green-button-color);
-  color: var(--yellow-green-button-color);
-}
-
+ 
 /* CSS for staff display area */
 .staff-info {
   font-size: 14px;
