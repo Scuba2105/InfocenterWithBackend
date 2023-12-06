@@ -99,7 +99,7 @@ html {
 
 .form-button-container:hover {
   cursor: pointer;
-  scale: 1.1;
+  scale: 1.05;
   z-index: 1;
 }
 
@@ -1534,6 +1534,7 @@ html {
 
 .device-data-option:hover {
  cursor: pointer;
+ scale: 1.1;
 }
 
 .device-data-option-selected {
@@ -1688,8 +1689,14 @@ html {
   width: 105px;
 }
 
-#add-another-file:hover {
+#add-another-file:hover, #remove-file:hover {
   cursor: pointer;
+  scale: 1.05;
+}
+
+#add-another-file:active, #remove-file:active {
+  cursor: pointer;
+  scale: 0.97;
 }
 
 #remove-file {
@@ -1700,10 +1707,6 @@ html {
   font-size: 13px; 
   height: 30px;
   width: 105px;
-}
-
-#remove-file {
-  cursor: pointer;
 }
 
 .file-add-remove-image {

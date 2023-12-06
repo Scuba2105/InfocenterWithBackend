@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Input } from "../Input";
 import { SelectInput } from "../SelectInput";
 import { serverConfig } from "../../server";
+import { FormButton } from "../FormButton";
 
 async function uploadData(formContainer, currentUserId, queryClient, showMessage, closeForm, closeDialog) {
     const serviceAgentInput = formContainer.current.querySelector(".form-select-input");
@@ -11,11 +12,17 @@ async function uploadData(formContainer, currentUserId, queryClient, showMessage
     const selectedServiceAgent = serviceAgentInput.value;
     const uploadfile = fileInput.files[0];
     
+    // Check a file has been added for upload
+    if (!uploadfile) {
+        showMessage("warning", "The file selection for the service request form is empty. Please select the appropriate service request form and try again.") 
+        return
+    }
+
     // Validate the service request form to be uploaded is either pdf or docx.
     const uploadFileExtension = uploadfile.name.split(".").slice(-1)[0];
     
     if (!["pdf", "docx"].includes(uploadFileExtension)) {
-       showMessage("warning", "The uploaded service request form must have either a pdf or docx file extension. Please make sure the correct file is being uploaded and try again.") 
+        showMessage("warning", "The uploaded service request form must have either a pdf or docx file extension. Please make sure the correct file is being uploaded and try again.") 
         return
     }
 
@@ -75,7 +82,7 @@ export function UpdateServiceRequestForms({serviceAgents, currentUserId, queryCl
                 <SelectInput type="form-select-input" optionData={serviceAgents} label="Service Agent"></SelectInput>
                 <Input inputType="file" identifier="service-request-file" labelText={"Service Request Form"}></Input>
             </div>
-            <div className="update-button service-request-forms-update-btn" onClick={() => uploadData(formContainer, currentUserId, queryClient, showMessage, closeForm, closeDialog)}>Upload Data</div>
+            <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => uploadData(formContainer, currentUserId, queryClient, showMessage, closeForm, closeDialog)} /> 
         </div>
     )
 }
