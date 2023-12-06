@@ -69,6 +69,7 @@ html {
 
 .main-button:hover {
   cursor: pointer;
+  scale: 1.05;
 }
 
 .main-button:active {
@@ -1474,6 +1475,7 @@ html {
   align-items: center;
 }
 
+/* Format the form buttons */
 .form-buttons {
   margin: auto auto;
   grid-row: 3;
@@ -1485,18 +1487,61 @@ html {
   margin-bottom: 40px;
 }
 
-.update-button {
+/* Format the form button. All styles for the color properties are located in the component. */
+.form-button-container {
+  position: relative;
   width: 150px;
-  height: 30px;
-  border: 1.3px solid var(--yellow-green-button-color);
+  height: 33px;
+  overflow: hidden;
+  border-radius: 5px;
+  transition: scale 0.3s ease-in-out;
+}
+
+.form-button-container:hover {
+  cursor: pointer;
+  scale: 1.1;
+  z-index: 1;
+}
+
+.form-button-container:active {
+  scale: 0.98;
+}
+
+.form-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  color: var(--yellow-green-button-color);
-  border-radius: 5px;
-  font-weight: 400;
+  font-weight: 550;
 }
+
+.form-button-after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.form-button-hover-after {
+  left: 0;
+  height: 110%;
+  width: 110%;
+}
+
+.form-button:active {
+  scale: 0.98;
+}
+
+/* End of form button formatting */
 
 .reset-button {
   border: 1.3px solid var(--reset-button-color);
@@ -1505,10 +1550,6 @@ html {
 
 .add-new-upload-button {
   margin: 20px 0 20px 0;
-}
-
-.update-button:hover {
-  cursor: pointer;
 }
 
 .save-button {

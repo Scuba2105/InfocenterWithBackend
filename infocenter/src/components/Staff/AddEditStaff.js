@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react"
 import { useConfirmation, useProfilePhotoUpdate, useUser } from "../StateStore"
 import { Input } from "../Input"
 import { SelectInput } from "../SelectInput"
-import { capitaliseFirstLetters, sortMandatoryFields } from "../../utils/utils"
+import { FormButton } from "../FormButton"
+import { sortMandatoryFields } from "../../utils/utils"
 import { serverConfig } from "../../server"
 
 // Define the arrays used for mapping over to simplify logic
@@ -377,8 +378,8 @@ export function AddEditStaff({type, page, selectedData, queryClient, showMessage
                 {type === "update" && selectedData.email !== "" ? <Input type="update" inputType="text" defaultValue={selectedData.email} identifier="add-new" labelText="Email Address" /> :                  
                 <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext={`Enter Email Address`} />}
                 <Input inputType="file" identifier="new-image" labelText={type === "update" ? "Update Employee Image" : "New Employee Image"} />
-            </div>  
-            <div className="update-button add-new-staff-upload-button" onClick={() => uploadStaffFormData(formContainer, updateData, type, page, selectedData, currentUser, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal)}>Upload Data</div>
+            </div> 
+            <FormButton content="Upload" btnColor="#5ef8ed" onClick={() => uploadStaffFormData(formContainer, updateData, type, page, selectedData, currentUser, setProfilePictureUpdates, setImageType, queryClient, message, showMessage, closeDialog, closeAddModal)} /> 
         </div>
     )
 }
