@@ -143,14 +143,14 @@ html {
 
 /* Link Buttons for technical links and staff details */
 .main-link-button {
-  background-color: var(--med-light-theme);
+  background: linear-gradient(135deg, #30384b, var(--med-light-theme));
   border: none;
   color: var(--main-color-accent);
   box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
 }
 
 .alternate-link-button {
-  background-color: var(--med-light-theme);
+  background: linear-gradient(135deg, #30384b, var(--med-light-theme));
   border: none;
   color: var(--alternate-color-accent);
   box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
@@ -1380,11 +1380,12 @@ html {
 
 .tooltip-button-img:hover {
   cursor: pointer;
-  scale: 1.07;
+  scale: 1.05;
 }
 
 .tooltip-button-img:active {
-  scale: 1;
+  transform: translate(1px, 2px);
+  scale: 1.05;
 }
 
 .tooltip-button > button {
@@ -1555,7 +1556,7 @@ html {
   color: #69737a;
   border: none;
   border-radius: 10px;
-  background-color: var(--med-light-theme);
+  background: linear-gradient(135deg, #30384b, var(--med-light-theme));
   margin-left: 15px;
   cursor: pointer;
   font-size: 10px;
@@ -1564,20 +1565,19 @@ html {
 }
 
 .documents-edit-button:hover, .device-data-option:hover {
-  background-color: rgb(47, 58, 78);
-  color: white;
+  color: var(--main-color-accent);
 }
 
 .documents-edit-button:active, .device-data-option:active {
   transform: translate(1px, 2px);
   box-shadow: 2px 2px 3px -5px rgba(12, 12, 12, 0.75);
-  background-color: rgb(47, 58, 78);
 }
 
 .device-data-option {
   font-size: 12px;
-  height: 80px;
-  width: 80px;
+  height: 85px;
+  width: 85px;
+  padding: 5px;
   border-radius: 10px;
   text-align: center;
 }
@@ -2048,7 +2048,7 @@ html {
   width: 200px;
   border-radius: 10px;
   display: grid; 
-  grid-template-rows: 40px 22% 1fr;
+  grid-template-rows: 40px 55px 1fr;
   border: 1px solid rgba(12, 12, 12, 0.75);
   box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
 }
@@ -2082,7 +2082,7 @@ html {
   grid: 1 / 2;
   height: 100%;
   width: 100%;
-  color: var(--med-light-theme);
+  background: var(--med--theme);
   justify-content: flex-start;
 }
 
@@ -2104,7 +2104,8 @@ html {
 .contact-numbers-container {
   justify-content: space-around;
   align-items: flex-start;
-  background-color: var(--med-light-theme);
+  background: linear-gradient(135deg, #30384b, var(--med-light-theme));
+  /*background-color: var(--med-light-theme);*/
   color: white;
   border-top: 1px solid black;
   border-bottom-left-radius: 15px;
@@ -2800,7 +2801,7 @@ abbr[title] {
   border-radius: 6px;
 }
 .react-calendar__tile--active {
-  background: var(--calendar-tile-active);
+  background: linear-gradient(135deg, #70ece3,var(--calendar-tile-active));
   border-radius: 6px;
   font-weight: bold;
   color: var(--med-theme);
@@ -2813,7 +2814,7 @@ abbr[title] {
 }
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: var(--calendar-tile-active);
+  background: linear-gradient(135deg, #70ece3,var(--calendar-tile-active));
   color: var(--med-theme);
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
@@ -3109,7 +3110,6 @@ abbr[title] {
 .text-input, .select-input, .date-input, .file-input, .password-input {
   border: 1px solid var(--search-bar-color);
   border-radius: 2px;
-  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
   background-color: var(--form-input-color);
   font-size: 12px;
   color: var(--form-font-color);
