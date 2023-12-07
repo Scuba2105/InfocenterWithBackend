@@ -95,16 +95,17 @@ html {
   height: 33px;
   overflow: hidden;
   border-radius: 5px;
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .form-button-container:hover {
   cursor: pointer;
-  scale: 1.05;
   z-index: 1;
 }
 
 .form-button-container:active {
-  scale: 0.98;
+  box-shadow: 2px 2px 3px 0px rgba(12, 12, 12, 0.75), -10px -10px 19px 0px rgba(20, 20, 20, 0.75) inset;
+  transform: translate(1px, 2px)
 }
 
 .form-button {
@@ -146,12 +147,14 @@ html {
   background-color: var(--med-light-theme);
   border: 1.5px solid var(--main-color-accent);
   color: var(--main-color-accent);
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .alternate-link-button {
   background-color: var(--med-light-theme);
   border: 1.5px solid var(--alternate-color-accent);
   color: var(--alternate-color-accent);
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .yellow-green-link-button {
@@ -161,11 +164,13 @@ html {
 }
 
 .main-link-button:hover, .alternate-link-button:hover {
-  scale: 1.06;
+  scale: 1.05;
 }
 
 .main-link-button:active, .alternate-link-button:active {
-  scale: 1;
+  transform: translate(1px, 2px);
+  box-shadow: 1px 1px 3px 0px rgba(12, 12, 12, 0.75);
+  scale: 1.05;
 }
 
 /* Button scale transition */
@@ -580,10 +585,12 @@ html {
 }
 
 #closeBtn {
-  background-color: var(--form-input-color);
+  background-color: #3a4256;
   color: var(--form-font-color);
-  border: 1px solid black;
+  border: 1px solid #3a4256;
+  border-radius: 5px;
   cursor: pointer;
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 #closeBtn:hover {
@@ -592,6 +599,7 @@ html {
 
 #closeBtn:active {
   transform: translate(1px, 2px);
+  box-shadow: 2px 2px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .upload-body {
@@ -1177,10 +1185,6 @@ html {
   justify-content: space-around;
   padding-bottom: 5px;
   font-size: clamp(12px, 1.75vh, 20px);
-}
-
-.info-entry:hover {
-  cursor: pointer;
 }
 
 .info-entry-label {
@@ -1987,6 +1991,7 @@ html {
   display: grid; 
   grid-template-rows: 40px 22% 1fr;
   border: 1px solid var(--contact-card-font-color);
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .contact-update-header {
@@ -2549,6 +2554,7 @@ html {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding-bottom: 10px;
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .date-card-small {
@@ -2556,6 +2562,7 @@ html {
   width: 110px;
   grid-template-rows: 15px 1fr;
   background-color: var(--med-light-theme);
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .card-head {
