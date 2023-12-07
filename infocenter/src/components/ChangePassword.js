@@ -3,6 +3,7 @@ import { Input } from "./Input";
 import { useState } from "react";
 import { useUser } from "./StateStore";
 import { serverConfig } from "../server";
+import { FormButton } from "./FormButton";
 
 const passwordStrengths = ["Undefined", "Very Bad", "Bad", "Average", "Good", "Very Good"];
 const passwordStrengthBar = {"Undefined": [0, "red"], "Very Bad": [67, "rgb(252, 82, 82)"], "Bad": [134, "rgb(252, 82, 82)"], 
@@ -116,8 +117,8 @@ export function ChangePassword({closeModal, showMessage, closeDialog}) {
                             <div className="strength-indicator" style={{width: strengthBarWidth + 'px', backgroundColor: strengthBarColor}}></div>
                         </div>}
                         {passwordMatch !== null && <p id="password-match" style={passwordMatch ? {color: 'rgb(3, 252, 156)'} : {color: 'rgb(252, 82, 82)'}}>{passwordMatch === true ? "Passwords Match!" : "Passwords Do Not Match!"}</p>}
-                    </div>                                            
-                    <button id="submit-password-change" className="update-button" onClick={() => submitNewPassword(currentUser.staffId ,currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog, closeModal)}>Submit</button>
+                    </div>  
+                    <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="20px" onClick={() => submitNewPassword(currentUser.staffId ,currentPassword, newPassword, passwordStrength, passwordMatch, showMessage, closeDialog, closeModal)} /> 
                 </div>
             </ModalSkeleton>
         </>

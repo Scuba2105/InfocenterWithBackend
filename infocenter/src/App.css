@@ -259,6 +259,14 @@ html {
   margin-bottom: 20px;
 }
 
+.login-button:hover {
+  scale: 1.04;
+}
+
+.login-button:active {
+  scale: 1;
+}
+
 .inputs-container {
   height: 10vh;
   transform: translateY(2vh);
@@ -389,6 +397,10 @@ html {
 .avatar-option label {
   cursor: pointer;
   margin-left: 10px;
+}
+
+.avatar-option-hovered label {
+  color: var(--yellow-green-button-color);
 }
 
 .change-password-form {
@@ -571,6 +583,14 @@ html {
   color: var(--form-font-color);
   border: 1px solid black;
   cursor: pointer;
+}
+
+#closeBtn:hover {
+  border: 1px solid var(--alternate-color-accent);
+}
+
+#closeBtn:active {
+  border: 1px solid var(--alternate-color-accent);
 }
 
 .upload-body {
@@ -1312,7 +1332,16 @@ html {
 
 /* Format the tooltip buttons for the equipment add new form */
 .tooltip-button {
-  width: 100px;
+  width: 60px;
+  margin-right: 40px;
+}
+
+.tooltip-button:hover {
+  scale: 1.07;
+}
+
+.tooltip-button:active {
+  scale: 1;
 }
 
 .tooltip-button > button {
@@ -1412,6 +1441,10 @@ html {
   width: 20px;
 }
 
+.copy-image:hover {
+  cursor: pointer;
+}
+
 .copied-text {
   position: relative;
   left: calc(223px);
@@ -1445,6 +1478,14 @@ html {
   color: var(--form-font-color);
 }
 
+.document-container:hover {
+  border: 1px solid var(--alternate-color-accent);
+}
+
+.document-container:active {
+  border: 1px solid var(--alternate-color-accent);
+}
+
 .document-icon {
   height: 50px;
   width: 50px;
@@ -1476,6 +1517,11 @@ html {
 .documents-edit-button:hover {
   color: #FBB934;
   border: 1.5px solid #FBB934;
+  scale: 1.07;
+}
+
+.documents-edit-button:active {
+  scale: 1;
 }
 
 /* documents edit form */
@@ -1834,7 +1880,7 @@ html {
   font-size: 13px;
 }
 
-.config-link a {
+.config-download-btn {
   padding: 3px 5px 3px 5px;
   font-size: 14px;
   font-weight: bold; 
@@ -1842,6 +1888,14 @@ html {
   background-color: rgb(248, 241, 98);
   color: black;
   border-radius: 5px;
+}
+
+.config-download-btn:hover {
+  scale: 1.07;
+}
+
+.config-download-btn:active {
+  scale: 0.98;
 }
 
 /* Formatting the Contacts page */

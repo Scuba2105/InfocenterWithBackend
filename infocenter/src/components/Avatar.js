@@ -44,8 +44,17 @@ function useOutsideAlerter(ref, setMenuVisible) {
     }, [ref, setMenuVisible]);
   }
 
+function handleHover(option, setHovered) {
+    setHovered(option)
+}
+
+function handleMouseOut(setHovered) {
+    setHovered(null)
+}
+
 export function Avatar({showMessage, closeDialog}) {
 
+    const [hovered, setHovered] = useState(null);
     const [menuVisible, setMenuVisible] = useState(false);
     const avatarMenu = useRef(null);
     useOutsideAlerter(avatarMenu, setMenuVisible);
@@ -66,12 +75,12 @@ export function Avatar({showMessage, closeDialog}) {
                 {menuVisible && 
                 <div className="avatar-menu flex-c-col">
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>
-                    <div className="avatar-option flex-c" onClick={() => showModal(setChangePasswordVisible, setMenuVisible)}>
-                        <PadlockIcon color="white" size="25px"></PadlockIcon>
+                    <div className={hovered === "password" ? "avatar-option avatar-option-hovered flex-c" : "avatar-option flex-c"} onClick={() => showModal(setChangePasswordVisible, setMenuVisible)} onMouseOver={() => handleHover("password", setHovered)} onMouseOut={() => handleMouseOut(setHovered)}>
+                        <PadlockIcon color={hovered === "password" ? "#D4FB7C" : "white"} size="25px"></PadlockIcon>
                         <label id="change-password">Change Password</label>
                     </div>
-                    <div className="avatar-option" onClick={() => logoutFromApp(logout)}>
-                        <LogoutIcon color="white" size="25px"></LogoutIcon>
+                    <div className={hovered === "logout" ? "avatar-option avatar-option-hovered flex-c" : "avatar-option flex-c"} onClick={() => logoutFromApp(logout)} onMouseOver={() => handleHover("logout", setHovered)} onMouseOut={() => handleMouseOut(setHovered)}>
+                        <LogoutIcon color={hovered === "logout" ? "#D4FB7C" : "white"} size="25px"></LogoutIcon>
                         <label id="logout-label">Logout</label>
                     </div>
                 </div>}

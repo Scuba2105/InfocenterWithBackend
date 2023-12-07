@@ -89,7 +89,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     for (let [index, input] of inputElements.entries()) {
 
         if (input.value === "") {
-            showMessage("error", `The input for the new device ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
+            showMessage("warning", `The input for the new device ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
             return;
         }
         else if (unavailableModels.includes(input.value) && index === 0) {

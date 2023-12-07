@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Input } from "../Input";
 import { serverConfig } from "../../server";
+import { FormButton } from "../FormButton";
 
 async function uploadData(formContainer, updateData, queryClient, showMessage, closeModal, closeDialog) {
     const dateInputs = formContainer.current.querySelectorAll(".date-input")
@@ -78,10 +79,10 @@ export function ConfirmRoster({queryClient, showMessage, closeModal, closeDialog
                 <p>Please select the Start Date and End Date to confirm</p>
                 <p>the on-call roster for the chosen week.</p>
             </div>
-            <form className="confirm-roster-form" ref={formContainer}>
+            <form className="confirm-roster-form flex-c-col" ref={formContainer}>
                 <Input inputType="date" identifier="date-change" labelText={"Start Date"}></Input>
                 <Input inputType="date" identifier="date-change" labelText={"End Date"}></Input>
-                <div className="update-button edit-roster-update-btn" onClick={() => uploadData(formContainer, updateData, queryClient, showMessage, closeModal, closeDialog, page)}>Upload Data</div>
+                <FormButton content="Upload" btnColor="#D4FB7C" marginTop="40px" marginBottom="30px" onClick={() => uploadData(formContainer, updateData, queryClient, showMessage, closeModal, closeDialog, page)} /> 
             </form>
         </div>
     )

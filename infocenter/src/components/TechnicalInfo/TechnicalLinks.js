@@ -21,11 +21,12 @@ function generateLinks(deviceData, type) {
 }
 
 function getClassList(link, selectedData) {
+    const btnType = ["userManual", "software", "passwords"].includes(link) ? "alternate-link-button" : "main-link-button";
     if (selectedData[link] === false || selectedData[link] === "") {
-        return `technical-link main-link-button flex-c-col main-btn-transition inactive ${link}`
+        return `technical-link ${link} ${btnType} flex-c-col main-btn-transition inactive `
     }
     else {
-        return `technical-link main-link-button flex-c-col main-btn-transition ${link}`
+        return `technical-link ${link} ${btnType} flex-c-col main-btn-transition `
     } 
 
 }

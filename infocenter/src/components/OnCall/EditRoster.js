@@ -3,6 +3,7 @@ import { Input } from "../Input";
 import { SelectInput } from "../SelectInput";
 import { staffOnCallRoster } from "../../utils/utils";
 import { serverConfig } from "../../server";
+import { FormButton } from "../FormButton";
 
 // Input element types
 const inputNames = ["Original Staff Member", "New Staff Member", "Reason", "Start Date", "End Date"]
@@ -97,13 +98,13 @@ export function EditRoster({queryClient, showMessage, closeModal, closeDialog}) 
 
     return (
         <div className="modal-display">
-            <form className="edit-roster-form" ref={formContainer}>
+            <form className="edit-roster-form flex-c-col" ref={formContainer}>
                 <SelectInput type="form-select-input" optionData={staffOnCallRoster} label="Original On-Call Member"></SelectInput>
                 <SelectInput type="form-select-input" optionData={staffOnCallRoster} label="New On-Call Member"></SelectInput>
                 <SelectInput type="form-select-input" optionData={rosterChangeReasons} label="Reason for Change"></SelectInput>
                 <Input inputType="date" identifier="date-change" labelText={"Start Date"}></Input>
                 <Input inputType="date" identifier="date-change" labelText={"End Date"}></Input>
-                <div className="update-button edit-roster-update-btn" onClick={() => uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog)}>Upload Data</div>
+                <FormButton content="Upload" btnColor="#D4FB7C" marginTop="30px" marginBottom="30px" onClick={() => uploadData(formContainer, queryClient, showMessage, closeModal, closeDialog)} /> 
             </form>
         </div>
     )
