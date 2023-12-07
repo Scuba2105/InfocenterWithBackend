@@ -18,10 +18,18 @@ function handleMouseOut(setHovered) {
 export function FormButton({content, btnColor, onClick, marginTop="30px", marginBottom="20px", marginLeft="0px", marginRight="0px"}) {
     
     const [hovered, setHovered] = useState(false);
-    const [clicked, setClicked] = useState(false);
-
-    // Get the darker color for the button gradient.
-    const darkBtnColorObject = tinycolor(btnColor).darken(30);
+    
+    let darkBtnColorObject;
+    if (content === "Delete") {
+        // Get the darker color for the button gradient.
+        darkBtnColorObject = tinycolor(btnColor).darken(15);
+    }
+    else {
+        // Get the darker color for the button gradient.
+        darkBtnColorObject = tinycolor(btnColor).darken(30);
+    }
+    
+    // Generate the dark button color from the darkBtnColorObject properties.
     const darkBtnColor = (`rgb(${darkBtnColorObject["_r"]}, ${darkBtnColorObject["_g"]}, ${darkBtnColorObject["_b"]})`)
     
     return (

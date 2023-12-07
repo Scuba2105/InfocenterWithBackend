@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { serverConfig } from '../server';
+import { CopyIcon } from '../svg';
 
 // Copy text to clipboard
 async function copyTextToClipboard(text) {
@@ -12,7 +12,7 @@ async function copyTextToClipboard(text) {
 }
 
 // onClick handler function for the copy button
-function handleCopyClick(copyTextToClipboard, copyText, setIsCopied) {
+function handleCopyClick(copyTextToClipboard, copyText, setIsCopied, setHovered) {
         
   // Asynchronously call copyTextToClipboard
    copyTextToClipboard(copyText)
@@ -20,7 +20,8 @@ function handleCopyClick(copyTextToClipboard, copyText, setIsCopied) {
        // If successful, update the isCopied state value
        setIsCopied(true);
        setTimeout(() => {
-         setIsCopied(false);
+         setIsCopied(false)
+         setHovered(false)
        }, 1500);
      })
      .catch((err) => {
@@ -28,12 +29,21 @@ function handleCopyClick(copyTextToClipboard, copyText, setIsCopied) {
      });
 }
 
+function handleHover(setHovered) {
+  setHovered(true);
+}
+
+function handleMouseOut(setHovered) {
+  setHovered(false);
+}
+
 export function ClipboardCopy({ copyText, identifier }) {
     const [isCopied, setIsCopied] = useState(false);
+    const [hovered, setHovered] = useState(false);
   
     return (
         <>
-            {isCopied ? <span className="copied-text" >Copied!</span> : <img src={`https://${serverConfig.host}:${serverConfig.port}/images/copy.svg`} alt="copy" style={isCopied ? {opacity: 0} : {opacity: 1}} className={copyText === "N/A" ? "hidden" : "copy-image"} onClick={() => handleCopyClick(copyTextToClipboard, copyText, setIsCopied)}></img>}
+            {isCopied ? <span className="copied-text" >Copied!</span> : <CopyIcon color={hovered ? "#5ef8ed" : "#BCE7FD"} size="20px" identifier={copyText === "N/A" ? "hidden" : "copy-image"}  onClick={() => handleCopyClick(copyTextToClipboard, copyText, setIsCopied, setHovered)} onMouseOver={() => handleHover(setHovered)} onMouseOut={() => handleMouseOut(setHovered)} isCopied={isCopied} />}
         </>
     );
 }
