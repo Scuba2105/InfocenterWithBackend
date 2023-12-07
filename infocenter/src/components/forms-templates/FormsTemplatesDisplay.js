@@ -14,7 +14,7 @@ import { MainButton } from "../MainButton";
 import { serverConfig } from "../../server";
 
 // Store list of Service Agents with service request forms.
-const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "Device Technologies", "FM30 Transducers Delivery Note", "Fresenius Kabi", "GE Healthcare", "Generic Delivery Note", "ICU Medical", 
+const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "Device Technologies", "Draeger", "FM30 Transducers Delivery Note", "Fresenius Kabi", "GE Healthcare", "Generic Delivery Note", "ICU Medical", 
                       "Independent Living Specialists", "JD Healthcare", "Masimo", "Medtronic", "Philips Respironics", "REM Systems", "Resmed",
                       "Verathon", "Welch Allyn"];
 
@@ -22,6 +22,7 @@ const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "Device Technologi
 const onlineForms  = {"Masimo": "https://www.masimo.com/company/global-services/customer-feedback-form/",
                       "Medtronic": "https://secure.medtronicinteract.com/SubmitServiceRequest",
                       "GE Healthcare": "https://services.gehealthcare.com.au/gehcstorefront/",
+                      "Draeger": "https://www.draeger-service.com.au/au/",
                       "Welch Allyn": "https://www.welchallyn.com/en/service-support/submit-a-repair.html",
                       "Generic Delivery Note": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/Generic Delivery Note.pdf`,
                       "FM30 Transducers Delivery Note": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/FM30 US and Toco Transducers.pdf`}

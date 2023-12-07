@@ -77,12 +77,12 @@ export function UpdateServiceRequestForms({serviceAgents, currentUserId, queryCl
     const formContainer = useRef(null)
 
     return (
-        <div className="modal-display">
+        <div className="modal-display" style={{minHeight: 200 + 'px', height: 300 + 'px'}}>
             <div id="service-request-forms-inputs-container" className="flex-c-col" ref={formContainer} >
                 <SelectInput type="form-select-input" optionData={serviceAgents} label="Service Agent"></SelectInput>
                 <Input inputType="file" identifier="service-request-file" labelText={"Service Request Form"}></Input>
             </div>
-            <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => uploadData(formContainer, currentUserId, queryClient, showMessage, closeForm, closeDialog)} /> 
+            <FormButton content="Upload" btnColor="#D4FB7C" marginTop="0px" marginBottom="10px" onClick={() => uploadData(formContainer, currentUserId, queryClient, showMessage, closeForm, closeDialog)} /> 
         </div>
     )
 }

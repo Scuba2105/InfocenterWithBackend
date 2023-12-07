@@ -117,6 +117,7 @@ html {
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  font-size: 15px;
   font-weight: 550;
 }
 
@@ -2904,8 +2905,11 @@ abbr[title] {
 
 /* Format the service request forms update models form */
 #service-request-forms-inputs-container {
-  height: 200px;
-  justify-content: space-around;
+  height: 80px;
+}
+
+.service-request-file-label {
+  margin-top: 25px;
 }
 
 /* Format the testing templates */
