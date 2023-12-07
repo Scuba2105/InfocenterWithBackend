@@ -95,8 +95,10 @@ html {
   height: 33px;
   overflow: hidden;
   border-radius: 5px;
-  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
+  box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
+  transition: all 0.3s ease-out;
 }
+
 
 .form-button-container:hover {
   cursor: pointer;
@@ -104,7 +106,7 @@ html {
 }
 
 .form-button-container:active {
-  box-shadow: 2px 2px 3px 0px rgba(12, 12, 12, 0.75), -10px -10px 19px 0px rgba(20, 20, 20, 0.75) inset;
+  box-shadow: 2px 2px 3px 0px rgba(21, 21, 32, 0.75);
   transform: translate(1px, 2px)
 }
 
@@ -138,21 +140,17 @@ html {
   width: 110%;
 }
 
-.form-button:active {
-  scale: 0.98;
-}
-
 /* Link Buttons for technical links and staff details */
 .main-link-button {
   background-color: var(--med-light-theme);
-  border: 1.5px solid var(--main-color-accent);
+  border: none;
   color: var(--main-color-accent);
   box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .alternate-link-button {
   background-color: var(--med-light-theme);
-  border: 1.5px solid var(--alternate-color-accent);
+  border: none;
   color: var(--alternate-color-accent);
   box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
@@ -179,7 +177,7 @@ html {
 }
 
 .form-btn-transition {
-  transition: scale 0.15s ease-in-out, width 0.2s ease-in-out;
+  transition: transform 0.15s ease-in-out, width 0.2s ease-in-out;
 }
 
 
@@ -815,6 +813,8 @@ html {
   margin: 20px 0px 20px 20px;
   background-color: var(--med-theme);
   width: 100%;
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
+  border-radius: 10px;
 }
 
 .search-table {
@@ -825,7 +825,7 @@ html {
 
 .header-row {
   height: 4.5vh;
-  font-size: 2.3vh;
+  font-size: 2vh;
   width: 100%;
   background-color: transparent;
   font-weight: bold;
@@ -888,9 +888,11 @@ html {
   width: 94%;
   background-color: var(--med-theme);
   border: 1px solid black;
+  border-radius: 10px;
   margin-top: 2%;
   min-height: 550px;
   min-width: calc(1100px * 0.45);
+  box-shadow: 8px 8px 8px 0px rgba(12, 12, 12, 0.75);
 }
 
 .staff-display {  
@@ -915,6 +917,8 @@ html {
   justify-content: space-between;
   background-color: var(--med-light-theme);
   color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .summary-card-header-center { 
@@ -924,6 +928,8 @@ html {
   grid-row: 1;
   background-color: var(--med-light-theme);
   color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 #summary-header-aligner {
@@ -980,6 +986,7 @@ html {
   object-fit: contain;
   border: 1px solid black;
   border-radius: 10px;
+  box-shadow: 4px 4px 6px 0px rgba(12, 12, 12, 0.75);
 }
 
 .equipment-summary {
@@ -1079,7 +1086,7 @@ html {
   aspect-ratio: 1 / 1;
   height: 65%;
   max-height: 155px;
-  border-radius: 6px;
+  border-radius: 10px;
   text-decoration: none;
   justify-content: space-around;
   font-size: clamp(12px, 1.75vh, 20px);
@@ -1496,6 +1503,7 @@ html {
   height: 60px;
   padding: 5px;
   border: 1px solid black;
+  border-radius: 10px;
   background-color: var(--form-input-color);
   text-decoration: none;
   color: var(--form-font-color);
@@ -1768,16 +1776,18 @@ html {
   font-size: 13px; 
   height: 30px;
   width: 105px;
+  box-shadow: 4px 4px 5px 0px rgba(21, 21, 32, 0.75);
 }
 
 #add-another-file:hover, #remove-file:hover {
   cursor: pointer;
-  scale: 1.05;
+  scale: 1.03;
 }
 
 #add-another-file:active, #remove-file:active {
   cursor: pointer;
-  scale: 0.97;
+  box-shadow: 2px 2px 3px 0px rgba(21, 21, 32, 0.75);
+  transform: translate(1px, 2px);
 }
 
 #remove-file {
@@ -1788,6 +1798,7 @@ html {
   font-size: 13px; 
   height: 30px;
   width: 105px;
+  box-shadow: 4px 4px 5px 0px rgba(21, 21, 32, 0.75);
 }
 
 .file-add-remove-image {
@@ -1897,13 +1908,14 @@ html {
   width: 100%;
   border: 1px solid var(--dark-theme);
   border-radius: 20px;
-  background: url('../../public/images/configuration-background.jpg');
+  background-color: var(--med-light-theme);
   background-repeat: no-repeat;
   background-size: cover;
   justify-content: space-around;
   color: white;
   padding: 10px;
   font-size: 13px;
+  box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
 }
 
 .config-download-btn {
@@ -1914,14 +1926,15 @@ html {
   background-color: rgb(248, 241, 98);
   color: black;
   border-radius: 5px;
+  box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
 }
 
 .config-download-btn:hover {
-  scale: 1.07;
+  background-color: rgb(250, 244, 132);
 }
 
 .config-download-btn:active {
-  scale: 0.98;
+  transform: translate(1px, 2px);
 }
 
 /* Formatting the Contacts page */
@@ -1929,6 +1942,7 @@ html {
   padding-top: 30px;
   height: 95%;
   width: 100%;
+
 }
 
 .hospital-contacts-container {
@@ -1943,6 +1957,8 @@ html {
   background-color: var(--med-light-theme);
   margin: auto auto;
   border: 1px solid black;
+  border-bottom: none;
+  box-shadow: 4px 4px 6px 0px rgba(12, 12, 12, 0.75);
 }
 
 .contacts-heading-admin {
@@ -1956,8 +1972,12 @@ html {
   width: 90%;
   margin: auto auto;
   border: 1px solid black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: none;
   display: grid;
   grid-template-rows: 100px 1fr 50px;
+  box-shadow: 4px 4px 6px 0px rgba(12, 12, 12, 0.75);
 }
 
 .contacts-display {
@@ -1990,7 +2010,7 @@ html {
   border-radius: 10px;
   display: grid; 
   grid-template-rows: 40px 22% 1fr;
-  border: 1px solid var(--contact-card-font-color);
+  border: 1px solid rgba(12, 12, 12, 0.75);
   box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
@@ -2534,6 +2554,8 @@ html {
   justify-content: flex-start;
   background: var(--med-theme);
   overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 8px 8px 8px 0px rgba(12, 12, 12, 0.75);
 }
 
 .on-call-summary {
@@ -2615,6 +2637,7 @@ html {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding-bottom: 10px;
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .on-call-staff {
@@ -2650,7 +2673,6 @@ html {
   color: white;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
   display: flex;
@@ -2658,6 +2680,7 @@ html {
   justify-content: flex-start;
   align-items: center;
   margin: auto auto;
+  box-shadow: 8px 8px 8px 0px rgba(12, 12, 12, 0.75);
 }
 
 /* Format the navigation bar */
@@ -2765,16 +2788,17 @@ abbr[title] {
 
 /* On call functions formatting */
 .on-call-functions-container {
-  height: 90%;
+  height: 92%;
   width: 90%;
   margin: auto auto;
   background-color: var(--med-theme);
-  border-radius: 20px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 4vw 1fr 1fr 1fr;
   overflow: hidden;
   text-decoration: none;
+  box-shadow: 8px 8px 8px 0px rgba(12, 12, 12, 0.75);
 }
 
 .on-call-functions-container:visited {
@@ -2784,7 +2808,7 @@ abbr[title] {
 .on-call-functions-header {
   grid-column: 1 / -1;
   grid-row: 1;
-  font-size: clamp(14px, 1.75vw, 28px);
+  font-size: clamp(14px, 1.5vw, 28px);
   background-color: var(--med-light-theme);
   color: white;
   font-weight: 500;
@@ -3045,6 +3069,8 @@ abbr[title] {
 /* Global formatting for the form input elements */
 .text-input, .select-input, .date-input, .file-input, .password-input {
   border: 1px solid var(--search-bar-color);
+  border-radius: 2px;
+  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
   background-color: var(--form-input-color);
   font-size: 12px;
   color: var(--form-font-color);

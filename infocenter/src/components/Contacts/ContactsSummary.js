@@ -102,7 +102,7 @@ export function ContactsSummary({page, identifier, selectedDepartment, setSelect
     displayedContacts = identifier === "staff" ? 
     allDepartmentContacts.slice(contactPage*entriesPerPage, contactPage*entriesPerPage + entriesPerPage) :
     allDepartmentContacts.slice(vendorContactPage*entriesPerPage, vendorContactPage*entriesPerPage + entriesPerPage)
-    console.log(currentUser.permissions === "admin")
+    
     return (
         <div className="hospital-contacts-container size-100">
             <div className={currentUser.permissions === "admin" ? "contacts-heading-admin flex-c" : "contacts-heading flex-c"}>
