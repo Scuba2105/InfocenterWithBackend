@@ -157,8 +157,9 @@ html {
 
 .yellow-green-link-button {
   background-color: var(--med-light-theme);
-  border: 1.5px solid var(--yellow-green-button-color);
+  border: none;
   color: var(--yellow-green-button-color);
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .main-link-button:hover, .alternate-link-button:hover {
@@ -1027,7 +1028,7 @@ html {
   color: var(--form-font-color);
 }
 
-.device-text-input, .add-new.input /*.change-password-input*/ {
+.device-text-input, .add-new.input {
   text-align: center;
   width: 275px;
   height: 25px;
@@ -1035,6 +1036,7 @@ html {
   background-color: var(--form-input-color);
   border: 1px solid var(--search-bar-color);
   color: var(--form-font-color);
+  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
 }
 
 .software-type {
@@ -1456,6 +1458,7 @@ html {
   height: 25px;
   padding-left: 20px;
   justify-content: flex-start;
+  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
 }
 
 .clipboard-aligner {
@@ -1507,7 +1510,7 @@ html {
   background-color: var(--form-input-color);
   text-decoration: none;
   color: var(--form-font-color);
-  box-shadow: 4px 4px 5px 0px rgba(12, 12, 12, 0.75);
+  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
 }
 
 .document-container:hover {
