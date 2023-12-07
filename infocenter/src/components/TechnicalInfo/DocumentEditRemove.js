@@ -4,6 +4,7 @@ import { Input } from "../Input";
 import { VendorArrow } from "../../svg";
 import { serverConfig } from "../../server"
 import { useConfirmation } from "../StateStore";
+import { FormButton } from "../FormButton";
 
 async function uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog) {
     const fileInput = formContainer.current.querySelector(".file-input");
@@ -144,7 +145,7 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
         return () => {
             resetConfirmationStatus();
         }    
-    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient, closeForm, currentDocument]);
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient, closeForm, currentDocument, selectedData]);
      
 
     return (
@@ -157,8 +158,8 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
             <form className="documents-edit-form">
                 <Input inputType="file" identifier="updated-file" labelText="Updated Document"></Input>
                 <div className="form-buttons">
-                    <div className="update-button" onClick={() => uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog)}>Upload Document</div>
-                    {documentDeletePermissions && <div className="update-button delete-button" onClick={() => deleteResource(showMessage)}>Delete Document</div>}
+                    {documentDeletePermissions && <FormButton content="Delete" btnColor="#EE467B" marginTop="0px" onClick={() => deleteResource(showMessage)} />}
+                    <FormButton content="Upload" btnColor="#D4FB7C" marginTop="0px" onClick={() => uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog)} /> 
                 </div>
             </form>
         </div>

@@ -587,11 +587,11 @@ html {
 }
 
 #closeBtn:hover {
-  border: 1px solid var(--alternate-color-accent);
+  background-color: rgb(47, 58, 78);
 }
 
 #closeBtn:active {
-  border: 1px solid var(--alternate-color-accent);
+  transform: translate(1px, 2px);
 }
 
 .upload-body {
@@ -631,6 +631,7 @@ html {
   background-color: rgb(247, 65, 65);
   border: 1px solid rgb(247, 65, 65);
   border-radius: 5px;
+  box-shadow: 4px 4px 5px 0px rgba(12, 12, 12, 0.75);
 }
 
 .proceed-btn {
@@ -638,10 +639,26 @@ html {
   background-color: rgb(8, 171, 103);
   border: 1px solid rgb(8, 171, 103);
   border-radius: 5px;
+  box-shadow: 4px 4px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 .cancel-btn:hover, .proceed-btn:hover {
   cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: rgb(247, 112, 112);
+  border: 1px solid rgb(247, 112, 112);
+}
+
+.proceed-btn:hover {
+  background-color: rgb(42, 207, 138);
+  border: 1px solid rgb(42, 207, 138);
+}
+
+.cancel-btn:active, .proceed-btn:active {
+  transform: translate(1px, 2px);
+  box-shadow: 2px 2px 4px 0px rgba(12, 12, 12, 0.75);
 }
 
 /* The animation code */
@@ -1337,11 +1354,12 @@ html {
   margin-right: 40px;
 }
 
-.tooltip-button:hover {
+.tooltip-button-img:hover {
+  cursor: pointer;
   scale: 1.07;
 }
 
-.tooltip-button:active {
+.tooltip-button-img:active {
   scale: 1;
 }
 
@@ -1477,14 +1495,17 @@ html {
   background-color: var(--form-input-color);
   text-decoration: none;
   color: var(--form-font-color);
+  box-shadow: 4px 4px 5px 0px rgba(12, 12, 12, 0.75);
 }
 
 .document-container:hover {
-  border: 1px solid var(--alternate-color-accent);
+  background-color: rgb(47, 58, 78)
 }
 
 .document-container:active {
-  border: 1px solid var(--alternate-color-accent);
+  transform: translate(1px, 2px);
+  box-shadow: 2px 2px 5px -5px rgba(12, 12, 12, 0.75);
+  background-color: rgb(47, 58, 78)
 }
 
 .document-icon {
