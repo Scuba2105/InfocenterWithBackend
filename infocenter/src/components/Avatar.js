@@ -76,11 +76,11 @@ export function Avatar({showMessage, closeDialog}) {
                 <div className="avatar-menu flex-c-col">
                     <label id="permission-label">{currentUser.permissions === "admin" ? "Administrator" : currentUser.permissions[0].toUpperCase() + currentUser.permissions.split("").slice(1).join("")}</label>
                     <div className={hovered === "password" ? "avatar-option avatar-option-hovered flex-c" : "avatar-option flex-c"} onClick={() => showModal(setChangePasswordVisible, setMenuVisible)} onMouseOver={() => handleHover("password", setHovered)} onMouseOut={() => handleMouseOut(setHovered)}>
-                        <PadlockIcon color={hovered === "password" ? "#D4FB7C" : "white"} size="25px"></PadlockIcon>
+                        <PadlockIcon color={hovered === "password" ? "#5ef8ed" : "white"} size="25px"></PadlockIcon>
                         <label id="change-password">Change Password</label>
                     </div>
                     <div className={hovered === "logout" ? "avatar-option avatar-option-hovered flex-c" : "avatar-option flex-c"} onClick={() => logoutFromApp(logout)} onMouseOver={() => handleHover("logout", setHovered)} onMouseOut={() => handleMouseOut(setHovered)}>
-                        <LogoutIcon color={hovered === "logout" ? "#D4FB7C" : "white"} size="25px"></LogoutIcon>
+                        <LogoutIcon color={hovered === "logout" ? "#5ef8ed" : "white"} size="25px"></LogoutIcon>
                         <label id="logout-label">Logout</label>
                     </div>
                 </div>}
