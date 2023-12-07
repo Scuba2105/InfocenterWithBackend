@@ -150,9 +150,11 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
 
     return (
         <div className="modal-display" ref={formContainer}>
-            <div className="previous-page-arrow-container flex-c" onClick={closeForm}>
-                <VendorArrow size="2.31vh" color="white" identifier="previous-page-arrow"></VendorArrow>
-                <label className="previous-page-arrow-label">Back to View Documents</label>
+            <div className="previous-page-arrow-container">
+                <button className="previous-page-arrow-button flex-c" onClick={closeForm}>
+                    <VendorArrow size="2.31vh" color="white" identifier="previous-page-arrow"></VendorArrow>
+                    <label className="previous-page-arrow-label">Back to View Documents</label>
+                </button>
             </div>
             <h3 className="documents-heading-edit">{`Edit ${currentDocument.description}`}</h3>
             <form className="documents-edit-form">
