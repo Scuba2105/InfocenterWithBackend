@@ -91,8 +91,8 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                 
                 }
                 <div className="other-file-button-container flex-c">
-                    {fileNumber[fileNumber.length - 1] < 4 && <div className="flex-c" id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><AddSquare color="rgb(5, 234, 146)" translateX={-8}/>Add File</div>}
-                    {fileNumber.length !== 1 && <div className="flex-c" id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><TrashCan color="rgb(253, 67, 67" translateX={-8}/>Delete File</div>}
+                    {fileNumber[fileNumber.length - 1] < 4 && <div className="other-doc-add-rm flex-c form-btn-transition" id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><AddSquare color="rgb(5, 234, 146)" translateX={-8}/>Add File</div>}
+                    {fileNumber.length !== 1 && <div className="other-doc-add-rm flex-c form-btn-transition" id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><TrashCan color="#fd6673" translateX={-8}/>Delete File</div>}
                 </div>
             </div>
         );

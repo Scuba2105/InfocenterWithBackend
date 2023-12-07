@@ -275,22 +275,26 @@ function updateSelectedOption(e, setSelectedOption, setFileNumber) {
 
 // Update the file count for the other documents page
 function updateFileCount(e, fileNumber, setFileNumber, showMessage) {
-    if (e.target.textContent === 'Add File') {
-        const lastNumber = fileNumber[fileNumber.length - 1];
-        
-        if (lastNumber < 4) {
-            setFileNumber([...fileNumber, lastNumber + 1]);
+    const clickedButton = e.currentTarget;
+
+    delayFunctionInitiation(() => {
+        if (clickedButton.textContent === 'Add File') {
+            const lastNumber = fileNumber[fileNumber.length - 1];
+            
+            if (lastNumber < 4) {
+                setFileNumber([...fileNumber, lastNumber + 1]);
+            }
+            else {
+                showMessage("warning", 'Maximum number of files reached. No more than 4 files can be added during one upload.')
+            }
         }
         else {
-            showMessage("warning", 'Maximum number of files reached. No more than 4 files can be added during one upload.')
+            if (fileNumber.length !== 1) {
+                const newArray = fileNumber.slice(0, -1);
+                setFileNumber(newArray);
+            }
         }
-    }
-    else {
-        if (fileNumber.length !== 1) {
-            const newArray = fileNumber.slice(0, -1);
-            setFileNumber(newArray);
-        }
-    }
+    })
 }
 
 export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
@@ -311,24 +315,24 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
         <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
             <div className="update-form-display">
                 <div className="update-options flex-c">
-                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <ServiceIcon color={selectedOption === "Service Manual" ? "#5ef8ed" : "#69737a"} size="25px"/>
+                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
+                        <ServiceIcon color={(selectedOption === "Service Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Service Manual
                     </div>
-                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <UserManualIcon color={selectedOption === "User Manual" ? "#5ef8ed" : "#69737a"} size="25px"/>
+                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
+                        <UserManualIcon color={(selectedOption === "User Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         User Manual
                     </div>
-                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <ConfigIcon color={selectedOption === "Configs" ? "#5ef8ed" : "#69737a"} size="25px"/>
+                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
+                        <ConfigIcon color={(selectedOption === "Configs") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Configs
                     </div>
-                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <SoftwareIcon color={selectedOption === "Software" ? "#5ef8ed" : "#69737a"} size="25px"/>
+                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
+                        <SoftwareIcon color={(selectedOption === "Software") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Software
                     </div>
-                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <DocumentsIcon color={selectedOption === "Other Documents" ? "#5ef8ed" : "#69737a"} size="25px"/>
+                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
+                        <DocumentsIcon color={(selectedOption === "Other Documents") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Other Documents
                     </div>                    
                 </div>

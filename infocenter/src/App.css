@@ -29,9 +29,9 @@ html {
   --green-button-color: rgb(5, 234, 146);
   --blue-button-color: #03a9eb;
   --search-bar-color: #69737a;
-  --red-accent: rgb(253, 67, 67);
+  --red-accent: #fd6673;
   --reset-button-color: rgb(252, 93, 132); 
-  --green-accent: rgb(2, 189, 118);
+  --green-accent: rgb(48, 238, 165);
   --orange-accent: #fdc046;
   --calendar-tile-active: var(--main-color-accent); 
   --calendar-tile-hover: var(--med-light-theme);
@@ -586,9 +586,9 @@ html {
 }
 
 #closeBtn {
-  background-color: transparent;
-  border: 1px solid var(--yellow-green-button-color);
-  color: var(--yellow-green-button-color);
+  background: linear-gradient(#30384b, var(--med-light-theme));
+  border: none;
+  color: var(--alternate-color-accent);
   border-radius: 5px;
   font-weight: 500;
   cursor: pointer;
@@ -596,11 +596,11 @@ html {
 }
 
 #closeBtn:hover {
-  scale: 1.04;
+  cursor: pointer;
 }
 
 #closeBtn:active {
-  scale: 1.04;
+  cursor: pointer;
   transform: translate(1px, 2px);
   box-shadow: 2px 2px 4px 0px rgba(12, 12, 12, 0.75);
 }
@@ -973,6 +973,7 @@ html {
 
 .vendor-button:hover {
   cursor: pointer;
+  scale: 1.03;
 }
 
 .vendor-button:active {
@@ -1553,7 +1554,7 @@ html {
 .documents-edit-button, .device-data-option {
   height: 60px;
   width: 60px;
-  color: #69737a;
+  color: var(--alternate-color-accent);
   border: none;
   border-radius: 10px;
   background: linear-gradient(135deg, #30384b, var(--med-light-theme));
@@ -1565,7 +1566,8 @@ html {
 }
 
 .documents-edit-button:hover, .device-data-option:hover {
-  color: var(--main-color-accent);
+  scale: 1.03;
+  color: var(--alternate-color-accent);
 }
 
 .documents-edit-button:active, .device-data-option:active {
@@ -1580,6 +1582,17 @@ html {
   padding: 5px;
   border-radius: 10px;
   text-align: center;
+}
+
+.device-data-option-selected {
+  color: var(--yellow-green-button-color);
+  border: 1px solid var(--yellow-green-button-color);
+  font-weight: 500;
+  scale: 1.03;
+}
+
+.device-data-option-selected:hover {
+  color: var(--yellow-green-button-color);
 }
 
 /* documents edit form */
@@ -1649,27 +1662,6 @@ html {
   justify-content: space-around;
   margin-top: 20px;
 }
-
-/* .device-data-option {
-  font-size: 12px;
-  height: 80px;
-  width: 80px;
-  color: #69737a;
-  border: 1px solid #69737a;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.device-data-option:hover {
- cursor: pointer;
- scale: 1.1;
-}
-
-.device-data-option-selected {
-  color: var(--orange-accent);
-  border: 1px solid var(--orange-accent);
-  font-weight:500;
-} */
 
 .update-options > label:hover {
   cursor: pointer;
@@ -1808,36 +1800,39 @@ html {
 }
 
 #add-another-file {
+  background: linear-gradient(#30384b, var(--med-light-theme));
   color: white;
   border-radius: 5px;
-  border: 1px solid var(--green-button-color);
+  border: none;
   color: var(--green-button-color);
   font-size: 13px; 
   height: 30px;
   width: 105px;
   box-shadow: 4px 4px 5px 0px rgba(21, 21, 32, 0.75);
-}
-
-#add-another-file:hover, #remove-file:hover {
-  cursor: pointer;
-  scale: 1.03;
-}
-
-#add-another-file:active, #remove-file:active {
-  cursor: pointer;
-  box-shadow: 2px 2px 3px 0px rgba(21, 21, 32, 0.75);
-  transform: translate(1px, 2px);
+  backface-visibility: hidden;
 }
 
 #remove-file {
+  background: linear-gradient(#30384b, var(--med-light-theme));
   color: white;
   border-radius: 5px;
-  border: 1px solid var(--red-accent);
+  border: none;
   color: var(--red-accent); 
   font-size: 13px; 
   height: 30px;
   width: 105px;
   box-shadow: 4px 4px 5px 0px rgba(21, 21, 32, 0.75);
+  backface-visibility: hidden;
+}
+
+.other-doc-add-rm:hover {
+  cursor: pointer;
+}
+
+.other-doc-add-rm:active {
+  cursor: pointer;
+  box-shadow: 2px 2px 3px 0px rgba(21, 21, 32, 0.75);
+  transform: translate(1px, 2px);
 }
 
 .file-add-remove-image {
