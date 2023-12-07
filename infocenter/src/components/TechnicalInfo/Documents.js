@@ -24,7 +24,7 @@ export function Documents({description, link, extension, showForm, setCurrentDoc
                 <label className="document-label">{description}</label>
             </a>
             <button className="documents-edit-button form-btn-transition flex-c-col" onClick={() => delayFunctionInitiation(() => showForm(setFormVisible, setCurrentDocument, link, description, extension))} onMouseOver={() => setButtonHovered(setButtonIsHovered)} onMouseOut={() => removeButtonHovered(setButtonIsHovered)}>
-                <EditIcon size="20px" color={buttonIsHovered ? "#FBB934" : "#69737a"}/>
+                <EditIcon size="20px" color={buttonIsHovered ? "white" : "#69737a"}/>
                 <span>Edit Resource</span>
             </button>
         </div>

@@ -100,7 +100,7 @@ export function Login() {
                     </div> 
                     <p style={loginError ? {opacity: 1} : {opacity: 0}}>{loginErrorMessage}</p>
                     <label>Forgot Password?</label>
-                    <button className="login-button" onClick={(e) => startLogin(setLoggingIn, e)}>{loggingIn ? "Logging In..." : "Login"}</button>
+                    <button className="login-button form-btn-transition" onClick={(e) => startLogin(setLoggingIn, e)}>{loggingIn ? "Logging In..." : "Login"}</button>
                 </div>
             </form>
         </div>

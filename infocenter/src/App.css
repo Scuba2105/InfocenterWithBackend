@@ -94,6 +94,7 @@ html {
   width: 150px;
   height: 33px;
   overflow: hidden;
+  background-color: var(--med-light-theme);
   border-radius: 5px;
   box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
   transition: all 0.3s ease-out;
@@ -262,14 +263,15 @@ html {
   border: 1px solid var(--yellow-green-button-color);  
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 4px 4px 6px 0px rgba(21, 21, 32, 0.75);
 }
 
 .login-button:hover {
-  scale: 1.04;
 }
 
 .login-button:active {
-  scale: 1;
+  transform: translate(1px, 2px);
+  box-shadow: 2px 2px 3px 0px rgba(21, 21, 32, 0.75);
 }
 
 .inputs-container {
@@ -584,19 +586,21 @@ html {
 }
 
 #closeBtn {
-  background-color: #3a4256;
-  color: var(--form-font-color);
-  border: 1px solid #3a4256;
+  background-color: transparent;
+  border: 1px solid var(--yellow-green-button-color);
+  color: var(--yellow-green-button-color);
   border-radius: 5px;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
+  box-shadow: 4px 4px 6px 0px rgba(21, 21, 32, 0.75);
 }
 
 #closeBtn:hover {
-  background-color: rgb(47, 58, 78);
+  scale: 1.04;
 }
 
 #closeBtn:active {
+  scale: 1.04;
   transform: translate(1px, 2px);
   box-shadow: 2px 2px 4px 0px rgba(12, 12, 12, 0.75);
 }
@@ -1512,12 +1516,12 @@ html {
   width: 375px;
   height: 60px;
   padding: 5px;
-  border: 1px solid black;
+  border: none;
   border-radius: 10px;
   background-color: var(--form-input-color);
   text-decoration: none;
   color: var(--form-font-color);
-  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
+  box-shadow: 4px 4px 5px 0px rgba(21, 21, 32, 0.75);
 }
 
 .document-container:hover {
@@ -1526,7 +1530,7 @@ html {
 
 .document-container:active {
   transform: translate(1px, 2px);
-  box-shadow: 2px 2px 5px -5px rgba(12, 12, 12, 0.75);
+  box-shadow: 2px 2px 3px -5px rgba(12, 12, 12, 0.75);
   background-color: rgb(47, 58, 78);
 }
 
@@ -1545,27 +1549,37 @@ html {
   cursor: pointer;
 }
 
-.documents-edit-button {
+.documents-edit-button, .device-data-option {
   height: 60px;
   width: 60px;
   color: #69737a;
-  border: 1.5px solid #69737a;
+  border: none;
   border-radius: 10px;
-  background-color: transparent;
+  background-color: var(--med-light-theme);
   margin-left: 15px;
   cursor: pointer;
   font-size: 10px;
   font-weight: 500;
+  box-shadow: 6px 6px 8px -5px rgba(12, 12, 12, 0.75);
 }
 
-.documents-edit-button:hover {
-  color: #FBB934;
-  border: 1.5px solid #FBB934;
-  scale: 1.07;
+.documents-edit-button:hover, .device-data-option:hover {
+  background-color: rgb(47, 58, 78);
+  color: white;
 }
 
-.documents-edit-button:active {
-  scale: 1;
+.documents-edit-button:active, .device-data-option:active {
+  transform: translate(1px, 2px);
+  box-shadow: 2px 2px 3px -5px rgba(12, 12, 12, 0.75);
+  background-color: rgb(47, 58, 78);
+}
+
+.device-data-option {
+  font-size: 12px;
+  height: 80px;
+  width: 80px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 /* documents edit form */
@@ -1636,7 +1650,7 @@ html {
   margin-top: 20px;
 }
 
-.device-data-option {
+/* .device-data-option {
   font-size: 12px;
   height: 80px;
   width: 80px;
@@ -1655,7 +1669,7 @@ html {
   color: var(--orange-accent);
   border: 1px solid var(--orange-accent);
   font-weight:500;
-}
+} */
 
 .update-options > label:hover {
   cursor: pointer;

@@ -1,15 +1,19 @@
 import { useConfirmation } from "./StateStore";
-import { capitaliseFirstLetters } from "../utils/utils";
+import { capitaliseFirstLetters, delayFunctionInitiation } from "../utils/utils";
 import { serverConfig } from "../server";
 
 function proceedWithUpdate(proceedUpdate, closeDialog) {
-    proceedUpdate();
-    closeDialog();
+    delayFunctionInitiation(() => {
+        proceedUpdate();
+        closeDialog();
+    })
 } 
 
 function cancelAndQuitUpdate(cancelUpdate, closeDialog) {
-    cancelUpdate();
-    closeDialog();
+    delayFunctionInitiation(() => {
+        cancelUpdate();
+        closeDialog();
+    })
 }
 
 export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
@@ -49,8 +53,8 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                             <div className={dialogType === "info" ? "dialog-body-info flex-c-col" : "dialog-body flex-c-col"}>
                                 <p>{message}</p>
                                 <div className="confirmation-btn-container flex-c">
-                                    <button className="cancel-btn" value="default" onClick={() => cancelAndQuitUpdate(cancelUpdate, closeDialog)}>Cancel</button>
-                                    <button className="proceed-btn" value="default" onClick={() => proceedWithUpdate(proceedUpdate, closeDialog)}>Proceed</button>
+                                    <button className="cancel-btn form-btn-transition" value="default" onClick={() => cancelAndQuitUpdate(cancelUpdate, closeDialog)}>Cancel</button>
+                                    <button className="proceed-btn form-btn-transition" value="default" onClick={() => proceedWithUpdate(proceedUpdate, closeDialog)}>Proceed</button>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +81,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                                         <p>Try again and if the issue persists contact an Administrator</p>
                                     </> :
                                     <p>{message}</p>}
-                                {(dialogType === "error" || dialogType === "warning" || dialogType === "error-request") && <button id="closeBtn" value="default" onClick={closeDialog}>Close</button>}
+                                {(dialogType === "error" || dialogType === "warning" || dialogType === "error-request") && <button id="closeBtn" className="form-btn-transition" value="default" onClick={() => delayFunctionInitiation(() => closeDialog())}>Close</button>}
                             </div>
                         </div>
                     </dialog>

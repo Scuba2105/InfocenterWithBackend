@@ -4,6 +4,7 @@ import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} f
 import { ModalSkeleton } from '../ModalSkeleton';
 import { FormButton } from '../FormButton';
 import { serverConfig } from '../../server';
+import { delayFunctionInitiation } from '../../utils/utils';
 
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
@@ -265,8 +266,11 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
 }
 
 function updateSelectedOption(e, setSelectedOption, setFileNumber) {
-    setSelectedOption(e.currentTarget.textContent)
-    setFileNumber([1]);
+    const selectedOptionButton = e.currentTarget;
+    delayFunctionInitiation(() => {
+        setSelectedOption(selectedOptionButton.textContent)
+        setFileNumber([1]);
+    })
 }
 
 // Update the file count for the other documents page
@@ -308,23 +312,23 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
             <div className="update-form-display">
                 <div className="update-options flex-c">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <ServiceIcon color={selectedOption === "Service Manual" ? "#FBB934" : "#69737a"} size="25px"/>
+                        <ServiceIcon color={selectedOption === "Service Manual" ? "white" : "#69737a"} size="25px"/>
                         Service Manual
                     </div>
                     <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <UserManualIcon color={selectedOption === "User Manual" ? "#FBB934" : "#69737a"} size="25px"/>
+                        <UserManualIcon color={selectedOption === "User Manual" ? "white" : "#69737a"} size="25px"/>
                         User Manual
                     </div>
                     <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <ConfigIcon color={selectedOption === "Configs" ? "#FBB934" : "#69737a"} size="25px"/>
+                        <ConfigIcon color={selectedOption === "Configs" ? "white" : "#69737a"} size="25px"/>
                         Configs
                     </div>
                     <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <SoftwareIcon color={selectedOption === "Software" ? "#FBB934" : "#69737a"} size="25px"/>
+                        <SoftwareIcon color={selectedOption === "Software" ? "white" : "#69737a"} size="25px"/>
                         Software
                     </div>
                     <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)}>
-                        <DocumentsIcon color={selectedOption === "Other Documents" ? "#FBB934" : "#69737a"} size="25px"/>
+                        <DocumentsIcon color={selectedOption === "Other Documents" ? "white" : "#69737a"} size="25px"/>
                         Other Documents
                     </div>                    
                 </div>

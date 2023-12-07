@@ -5,6 +5,7 @@ import { VendorArrow } from "../../svg";
 import { serverConfig } from "../../server"
 import { useConfirmation } from "../StateStore";
 import { FormButton } from "../FormButton";
+import { delayFunctionInitiation } from "../../utils/utils";
 
 async function uploadUpdatedResource(selectedData, formContainer, currentDocument, closeForm, queryClient, showMessage, closeDialog) {
     const fileInput = formContainer.current.querySelector(".file-input");
@@ -151,7 +152,7 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
     return (
         <div className="modal-display" ref={formContainer}>
             <div className="previous-page-arrow-container">
-                <button className="previous-page-arrow-button flex-c" onClick={closeForm}>
+                <button className="previous-page-arrow-button form-btn-transition flex-c" onClick={() => delayFunctionInitiation(() => closeForm())}>
                     <VendorArrow size="2.31vh" color="white" identifier="previous-page-arrow"></VendorArrow>
                     <label className="previous-page-arrow-label">Back to View Documents</label>
                 </button>
