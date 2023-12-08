@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { DisplayOption } from './DisplayOption';
-import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon} from "../../svg";
+import { ServiceIcon, UserManualIcon, ConfigIcon, SoftwareIcon, DocumentsIcon, PasswordsIcon } from "../../svg";
 import { ModalSkeleton } from '../ModalSkeleton';
 import { FormButton } from '../FormButton';
 import { serverConfig } from '../../server';
@@ -343,7 +343,11 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                     <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Other Documents", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <DocumentsIcon color={(selectedOption === "Other Documents" || hovered === "Other Documents") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Other Documents
-                    </div>                    
+                    </div> 
+                    <div className={selectedOption === 'Passwords' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } style={{marginRight: 20 + 'px'}} onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Passwords", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <PasswordsIcon color={(selectedOption === "Passwords" || hovered === "Passwords") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                        Passwords
+                    </div>                   
                 </div>
                 <div className="display-section" ref={formContainer}>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} />

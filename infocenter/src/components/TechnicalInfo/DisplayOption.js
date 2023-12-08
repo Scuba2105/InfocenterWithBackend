@@ -71,7 +71,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
             </div> 
         );
     }
-    else {
+    else if (selectedOption === 'Other Documents'){
         return (
             <div key={selectedOption} className="other-input-container flex-c-col">
                 {fileNumber.map((number) => {
@@ -96,6 +96,12 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                 </div>
             </div>
         );
+    }
+    else {
+        return (
+            <>
+            </>
+        )
     }
 }
 
