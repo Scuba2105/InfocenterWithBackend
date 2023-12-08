@@ -150,7 +150,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
             showMessage("error", 'No location has been provided for the software. Please specify a location and try again.');
             return
         }
-        const data = `${softwareType}=${textInput.value}`;
+        const data = `${softwareType}=${textInput.value.trim()}`;
         updateData.current.set('software', data);
         showMessage("info", `The ${selectedOption} location for ${selectedData.model} has been saved ready for upload.`)
         setTimeout(() => {
@@ -184,7 +184,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         configDataInputs.forEach((input, index) => {
             // Push the department and sub-location input values
             if (index === 1 || index === 3) {
-                interimArray.push(input.value);                
+                interimArray.push(input.value.trim());                
             }
             
             // Parse options string. Filter out Intellivue monitors so options string can be parsed otherwise format the data appropriately.
@@ -194,14 +194,14 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
                     interimArray.push((regex.join('-').toUpperCase()));
                 }
                 else {
-                    input.value === "" ? interimArray.push('none') : configFileTypes.includes(input.value) ? interimArray.push(input.value.toUpperCase()) :
-                    interimArray.push(capitaliseFirstLetters(input.value)); 
+                    input.value === "" ? interimArray.push('none') : configFileTypes.includes(input.value.trim()) ? interimArray.push(input.value.toUpperCase().trim()) :
+                    interimArray.push(capitaliseFirstLetters(input.value.trim())); 
                 }                                        
             }
             // Parse config software string and format
             else if (index === 2) {
                 input.value === "" ? interimArray.push('none') : 
-                interimArray.push(input.value.toUpperCase()); 
+                interimArray.push(input.value.toUpperCase().trim()); 
             }
         })
 
@@ -244,7 +244,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
                 showMessage("error", `The description for File ${index + 1} is missing. Please provide a description and try again.`);
                 return
             }
-            updateData.current.set(`description${index + 1}`, description.value);
+            updateData.current.set(`description${index + 1}`, description.value.trim());
         })
 
         const fileInputArray = Array.from(fileInputs);

@@ -105,9 +105,9 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     inputElements.forEach((input, index) => {
         if (index <= 3) {
             if (index === 0) {
-                model = input.value.toLocaleLowerCase().replace(/\s/ig, '_');
+                model = input.value.toLocaleLowerCase().trim().replace(/\s/ig, '_');
             } 
-            newData.current.set(formDataNames[index], input.value);
+            newData.current.set(formDataNames[index], input.value.trim());
         }
         else {
             const fileExt = input.files[0].name.split('.').slice(-1)[0];

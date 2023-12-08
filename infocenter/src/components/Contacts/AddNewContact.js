@@ -51,12 +51,12 @@ function saveNewVendorContact(inputContainer, newContactData, inputPage, addNewV
         
         // Validate the inputs for each page and show warning if fails validation. Else, add entry to contact data.
         if ((inputPage === 1) || (input.value !== "" && inputPage === 2)) {
-            if (!vendorRegexArray[regexIndex].test(input.value)) {
+            if (!vendorRegexArray[regexIndex].test(input.value.trim())) {
                 showMessage("warning", `The input value for ${vendorInputsDescriptions[regexIndex]} is not valid. Please provide a valid input and try again.`)
                 return
             }
             else {
-                newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value
+                newContactData.current[vendorInputsDescriptions[regexIndex]] = input.value.trim()
             }
         }
     }
@@ -100,22 +100,22 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
         if (inputPage === 1) {
             const regexIndex = index <= 1 ? index : 1;
             const descIndex = !addNewHospital && addNewDepartment && index >= 2 ? index + 1 : index
-            if (staffRegexArray[regexIndex].test(input.value) === false) {
+            if (staffRegexArray[regexIndex].test(input.value.trim()) === false) {
                 showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`)
                 return
             }
             else {
-                newContactData.current[staffInputsDescriptions[descIndex]] = input.value;
+                newContactData.current[staffInputsDescriptions[descIndex]] = input.value.trim();
             }
         }
         else {
             if (input.value !== "") {
-                if (staffRegexArray[index + 2].test(input.value) === false) {
+                if (staffRegexArray[index + 2].test(input.value.trim()) === false) {
                     showMessage("warning", `The value entered for ${staffInputsDescriptions[index + 4]} is not a valid entry`)
                     return
                 }
                 else {
-                    newContactData.current[staffInputsDescriptions[index + 4]] = input.value;
+                    newContactData.current[staffInputsDescriptions[index + 4]] = input.value.trim();
                 }
             }
         }
@@ -125,13 +125,12 @@ function saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHo
     if (inputPage === 1) {
         for (let [index, input] of Array.from(selectInputs).entries()) {
             const descIndex = getDescriptionIndex(index, addNewHospital, addNewDepartment)
-            console.log(index, descIndex)
             if (staffRegexArray[1].test(input.value) === false) {
                 showMessage("warning", `The value entered for ${staffInputsDescriptions[descIndex]} is not a valid entry`);
                 return
             }
             else {
-                newContactData.current[staffInputsDescriptions[descIndex]] = input.value;
+                newContactData.current[staffInputsDescriptions[descIndex]] = input.value.trim();
             }
         }
     }
@@ -267,6 +266,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
         }
     }, [addNewHospital, formType, hospital, inputPage]);
     
+    // Generate the select options for the form before rendering to page
     if (formType === "staff") {
         const hospitalSelectOptions = pageData.reduce((acc, entry) => {
             if (!acc.includes(entry.hospital)) {

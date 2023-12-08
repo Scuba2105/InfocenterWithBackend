@@ -28,7 +28,7 @@ const inputsRegexArray = [/^[a-z ,.'-]+$/i, //Name
 
 
 function createFormData(updateData, formData) {
-    for (const [key, value] of Object.entries(updateData)) {
+    for (const [key, value] of Object.entries(updateData)) {                                                                  
         if (key === "employee-photo") {
             formData.set(key, value.file, value.fileName);
         }
@@ -61,18 +61,18 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
                     showMessage("warning", `The input for the new employee ${inputFields[index]} is empty. Please enter the necessary data and try again.`)
                     return;
                 }
-                else if (!inputsRegexArray[index].test(input.value)) {
+                else if (!inputsRegexArray[index].test(input.value.trim())) {
                     showMessage("warning", `The input for the new employee ${inputFields[index]} is not valid. Please enter a valid value and try again.`)
                     return;
                 }
-                updateData.current[keyIdentifier[index]] = input.value;
+                updateData.current[keyIdentifier[index]] = input.value.trim();
             }
             else if (index >= 4 && input.value !== "") {
-                if (!inputsRegexArray[index].test(input.value)) {
+                if (!inputsRegexArray[index].test(input.value.trim())) {
                     showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
                     return;
                 }
-                updateData.current[keyIdentifier[index]] = input.value;
+                updateData.current[keyIdentifier[index]] = input.value.trim();
             }
         };
         
@@ -137,24 +137,24 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
         for (let [index, input] of textValueInputsArray.entries()) {
             // These are non-mandatory inputs that must be validated
             if (index === 2 && input.value !== selectedData.hospital) {
-                if (!inputsRegexArray[index].test(input.value)) {
+                if (!inputsRegexArray[index].test(input.value.trim())) {
                     showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
                     return;
                 }
-                updateData.current[keyIdentifier[index]] = input.value;
+                updateData.current[keyIdentifier[index]] = input.value.trim();
             }
-            else if (index !== 2 && input.value !== selectedData[keyIdentifier[index]]) {
-                if (!inputsRegexArray[index].test(input.value)) {
+            else if (index !== 2 && input.value.trim() !== selectedData[keyIdentifier[index]]) {
+                if (!inputsRegexArray[index].test(input.value.trim())) {
                     showMessage("warning", `The input ${inputFields[index]} is not a valid input. Please update to a valid entry and try again.`);
                     return;
                 }
-                updateData.current[keyIdentifier[index]] = input.value;
+                updateData.current[keyIdentifier[index]] = input.value.trim();
             }
             
             // Add the staff ID to the upload data to identify the entry
             if (index === 1) {
                 // Store the staff ID for naming the uploaded image file.
-                staffId = input.value;
+                staffId = input.value.trim();
                 updateData.current["existing-id"] = staffId;
             }
         };
