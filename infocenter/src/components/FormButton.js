@@ -22,7 +22,7 @@ export function FormButton({content, btnColor, onClick, marginTop="30px", margin
     let darkBtnColorObject;
     if (content === "Delete") {
         // Get the darker color for the button gradient.
-        darkBtnColorObject = tinycolor(btnColor).darken(15);
+        darkBtnColorObject = tinycolor(btnColor).darken(8);
     }
     else {
         // Get the darker color for the button gradient.

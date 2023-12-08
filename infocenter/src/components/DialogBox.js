@@ -46,7 +46,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                 <>
                     <dialog open id="dialog-background" className="flex-c">
                         <div id="dialog-box">
-                            <div className="dialog-title flex-c" style={{color: "white", backgroundColor: "#fea500"}}>
+                            <div className="dialog-title flex-c" style={{color: "white", backgroundColor: "#fcd303"}}>
                                 <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/warning-icon.jpg`} alt="warning"></img>
                                 <h3>Confirmation to Proceed</h3>
                             </div>

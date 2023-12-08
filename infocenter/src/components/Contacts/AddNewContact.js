@@ -291,7 +291,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container flex-c" style={inputPage === 2 ? {transform: 'translateY(31px)'} : null}>
-                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
+                    <NavigationArrow key={`${inputPage}-left-arrow`} color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Name" placeholdertext={`Enter new contact name`} />}
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
@@ -313,7 +313,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Dect Phone" placeholdertext="Enter dect phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter mobile phone number" />}
                     </div>  
-                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-right-arrow config-right-arrow1" : "config-right-arrow config-right-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />          
+                    <NavigationArrow key={`${inputPage}-right-arrow`} color="white" size="45px" identifier={inputPage === 1 ? "config-right-arrow config-right-arrow1" : "config-right-arrow config-right-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />          
                 </div>
                 <div className="form-buttons" style={inputPage === 1 ? {marginTop: 40 + 'px'} : {marginTop: 60 + 'px'}}>
                     <FormButton content="Save Progress" btnColor="#5ef8ed" onClick={() => saveNewStaffContact(inputContainer, newContactData, inputPage, addNewHospital, addNewDepartment, queryClient, showMessage, closeDialog)} /> 
@@ -337,7 +337,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className={inputPage === 2 ? "indicator active-indicator" : "indicator"}></div>
                 </div>
                 <div className="staff-contacts-input-container flex-c" style={{transform: 'translateY(30px)'}}>
-                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
+                    <NavigationArrow key={`vendor-${inputPage}-left-arrow`} color="white" size="45px" identifier={inputPage === 1 ? "config-left-arrow config-left-arrow1" : "config-left-arrow config-left-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
                         <div className="edit-add-new-container flex-c">
@@ -352,7 +352,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Mobile Phone" placeholdertext="Enter office phone number" />}
                         {inputPage === 2 && <Input inputType="text" identifier="add-new" labelText="Email Address" placeholdertext="Enter email address" />}
                     </div> 
-                    <NavigationArrow color="white" size="45px" identifier={inputPage === 1 ? "config-right-arrow config-right-arrow1" : "config-right-arrow config-right-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />          
+                    <NavigationArrow key={`vendor-${inputPage}-right-arrow`} color="white" size="45px" identifier={inputPage === 1 ? "config-right-arrow config-right-arrow1" : "config-right-arrow config-right-arrow2"} onClick={(e) => updatePage(inputPage, setinputPage, setAddNewHospital, setAddNewDepartment, e)} />          
                 </div>
                 <div className="form-buttons" style={{marginTop: 60 + 'px'}}>
                     <FormButton content="Save Progress" btnColor="#5ef8ed" onClick={() => saveNewVendorContact(inputContainer, newContactData, inputPage, addNewVendor, showMessage, closeDialog)} /> 

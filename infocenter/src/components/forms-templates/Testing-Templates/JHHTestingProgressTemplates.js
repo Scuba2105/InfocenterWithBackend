@@ -3,6 +3,7 @@ import { BedStatusTable } from "./BedStatusTable";
 import { SelectInput } from "../../SelectInput";
 import { serverConfig } from "../../../server";
 import { useConfirmation } from "../../StateStore";
+import { FormButton } from "../../FormButton";
  
 // Departments with no sub-locations
 const noSubLocationDepts = ["CCU", "Recovery"];
@@ -262,8 +263,8 @@ export function JHHTestingProgressTemplates({testingTemplatesData, currentDept, 
                 })} 
             </div>
             <div className="testing-template-upload-btn-container size-100 flex-c">
-                <div className="update-button reset-button testing-template-upload-btn" onClick={() => confirmResetTestingProgress(currentDept, showMessage)}>Reset Form</div>
-                <div className="update-button testing-template-upload-btn" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)}>Upload Progress</div>
+                    <FormButton content="Delete" btnColor="#fd6673" onClick={() => confirmResetTestingProgress(currentDept, showMessage)} /> 
+                    <FormButton content="Upload" btnColor="#D4FB7C" onClick={() => uploadTestingProgress(currentDept, subLocation, testingProgress, queryClient, showMessage, closeDialog)} /> 
             </div> 
         </div>
     )
