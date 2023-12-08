@@ -326,27 +326,36 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                 <div className="update-options flex-c">
                     <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Service Manual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <ServiceIcon color={(selectedOption === "Service Manual" || hovered === "Service Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
-                        Service Manual
+                        <div className='flex-c-col' style={{marginTop: 5 + 'px'}}>
+                            <span>Service</span>
+                            <span>Manual</span>
+                        </div>
                     </div>
                     <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("User Manual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <UserManualIcon color={(selectedOption === "User Manual" || hovered === "User Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
-                        User Manual
+                        <div className='flex-c-col' style={{marginTop: 5 + 'px'}}>
+                            <span>User</span>
+                            <span>Manual</span>
+                        </div>
                     </div>
                     <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Configs", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <ConfigIcon color={(selectedOption === "Configs" || hovered === "Configs") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
-                        Configs
+                        <span style={{marginTop: 5 + 'px'}}>Configs</span>
                     </div>
                     <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Software", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <SoftwareIcon color={(selectedOption === "Software" || hovered === "Software") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
-                        Software
+                        <span style={{marginTop: 5 + 'px'}}>Software</span>
                     </div>
                     <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Other Documents", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <DocumentsIcon color={(selectedOption === "Other Documents" || hovered === "Other Documents") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
-                        Other Documents
+                        <div className='flex-c-col' style={{marginTop: 5 + 'px'}}>
+                            <span>Other</span>
+                            <span>Documents</span>
+                        </div>
                     </div> 
                     <div className={selectedOption === 'Passwords' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } style={{marginRight: 20 + 'px'}} onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Passwords", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
                         <PasswordsIcon color={(selectedOption === "Passwords" || hovered === "Passwords") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
-                        Passwords
+                        <span style={{marginTop: 5 + 'px'}}>Passwords</span>
                     </div>                   
                 </div>
                 <div className="display-section" ref={formContainer}>

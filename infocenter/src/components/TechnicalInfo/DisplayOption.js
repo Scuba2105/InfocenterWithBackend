@@ -13,6 +13,11 @@ const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND H
 
 const configTypes = {TC50: ['XML', 'DAT'], "Perfusor Space": ['Modification Data', 'Disposable Articles', 'Drug Library']};
 
+const defaultPasswordTypes = ['Configuration Menu', 'Service Mode', 'Admin Password', 'Configuration Mode',
+'Demo Mode', 'Biomed Menu', 'Engineering Mode', 'Diagnostic Tools', 'Wireless Network Credentials',
+'Setup Mode', 'Factory Default', 'Maintenance Menu', 'Factory Menu', 'Clinical Configuration',
+'Biomed Login', 'Diagnostics Menu', 'Clincal Settings'];
+
 const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
@@ -99,8 +104,9 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else {
         return (
-            <>
-            </>
+            <div key={selectedOption} className="device-password-update-container flex-c-col">
+                
+            </div>
         )
     }
 }

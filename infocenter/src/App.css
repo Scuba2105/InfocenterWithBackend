@@ -1866,6 +1866,9 @@ html {
   transform: translateX(10px);
 }
 
+/* Formatting the password add form */
+
+
 /* Formatting for the configuration modal */
 .config-display {
   width: 200px;
