@@ -1445,7 +1445,6 @@ html {
   margin-bottom: 20px;
 }
 
-/* Reached this point with the refactor */
 .software-summary {
   margin-top: 25px;
   margin-bottom: 20px;
@@ -1468,7 +1467,7 @@ html {
   font-size: 12px;
   border: 1px solid var(--contact-card-font-color);
   background-color: var(--form-input-color);
-  color: var(--form-font-color);
+  color: var(--alternate-color-accent);
   width: 450px;
   height: 25px;
   padding-left: 20px;
@@ -1569,7 +1568,8 @@ html {
 
 .documents-edit-button:hover, .device-data-option:hover {
   scale: 1.03;
-  color: var(--alternate-color-accent);
+  border: 1px solid var(--yellow-green-button-color);
+  color: var(--yellow-green-button-color);
 }
 
 .documents-edit-button:active, .device-data-option:active {
@@ -1906,7 +1906,8 @@ html {
 .config-arrow {
   height: 50px;
   width: 50px;
-  opacity: 0.3;
+  padding: 7px;
+  border-radius: 10px;
 }
 
 .config-right-arrow {
@@ -1915,12 +1916,6 @@ html {
 
 .config-arrow:hover {
   cursor: pointer;
-  opacity: 0.8;
-  scale: 1.04;
-}
-
-.config-arrow:active {
-  scale: 0.98;
 }
 
 /* Adjust the arrows for the contacts page modal forms */
@@ -1945,7 +1940,7 @@ html {
   width: 100%;
   border: 1px solid var(--dark-theme);
   border-radius: 20px;
-  background: linear-gradient(135deg, #202b3f, var(--med-theme));
+  background: linear-gradient(135deg, #30384b, var(--med-light-theme));
   background-repeat: no-repeat;
   background-size: cover;
   justify-content: space-around;
@@ -1960,16 +1955,14 @@ html {
   font-size: 14px;
   font-weight: bold; 
   text-decoration: none;
-  background: linear-gradient(#384157, #30384b);
-  color: var(--yellow-green-button-color);
+  background: linear-gradient(var(--yellow-green-button-color), #96b64c);
+  color: var(--med-theme);
   border-radius: 5px;
   box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
 }
 
 .config-download-btn:hover {
   cursor: pointer;
-  background: linear-gradient(var(--yellow-green-button-color), #96b64c);
-  color: var(--med-theme)
 }
 
 .config-download-btn:active {

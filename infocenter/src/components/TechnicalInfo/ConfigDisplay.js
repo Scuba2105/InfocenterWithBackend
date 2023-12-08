@@ -1,15 +1,22 @@
 import { serverConfig } from "../../server";
+import { useState } from "react";
 import { NavigationArrow } from "../../svg"
 
-function updateIndicator(e, setConfigIndex, configIndex, configNumber) {
+function updateIndicator(e, setConfigIndex, configIndex, configNumber, setClicked) {
     const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
     
     if (rightArrowPressed && configIndex < (configNumber -1)) {
         setConfigIndex(c => c + 1);
+        setClicked(true);
     }
     else if (!rightArrowPressed && configIndex > 0) {
         setConfigIndex(c => c - 1);
+        setClicked(true);
     }
+}
+
+function handleMouseUp(setClicked) {
+    setClicked(false);
 }
 
 function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName) {
@@ -46,6 +53,7 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
 export function ConfigDisplay({selectedData, hospitals, departmentName, hospitalsIndex, configIndex, setConfigIndex}) {
     
     const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName);
+    const [clicked, setClicked] = useState(false);
 
     return (
         <>
@@ -55,7 +63,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
             })}
             </div>}
             <div className="config-display-container flex-c">
-                {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-left-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}
+                {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-left-arrow" transformX={clicked ? "1px" : "0px"} transformY={clicked ? "2px" : "0px"} onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber, setClicked)} onMouseUp={() => handleMouseUp(setClicked)}/>}
                 <div className="config-display flex-c-col">
                     <div key={`${hospitals[hospitalsIndex]}-${departmentName}`} className="config-link flex-c-col">
                             <div className="options-info flex-c-col">
@@ -73,7 +81,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
                             <a className="flex-c config-download-btn main-btn-transition" href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
                     </div>
                 </div>
-                {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}
+                {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber, setClicked)} onMouseUp={() => handleMouseUp(setClicked)}/>}
             </div>
         </>
     );
