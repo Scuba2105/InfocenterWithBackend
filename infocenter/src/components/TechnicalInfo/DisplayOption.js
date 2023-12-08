@@ -30,7 +30,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     else if (selectedOption === 'User Manual') {
         return (
             <div key={selectedOption} className="device-input-container flex-c-col">
-                <label className="available-label">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
+                <label className="available-label flex-c">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update User Manual:" uniqueId="file2" name="user-upload"/>
             </div>
         );

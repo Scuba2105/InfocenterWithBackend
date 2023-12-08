@@ -297,10 +297,19 @@ function updateFileCount(e, fileNumber, setFileNumber, showMessage) {
     })
 }
 
+function handleMouseOver(link, setHovered) {
+    setHovered(link);
+}
+
+function handlemouseOut(setHovered) {
+    setHovered(null);
+}
+
 export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     const [selectedOption, setSelectedOption] = useState('Service Manual')
     const [fileNumber, setFileNumber] = useState([1]);
+    const [hovered, setHovered] = useState(null);
                     
     // Create a new form data object for storing saved files and data.
     const formData = new FormData();
@@ -315,24 +324,24 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
         <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
             <div className="update-form-display">
                 <div className="update-options flex-c">
-                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
-                        <ServiceIcon color={(selectedOption === "Service Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Service Manual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <ServiceIcon color={(selectedOption === "Service Manual" || hovered === "Service Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Service Manual
                     </div>
-                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
-                        <UserManualIcon color={(selectedOption === "User Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("User Manual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <UserManualIcon color={(selectedOption === "User Manual" || hovered === "User Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         User Manual
                     </div>
-                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
-                        <ConfigIcon color={(selectedOption === "Configs") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'Configs' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Configs", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <ConfigIcon color={(selectedOption === "Configs" || hovered === "Configs") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Configs
                     </div>
-                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
-                        <SoftwareIcon color={(selectedOption === "Software") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'Software' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Software", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <SoftwareIcon color={(selectedOption === "Software" || hovered === "Software") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Software
                     </div>
-                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} >
-                        <DocumentsIcon color={(selectedOption === "Other Documents") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Other Documents", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <DocumentsIcon color={(selectedOption === "Other Documents" || hovered === "Other Documents") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         Other Documents
                     </div>                    
                 </div>
