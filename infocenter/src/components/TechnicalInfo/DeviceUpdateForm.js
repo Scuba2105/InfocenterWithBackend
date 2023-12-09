@@ -9,6 +9,9 @@ import { delayFunctionInitiation } from '../../utils/utils';
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
 
+const passwordTypeRegex = /^[a-z0-9 &/]+$/i;
+const passwordRegex = /^[a-z0-9 &/[^a-zA-Z0-9]]+$/i;
+
 function capitaliseFirstLetters(input) {
     let words = input.split(' ');
     if (words.length === 1) {
@@ -146,7 +149,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
             showMessage("warning", "The software type has not been selected. Please select an option and try again.");
             return;
         }
-        if (textInput.value === "") {
+        if (textInput.value.trim() === "") {
             showMessage("warning", 'No location has been provided for the software. Please specify a location and try again.');
             return
         }
@@ -167,11 +170,11 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         updateData.current.set('hospital', selectedHospital.value);
 
         // Check mandatory fields have been entered
-        if (configDataInputs[1].value === "") {
+        if (configDataInputs[1].value.trim() === "") {
             showMessage("warning", "Department is a mandatory field and has not been entered. Please enter a value.");
             return
         }
-        else if (dateInput.value === "") {
+        else if (dateInput.value.trim() === "") {
             showMessage("warning", 'Date Created is a mandatory field and has not been entered. Please enter a value.');
             return
         }
@@ -194,13 +197,13 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
                     interimArray.push((regex.join('-').toUpperCase()));
                 }
                 else {
-                    input.value === "" ? interimArray.push('none') : configFileTypes.includes(input.value.trim()) ? interimArray.push(input.value.toUpperCase().trim()) :
+                    input.value.trim() === "" ? interimArray.push('none') : configFileTypes.includes(input.value.trim()) ? interimArray.push(input.value.toUpperCase().trim()) :
                     interimArray.push(capitaliseFirstLetters(input.value.trim())); 
                 }                                        
             }
             // Parse config software string and format
             else if (index === 2) {
-                input.value === "" ? interimArray.push('none') : 
+                input.value.trim() === "" ? interimArray.push('none') : 
                 interimArray.push(input.value.toUpperCase().trim()); 
             }
         })
@@ -240,7 +243,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         const fileInputs = formContainer.querySelectorAll(".other-doc-file-upload");
         
         descriptions.forEach((description, index) => {
-            if (description.value === "") {
+            if (description.value.trim() === "") {
                 showMessage("warning", `The description for File ${index + 1} is missing. Please provide a description and try again.`);
                 return
             }
@@ -263,49 +266,49 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         }, 1600);
     }
     else if (selectedOption === "Passwords") {
-        let passwordTypeInput, passwordValueInput;
+        let passwordTypeInput, passwordValueInput, passwordType, passwordValue;
         if (customPasswordType) {
             passwordTypeInput = formContainer.querySelectorAll(".text-input")[0];
             passwordValueInput = formContainer.querySelectorAll(".text-input")[1];
-            
+            passwordType = passwordTypeInput.value.trim(); 
+            passwordValue = passwordValueInput.value.trim();
+
             // Check the data is valid.
-            if (passwordTypeInput.value.trim() === "") {
-                showMessage("warning", `The custom password type has not been provided. Please enter the password type and try again.`);
+            if (passwordType === "") {
+                showMessage("warning", `The custom Password Type has not been provided. Please enter the Password Type and try again.`);
                 return
             }
+            else if (passwordTypeRegex.test(passwordType) === false) {
+                showMessage("warning", `The custom Password Type is not the required string pattern. Please update the Password Type and try again. If the issue persists contact an administrator.`);
+                return
+            } 
         }
         else {
-            passwordTypeInput = formContainer.querySelector(".select-input")
+            passwordTypeInput = formContainer.querySelector(".select-input");
             passwordValueInput = formContainer.querySelector(".text-input");
+            passwordType = passwordTypeInput.value.trim(); 
+            passwordValue = passwordValueInput.value.trim();
         }
                  
         // Check the password value is valid.
-        if (passwordValueInput.value.trim() === "") {
-            showMessage("warning", `The password has not been provided for the ${passwordTypeInput.value}. Please enter the password value and try again.`);
+        if (passwordValue === "") {
+            showMessage("warning", `The Password has not been provided for the ${passwordTypeInput.value}. Please enter the password value and try again. If the issue persists contact an administrator.`);
             return
         }
+        else if (passwordRegex.test(passwordValue)) {
+            showMessage("warning", `The Password is not of the required string pattern. Please update the Password and try again. If the issue persists contact an administrator.`);
+            return
+        } 
                 
         // Add the password to the form data.
-        updateData.current.set("password-type", passwordTypeInput.value);
-        updateData.current.set("password-value", passwordValueInput.value);
+        updateData.current.set("password-type", passwordTypeInput.value.trim());
+        updateData.current.set("password-value", passwordValueInput.value.trim());
         
-
-        // const fileInputArray = Array.from(fileInputs);
-        
-        // for (const fileInput of fileInputArray) {
-        //     const index = fileInputArray.indexOf(fileInput);
-        //     if (fileInput.files.length === 0) {
-        //         showMessage("error", `File ${index + 1} is missing. Please choose a file and try again.`);
-        //         return 
-        //     }
-        //     updateData.current.set(`file${index + 1}`, fileInput.files[0]);
-        // }
-        // showMessage("info", `The documents for ${selectedData.model} have been saved ready for upload.`)
-        // setTimeout(() => {
-        //     closeDialog();
-        // }, 1600);*/
-    }
-    
+        showMessage("info", `The ${passwordType} for ${selectedData.model} has been saved ready for upload.`)
+        setTimeout(() => {
+            closeDialog();
+        }, 1600);
+    }    
 }
 
 function updateSelectedOption(e, setSelectedOption, setFileNumber) {

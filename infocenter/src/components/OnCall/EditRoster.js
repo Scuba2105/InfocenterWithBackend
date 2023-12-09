@@ -33,7 +33,7 @@ async function uploadData(formContainer, queryClient, showMessage, closeModal, c
     const uploadOnCallData = {};
 
     for (const [index, input] of formElements.entries()) {
-        if (input.value === "") {
+        if (input.value.trim() === "") {
             showMessage("warning", `The ${inputNames[index]} input values are empty. Please check the date inputs are valid and try again.`)
             return 
         }

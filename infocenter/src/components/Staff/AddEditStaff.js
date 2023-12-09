@@ -57,7 +57,7 @@ async function uploadStaffFormData(formContainer, updateData, type, page, select
     if (type === "add-new") {
         for (let [index, input] of textValueInputsArray.entries()) {
             if (index <= 4 || index === 9) {
-                if (input.value === "") {
+                if (input.value.trim() === "") {
                     showMessage("warning", `The input for the new employee ${inputFields[index]} is empty. Please enter the necessary data and try again.`)
                     return;
                 }

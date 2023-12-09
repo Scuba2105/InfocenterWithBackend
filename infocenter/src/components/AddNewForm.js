@@ -88,7 +88,7 @@ async function uploadEquipmentFormData(addNewManufacturer, addNewType, formConta
     // Validate the input data for the new device. All fields mandatory
     for (let [index, input] of inputElements.entries()) {
 
-        if (input.value === "") {
+        if (input.value.trim() === "") {
             showMessage("warning", `The input for the new device ${deviceDataOptions[index]} is empty. Please enter the necessary data and try again.`)
             return;
         }
