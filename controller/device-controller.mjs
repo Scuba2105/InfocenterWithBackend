@@ -65,7 +65,6 @@ export async function updateExistingDeviceData(req, res, next, __dirname) {
             // Define the variables from the uploaded data.
             const model = req.body.model;
             const manufacturer = req.body.manufacturer;
-            let hospital, configPath;
             const documentKeys = Object.keys(req.body).filter((key) => {
                 return /description[1-4]/.test(key);
             });
@@ -131,6 +130,17 @@ export async function updateExistingDeviceData(req, res, next, __dirname) {
                 }
             }
 
+            if (Object.keys(req.body).includes("password-type") && Object.keys(req.body).includes("password-value")) {
+                
+                // Create the new password data object
+                //const passwordDataObject = {type: , values: ["Software Revision N or Higher: 00000ANZ"]}
+
+                if (updatedDevice.passwords === "") {
+
+                }
+                console.log(req.body["password-type"], req.body["password-value"])
+            }
+            
             // Replace the old device data in the DeviceData array with the new data that has been entered 
             const updatedDeviceData = deviceData.map((entry) => {
                 if (entry.model === model && entry.manufacturer === manufacturer) {

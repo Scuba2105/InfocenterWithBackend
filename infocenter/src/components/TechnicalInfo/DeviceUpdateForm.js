@@ -343,6 +343,10 @@ function updateFileCount(e, fileNumber, setFileNumber, showMessage) {
     })
 }
 
+function toggleAccessType(setCustomAccessType) {
+    setCustomAccessType(a => !a);
+}
+
 function togglePasswordType(setCustomPasswordType) {
     setCustomPasswordType(p => !p);
 }
@@ -363,7 +367,8 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
     // Set the file number for the Other Documents page when the add or delete document button is pushed.
     const [fileNumber, setFileNumber] = useState([1]);
 
-    // Specify whether a default password type is used or a custom password type is required.
+    // Specify whether a default access type and/or password type is used or whether a custom type is required.
+    const [customAccessType, setCustomAccessType] = useState(false);
     const [customPasswordType, setCustomPasswordType] = useState(false);
 
     // Track the hover state of the device data options to control the css.
@@ -417,7 +422,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                     </div>                   
                 </div>
                 <div className="display-section" ref={formContainer}>
-                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
+                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                         <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 

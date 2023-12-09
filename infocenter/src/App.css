@@ -1862,7 +1862,7 @@ html {
 
 /* Formatting the password add form */
 .device-password-update-container {
-  height: 150px;
+  height: 200px;
   justify-content: space-around;
   margin-top: 40px;
 }

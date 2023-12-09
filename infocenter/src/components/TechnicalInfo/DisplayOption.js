@@ -13,7 +13,7 @@ const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND H
 
 const configTypes = {TC50: ['XML', 'DAT'], "Perfusor Space": ['Modification Data', 'Disposable Articles', 'Drug Library']};
 
-const defaultPasswordTypes = ['Configuration Menu', 'Service Mode', 'Admin Password', 'Configuration Mode',
+const defaultAccessTypes = ['Configuration Menu', 'Service Mode', 'Admin Password', 'Configuration Mode',
 'Demo Mode', 'Biomed Menu', 'Engineering Mode', 'Diagnostic Tools', 'Wireless Network Credentials',
 'Setup Mode', 'Factory Default', 'Maintenance Menu', 'Factory Menu', 'Clinical Configuration',
 'Biomed Login', 'Diagnostics Menu', 'Clincal Settings'];
@@ -22,7 +22,7 @@ const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
 
-export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount, customPasswordType, togglePasswordType}) {
+export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount, customAccessType, toggleAccessType, customPasswordType, togglePasswordType}) {
     
     if (selectedOption === 'ServiceManual') {
         return (
@@ -104,13 +104,18 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
         return (
             <div key={selectedOption} className="device-password-update-container flex-c-col" style={{marginTop: 40 + 'px'}}>
                 <div className="edit-add-new-container flex-c">
-                    <TooltipButton content={customPasswordType ? "Undo" :"Custom Type"} boolean={customPasswordType} translateY={customPasswordType ? "6px" : "6px"} toggleFunction={togglePasswordType}/>
-                    {customPasswordType ? <Input inputType="text" identifier="add-new" labelText="Password Type" placeholdertext={`Enter custom password type`} /> : 
-                    <SelectInput type="form-select-input" label='Password Type' optionData={defaultPasswordTypes.sort()}/> }
+                    <TooltipButton content={customAccessType ? "Undo" :"Custom Type"} boolean={customAccessType} translateY={customAccessType ? "6px" : "6px"} toggleFunction={toggleAccessType}/>
+                    {customAccessType ? <Input inputType="text" identifier="add-new" labelText="Restricted Access Type" placeholdertext={`Enter the custom restricted access type`} /> : 
+                    <SelectInput type="form-select-input" label="Restricted Access Type" optionData={defaultAccessTypes.sort()}/> }
                     <div className="add-new-aligner"></div>
                 </div>
-                
-                <Input inputType='text' identifier='password-add' labelText='Password' placeholdertext='Please enter the password'/>  
+                <div className="edit-add-new-container flex-c" style={{transform: `translateY(-10px)`}}>
+                    <TooltipButton content={customPasswordType ? "Undo" :"Custom Type"} boolean={customPasswordType} translateY={customPasswordType ? "6px" : "6px"} toggleFunction={togglePasswordType}/>
+                    {customPasswordType ? <Input inputType="text" identifier="add-new" labelText="Credential Type" placeholdertext={`Enter custom credential type`} /> : 
+                    <SelectInput type="form-select-input" label="Credential Type" optionData={["Username", "Password"]}/> }
+                    <div className="add-new-aligner"></div>
+                </div>                
+                <Input inputType='text' identifier='password-add' labelText='Credential Value' placeholdertext='Please enter the password'/>  
             </div>
         )
     }
