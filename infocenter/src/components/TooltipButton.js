@@ -17,7 +17,14 @@ export function TooltipButton({content, boolean, translateY="0px", toggleFunctio
     const btnColor = boolean ? '#ff69b4' : 'rgb(3, 252, 156)'
 
     // Get the darker color for the button gradient.
-    const darkBtnColorObject = tinycolor(btnColor).darken(20);
+    let darkBtnColorObject;
+    if (content === "Undo") {
+        darkBtnColorObject = tinycolor(btnColor).darken(9);
+    }
+    else {
+        darkBtnColorObject = tinycolor(btnColor).darken(20);
+    }
+    
     const darkBtnColor = (`rgb(${darkBtnColorObject["_r"]}, ${darkBtnColorObject["_g"]}, ${darkBtnColorObject["_b"]})`)
 
 
