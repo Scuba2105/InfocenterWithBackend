@@ -130,15 +130,38 @@ export async function updateExistingDeviceData(req, res, next, __dirname) {
                 }
             }
 
-            if (Object.keys(req.body).includes("password-type") && Object.keys(req.body).includes("password-value")) {
-                
+            if (Object.keys(req.body).includes("restricted-access-type")) {
+                 
                 // Create the new password data object
-                //const passwordDataObject = {type: , values: ["Software Revision N or Higher: 00000ANZ"]}
+                const restrictedAccessType = `${req.body["restricted-access-type"]}`;
+                const passwordDataObject = `${req.body["credential-type"]}: ${req.body["credential-value"]}`;
 
-                if (updatedDevice.passwords === "") {
+                // Get the existing password data.
+                const passwordData = updatedDevice.passwords;
 
+                // If password data doesn't exist create the password array and enter the new data object.
+                if (passwordData === "" || passwordData === undefined) {
+                    updatedDevice.passwords = [];
+                    updatedDevice.passwords.push({type: restrictedAccessType, values: [passwordDataObject]});
                 }
-                console.log(req.body["password-type"], req.body["password-value"])
+                else {
+                    
+                    // Get the existing password data for the restricted access if it exists. Devices can have multiple entries for each
+                    // access type such as password, username, or different software revision passwords.
+                    const existingRestrictedAccessData = passwordData.find((entry) => {
+                        return entry.type === restrictedAccessType;
+                    })
+
+                    // If restricted access type array already exists push the new data to the values array otherwise 
+                    // push the new object to the password data.
+                    if (!existingRestrictedAccessData) {
+                        passwordData.push({type: restrictedAccessType, values: [passwordDataObject]});
+                    }
+                    else {
+                        existingRestrictedAccessData.values.push(passwordDataObject);
+                    }
+                }
+                
             }
             
             // Replace the old device data in the DeviceData array with the new data that has been entered 

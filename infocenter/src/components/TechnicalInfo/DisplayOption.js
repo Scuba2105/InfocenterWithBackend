@@ -105,7 +105,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
             <div key={selectedOption} className="device-password-update-container flex-c-col" style={{marginTop: 40 + 'px'}}>
                 <div className="edit-add-new-container flex-c">
                     <TooltipButton content={customAccessType ? "Undo" :"Custom Type"} boolean={customAccessType} translateY={customAccessType ? "6px" : "6px"} toggleFunction={toggleAccessType}/>
-                    {customAccessType ? <Input inputType="text" identifier="add-new" labelText="Restricted Access Type" placeholdertext={`Enter the custom restricted access type`} /> : 
+                    {customAccessType ? <Input inputType="text" identifier="add-new" labelText="Restricted Access Type" placeholdertext={`Enter the restricted access type`} /> : 
                     <SelectInput type="form-select-input" label="Restricted Access Type" optionData={defaultAccessTypes.sort()}/> }
                     <div className="add-new-aligner"></div>
                 </div>
@@ -115,7 +115,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                     <SelectInput type="form-select-input" label="Credential Type" optionData={["Username", "Password"]}/> }
                     <div className="add-new-aligner"></div>
                 </div>                
-                <Input inputType='text' identifier='password-add' labelText='Credential Value' placeholdertext='Please enter the password'/>  
+                <Input inputType='text' identifier='password-add' labelText='Credential Value' placeholdertext='Please enter the password/username'/>  
             </div>
         )
     }

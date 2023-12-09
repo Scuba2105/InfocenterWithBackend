@@ -9,8 +9,35 @@ import { delayFunctionInitiation } from '../../utils/utils';
 const hospitalAcronyms = {'John Hunter Hospital': 'JHH', 'Royal Newcastle Centre': 'RNC'};
 const configFileTypes = ['XML', 'DAT', 'TGZ', 'CFG'];
 
-const passwordTypeRegex = /^[a-z0-9 &/]+$/i;
-const passwordRegex = /^[a-z0-9 &/[^a-zA-Z0-9]]+$/i;
+// Store the regex for validating each of the password form inputs.
+const passwordInputsRegex = [/^[a-z0-9 &/]+$/i, /^[a-z0-9 .&/]+$/i, /^[a-z0-9 \W]+$/i];
+
+function getPasswordElements(formContainer, customAccessType, customPasswordType) {
+    let accessTypeInput, credentialTypeInput, credentialValueInput;
+        // Get the appropriate text input or select input based on access and password props.
+        if (customAccessType && customPasswordType) {
+            accessTypeInput = formContainer.querySelectorAll(".text-input")[0];
+            credentialTypeInput = formContainer.querySelectorAll(".text-input")[1];
+            credentialValueInput = formContainer.querySelectorAll(".text-input")[2];
+        }
+        else if (!customAccessType && customPasswordType) {
+            accessTypeInput = formContainer.querySelector(".select-input");
+            credentialTypeInput = formContainer.querySelectorAll(".text-input")[0];
+            credentialValueInput = formContainer.querySelectorAll(".text-input")[1];
+        }
+        else if (customAccessType && !customPasswordType){
+            accessTypeInput = formContainer.querySelectorAll(".text-input")[0];
+            credentialTypeInput = formContainer.querySelector(".select-input");
+            credentialValueInput = formContainer.querySelectorAll(".text-input")[1];
+        }
+        else {
+            accessTypeInput = formContainer.querySelectorAll(".select-input")[0];
+            credentialTypeInput = formContainer.querySelectorAll(".select-input")[1];
+            credentialValueInput = formContainer.querySelector(".text-input");
+        }
+
+        return [accessTypeInput, credentialTypeInput, credentialValueInput];
+}
 
 function capitaliseFirstLetters(input) {
     let words = input.split(' ');
@@ -115,7 +142,7 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 } 
 
 // Save the form data ready for upload
-function saveUpdateData(formContainer, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog) {
+function saveUpdateData(formContainer, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customAccessType, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog) {
     
     // Add the files from the service manual and user manual forms to the formData ref
     if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
@@ -266,45 +293,33 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         }, 1600);
     }
     else if (selectedOption === "Passwords") {
-        let passwordTypeInput, passwordValueInput, passwordType, passwordValue;
-        if (customPasswordType) {
-            passwordTypeInput = formContainer.querySelectorAll(".text-input")[0];
-            passwordValueInput = formContainer.querySelectorAll(".text-input")[1];
-            passwordType = passwordTypeInput.value.trim(); 
-            passwordValue = passwordValueInput.value.trim();
 
-            // Check the data is valid.
-            if (passwordType === "") {
-                showMessage("warning", `The custom Password Type has not been provided. Please enter the Password Type and try again.`);
+        // get the password form elements based on provided props.
+        const passwordFormElements = getPasswordElements(formContainer, customAccessType, customPasswordType);
+        const passwordElementsArray = Array.from(passwordFormElements);
+
+        const elementDescriptions = ["Restricted Access Type", "Credential Type", "Credential Value"];
+        
+        // Store the restricted access type for dialog message on save.
+        let restrictedAccessType;
+
+        // Validate the user inputs against empty strings and invalid string patterns.
+        for (const [index, element] of passwordElementsArray.entries()) {
+            if (element.value.trim() === "") {
+                showMessage("warning", `The value has not been provided for ${elementDescriptions[index]}. Please enter the ${elementDescriptions[index]} and try again.`);
                 return
             }
-            else if (passwordTypeRegex.test(passwordType) === false) {
-                showMessage("warning", `The custom Password Type is not the required string pattern. Please update the Password Type and try again. If the issue persists contact an administrator.`);
+            if (!passwordInputsRegex[index].test(element.value.trim())) {
+                showMessage("warning", `The value provided for ${elementDescriptions[index]} contains invalid characters. Please enter a valid ${elementDescriptions[index]} and try again. If the issue persists contact and administrator.`);
                 return
+            }
+            updateData.current.set(`${elementDescriptions[index].toLowerCase().replace(/\s/g, "-")}`, element.value.trim());
+            if (index === 0) {
+                restrictedAccessType = element.value.trim();
             } 
         }
-        else {
-            passwordTypeInput = formContainer.querySelector(".select-input");
-            passwordValueInput = formContainer.querySelector(".text-input");
-            passwordType = passwordTypeInput.value.trim(); 
-            passwordValue = passwordValueInput.value.trim();
-        }
-                 
-        // Check the password value is valid.
-        if (passwordValue === "") {
-            showMessage("warning", `The Password has not been provided for the ${passwordTypeInput.value}. Please enter the password value and try again. If the issue persists contact an administrator.`);
-            return
-        }
-        else if (passwordRegex.test(passwordValue)) {
-            showMessage("warning", `The Password is not of the required string pattern. Please update the Password and try again. If the issue persists contact an administrator.`);
-            return
-        } 
-                
-        // Add the password to the form data.
-        updateData.current.set("password-type", passwordTypeInput.value.trim());
-        updateData.current.set("password-value", passwordValueInput.value.trim());
         
-        showMessage("info", `The ${passwordType} for ${selectedData.model} has been saved ready for upload.`)
+        showMessage("info", `The ${restrictedAccessType} data for ${selectedData.model} has been saved ready for upload.`)
         setTimeout(() => {
             closeDialog();
         }, 1600);
@@ -424,7 +439,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                 <div className="display-section" ref={formContainer}>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
-                        <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
+                        <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customAccessType, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                         <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                     </div>                    
                 </div>
