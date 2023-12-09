@@ -1,5 +1,6 @@
 import { serverConfig } from "../../server";
 import { NavigationArrow } from "../../svg"
+import { useUser } from "../StateStore";
 
 function updateIndicator(e, setConfigIndex, configIndex, configNumber, setClicked) {
     const rightArrowPressed = e.currentTarget.classList[1] === "config-right-arrow";
@@ -47,6 +48,10 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
     
     const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName);
     
+    // Get user state from Zustand state
+    const currentUser = useUser((state) => state.userCredentials);
+    const configEditPermissions = currentUser.permissions === "admin";
+
     return (
         <>
             {configNumber > 1 && <div className="indicator-container flex-c">
@@ -70,8 +75,11 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
                                 <label>Date Created:</label>
                                 <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                             </div>
-                            <a className="flex-c config-download-btn main-btn-transition" href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
-                    </div>
+                            <div className={configEditPermissions ? "config-btn-container flex-c" : "flex-c"}>
+                                {configEditPermissions && <button className="flex-c config-edit-btn main-btn-transition">Edit</button>}
+                                <a className="flex-c config-download-btn main-btn-transition" href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
+                            </div>
+                        </div>
                 </div>
                 {configNumber > 1 && <NavigationArrow size="45px" color="white" identifier="config-right-arrow" onClick={(e) => updateIndicator(e, setConfigIndex, configIndex, configNumber)} />}
             </div>

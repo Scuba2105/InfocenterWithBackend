@@ -63,9 +63,13 @@ export function LinkModal({selectedData, modalType, queryClient, showMessage, cl
     const [departmentsIndex, setDepartmentsIndex] = useState(0);
     const [configIndex, setConfigIndex] = useState(0);
 
-    // Store state as to whether documents view or edit/remove form is displayed
+    // Store state as to whether documents view or edit/remove form is displayed.
     const [documentsEditVisible, setDocumentsEditVisible] = useState(false);
     const [currentDocument, setCurrentDocument] = useState(null);
+
+    // Store state as to whether configs view or edit/remove is displayed.
+    const [configEditVisible, setConfigEditVisible] = useState(false)
+    const [currentConfig, setCurrentConfig] = useState(null);
     
     if (modalType === "documents") {
 
@@ -159,8 +163,8 @@ export function LinkModal({selectedData, modalType, queryClient, showMessage, cl
                 
         return (
             <div className="modal-display">
-                <SelectInput label="Hospitals" optionData={hospitals} onChange={onHospitalChange} />
-                <SelectInput label="Department" value={getDepartments()[departmentsIndex]} optionData={getDepartments()} onChange={onDepartmentChange} />
+                <SelectInput type="form-select-input" label="Hospital" optionData={hospitals} onChange={onHospitalChange} />
+                <SelectInput type="form-select-input" label="Department" value={getDepartments()[departmentsIndex]} optionData={getDepartments()} onChange={onDepartmentChange} />
                 <ConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} configIndex={configIndex} setConfigIndex={setConfigIndex}/>    
             </div>
         );

@@ -1404,7 +1404,6 @@ html {
 .tooltip, .main-btn-tooltip {
   font-size: 10px;
   background-color: #e8f6fc;
-  /*background-color: #f5f1af;*/
   color: var(--dark-theme);
   padding: 3px 6px 3px 6px;
   border-radius: 3px;
@@ -1901,8 +1900,7 @@ html {
 
 .config-display-container {
   justify-content: space-around;
-  transform: translateY(-20px);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .config-arrow {
@@ -1958,22 +1956,33 @@ html {
   box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
 }
 
-.config-download-btn {
-  padding: 5px 7px 5px 7px;
-  font-size: 14px;
+.config-btn-container {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.config-download-btn, .config-edit-btn {
+  width: 78px;
+  height: 25px;
+  font-size: 12px;
   font-weight: bold; 
   text-decoration: none;
   background: linear-gradient(var(--yellow-green-button-color), #96b64c);
   color: var(--med-theme);
+  border: none;
   border-radius: 5px;
   box-shadow: 3px 3px 4px 0px rgba(21, 21, 32, 0.75);
 }
 
-.config-download-btn:hover {
+.config-edit-btn {
+  background: linear-gradient(var(--green-accent), rgb(37, 208, 143));
+}
+
+.config-download-btn:hover, .config-edit-btn:hover {
   cursor: pointer;
 }
 
-.config-download-btn:active {
+.config-download-btn:active, .config-edit-btn:active {
   cursor: pointer;
   transform: translate(1px, 2px);
 }
