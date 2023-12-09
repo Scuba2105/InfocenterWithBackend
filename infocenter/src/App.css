@@ -164,10 +164,12 @@ html {
 }
 
 .main-link-button:hover, .alternate-link-button:hover {
+  cursor: pointer;
   scale: 1.05;
 }
 
 .main-link-button:active, .alternate-link-button:active {
+  cursor: pointer;
   transform: translate(1px, 2px);
   box-shadow: 1px 1px 3px 0px rgba(12, 12, 12, 0.75);
   scale: 1.05;
@@ -1043,17 +1045,6 @@ html {
   color: var(--form-font-color);
 }
 
-.device-text-input, .add-new.input {
-  text-align: center;
-  width: 275px;
-  height: 25px;
-  margin-top: 8px;
-  background-color: var(--form-input-color);
-  border: 1px solid var(--search-bar-color);
-  color: var(--form-font-color);
-  box-shadow: 3px 3px 5px 0px rgba(21, 21, 32, 0.75);
-}
-
 .software-type {
   margin-bottom: 30px;
   margin-top: 10px;
@@ -1374,12 +1365,13 @@ html {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 75px;
 }
 
 /* Format the tooltip buttons for the equipment add new form */
 .tooltip-button {
-  width: 60px;
-  margin-right: 40px;
+  width: 80px;
+  margin-right: 20px;
 }
 
 .tooltip-button-img:hover {
@@ -1733,6 +1725,7 @@ html {
   grid-template-columns: 250px 250px;
   grid-template-rows: 50px 27vh 1fr;
   transform: translateY(-40px);
+  margin-top: 50px;
 }
 
 #device-config-container > h4 {
@@ -1846,6 +1839,7 @@ html {
 }
 
 .other-file-button-container {
+  margin-bottom: 20px;
   transform: translate(-5px, 20px);
 }
 
@@ -1867,7 +1861,11 @@ html {
 }
 
 /* Formatting the password add form */
-
+.device-password-update-container {
+  height: 150px;
+  justify-content: space-around;
+  margin-top: 40px;
+}
 
 /* Formatting for the configuration modal */
 .config-display {
@@ -1950,7 +1948,7 @@ html {
   width: 100%;
   border: 1px solid var(--dark-theme);
   border-radius: 20px;
-  background: linear-gradient(135deg, #30384b, var(--med-light-theme));
+  background: linear-gradient(135deg, #2b3244, var(--med-light-theme));
   background-repeat: no-repeat;
   background-size: cover;
   justify-content: space-around;
@@ -2627,7 +2625,7 @@ html {
   height: 100px;
   width: 110px;
   grid-template-rows: 15px 1fr;
-  background: linear-gradient(#394257, var(--med-light-theme));
+  background: linear-gradient(#323b4e, var(--med-light-theme));
   box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
 }
 
@@ -2674,7 +2672,7 @@ html {
   min-width: 250px;
   max-width: 500px;
   border: 1px solid var(--dark-theme);
-  background: linear-gradient(#394257, var(--med-light-theme));
+  background: linear-gradient(#323b4e, var(--med-light-theme));
   color: white;
   display: grid;
   grid-template-rows: 3.4vh 1fr;

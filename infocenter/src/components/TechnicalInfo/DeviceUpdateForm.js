@@ -297,6 +297,10 @@ function updateFileCount(e, fileNumber, setFileNumber, showMessage) {
     })
 }
 
+function togglePasswordType(setCustomPasswordType) {
+    setCustomPasswordType(p => !p);
+}
+
 function handleMouseOver(link, setHovered) {
     setHovered(link);
 }
@@ -307,8 +311,16 @@ function handlemouseOut(setHovered) {
 
 export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
-    const [selectedOption, setSelectedOption] = useState('Service Manual')
+    // Set the selected option when a device data option is clicked.
+    const [selectedOption, setSelectedOption] = useState('ServiceManual')
+    
+    // Set the file number for the Other Documents page when the add or delete document button is pushed.
     const [fileNumber, setFileNumber] = useState([1]);
+
+    // Specify whether a default password type is used or a custom password type is required.
+    const [customPasswordType, setCustomPasswordType] = useState(true);
+
+    // Track the hover state of the device data options to control the css.
     const [hovered, setHovered] = useState(null);
                     
     // Create a new form data object for storing saved files and data.
@@ -324,15 +336,15 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
         <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
             <div className="update-form-display">
                 <div className="update-options flex-c">
-                    <div className={selectedOption === 'Service Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Service Manual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
-                        <ServiceIcon color={(selectedOption === "Service Manual" || hovered === "Service Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'ServiceManual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("ServiceManual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <ServiceIcon color={(selectedOption === "ServiceManual" || hovered === "ServiceManual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         <div className='flex-c-col' style={{marginTop: 5 + 'px'}}>
                             <span>Service</span>
                             <span>Manual</span>
                         </div>
                     </div>
-                    <div className={selectedOption === 'User Manual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("User Manual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
-                        <UserManualIcon color={(selectedOption === "User Manual" || hovered === "User Manual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'UserManual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("UserManual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <UserManualIcon color={(selectedOption === "UserManual" || hovered === "UserManual") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         <div className='flex-c-col' style={{marginTop: 5 + 'px'}}>
                             <span>User</span>
                             <span>Manual</span>
@@ -346,8 +358,8 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                         <SoftwareIcon color={(selectedOption === "Software" || hovered === "Software") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         <span style={{marginTop: 5 + 'px'}}>Software</span>
                     </div>
-                    <div className={selectedOption === 'Other Documents' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("Other Documents", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
-                        <DocumentsIcon color={(selectedOption === "Other Documents" || hovered === "Other Documents") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
+                    <div className={selectedOption === 'OtherDocuments' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("OtherDocuments", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
+                        <DocumentsIcon color={(selectedOption === "OtherDocuments" || hovered === "OtherDocuments") ? "#D4FB7C" : "#BCE7FD"} size="25px"/>
                         <div className='flex-c-col' style={{marginTop: 5 + 'px'}}>
                             <span>Other</span>
                             <span>Documents</span>
@@ -359,7 +371,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                     </div>                   
                 </div>
                 <div className="display-section" ref={formContainer}>
-                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} />
+                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                         <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 

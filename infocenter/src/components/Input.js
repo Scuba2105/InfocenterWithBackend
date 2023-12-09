@@ -1,6 +1,6 @@
 
 
-export function Input({ type, inputType, identifier, labelText, defaultValue, placeholdertext, onChange, uniqueId, name }) {
+export function Input({ type, inputType, identifier, labelText, defaultValue, placeholdertext, onChange, uniqueId, name}) {
     if (type === "disabled") {
         return (
             <div className={`flex-c-col ${identifier}`}>

@@ -2,7 +2,7 @@ import { SelectInput } from "../SelectInput";
 import { Input } from "../Input";
 import { capitaliseFirstLetters } from "../../utils/utils";
 import { Cross, Tick, AddSquare, TrashCan } from "../../svg";
-import { serverConfig } from "../../server";
+import { TooltipButton } from "../TooltipButton";
 
 const hospitals = ['JOHN HUNTER HOSPITAL', 'ROYAL NEWCASTLE CENTRE', 'MAITLAND HOSPITAL', 'NEW MAITLAND HOSPITAL', 'MATER HOSPITAL','BELMONT HOSPITAL', 'BULAHDELAH HOSPITAL', 'KURRI KURRI HOSPITAL', 
 'CESSNOCK HOSPITAL', 'TAREE HOSPITAL', 'DUNGOG HOSPITAL', 'SINGLETON HOSPITAL', 'DENMAN MPS','GLOUCESTOR HOSPITAL', 'SCONE HOSPITAL', 'MUSWELBROOK HOSPITAL', 
@@ -22,19 +22,19 @@ const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
 
-export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount}) {
-
-    if (selectedOption === 'Service Manual') {
+export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount, customPasswordType, togglePasswordType}) {
+    
+    if (selectedOption === 'ServiceManual') {
         return (
-            <div key={selectedOption} className="device-input-container flex-c-col"> 
+            <div key={selectedOption} className="device-input-container flex-c-col" style={{marginBottom: 80 + 'px'}}> 
                 <label className="available-label flex-c">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update Service Manual:" uniqueId="file1" name="service-upload"/>
             </div>
         );
     }
-    else if (selectedOption === 'User Manual') {
+    else if (selectedOption === 'UserManual') {
         return (
-            <div key={selectedOption} className="device-input-container flex-c-col">
+            <div key={selectedOption} className="device-input-container flex-c-col" style={{marginBottom: 80 + 'px'}}>
                 <label className="available-label flex-c">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
                 <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update User Manual:" uniqueId="file2" name="user-upload"/>
             </div>
@@ -76,7 +76,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
             </div> 
         );
     }
-    else if (selectedOption === 'Other Documents'){
+    else if (selectedOption === 'OtherDocuments'){
         return (
             <div key={selectedOption} className="other-input-container flex-c-col">
                 {fileNumber.map((number) => {
@@ -92,9 +92,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                         </div>
                     </div>
                     );
-                })
-                
-                }
+                })}
                 <div className="other-file-button-container flex-c">
                     {fileNumber[fileNumber.length - 1] < 4 && <div className="other-doc-add-rm flex-c form-btn-transition" id="add-another-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 1 ? {marginRight: '0px'} : {marginRight: '15px'}}><AddSquare color="rgb(5, 234, 146)" translateX={-8}/>Add File</div>}
                     {fileNumber.length !== 1 && <div className="other-doc-add-rm flex-c form-btn-transition" id="remove-file" onClick={(e) => updateFileCount(e, fileNumber, setFileNumber, showMessage)} style={fileNumber.length === 4 ? {marginLeft: '0px'} : {marginLeft: '15px'}}><TrashCan color="#fd6673" translateX={-8}/>Delete File</div>}
@@ -104,8 +102,15 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else {
         return (
-            <div key={selectedOption} className="device-password-update-container flex-c-col">
+            <div key={selectedOption} className="device-password-update-container flex-c-col" style={{marginTop: 40 + 'px'}}>
+                <div className="edit-add-new-container flex-c">
+                    <TooltipButton content={customPasswordType ? "Undo" :"Custom Type"} boolean={customPasswordType} translateY={customPasswordType ? "6px" : "6px"} toggleFunction={togglePasswordType}/>
+                    {customPasswordType ? <Input inputType="text" identifier="add-new" labelText="Password Type" placeholdertext={`Enter custom password type`} /> : 
+                    <SelectInput type="form-select-input" label='Password Type' optionData={defaultPasswordTypes.sort()}/> }
+                    <div className="add-new-aligner"></div>
+                </div>
                 
+                <Input inputType='text' identifier='password-add' labelText='Password' placeholdertext='Please enter the password'/>  
             </div>
         )
     }

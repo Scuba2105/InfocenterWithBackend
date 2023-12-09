@@ -297,7 +297,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                         {inputPage === 1 && <Input inputType="text" identifier="add-new" labelText="New Contact Position" placeholdertext="eg. NUM, Equipment Officer" />}
                         {inputPage === 1 && 
                         <div className="edit-add-new-container">
-                            <TooltipButton content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
+                            <TooltipButton content={addNewHospital ? "Undo" :"Add New"} boolean={addNewHospital} translateY={addNewHospital ? "7px" : "4px"} toggleFunction={() => toggleNewHospital(addNewHospital, setAddNewHospital, setAddNewDepartment)}/>
                             {addNewHospital ? <Input inputType="text" identifier="add-new" labelText="Hospital" placeholdertext={`Enter new contact Hospital`} /> : 
                             <SelectInput type="form-select-input" label="Hospital" value={hospital} optionData={hospitalSelectOptions} onChange={(e) => updateHospital(e, setHospital, pageData, inputContainer)}/>}
                             <div className="add-new-aligner"></div>
@@ -341,7 +341,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
                         <div className="edit-add-new-container flex-c">
-                            {<TooltipButton content={addNewVendor ? "Undo" :"Add New"} boolean={addNewVendor} toggleFunction={() => toggleNewVendor(setAddNewVendor)}/>}
+                            {<TooltipButton content={addNewVendor ? "Undo" :"Add New"} boolean={addNewVendor} translateY={addNewHospital ? "7px" : "4px"} toggleFunction={() => toggleNewVendor(setAddNewVendor)}/>}
                             {addNewVendor ? <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" /> : 
                             <SelectInput type="form-select-input" label="Vendor" optionData={vendorSelectOptions} />}
                             {<div className="add-new-aligner"></div>}
