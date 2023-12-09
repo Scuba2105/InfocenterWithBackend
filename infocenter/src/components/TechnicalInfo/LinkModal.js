@@ -173,7 +173,7 @@ export function LinkModal({selectedData, modalType, queryClient, showMessage, cl
         
         if (configEditVisible) {
             return (
-               <ConfigEditRemove currentConfig={currentConfig} closeForm={() => closeConfigEditForm(setConfigEditVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
+               <ConfigEditRemove currentConfig={currentConfig} hospital={hospitals[hospitalsIndex]} department={getDepartments()[departmentsIndex]} closeForm={() => closeConfigEditForm(setConfigEditVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
             )
         } 
         else {

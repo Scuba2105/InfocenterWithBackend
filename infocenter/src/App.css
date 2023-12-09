@@ -1987,6 +1987,24 @@ html {
   transform: translate(1px, 2px);
 }
 
+/* Configuration Edit Form formatting */
+.config-edit-heading-container {
+  height: 60px;
+  justify-content: space-around;
+  margin: 20px 0 30px 0;
+}
+
+.config-edit-heading-container span{
+  font-weight: bold;
+}
+
+.config-edit-inputs-container {
+  height: 150px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px 15px;
+}
+
 /* Formatting the Contacts page */
 .hospital-contact-summary {
   padding-top: 30px;
