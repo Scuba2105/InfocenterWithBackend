@@ -318,7 +318,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
     const [fileNumber, setFileNumber] = useState([1]);
 
     // Specify whether a default password type is used or a custom password type is required.
-    const [customPasswordType, setCustomPasswordType] = useState(true);
+    const [customPasswordType, setCustomPasswordType] = useState(false);
 
     // Track the hover state of the device data options to control the css.
     const [hovered, setHovered] = useState(null);

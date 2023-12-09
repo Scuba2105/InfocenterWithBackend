@@ -198,13 +198,13 @@ export function AddNewForm({page, selectedData, pageData, vendorData, queryClien
                 <div className="add-new-input-container" ref={formContainer}>
                     <Input inputType="text" identifier="add-new" labelText={nameInputLabel} placeholdertext={`Enter new ${placeholderValue}`} />
                     <div className="edit-add-new-container">
-                        <TooltipButton content={addNewType ? "Undo" :"Add New"} boolean={addNewType} translateY={addNewType ? "7px" : "5px"} toggleFunction={() => toggleAddNewType(setAddNewType)}/>
+                        <TooltipButton content={addNewType ? "Undo" :"Add New"} boolean={addNewType} translateY={addNewType ? "5px" : "5px"} toggleFunction={() => toggleAddNewType(setAddNewType)}/>
                         {addNewType ? <Input inputType="text" identifier="add-new" labelText="Device Type" placeholdertext={`Enter new device type`} /> : 
                         <SelectInput type="form-select-input" label="Device Type" optionData={currentTypes} />}
                         <div className="add-new-aligner"></div>
                     </div>
                     <div className="edit-add-new-container">
-                        <TooltipButton content={addNewManufacturer ? "Undo" :"Add New"} boolean={addNewManufacturer} translateY={addNewType ? "5px" : "3px"} toggleFunction={() => toggleAddNewManufacturer(setAddNewManufacturer)}/>
+                        <TooltipButton content={addNewManufacturer ? "Undo" :"Add New"} boolean={addNewManufacturer} translateY={addNewManufacturer ? "8px" : "7px"} toggleFunction={() => toggleAddNewManufacturer(setAddNewManufacturer)}/>
                         {addNewManufacturer ? <Input inputType="text" identifier="add-new" labelText="Device Manufacturer" placeholdertext={`Enter new device type`} /> : 
                         <SelectInput type="form-select-input" label="Manufacturer" optionData={currentManufacturers} />}
                         <div className="add-new-aligner"></div>
