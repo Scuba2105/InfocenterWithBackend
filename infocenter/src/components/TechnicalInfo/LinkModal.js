@@ -4,6 +4,7 @@ import { ConfigDisplay } from "./ConfigDisplay";
 import { ClipboardCopy } from "../CopyToClipboard";
 import { Documents } from "./Documents";
 import { DocumentEditRemove } from "./DocumentEditRemove";
+import { ConfigEditRemove } from "./ConfigEditRemove";
 
 function passwordEntryClassName(num) {
     if (num === 0) {
@@ -55,6 +56,15 @@ function showForm(setDocumentsEditVisible, setCurrentDocument, link, description
 
 function closeForm(setDocumentsEditVisible) {
     setDocumentsEditVisible(false);
+}
+
+function openConfigEditForm(setConfigEditVisible, currentConfig, setCurrentConfig) {
+    setConfigEditVisible(true);
+    setCurrentConfig(currentConfig);
+}
+
+function closeConfigEditForm(setConfigEditVisible) {
+    setConfigEditVisible(false);
 }
 
 export function LinkModal({selectedData, modalType, queryClient, showMessage, closeDialog, closeAddModal}) {
@@ -160,15 +170,23 @@ export function LinkModal({selectedData, modalType, queryClient, showMessage, cl
             setDepartmentsIndex(newDepartmentIndex);
             setConfigIndex(0);
         }
-                
-        return (
-            <div className="modal-display">
-                <SelectInput type="form-select-input" label="Hospital" optionData={hospitals} onChange={onHospitalChange} />
-                <SelectInput type="form-select-input" label="Department" value={getDepartments()[departmentsIndex]} optionData={getDepartments()} onChange={onDepartmentChange} />
-                <ConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} configIndex={configIndex} setConfigIndex={setConfigIndex}/>    
-            </div>
-        );
+        
+        if (configEditVisible) {
+            return (
+               <ConfigEditRemove currentConfig={currentConfig} closeForm={() => closeConfigEditForm(setConfigEditVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
+            )
+        } 
+        else {
+            return (
+                <div className="modal-display">
+                    <SelectInput type="form-select-input" label="Hospital" optionData={hospitals} onChange={onHospitalChange} />
+                    <SelectInput type="form-select-input" label="Department" value={getDepartments()[departmentsIndex]} optionData={getDepartments()} onChange={onDepartmentChange} />
+                    <ConfigDisplay selectedData={selectedData} parsedConfigData={parsedConfigData} hospitals={hospitals} departmentName={getDepartments()[departmentsIndex]} departmentsIndex={departmentsIndex} hospitalsIndex={hospitalsIndex} configIndex={configIndex} setConfigIndex={setConfigIndex} openConfigEditForm={openConfigEditForm} setConfigEditVisible={setConfigEditVisible} currentConfig={currentConfig} setCurrentConfig={setCurrentConfig} />    
+                </div>
+            );
+        }
     }
+
     if (modalType === "passwords") {
         const passwordData = selectedData.passwords;
 

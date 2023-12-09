@@ -33,7 +33,7 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
          
     // Get the current entry data based on config index
     const parsedConfigData = parsedEntries[configIndex].split('_');
-
+    
     // Create the confing link and filename for the downloaded link
     const configLink = filteredCurrentEntries[configIndex];
     const fileName = parsedEntries[configIndex];
@@ -44,7 +44,7 @@ function generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex
     return [parsedConfigData, parsedEntries, configNumber, configLink, fileName]
 }
 
-export function ConfigDisplay({selectedData, hospitals, departmentName, hospitalsIndex, configIndex, setConfigIndex}) {
+export function ConfigDisplay({selectedData, hospitals, departmentName, hospitalsIndex, configIndex, setConfigIndex, openConfigEditForm, setConfigEditVisible, currentConfig, setCurrentConfig}) {
     
     const [parsedConfigData, parsedEntries, configNumber, configLink, fileName] = generateConfigData(selectedData, hospitals, hospitalsIndex, configIndex, departmentName);
     
@@ -76,7 +76,7 @@ export function ConfigDisplay({selectedData, hospitals, departmentName, hospital
                                 <label>{parsedConfigData[5].split('.').slice(0, -1).join('/')}</label>
                             </div>
                             <div className={configEditPermissions ? "config-btn-container flex-c" : "flex-c"}>
-                                {configEditPermissions && <button className="flex-c config-edit-btn main-btn-transition">Edit</button>}
+                                {configEditPermissions && <button className="flex-c config-edit-btn main-btn-transition" onClick={() => openConfigEditForm(setConfigEditVisible, parsedConfigData, setCurrentConfig)}>Edit</button>}
                                 <a className="flex-c config-download-btn main-btn-transition" href={`https://${serverConfig.host}:${serverConfig.port}${configLink}`} download={fileName} >Download</a>
                             </div>
                         </div>
