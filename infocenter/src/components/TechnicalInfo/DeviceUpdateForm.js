@@ -64,7 +64,7 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
     }
     
     if (dataKeys.length === 2 && dataKeys[0] === 'model' && dataKeys[1] === 'manufacturer') {
-        showMessage("error", 'No form data has been saved for upload');
+        showMessage("warning", 'No form data has been saved for upload');
         return;
     }        
 
@@ -112,13 +112,13 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 } 
 
 // Save the form data ready for upload
-function saveUpdateData(formContainer, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
+function saveUpdateData(formContainer, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog) {
     
     // Add the files from the service manual and user manual forms to the formData ref
     if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
         const selectedFile = formContainer.querySelector('.file-input');
         if (selectedFile.files.length === 0) {
-            showMessage("error", `No ${selectedOption} has been provided. Please choose a file and try again.`)
+            showMessage("warning", `No ${selectedOption} has been provided. Please choose a file and try again.`)
             return
         }
         else {
@@ -143,11 +143,11 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
             }
         })
         if (softwareType === null) {
-            showMessage("error", "The software type has not been selected. Please select an option and try again.");
+            showMessage("warning", "The software type has not been selected. Please select an option and try again.");
             return;
         }
         if (textInput.value === "") {
-            showMessage("error", 'No location has been provided for the software. Please specify a location and try again.');
+            showMessage("warning", 'No location has been provided for the software. Please specify a location and try again.');
             return
         }
         const data = `${softwareType}=${textInput.value.trim()}`;
@@ -168,11 +168,11 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
 
         // Check mandatory fields have been entered
         if (configDataInputs[1].value === "") {
-            showMessage("error", "Department is a mandatory field and has not been entered. Please enter a value.");
+            showMessage("warning", "Department is a mandatory field and has not been entered. Please enter a value.");
             return
         }
         else if (dateInput.value === "") {
-            showMessage("error", 'Date Created is a mandatory field and has not been entered. Please enter a value.');
+            showMessage("warning", 'Date Created is a mandatory field and has not been entered. Please enter a value.');
             return
         }
 
@@ -217,7 +217,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
 
         
         if (configFileInput.files.length === 0) {
-            showMessage("error", 'Config File has not been selected from the file input. Please choose a config file and try again.')
+            showMessage("warning", 'Config File has not been selected from the file input. Please choose a config file and try again.')
             return 
         }
         else {
@@ -241,7 +241,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         
         descriptions.forEach((description, index) => {
             if (description.value === "") {
-                showMessage("error", `The description for File ${index + 1} is missing. Please provide a description and try again.`);
+                showMessage("warning", `The description for File ${index + 1} is missing. Please provide a description and try again.`);
                 return
             }
             updateData.current.set(`description${index + 1}`, description.value.trim());
@@ -252,7 +252,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         for (const fileInput of fileInputArray) {
             const index = fileInputArray.indexOf(fileInput);
             if (fileInput.files.length === 0) {
-                showMessage("error", `File ${index + 1} is missing. Please choose a file and try again.`);
+                showMessage("warning", `File ${index + 1} is missing. Please choose a file and try again.`);
                 return 
             }
             updateData.current.set(`file${index + 1}`, fileInput.files[0]);
@@ -261,6 +261,49 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
         setTimeout(() => {
             closeDialog();
         }, 1600);
+    }
+    else if (selectedOption === "Passwords") {
+        let passwordTypeInput, passwordValueInput;
+        if (customPasswordType) {
+            passwordTypeInput = formContainer.querySelectorAll(".text-input")[0];
+            passwordValueInput = formContainer.querySelectorAll(".text-input")[1];
+            
+            // Check the data is valid.
+            if (passwordTypeInput.value.trim() === "") {
+                showMessage("warning", `The custom password type has not been provided. Please enter the password type and try again.`);
+                return
+            }
+        }
+        else {
+            passwordTypeInput = formContainer.querySelector(".select-input")
+            passwordValueInput = formContainer.querySelector(".text-input");
+        }
+                 
+        // Check the password value is valid.
+        if (passwordValueInput.value.trim() === "") {
+            showMessage("warning", `The password has not been provided for the ${passwordTypeInput.value}. Please enter the password value and try again.`);
+            return
+        }
+                
+        // Add the password to the form data.
+        updateData.current.set("password-type", passwordTypeInput.value);
+        updateData.current.set("password-value", passwordValueInput.value);
+        
+
+        // const fileInputArray = Array.from(fileInputs);
+        
+        // for (const fileInput of fileInputArray) {
+        //     const index = fileInputArray.indexOf(fileInput);
+        //     if (fileInput.files.length === 0) {
+        //         showMessage("error", `File ${index + 1} is missing. Please choose a file and try again.`);
+        //         return 
+        //     }
+        //     updateData.current.set(`file${index + 1}`, fileInput.files[0]);
+        // }
+        // showMessage("info", `The documents for ${selectedData.model} have been saved ready for upload.`)
+        // setTimeout(() => {
+        //     closeDialog();
+        // }, 1600);*/
     }
     
 }
@@ -373,7 +416,7 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                 <div className="display-section" ref={formContainer}>
                     <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
-                        <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
+                        <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                         <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                     </div>                    
                 </div>
