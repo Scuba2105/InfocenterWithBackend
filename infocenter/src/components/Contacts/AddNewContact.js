@@ -341,7 +341,7 @@ export function AddNewContact({formType, page, pageData, queryClient, showMessag
                     <div className="add-new-input-container" ref={inputContainer}>
                         {inputPage === 1 &&
                         <div className="edit-add-new-container flex-c">
-                            {<TooltipButton content={addNewVendor ? "Undo" :"Add New"} boolean={addNewVendor} translateY={addNewHospital ? "7px" : "4px"} toggleFunction={() => toggleNewVendor(setAddNewVendor)}/>}
+                            {<TooltipButton content={addNewVendor ? "Undo" :"Add New"} boolean={addNewVendor} translateY={addNewHospital ? "11px" : "8px"} toggleFunction={() => toggleNewVendor(setAddNewVendor)}/>}
                             {addNewVendor ? <Input inputType="text" identifier="add-new" labelText="Vendor" placeholdertext="Enter vendor for new contact" /> : 
                             <SelectInput type="form-select-input" label="Vendor" optionData={vendorSelectOptions} />}
                             {<div className="add-new-aligner"></div>}
