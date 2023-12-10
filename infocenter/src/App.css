@@ -1877,7 +1877,8 @@ html {
 
 .indicator-container {
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 5px;
 }
 
 .contact-indicator-container {

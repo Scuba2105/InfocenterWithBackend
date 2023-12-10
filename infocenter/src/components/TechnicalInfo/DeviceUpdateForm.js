@@ -219,7 +219,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
             
             // Parse options string. Filter out Intellivue monitors so options string can be parsed otherwise format the data appropriately.
             else if (index === 0 ) {
-                if (input.value !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
+                if (input.value.trim() !== "" && (/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3')) {
                     const regex = input.value.match(/[A-Za-z]\d{2}/ig);
                     interimArray.push((regex.join('-').toUpperCase()));
                 }
