@@ -146,6 +146,14 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, manufac
     }
 }
 
+function deleteConfig(showMessage, device, hospital, department) {
+    // Have user confirm to proceed if changing mandatory data
+    showMessage("confirmation", `You are about to delete the ${device} configuration for ${hospital}, ${department} permanently from the server. Please confirm you wish to proceed or cancel to prevent deletion.`);
+}
+// async function deleteConfig(formContainer, currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog) { 
+
+// }
+
 export function ConfigEditRemove({currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog}) {
     
     const formContainer = useRef(null);
@@ -170,7 +178,7 @@ export function ConfigEditRemove({currentConfig, device, manufacturer, hospital,
                     <Input inputType="file" identifier="updated-file" labelText="Updated Configuration File"></Input>
                 </div>
                 <div className="form-buttons">
-                    <FormButton content="Delete" btnColor="#EE467B" marginTop="0px" />
+                    <FormButton content="Delete" btnColor="#EE467B" marginTop="0px" onClick={() => deleteConfig(showMessage, device, hospital, department)}/>
                     <FormButton content="Upload" btnColor="#D4FB7C" marginTop="0px" onClick={() => uploadConfigUpdates(formContainer.current, currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog)}/> 
                 </div>
             </form>
