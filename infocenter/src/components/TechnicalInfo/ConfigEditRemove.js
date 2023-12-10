@@ -16,20 +16,24 @@ function uploadConfigUpdates(formContainer, currentConfig, device, hospital, dep
     // Initialise the device and hospital entries in the form data.
     formData.set("device", device);
     formData.set("hospital", hospital);
-    formData.set("existing-file", currentConfig.join("_"));
+    formData.set("existing-filename", currentConfig.join("_"));
 
-    // Validate the inputs values and store valid values used to construct filename.
+    // Get the current config file type from the current array.
+    const currentConfigType = currentConfig[currentConfig.length - 1].split(".").slice(-1)[0];
+
     let typeOptionsValue, softwareValue, dateValue, fileSelected
     if (fileInput.files[0]) {
-        // Get the current config file type from existing file name and compare to new file name.
-        const currentConfigType = currentConfig[currentConfig.length - 1].split(".").slice(-1)[0];
+        
+        // Compare existing file type to new file type.
         const updatedFileType = fileInput.files[0].name.split(".").slice(-1)[0];
         if (currentConfigType !== updatedFileType) {
             showMessage("warning", "The updated config file does not have the same file type as the existing file. Please confirm you have selected the correct file and try again. If the issue persists contact an administrator.")
             return
         }
         fileSelected = true;
-    }        
+    }   
+    
+    // Sanitise the config input and store value if changed.
     if (configTypeInput.value.trim() !== "") {
         // Parse options string. Filter out Intellivue monitors so options string can be parsed otherwise format the data appropriately.
         if (/^MX/.test(device) || device === 'X2' || device === 'X3') {
@@ -40,28 +44,69 @@ function uploadConfigUpdates(formContainer, currentConfig, device, hospital, dep
                 }
                 typeOptionsValue = regex.join('-').toUpperCase();
         }
-        typeOptionsValue = configTypeInput.value.trim();
+        else {
+            typeOptionsValue = configTypeInput.value.trim();
+        }
     }
+    
+    // Sanitise the software input and store value if changed.
     if (softwareInput.value.trim() !== "") {
         softwareValue = softwareInput.value.trim();
     }
+
+    // Send a message if no data has been changed. Otherwise perform the appropriate response depending on whether a file has been updated or not.
     if (dateInput.value.trim() === "" && fileSelected) {
         showMessage("warning", "The date the config was created has not been entered. Please enter a valid date and try again.")
         return
     }
-    else if (!fileSelected) {
+    else if (!fileSelected) { 
+        // Update the filename accordingly.
+
         // Check if software or type/options are not null and update accordingly.
         if (!typeOptionsValue && !softwareValue) {
             showMessage("warning", "No data has been updated for the configuration.");
             return
         }
-        // Update the congiguration name accordingly.
-        console.log(typeOptionsValue, softwareValue);
+        // Update the congiguration name accordingly if software or type options fields provided.
+        const updatedConfigArray = currentConfig.map(entry => entry)
+
+        // Update the type/options value if valid input provided.
+        if (typeOptionsValue) {
+            updatedConfigArray[3] = typeOptionsValue;
+        }
+        // Update the software value if valid input provided.
+        if (softwareValue) {
+            updatedConfigArray[4] = softwareValue; 
+        }
+        const updatedConfigName = updatedConfigArray.join("_");
+        formData.set("updated-filename", updatedConfigName);
     }
-    else {
-        // Set the dateValue and create new file name from supplied input values.
+    else { 
+        // Append the updated config file to the formData with the new filename.
+
+        // Copy the current config into a new array and update the congiguration name accordingly if software or type options fields provided.
+        const updatedConfigArray = currentConfig.map(entry => entry)
+        
+        // Set the dateValue and update the date.<file extension> entry in the config array.
         dateValue = dateInput.value.trim();
-        console.log(typeOptionsValue, softwareValue, dateValue);
+        const dateArray = dateValue.split("-");
+        const newDate = `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
+        updatedConfigArray[6] = `${newDate}.${currentConfigType}`
+
+        if (typeOptionsValue) {
+            updatedConfigArray[3] = typeOptionsValue;
+        }
+        // Update the software value if valid input provided.
+        if (softwareValue) {
+            updatedConfigArray[4] = softwareValue; 
+        }
+        const updatedConfigName = updatedConfigArray.join("_");
+        formData.set("updated-config-file", fileInput.files[0], updatedConfigName);
+    }
+
+    // Upload the Form Data
+    for (const pair of formData.entries()) {
+        console.log(pair[0], pair[1]);
     }
 }
 
