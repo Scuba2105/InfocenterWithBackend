@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useConfirmation } from "../StateStore";
 import { FormButton } from "../FormButton";
 import { VendorArrow } from "../../svg";
 import { Input } from "../Input";
@@ -150,13 +151,72 @@ function deleteConfig(showMessage, device, hospital, department) {
     // Have user confirm to proceed if changing mandatory data
     showMessage("confirmation", `You are about to delete the ${device} configuration for ${hospital}, ${department} permanently from the server. Please confirm you wish to proceed or cancel to prevent deletion.`);
 }
-// async function deleteConfig(formContainer, currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog) { 
-
-// }
 
 export function ConfigEditRemove({currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog}) {
     
     const formContainer = useRef(null);
+
+    // Get the confirmation result from Zustand state store.
+    const confirmationResult = useConfirmation((state) => state.updateConfirmation);
+    const resetConfirmationStatus = useConfirmation((state) => state.resetConfirmation);
+
+    // Run effect hook if confirmation result provided to complete delete after re-render
+    useEffect(() => {
+        if (confirmationResult === "proceed") {
+
+            async function proceedwithUpload() {
+                showMessage("uploading", `Deleting Selected Configuration Data`);
+
+                // Create the object to be sent in the request body.
+                const uploadData = {model: device, hospital: hospital, configFile: currentConfig.join("_")} 
+                
+                try {
+
+                    // Post the data to the server  
+                    const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/DeleteConfiguration`, {
+                            method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+                            mode: "cors", // no-cors, *cors, same-origin
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            redirect: "follow", // manual, *follow, error
+                            referrerPolicy: "no-referrer",
+                            body: JSON.stringify(uploadData),
+                    })
+        
+                    const data = await res.json();
+
+                    if (data.type === "Error") {
+                        closeDialog();
+                        showMessage("error", `${data.message} If the issue persists please contact an administrator.`);
+                    }
+                    else {                            
+                        // Need to update app data.
+                        queryClient.invalidateQueries('dataSource');
+            
+                        closeDialog();
+                        showMessage("info", 'Resources have been successfully updated!');
+                        
+                        setTimeout(() => {
+                            closeDialog();
+                            closeForm();
+                        }, 1600);
+                    }
+                } 
+                catch (error) {
+                    showMessage("error", `${error.message}.`)
+                }
+            }
+            proceedwithUpload();
+        }
+        else if (confirmationResult === "cancel") {
+            resetConfirmationStatus();            
+        }
+        return () => {
+            resetConfirmationStatus();
+        }    
+    }, [confirmationResult, resetConfirmationStatus, closeDialog, showMessage, queryClient, closeForm, currentConfig, device, hospital]);
+     
     
     return (
         <div className="modal-display" ref={formContainer}>
