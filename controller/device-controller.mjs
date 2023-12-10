@@ -205,13 +205,18 @@ export async function updateDeviceConfiguration(__dirname, req, res, next) {
             });
             
             // Define the variables from the uploaded data.
-            const device = req.body.device;
+            const model = req.body.model;
             const hospital = req.body.hospital;
             const existingFilename = req.body["existing-filename"];
-            const updatedFilename  = req.body["updated-filename"]   
-    
-             
-           
+            const updatedFilename  = req.body["updated-filename"];
+            const filenameOnly = req.body["filename-only"];  
+            
+            if ("filename-only" === "true") {
+                console.log("recognised no file attached")
+            }
+            else {
+                console.log("file attachment recognised");
+            }
             
             // Complete the write to file and delete document from file concurrently as they are not dependent.
             // const deletionResult = await Promise.all([

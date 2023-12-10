@@ -15,7 +15,7 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
     const formData = new FormData();
 
     // Initialise the device and hospital entries in the form data.
-    formData.set("device", device);
+    formData.set("model", device);
     formData.set("hospital", hospital);
     formData.set("existing-filename", currentConfig.join("_"));
 
@@ -80,7 +80,9 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
             updatedConfigArray[4] = softwareValue; 
         }
         const updatedConfigName = updatedConfigArray.join("_");
+        console.log(updatedConfigName)
         formData.set("updated-filename", updatedConfigName);
+        formData.set("filename-only", "true");
     }
     else { 
         // Append the updated config file to the formData with the new filename.
@@ -92,7 +94,7 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
         dateValue = dateInput.value.trim();
         const dateArray = dateValue.split("-");
         const newDate = `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
-        updatedConfigArray[6] = `${newDate}.${currentConfigType}`
+        updatedConfigArray[5] = `${newDate}.${currentConfigType}`
 
         if (typeOptionsValue) {
             updatedConfigArray[3] = typeOptionsValue;
@@ -102,6 +104,7 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
             updatedConfigArray[4] = softwareValue; 
         }
         const updatedConfigName = updatedConfigArray.join("_");
+        formData.set("updated-filename", updatedConfigName);
         formData.set("updated-config-file", fileInput.files[0], updatedConfigName);
     }
 

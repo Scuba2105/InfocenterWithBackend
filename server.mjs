@@ -92,7 +92,8 @@ const storage = multer.diskStorage({
             cb(null, path.join(__dirname, `public/images/staff`))
         }
         else if (file.fieldname === "updated-config-file") {
-            cb(null, path.join(__dirname, `public/configurations/${model}`))
+            const hospital = convertHospitalName(req.body.hospital);
+            cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
         }
         else if (file.fieldname === "updated-document") {
             cb(null, path.join(__dirname, `public/documents/${model}`))
