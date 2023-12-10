@@ -6,7 +6,7 @@ import cors from 'cors';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
 import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
-import { addNewDeviceData, updateExistingDeviceData, deleteExistingDocument } from './controller/device-controller.mjs'
+import { addNewDeviceData, updateExistingDeviceData, updateDeviceConfiguration, deleteExistingDocument } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
 import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
 import { updateTestingProgressData, resetTestingProgressData } from './controller/testing-templates-controller.mjs';
@@ -91,6 +91,9 @@ const storage = multer.diskStorage({
         else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
             cb(null, path.join(__dirname, `public/images/staff`))
         }
+        else if (file.fieldname === "updated-config-file") {
+            cb(null, path.join(__dirname, `public/configurations/${model}`))
+        }
         else if (file.fieldname === "updated-document") {
             cb(null, path.join(__dirname, `public/documents/${model}`))
         } 
@@ -126,7 +129,8 @@ const upload = multer({ storage: storage})
 const cpUpload = upload.fields([{name: 'service-manual', maxCount: 1}, {name: 'user-manual', maxCount: 1}, 
 {name: 'configs', maxCount: 1}, {name: 'software', maxCount: 1}, {name: 'file1', maxCount: 1},
 {name: 'file2', maxCount: 1}, {name: 'file3', maxCount: 1}, {name: 'file4', maxCount: 1}, {name: 'image-file', maxCount: 1},
-{name: 'employee-photo', maxCount: 1}, {name: 'updated-document', maxCount: 1}, {name: 'service-request-form', maxCount: 1}])
+{name: 'employee-photo', maxCount: 1}, {name: 'updated-document', maxCount: 1}, {name: 'service-request-form', maxCount: 1},
+{name: 'updated-config-file', maxCount: 1}]);
 
 app.get("/", async (req, res, next) => {
     try {
@@ -182,6 +186,18 @@ app.post('/AddNewEntry/:page', (req, res, next) => {
             else if (page === "staff") {
                 addNewStaffData(req, res, next, __dirname);
             }
+        }
+    })
+})
+
+// Define route to update existing equipment configuration files. 
+app.put("/UpdateConfigurations", (req, res, next) => {
+    cpUpload(req, res, (err) => {
+        if (err) {
+            next(err);
+        }
+        else {
+            updateDeviceConfiguration(__dirname, req, res, next);
         }
     })
 })

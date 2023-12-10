@@ -2,9 +2,10 @@ import { useRef } from "react";
 import { FormButton } from "../FormButton";
 import { VendorArrow } from "../../svg";
 import { Input } from "../Input";
+import { serverConfig } from "../../server";
 import { delayFunctionInitiation } from "../../utils/utils";
 
-function uploadConfigUpdates(formContainer, currentConfig, device, hospital, department, closeForm, queryClient, showMessage, closeDialog) {
+async function uploadConfigUpdates(formContainer, currentConfig, device, hospital, department, closeForm, queryClient, showMessage, closeDialog) {
     const configTypeInput = formContainer.querySelectorAll(".text-input")[0];
     const softwareInput = formContainer.querySelectorAll(".text-input")[1];
     const dateInput = formContainer.querySelector(".date-input");
@@ -105,8 +106,43 @@ function uploadConfigUpdates(formContainer, currentConfig, device, hospital, dep
     }
 
     // Upload the Form Data
-    for (const pair of formData.entries()) {
-        console.log(pair[0], pair[1]);
+    // Show the uploading spinner dialog while uploading.
+    //showMessage("uploading", `Updating ${device} Config Data`)
+      
+    try {    
+        // Post the form data to the server. 
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateConfigurations`, {
+                method: "PUT", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer",
+                body: formData
+        })
+
+        const data = await res.json();
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}.`);
+        }
+        else {
+            // Need to clear formData at this point
+            for (const pair of formData.entries()) {
+                formData.delete(pair[0]);
+            }
+
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeForm();
+            }, 1600);
+        }
+    }
+    catch (error) {
+        showMessage("error", error.message);
     }
 }
 

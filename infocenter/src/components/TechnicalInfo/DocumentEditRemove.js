@@ -96,7 +96,7 @@ export function DocumentEditRemove({selectedData, currentDocument, closeForm, qu
         if (confirmationResult === "proceed") {
 
             async function proceedwithUpload() {
-                showMessage("uploading", `Uploading Employee Data`);
+                showMessage("uploading", `Deleting ${selectedData.model} Data`);
 
                 // Create the object to be sent in the request body.
                 const uploadData = {model: selectedData.model, document: currentDocument} 

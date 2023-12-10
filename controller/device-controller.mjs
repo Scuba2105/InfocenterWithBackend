@@ -191,7 +191,48 @@ export async function updateExistingDeviceData(req, res, next, __dirname) {
     })
 }
 
-export function deleteExistingDocument(req, res, next, __dirname) {
+export async function updateDeviceConfiguration(__dirname, req, res, next) {
+    deviceDataMutex.runExclusive(async () => {
+        try {
+            // Read the device data.
+            const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
+            });
+            
+            // Define the variables from the uploaded data.
+            const device = req.body.device;
+            const hospital = req.body.hospital;
+            const existingFilename = req.body["existing-filename"];
+            const updatedFilename  = req.body["updated-filename"]   
+    
+             
+           
+            
+            // Complete the write to file and delete document from file concurrently as they are not dependent.
+            // const deletionResult = await Promise.all([
+            //     writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
+            //     deleteDocumentFile(__dirname, filepath)]).catch((err) => {
+            //         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            //     });
+
+            // Send the success response message.
+            res.json({type: "Success", message: 'Document Successfully Deleted'});
+
+        }
+        catch (err) {
+            // Log the route and error message and call error handling middlware.
+            console.log({Route: `Delete Document`, Error: err.message});
+            next(err);         
+        }
+    })
+}
+
+export async function deleteExistingDocument(req, res, next, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
             // Read the device data.
