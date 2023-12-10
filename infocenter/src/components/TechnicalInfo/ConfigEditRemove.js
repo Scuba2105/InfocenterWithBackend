@@ -5,12 +5,12 @@ import { Input } from "../Input";
 import { serverConfig } from "../../server";
 import { delayFunctionInitiation } from "../../utils/utils";
 
-async function uploadConfigUpdates(formContainer, currentConfig, device, hospital, department, closeForm, queryClient, showMessage, closeDialog) {
+async function uploadConfigUpdates(formContainer, currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog) {
     const configTypeInput = formContainer.querySelectorAll(".text-input")[0];
     const softwareInput = formContainer.querySelectorAll(".text-input")[1];
     const dateInput = formContainer.querySelector(".date-input");
     const fileInput = formContainer.querySelector(".file-input");
-
+    
     // Initialise the update config data.
     const formData = new FormData();
 
@@ -80,7 +80,6 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
             updatedConfigArray[4] = softwareValue; 
         }
         const updatedConfigName = updatedConfigArray.join("_");
-        console.log(updatedConfigName)
         formData.set("updated-filename", updatedConfigName);
         formData.set("filename-only", "true");
     }
@@ -96,21 +95,19 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
         const newDate = `${dateArray[2]}.${dateArray[1]}.${dateArray[0]}`;
         updatedConfigArray[5] = `${newDate}.${currentConfigType}`
 
-        if (typeOptionsValue) {
-            updatedConfigArray[3] = typeOptionsValue;
-        }
-        // Update the software value if valid input provided.
-        if (softwareValue) {
-            updatedConfigArray[4] = softwareValue; 
-        }
+        // Update the type/options string if valid input provided otherwise none.
+        updatedConfigArray[3] = typeOptionsValue ? typeOptionsValue : "none";
+        
+        // Update the software value if valid input provided otherwise none.
+        updatedConfigArray[4] = softwareValue ? softwareValue : "none";         
+
         const updatedConfigName = updatedConfigArray.join("_");
         formData.set("updated-filename", updatedConfigName);
         formData.set("updated-config-file", fileInput.files[0], updatedConfigName);
     }
 
-    // Upload the Form Data
     // Show the uploading spinner dialog while uploading.
-    //showMessage("uploading", `Updating ${device} Config Data`)
+    showMessage("uploading", `Updating ${device} Config Data`)
       
     try {    
         // Post the form data to the server. 
@@ -149,7 +146,7 @@ async function uploadConfigUpdates(formContainer, currentConfig, device, hospita
     }
 }
 
-export function ConfigEditRemove({currentConfig, device, hospital, department, closeForm, queryClient, showMessage, closeDialog}) {
+export function ConfigEditRemove({currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog}) {
     
     const formContainer = useRef(null);
     
@@ -174,7 +171,7 @@ export function ConfigEditRemove({currentConfig, device, hospital, department, c
                 </div>
                 <div className="form-buttons">
                     <FormButton content="Delete" btnColor="#EE467B" marginTop="0px" />
-                    <FormButton content="Upload" btnColor="#D4FB7C" marginTop="0px" onClick={() => uploadConfigUpdates(formContainer.current, currentConfig, device, hospital, department, closeForm, queryClient, showMessage, closeDialog)}/> 
+                    <FormButton content="Upload" btnColor="#D4FB7C" marginTop="0px" onClick={() => uploadConfigUpdates(formContainer.current, currentConfig, device, manufacturer, hospital, department, closeForm, queryClient, showMessage, closeDialog)}/> 
                 </div>
             </form>
         </div>

@@ -1,4 +1,4 @@
-import { getAllDeviceData, writeAllDeviceData, deleteDocumentFile, generateNewDeviceData } from '../models/device-models.mjs';
+import { getAllDeviceData, writeAllDeviceData, deleteFile, renameFile, generateNewDeviceData } from '../models/device-models.mjs';
 import { convertHospitalName } from '../utils/utils.mjs';
 import { Mutex } from 'async-mutex';
 import { FileHandlingError, DBError, ParsingError } from '../error-handling/file-errors.mjs';
@@ -206,28 +206,60 @@ export async function updateDeviceConfiguration(__dirname, req, res, next) {
             
             // Define the variables from the uploaded data.
             const model = req.body.model;
+            const manufacturer = req.body.manufacturer;
             const hospital = req.body.hospital;
             const existingFilename = req.body["existing-filename"];
             const updatedFilename  = req.body["updated-filename"];
             const filenameOnly = req.body["filename-only"];  
             
-            if ("filename-only" === "true") {
-                console.log("recognised no file attached")
+            // Get the current config data for the selected device and hospital.
+            const abbrvHospitalName = convertHospitalName(hospital);
+            const currentDeviceData = deviceData.find(entry => entry.model === model);
+            const hospitalDeviceConfigData = currentDeviceData.config[hospital];
+
+            // Update the config link for the selected device.
+            const updatedHospitalDeviceConfigData = hospitalDeviceConfigData.map((entry) => {
+                if (entry === `/configurations/${abbrvHospitalName}/${model.toLowerCase()}/${existingFilename}`) {
+                    return `/configurations/${abbrvHospitalName}/${model.toLowerCase()}/${updatedFilename}`
+                }
+                return entry
+            })
+
+            // Write the updated config data to the device.
+            currentDeviceData.config[hospital] = updatedHospitalDeviceConfigData;
+
+            // Need to rename old config file from project repository so the link matches.
+            const oldFilename = `${__dirname}/public/configurations/${abbrvHospitalName}/${model.toLowerCase()}/${existingFilename}`
+            const newFilename = `${__dirname}/public/configurations/${abbrvHospitalName}/${model.toLowerCase()}/${updatedFilename}`
+
+            if (filenameOnly === "true") {
+                // Rename the existing file so the link matches. 
+                const fileRenameResult = await renameFile(oldFilename, newFilename).catch((err) => {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                });
             }
             else {
-                console.log("file attachment recognised");
+                // Delete the old document from the project repository.
+                const deleteFileResult = await deleteFile(__dirname, `/configurations/${abbrvHospitalName}/${model.toLowerCase()}/${existingFilename}`)
             }
+                        
+            // Replace the old device data in the DeviceData array with the new data that has been entered 
+            const updatedDeviceData = deviceData.map((entry) => {
+                if (entry.model === model && entry.manufacturer === manufacturer) {
+                    return currentDeviceData
+                }
+                else {
+                    return entry;
+                }
+            })
             
-            // Complete the write to file and delete document from file concurrently as they are not dependent.
-            // const deletionResult = await Promise.all([
-            //     writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
-            //     deleteDocumentFile(__dirname, filepath)]).catch((err) => {
-            //         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-            //     });
+            // Write the data to file.
+            const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)).catch((err) => {
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            });
 
             // Send the success response message.
-            res.json({type: "Success", message: 'Document Successfully Deleted'});
-
+            res.json({type: "Success", message: 'Config Data Upload Successful'});
         }
         catch (err) {
             // Log the route and error message and call error handling middlware.
@@ -280,7 +312,7 @@ export async function deleteExistingDocument(req, res, next, __dirname) {
             // Complete the write to file and delete document from file concurrently as they are not dependent.
             const deletionResult = await Promise.all([
                 writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
-                deleteDocumentFile(__dirname, filepath)]).catch((err) => {
+                deleteFile(__dirname, filepath)]).catch((err) => {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
 

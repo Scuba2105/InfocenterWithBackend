@@ -31,11 +31,23 @@ export function writeAllDeviceData(__dirname, data) {
     });
 }
 
-export function deleteDocumentFile(__dirname, filepath) {
+export function deleteFile(__dirname, filepath) {
     return new Promise((resolve, reject) => {
         fs.unlink(path.join(__dirname, "public", filepath), (err) => {
             if (err) {
-                reject({type: "FileHandlingError", message: err.message, cause: err, action: "read", route: "Device"});
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "delete", route: "Device"});
+            } else {
+                resolve("Success");
+            }
+        });
+    })
+}
+
+export function renameFile(originalFilename, newFilename) {
+    return new Promise((resolve, reject) => {
+        fs.rename(originalFilename, newFilename, (err) => { 
+            if (err) {
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "rename", route: "Device"});
             } else {
                 resolve("Success");
             }
