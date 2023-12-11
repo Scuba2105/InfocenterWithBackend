@@ -1312,6 +1312,20 @@ html {
   color: var(--form-font-color);
 }
 
+/* Format the resource request form */
+.request-form-instruction {
+  width: 75%;
+  height: 150px;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 2px solid white;
+}
+
+.request-form-instruction span {
+  font-size: 14px;
+}
+
 /* Format password display */
 .password-display {
   grid-row: 2;
