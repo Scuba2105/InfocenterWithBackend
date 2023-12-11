@@ -6,7 +6,7 @@ import cors from 'cors';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
 import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
-import { addNewDeviceData, updateExistingDeviceData, updateDeviceConfiguration, deleteExistingDocument } from './controller/device-controller.mjs'
+import { addNewDeviceData, updateExistingDeviceData, updateDeviceConfiguration, deleteExistingConfiguration, deleteExistingDocument } from './controller/device-controller.mjs'
 import { addNewContactData, updateContactData } from './controller/contacts-controller.mjs';
 import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
 import { updateTestingProgressData, resetTestingProgressData } from './controller/testing-templates-controller.mjs';
@@ -201,6 +201,11 @@ app.put("/UpdateConfigurations", (req, res, next) => {
             updateDeviceConfiguration(__dirname, req, res, next);
         }
     })
+})
+
+// Define route to delete equipment documents. 
+app.delete("/DeleteConfiguration", (req, res, next) => {
+    deleteExistingConfiguration(req, res, next, __dirname);
 })
 
 // Define route to upload equipment documents. 

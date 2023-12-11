@@ -269,6 +269,69 @@ export async function updateDeviceConfiguration(__dirname, req, res, next) {
     })
 }
 
+export async function deleteExistingConfiguration(req, res, next, __dirname) {
+    deviceDataMutex.runExclusive(async () => {
+        try {
+            // Read the device data.
+            const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
+            });
+            
+            // Define the variables from the uploaded data.
+            const model = req.body.model;
+            const hospital = req.body.hospital;
+            const existingFilename = req.body.configFile;
+            const abbrvHospitalName = convertHospitalName(hospital);
+            const existingPublicFilePath = `/configurations/${abbrvHospitalName}/${model.toLowerCase()}/${existingFilename}`; 
+            
+            // Get the selected model data from the device data
+            const modelData = deviceData.find(entry => entry.model === model)
+
+            // Get the config data for chosen device and the selected hospital.
+            const modelHospitalConfigurations = modelData.config[hospital];
+
+            // Filter out the config data which is to be deleted.
+            const updatedModelHospitalConfigurations = modelHospitalConfigurations.filter((entry) => {
+                return entry !== existingPublicFilePath
+            })
+
+            // Ovrwrite the existing model configuration for the selected hospital to remove the selected file from the data.
+            modelData.config[hospital] = updatedModelHospitalConfigurations;
+            
+            // Update the device data with the new data for the current selected model.
+            const updatedDeviceData = deviceData.map((entry) => {
+                if (entry.model === model) {
+                    return modelData
+                }
+                else {
+                    return entry
+                }
+            })
+            
+            // Complete the write to file and delete document from file concurrently as they are not dependent.
+            const deletionResult = await Promise.all([
+                writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)),
+                deleteFile(__dirname, existingPublicFilePath)]).catch((err) => {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                });
+
+            // Send the success response message.
+            res.json({type: "Success", message: 'Document Successfully Deleted'});
+
+        }
+        catch (err) {
+            // Log the route and error message and call error handling middlware.
+            console.log({Route: `Delete Document`, Error: err.message});
+            next(err);         
+        }
+    })
+}
+
 export async function deleteExistingDocument(req, res, next, __dirname) {
     deviceDataMutex.runExclusive(async () => {
         try {
