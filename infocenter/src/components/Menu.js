@@ -31,10 +31,10 @@ export function Menu({page, onPageSelect}) {
         option.id === 'forms-templates' ? <FormsTemplatesIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} /> :
         <UtilitiesIcon key={option.id} color={option.id === hoveredId || option.id === page ? imagelightColor : imageDarkColor} />
         }
-        {titleLength === 1 ? <span>{option.title}</span> : 
+        {titleLength === 1 ? <span className="menu-label">{option.title}</span> : 
         <>
           {titleArray.map((word, index) => {
-            return <span key={index} className="menu-description">{word}</span>
+            return <span key={index} className="menu-label">{word}</span>
           })}
         </>
         }

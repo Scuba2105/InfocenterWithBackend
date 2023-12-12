@@ -459,6 +459,7 @@ html {
   grid-row: 2 / -1;
   grid-column: 1;
   background: var(--med-theme);
+  width: 100%;
   justify-content: flex-start;
   overflow: hidden;
   margin-bottom: -20px;
@@ -466,7 +467,7 @@ html {
 
 .menu-option, .menu-selected {
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 0 10px 0;
   font-size: 12px;
   width: 100%;
   color:rgb(97, 97, 97);
@@ -474,12 +475,17 @@ html {
 
 .menu-selected {
   cursor: pointer;
+  border-left: 5px solid var(--main-color-accent);
   background-color: var(--med-light-theme);
   color: var(--alternate-color-accent);
 }
 
 .menu-icon {
   margin-bottom: 6px;
+}
+
+.menu-selected .menu-icon, .menu-selected .menu-label {
+  transform: translateX(-2.5px);
 }
 
 .menu-option:hover {
