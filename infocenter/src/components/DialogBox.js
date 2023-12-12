@@ -46,15 +46,15 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                 <>
                     <dialog open id="dialog-background" className="flex-c">
                         <div id="dialog-box">
-                            <div className="dialog-title flex-c" style={{color: "white", backgroundColor: "#fcd303"}}>
-                                <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/warning-icon.jpg`} alt="warning"></img>
+                            <div className="dialog-title flex-c" style={{color: "white", backgroundColor: "#fdc046"}}>
+                                <img className="dialog-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/warning-icon.png`} alt="warning"></img>
                                 <h3>Confirmation to Proceed</h3>
                             </div>
                             <div className={dialogType === "info" ? "dialog-body-info flex-c-col" : "dialog-body flex-c-col"}>
                                 <p>{message}</p>
                                 <div className="confirmation-btn-container flex-c">
-                                    <button className="cancel-btn form-btn-transition" value="default" onClick={() => cancelAndQuitUpdate(cancelUpdate, closeDialog)}>Cancel</button>
-                                    <button className="proceed-btn form-btn-transition" value="default" onClick={() => proceedWithUpdate(proceedUpdate, closeDialog)}>Proceed</button>
+                                    <button className="cancel-btn flex-c form-btn-transition" value="default" onClick={() => cancelAndQuitUpdate(cancelUpdate, closeDialog)}>Cancel</button>
+                                    <button className="proceed-btn flex-c form-btn-transition" value="default" onClick={() => proceedWithUpdate(proceedUpdate, closeDialog)}>Proceed</button>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                             <div className="dialog-title flex-c" style={dialogType === "error" || dialogType === "error-request" ? {color: "white", backgroundColor: "#ed1b2e"} : 
                             dialogType === "info" ? {color: "white", backgroundColor: "#4052c5"} : 
                             {color: "white", backgroundColor: "#fea500"}}>
-                                <img className="info-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
+                                <img className="dialog-icon warning-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
                                 <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType).split("-")[0]} Message`}</h3>
                             </div>
                             <div className={dialogType === "info" ? "dialog-body-info flex-c-col" : dialogType === "error-request" ? "dialog-body-error-request flex-c-col" : "dialog-body flex-c-col"}>
