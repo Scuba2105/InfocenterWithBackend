@@ -69,7 +69,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                         <div id={dialogType === "error-request" ? "dialog-box-error-request" : "dialog-box"}>
                             <div className="dialog-title flex-c" style={dialogType === "error" || dialogType === "error-request" ? {color: "white", backgroundColor: "#ed1b2e"} : 
                             dialogType === "info" ? {color: "white", backgroundColor: "#4052c5"} : 
-                            {color: "white", backgroundColor: "#fea500"}}>
+                            {color: "white", backgroundColor: "#fdc046"}}>
                                 <img className="dialog-icon warning-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
                                 <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType).split("-")[0]} Message`}</h3>
                             </div>

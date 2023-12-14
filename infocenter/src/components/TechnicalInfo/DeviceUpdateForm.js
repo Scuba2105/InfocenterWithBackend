@@ -145,10 +145,10 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 function saveUpdateData(formContainer, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customAccessType, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog) {
     
     // Add the files from the service manual and user manual forms to the formData ref
-    if (selectedOption === 'Service Manual' || selectedOption === 'User Manual') {
+    if (selectedOption === 'ServiceManual' || selectedOption === 'UserManual') {
         const selectedFile = formContainer.querySelector('.file-input');
         if (selectedFile.files.length === 0) {
-            showMessage("warning", `No ${selectedOption} has been provided. Please choose a file and try again.`)
+            showMessage("warning", `No ${selectedOption === 'ServiceManual' ? "Service Manual" : "User Manual"} has been provided. Please choose a file and try again.`)
             return
         }
         else {
@@ -264,7 +264,7 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
             closeDialog();
         }, 1600);
     }
-    else if (selectedOption === "Other Documents") {
+    else if (selectedOption === "OtherDocuments") {
 
         const descriptions = formContainer.querySelectorAll(".other-doc-text-input");
         const fileInputs = formContainer.querySelectorAll(".other-doc-file-upload");
