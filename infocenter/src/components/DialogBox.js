@@ -70,7 +70,7 @@ export function DialogBox({children, dialogOpen, dialogMessage, closeDialog}) {
                             <div className="dialog-title flex-c" style={dialogType === "error" || dialogType === "error-request" ? {color: "white", backgroundColor: "#ed1b2e"} : 
                             dialogType === "info" ? {color: "white", backgroundColor: "#4052c5"} : 
                             {color: "white", backgroundColor: "#fdc046"}}>
-                                <img className="dialog-icon warning-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.jpg`} alt="information"></img>
+                                <img className="dialog-icon warning-icon" src={`https://${serverConfig.host}:${serverConfig.port}/images/${dialogType.split("-")[0]}-icon.png`} alt="information"></img>
                                 <h3>{dialogType === "info" ? "Save Notification" : `${capitaliseFirstLetters(dialogType).split("-")[0]} Message`}</h3>
                             </div>
                             <div className={dialogType === "info" ? "dialog-body-info flex-c-col" : dialogType === "error-request" ? "dialog-body-error-request flex-c-col" : "dialog-body flex-c-col"}>
