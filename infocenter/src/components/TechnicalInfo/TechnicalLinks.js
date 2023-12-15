@@ -39,7 +39,7 @@ function handleLinkMouseOut(setHovered) {
     setHovered(null);
 }
 
-export function TechnicalLinks({selectedData, page, equipmentEditPermissions, updateFormVisible, setUpdateFormVisible, closeUpdate, onLinkClick, queryClient, showMessage, closeDialog}) {
+export function TechnicalLinks({selectedData, page, currentUsername, equipmentEditPermissions, updateFormVisible, setUpdateFormVisible, closeUpdate, onLinkClick, queryClient, showMessage, closeDialog}) {
 
     const [hovered, setHovered] = useState(false);
 
@@ -113,7 +113,7 @@ export function TechnicalLinks({selectedData, page, equipmentEditPermissions, up
                     </div>   
                 </div>
             </div>
-            {updateFormVisible && <DeviceUpdateForm equipmentEditPermissions={equipmentEditPermissions} selectedData={selectedData} page={page} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
+            {updateFormVisible && <DeviceUpdateForm currentUsername={currentUsername} equipmentEditPermissions={equipmentEditPermissions} selectedData={selectedData} page={page} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
         </> 
     );
 }

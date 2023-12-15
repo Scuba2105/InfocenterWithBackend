@@ -376,7 +376,7 @@ function handlemouseOut(setHovered) {
     setHovered(null);
 }
 
-export function DeviceUpdateForm({equipmentEditPermissions, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
+export function DeviceUpdateForm({currentUsername, equipmentEditPermissions, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     // Set the selected option when a device data option is clicked.
     const [selectedOption, setSelectedOption] = useState('ServiceManual')
@@ -399,6 +399,7 @@ export function DeviceUpdateForm({equipmentEditPermissions, selectedData, page, 
     // Attach request type to form data if it is a request by standard user and not an update from an administrator.
     if (!equipmentEditPermissions) {
         formData.append("request-type", "update-request");
+        formData.append("username", currentUsername);
         formData.append("timestamp", Date.now());
     }
 

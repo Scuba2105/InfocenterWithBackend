@@ -137,7 +137,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         if (req.body["request-type"] === "update-request") {
-            cb(null, `${req.body.timestamp}_${file.originalname}`);
+            cb(null, `${req.body.username}_${req.body.timestamp}_${file.originalname}`);
         }
         else {
             cb(null, file.originalname);

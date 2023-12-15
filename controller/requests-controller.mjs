@@ -1,6 +1,7 @@
 import { getRequestsData, writeRequestsData } from "../models/requests-models.mjs";
 import { FileHandlingError, ParsingError } from "../error-handling/file-errors.mjs";
 import { Mutex } from "async-mutex";
+import { convertHospitalName } from "../utils/utils.mjs";
 
 // Assists with preventing race conditions. 
 const requestsDataMutex = new Mutex();
@@ -39,20 +40,33 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             
             // Update the device details if corresponding key exists in form data.
             if (Object.keys(req.files).includes('service-manual')) {
+                const serviceManualFileName = `${req.body.username}_${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`
                 if (updatedDevice.serviceManual) {
-                    updatedDevice.serviceManual.push(`${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`)
+                    updatedDevice.serviceManual.push(serviceManualFileName);
                 }
                 else {
-                    updatedDevice.serviceManual = [`${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`];
+                    updatedDevice.serviceManual = [serviceManualFileName];
                 }
             }
 
             if (Object.keys(req.files).includes('user-manual')) {
+                const userManualFileName = `${req.body.username}_${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`
                 if (updatedDevice.userManual) {
-                    updatedDevice.userManual.push(`${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`)
+                    updatedDevice.userManual.push(userManualFileName)
                 }
                 else {
-                    updatedDevice.userManual = [`${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`];
+                    updatedDevice.userManual = [userManualFileName];
+                }
+            }
+
+            if (Object.keys(req.files).includes('configs')) {
+                const hospital = req.body.hospital;
+                const configName = `${req.body.username}_${req.body.timestamp}_${hospital}_${model}_${req.files.configs[0].originalname}`
+                if (updatedDevice.config) {
+                    updatedDevice.config.push(configName)
+                }
+                else {
+                    updatedDevice.config = [configName];
                 }
             }
 
@@ -69,29 +83,13 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             else {
                 requestsData.push(updatedDevice);
                 updatedRequestsData = requestsData;
-            }            
-
-            const writeResult = await writeRequestsData(__dirname, JSON.stringify(updatedRequestsData)).catch((err) => {
+            }    
+            
+            const writeResult = await writeRequestsData(__dirname, JSON.stringify(updatedRequestsData, null, 2)).catch((err) => {
                 throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-            });;
+            });
         
             // Updated request API to here *******************************************************************.
-            // if (Object.keys(req.files).includes('configs')) {
-            //     const hospital = req.body.hospital;
-            //     const hospitalDirectory = convertHospitalName(hospital);
-            //     const configPath = `/configurations/${hospitalDirectory}/${model}/${req.files.configs[0].originalname}`
-            //     if (Object.keys(updatedDevice.config).includes(hospital)) {
-            //         updatedDevice.config[hospital].push(configPath)
-            //     } 
-            //     else if (updatedDevice.config === "") {
-            //         updatedDevice.config = {};
-            //         updatedDevice.config[hospital] = [configPath];
-            //     }
-            //     else {
-            //         updatedDevice.config[hospital] = [configPath];
-            //     }
-            // }
-
             // if (Object.keys(req.body).includes('software')) {
             //     const softwareData = req.body.software;
             //     const softwareDataArray = softwareData.split('=');
