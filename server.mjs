@@ -12,6 +12,7 @@ import { updateServiceRequestForms } from './controller/forms-templates-controll
 import { updateTestingProgressData, resetTestingProgressData } from './controller/testing-templates-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
 import { handleDeviceUpdateRequest } from './controller/requests-controller.mjs';
+import { FileHandlingError, ParsingError, DBError } from './error-handling/file-errors.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
     getInactiveThermometers, disposeSelectedThermometers } from './controller/thermometers-controller.mjs';
@@ -76,6 +77,10 @@ const storage = multer.diskStorage({
 
         // handle any resource requests in a separate path first as they use same fieldnames as device updates
         if (req.body["request-type"] === "update-request") {
+            if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
+                const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
+                return cb(new Error(`The uploaded file is not of the correct type. Please check the manual is a PDF and try again`));
+            }
             createDirectory(path.join(__dirname, `public/requests/${model}`));
             cb(null, path.join(__dirname, `public/requests/${model}`));
         }
@@ -115,11 +120,11 @@ const storage = multer.diskStorage({
                 cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`));
             }
             else if ((file.fieldname === "service-request-form") && (file.mimetype !== 'application/pdf' || file.mimetype !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype !== 'application/msword')) {
-                return cb(new Error(`The error occurred trying to save the uploaded file because the file extension is incorrect. Please check the manual is a pdf or word document and try again`));    
+                return cb(new Error(`The error occurred trying to save the uploaded file because the file extension is incorrect. Please check the manual is a PDF or word document and try again`));    
             }
             else if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
                 const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
-                return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the manual is a pdf and try again`));
+                return cb(new Error(`The uploaded file is not of the correct type. Please check the manual is a PDF and try again`));
             }
             else if ((file.fieldname === "employee-photo" || file.fieldname === "image-file") && (file.mimetype !== 'image/jpeg' || file.mimetype !== 'image/jpg' || file.mimetype !== 'image/png')) {
                 const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
@@ -176,11 +181,11 @@ app.get("/getData/:staffId", async (req, res, next) => {
 // Define route to update staff or equipment details. 
 app.put("/UpdateEntry/:page", (req, res, next) => {
     cpUpload(req, res, (err) => {
+        const page = req.params.page; 
         if (err) {
             next(err);
         }
         else {
-            const page = req.params.page; 
             if (page === "technical-info") {
                 updateExistingDeviceData(req, res, next, __dirname);  
             }
@@ -346,12 +351,11 @@ app.use((err, req, res, next) => {
     if (res.headersSent) {
       return next(err);
     }
-    console.log(err)
     if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
         res.status(err.httpStatusCode).json({type: "Error", message: err.message});
     }
     else {
-        res.status(400).json({type: "Error", message: `An unexpected error occurred while completing the request. ${err.message}`});
+        res.status(400).json({type: "Error", message: `An  error occurred while completing the request. ${err.message} If the issue persists please contact and administrator`});
     }
 });
 

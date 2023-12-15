@@ -10,6 +10,7 @@ export function getRequestsData(__dirname) {
             else {
                 try {
                     const requestsData = JSON.parse(data);
+                    console.log(requestsData);
                     resolve(requestsData);
                 }
                 catch(err) {

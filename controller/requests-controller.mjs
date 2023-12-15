@@ -30,6 +30,9 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 return entry.model === model && entry.manufacturer === manufacturer;
             })
 
+            // determine if the current device has update requests
+            const modelUpdatesExist = updatedDevice ? true : false;
+
             if (!updatedDevice) {
                 updatedDevice = {model: model, manufacturer: manufacturer};
             }
@@ -53,14 +56,22 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 }
             }
 
-            const updatedRequestsData = requestsData.map((entry) => {
-                if (entry.model === model && entry.manufacturer === manufacturer) {
-                    return updatedDevice
-                }
-                return entry
-            })
+            let updatedRequestsData;
 
-            const writeResult = await writeRequestsData(__dirname, updatedRequestsData).catch((err) => {
+            if (modelUpdatesExist) {
+                updatedRequestsData = requestsData.map((entry) => {
+                    if (entry.model === model && entry.manufacturer === manufacturer) {
+                        return updatedDevice
+                    }
+                    return entry
+                })
+            }
+            else {
+                requestsData.push(updatedDevice);
+                updatedRequestsData = requestsData;
+            }            
+
+            const writeResult = await writeRequestsData(__dirname, JSON.stringify(updatedRequestsData)).catch((err) => {
                 throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });;
         
@@ -166,6 +177,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
     
         }
         catch (err) {
+            console.log(err)
             // Log the route and error message and call error handling middlware.
             console.log({Route: `Update ${req.body.model}`, Error: err.message});
             next(err);
