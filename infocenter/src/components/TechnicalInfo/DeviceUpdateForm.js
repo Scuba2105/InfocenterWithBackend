@@ -399,6 +399,7 @@ export function DeviceUpdateForm({equipmentEditPermissions, selectedData, page, 
     // Attach request type to form data if it is a request by standard user and not an update from an administrator.
     if (!equipmentEditPermissions) {
         formData.append("request-type", "update-request");
+        formData.append("timestamp", Date.now());
     }
 
     const updateData = useRef(formData);

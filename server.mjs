@@ -85,34 +85,34 @@ const storage = multer.diskStorage({
                 cb(null, path.join(__dirname, `public/manuals/service_manuals`))
             }
             else if (file.fieldname === "user-manual" && file.mimetype === 'application/pdf') {
-                cb(null, path.join(__dirname, `public/manuals/user_manuals`))
+                cb(null, path.join(__dirname, `public/manuals/user_manuals`));
             } 
             else if (file.fieldname === "configs") {
                 const hospital = convertHospitalName(req.body.hospital);
-                createDirectory(path.join(__dirname, `public/configurations/${hospital}/${model}`))
-                cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
+                createDirectory(path.join(__dirname, `public/configurations/${hospital}/${model}`));
+                cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`));
             }
             else if (documentsFieldRegex.test(file.fieldname)) {
-                createDirectory(path.join(__dirname, `public/documents/${model}`))
-                cb(null, path.join(__dirname, `public/documents/${model}`))            
+                createDirectory(path.join(__dirname, `public/documents/${model}`));
+                cb(null, path.join(__dirname, `public/documents/${model}`));            
             }  
             else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
-                cb(null, path.join(__dirname, `public/images/equipment`))
+                cb(null, path.join(__dirname, `public/images/equipment`));
             }
             else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
-                cb(null, path.join(__dirname, `public/images/staff`))
+                cb(null, path.join(__dirname, `public/images/staff`));
             }
             else if (file.fieldname === "updated-config-file") {
                 const hospital = convertHospitalName(req.body.hospital);
-                cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
+                cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`));
             }
             else if (file.fieldname === "updated-document") {
-                cb(null, path.join(__dirname, `public/documents/${model}`))
+                cb(null, path.join(__dirname, `public/documents/${model}`));
             } 
             else if ((file.fieldname === "service-request-form") && (file.mimetype === 'application/pdf' || file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype === 'application/msword')) {
                 const staffId = req.params.UserId;
-                createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
-                cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
+                createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`));
+                cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`));
             }
             else if ((file.fieldname === "service-request-form") && (file.mimetype !== 'application/pdf' || file.mimetype !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype !== 'application/msword')) {
                 return cb(new Error(`The error occurred trying to save the uploaded file because the file extension is incorrect. Please check the manual is a pdf or word document and try again`));    
@@ -132,8 +132,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         if (req.body["request-type"] === "update-request") {
-            const timeStamp = Date.now();
-            cb(null, `${timeStamp}_${file.originalname}`);
+            cb(null, `${req.body.timestamp}_${file.originalname}`);
         }
         else {
             cb(null, file.originalname);
