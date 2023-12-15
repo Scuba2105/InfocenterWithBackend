@@ -11,6 +11,7 @@ import { addNewContactData, updateContactData } from './controller/contacts-cont
 import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
 import { updateTestingProgressData, resetTestingProgressData } from './controller/testing-templates-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
+import { handleDeviceUpdateRequest } from './controller/requests-controller.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
     getInactiveThermometers, disposeSelectedThermometers } from './controller/thermometers-controller.mjs';
@@ -43,6 +44,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // set custom route for profile images so response headers can be set to no cache.
+// This allows the avatar and photo to update on change. 
 app.get("/images/staff/:filename", async (req, res, next) => {
     try {
         const filename = req.params.filename;
@@ -67,59 +69,76 @@ app.use(express.json());
 // Used with Multer for storing uploaded files on disk.
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+
+        // Get the model 
         const model = req.body.model ? req.body.model.toLowerCase() : null;
         const documentsFieldRegex = /file[1-4]/;
-        
-        if (file.fieldname === "service-manual" && file.mimetype === 'application/pdf') {
-            cb(null, path.join(__dirname, `public/manuals/service_manuals`))
+
+        // handle any resource requests in a separate path first as they use same fieldnames as device updates
+        if (req.body["request-type"] === "update-request") {
+            createDirectory(path.join(__dirname, `public/requests/${model}`));
+            cb(null, path.join(__dirname, `public/requests/${model}`));
         }
-        else if (file.fieldname === "user-manual" && file.mimetype === 'application/pdf') {
-            cb(null, path.join(__dirname, `public/manuals/user_manuals`))
-        } 
-        else if (file.fieldname === "configs") {
-            const hospital = convertHospitalName(req.body.hospital);
-            createDirectory(path.join(__dirname, `public/configurations/${hospital}/${model}`))
-            cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
-        }
-        else if (documentsFieldRegex.test(file.fieldname)) {
-            createDirectory(path.join(__dirname, `public/documents/${model}`))
-            cb(null, path.join(__dirname, `public/documents/${model}`))            
-        }  
-        else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
-            cb(null, path.join(__dirname, `public/images/equipment`))
-        }
-        else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
-            cb(null, path.join(__dirname, `public/images/staff`))
-        }
-        else if (file.fieldname === "updated-config-file") {
-            const hospital = convertHospitalName(req.body.hospital);
-            cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
-        }
-        else if (file.fieldname === "updated-document") {
-            cb(null, path.join(__dirname, `public/documents/${model}`))
-        } 
-        else if ((file.fieldname === "service-request-form") && (file.mimetype === 'application/pdf' || file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype === 'application/msword')) {
-            const staffId = req.params.UserId;
-            createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
-            cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
-        }
-        else if ((file.fieldname === "service-request-form") && (file.mimetype !== 'application/pdf' || file.mimetype !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype !== 'application/msword')) {
-            return cb(new Error(`The error occurred trying to save the uploaded file because the file extension is incorrect. Please check the manual is a pdf or word document and try again`));    
-        }
-        else if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
-            const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
-            return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the manual is a pdf and try again`));
-        }
-        else if ((file.fieldname === "employee-photo" || file.fieldname === "image-file") && (file.mimetype !== 'image/jpeg' || file.mimetype !== 'image/jpg' || file.mimetype !== 'image/png')) {
-            const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
-            return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the image file is either jpg or png and try again`));
-        }   
         else {
-            return cb(new Error('An unknown error occurred with the file upload. Please try again and contact the administrator if the issue persists'))
-        } 
+            
+            if (file.fieldname === "service-manual" && file.mimetype === 'application/pdf') {
+                cb(null, path.join(__dirname, `public/manuals/service_manuals`))
+            }
+            else if (file.fieldname === "user-manual" && file.mimetype === 'application/pdf') {
+                cb(null, path.join(__dirname, `public/manuals/user_manuals`))
+            } 
+            else if (file.fieldname === "configs") {
+                const hospital = convertHospitalName(req.body.hospital);
+                createDirectory(path.join(__dirname, `public/configurations/${hospital}/${model}`))
+                cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
+            }
+            else if (documentsFieldRegex.test(file.fieldname)) {
+                createDirectory(path.join(__dirname, `public/documents/${model}`))
+                cb(null, path.join(__dirname, `public/documents/${model}`))            
+            }  
+            else if (file.fieldname === "image-file" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
+                cb(null, path.join(__dirname, `public/images/equipment`))
+            }
+            else if (file.fieldname === "employee-photo" && (file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png')) {
+                cb(null, path.join(__dirname, `public/images/staff`))
+            }
+            else if (file.fieldname === "updated-config-file") {
+                const hospital = convertHospitalName(req.body.hospital);
+                cb(null, path.join(__dirname, `public/configurations/${hospital}/${model}`))
+            }
+            else if (file.fieldname === "updated-document") {
+                cb(null, path.join(__dirname, `public/documents/${model}`))
+            } 
+            else if ((file.fieldname === "service-request-form") && (file.mimetype === 'application/pdf' || file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype === 'application/msword')) {
+                const staffId = req.params.UserId;
+                createDirectory(path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
+                cb(null, path.join(__dirname, `public/forms-templates/service-requests/${staffId}`))
+            }
+            else if ((file.fieldname === "service-request-form") && (file.mimetype !== 'application/pdf' || file.mimetype !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype !== 'application/msword')) {
+                return cb(new Error(`The error occurred trying to save the uploaded file because the file extension is incorrect. Please check the manual is a pdf or word document and try again`));    
+            }
+            else if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
+                const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
+                return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the manual is a pdf and try again`));
+            }
+            else if ((file.fieldname === "employee-photo" || file.fieldname === "image-file") && (file.mimetype !== 'image/jpeg' || file.mimetype !== 'image/jpg' || file.mimetype !== 'image/png')) {
+                const fileType = capitaliseFirstLetters(file.fieldname.split('-').join(' '));
+                return cb(new Error(`An error occurred trying to save the uploaded ${fileType}. Please check the image file is either jpg or png and try again`));
+            }   
+            else {
+                return cb(new Error('An unknown error occurred with the file upload. Please try again and contact the administrator if the issue persists'))
+            } 
+        }
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        if (req.body["request-type"] === "update-request") {
+            const timeStamp = Date.now();
+            cb(null, `${timeStamp}_${file.originalname}`);
+        }
+        else {
+            cb(null, file.originalname);
+        }
+        
     }
   })
 
@@ -169,6 +188,18 @@ app.put("/UpdateEntry/:page", (req, res, next) => {
             else if (page === "staff") {
                 updateExistingStaffData(req, res, next, __dirname); 
             }
+        }
+    })
+})
+
+// Define the route for handling the device resource update requests.
+app.put("/RequestDeviceUpdate", (req, res, next) => {
+    cpUpload(req, res, (err) => {
+        if (err) {
+            next(err);
+        }
+        else {
+            handleDeviceUpdateRequest(req, res, next, __dirname);
         }
     })
 })

@@ -2,7 +2,6 @@ import { TechnicalLinks } from "./TechnicalInfo/TechnicalLinks";
 import { StaffDetails } from "./Staff/StaffDetails";
 import { useUser, useDevice } from "./StateStore";
 import { LinkModal } from "./TechnicalInfo/LinkModal";
-import { UpdateResourceRequest } from "./TechnicalInfo/UpdateResourceRequest";
 import { ModalSkeleton } from "./ModalSkeleton";
 import { useState } from "react"
 import { AddEditStaff } from "./Staff/AddEditStaff";
@@ -80,8 +79,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
     const [modalVisible, setModalVisible] = useState(false);
     const [addUpdateFormVisible, setAddUpdateFormVisible] = useState(false);
     const [updateFormVisible, setUpdateFormVisible] = useState(false);
-    const [requestFormVisible, setRequestFormVisible] = useState(false);
-    
+        
     const currentDataSet = pageData;
 
     const selectedData = currentDataSet.find((entry) => {
@@ -104,10 +102,10 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                     {page === "technical-info" && <div id="summary-header-aligner"></div>}
                     <h2>{page === 'staff' ? "Employee Summary" : page === "technical-info" ? "Equipment Summary" : "Department Contacts"}</h2>
                     {!workshops.includes(selectedData.name) && (staffEditPermissions || currentUser.user === selectedData.name) && page === "staff" && <Tooltip content="Edit Employee" xPos="-19px" yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => openAddUpdateForm(setAddUpdateFormVisible)} btnColor="#D4FB7C" />}
-                    {page === "technical-info" && <Tooltip content={equipmentEditPermissions ? "Edit Device" : "Send Request"} xPos={equipmentEditPermissions ? "-12px" : "-16px"} yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={equipmentEditPermissions ? () => showDeviceUpdate(setUpdateFormVisible) : () => openRequestForm(setRequestFormVisible)} btnColor="#D4FB7C" />}
+                    {page === "technical-info" && <Tooltip content={equipmentEditPermissions ? "Edit Device" : "Send Request"} xPos={equipmentEditPermissions ? "-12px" : "-16px"} yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} btnColor="#D4FB7C" />}
                 </div>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.staffId} />}                    
-                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
+                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} equipmentEditPermissions={equipmentEditPermissions} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {page === "technical-info" && selectedData.vendor && <div className="vendor-link flex-c">
                     <button className="vendor-button flex-c form-btn-transition" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size="2.31vh" color="white"></VendorArrow></button> 
                 </div>}
@@ -119,11 +117,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                     <ModalSkeleton selectedData={selectedData} closeModal={() => closeModal(setModalVisible)} type={equipmentEditPermissions ? modalVisible.type : "Resource Update Request"} page={page}>
                         <LinkModal selectedData={selectedData} modalType={modalVisible.type} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
                     </ModalSkeleton>}
-                {requestFormVisible && page === 'technical-info' && 
-                <ModalSkeleton selectedData={selectedData} closeModal={() => closeRequestForm(setRequestFormVisible)} type="Resource Update Request" page={page}>
-                    <UpdateResourceRequest selectedData={selectedData} /> 
-                </ModalSkeleton>}
-            </div> 
+            </div>
         </div>
     )
 }
