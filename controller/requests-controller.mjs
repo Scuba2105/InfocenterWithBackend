@@ -39,6 +39,8 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             }
             
             // Update the device details if corresponding key exists in form data.
+
+            // Add any service manual requests to the updated request data
             if (Object.keys(req.files).includes('service-manual')) {
                 const serviceManualFileName = `${req.body.username}_${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`
                 if (updatedDevice.serviceManual) {
@@ -49,6 +51,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 }
             }
 
+            // Add any user manual requests to the updated request data
             if (Object.keys(req.files).includes('user-manual')) {
                 const userManualFileName = `${req.body.username}_${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`
                 if (updatedDevice.userManual) {
@@ -59,6 +62,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 }
             }
 
+            // Add any config requests to the updated request data.
             if (Object.keys(req.files).includes('configs')) {
                 const hospital = req.body.hospital;
                 const configName = `${req.body.username}_${req.body.timestamp}_${hospital}_${model}_${req.files.configs[0].originalname}`
@@ -67,6 +71,22 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 }
                 else {
                     updatedDevice.config = [configName];
+                }
+            }
+
+            // Add any software reequests to the updated request data.
+            if (Object.keys(req.body).includes('software')) {
+                const softwareData = req.body.software;
+                const softwareDataArray = softwareData.split('=');
+                const softwareType = softwareDataArray[0];
+                const softwareLocation = softwareDataArray[1];
+                const softwareString = `${req.body.username}_${req.body.timestamp}_${softwareType}: ${softwareLocation}`;
+                    
+                if (updatedDevice.software) {
+                    updatedDevice.software.push(softwareString);
+                }
+                else {
+                    updatedDevice.software = [softwareString];
                 }
             }
 
@@ -90,20 +110,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             });
         
             // Updated request API to here *******************************************************************.
-            // if (Object.keys(req.body).includes('software')) {
-            //     const softwareData = req.body.software;
-            //     const softwareDataArray = softwareData.split('=');
-            //     const softwareType = softwareDataArray[0];
-            //     const softwareLocation = softwareDataArray[1];
                     
-            //     if (typeof updatedDevice.software !== "object") {
-            //         updatedDevice.software = {[softwareType]: softwareLocation};
-            //     }
-            //     else {
-            //         updatedDevice.software[softwareType] = softwareLocation;
-            //     }
-            // }
-        
             // if (documentKeys.length !== 0) {
             //     if (typeof updatedDevice.documents === 'string') {
             //         const documentsInfo = [];
@@ -171,7 +178,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             // });
 
             // // Send the success response message.
-            res.json({type: "Success", message: 'Data Upload Successful'});
+            res.json({type: "Success", message: 'Update Request Successfully Submitted'});
     
         }
         catch (err) {

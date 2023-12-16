@@ -129,7 +129,7 @@ async function sendFormData(equipmentEditPermissions, updateData, selectedData, 
             queryClient.invalidateQueries('dataSource');
 
             closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
+            showMessage("info", equipmentEditPermissions ? 'Resources have been successfully updated!' : 'Update Request Successfully Submitted!');
             setTimeout(() => {
                 closeDialog();
                 closeUpdate(setUpdateFormVisible);
