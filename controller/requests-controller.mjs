@@ -123,7 +123,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 // If password data doesn't exist create the password array and enter the new data object.
                 if (!passwordData) {
                     updatedDevice.passwords = [];
-                    updatedDevice.passwords.push({requestor: username, timestamp: timestamp, type: restrictedAccessType, values: [passwordDataObject]});
+                    updatedDevice.passwords.push({type: restrictedAccessType, values: [{requestor: username, timestamp: timestamp, passwordData: passwordDataObject}]});
                 }
                 else {
                     
@@ -136,10 +136,10 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                     // If restricted access type array already exists push the new data to the values array otherwise 
                     // push the new object to the password data.
                     if (!existingRestrictedAccessData) {
-                        updatedDevice.passwords.push({requestor: username, timestamp: timestamp, type: restrictedAccessType, values: [passwordDataObject]});
+                        updatedDevice.passwords.push({type: restrictedAccessType, values: [{requestor: username, timestamp: timestamp, passwordData: passwordDataObject}]});
                     }
                     else {
-                        existingRestrictedAccessData.values.push(passwordDataObject);
+                        existingRestrictedAccessData.values.push({requestor: username, timestamp: timestamp, passwordData: passwordDataObject});
                         const updatedPasswordsData = passwordData.map((entry) => {
                             if (entry.type === restrictedAccessType) {
                                 return existingRestrictedAccessData
@@ -170,31 +170,11 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });
         
-            // Updated request API to here *******************************************************************.
-                    
-            
-            
-            // // Replace the old device data in the DeviceData array with the new data that has been entered 
-            // const updatedDeviceData = requestsData.map((entry) => {
-            //     if (entry.model === model && entry.manufacturer === manufacturer) {
-            //         return updatedDevice
-            //     }
-            //     else {
-            //         return entry;
-            //     }
-            // })
-
-            // // Write the data to file.
-            // const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)).catch((err) => {
-            //     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-            // });
-
-            // // Send the success response message.
+            // Send the success response message.
             res.json({type: "Success", message: 'Update Request Successfully Submitted'});
     
         }
         catch (err) {
-            console.log(err)
             // Log the route and error message and call error handling middlware.
             console.log({Route: `Update ${req.body.model}`, Error: err.message});
             next(err);
