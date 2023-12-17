@@ -450,7 +450,7 @@ export function DeviceUpdateForm({currentUsername, equipmentEditPermissions, sel
                     <DisplayOption equipmentEditPermissions={equipmentEditPermissions} selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customAccessType, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
-                        <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(equipmentEditPermissions, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
+                        <FormButton content={equipmentEditPermissions ? "Upload" : "Send Request"} btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(equipmentEditPermissions, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                     </div>                    
                 </div>
             </div>                

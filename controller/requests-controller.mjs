@@ -110,6 +110,47 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 }
             }
 
+            //  Add any uploaded password data to the updated request object 
+            if (Object.keys(req.body).includes("restricted-access-type")) {
+                 
+                // Create the new password data object
+                const restrictedAccessType = `${req.body["restricted-access-type"]}`;
+                const passwordDataObject = `${req.body["credential-type"]}: ${req.body["credential-value"]}`;
+
+                // Get the existing password data.
+                const passwordData = updatedDevice.passwords;
+
+                // If password data doesn't exist create the password array and enter the new data object.
+                if (!passwordData) {
+                    updatedDevice.passwords = [];
+                    updatedDevice.passwords.push({requestor: username, timestamp: timestamp, type: restrictedAccessType, values: [passwordDataObject]});
+                }
+                else {
+                    
+                    // Get the existing password data for the restricted access if it exists. Devices can have multiple entries for each
+                    // access type such as password, username, or different software revision passwords.
+                    const existingRestrictedAccessData = passwordData.find((entry) => {
+                        return entry.type === restrictedAccessType;
+                    })
+
+                    // If restricted access type array already exists push the new data to the values array otherwise 
+                    // push the new object to the password data.
+                    if (!existingRestrictedAccessData) {
+                        updatedDevice.passwords.push({requestor: username, timestamp: timestamp, type: restrictedAccessType, values: [passwordDataObject]});
+                    }
+                    else {
+                        existingRestrictedAccessData.values.push(passwordDataObject);
+                        const updatedPasswordsData = passwordData.map((entry) => {
+                            if (entry.type === restrictedAccessType) {
+                                return existingRestrictedAccessData
+                            }
+                            return entry;
+                        })
+                        updatedDevice.passwords = updatedPasswordsData;
+                    }
+                }
+            }
+
             let updatedRequestsData;
 
             if (modelUpdatesExist) {
@@ -131,39 +172,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
         
             // Updated request API to here *******************************************************************.
                     
-            // if (Object.keys(req.body).includes("restricted-access-type")) {
-                 
-            //     // Create the new password data object
-            //     const restrictedAccessType = `${req.body["restricted-access-type"]}`;
-            //     const passwordDataObject = `${req.body["credential-type"]}: ${req.body["credential-value"]}`;
-
-            //     // Get the existing password data.
-            //     const passwordData = updatedDevice.passwords;
-
-            //     // If password data doesn't exist create the password array and enter the new data object.
-            //     if (passwordData === "" || passwordData === undefined) {
-            //         updatedDevice.passwords = [];
-            //         updatedDevice.passwords.push({type: restrictedAccessType, values: [passwordDataObject]});
-            //     }
-            //     else {
-                    
-            //         // Get the existing password data for the restricted access if it exists. Devices can have multiple entries for each
-            //         // access type such as password, username, or different software revision passwords.
-            //         const existingRestrictedAccessData = passwordData.find((entry) => {
-            //             return entry.type === restrictedAccessType;
-            //         })
-
-            //         // If restricted access type array already exists push the new data to the values array otherwise 
-            //         // push the new object to the password data.
-            //         if (!existingRestrictedAccessData) {
-            //             passwordData.push({type: restrictedAccessType, values: [passwordDataObject]});
-            //         }
-            //         else {
-            //             existingRestrictedAccessData.values.push(passwordDataObject);
-            //         }
-            //     }
-                
-            // }
+            
             
             // // Replace the old device data in the DeviceData array with the new data that has been entered 
             // const updatedDeviceData = requestsData.map((entry) => {
