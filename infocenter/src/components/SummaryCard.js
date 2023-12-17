@@ -54,14 +54,6 @@ function closeUpdate(setUpdateFormVisible) {
     setUpdateFormVisible(false)
 }
 
-function openRequestForm(setRequestFormVisible) {
-    setRequestFormVisible(true);
-}
-
-function closeRequestForm(setRequestFormVisible) {
-    setRequestFormVisible(false);
-}
-
 function renderContactsPage(setPage, setVendor, setCurrentDevice, currentModel, currentVendor) {
     setPage('contacts');
     setVendor(currentVendor);
@@ -115,7 +107,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                         <AddEditStaff type="update" page={page} selectedData={selectedData} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} />
                     </ModalSkeleton>}
                 {modalVisible.visible && page === 'technical-info' && 
-                    <ModalSkeleton selectedData={selectedData} closeModal={() => closeModal(setModalVisible)} type={equipmentEditPermissions ? modalVisible.type : "Resource Update Request"} page={page}>
+                    <ModalSkeleton selectedData={selectedData} closeModal={() => closeModal(setModalVisible)} type={modalVisible.type} page={page}>
                         <LinkModal selectedData={selectedData} modalType={modalVisible.type} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog} /> 
                     </ModalSkeleton>}
             </div>

@@ -42,51 +42,69 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
 
             // Add any service manual requests to the updated request data
             if (Object.keys(req.files).includes('service-manual')) {
-                const serviceManualFileName = `${req.body.username}_${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`
+                const serviceManualRequestObject = {requestor: req.body.username, timestamp: req.body.timestamp, fileName: `${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`};
                 if (updatedDevice.serviceManual) {
-                    updatedDevice.serviceManual.push(serviceManualFileName);
+                    updatedDevice.serviceManual.push(serviceManualRequestObject);
                 }
                 else {
-                    updatedDevice.serviceManual = [serviceManualFileName];
+                    updatedDevice.serviceManual = [serviceManualRequestObject];
                 }
             }
 
             // Add any user manual requests to the updated request data
             if (Object.keys(req.files).includes('user-manual')) {
-                const userManualFileName = `${req.body.username}_${req.body.timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`
+                const userManualRequestObject = {requestor: req.body.username, timestamp: req.body.timestamp, fileName: `${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`};
                 if (updatedDevice.userManual) {
-                    updatedDevice.userManual.push(userManualFileName)
+                    updatedDevice.userManual.push(userManualRequestObject)
                 }
                 else {
-                    updatedDevice.userManual = [userManualFileName];
+                    updatedDevice.userManual = [userManualRequestObject];
                 }
             }
 
             // Add any config requests to the updated request data.
             if (Object.keys(req.files).includes('configs')) {
                 const hospital = req.body.hospital;
-                const configName = `${req.body.username}_${req.body.timestamp}_${hospital}_${model}_${req.files.configs[0].originalname}`
+                const configRequestObject = {requestor: req.body.username, timestamp: req.body.timestamp, hospital: hospital, model: model, configName: req.files.configs[0].originalname};
                 if (updatedDevice.config) {
-                    updatedDevice.config.push(configName)
+                    updatedDevice.config.push(configRequestObject)
                 }
                 else {
-                    updatedDevice.config = [configName];
+                    updatedDevice.config = [configRequestObject];
                 }
             }
 
-            // Add any software reequests to the updated request data.
+            // Add any software requests to the updated request data.
             if (Object.keys(req.body).includes('software')) {
                 const softwareData = req.body.software;
                 const softwareDataArray = softwareData.split('=');
                 const softwareType = softwareDataArray[0];
                 const softwareLocation = softwareDataArray[1];
-                const softwareString = `${req.body.username}_${req.body.timestamp}_${softwareType}: ${softwareLocation}`;
+                const softwareRequestObject = {requestor: req.body.username, timestamp: req.body.timestamp, softwareType: softwareType, softwareLocation: softwareLocation};
                     
                 if (updatedDevice.software) {
-                    updatedDevice.software.push(softwareString);
+                    updatedDevice.software.push(softwareRequestObject);
                 }
                 else {
-                    updatedDevice.software = [softwareString];
+                    updatedDevice.software = [softwareRequestObject];
+                }
+            }
+
+            // Add any uploaded 'Other Documents' to the uploaded request data 
+            if (documentKeys.length !== 0) {
+                if (!updatedDevice.documents) {
+                    const documentsInfo = [];
+                    documentKeys.forEach((key, index) => {
+                        const keyObjectDetails = {requestor: req.body.username, timestamp: req.body.timestamp, label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
+                        documentsInfo.push(keyObjectDetails);
+                    });
+                    updatedDevice.documents = documentsInfo;
+                }
+                else {
+                    documentKeys.forEach((key, index) => {
+                        const keyObjectDetails = {requestor: req.body.username, timestamp: req.body.timestamp, label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
+                        updatedDevice.documents.push(keyObjectDetails);
+                    });
                 }
             }
 
@@ -111,23 +129,6 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
         
             // Updated request API to here *******************************************************************.
                     
-            // if (documentKeys.length !== 0) {
-            //     if (typeof updatedDevice.documents === 'string') {
-            //         const documentsInfo = [];
-            //         documentKeys.forEach((key, index) => {
-            //             const keyObjectDetails = {label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
-            //             documentsInfo.push(keyObjectDetails);
-            //         });
-            //         updatedDevice.documents = documentsInfo;
-            //     }
-            //     else {
-            //         documentKeys.forEach((key, index) => {
-            //             const keyObjectDetails = {label: req.body[key], filePath: `/documents/${model}/${req.files[`file${index + 1}`][0].originalname}`} 
-            //             updatedDevice.documents.push(keyObjectDetails);
-            //         });
-            //     }
-            // }
-
             // if (Object.keys(req.body).includes("restricted-access-type")) {
                  
             //     // Create the new password data object

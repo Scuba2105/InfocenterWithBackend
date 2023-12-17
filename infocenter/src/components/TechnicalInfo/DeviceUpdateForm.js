@@ -409,7 +409,7 @@ export function DeviceUpdateForm({currentUsername, equipmentEditPermissions, sel
     const formContainer = useRef(null)
         
     return (
-        <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
+        <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type={equipmentEditPermissions ? "Resource Update" : "Resource Update Request"} page={page}>
             <div className="update-form-display">
                 <div className="update-options flex-c">
                     <div className={selectedOption === 'ServiceManual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("ServiceManual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
@@ -447,7 +447,7 @@ export function DeviceUpdateForm({currentUsername, equipmentEditPermissions, sel
                     </div>                   
                 </div>
                 <div className="display-section" ref={formContainer}>
-                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
+                    <DisplayOption equipmentEditPermissions={equipmentEditPermissions} selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customAccessType, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                         <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(equipmentEditPermissions, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
