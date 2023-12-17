@@ -6,6 +6,30 @@ import { convertHospitalName } from "../utils/utils.mjs";
 // Assists with preventing race conditions. 
 const requestsDataMutex = new Mutex();
 
+export function getAllRequestsData(req, res, next, __dirname) {
+    requestsDataMutex.runExclusive(async () => {
+        try {
+            const requestsData = await getRequestsData(__dirname).catch((err) => {
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
+            });
+             
+            // Send the requests data as the response.
+            res.json(JSON.stringify(requestsData));
+    
+        }
+        catch (err) {
+            // Log the route and error message and call error handling middlware.
+            console.log({Route: `Update ${req.body.model}`, Error: err.message});
+            next(err);
+        }
+    })
+}
+
 export function handleDeviceUpdateRequest(req, res, next, __dirname) {
     // Need to add the data to the requests json file for storage.
     requestsDataMutex.runExclusive(async () => {
@@ -182,3 +206,4 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
     })
     
 }
+

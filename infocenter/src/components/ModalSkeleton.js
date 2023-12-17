@@ -2,7 +2,7 @@ import { capitaliseFirstLetters, delayFunctionInitiation } from "../utils/utils"
 import { serverConfig } from "../server";
 
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
-'disposal', 'change-password', "update-staff-contact", "update-vendor-contact", "edit-existing-documents", "service-request-forms",
+'disposal', 'change-password', "view-requests", "update-staff-contact", "update-vendor-contact", "edit-existing-documents", "service-request-forms",
 "Resource Update Request"];
 
 const onCallPageHeadings = {"my-roster": "Upcoming On-Call Duties", "staff-roster": "On-Call Roster", "edit-roster": "Edit On-Call Roster", "confirm-roster": "Confirm On-Call Roster",
@@ -22,8 +22,8 @@ function getFormHeading(page, type, selectedData, name) {
         const heading = type === "check" ? "Check Genius 3 Returns" : `Manage Genius 3 Disposals`
         return heading;
     }
-    else if (type === "change-password") {
-        return "Change Password";
+    else if (type === "change-password" || type === "view-requests") {
+        return type === "change-password" ? "Change Password" : "View Requests";
     }
     else if (type === "new-department-contact") {
         return "Add New Department Contact";

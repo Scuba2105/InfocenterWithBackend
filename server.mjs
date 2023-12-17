@@ -11,7 +11,7 @@ import { addNewContactData, updateContactData } from './controller/contacts-cont
 import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
 import { updateTestingProgressData, resetTestingProgressData } from './controller/testing-templates-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
-import { handleDeviceUpdateRequest } from './controller/requests-controller.mjs';
+import { handleDeviceUpdateRequest, getAllRequestsData } from './controller/requests-controller.mjs';
 import { FileHandlingError, ParsingError, DBError } from './error-handling/file-errors.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
@@ -298,6 +298,11 @@ app.put('/ResetTestingProgress', (req, res, next) => {
 // Define route to update on-call details. 
 app.post('/OnCall/:operation', (req, res, next) => {
     updateOnCallData(req, res, next, __dirname); 
+})
+
+// Define the route for getting requests data
+app.get('/GetRequestsData', (req, res, next) => {
+    getAllRequestsData(req, res, next, __dirname); 
 })
 
 // define route for processing Genius 3 thermometers
