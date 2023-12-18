@@ -49,7 +49,16 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
         <>
             <ModalSkeleton type="view-requests" closeModal={closeModal}>
                 <div className="modal-display">
-                    View Requests Display
+                    {requests.map((request, index) => {
+                        const ms = request.timestamp;
+                        const requestDate = new Date(Number(ms))
+                        const reqDateString = requestDate.toLocaleDateString();
+                        return (
+                            <div key={`request-${index}`}>
+                                <span>{`${request.model}__${request.manufacturer}__${request.requestor}__${request.requestorId}__${reqDateString}`}</span>
+                            </div>
+                        )
+                    })}
                 </div>
             </ModalSkeleton>
         </>

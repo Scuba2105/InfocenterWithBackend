@@ -80,7 +80,6 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
     
     // Get user state from Zustand state
     const currentUser = useUser((state) => state.userCredentials);
-    const currentUsername = currentUser.user;
     const staffEditPermissions = (currentUser.permissions === "admin" || currentUser.user === selectedData.name)
     const equipmentEditPermissions = currentUser.permissions === "admin";
     
@@ -98,7 +97,7 @@ export function SummaryCard({page, setPage, pageData, selectedEntry, setVendor, 
                     {page === "technical-info" && <Tooltip content={equipmentEditPermissions ? "Edit Device" : "Send Request"} xPos={equipmentEditPermissions ? "-12px" : "-16px"} yPos="-45px" btnTranslateX="-20px" ButtonComponent={ButtonComponent} onClick={() => showDeviceUpdate(setUpdateFormVisible)} btnColor="#D4FB7C" />}
                 </div>
                 {page === 'staff' && <StaffDetails key={selectedData.name} selectedData={selectedData} user={currentUser.staffId} />}                    
-                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} currentUsername={currentUsername} equipmentEditPermissions={equipmentEditPermissions} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
+                {page === 'technical-info' && <TechnicalLinks key={selectedData.model} selectedData={selectedData} page={page} currentUser={currentUser} equipmentEditPermissions={equipmentEditPermissions} updateFormVisible={updateFormVisible} setUpdateFormVisible={setUpdateFormVisible} closeUpdate={closeUpdate} onLinkClick={(e) => onLinkClick(e, selectedData, setModalVisible)} queryClient={queryClient} showMessage={showMessage} closeDialog={closeDialog}/>}
                 {page === "technical-info" && selectedData.vendor && <div className="vendor-link flex-c">
                     <button className="vendor-button flex-c form-btn-transition" onClick={() => renderContactsPage(setPage, setVendor, setCurrentDevice, selectedData.model, selectedData.vendor)}>View Vendor Contacts <VendorArrow size="2.31vh" color="white"></VendorArrow></button> 
                 </div>}
