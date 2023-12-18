@@ -1,4 +1,5 @@
 import { ModalSkeleton } from "./ModalSkeleton"
+import { serverConfig } from "../server";
 
 function generateData(requestsData) {
     const formattedRequestData = [];
@@ -55,6 +56,9 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
                         const reqDateString = requestDate.toLocaleDateString();
                         return (
                             <div key={`request-${index}`}>
+                                <object data={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${request.requestorId}.${request.staffPhotoExtension}`} style={{width: 50 + 'px', height: 50 + 'px'}}>
+                                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/blank-profile.png`} alt="Fallback" style={{width: 50 + 'px', height: 50 + 'px'}}></img>
+                                </object>
                                 <span>{`${request.model}__${request.manufacturer}__${request.requestor}__${request.requestorId}__${reqDateString}`}</span>
                             </div>
                         )

@@ -48,6 +48,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             const manufacturer = req.body.manufacturer;
             const username = req.body.username;
             const staffId = req.body.staffId;
+            const staffPhotoExtension = req.body.fileExtension;
             const timestamp = req.body.timestamp;
             const documentKeys = Object.keys(req.body).filter((key) => {
                 return /description[1-4]/.test(key);
@@ -69,7 +70,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
 
             // Add any service manual requests to the updated request data
             if (Object.keys(req.files).includes('service-manual')) {
-                const serviceManualRequestObject = {requestor: username, requestorId: staffId, timestamp: timestamp, filePath: `/requests/${model}/${username}_${timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`};
+                const serviceManualRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, filePath: `/requests/${model}/${username}_${timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`};
                 if (updatedDevice.serviceManual) {
                     updatedDevice.serviceManual.push(serviceManualRequestObject);
                 }
@@ -80,7 +81,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
 
             // Add any user manual requests to the updated request data
             if (Object.keys(req.files).includes('user-manual')) {
-                const userManualRequestObject = {requestor: username, requestorId: staffId, timestamp: timestamp, filePath: `/requests/${model}/${username}_${timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`};
+                const userManualRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, filePath: `/requests/${model}/${username}_${timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_user_manual.pdf`};
                 if (updatedDevice.userManual) {
                     updatedDevice.userManual.push(userManualRequestObject)
                 }
@@ -92,7 +93,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             // Add any config requests to the updated request data.
             if (Object.keys(req.files).includes('configs')) {
                 const hospital = req.body.hospital;
-                const configRequestObject = {requestor: username, requestorId: staffId, timestamp: timestamp, hospital: hospital, model: model, configPath: `/requests/${model}/${username}_${timestamp}_${req.files.configs[0].originalname}`};
+                const configRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, hospital: hospital, model: model, configPath: `/requests/${model}/${username}_${timestamp}_${req.files.configs[0].originalname}`};
                 if (updatedDevice.config) {
                     updatedDevice.config.push(configRequestObject)
                 }
@@ -107,7 +108,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 const softwareDataArray = softwareData.split('=');
                 const softwareType = softwareDataArray[0];
                 const softwareLocation = softwareDataArray[1];
-                const softwareRequestObject = {requestor: username, requestorId: staffId, timestamp: timestamp, softwareType: softwareType, softwareLocation: softwareLocation};
+                const softwareRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, softwareType: softwareType, softwareLocation: softwareLocation};
                     
                 if (updatedDevice.software) {
                     updatedDevice.software.push(softwareRequestObject);
@@ -122,14 +123,14 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 if (!updatedDevice.documents) {
                     const documentsInfo = [];
                     documentKeys.forEach((key, index) => {
-                        const keyObjectDetails = {requestor: username, requestorId: staffId, timestamp: timestamp, label: req.body[key], filePath: `/requests/${model}/${username}_${timestamp}_${req.files[`file${index + 1}`][0].originalname}`} 
+                        const keyObjectDetails = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, label: req.body[key], filePath: `/requests/${model}/${username}_${timestamp}_${req.files[`file${index + 1}`][0].originalname}`} 
                         documentsInfo.push(keyObjectDetails);
                     });
                     updatedDevice.documents = documentsInfo;
                 }
                 else {
                     documentKeys.forEach((key, index) => {
-                        const keyObjectDetails = {requestor: username, requestorId: staffId, timestamp: timestamp, label: req.body[key], filePath: `/requests/${model}/${username}_${timestamp}_${req.files[`file${index + 1}`][0].originalname}`} 
+                        const keyObjectDetails = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, label: req.body[key], filePath: `/requests/${model}/${username}_${timestamp}_${req.files[`file${index + 1}`][0].originalname}`} 
                         updatedDevice.documents.push(keyObjectDetails);
                     });
                 }
@@ -148,7 +149,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                 // If password data doesn't exist create the password array and enter the new data object.
                 if (!passwordData) {
                     updatedDevice.passwords = [];
-                    updatedDevice.passwords.push({type: restrictedAccessType, values: [{requestor: username, requestorId: staffId, timestamp: timestamp, passwordData: passwordDataObject}]});
+                    updatedDevice.passwords.push({type: restrictedAccessType, values: [{requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, passwordData: passwordDataObject}]});
                 }
                 else {
                     
@@ -161,10 +162,10 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                     // If restricted access type array already exists push the new data to the values array otherwise 
                     // push the new object to the password data.
                     if (!existingRestrictedAccessData) {
-                        updatedDevice.passwords.push({type: restrictedAccessType, values: [{requestor: username, requestorId: staffId, timestamp: timestamp, passwordData: passwordDataObject}]});
+                        updatedDevice.passwords.push({type: restrictedAccessType, values: [{requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, passwordData: passwordDataObject}]});
                     }
                     else {
-                        existingRestrictedAccessData.values.push({requestor: username, requestorId: staffId, timestamp: timestamp, passwordData: passwordDataObject});
+                        existingRestrictedAccessData.values.push({requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, passwordData: passwordDataObject});
                         const updatedPasswordsData = passwordData.map((entry) => {
                             if (entry.type === restrictedAccessType) {
                                 return existingRestrictedAccessData

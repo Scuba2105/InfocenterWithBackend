@@ -401,6 +401,7 @@ export function DeviceUpdateForm({currentUser, equipmentEditPermissions, selecte
         formData.append("request-type", "update-request");
         formData.append("username", currentUser.user);
         formData.append("staffId", currentUser.staffId);
+        formData.append("fileExtension", currentUser.imageType);
         formData.append("timestamp", Date.now());
     }
 
