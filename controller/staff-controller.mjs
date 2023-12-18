@@ -22,7 +22,8 @@ const inputsRegexLookup = {name: /^[a-z\s,.'-]+$/i, id: /^[0-9]{8}$/i, workshop:
                           personalMobile: /^0[0-9]{9}$|^[0-9]{4}\s[0-9]{3}\s[0-9]{3}$|^\s*$/,
                           hostname: /^[A-Z]{3}BME[0-9]{3}|^\s*$/, 
                           email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                          "existing-id": /^[0-9]{8}$/i};
+                          "existing-id": /^[0-9]{8}$/i,
+                          extension: /jpg|png/};
 
 export async function addNewStaffData(req, res, next, __dirname) {
     staffDataMutex.runExclusive(async () => {
@@ -133,6 +134,7 @@ export async function updateExistingStaffData(req, res, next, __dirname) {
         
         // Validate the request body data
         for (const [key, value] of Object.entries(req.body)) {
+            console.log(key, inputsRegexLookup[key], value);
             if (!inputsRegexLookup[key].test(value)) {
                 throw new Error(`The input value for ${propLabelLookup[key]} is not valid. Please correct this value and try again`)
             }

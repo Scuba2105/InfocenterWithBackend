@@ -76,7 +76,7 @@ async function getCurrentRequestData(setRequestsData, closeDialog, showMessage, 
             const error = await res.json();
             throw new Error(`${error.message} If the issue persists please contact an admininistrator.`)
         }
-        console.log(res)
+        
         // Get the data from the JSON response.
         const data = await res.json();  
         const pendingRequestsData = JSON.parse(data);

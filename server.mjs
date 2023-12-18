@@ -74,7 +74,7 @@ const storage = multer.diskStorage({
         // Get the model 
         const model = req.body.model ? req.body.model.toLowerCase() : null;
         const documentsFieldRegex = /file[1-4]/;
-
+        
         // handle any resource requests in a separate path first as they use same fieldnames as device updates
         if (req.body["request-type"] === "update-request") {
             if ((file.fieldname === "service-manual" || file.fieldname === "user-manual") && file.mimetype !== 'application/pdf') {
