@@ -68,7 +68,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
 
             // Add any service manual requests to the updated request data
             if (Object.keys(req.files).includes('service-manual')) {
-                const serviceManualRequestObject = {requestor: username, timestamp: timestamp, fileName: `/requests/${model}/${username}_${timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`};
+                const serviceManualRequestObject = {requestor: username, timestamp: timestamp, filePath: `/requests/${model}/${username}_${timestamp}_${model.toLowerCase().replace(/\s/g, "_")}_service_manual.pdf`};
                 if (updatedDevice.serviceManual) {
                     updatedDevice.serviceManual.push(serviceManualRequestObject);
                 }
