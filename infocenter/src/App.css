@@ -3291,6 +3291,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .inactive:hover {
+  cursor: default;
+  scale: 1;
+}
+
+.inactive:active {
+  cursor: default;
+  transform: translate(0px, 0px);
+  box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
   scale: 1;
 }
 
