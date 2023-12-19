@@ -395,7 +395,7 @@ export function DeviceUpdateForm({currentUser, equipmentEditPermissions, selecte
     const formData = new FormData();
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
-    console.log(currentUser.imageType);
+    
     // Attach request type to form data if it is a request by standard user and not an update from an administrator.
     if (!equipmentEditPermissions) {
         formData.append("request-type", "update-request");
