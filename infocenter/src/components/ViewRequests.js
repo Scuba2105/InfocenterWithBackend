@@ -49,14 +49,14 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
     return (
         <>
             <ModalSkeleton type="view-requests" closeModal={closeModal}>
-                <div className="modal-display">
+                <div className="modal-display" style={{justifyContent: 'flex-start'}}>
                     {requests.map((request, index) => {
                         const ms = request.timestamp;
                         const requestDate = new Date(Number(ms))
                         const reqDateString = requestDate.toLocaleDateString();
                         return (
                             <div key={`request-${index}`}>
-                                {["jpg","png"].includes(request.staffPhotoExtension) ? <img src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${request.requestorId}.${request.staffPhotoExtension}`} alt="employee" style={{width: 50 + 'px', height: 50 + 'px', borderRadius: '50%'}}></img>
+                                {["jpg", "JPG", "png", "PNG"].includes(request.staffPhotoExtension) ? <img src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/${request.requestorId}.${request.staffPhotoExtension}`} alt="employee" style={{width: 50 + 'px', height: 50 + 'px', borderRadius: '50%'}}></img>
                                 : <img src={`https://${serverConfig.host}:${serverConfig.port}/images/staff/blank-profile.png`} alt="Fallback" style={{width: 50 + 'px', height: 50 + 'px', borderRadius: '50%'}}></img>}
                                 <span>{`${request.model}__${request.manufacturer}__${request.requestor}__${request.requestorId}__${reqDateString}`}</span>
                             </div>
