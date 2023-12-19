@@ -455,6 +455,49 @@ html {
   transform: translateY(25px);
 }
 
+/* Format the requests display */
+.request-container {
+  width: 520px;
+  height: 150px;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  padding: 20px 0;
+  margin: 8px 0 8px 0;
+  border-top: 1px solid var(--grey-font);
+}
+
+.request-container:first-of-type {
+  border-top: 1px solid transparent;
+}
+
+.request-image-header {
+  justify-content: space-around;
+}
+
+.request-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%
+}
+
+.request-summary {
+  width: 420px;
+  font-size: 14px;
+  color: var(--grey-font);
+  align-items: flex-start;
+}
+
+.request-highlight {
+  font-weight: 700;
+  color: var(--alternate-color-accent);
+}
+
+.request-time {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Format the sidenav bar */
 .sidenav {
   grid-row: 2 / -1;
   grid-column: 1;
