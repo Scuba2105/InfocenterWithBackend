@@ -1,8 +1,6 @@
 import { ModalSkeleton } from "./ModalSkeleton"
 import { serverConfig } from "../server";
-
-const daysLookup = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
-const monthsLookup = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+import { getDateTimeData } from "../utils/time-date-utils";
 
 function generateData(requestsData) {
     const formattedRequestData = [];
@@ -42,36 +40,6 @@ function generateData(requestsData) {
     });
 
     return formattedRequestData;
-}
-
-function getDateTimeData(timestamp) {
-    const requestDate = new Date(timestamp);
-    const currentDate = new Date();
-    const requestTime = `${requestDate.getHours()}:${String(requestDate.getMinutes()).length === 1 ? `0${requestDate.getMinutes()}` : requestDate.getMinutes()} ${getTimeSuffix(requestDate.getHours())}`;
-    const dayDiff = Math.floor(currentDate - requestDate / (1000*60*60*24));
-    const dateTimeObject = {requestTime: requestTime}
-    if (dayDiff === 0) {
-        dateTimeObject.day = `Today` 
-    }
-    else if (dayDiff < 5) {
-        dateTimeObject.day = `${dayDiff} ${dayDiff === 1 ? "day" : "days"} ago` 
-    }
-    else {
-        const dayOfWeek = daysLookup[requestDate.getDay()];
-        const dayOfMonth = requestDate.toLocaleDateString().split("/")[0];
-        const month = monthsLookup[requestDate.getDay()];
-        dateTimeObject.day = `${dayOfWeek} ${dayOfMonth}${getDaySuffix(dayOfMonth)} ${month}`
-    }
-    return dateTimeObject
-}
-
-function getDaySuffix(day) {
-    const lastDigit = day.length === 1 ? day : day[1];
-    return lastDigit === "1" ? "st" : lastDigit === "2" ? "nd" : lastDigit === "3" ? "rd" : "th"
-}
-
-function getTimeSuffix(hour) {
-    return hour < 12 ? "am" : "pm";
 }
 
 export function ViewRequests({requestsData, closeModal, showMessage, closeDialog}) {
