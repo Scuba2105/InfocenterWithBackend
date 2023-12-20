@@ -22,13 +22,13 @@ const hospitalLocations = hospitals.map((hospital) => {
     return capitaliseFirstLetters(hospital)
 }).sort();
 
-export function DisplayOption({selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount, customAccessType, toggleAccessType, customPasswordType, togglePasswordType}) {
+export function DisplayOption({equipmentEditPermissions, selectedOption, selectedData, fileNumber, setFileNumber, showMessage, updateFileCount, customAccessType, toggleAccessType, customPasswordType, togglePasswordType}) {
     
     if (selectedOption === 'ServiceManual') {
         return (
             <div key={selectedOption} className="device-input-container flex-c-col" style={{marginBottom: 80 + 'px'}}> 
                 <label className="available-label flex-c">Currently Available: {selectedData.serviceManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
-                <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update Service Manual:" uniqueId="file1" name="service-upload"/>
+                <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText={equipmentEditPermissions ? "Update Service Manual:" : "Request Updated Service Manual:"} uniqueId="file1" name="service-upload"/>
             </div>
         );
     }
@@ -36,7 +36,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
         return (
             <div key={selectedOption} className="device-input-container flex-c-col" style={{marginBottom: 80 + 'px'}}>
                 <label className="available-label flex-c">Currently Available: {selectedData.userManual ? <Tick color="rgb(7, 171, 138)" /> : <Cross color="#de0d37" />} </label>
-                <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText="Update User Manual:" uniqueId="file2" name="user-upload"/>
+                <Input type="device-update-file" inputType="file" identifier="update-device-file" labelText={equipmentEditPermissions ? "Update User Manual:" : "Request Updated User Manual:"} uniqueId="file2" name="user-upload"/>
             </div>
         );
     }
@@ -50,14 +50,14 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
                     <input type="radio" id="service-software" name="software-type" value="service-software"></input>
                     <label id="service-software-label" htmlFor="service-software">Service Software</label><br></br>
                 </div>
-                <label className="update-device-file-label">Update Software File Location: </label><input type="text" className="device-text-input" ></input>
+                <label className="update-device-file-label">{equipmentEditPermissions ? "Update Software Location:" : "Request Updated Software Location:"}</label><input type="text" className="device-text-input" ></input>
             </div>
         );
     }
     else if (selectedOption === 'Configs') {
         return (
             <div key={selectedOption} id="device-config-container" className="device-input-container flex-c-col">
-                <h4 className="flex-c size-100">Add New Configuration</h4>
+                <h4 className="flex-c size-100">{equipmentEditPermissions ? "Add New Configuration" : "Request New Configuration"}</h4>
                 <div className="config-info">
                     <SelectInput type="form-select-input" label='Hospital' optionData={hospitalLocations} />
                     {/^MX/.test(selectedData.model) || selectedData.model === 'X2' || selectedData.model === 'X3' ? <Input inputType='text' identifier='config-data' labelText='Options (optional)' placeholdertext='eg. A06, H10, C06 etc'/> : 
@@ -79,6 +79,7 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     else if (selectedOption === 'OtherDocuments'){
         return (
             <div key={selectedOption} className="other-input-container flex-c-col">
+                <h4 className="flex-c size-100">{equipmentEditPermissions ? "Add New Document/s" : "Request New Document/s"}</h4>
                 {fileNumber.map((number) => {
                     return (
                     <div key={`container-${number}`} className="description-file-container flex-c">
@@ -102,19 +103,20 @@ export function DisplayOption({selectedOption, selectedData, fileNumber, setFile
     }
     else {
         return (
-            <div key={selectedOption} className="device-password-update-container flex-c-col" style={{marginTop: 40 + 'px'}}>
-                <div className="edit-add-new-container flex-c">
+            <div key={selectedOption} className="device-password-update-container flex-c-col" style={{marginTop: 40 + 'px', marginBottom: 60 + 'px'}}>
+                <h4 className="flex-c size-100" style={{color: "white"}}>{equipmentEditPermissions ? "Add New Password" : "Request New Password"}</h4>
+                <div className="edit-add-new-container flex-c" style={{transform: `translateY(-10px)`}}>
                     <TooltipButton content={customAccessType ? "Undo" :"Custom Type"} boolean={customAccessType} translateY={customAccessType ? "6px" : "6px"} toggleFunction={toggleAccessType}/>
                     {customAccessType ? <Input inputType="text" identifier="add-new" labelText="Restricted Access Type" placeholdertext={`Enter the restricted access type`} /> : 
                     <SelectInput type="form-select-input" label="Restricted Access Type" optionData={defaultAccessTypes.sort()}/> }
                     <div className="add-new-aligner"></div>
                 </div>
-                <div className="edit-add-new-container flex-c" style={{transform: `translateY(-10px)`}}>
+                <div className="edit-add-new-container flex-c" style={{transform: `translateY(-15px)`}}>
                     <TooltipButton content={customPasswordType ? "Undo" :"Custom Type"} boolean={customPasswordType} translateY={customPasswordType ? "6px" : "6px"} toggleFunction={togglePasswordType}/>
                     {customPasswordType ? <Input inputType="text" identifier="add-new" labelText="Credential Type" placeholdertext={`Enter custom credential type`} /> : 
                     <SelectInput type="form-select-input" label="Credential Type" optionData={["Username", "Password"]}/> }
                     <div className="add-new-aligner"></div>
-                </div>                
+                </div> 
                 <Input inputType='text' identifier='password-add' labelText='Credential Value' placeholdertext='Please enter the password/username'/>  
             </div>
         )

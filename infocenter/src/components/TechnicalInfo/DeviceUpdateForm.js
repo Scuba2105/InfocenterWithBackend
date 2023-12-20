@@ -51,7 +51,7 @@ function capitaliseFirstLetters(input) {
 }
 
 function buttonOffset(selectedOption) {
-    if (selectedOption === "User Manual" || selectedOption === "Service Manual") {
+    if (selectedOption === "UserManual" || selectedOption === "ServiceManual") {
         return "90px"
     }
     else if (selectedOption === "Configs") {
@@ -86,7 +86,7 @@ function generateHospitalLabel(name) {
     }
 }
 
-async function sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
+async function sendFormData(equipmentEditPermissions, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog) {
             
     let dataKeys = [];
     for (const key of updateData.current.keys()) {
@@ -100,11 +100,11 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
 
     // Show the uploading spinner dialog while uploading.
     showMessage("uploading", `Uploading ${selectedData.model} Data`)
-      
+
     try {
     
         // Post the form data to the server. 
-        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}`, {
+        const res = await fetch(equipmentEditPermissions ? `https://${serverConfig.host}:${serverConfig.port}/UpdateEntry/${page}` : `https://${serverConfig.host}:${serverConfig.port}/RequestDeviceUpdate`, {
                 method: "PUT", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
                 redirect: "follow", // manual, *follow, error
@@ -129,7 +129,7 @@ async function sendFormData(updateData, selectedData, page, setUpdateFormVisible
             queryClient.invalidateQueries('dataSource');
 
             closeDialog();
-            showMessage("info", 'Resources have been successfully updated!');
+            showMessage("info", equipmentEditPermissions ? 'Resources have been successfully updated!' : 'Update Request Successfully Submitted!');
             setTimeout(() => {
                 closeDialog();
                 closeUpdate(setUpdateFormVisible);
@@ -148,14 +148,16 @@ function saveUpdateData(formContainer, selectedOption, updateData, selectedData,
     if (selectedOption === 'ServiceManual' || selectedOption === 'UserManual') {
         const selectedFile = formContainer.querySelector('.file-input');
         if (selectedFile.files.length === 0) {
-            showMessage("warning", `No ${selectedOption === 'ServiceManual' ? "Service Manual" : "User Manual"} has been provided. Please choose a file and try again.`)
+            showMessage("warning", `No ${selectedOption === "ServiceManual" ? "Service Manual" : "User Manual"} has been provided. Please choose a file and try again.`)
             return
         }
         else {
             // Get the extension from the uploaded file and append to the new filename in form data.
             const extension = selectedFile.files[0].name.split('.').slice(-1)[0];
-            updateData.current.set(`${formatText(selectedOption, "field-name")}`, selectedFile.files[0], `${formatText(selectedData.model)}_${formatText(selectedOption)}.${extension}`);
-            showMessage("info", `The ${selectedOption} for ${selectedData.model} has been saved ready for upload.`)
+            const fieldName = selectedOption === "ServiceManual" ? "service-manual" : "user-manual";
+            const filename = selectedOption === "ServiceManual" ? "service_manual" : "user_manual";
+            updateData.current.set(fieldName, selectedFile.files[0], `${formatText(selectedData.model)}_${filename}.${extension}`);
+            showMessage("info", `The ${selectedOption === "ServiceManual" ? "Service Manual" : "User Manual"} for ${selectedData.model} has been saved ready for upload.`)
             setTimeout(() => {
                 closeDialog();
             }, 1600);
@@ -374,7 +376,7 @@ function handlemouseOut(setHovered) {
     setHovered(null);
 }
 
-export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
+export function DeviceUpdateForm({currentUser, equipmentEditPermissions, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog}) {
     
     // Set the selected option when a device data option is clicked.
     const [selectedOption, setSelectedOption] = useState('ServiceManual')
@@ -393,13 +395,23 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
     const formData = new FormData();
     formData.append("model", selectedData.model);
     formData.append("manufacturer", selectedData.manufacturer);
+    
+    // Attach request type to form data if it is a request by standard user and not an update from an administrator.
+    if (!equipmentEditPermissions) {
+        formData.append("request-type", "update-request");
+        formData.append("username", currentUser.user);
+        formData.append("staffId", currentUser.staffId);
+        formData.append("fileExtension", currentUser.imageType);
+        formData.append("timestamp", Date.now());
+    }
+
     const updateData = useRef(formData);
 
     // Store the form container in a ref
     const formContainer = useRef(null)
         
     return (
-        <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type="update" page={page}>
+        <ModalSkeleton selectedData={selectedData} closeModal={() => closeUpdate(setUpdateFormVisible)} type={equipmentEditPermissions ? "Resource Update" : "Resource Update Request"} page={page}>
             <div className="update-form-display">
                 <div className="update-options flex-c">
                     <div className={selectedOption === 'ServiceManual' ? "device-data-option device-data-option-selected flex-c-col" : "device-data-option flex-c-col" } onClick={(e) => updateSelectedOption(e, setSelectedOption, setFileNumber)} onMouseOver={() => handleMouseOver("ServiceManual", setHovered)} onMouseOut={() => handlemouseOut(setHovered)}>
@@ -437,10 +449,10 @@ export function DeviceUpdateForm({selectedData, page, setUpdateFormVisible, clos
                     </div>                   
                 </div>
                 <div className="display-section" ref={formContainer}>
-                    <DisplayOption selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
+                    <DisplayOption equipmentEditPermissions={equipmentEditPermissions} selectedOption={selectedOption} selectedData={selectedData} fileNumber={fileNumber} setFileNumber={setFileNumber} showMessage={showMessage} updateFileCount={updateFileCount} customAccessType={customAccessType} toggleAccessType={() => toggleAccessType(setCustomAccessType)} customPasswordType={customPasswordType} togglePasswordType={() => togglePasswordType(setCustomPasswordType)} />
                     <div className="form-buttons" style={{marginTop: buttonOffset(selectedOption)}}>
                         <FormButton content="Save Progress" btnColor="#5ef8ed" marginTop="10px" marginBottom="30px" onClick={() => saveUpdateData(formContainer.current, selectedOption, updateData, selectedData, page, setUpdateFormVisible, customAccessType, customPasswordType, closeUpdate, queryClient, showMessage, closeDialog)} /> 
-                        <FormButton content="Upload" btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
+                        <FormButton content={equipmentEditPermissions ? "Upload" : "Send Request"} btnColor="#D4FB7C" marginTop="10px" marginBottom="30px" onClick={() => sendFormData(equipmentEditPermissions, updateData, selectedData, page, setUpdateFormVisible, closeUpdate, queryClient, showMessage, closeDialog)} /> 
                     </div>                    
                 </div>
             </div>                

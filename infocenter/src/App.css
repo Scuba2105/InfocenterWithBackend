@@ -455,10 +455,54 @@ html {
   transform: translateY(25px);
 }
 
+/* Format the requests display */
+.request-container {
+  width: 520px;
+  height: 150px;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  padding: 20px 0;
+  margin: 8px 0 8px 0;
+  border-top: 1px solid var(--grey-font);
+}
+
+.request-container:first-of-type {
+  border-top: 1px solid transparent;
+}
+
+.request-image-header {
+  justify-content: space-around;
+}
+
+.request-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%
+}
+
+.request-summary {
+  width: 420px;
+  font-size: 14px;
+  color: var(--grey-font);
+  align-items: flex-start;
+}
+
+.request-highlight {
+  font-weight: 700;
+  color: var(--alternate-color-accent);
+}
+
+.request-time {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Format the sidenav bar */
 .sidenav {
   grid-row: 2 / -1;
   grid-column: 1;
   background: var(--med-theme);
+  width: 100%;
   justify-content: flex-start;
   overflow: hidden;
   margin-bottom: -20px;
@@ -1308,6 +1352,20 @@ html {
 
 .add-new-heading {
   color: var(--form-font-color);
+}
+
+/* Format the resource request form */
+.request-form-instruction {
+  width: 75%;
+  height: 150px;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 2px solid white;
+}
+
+.request-form-instruction span {
+  font-size: 14px;
 }
 
 /* Format password display */
@@ -3269,6 +3327,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .inactive:hover {
+  cursor: default;
+  scale: 1;
+}
+
+.inactive:active {
+  cursor: default;
+  transform: translate(0px, 0px);
+  box-shadow: 4px 4px 7px 0px rgba(21, 21, 32, 0.85);
   scale: 1;
 }
 

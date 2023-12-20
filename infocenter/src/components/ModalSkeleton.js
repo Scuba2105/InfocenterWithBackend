@@ -2,7 +2,8 @@ import { capitaliseFirstLetters, delayFunctionInitiation } from "../utils/utils"
 import { serverConfig } from "../server";
 
 const formTypes = ['add-new', 'update', 'check', 'new-department-contact', 'new-vendor', 
-'disposal', 'change-password', "update-staff-contact", "update-vendor-contact", "edit-existing-documents", "service-request-forms"];
+'disposal', 'change-password', "view-requests", "update-staff-contact", "update-vendor-contact", "edit-existing-documents", "service-request-forms",
+"Resource Update Request"];
 
 const onCallPageHeadings = {"my-roster": "Upcoming On-Call Duties", "staff-roster": "On-Call Roster", "edit-roster": "Edit On-Call Roster", "confirm-roster": "Confirm On-Call Roster",
 "key-contacts": "Key On-Call Contacts", "on-call-cheatsheet": "On-Call Cheatsheet"} 
@@ -14,15 +15,15 @@ function getFormHeading(page, type, selectedData, name) {
         return heading;
     }
     else if (page === "technical-info") {
-        const heading = type === "add-new" ? "Add New Equipment" : `Update ${selectedData.model} Details`
+        const heading = type === "add-new" ? "Add New Equipment" : type === "Resource Update Request" ? `${selectedData.model} Update Request` : `Update ${selectedData.model} Details`
         return heading;
     }
     else if (page === "utilities") {
         const heading = type === "check" ? "Check Genius 3 Returns" : `Manage Genius 3 Disposals`
         return heading;
     }
-    else if (type === "change-password") {
-        return "Change Password";
+    else if (type === "change-password" || type === "view-requests") {
+        return type === "change-password" ? "Change Password" : "View Requests";
     }
     else if (type === "new-department-contact") {
         return "Add New Department Contact";

@@ -7,6 +7,7 @@
 /public/oncall
 /public/forms-templates
 /public/administration
+/public/requests
 config.mjs
 /data/device-data.json
 /data/staff-contacts.json
@@ -18,6 +19,7 @@ config.mjs
 /data/on-call-data.json
 /data/forms-template-data.json
 /data/testing-progress-data.json
+/data/requests-data.json
 /ecosystem.config.js
 /infocenter/src/server.js
 /hnect_cert.pfx
