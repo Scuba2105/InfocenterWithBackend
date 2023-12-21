@@ -30,7 +30,7 @@ export async function validateLoginCredentials(req, res, next, __dirname) {
 
         // Retrieve the user credentials from the database
         const data = await retrieveUserCredentials(email).catch((err) => {
-            throw new Error(`${err}`);
+            throw new DBError(err.message, err.cause, err.action, err.route);
         });
         
         if (data === undefined) {
@@ -46,7 +46,12 @@ export async function validateLoginCredentials(req, res, next, __dirname) {
         if (passwordResult === true) {
             // Get the staff member details and credentials and send them
             const staffData = await getAllStaffData(__dirname).catch((err) => {
-                throw new Error(`${err}`);
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
             });
                         
             const user = staffData.find((entry) => {

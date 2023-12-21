@@ -55,30 +55,37 @@ export function Login() {
             // Create login credentials object
             const loginCredentials = {email: emailInput.value, password: passwordInput.value}
             
-            // Post the form data to the server. 
-            const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/VerifyLogin`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer",
-                headers: {
-                    'Content-Type': 'application/json'
-                    },
-                body: JSON.stringify(loginCredentials)
-            })
-        
-            const data = await res.json();
+            try {
+                // Post the form data to the server. 
+                const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/VerifyLogin`, {
+                    method: "POST", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer",
+                    headers: {
+                        'Content-Type': 'application/json'
+                        },
+                    body: JSON.stringify(loginCredentials)
+                })
             
-            if (data.type === "Error") {
-                setLoginError(true);
-                setLoginErrorMessage(data.message);
-                setLoggingIn(false);
+                const data = await res.json();
+                
+                if (data.type === "Error") {
+                    setLoginError(true);
+                    setLoginErrorMessage(data.message);
+                    setLoggingIn(false);
+                }
+                else {
+                    // Write data to session storage for page reloads
+                    sessionStorage.setItem("currentInfoCentreSession", JSON.stringify({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageType: data.credentials.imageType}));
+                    setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions, data.credentials.imageType);
+                    login();
+                }
             }
-            else {
-                // Write data to session storage for page reloads
-                sessionStorage.setItem("currentInfoCentreSession", JSON.stringify({name: data.credentials.name, staffId: data.credentials.staffId, permissions: data.credentials.accessPermissions, imageType: data.credentials.imageType}));
-                setUser(data.credentials.name, data.credentials.staffId, data.credentials.accessPermissions, data.credentials.imageType);
-                login();
+            catch (error) {
+                setLoginError(true);
+                setLoginErrorMessage(error.message);
+                setLoggingIn(false);
             }
         }
         if (loggingIn) {

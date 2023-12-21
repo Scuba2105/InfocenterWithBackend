@@ -110,7 +110,7 @@ export class DBError extends Error {
         this.message = `There already exists an entry in the Information Centre database with the entered ${primaryKeyLookup[table]} and duplicates are not allowed. Please verify you have entered the correct ${primaryKeyLookup[table]}.`
       }
       else {
-        this.message = `An unexpected error occurred with the Information Centre database query.`
+        this.message = `An unexpected error occurred with the Information Centre database query. ${this.message} If the issue persists contact an administrator.`
       }
     }
     else if (["INSERT", "UPDATE"].includes(action) && querySuccess === true) {
