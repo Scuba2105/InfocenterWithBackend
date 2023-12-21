@@ -497,6 +497,12 @@ html {
   margin-top: 5px;
 }
 
+.request-file-link {
+  width: 200px;
+  height: 100px;
+  border: 1px solid white;
+}
+
 /* Format the sidenav bar */
 .sidenav {
   grid-row: 2 / -1;

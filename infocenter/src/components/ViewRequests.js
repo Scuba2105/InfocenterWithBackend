@@ -1,5 +1,6 @@
 import { ModalSkeleton } from "./ModalSkeleton"
 import { serverConfig } from "../server";
+import { RequestDetails } from "./RequestDetails";
 import { getDateTimeData } from "../utils/time-date-utils";
 
 function generateData(requestsData) {
@@ -51,6 +52,7 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
             <ModalSkeleton type="view-requests" closeModal={closeModal}>
                 <div className="modal-display" style={{justifyContent: 'flex-start', width: 700 + 'px'}}>
                     {requests.map((request, index) => {
+                        console.log(request)
                         const ms = request.timestamp;
                         const dateTimeData = getDateTimeData(Number(ms))
                         return (
@@ -62,6 +64,9 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
                                         <span><span className="request-highlight">{request.requestor}</span><span> has requested an update to the </span><span className="request-highlight">{request.requestType}</span><span> for the </span><span className="request-highlight">{`${request.manufacturer} ${request.model}`}</span></span>
                                         <span className="request-time">{`${dateTimeData.day}, ${dateTimeData.requestTime}`}</span>
                                     </div>
+                                </div>
+                                <div className="request-details">
+                                    <RequestDetails request={request} ></RequestDetails>
                                 </div>
                             </div>
                         )
