@@ -47,11 +47,30 @@ const externalApplications = {
     "ChemAlert": "https://chemalert.rmt.com.au/nswhealthv5/login/"
 }
 
+// Store list of common External Applications and their corresponding url.
+const workHealthSafetyLinks = {
+    "Hazard Inspection Form": `https://${serverConfig.host}:${serverConfig.port}/administration/work-health-safety/Hazard Inspection Form.doc`,
+    "Safety Walk Form": `https://${serverConfig.host}:${serverConfig.port}/administration/work-health-safety/Safety Walk Form.doc`,
+    "Work Health and Safety Act": `https://${serverConfig.host}:${serverConfig.port}/administration/work-health-safety/Work Health and Safety Act.docx`,
+    "WHS Forms, Policies & Procedures" : "https://intranet.hne.health.nsw.gov.au/hr/health_safety_and_insurable_risk/ohs/whs_policies,_procedures,_forms_and_guidelines"     
+}
+
+const australianStandardsLinks = {
+    "AS/NZS 3551: Management Programs for Medical Equipment": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3551.pdf`,
+    "AS/NZS 3200: Approval and Test Specification": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3200.pdf`,
+    "AS/NZS 3003: Electrical Installation - Patient Areas": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3003.pdf`,
+    "AS/NZS 2896: Medical Gas Systems -  Installation and Testing": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 2896.pdf`,
+    "AS/NZS 2500: Safe Use of Electricity in Patient Care" : `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 2500.pdf`, 
+    "Australian Standards Subscription" : "https://subscriptions.techstreet.com/subscriptions/index"    
+}
+
 // Create the array of admin page sections and their associated url data.
 const adminPageSectionsArray = [
     {section: "Policies and Procedures", linksData: policiesProceduresLinks},
     {section: "External Applications and Websites", linksData: externalApplications},
     {section: "Modification and Fabrication", linksData: modificationFabricationLinks},
+    {section: "Work, Health & Safety", linksData: workHealthSafetyLinks},
+    {section: "Australian Standards", linksData: australianStandardsLinks},
     {section: "Disaster Plans", linksData: disasterPlansLinks}
 ]
 
