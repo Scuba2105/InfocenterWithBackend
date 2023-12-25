@@ -138,7 +138,13 @@ export async function getAllData(req, res, next, __dirname) {
             getOnCallData(__dirname),            
             getUserFormsTemplatesData(__dirname, staffId),
             getAllTestingTemplateData(__dirname)]).catch((err) => {
-                throw new FileHandlingError(err.message, err.action, err.route);
+                console.log("testing", err)
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else if (err.type === "ParsingError") {
+                    throw new ParsingError(err.message, err.cause, err.action, err.route);
+                }
             });
         
         // Create the allData object from the Promise.all array.

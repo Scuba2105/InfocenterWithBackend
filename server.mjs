@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import https from 'https';
 import cors from 'cors';
+import helmet from 'helmet';
 import multer from 'multer';
 import { changeLoginPassword, validateLoginCredentials, getAllData } from './controller/controller.mjs'
 import { addNewStaffData, updateExistingStaffData } from './controller/staff-controller.mjs'
@@ -38,6 +39,11 @@ const options = {
     pfx: fs.readFileSync(`${__dirname}/hnect_cert.pfx`),
     passphrase: certPassword
 };
+
+// Secures the http repsonse headers
+if (process.env.NODE_ENV === "production") {
+    app.use(helmet()); 
+}
 
 // Set cors for any origin during development. Set to same origin for production.  
 if (process.env.NODE_ENV !== "production") {
