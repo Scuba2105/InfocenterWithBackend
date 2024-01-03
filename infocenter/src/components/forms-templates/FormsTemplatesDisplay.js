@@ -23,6 +23,7 @@ const onlineForms  = {"Masimo": "https://www.masimo.com/company/global-services/
                       "Medtronic": "https://secure.medtronicinteract.com/SubmitServiceRequest",
                       "GE Healthcare": "https://services.gehealthcare.com.au/gehcstorefront/",
                       "Welch Allyn": "https://www.welchallyn.com/en/service-support/submit-a-repair.html",
+                      "Verathon": "https://www.verathon.com/contact-technical-support",
                       "Generic Delivery Note": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/Generic Delivery Note.pdf`,
                       "FM30 Transducers Delivery Note": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/FM30 US and Toco Transducers.pdf`}
 
