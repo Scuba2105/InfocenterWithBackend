@@ -56,11 +56,11 @@ const workHealthSafetyLinks = {
 }
 
 const australianStandardsLinks = {
-    "AS/NZS 3551: Management Programs for Medical Equipment": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3551.pdf`,
-    "AS/NZS 3200: Approval and Test Specification": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3200.pdf`,
-    "AS/NZS 3003: Electrical Installation - Patient Areas": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3003.pdf`,
-    "AS/NZS 2896: Medical Gas Systems -  Installation and Testing": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 2896.pdf`,
-    "AS/NZS 2500: Safe Use of Electricity in Patient Care" : `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 2500.pdf`, 
+    "AS/NZS 3551: Management Programs for Medical Equipment": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/ASNZS 3551.pdf`,
+    "AS/NZS 3200: Approval and Test Specification": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/ASNZS 3200.pdf`,
+    "AS/NZS 3003: Electrical Installation - Patient Areas": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/ASNZS 3003.pdf`,
+    "AS/NZS 2896: Medical Gas Systems -  Installation and Testing": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/ASNZS 2896.pdf`,
+    "AS/NZS 2500: Safe Use of Electricity in Patient Care" : `https://${serverConfig.host}:${serverConfig.port}/administration/standards/ASNZS 2500.pdf`, 
     "Australian Standards Subscription" : "https://subscriptions.techstreet.com/subscriptions/index"    
 }
 

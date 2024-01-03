@@ -18,12 +18,13 @@ const serviceAgents = ["3M", "Cardinal Health", "Celemetrix", "Device Technologi
                       "Independent Living Specialists", "JD Healthcare", "Masimo", "Medtronic", "Philips Respironics", "REM Systems", "Resmed",
                       "Verathon", "Welch Allyn"];
 
-// Store list of service agents that use Online request forms.
+// Store list of service agents that use Online request forms or generic templates not specific to any staff member.
 const onlineForms  = {"Masimo": "https://www.masimo.com/company/global-services/customer-feedback-form/",
                       "Medtronic": "https://secure.medtronicinteract.com/SubmitServiceRequest",
                       "GE Healthcare": "https://services.gehealthcare.com.au/gehcstorefront/",
                       "Welch Allyn": "https://www.welchallyn.com/en/service-support/submit-a-repair.html",
                       "Generic Delivery Note": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/Generic Delivery Note.pdf`,
+                      "Verathon": "https://www.verathon.com/contact-technical-support",
                       "FM30 Transducers Delivery Note": `https://${serverConfig.host}:${serverConfig.port}/forms-templates/service-requests/FM30 US and Toco Transducers.pdf`}
 
 // Open the form to perform updates. 
