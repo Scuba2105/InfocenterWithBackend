@@ -48,7 +48,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             const manufacturer = req.body.manufacturer;
             const username = req.body.username;
             const staffId = req.body.staffId;
-            const staffPhotoExtension = req.body.imageType;
+            const staffPhotoExtension = req.body.fileExtension;
             const timestamp = req.body.timestamp;
             const documentKeys = Object.keys(req.body).filter((key) => {
                 return /description[1-4]/.test(key);

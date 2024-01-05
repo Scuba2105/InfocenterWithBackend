@@ -502,23 +502,41 @@ html {
   height: 100px;
   color: white;
   font-size: 15px;
+  font-weight: 550;
   text-decoration: none;
   margin-top: 15px;
 }
 
-.request-file-container {
+.request-file-container, .request-software-container {
   border: 1px solid white;
   border-radius: 10px;
   padding: 15px 30px 15px 10px;
+}
+
+.request-software-container {
+  padding: 15px 35px 15px 30px;
+}
+
+.config-request-location-container {
+  margin-left: -15px;
+}
+
+.software-request-location-container {
+  align-items: flex-start;
+  margin-left: 15px;
 }
 
 .request-file-path:hover {
   cursor: pointer;
 }
 
-.config-request-label {
+.config-request-label, .software-request-label {
   font-size: 14px;
   font-weight: 550;
+}
+
+.config-request-location-container {
+  align-items: flex-start;
 }
 
 .config-request-hospital, .config-request-department {

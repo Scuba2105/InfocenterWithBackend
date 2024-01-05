@@ -404,7 +404,7 @@ export function DeviceUpdateForm({currentUser, equipmentEditPermissions, selecte
         formData.append("fileExtension", currentUser.imageType);
         formData.append("timestamp", Date.now());
     }
-
+    
     const updateData = useRef(formData);
 
     // Store the form container in a ref
