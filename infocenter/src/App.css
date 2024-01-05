@@ -507,23 +507,39 @@ html {
   margin-top: 15px;
 }
 
+.config-request-link {
+  justify-content: center;
+}
+
 .request-file-container, .request-software-container {
   border: 1px solid white;
   border-radius: 10px;
-  padding: 15px 30px 15px 10px;
+  padding: 15px 35px 15px 15px;
+  width: 300px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .request-software-container {
-  padding: 15px 35px 15px 30px;
-}
-
-.config-request-location-container {
-  margin-left: -15px;
+  padding: 15px 35px 15px 20px;
 }
 
 .software-request-location-container {
   align-items: flex-start;
-  margin-left: 15px;
+  margin-left: 25px;
+}
+
+.request-icon {
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+}
+
+.config-request-icon {
+  height: 60px;
+  width: 60px;
+  margin-right: 20px;
 }
 
 .request-file-path:hover {

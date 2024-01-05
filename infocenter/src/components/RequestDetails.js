@@ -6,7 +6,7 @@ export function RequestDetails({request}) {
         return (
             <a className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>
                 <div className="request-file-container flex-c">
-                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/pdf.png`} alt="copy" className="document-icon"></img>
+                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/pdf.png`} alt="copy" className="request-icon"></img>
                     <label className="request-file-path">{request.filePath.split("_").slice(-3).join("_")}</label>
                 </div>
             </a>
@@ -19,8 +19,8 @@ export function RequestDetails({request}) {
         const fileType = path.split(".").slice(-1)[0];
         return (
             <a className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>
-                <div className="request-file-container flex-c">
-                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/cfg.png`} alt="copy" className="document-icon"></img>
+                <div className="request-file-container">
+                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/cfg.png`} alt="copy" className="config-request-icon"></img>
                     <div className="config-request-location-container flex-c-col">
                         <div><label className="config-request-label">Hospital: </label><label className="config-request-hospital">{hospital}</label></div>
                         <div><label className="config-request-label">Department: </label><label className="config-request-department">{department}</label></div>
@@ -53,8 +53,8 @@ export function RequestDetails({request}) {
         return (
             <a className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>
                 <div className="request-software-container flex-c">
-                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/${iconName}.png`} alt="copy" className="document-icon"></img>
-                    <div className="software-request-location-container flex-c-col">
+                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/${iconName}.png`} alt="copy" className="request-icon"></img>
+                    <div className="config-request-location-container flex-c-col">
                             <div><label className="software-request-label">Type: </label><label className="config-request-hospital">Hello</label></div>
                             <div><label className="software-request-label">File Path: </label><label className="config-request-department">Hello</label></div>
                     </div>
