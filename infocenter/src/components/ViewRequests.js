@@ -2,6 +2,7 @@ import { ModalSkeleton } from "./ModalSkeleton"
 import { serverConfig } from "../server";
 import { RequestDetails } from "./RequestDetails";
 import { getDateTimeData } from "../utils/time-date-utils";
+import { FormButton } from "./FormButton";
 
 function generateData(requestsData) {
     const formattedRequestData = [];
@@ -52,7 +53,6 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
             <ModalSkeleton type="view-requests" closeModal={closeModal}>
                 <div className="modal-display" style={{justifyContent: 'flex-start', width: 700 + 'px', paddingBottom: 40 + 'px'}}>
                     {requests.map((request, index) => {
-                        console.log(request)
                         const ms = request.timestamp;
                         const dateTimeData = getDateTimeData(Number(ms))
                         return (
@@ -67,6 +67,10 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
                                 </div>
                                 <div className="request-details">
                                     <RequestDetails request={request} ></RequestDetails>
+                                </div>
+                                <div className="form-buttons" style={{marginBottom: 0 + 'px'}}>
+                                    <FormButton content="Approve" btnColor="#D4FB7C" marginTop="0px"/> 
+                                    <FormButton content="Deny" btnColor="#EE467B" marginTop="0px"/>
                                 </div>
                             </div>
                         )

@@ -458,7 +458,6 @@ html {
 /* Format the requests display */
 .request-container {
   width: 520px;
-  height: 150px;
   display: grid;
   grid-template-rows: 60px 1fr;
   padding: 20px 0;
