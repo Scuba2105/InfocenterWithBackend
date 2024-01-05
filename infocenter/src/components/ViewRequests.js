@@ -50,7 +50,7 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
     return (
         <>
             <ModalSkeleton type="view-requests" closeModal={closeModal}>
-                <div className="modal-display" style={{justifyContent: 'flex-start', width: 700 + 'px'}}>
+                <div className="modal-display" style={{justifyContent: 'flex-start', width: 700 + 'px', paddingBottom: 20 + 'px'}}>
                     {requests.map((request, index) => {
                         console.log(request)
                         const ms = request.timestamp;

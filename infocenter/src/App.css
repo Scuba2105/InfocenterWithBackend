@@ -500,17 +500,30 @@ html {
 .request-file-link {
   width: 100%;
   height: 100px;
-  text-decoration: none;
-}
-
-.request-file-path {
   color: white;
   font-size: 15px;
-  transform: translateY(-10px);
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.request-file-container {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 15px 30px 15px 10px;
 }
 
 .request-file-path:hover {
   cursor: pointer;
+}
+
+.config-request-label {
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.config-request-hospital, .config-request-department {
+  font-size: 13px;
+  font-weight: normal;
 }
 
 /* Format the sidenav bar */

@@ -42,7 +42,8 @@ export function getDateTimeData(timestamp) {
     }
     else {
         const dayOfWeek = daysLookup[requestDate.getDay()];
-        const dayOfMonth = requestDate.toLocaleDateString().split("/")[0];
+        // Remove the 0 if the first 'digit' in the day of month string is zero eg. 05th so it becomes the 5th
+        const dayOfMonth = requestDate.toLocaleDateString().split("/")[0][0] === "0" ? requestDate.toLocaleDateString().split("/")[0][1] : requestDate.toLocaleDateString().split("/")[0];
         const month = monthsLookup[requestDate.getDay()];
         dateTimeObject.day = `${dayOfWeek} ${dayOfMonth}${getDaySuffix(dayOfMonth)} ${month}`
     }
