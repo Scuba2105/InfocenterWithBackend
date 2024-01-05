@@ -1,5 +1,5 @@
 import { serverConfig } from "../server";
-import { SoftwareIcon } from "../svg";
+import { SoftwareIcon, PasswordsIcon } from "../svg";
 
 export function RequestDetails({request}) {
     if (["Service Manual", "User Manual"].includes(request.requestType)) {
@@ -18,7 +18,7 @@ export function RequestDetails({request}) {
         const department = path.split("_")[4].replace("--", "-")
         const fileType = path.split(".").slice(-1)[0];
         return (
-            <a className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>
+            <div className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>
                 <div className="request-file-container">
                     <img src={`https://${serverConfig.host}:${serverConfig.port}/images/cfg.png`} alt="copy" className="config-request-icon"></img>
                     <div className="config-request-location-container flex-c-col">
@@ -27,7 +27,7 @@ export function RequestDetails({request}) {
                         <div><label className="config-request-label">File Type: </label><label className="config-request-department">{fileType}</label></div>
                     </div>
                 </div>
-            </a>
+            </div>
         )
     }
     else if (["Software"].includes(request.requestType)) {
@@ -37,10 +37,10 @@ export function RequestDetails({request}) {
         return (
             <div className="request-file-link flex-c">
                 <div className="request-software-container flex-c">
-                    <SoftwareIcon color="white" size="50px"/>
+                    <SoftwareIcon color="#BCE7FD" size="50px"/>
                     <div className="software-request-location-container flex-c-col">
-                            <div><label className="software-request-label">Type: </label><label className="config-request-hospital">{softwareType}</label></div>
                             <div><label className="software-request-label">File Path: </label><label className="config-request-department">{request.softwareLocation}</label></div>
+                            <div><label className="software-request-label">Type: </label><label className="config-request-hospital">{softwareType}</label></div>
                     </div>
                 </div>
             </div>
@@ -55,11 +55,36 @@ export function RequestDetails({request}) {
                 <div className="request-software-container flex-c">
                     <img src={`https://${serverConfig.host}:${serverConfig.port}/images/${iconName}.png`} alt="copy" className="request-icon"></img>
                     <div className="config-request-location-container flex-c-col">
-                            <div><label className="software-request-label">Type: </label><label className="config-request-hospital">Hello</label></div>
-                            <div><label className="software-request-label">File Path: </label><label className="config-request-department">Hello</label></div>
+                            <div><label className="software-request-label">File Type: </label><label className="config-request-hospital">{extension}</label></div>
+                            <div><label className="software-request-label">Title: </label><label className="config-request-department">{request.label}</label></div>
                     </div>
                 </div>
             </a>
+        )
+    }
+    else if (["Passwords"].includes(request.requestType)) {
+
+        // Get restricted access type from the data 
+        const passwordType = request.credentialType;
+        const passwordData = request.passwordData.split(":"); 
+
+        // Determine whether it is a username or password which is requested 
+        const credentialType = passwordData[0];
+
+        // Get the value of the username/password
+        const credentialValue = passwordData[1].replace(/^\s/, "");
+
+        return (
+            <div className="request-file-link flex-c">
+                <div className="request-software-container flex-c">
+                    <PasswordsIcon color="#BCE7FD" size="50px"/>
+                    <div className="software-request-location-container flex-c-col">
+                        <div><label className="software-request-label">Access Type: </label><label className="config-request-department">{passwordType}</label></div>
+                        <div><label className="software-request-label">Credential Type: </label><label className="config-request-department">{credentialType}</label></div>
+                        <div><label className="software-request-label">Value: </label><label className="config-request-hospital">{credentialValue}</label></div>
+                    </div>
+                </div>
+            </div>
         )
     }
     else {

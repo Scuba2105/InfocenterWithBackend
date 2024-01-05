@@ -512,7 +512,7 @@ html {
 }
 
 .request-file-container, .request-software-container {
-  border: 1px solid white;
+  border: 1px solid var(--grey-font);
   border-radius: 10px;
   padding: 15px 35px 15px 15px;
   width: 300px;
