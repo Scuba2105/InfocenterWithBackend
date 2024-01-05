@@ -138,7 +138,6 @@ export async function getAllData(req, res, next, __dirname) {
             getOnCallData(__dirname),            
             getUserFormsTemplatesData(__dirname, staffId),
             getAllTestingTemplateData(__dirname)]).catch((err) => {
-                console.log("testing", err)
                 if (err.type === "FileHandlingError") {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 }

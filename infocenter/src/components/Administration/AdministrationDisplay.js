@@ -55,13 +55,15 @@ const workHealthSafetyLinks = {
     "WHS Forms, Policies & Procedures" : "https://intranet.hne.health.nsw.gov.au/hr/health_safety_and_insurable_risk/ohs/whs_policies,_procedures,_forms_and_guidelines"     
 }
 
+// Create the array for all the AUS/NZ Standards Biomedical Standards and HNE Standards Subscription. 
 const australianStandardsLinks = {
     "AS/NZS 3551: Management Programs for Medical Equipment": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3551.pdf`,
     "AS/NZS 3200: Approval and Test Specification": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3200.pdf`,
     "AS/NZS 3003: Electrical Installation - Patient Areas": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 3003.pdf`,
     "AS/NZS 2896: Medical Gas Systems -  Installation and Testing": `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 2896.pdf`,
     "AS/NZS 2500: Safe Use of Electricity in Patient Care" : `https://${serverConfig.host}:${serverConfig.port}/administration/standards/Standards/ASNZS 2500.pdf`, 
-    "Australian Standards Subscription" : "https://subscriptions.techstreet.com/subscriptions/index"    
+    "Australian Standards Subscription" : "https://subscriptions.techstreet.com/subscriptions/index",
+    "Subscription Registration": "https://www.hnehealthlibraries.com.au/503"    
 }
 
 // Create the array of admin page sections and their associated url data.
