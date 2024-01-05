@@ -46,6 +46,22 @@ export function RequestDetails({request}) {
             </div>
         )
     }
+    else if (["Documents"].includes(request.requestType)) {
+
+        const extension = request.filePath.split(".").slice(-1)[0];
+        const iconName = ["xls", "xlsx", "csv"].includes(extension) ? "xlsx" : ["docx", "doc"].includes(extension) ? "docx" : ["ppt", "pptx"].includes(extension) ? "pptx" : ["txt", "jpg", "png"].includes(extension) ? extension : "document";
+        return (
+            <a className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>
+                <div className="request-software-container flex-c">
+                    <img src={`https://${serverConfig.host}:${serverConfig.port}/images/${iconName}.png`} alt="copy" className="document-icon"></img>
+                    <div className="software-request-location-container flex-c-col">
+                            <div><label className="software-request-label">Type: </label><label className="config-request-hospital">Hello</label></div>
+                            <div><label className="software-request-label">File Path: </label><label className="config-request-department">Hello</label></div>
+                    </div>
+                </div>
+            </a>
+        )
+    }
     else {
         return (
             <div>
