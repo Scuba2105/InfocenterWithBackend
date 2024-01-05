@@ -3,6 +3,7 @@ import { serverConfig } from "../server";
 import { RequestDetails } from "./RequestDetails";
 import { getDateTimeData } from "../utils/time-date-utils";
 import { FormButton } from "./FormButton";
+import { useUser } from "./StateStore";
 
 function generateData(requestsData) {
     const formattedRequestData = [];
@@ -47,6 +48,10 @@ function generateData(requestsData) {
 export function ViewRequests({requestsData, closeModal, showMessage, closeDialog}) {
     
     const requests = generateData(requestsData);
+
+    // Get the current user from the state store.
+    const currentUser = useUser((state) => state.userCredentials);
+    const adminAccess = currentUser.permissions === "admin";
     
     return (
         <>
@@ -68,10 +73,10 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
                                 <div className="request-details">
                                     <RequestDetails request={request} ></RequestDetails>
                                 </div>
-                                <div className="form-buttons" style={{marginBottom: 0 + 'px'}}>
+                                {adminAccess && <div className="form-buttons" style={{marginBottom: 0 + 'px'}}>
                                     <FormButton content="Approve" btnColor="#D4FB7C" marginTop="0px"/> 
                                     <FormButton content="Deny" btnColor="#EE467B" marginTop="0px"/>
-                                </div>
+                                </div>}
                             </div>
                         )
                     })}
