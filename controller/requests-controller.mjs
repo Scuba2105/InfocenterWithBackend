@@ -209,3 +209,61 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
     
 }
 
+export function approveRequest(req, res, next, __dirname) {
+    
+    // Get the request data from the http request body
+    const requestData = req.body;
+
+    // Move the file from the requests folder and into the appropriate model folder (manuals/model)
+    let currentFilePath, newFilePath;
+    if (requestData.requestType === "Service Manual") {
+        newFilePath = `${__dirname}/public/manuals/service_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`;
+        currentFilePath = `${__dirname}/public${requestData.filePath}`;
+    }
+    else if (requestData.requestType === "User Manual") {
+        newFilePath = `${__dirname}/public/manuals/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
+        currentFilePath = `${__dirname}/public${requestData.filePath}`;
+    }
+    else if (requestData.requestType === "Configurations") {
+        // Need to complete new config file path.
+        newFilePath = `${__dirname}/public/configurations/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
+        currentFilePath = `${__dirname}/public${requestData.configPath}`;
+    }
+
+    console.log(requestData);
+
+    // {
+    //     requestType: 'Configurations',
+    //     model: 'MX450',
+    //     manufacturer: 'Philips Healthcare',
+    //     requestor: 'Atif Siddiqui',
+    //     requestorId: '60146568',
+    //     staffPhotoExtension: 'jpg',
+    //     timestamp: '1702875356553',
+    //     hospital: 'Armidale Hospital',
+    //     configPath: '/requests/MX450/Atif Siddiqui_1702875356553_mx450_armidale_ICU--Transport_A06-H10-C01-C12_L.01.02_21.12.2023.cfg'
+    //   }
+
+    // {
+    //     requestType: 'Service Manual',
+    //     model: 'MX450',
+    //     manufacturer: 'Philips Healthcare',
+    //     requestor: 'Atif Siddiqui',
+    //     requestorId: '60146568',
+    //     staffPhotoExtension: 'jpg',
+    //     timestamp: '1702875356553',
+    //     filePath: '/requests/MX450/Atif Siddiqui_1702875356553_mx450_service_manual.pdf'
+    //   }
+
+    // {
+    //     requestType: 'User Manual',
+    //     model: 'MX450',
+    //     manufacturer: 'Philips Healthcare',
+    //     requestor: 'Atif Siddiqui',
+    //     requestorId: '60146568',
+    //     staffPhotoExtension: 'jpg',
+    //     timestamp: '1702875356553',
+    //     filePath: '/requests/MX450/Atif Siddiqui_1702875356553_mx450_user_manual.pdf'
+    //   }
+}
+

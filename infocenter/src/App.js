@@ -93,7 +93,7 @@ export default function App() {
                 <div className={month === 11 ? "header-bar-christmas flex-c" : "header-bar flex-c"}>
                     <div id='header-aligner'></div>
                     HNECT Information Center
-                    <Avatar showMessage={showMessage} closeDialog={closeDialog}></Avatar>
+                    <Avatar showMessage={showMessage} closeDialog={closeDialog} queryClient={queryClient}></Avatar>
                 </div>
                 <Menu page={page} onPageSelect={onPageSelect} />
                 <QueryClientProvider client={queryClient}>

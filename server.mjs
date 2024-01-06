@@ -12,7 +12,7 @@ import { addNewContactData, updateContactData } from './controller/contacts-cont
 import { updateServiceRequestForms } from './controller/forms-templates-controller.mjs';
 import { updateTestingProgressData, resetTestingProgressData } from './controller/testing-templates-controller.mjs';
 import { updateOnCallData } from "./controller/on-call-controller.mjs";
-import { handleDeviceUpdateRequest, getAllRequestsData } from './controller/requests-controller.mjs';
+import { handleDeviceUpdateRequest, getAllRequestsData, approveRequest } from './controller/requests-controller.mjs';
 import { FileHandlingError, ParsingError, DBError } from './error-handling/file-errors.mjs';
 import { capitaliseFirstLetters, createDirectory, convertHospitalName } from './utils/utils.mjs';
 import { generateThermometerRepairRequest, getThermometerBatch, updateThermometerList, 
@@ -177,6 +177,10 @@ app.post("/VerifyLogin", async (req, res, next) => {
 
 app.post("/ChangePassword", async (req, res, next) => {
     changeLoginPassword(req, res, next, __dirname)
+});
+
+app.post("/ApproveRequest", async (req, res, next) => {
+    approveRequest(req, res, next, __dirname)
 });
 
 // Define route to get all data.

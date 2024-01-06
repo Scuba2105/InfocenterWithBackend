@@ -93,7 +93,7 @@ async function getCurrentRequestData(setRequestsData, closeDialog, showMessage, 
     }
 }
 
-export function Avatar({showMessage, closeDialog}) {
+export function Avatar({showMessage, closeDialog, queryClient}) {
 
     const [hovered, setHovered] = useState(null);
     const [menuVisible, setMenuVisible] = useState(false);
@@ -134,7 +134,7 @@ export function Avatar({showMessage, closeDialog}) {
                 </div>}
             </div>
             {modalVisible === "password" && <ChangePassword closeModal={() => closeModal(setModalVisible)} showMessage={showMessage} closeDialog={closeDialog}></ChangePassword>}
-            {modalVisible === "requests" && <ViewRequests requestsData={requestsData} closeModal={() => closeModal(setModalVisible)} showMessage={showMessage} closeDialog={closeDialog}></ViewRequests>}
+            {modalVisible === "requests" && <ViewRequests requestsData={requestsData} closeModal={() => closeModal(setModalVisible)} showMessage={showMessage} closeDialog={closeDialog} queryClient={queryClient}></ViewRequests>}
         </>
         
     )

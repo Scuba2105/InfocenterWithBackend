@@ -2,6 +2,7 @@ import { useState } from "react";
 import tinycolor from "tinycolor2";
 
 function handleButtonClick(onClick) {
+    console.log(onClick)
     setTimeout(() => {
         onClick();
     }, 150)

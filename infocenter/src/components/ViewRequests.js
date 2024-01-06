@@ -5,6 +5,49 @@ import { getDateTimeData } from "../utils/time-date-utils";
 import { FormButton } from "./FormButton";
 import { useUser } from "./StateStore";
 
+async function approveRequest(request, closeModal, showMessage, closeDialog, queryClient) {
+
+    // Show the uploading spinner dialog while uploading.
+    showMessage("uploading", `Approving Request Data`)
+      
+    try {
+    
+        // Post the form data to the server. 
+        const res = await fetch(`https://${serverConfig.host}:${serverConfig.port}/ApproveRequest`, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(request)
+        })
+
+        const data = await res.json();
+        if (data.type === "Error") {
+            closeDialog();
+            showMessage("error", `${data.message}.`);
+        }
+        else {
+            
+            // Need to update app data.
+            queryClient.invalidateQueries('dataSource');
+
+            closeDialog();
+            showMessage("info", 'Resources have been successfully updated!');
+            setTimeout(() => {
+                closeDialog();
+                closeModal();
+            }, 1600);
+        }
+    }
+    catch (error) {
+        showMessage("error", error.message);
+    }
+
+}
+
 function generateData(requestsData) {
     const formattedRequestData = [];
     requestsData.forEach((device) => {
@@ -45,7 +88,7 @@ function generateData(requestsData) {
     return formattedRequestData;
 }
 
-export function ViewRequests({requestsData, closeModal, showMessage, closeDialog}) {
+export function ViewRequests({requestsData, closeModal, showMessage, closeDialog, queryClient}) {
     
     const requests = generateData(requestsData);
 
@@ -74,8 +117,11 @@ export function ViewRequests({requestsData, closeModal, showMessage, closeDialog
                                     <RequestDetails request={request} ></RequestDetails>
                                 </div>
                                 {adminAccess && <div className="form-buttons" style={{marginBottom: 0 + 'px'}}>
-                                    <FormButton content="Approve" btnColor="#D4FB7C" marginTop="0px"/> 
+                                    <FormButton content="Approve" btnColor="#D4FB7C" marginTop="0px" onClick={() => approveRequest(request, closeModal, showMessage, closeDialog, queryClient)}/> 
                                     <FormButton content="Deny" btnColor="#EE467B" marginTop="0px"/>
+                                </div>}
+                                {currentUser.user === request.requestor && <div className="form-buttons" style={{marginBottom: 0 + 'px'}}>
+                                    <FormButton content="Cancel" btnColor="#EE467B" marginTop="0px"/>
                                 </div>}
                             </div>
                         )
