@@ -33,6 +33,7 @@ export function writeRequestsData(__dirname, data) {
 
 export function moveRequestFile(__dirname, currentFilePath, newFilePath) {
     return new Promise((resolve, reject) => {
+        console.log(currentFilePath, newFilePath)
         fs.rename(currentFilePath, newFilePath, (err) => {
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "rename", route: "Requests"});

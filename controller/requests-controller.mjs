@@ -245,13 +245,63 @@ export async function approveRequest(req, res, next, __dirname) {
             
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
-                const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath);
+                const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath).catch((err) => {
+                    if (err.type === "FileHandlingError") {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    }
+                })
             }            
+
+            // Need to add entry to device data
+            const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+                if (err.type === "FileHandlingError") {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                }
+                else {
+                    throw new ParsingError(err.message, err.cause, err.route);
+                }
+            });
+
+            // Find the current model from the device data
+            const requestDevice = deviceData.find((entry) => entry.model === requestData.model);
+
+            if (requestData.requestType === "Service Manual") {
+                requestDevice.serviceManual = true;
+            }
+            else if (requestData.requestType === "User Manual") {
+                requestDevice.userManual = true;
+            }
+            else if (requestData.requestType === "Configurations") {
+                const currentConfigData = requestDevice.config[requestData.hospital];
+                const fileName = requestData.configPath.split("/").slice(-1)[0].split("_").slice(2).join("_");
+                                    
+                // Find any configs which belong to the same department/sublocation.
+                const requestLocation = requestData.configPath.split("_").slice(4, 5)[0];
+
+                // Check whether existing entry exists for current location.
+                let existingLocationEntry = false;
+                let newPath;
+
+                const updatedConfigData = currentConfigData.map((config) => {
+                    // Add request data if already exists.
+                    const configLocation = config.split("_").slice(2, 3)[0];
+                    const basePath = config.split("/").slice(0, -1).join("/");
+                    newPath = basePath;
+                    if (configLocation === requestLocation) {
+                        existingLocationEntry = true;
+                        return `${basePath}/${fileName}`;
+                    } 
+                    else {
+                        return config;
+                    }
+                })
+
+                // If entry does not exist add it to the array
+                updatedConfigData.push(`${newPath}/${fileName}`)
+            }
 
             // Need to remove entry from request file
             
-            // Need to add entry to device data
-
             console.log(req.body)
         }
         catch (err) {
