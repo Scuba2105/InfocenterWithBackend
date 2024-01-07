@@ -1,4 +1,4 @@
-import { getRequestsData, writeRequestsData } from "../models/requests-models.mjs";
+import { getRequestsData, writeRequestsData, moveRequestFile } from "../models/requests-models.mjs";
 import { FileHandlingError, ParsingError } from "../error-handling/file-errors.mjs";
 import { Mutex } from "async-mutex";
 import { convertHospitalName } from "../utils/utils.mjs";
@@ -209,28 +209,89 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
     
 }
 
-export function approveRequest(req, res, next, __dirname) {
-    
-    // Get the request data from the http request body
-    const requestData = req.body;
+export async function approveRequest(req, res, next, __dirname) {
+    // Need to add the data to the requests json file for storage.
+    requestsDataMutex.runExclusive(async () => {
+        try {
+            // Get the request data from the http request body
+            const requestData = req.body;
 
-    // Move the file from the requests folder and into the appropriate model folder (manuals/model)
-    let currentFilePath, newFilePath;
-    if (requestData.requestType === "Service Manual") {
-        newFilePath = `${__dirname}/public/manuals/service_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`;
-        currentFilePath = `${__dirname}/public${requestData.filePath}`;
-    }
-    else if (requestData.requestType === "User Manual") {
-        newFilePath = `${__dirname}/public/manuals/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
-        currentFilePath = `${__dirname}/public${requestData.filePath}`;
-    }
-    else if (requestData.requestType === "Configurations") {
-        // Need to complete new config file path.
-        newFilePath = `${__dirname}/public/configurations/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
-        currentFilePath = `${__dirname}/public${requestData.configPath}`;
-    }
+            // Move the file from the requests folder and into the appropriate model folder (manuals/model)
+            let currentFilePath, newFilePath;
+            if (requestData.requestType === "Service Manual") {
+                newFilePath = `${__dirname}/public/manuals/service_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`;
+                currentFilePath = `${__dirname}/public${requestData.filePath}`;
+            }
+            else if (requestData.requestType === "User Manual") {
+                newFilePath = `${__dirname}/public/manuals/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
+                currentFilePath = `${__dirname}/public${requestData.filePath}`;
+            }
+            else if (requestData.requestType === "Configurations") {
+                const model = requestData.model.toLowerCase();
+                const hospital = convertHospitalName(requestData.hospital);
 
-    console.log(requestData);
+                // Need to complete new config file path.
+                newFilePath = `${__dirname}/public/configurations/${hospital}/${model}/${requestData.filePath.split("_").splice(-6).join("_")}`; 
+                currentFilePath = `${__dirname}/public${requestData.configPath}`;
+            }
+
+            else if (requestData.requestType === "Documents") {
+                const model = requestData.model.toLowerCase();
+
+                // Need to complete new config file path.
+                newFilePath = `${__dirname}/public/documents/${model}/${requestData.filePath.split("_").splice(-1).join("_")}`; 
+                currentFilePath = `${__dirname}/public${requestData.filePath}`;
+            }
+            
+            // Rename the file to move it to the appropriate file directory if the request involves a file.
+            if (currentFilePath !== undefined) {
+                const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath);
+            }            
+
+            // Need to remove entry from request file
+            
+            // Need to add entry to device data
+
+            console.log(req.body)
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
+
+    // {
+    //     requestType: 'Passwords',
+    //     model: 'MX450',
+    //     manufacturer: 'Philips Healthcare',
+    //     credentialType: 'Service Mode',
+    //     requestor: 'Durga Sompalle',
+    //     requestorId: '60035155',
+    //     staffPhotoExtension: 'JPG',
+    //     timestamp: '1702793505578',
+    //     passwordData: 'Username: biomedengr'
+    // }
+    // {
+    //     requestType: 'Documents',
+    //     model: 'MX450',
+    //     manufacturer: 'Philips Healthcare',
+    //     requestor: 'Atif Siddiqui',
+    //     requestorId: '60146568',
+    //     staffPhotoExtension: 'jpg',
+    //     timestamp: '1702875929007',
+    //     label: 'test1',
+    //     filePath: '/requests/MX450/Atif Siddiqui_1702875929007_Book1.csv'
+    // }
+    // {
+    //     requestType: 'Software',
+    //     model: 'MX450',
+    //     manufacturer: 'Philips Healthcare',
+    //     requestor: 'Atif Siddiqui',
+    //     requestorId: '60146568',
+    //     staffPhotoExtension: 'jpg',
+    //     timestamp: '1702875356553',
+    //     softwareType: 'service-software',
+    //     softwareLocation: 'I:/Staff/Apps/Philips/Support Tool'
+    // }
 
     // {
     //     requestType: 'Configurations',
@@ -242,7 +303,7 @@ export function approveRequest(req, res, next, __dirname) {
     //     timestamp: '1702875356553',
     //     hospital: 'Armidale Hospital',
     //     configPath: '/requests/MX450/Atif Siddiqui_1702875356553_mx450_armidale_ICU--Transport_A06-H10-C01-C12_L.01.02_21.12.2023.cfg'
-    //   }
+    // }
 
     // {
     //     requestType: 'Service Manual',
@@ -253,7 +314,7 @@ export function approveRequest(req, res, next, __dirname) {
     //     staffPhotoExtension: 'jpg',
     //     timestamp: '1702875356553',
     //     filePath: '/requests/MX450/Atif Siddiqui_1702875356553_mx450_service_manual.pdf'
-    //   }
+    // }
 
     // {
     //     requestType: 'User Manual',
@@ -264,6 +325,6 @@ export function approveRequest(req, res, next, __dirname) {
     //     staffPhotoExtension: 'jpg',
     //     timestamp: '1702875356553',
     //     filePath: '/requests/MX450/Atif Siddiqui_1702875356553_mx450_user_manual.pdf'
-    //   }
+    // }
 }
 
