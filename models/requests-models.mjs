@@ -42,3 +42,15 @@ export function moveRequestFile(__dirname, currentFilePath, newFilePath) {
         })
     })
 }
+
+export function deleteConfigFile(__dirname, filepath) {
+    return new Promise((resolve, reject) => {
+        fs.unlink(path.join(__dirname, "public", filepath), (err) => {
+            if (err) {
+                reject({type: "FileHandlingError", message: err.message, cause: err, action: "delete", route: "Requests"});
+            } else {
+                resolve("Success");
+            }
+        });
+    })
+}

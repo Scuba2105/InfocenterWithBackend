@@ -1,5 +1,5 @@
-import { getRequestsData, writeRequestsData, moveRequestFile } from "../models/requests-models.mjs";
-import { getAllDeviceData } from "../models/device-models.mjs";
+import { getRequestsData, writeRequestsData, moveRequestFile, deleteConfigFile } from "../models/requests-models.mjs";
+import { getAllDeviceData, writeAllDeviceData } from "../models/device-models.mjs";
 import { FileHandlingError, ParsingError } from "../error-handling/file-errors.mjs";
 import { Mutex } from "async-mutex";
 import { convertHospitalName } from "../utils/utils.mjs";
@@ -287,7 +287,7 @@ export async function approveRequest(req, res, next, __dirname) {
                         // Add request data if already exists.
                         const configLocation = config.split("_").slice(2, 3)[0];
                         if (configLocation === requestLocation) {
-                            existingLocationEntry = true;
+                            existingLocationEntry = config;
                             return `/${newFilePath.split("/").splice(2).join("/")}`;
                         } 
                         else {
@@ -295,21 +295,46 @@ export async function approveRequest(req, res, next, __dirname) {
                         }
                     })
 
-                    // If entry does not exist add it to the array
+                    // If entry does not exist add it to the array.
                     if (!existingLocationEntry) {
                         updatedConfigData.push(`/${newFilePath.split("/").splice(2).join("/")}`);
                     }
+
+
                 }
                 else {
                     updatedConfigData = [`/${newFilePath.split("/").splice(2).join("/")}`];
                 }
-                // Delete existing config file if there is one.
+
+                // Delete existing config file if the file name is different as it will not be overwritten.
+                if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
+                    const deleteExistingFileResult = await deleteConfigFile(__dirname, filepath);
+                } 
+
+                // Add the new config data to the hospital property for the model.  
+                requestDevice.config[requestData.hospital] = updatedConfigData;
+                console.log(requestDevice);
+
+                // Add the request device data all device data.
+                deviceData.map((entry) => {
+                    if (entry.model === requestData.model) {
+                        return requestDevice;
+                    }
+                    return entry;
+                }); 
+
+                // Need to remove entry from requests file
+
+                
+                // Write the data to file.
+                const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                });
+
                 console.log(currentFilePath)
                 console.log(newFilePath)
                 console.log(updatedConfigData)
             }
-
-            // Need to remove entry from request file
         }
         catch (err) {
             console.log(err);
