@@ -27,14 +27,14 @@ const removeSpacesProperties = ["officePhone", "mobilePhone"]
 function inputIsValid(formType, index, value, currentContact) {
     
     if (formType === "staff") {
-        return staffInputsRegexArray[index].test(value)
+        return staffInputsRegexArray[index].test(value.trim())
     }
     else {
         if (index !== 0 && excludedPositions.includes(currentContact.contact)) {
-            return vendorRegexArray[index + 1].test(value)
+            return vendorRegexArray[index + 1].test(value.trim())
         }
         else {
-            return vendorRegexArray[index].test(value)
+            return vendorRegexArray[index].test(value.trim())
         }
     }
 }
