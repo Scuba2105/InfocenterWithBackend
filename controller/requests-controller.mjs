@@ -1,11 +1,8 @@
 import { getRequestsData, writeRequestsData, moveRequestFile, deleteConfigFile } from "../models/requests-models.mjs";
-import { getAllDeviceData, writeAllDeviceData } from "../models/device-models.mjs";
+import { getAllDeviceData, writeAllDeviceData, removeRequestEntry } from "../models/device-models.mjs";
 import { FileHandlingError, ParsingError } from "../error-handling/file-errors.mjs";
 import { Mutex } from "async-mutex";
 import { convertHospitalName } from "../utils/utils.mjs";
-
-// Request property lookups
-const requestLookups = {"Service Manual": "serviceManual", "User Manual": "userManual", "Configurations": "config", "Software": "software", "Documents": "documents", "Passwords": "passwords"};
 
 // Assists with preventing race conditions. 
 const requestsDataMutex = new Mutex();
@@ -220,8 +217,9 @@ export async function approveRequest(req, res, next, __dirname) {
             // Get the request data from the http request body
             const requestData = req.body;
 
-            // Move the file from the requests folder and into the appropriate model folder (manuals/model)
+            // Determine if a file needs to be moved to the appropriate model folder (manuals/model)
             let currentFilePath, newFilePath;
+
             if (requestData.requestType === "Service Manual") {
                 newFilePath = `${__dirname}/public/manuals/service_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`;
                 currentFilePath = `${__dirname}/public${requestData.filePath}`;
@@ -247,15 +245,6 @@ export async function approveRequest(req, res, next, __dirname) {
                 currentFilePath = `${__dirname}/public${requestData.filePath}`;
             }
             
-            // Rename the file to move it to the appropriate file directory if the request involves a file.
-            // if (currentFilePath !== undefined) {
-            //     const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath).catch((err) => {
-            //         if (err.type === "FileHandlingError") {
-            //             throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-            //         }
-            //     })
-            // }            
-
             // Need to read both the device data and the requests data.
             const [deviceData, allRequestsData] = await Promise.all(getAllDeviceData(__dirname), getRequestsData(__dirname)).catch((err) => {
                 if (err.type === "FileHandlingError") {
@@ -320,51 +309,33 @@ export async function approveRequest(req, res, next, __dirname) {
                     return entry;
                 }); 
 
-                // Need to remove entry from requests file.
-                // Get the current request model request data.
-                const modelRequestsData = allRequestsData.find((entry) => entry.model === requestData.model);
+                // Remove the current request from the request data since it is approved. 
+                const updatedAllRequestsData = removeRequestEntry(allRequestsData)
 
-                // Get the data for the current request.
-                const modelTypeRequestData = modelRequestsData[requestLookups[requestData.requestType]];
-
-                // Remove the current request data as it has been approved. 
-                const updatedModelTypeRequestData = modelTypeRequestData.reduce((acc, curr) => {
-                    if (entry.requestor !== requestData.requestor && entry.timestamp === requestData.timestamp) {
-                        acc.push(curr);
-                    }
-                    return acc;
-                }, []);
-
-                // Update (mutate) the model request data variable
-                modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
-
-                // Update (mutate) the all requests data array
-                const updatedAllRequestsData = allRequestsData.map((entry) => {
-                    if (entry.model === requestData.model) {
-                        return modelRequestsData;
-                    }
-                    return entry;
-                })
+                // Rename the file to move it to the appropriate file directory if the request involves a file.
+                if (currentFilePath !== undefined) {
+                    const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath).catch((err) => {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    })
+                }
 
                 // Delete existing config file if the file name is different as it will not be overwritten.
-                // if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
-                //     const deleteExistingFileResult = await deleteConfigFile(__dirname, filepath);
-                // } 
+                if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
+                    const deleteExistingFileResult = await deleteConfigFile(__dirname, filepath).catch((err) => {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    });
+                } 
                 
                 // Write the data to file.
-                // const devicesFileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
-                //     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-                // });
-
-                // Write the updated request data with the approved request removed. 
-
-                console.log(currentFilePath)
-                console.log(newFilePath)
-                console.log(updatedConfigData)
+                const [devicesFileWriteResult, requestsWriteResult] = await Promise.all(writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)), writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2))).catch((err) => {
+                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                });
             }
         }
         catch (err) {
-            console.log(err);
+            // Log the route and error message and call error handling middlware.
+            console.log({Route: `Update ${req.body.model}`, Error: err.message});
+            next(err);
         }
     })
 

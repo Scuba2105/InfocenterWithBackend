@@ -1,6 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
+// Request property lookups
+const requestLookups = {"Service Manual": "serviceManual", "User Manual": "userManual", "Configurations": "config", "Software": "software", "Documents": "documents", "Passwords": "passwords"};
+
 export function getRequestsData(__dirname) {
     return new Promise((resolve, reject) => {
         fs.readFile(path.join(__dirname, 'data', 'requests-data.json'), (err, data) => {
@@ -53,4 +56,33 @@ export function deleteConfigFile(__dirname, filepath) {
             }
         });
     })
+}
+
+export function removeRequestEntry(allRequestsData) {
+    // Get the current request model request data.
+    const modelRequestsData = allRequestsData.find((entry) => entry.model === requestData.model);
+
+    // Get the data for the current request.
+    const modelTypeRequestData = modelRequestsData[requestLookups[requestData.requestType]];
+
+    // Remove the current request data as it has been approved. 
+    const updatedModelTypeRequestData = modelTypeRequestData.reduce((acc, curr) => {
+        if (entry.requestor !== requestData.requestor && entry.timestamp === requestData.timestamp) {
+            acc.push(curr);
+        }
+        return acc;
+    }, []);
+
+    // Update (mutate) the model request data variable
+    modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
+
+    // Update (mutate) the all requests data array
+    const updatedAllRequestsData = allRequestsData.map((entry) => {
+        if (entry.model === requestData.model) {
+            return modelRequestsData;
+        }
+        return entry;
+    })
+
+    return updatedAllRequestsData;
 }
