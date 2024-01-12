@@ -15,7 +15,7 @@ export function RequestDetails({request}) {
     else if (["Configurations"].includes(request.requestType)) {
         const path = request.configPath;
         const hospital = request.hospital;
-        const department = path.split("_")[4].replace("--", "-")
+        const department = path.split("_")[4].replace(/-/g, " ").replace("--", " - ")
         const fileType = path.split(".").slice(-1)[0];
         return (
             <div className="request-file-link flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${request.filePath}`} download>

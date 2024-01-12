@@ -4,6 +4,9 @@ import { FileHandlingError, ParsingError } from "../error-handling/file-errors.m
 import { Mutex } from "async-mutex";
 import { convertHospitalName } from "../utils/utils.mjs";
 
+// Request property lookups
+const requestLookups = {"Service Manual": "serviceManual", "User Manual": "userManual", "Configurations": "config", "Software": "software", "Documents": "documents", "Passwords": "passwords"};
+
 // Assists with preventing race conditions. 
 const requestsDataMutex = new Mutex();
 
@@ -94,7 +97,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             // Add any config requests to the updated request data.
             if (Object.keys(req.files).includes('configs')) {
                 const hospital = req.body.hospital;
-                const configRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, hospital: hospital, model: model, configPath: `/requests/${model}/${username}_${timestamp}_${req.files.configs[0].originalname}`};
+                const configRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, hospital: hospital, model: model, configPath: `/requests/${model}/${username}_${timestamp}_${req.files.configs[0].originalname.replace(/\s/g, "-")}`};
                 if (updatedDevice.config) {
                     updatedDevice.config.push(configRequestObject)
                 }
@@ -177,7 +180,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                     }
                 }
             }
-
+            console.log(updatedDevice)
             let updatedRequestsData;
 
             if (modelUpdatesExist) {
@@ -253,15 +256,15 @@ export async function approveRequest(req, res, next, __dirname) {
             //     })
             // }            
 
-            // Need to add entry to device data
-            const deviceData = await getAllDeviceData(__dirname).catch((err) => {
+            // Need to read both the device data and the requests data.
+            const [deviceData, allRequestsData] = await Promise.all(getAllDeviceData(__dirname), getRequestsData(__dirname)).catch((err) => {
                 if (err.type === "FileHandlingError") {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 }
                 else {
                     throw new ParsingError(err.message, err.cause, err.route);
                 }
-            });
+            });            
 
             // Find the current model from the device data
             const requestDevice = deviceData.find((entry) => entry.model === requestData.model);
@@ -306,15 +309,9 @@ export async function approveRequest(req, res, next, __dirname) {
                     updatedConfigData = [`/${newFilePath.split("/").splice(2).join("/")}`];
                 }
 
-                // Delete existing config file if the file name is different as it will not be overwritten.
-                if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
-                    const deleteExistingFileResult = await deleteConfigFile(__dirname, filepath);
-                } 
-
                 // Add the new config data to the hospital property for the model.  
                 requestDevice.config[requestData.hospital] = updatedConfigData;
-                console.log(requestDevice);
-
+                
                 // Add the request device data all device data.
                 deviceData.map((entry) => {
                     if (entry.model === requestData.model) {
@@ -324,12 +321,27 @@ export async function approveRequest(req, res, next, __dirname) {
                 }); 
 
                 // Need to remove entry from requests file
+                // Get the current request model request data
+                const modelRequestsData = allRequestsData.find((entry) => entry.model === requestData.model);
 
+                const modelTypeRequestData = modelRequestsData[requestLookups[requestData.requestType]];
+
+                const updatedModelTypeRequestData = modelTypeRequestData.reduce((acc, curr) => {
+                    if (entry.requestor !== requestData.requestor && entry.timestamp === requestData.timestamp) {
+                        acc.push(curr);
+                    }
+                    return acc
+                }, [])
+
+                // Delete existing config file if the file name is different as it will not be overwritten.
+                // if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
+                //     const deleteExistingFileResult = await deleteConfigFile(__dirname, filepath);
+                // } 
                 
                 // Write the data to file.
-                const fileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
-                    throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-                });
+                // const devicesFileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
+                //     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                // });
 
                 console.log(currentFilePath)
                 console.log(newFilePath)
