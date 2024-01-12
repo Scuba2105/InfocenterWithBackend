@@ -320,18 +320,31 @@ export async function approveRequest(req, res, next, __dirname) {
                     return entry;
                 }); 
 
-                // Need to remove entry from requests file
-                // Get the current request model request data
+                // Need to remove entry from requests file.
+                // Get the current request model request data.
                 const modelRequestsData = allRequestsData.find((entry) => entry.model === requestData.model);
 
+                // Get the data for the current request.
                 const modelTypeRequestData = modelRequestsData[requestLookups[requestData.requestType]];
 
+                // Remove the current request data as it has been approved. 
                 const updatedModelTypeRequestData = modelTypeRequestData.reduce((acc, curr) => {
                     if (entry.requestor !== requestData.requestor && entry.timestamp === requestData.timestamp) {
                         acc.push(curr);
                     }
-                    return acc
-                }, [])
+                    return acc;
+                }, []);
+
+                // Update (mutate) the model request data variable
+                modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
+
+                // Update (mutate) the all requests data array
+                const updatedAllRequestsData = allRequestsData.map((entry) => {
+                    if (entry.model === requestData.model) {
+                        return modelRequestsData;
+                    }
+                    return entry;
+                })
 
                 // Delete existing config file if the file name is different as it will not be overwritten.
                 // if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
@@ -342,6 +355,8 @@ export async function approveRequest(req, res, next, __dirname) {
                 // const devicesFileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)).catch((err) => {
                 //     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 // });
+
+                // Write the updated request data with the approved request removed. 
 
                 console.log(currentFilePath)
                 console.log(newFilePath)
