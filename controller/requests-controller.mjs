@@ -1,5 +1,5 @@
-import { getRequestsData, writeRequestsData, moveRequestFile, deleteConfigFile } from "../models/requests-models.mjs";
-import { getAllDeviceData, writeAllDeviceData, removeRequestEntry } from "../models/device-models.mjs";
+import { getRequestsData, writeRequestsData, moveRequestFile, deleteConfigFile, removeRequestEntry } from "../models/requests-models.mjs";
+import { getAllDeviceData, writeAllDeviceData } from "../models/device-models.mjs";
 import { FileHandlingError, ParsingError } from "../error-handling/file-errors.mjs";
 import { Mutex } from "async-mutex";
 import { convertHospitalName } from "../utils/utils.mjs";
@@ -246,7 +246,7 @@ export async function approveRequest(req, res, next, __dirname) {
             }
             
             // Need to read both the device data and the requests data.
-            const [deviceData, allRequestsData] = await Promise.all(getAllDeviceData(__dirname), getRequestsData(__dirname)).catch((err) => {
+            const [deviceData, allRequestsData] = await Promise.all([getAllDeviceData(__dirname), getRequestsData(__dirname)]).catch((err) => {
                 if (err.type === "FileHandlingError") {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 }
@@ -298,42 +298,43 @@ export async function approveRequest(req, res, next, __dirname) {
                     updatedConfigData = [`/${newFilePath.split("/").splice(2).join("/")}`];
                 }
 
+                // Delete existing config file if the file name is different as it will not be overwritten.
+                // if (existingLocationEntry && existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
+                //     const deleteExistingFileResult = await deleteConfigFile(__dirname, existingLocationEntry).catch((err) => {
+                //         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                //     });
+                // } 
+
                 // Add the new config data to the hospital property for the model.  
                 requestDevice.config[requestData.hospital] = updatedConfigData;
-                
-                // Add the request device data all device data.
-                deviceData.map((entry) => {
-                    if (entry.model === requestData.model) {
-                        return requestDevice;
-                    }
-                    return entry;
-                }); 
+            }
 
-                // Remove the current request from the request data since it is approved. 
-                const updatedAllRequestsData = removeRequestEntry(allRequestsData)
-
-                // Rename the file to move it to the appropriate file directory if the request involves a file.
-                if (currentFilePath !== undefined) {
-                    const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath).catch((err) => {
-                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-                    })
+            // Add the request device data all device data.
+            const updatedDeviceData = deviceData.map((entry) => {
+                if (entry.model === requestData.model) {
+                    return requestDevice;
                 }
+                return entry;
+            }); 
 
-                // Delete existing config file if the file name is different as it will not be overwritten.
-                if (existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
-                    const deleteExistingFileResult = await deleteConfigFile(__dirname, filepath).catch((err) => {
-                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-                    });
-                } 
-                
-                // Write the data to file.
-                const [devicesFileWriteResult, requestsWriteResult] = await Promise.all(writeAllDeviceData(__dirname, JSON.stringify(deviceData, null, 2)), writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2))).catch((err) => {
+            // Remove the current request from the request data since it is approved. 
+            const updatedAllRequestsData = removeRequestEntry(allRequestsData, requestData);
+            
+            // Rename the file to move it to the appropriate file directory if the request involves a file.
+            if (currentFilePath !== undefined) {
+                const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath).catch((err) => {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
             }
+
+            // Write the data to file.
+            const [devicesFileWriteResult, requestsWriteResult] = await Promise.all(writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)), writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2))).catch((err) => {
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            });
         }
         catch (err) {
-            // Log the route and error message and call error handling middlware.
+            // Log the route and error message and call error handling middleware.
+            console.log(err)
             console.log({Route: `Update ${req.body.model}`, Error: err.message});
             next(err);
         }

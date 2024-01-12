@@ -58,16 +58,17 @@ export function deleteConfigFile(__dirname, filepath) {
     })
 }
 
-export function removeRequestEntry(allRequestsData) {
+export function removeRequestEntry(allRequestsData, requestData) {
     // Get the current request model request data.
     const modelRequestsData = allRequestsData.find((entry) => entry.model === requestData.model);
-
+    
     // Get the data for the current request.
     const modelTypeRequestData = modelRequestsData[requestLookups[requestData.requestType]];
 
     // Remove the current request data as it has been approved. 
     const updatedModelTypeRequestData = modelTypeRequestData.reduce((acc, curr) => {
-        if (entry.requestor !== requestData.requestor && entry.timestamp === requestData.timestamp) {
+        console.log(curr, requestData)
+        if (curr.requestor !== requestData.requestor && curr.timestamp !== requestData.timestamp) {
             acc.push(curr);
         }
         return acc;
@@ -75,7 +76,7 @@ export function removeRequestEntry(allRequestsData) {
 
     // Update (mutate) the model request data variable
     modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
-
+        
     // Update (mutate) the all requests data array
     const updatedAllRequestsData = allRequestsData.map((entry) => {
         if (entry.model === requestData.model) {
