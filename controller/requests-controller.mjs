@@ -177,7 +177,8 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
                     }
                 }
             }
-            console.log(updatedDevice)
+           
+            // Add the updated device data to the re
             let updatedRequestsData;
 
             if (modelUpdatesExist) {
@@ -198,7 +199,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             });
         
             // Send the success response message.
-            res.json({type: "Success", message: 'Update Request Successfully Submitted'});
+            res.json({type: "Success", message: 'Update Request Successfully Submitted!'});
     
         }
         catch (err) {
@@ -299,7 +300,7 @@ export async function approveRequest(req, res, next, __dirname) {
                     updatedConfigData = [`/${newFilePath.split("/").splice(2).join("/")}`];
                 }
 
-                // Delete existing config file if the file name is different as it will not be overwritten.
+                // Delete existing config file if the file name is different as it will not be overwritten when moving the file.
                 if (existingLocationEntry && existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
                     const deleteExistingFileResult = await deleteConfigFile(__dirname, existingLocationEntry).catch((err) => {
                         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
@@ -340,6 +341,9 @@ export async function approveRequest(req, res, next, __dirname) {
                 console.log("requests file error")
                 throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });
+
+            // Send the success response message.
+            res.json({type: "Success", message: 'Request Approved Successfully!'});
         }
         catch (err) {
             // Log the route and error message and call error handling middleware.
