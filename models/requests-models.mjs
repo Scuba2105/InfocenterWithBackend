@@ -69,23 +69,33 @@ export function removeRequestEntry(allRequestsData, requestData) {
 
     // Remove the current request data as it has been approved. 
     const updatedModelTypeRequestData = modelTypeRequestData.reduce((acc, curr) => {
-        console.log(curr, requestData)
         if (curr.requestor !== requestData.requestor && curr.timestamp !== requestData.timestamp) {
             acc.push(curr);
         }
         return acc;
     }, []);
 
-    // Update (mutate) the model request data variable
+    // Delete the resource type key if the array is now empty.
+    if (updatedModelTypeRequestData[requestLookups[requestData.requestType]].length === 0) {
+        delete updatedModelTypeRequestData[requestLookups[requestData.requestType]];
+    }
+    
+    // Update (mutate) the model request data variable.
     modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
         
-    // Update (mutate) the all requests data array
-    const updatedAllRequestsData = allRequestsData.map((entry) => {
-        if (entry.model === requestData.model) {
-            return modelRequestsData;
+    // Update (mutate) the all requests data array and remove any entry models with no current requests
+    const updatedAllRequestsData = allRequestsData.reduce((acc, curr) => {
+        if (curr.model === requestData.model) {
+            const keyNo = Object.keys(curr).length;
+            if (keyNo > 2) {
+                acc.push(modelRequestsData)
+            }
         }
-        return entry;
-    })
+        else {
+            acc.push(entry);
+        }
+        return acc;
+    }, [])
 
     return updatedAllRequestsData;
 }

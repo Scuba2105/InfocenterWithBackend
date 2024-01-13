@@ -321,7 +321,7 @@ export async function approveRequest(req, res, next, __dirname) {
 
             // Remove the current request from the request data since it is approved. 
             const updatedAllRequestsData = removeRequestEntry(allRequestsData, requestData);
-            
+
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
                 const hospital = convertHospitalName(requestData.hospital);
