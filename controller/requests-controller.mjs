@@ -1,4 +1,4 @@
-import { getRequestsData, writeRequestsData, moveRequestFile, deleteConfigFile, removeRequestEntry } from "../models/requests-models.mjs";
+import { getRequestsData, writeRequestsData, moveRequestFile, deleteFile, removeRequestEntry } from "../models/requests-models.mjs";
 import { getAllDeviceData, writeAllDeviceData } from "../models/device-models.mjs";
 import { FileHandlingError, ParsingError } from "../error-handling/file-errors.mjs";
 import { Mutex } from "async-mutex";
@@ -237,7 +237,6 @@ export async function approveRequest(req, res, next, __dirname) {
                 newFilePath = `${__dirname}/public/configurations/${hospital}/${model}/${requestData.configPath.split("_").splice(-6).join("_")}`; 
                 currentFilePath = `${__dirname}/public${requestData.configPath}`;
             }
-
             else if (requestData.requestType === "Documents") {
                 const model = requestData.model.toLowerCase();
 
@@ -302,13 +301,46 @@ export async function approveRequest(req, res, next, __dirname) {
 
                 // Delete existing config file if the file name is different as it will not be overwritten when moving the file.
                 if (existingLocationEntry && existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
-                    const deleteExistingFileResult = await deleteConfigFile(__dirname, existingLocationEntry).catch((err) => {
+                    const deleteExistingFileResult = await deleteFile(__dirname, existingLocationEntry).catch((err) => {
                         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                     });
                 } 
 
                 // Add the new config data to the hospital property for the model.  
                 requestDevice.config[requestData.hospital] = updatedConfigData;
+            }
+            else if (requestData.requestType === "Documents") {
+                const currentDocuments = requestDevice.documents;
+                const documentLabel = requestData.label;
+                currentFilePath = requestData.filePath;
+                const fileName = requestData.filePath.split("/").slice(-1)[0].split("_").slice(-1)[0];
+                const fileExtension = fileName.split(".").slice(-1)[0];
+                newFilePath = `/documents/${requestData.model}/${documentLabel}.${fileExtension}`;
+            
+                const existingDocument = currentDocuments.find((entry) => entry.label === documentLabel)
+                let updatedDocuments;
+                if (existingDocument !== undefined) {
+                    updatedDocuments = currentDocuments.map((entry) => {
+                        if (entry.label === documentLabel) {
+                            return {label: documentLabel, filePath: newFilePath}
+                        }
+                        return entry
+                    })
+                }     
+                else {
+                    currentDocuments.push({label: documentLabel, filePath: newFilePath})
+                    updatedDocuments = currentDocuments
+                } 
+                
+                // Delete existing document if label is same but filename different.
+                if (existingDocument !== undefined && existingDocument.filePath !== newFilePath) {
+                    const deleteExistingFileResult = await deleteFile(__dirname, existingDocument.filePath).catch((err) => {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    });
+                } 
+                
+                // Update the requested device documents
+                requestDevice.documents = updatedDocuments;
             }
 
             // Add the request device data all device data.
@@ -324,9 +356,13 @@ export async function approveRequest(req, res, next, __dirname) {
 
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
-                const hospital = convertHospitalName(requestData.hospital);
-                const model = requestData.model.toLowerCase(); 
-                const fileRenameResult = await moveRequestFile(__dirname, `configurations/${hospital}/${model}`, currentFilePath, newFilePath).catch((err) => {
+                const hospital = requestData.hospital;
+                const requestTypeFolderDirectory = requestData.requestType === "Service Manual" ? `manuals/service-manuals/${model}` :
+                                                   requestData.requestType === "User Manual" ? `manuals/user-manuals/${model}` :
+                                                   requestData.requestType === "Configurations" ? `configurations/${hospital}/${model}` :
+                                                   `documents/${model}`
+
+                const fileRenameResult = await moveRequestFile(__dirname, requestTypeFolderDirectory, currentFilePath, newFilePath).catch((err) => {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
             }

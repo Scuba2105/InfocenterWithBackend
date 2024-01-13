@@ -27,7 +27,6 @@ export function getRequestsData(__dirname) {
 export function writeRequestsData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'requests-data.json'), data, (err) => {
-            console.log(err)
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "write", route: "Requests"});
             } 
@@ -38,7 +37,7 @@ export function writeRequestsData(__dirname, data) {
 
 export function moveRequestFile(__dirname, fileTypeDirectory, currentFilePath, newFilePath) {
     return new Promise((resolve, reject) => {
-        createDirectory(path.join(__dirname, `public/${fileTypeDirectory}`));
+        createDirectory(path.join(__dirname, `public${fileTypeDirectory}`));
         fs.rename(currentFilePath, newFilePath, (err) => {
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "rename", route: "Requests"});
@@ -48,9 +47,9 @@ export function moveRequestFile(__dirname, fileTypeDirectory, currentFilePath, n
     })
 }
 
-export function deleteConfigFile(__dirname, filepath) {
+export function deleteFile(__dirname, filepath) {
     return new Promise((resolve, reject) => {
-        fs.unlink(path.join(__dirname, "public", filepath), (err) => {
+        fs.unlink(path.join(__dirname, `public${filepath}`), (err) => {
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "delete", route: "Requests"});
             } else {
@@ -83,7 +82,7 @@ export function removeRequestEntry(allRequestsData, requestData) {
     // Update (mutate) the model request data variable.
     modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
         
-    // Update (mutate) the all requests data array and remove any entry models with no current requests
+    // Update (mutate) the all requests data array and remove any entry models with no current requests.
     const updatedAllRequestsData = allRequestsData.reduce((acc, curr) => {
         if (curr.model === requestData.model) {
             const keyNo = Object.keys(curr).length;
