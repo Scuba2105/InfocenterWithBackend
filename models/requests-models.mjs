@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { createDirectory } from '../utils/utils.mjs';
 
 // Request property lookups
 const requestLookups = {"Service Manual": "serviceManual", "User Manual": "userManual", "Configurations": "config", "Software": "software", "Documents": "documents", "Passwords": "passwords"};
@@ -26,6 +27,7 @@ export function getRequestsData(__dirname) {
 export function writeRequestsData(__dirname, data) {
     return new Promise((resolve, reject) => {
         fs.writeFile(path.join(__dirname, 'data', 'requests-data.json'), data, (err) => {
+            console.log(err)
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "write", route: "Requests"});
             } 
@@ -34,9 +36,9 @@ export function writeRequestsData(__dirname, data) {
     });
 }
 
-export function moveRequestFile(__dirname, currentFilePath, newFilePath) {
+export function moveRequestFile(__dirname, fileTypeDirectory, currentFilePath, newFilePath) {
     return new Promise((resolve, reject) => {
-        console.log(currentFilePath, newFilePath)
+        createDirectory(path.join(__dirname, `public/${fileTypeDirectory}`));
         fs.rename(currentFilePath, newFilePath, (err) => {
             if (err) {
                 reject({type: "FileHandlingError", message: err.message, cause: err, action: "rename", route: "Requests"});
@@ -87,3 +89,4 @@ export function removeRequestEntry(allRequestsData, requestData) {
 
     return updatedAllRequestsData;
 }
+

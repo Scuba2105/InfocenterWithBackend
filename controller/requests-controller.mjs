@@ -272,7 +272,7 @@ export async function approveRequest(req, res, next, __dirname) {
 
                 // Check whether existing entry exists for current location.
                 let updatedConfigData;
-                let existingLocationEntry = false;
+                let existingLocationEntry;
                 
                 if (currentConfigData !== undefined) {
                     updatedConfigData = currentConfigData.map((config) => {
@@ -295,15 +295,16 @@ export async function approveRequest(req, res, next, __dirname) {
 
                 }
                 else {
+                    // Create the config array if it does not exist for the requested hospital.
                     updatedConfigData = [`/${newFilePath.split("/").splice(2).join("/")}`];
                 }
 
                 // Delete existing config file if the file name is different as it will not be overwritten.
-                // if (existingLocationEntry && existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
-                //     const deleteExistingFileResult = await deleteConfigFile(__dirname, existingLocationEntry).catch((err) => {
-                //         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-                //     });
-                // } 
+                if (existingLocationEntry && existingLocationEntry !== newFilePath.split("/").splice(2).join("/")) {
+                    const deleteExistingFileResult = await deleteConfigFile(__dirname, existingLocationEntry).catch((err) => {
+                        throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+                    });
+                } 
 
                 // Add the new config data to the hospital property for the model.  
                 requestDevice.config[requestData.hospital] = updatedConfigData;
@@ -322,19 +323,26 @@ export async function approveRequest(req, res, next, __dirname) {
             
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
-                const fileRenameResult = await moveRequestFile(__dirname, currentFilePath, newFilePath).catch((err) => {
+                const hospital = convertHospitalName(requestData.hospital);
+                const model = requestData.model.toLowerCase(); 
+                const fileRenameResult = await moveRequestFile(__dirname, `configurations/${hospital}/${model}`, currentFilePath, newFilePath).catch((err) => {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
             }
 
-            // Write the data to file.
-            const [devicesFileWriteResult, requestsWriteResult] = await Promise.all(writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)), writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2))).catch((err) => {
+            // Write the data to the device and requests files.
+            const devicesFileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)).catch((err) => {
+                console.log("device file error")
+                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
+            });
+
+            const requestsWriteResult = await writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2)).catch((err) => {
+                console.log("requests file error")
                 throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });
         }
         catch (err) {
             // Log the route and error message and call error handling middleware.
-            console.log(err)
             console.log({Route: `Update ${req.body.model}`, Error: err.message});
             next(err);
         }
