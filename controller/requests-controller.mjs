@@ -332,13 +332,7 @@ export async function approveRequest(req, res, next, __dirname) {
             }
 
             // Write the data to the device and requests files.
-            const devicesFileWriteResult = await writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)).catch((err) => {
-                console.log("device file error")
-                throw new FileHandlingError(err.message, err.cause, err.action, err.route);
-            });
-
-            const requestsWriteResult = await writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2)).catch((err) => {
-                console.log("requests file error")
+            const [devicesFileWriteResult, requestsWriteResult] = await Promise.all([writeAllDeviceData(__dirname, JSON.stringify(updatedDeviceData, null, 2)), writeRequestsData(__dirname, JSON.stringify(updatedAllRequestsData, null, 2))]).catch((err) => {
                 throw new FileHandlingError(err.message, err.cause, err.action, err.route);
             });
 
