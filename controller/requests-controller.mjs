@@ -218,26 +218,6 @@ export async function approveRequest(req, res, next, __dirname) {
             // Get the request data from the http request body
             const requestData = req.body;
 
-            // Determine if a file needs to be moved to the appropriate model folder (manuals/model)
-            let currentFilePath, newFilePath;
-
-            if (requestData.requestType === "Service Manual") {
-                newFilePath = `${__dirname}/public/manuals/service_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`;
-                currentFilePath = `${__dirname}/public${requestData.filePath}`;
-            }
-            else if (requestData.requestType === "User Manual") {
-                newFilePath = `${__dirname}/public/manuals/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
-                currentFilePath = `${__dirname}/public${requestData.filePath}`;
-            }
-            else if (requestData.requestType === "Configurations") {
-                const model = requestData.model.toLowerCase();
-                const hospital = convertHospitalName(requestData.hospital);
-
-                // Need to complete new config file path.
-                newFilePath = `${__dirname}/public/configurations/${hospital}/${model}/${requestData.configPath.split("_").splice(-6).join("_")}`; 
-                currentFilePath = `${__dirname}/public${requestData.configPath}`;
-            }
-                        
             // Need to read both the device data and the requests data.
             const [deviceData, allRequestsData] = await Promise.all([getAllDeviceData(__dirname), getRequestsData(__dirname)]).catch((err) => {
                 if (err.type === "FileHandlingError") {
@@ -251,15 +231,35 @@ export async function approveRequest(req, res, next, __dirname) {
             // Find the current model from the device data
             const requestDevice = deviceData.find((entry) => entry.model === requestData.model);
 
+             // Determine if a file needs to be moved to the appropriate model folder (manuals/configs/documents)
+            let currentFilePath, newFilePath;
+
             if (requestData.requestType === "Service Manual") {
+
+                // Set the current service manual update request file path and the new service manual file path.
+                newFilePath = `${__dirname}/public/manuals/service_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
+                currentFilePath = `${__dirname}/public${requestData.filePath}`;
                 requestDevice.serviceManual = true;
             }
             else if (requestData.requestType === "User Manual") {
+
+                // Set the current user manual update request file path and the new user manual file path.
+                newFilePath = `${__dirname}/public/manuals/user_manuals/${requestData.filePath.split("_").splice(-3).join("_")}`; 
+                currentFilePath = `${__dirname}/public${requestData.filePath}`;
                 requestDevice.userManual = true;
             }
             else if (requestData.requestType === "Configurations") {
+
+                // Get the model and hospital from the request data.
+                const model = requestData.model.toLowerCase();
+                const hospital = convertHospitalName(requestData.hospital);
+
+                // Set the current config update request file path and the new config file path.
+                newFilePath = `${__dirname}/public/configurations/${hospital}/${model}/${requestData.configPath.split("_").splice(-6).join("_")}`; 
+                currentFilePath = `${__dirname}/public${requestData.configPath}`;
+                        
                 let currentConfigData = requestDevice.config[requestData.hospital];
-                                                    
+
                 // Find any configs which belong to the same department/sublocation.
                 const requestLocation = requestData.configPath.split("_").slice(4, 5)[0];
 
@@ -363,8 +363,6 @@ export async function approveRequest(req, res, next, __dirname) {
                                                    requestData.requestType === "Configurations" ? `configurations/${hospital}/${model}` :
                                                    `documents/${model}`
 
-                console.log(currentFilePath)
-                console.log(newFilePath)
                 const fileRenameResult = await moveRequestFile(__dirname, requestTypeFolderDirectory, currentFilePath, newFilePath).catch((err) => {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });

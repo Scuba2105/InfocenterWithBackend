@@ -99,7 +99,7 @@ async function sendFormData(equipmentEditPermissions, updateData, selectedData, 
     }        
 
     // Show the uploading spinner dialog while uploading.
-    showMessage("uploading", `Uploading ${selectedData.model} Data`)
+    showMessage("uploading", !equipmentEditPermissions ? `Uploading ${selectedData.model} Request Data` : `Uploading ${selectedData.model} Data`)
 
     try {
     
