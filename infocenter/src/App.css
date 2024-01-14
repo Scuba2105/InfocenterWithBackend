@@ -398,7 +398,7 @@ html {
 .avatar-option {
   width: 100%;
   justify-content: flex-start;
-  transform: translateY(-8px);
+  transform: translateY(-2px);
   padding-left: 20px;
   cursor: pointer;
 }
