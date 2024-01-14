@@ -257,9 +257,8 @@ export async function approveRequest(req, res, next, __dirname) {
                 // Set the current config update request file path and the new config file path.
                 newFilePath = `${__dirname}/public/configurations/${hospital}/${model}/${requestData.configPath.split("_").splice(-6).join("_")}`; 
                 currentFilePath = `${__dirname}/public${requestData.configPath}`;
-                        
                 let currentConfigData = requestDevice.config[requestData.hospital];
-
+                
                 // Find any configs which belong to the same department/sublocation.
                 const requestLocation = requestData.configPath.split("_").slice(4, 5)[0];
 
@@ -298,19 +297,25 @@ export async function approveRequest(req, res, next, __dirname) {
                         throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                     });
                 } 
-
-                // Add the new config data to the hospital property for the model.  
-                requestDevice.config[requestData.hospital] = updatedConfigData;
+                
+                // Add the new config data to the hospital property for the model. 
+                if (requestDevice.config === "" || requestDevice.config === undefined) {
+                    requestDevice.config = {};
+                    requestDevice.config[requestData.hospital] = updatedConfigData;
+                } 
+                else {
+                    requestDevice.config[requestData.hospital] = updatedConfigData;
+                }
             }
             else if (requestData.requestType === "Documents") {
                 const currentDocuments = requestDevice.documents;
                 const documentLabel = requestData.label;
                 const model = requestData.model.toLowerCase();
-                const fileName = requestData.filePath.split("/").slice(-1)[0].split("_").slice(2).join(" ");
+                const fileName = requestData.filePath.split("/").slice(-1)[0].split("_").slice(2).join("_");
                 const fileExtension = fileName.split(".").slice(-1)[0];
 
                 // Determine the current request file path and the new path it needs to be moved to.
-                newFilePath = `${__dirname}/public/documents/${model}/${documentLabel}.${fileExtension}`;
+                newFilePath = `${__dirname}/public/documents/${model}/${documentLabel.replace(/\s/g, "_")}.${fileExtension}`;
                 currentFilePath = `${__dirname}/public${requestData.filePath}`;
             
                 // Determine if there is an existing document with the same name.
@@ -321,13 +326,13 @@ export async function approveRequest(req, res, next, __dirname) {
                 if (existingDocument !== undefined) {
                     updatedDocuments = currentDocuments.map((entry) => {
                         if (entry.label === documentLabel) {
-                            return {label: documentLabel, filePath: newFilePath}
+                            return {label: documentLabel, filePath: newFilePath.split("/").slice(2).join("/")}
                         }
                         return entry
                     })
                 }     
                 else {
-                    currentDocuments.push({label: documentLabel, filePath: newFilePath})
+                    currentDocuments.push({label: documentLabel, filePath: newFilePath.split("/").slice(2).join("/")})
                     updatedDocuments = currentDocuments
                 } 
                 
@@ -356,8 +361,11 @@ export async function approveRequest(req, res, next, __dirname) {
 
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
-                const hospital = convertHospitalName(requestData.hospital);
-                const model = requestData.model;
+                let hospital;
+                if (requestData.requestType === "Configurations") {
+                    hospital = convertHospitalName(requestData.hospital);
+                }
+                const model = requestData.model.toLowerCase();
                 const requestTypeFolderDirectory = requestData.requestType === "Service Manual" ? `manuals/service-manuals/${model}` :
                                                    requestData.requestType === "User Manual" ? `manuals/user-manuals/${model}` :
                                                    requestData.requestType === "Configurations" ? `configurations/${hospital}/${model}` :

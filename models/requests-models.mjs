@@ -92,7 +92,7 @@ export function removeRequestEntry(allRequestsData, requestData) {
             }
         }
         else {
-            acc.push(entry);
+            acc.push(curr);
         }
         return acc;
     }, [])
