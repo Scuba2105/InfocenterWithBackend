@@ -75,12 +75,13 @@ export function removeRequestEntry(allRequestsData, requestData) {
     }, []);
 
     // Delete the resource type key if the array is now empty.
-    if (updatedModelTypeRequestData[requestLookups[requestData.requestType]].length === 0) {
-        delete updatedModelTypeRequestData[requestLookups[requestData.requestType]];
+    if (updatedModelTypeRequestData.length === 0) {
+        delete modelRequestsData[requestLookups[requestData.requestType]]
     }
-    
-    // Update (mutate) the model request data variable.
-    modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
+    else {
+        // Update (mutate) the model request data variable.
+        modelRequestsData[requestLookups[requestData.requestType]] = updatedModelTypeRequestData;
+    }   
         
     // Update (mutate) the all requests data array and remove any entry models with no current requests.
     const updatedAllRequestsData = allRequestsData.reduce((acc, curr) => {

@@ -367,9 +367,11 @@ app.use((err, req, res, next) => {
       return next(err);
     }
     if (["FileHandlingError", "DBError", "ParsingError"].includes(err.type)) {
+        console.log(err)
         res.status(err.httpStatusCode).json({type: "Error", message: err.message});
     }
     else {
+        console.log(err)
         res.status(400).json({type: "Error", message: `An  error occurred while completing the request. ${err.message} If the issue persists please contact and administrator`});
     }
 });

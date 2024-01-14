@@ -204,7 +204,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
         }
         catch (err) {
             // Log the route and error message and call error handling middlware.
-            console.log({Route: `Update ${req.body.model}`, Error: err.message});
+            console.log({Route: `${req.body.model} Request Submit`, Error: err.message});
             next(err);
         }
     })
@@ -237,14 +237,7 @@ export async function approveRequest(req, res, next, __dirname) {
                 newFilePath = `${__dirname}/public/configurations/${hospital}/${model}/${requestData.configPath.split("_").splice(-6).join("_")}`; 
                 currentFilePath = `${__dirname}/public${requestData.configPath}`;
             }
-            else if (requestData.requestType === "Documents") {
-                const model = requestData.model.toLowerCase();
-
-                // Need to complete new config file path.
-                newFilePath = `${__dirname}/public/documents/${model}/${requestData.filePath.split("_").splice(-1).join("_")}`; 
-                currentFilePath = `${__dirname}/public${requestData.filePath}`;
-            }
-            
+                        
             // Need to read both the device data and the requests data.
             const [deviceData, allRequestsData] = await Promise.all([getAllDeviceData(__dirname), getRequestsData(__dirname)]).catch((err) => {
                 if (err.type === "FileHandlingError") {
@@ -312,12 +305,18 @@ export async function approveRequest(req, res, next, __dirname) {
             else if (requestData.requestType === "Documents") {
                 const currentDocuments = requestDevice.documents;
                 const documentLabel = requestData.label;
-                currentFilePath = requestData.filePath;
-                const fileName = requestData.filePath.split("/").slice(-1)[0].split("_").slice(-1)[0];
+                const model = requestData.model.toLowerCase();
+                const fileName = requestData.filePath.split("/").slice(-1)[0].split("_").slice(2).join(" ");
                 const fileExtension = fileName.split(".").slice(-1)[0];
-                newFilePath = `/documents/${requestData.model}/${documentLabel}.${fileExtension}`;
+
+                // Determine the current request file path and the new path it needs to be moved to.
+                newFilePath = `${__dirname}/public/documents/${model}/${documentLabel}.${fileExtension}`;
+                currentFilePath = `${__dirname}/public${requestData.filePath}`;
             
+                // Determine if there is an existing document with the same name.
                 const existingDocument = currentDocuments.find((entry) => entry.label === documentLabel)
+                            
+                // Update the device documents data with the updated entries.
                 let updatedDocuments;
                 if (existingDocument !== undefined) {
                     updatedDocuments = currentDocuments.map((entry) => {
@@ -341,6 +340,7 @@ export async function approveRequest(req, res, next, __dirname) {
                 
                 // Update the requested device documents
                 requestDevice.documents = updatedDocuments;
+           
             }
 
             // Add the request device data all device data.
@@ -357,11 +357,14 @@ export async function approveRequest(req, res, next, __dirname) {
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
                 const hospital = requestData.hospital;
+                const model = requestData.model;
                 const requestTypeFolderDirectory = requestData.requestType === "Service Manual" ? `manuals/service-manuals/${model}` :
                                                    requestData.requestType === "User Manual" ? `manuals/user-manuals/${model}` :
                                                    requestData.requestType === "Configurations" ? `configurations/${hospital}/${model}` :
                                                    `documents/${model}`
 
+                console.log(currentFilePath)
+                console.log(newFilePath)
                 const fileRenameResult = await moveRequestFile(__dirname, requestTypeFolderDirectory, currentFilePath, newFilePath).catch((err) => {
                     throw new FileHandlingError(err.message, err.cause, err.action, err.route);
                 });
@@ -377,7 +380,7 @@ export async function approveRequest(req, res, next, __dirname) {
         }
         catch (err) {
             // Log the route and error message and call error handling middleware.
-            console.log({Route: `Update ${req.body.model}`, Error: err.message});
+            console.log({Route: `${req.body.model} Request Approval`, Error: err.message});
             next(err);
         }
     })
