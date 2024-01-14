@@ -356,7 +356,7 @@ export async function approveRequest(req, res, next, __dirname) {
 
             // Rename the file to move it to the appropriate file directory if the request involves a file.
             if (currentFilePath !== undefined) {
-                const hospital = requestData.hospital;
+                const hospital = convertHospitalName(requestData.hospital);
                 const model = requestData.model;
                 const requestTypeFolderDirectory = requestData.requestType === "Service Manual" ? `manuals/service-manuals/${model}` :
                                                    requestData.requestType === "User Manual" ? `manuals/user-manuals/${model}` :

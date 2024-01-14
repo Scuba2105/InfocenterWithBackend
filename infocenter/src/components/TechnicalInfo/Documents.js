@@ -16,7 +16,6 @@ export function Documents({description, link, extension, showForm, setCurrentDoc
     
     const [buttonIsHovered, setButtonIsHovered] = useState(false);
     const iconName = ["xls", "xlsx", "csv"].includes(extension) ? "xlsx" : ["docx", "doc"].includes(extension) ? "docx" : ["ppt", "pptx"].includes(extension) ? "pptx" : ["txt", "jpg", "png", "pdf"].includes(extension) ? extension : "document";
-       
     return (
         <div className="documents-edit-container flex-c">
             <a className="document-container form-btn-transition flex-c" href={`https://${serverConfig.host}:${serverConfig.port}${link}`} target="_blank" rel="noopener noreferrer">

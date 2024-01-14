@@ -47,7 +47,6 @@ export function RequestDetails({request}) {
         )
     }
     else if (["Documents"].includes(request.requestType)) {
-
         const extension = request.filePath.split(".").slice(-1)[0];
         const iconName = ["xls", "xlsx", "csv"].includes(extension) ? "xlsx" : ["docx", "doc"].includes(extension) ? "docx" : ["ppt", "pptx"].includes(extension) ? "pptx" : ["txt", "jpg", "png", "pdf"].includes(extension) ? extension : "document";
         return (
