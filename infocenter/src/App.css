@@ -7,7 +7,8 @@ html {
 #root {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
   background-color: var(--med-theme); 
   --pageWidth: 100vw;
   --row-hover: #2a3657;
@@ -606,7 +607,7 @@ html {
   display: grid;
   grid-template-columns: 50% 50%;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   min-width: 1100px;
   padding-bottom: 30px;
 }
@@ -999,7 +1000,6 @@ html {
   margin-right: 2%;
   width: 94%;
   background-color: var(--med-theme);
-  border: 1px solid black;
   border-radius: 10px;
   margin-top: 2%;
   min-height: 550px;
@@ -2143,7 +2143,6 @@ html {
   color: white;
   background-color: var(--med-light-theme);
   margin: auto auto;
-  border: 1px solid black;
   border-bottom: none;
   box-shadow: 4px 4px 6px 0px rgba(12, 12, 12, 0.75);
 }
@@ -2158,7 +2157,6 @@ html {
   height: 100%;
   width: 90%;
   margin: auto auto;
-  border: 1px solid black;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border-top: none;
