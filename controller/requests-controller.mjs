@@ -94,7 +94,7 @@ export function handleDeviceUpdateRequest(req, res, next, __dirname) {
             // Add any config requests to the updated request data.
             if (Object.keys(req.files).includes('configs')) {
                 const hospital = req.body.hospital;
-                const configRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, hospital: hospital, model: model, configPath: `/requests/${model}/${username}_${timestamp}_${req.files.configs[0].originalname.replace(/\s/g, "-")}`};
+                const configRequestObject = {requestor: username, requestorId: staffId, staffPhotoExtension: staffPhotoExtension, timestamp: timestamp, hospital: hospital, model: model, configPath: `/requests/${model.toLowerCase()}/${username}_${timestamp}_${req.files.configs[0].originalname.replace(/\s/g, "-")}`};
                 if (updatedDevice.config) {
                     updatedDevice.config.push(configRequestObject)
                 }
@@ -318,22 +318,29 @@ export async function approveRequest(req, res, next, __dirname) {
                 newFilePath = `${__dirname}/public/documents/${model}/${documentLabel.replace(/\s/g, "_")}.${fileExtension}`;
                 currentFilePath = `${__dirname}/public${requestData.filePath}`;
             
+
                 // Determine if there is an existing document with the same name.
-                const existingDocument = currentDocuments.find((entry) => entry.label === documentLabel)
-                            
+                let existingDocument;
+                if (currentDocuments === "") {
+                    existingDocument = undefined;    
+                }
+                else {
+                    console.log(currentDocuments)
+                    existingDocument = currentDocuments.find((entry) => entry.label === documentLabel);
+                }
+                                            
                 // Update the device documents data with the updated entries.
                 let updatedDocuments;
                 if (existingDocument !== undefined) {
                     updatedDocuments = currentDocuments.map((entry) => {
                         if (entry.label === documentLabel) {
-                            return {label: documentLabel, filePath: newFilePath.split("/").slice(2).join("/")}
+                            return {label: documentLabel, filePath: `/${newFilePath.split("/").slice(2).join("/")}`}
                         }
                         return entry
                     })
                 }     
                 else {
-                    currentDocuments.push({label: documentLabel, filePath: newFilePath.split("/").slice(2).join("/")})
-                    updatedDocuments = currentDocuments
+                    updatedDocuments = [{label: documentLabel, filePath: `/${newFilePath.split("/").slice(2).join("/")}`}]
                 } 
                 
                 // Delete existing document if label is same but filename different.
@@ -365,6 +372,7 @@ export async function approveRequest(req, res, next, __dirname) {
                 if (requestData.requestType === "Configurations") {
                     hospital = convertHospitalName(requestData.hospital);
                 }
+
                 const model = requestData.model.toLowerCase();
                 const requestTypeFolderDirectory = requestData.requestType === "Service Manual" ? `manuals/service-manuals/${model}` :
                                                    requestData.requestType === "User Manual" ? `manuals/user-manuals/${model}` :
